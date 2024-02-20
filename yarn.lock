@@ -1814,10 +1814,42 @@
   resolved "https://registry.yarnpkg.com/@swc/types/-/types-0.1.5.tgz#043b731d4f56a79b4897a3de1af35e75d56bc63a"
   integrity sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==
 
+"@tanstack/query-core@5.22.2":
+  version "5.22.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.22.2.tgz#af67d41b0b4a3e846c2325f32540f39ca0d4788d"
+  integrity sha512-z3PwKFUFACMUqe1eyesCIKg3Jv1mysSrYfrEW5ww5DCDUD4zlpTKBvUDaEjsfZzL3ULrFLDM9yVUxI/fega1Qg==
+
+"@tanstack/react-query@^5.22.2":
+  version "5.22.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.22.2.tgz#e5fce278fbdd026fc1d561a4505142b9f93549d7"
+  integrity sha512-TaxJDRzJ8/NWRT4lY2jguKCrNI6MRN+67dELzPjNUlvqzTxGANlMp68l7aC7hG8Bd1uHNxHl7ihv7MT50i/43A==
+  dependencies:
+    "@tanstack/query-core" "5.22.2"
+
 "@tokenizer/token@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@tokenizer/token/-/token-0.3.0.tgz#fe98a93fe789247e998c75e74e9c7c63217aa276"
   integrity sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==
+
+"@trpc/client@^11.0.0-next-beta.289":
+  version "11.0.0-next-beta.289"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.0.0-next-beta.289.tgz#5b2f6cf19133724d1b9452b3a2e9e70576982d32"
+  integrity sha512-jqBzRRXNO9xn+onayc8BH6CDBDFA3NWGxXkuppTm2yu3r7wcbl5S7S5y6SvGGmyVqISoQT3u0t4dz9AZOuETHQ==
+
+"@trpc/next@^11.0.0-next-beta.289":
+  version "11.0.0-next-beta.289"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-11.0.0-next-beta.289.tgz#72a77359491014cc314cc3e5cf76b040c6ad79ab"
+  integrity sha512-AKCrcbtHh/zFrld6lMG0RC37d/aac4ZisLDjJcViMnEmJXCo0J5nhoZa6f+G9N683NdMWZVmY2rmJidw9IX3QQ==
+
+"@trpc/react-query@^11.0.0-next-beta.289":
+  version "11.0.0-next-beta.289"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.0.0-next-beta.289.tgz#9d99d42ca2e5fbe33a24d9458dbd1eee2201bc3b"
+  integrity sha512-SAn09DmZ4eFYLS0cCHOVNvRHJhHZ2ssUj4LUTj56wym0MieaCSrcxTqiolnaMfF+mWc1SJlLOzebrxaTHPwJSw==
+
+"@trpc/server@^11.0.0-next-beta.289":
+  version "11.0.0-next-beta.289"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.0.0-next-beta.289.tgz#3edcb8516bc424b8fef9867a420127ab611fa06d"
+  integrity sha512-HfBVYUShvktA6M78jrCsRLyeE6l2NdaPJxKg095h4vk0bgWVfz0MgEOCQR/hjGdw0EFLEVcZANhqTZaHEzr36w==
 
 "@trysound/sax@0.2.0":
   version "0.2.0"

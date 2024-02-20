@@ -1,10 +1,20 @@
 import express from 'express';
 import { getPayloadClient } from './get-payload';
 import { nextApp, nextHandler } from './next-utils';
+import * as trpcExpress from '@trpc/server/adapters/express';
+import { appRouter } from './trpc';
 
 const PORT = Number(process.env.PORT) || 3000;
 
 const app = express();
+
+const createContext = ({
+  req,
+  res,
+}: trpcExpress.CreateExpressContextOptions) => ({
+  req,
+  res,
+});
 
 const start = async () => {
   const payload = await getPayloadClient({
@@ -15,6 +25,15 @@ const start = async () => {
       },
     },
   });
+
+  // TODO: NOTE 4
+  app.use(
+    '/api/trpc',
+    trpcExpress.createExpressMiddleware({
+      router: appRouter,
+      createContext, // TODO: Note 5
+    }),
+  );
 
   // This enables us to self-host
   app.use((req, res) => nextHandler(req, res));
