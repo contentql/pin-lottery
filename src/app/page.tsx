@@ -1,7 +1,10 @@
+import HomeView from '@/views/HomeView';
 export default function Home() {
   return (
     <>
-      <div>This is home page</div>
+      <div>
+        <HomeView />
+      </div>
     </>
   );
 }
