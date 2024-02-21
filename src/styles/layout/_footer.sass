@@ -1,0 +1,136 @@
+/* footer section css start */
+.footer-section 
+  position: relative
+  background-color: #2d0865
+  z-index: 1
+  hr
+    margin: 0
+    border-color: rgba(#686fc5, 0.4)!important
+.bg-shape--top 
+  position: absolute
+  top: 0
+  left: 0
+  text-align: center
+  margin-top: -3px
+  z-index: -1 
+.subscribe-area 
+  padding: 50px 50px
+  background-image: linear-gradient( 300deg, rgb(84,150,255) 0%, rgb(135,57,230) 100%)
+  background-image: -moz-linear-gradient( 135deg, rgb(84,150,255) 0%, rgb(135,57,230) 100%)
+  background-image: -webkit-linear-gradient( 135deg, rgb(84,150,255) 0%, rgb(135,57,230) 100%)
+  background-image: -ms-linear-gradient( 135deg, rgb(84,150,255) 0%, rgb(135,57,230) 100%)
+  box-shadow: 0px 19px 56px 0px rgba(0, 0, 0, 0.2)
+  +border-radius(30px)
+  +d-flex
+  align-items: center
+  @media (max-width: 480px)
+    padding: 30px
+  .left
+    width: 50%
+    @media (max-width: 991px)
+      width: 100%
+      text-align: center
+    .subtitle 
+      font-size: 24px
+      font-weight: 600 
+      color: #ffb200
+      margin-bottom: 10px
+      @media (max-width: 460px)
+        font-size: 18px
+    .title
+      color: #ffffff
+      font-size: 32px
+      @media (max-width: 460px)
+        font-size: 24px
+  .right 
+    width: 50%
+    @media (max-width: 991px)
+      width: 100%
+      margin-top: 30px
+  .subscribe-form 
+    +d-flex
+    margin-right: -45px
+    @media (max-width: 575px)
+      margin-right: 0
+    input 
+      background-color: rgba(255, 255, 255, 0.102)
+      border: 1px solid rgba(#ffffff, 0.2)
+      +border-radius(999px)
+      width: calc(100% - 160px)
+      min-height: 60px
+      padding-left: 25px
+      //padding-right: 40px
+      padding-right: 50px
+      color: #fff
+      @media (max-width: 575px)
+        width: 100%
+    button 
+      background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+      color: #ffffff
+      width: 160px
+      +border-radius(999px)
+      margin-left: -45px
+      @media (max-width: 575px)
+        margin-left: 0
+        min-height: 55px
+        width: 100%
+        margin-top: 15px
+.social-links 
+  +d-flex
+  margin: -5px
+  li 
+    margin: 5px
+    a 
+      width: 40px
+      height: 40px
+      background-color: #0a1e5e00
+      border: 1px solid rgba(#ffffff, 0.1)
+      +border-radius(50%)
+      color: #ffffff
+      font-size: 14px
+      line-height: 40px
+      text-align: center
+      +transition(all 0.3s)
+      &:hover 
+        background-color: rgb(238, 71, 48)
+        box-shadow: 0px 5px 9px 0px rgba(238, 71, 48, 0.54)
+.app-btn 
+  +d-flex 
+  margin: -5px -7px
+  @media (max-width: 991px)
+    justify-content: center
+    margin-bottom: 20px
+  li 
+    margin: 5px 7px
+.short-links 
+  +d-flex
+  margin-top: -5px
+  margin-bottom: -5px
+  li 
+    &:first-child
+      a 
+        padding-left: 0
+        &::before 
+          display: none
+    &:last-child
+      a 
+        padding-right: 0
+    a 
+      padding: 5px 30px
+      color: #d2d5fc
+      position: relative
+      font-size: 18px
+      &::before 
+        position: absolute
+        content: ''
+        top: 50%
+        left: 0
+        width: 3px 
+        height: 18px
+        background-color: #686fc5
+        margin-top: -9px
+/* footer section css end */

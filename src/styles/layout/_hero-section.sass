@@ -1,0 +1,428 @@
+/* hero css start */
+.hero
+  position: relative
+  padding-top: 303px
+  padding-bottom: 253px
+  background-image: linear-gradient( 360deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  background-image: -moz-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  background-image: -webkit-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  background-image: -ms-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  z-index: 1
+  overflow: hidden
+  @media (max-width: 1199px)
+    padding-top: 285px
+    padding-bottom: 215px
+  @media (max-width: 991px)
+    padding-top: 240px
+    padding-bottom: 450px
+  @media (max-width: 767px)
+    padding-bottom: 385px
+  @media (max-width: 575px)
+    padding-top: 250px
+  &__shape
+    position: absolute
+    left: 0
+    bottom: -5px
+    z-index: -1
+  &__element
+    position: absolute
+    bottom: -75px
+    left: -24px
+    width: 62%
+    z-index: -1
+    img 
+      width: 100%
+  &__content
+    @media (max-width: 991px)
+      text-align: center
+    p 
+      color: #ffffff
+      font-size: 24px
+      @media (max-width: 1199px)
+        font-size: 18px
+      @media (max-width: 575px)
+        font-size: 16px
+  &__subtitle
+    +font(28px, weight("semi"), uppercase)
+    color: $base-color
+    margin-bottom: 10px
+    @media (max-width: 1350px)
+      font-size: 24px
+    @media (max-width: 1199px)
+      font-size: 22px
+    @media (max-width: 991px)
+      font-size: 20px
+    @media (max-width: 575px)
+      font-size: 16px
+  &__title 
+    +font(120px, weight("bold"), uppercase)
+    line-height: 1.1
+    @media (max-width: 1350px)
+      font-size: 102px
+    @media (max-width: 1199px)
+      font-size: 90px
+    @media (max-width: 991px)
+      font-size: 72px
+    @media (max-width: 767px)
+      font-size: 56px
+    @media (max-width: 575px)
+        font-size: 48px
+    @media (max-width: 380px)
+      font-size: 36px
+  &__btn 
+    display: flex
+    align-items: center
+    margin-top: 30px
+    @media (max-width: 480px)
+      display: inline-grid
+      display: -moz-inline-grid
+      display: -ms-inline-grid
+    .cmn-btn
+      @media (max-width: 480px)
+        margin-bottom: 45px
+    .video-btn 
+      margin-left: 30px
+      @media (max-width: 480px)
+        margin: 0 auto
+  &__thumb
+    display: none
+  &__car 
+    width: 1150px
+    height: 725px
+    position: absolute
+    right: 0
+    top: 15%
+    overflow: hidden
+    @media (max-width: 991px)
+      height: 475px
+      top: auto
+      bottom: 0
+    @media (max-width: 767px)
+      height: 345px
+    @media (max-width: 575px)
+      bottom: 3%
+    img 
+      position: absolute
+      top: 50%
+      left: 55%
+      +transform(translate(-50%, -50%))
+      @media (max-width: 1700px)
+        max-width: 60%
+        left: 65%
+      @media (max-width: 1350px)
+        max-width: 50%
+        left: 70%
+      @media (max-width: 1199px)
+        max-width: 40%
+        left: 78%
+      @media (max-width: 991px)
+        left: 65%
+      @media (max-width: 767px)
+        max-width: 30%
+        left: 70%
+      @media (max-width: 575px)
+        left: 80%
+      @media (max-width: 480px)
+        max-width: 25%
+        left: 85%
+    // .car-shadow
+    .car-ray
+      animation: rifaRounded 20s infinite linear
+      z-index: -1
+    .car-light
+      animation: rifaLight 2s infinite linear
+      z-index: -2
+    // .hero-car
+    .car-star
+      animation: rifaLight 2s infinite linear
+  .hero__shape-left 
+    position: absolute
+    bottom: 0
+    left: 0
+    height: 100% 
+    z-index: -1
+    img 
+      height: 100%
+  // hero section style two css
+  &.style--two
+    padding-bottom: 365px
+    overflow: hidden
+    background-image: url("/images/elements/hero-2-bg.jpg")
+    .hero__title 
+      +font(110px, weight("bold"), uppercase)
+      line-height: 1.1
+      @media (max-width: 1750px)
+        font-size: 76px
+      @media (max-width: 1199px)
+        font-size: 62px
+      @media (max-width: 575px)
+        font-size: 48px
+      @media (max-width: 380px)
+        font-size: 36px
+    .hero__content
+      p
+        @media (max-width: 1650px)
+          font-size: 22px
+        @media (max-width: 1199px)
+          font-size: 18px
+    .hero__shape 
+      bottom: -2px
+      left: 0
+      z-index: 1
+    *[class*="hero-e"]
+      position: absolute
+      z-index: -1 
+    .hero-e1
+      left: 0
+      bottom: 0
+    .hero-e2
+      top: 0
+      right: 0
+    .hero-e3
+      top: 23%
+      left: 14%
+      opacity: 0.25
+    .hero-e4
+      top: 28%
+      left: 42%
+    .hero-e5
+      top: 15%
+      left: 28%
+      opacity: 0.2
+    .hero-car 
+      position: absolute
+      width: 765px
+      height: 620px
+      top: 20%
+      right: 0
+      @media (max-width: 1450px) 
+        height: 475px
+        right: -85px
+        top: 25%
+      @media (max-width: 1199px) 
+        width: 715px
+        height: 425px
+        right: -18% 
+        top: 20%
+      @media (max-width: 991px)
+        display: none
+      div[class*="el"]
+        position: absolute
+        img 
+          @media (max-width: 1450px)
+            width: 75%
+          @media (max-width: 1199px) 
+            width: 60%
+      .el-car
+        left: 0
+        bottom: 5%
+        @media (max-width: 1350px)
+          text-align: center
+      .el-girl
+        bottom: 0
+        right: 5%
+        @media (max-width: 1350px) 
+          right: 3%
+        @media (max-width: 1199px) 
+          right: 22%
+        img 
+          @media (max-width: 1199px)
+            width: 55%!important
+      .el-star
+        top: 10% 
+        left: 40%
+      .el-star-2
+        top: 25%
+        left: 25%
+    .hero-car-main 
+      position: absolute
+      top: 20%
+      right: 0
+      text-align: right
+      @media (max-width: 1450px) 
+        top: 25%
+      @media (max-width: 991px)
+        display: none
+      img 
+        @media (max-width: 1650px)
+          width: 80%
+        @media (max-width: 1450px)
+          width: 70%
+        @media (max-width: 1199px)
+          width: 60%
+  &.style--three
+    background-color: transparent
+    background-image: none
+    padding-bottom: 405px
+    @media (max-width: 991px)
+      padding-bottom: 200px
+    @media (max-width: 767px)
+      padding-bottom: 150px
+    @media (max-width: 767px)
+      padding-bottom: 30px
+    .hero__circle, .hero__obj, .hero__car-left, .hero__bike, .hero__car-right
+      position: absolute
+      z-index: -1 
+    .hero__circle 
+      top: -27px
+    .hero__obj 
+      top: 0
+      left: 0
+      width: 100% 
+      text-align: center
+    .hero__bike 
+      bottom: 0
+      left: 40%
+      @media (max-width: 991px)
+        display: none
+      img 
+        width: 90%
+        @media (max-width: 1650px)
+          width: 70%
+        @media (max-width: 1450px)
+          width: 60%
+        @media (max-width: 1199px)
+          width: 50%
+    .hero__car-left 
+      bottom: 2%
+      left: 1%
+      text-align: left
+      @media (max-width: 991px)
+        display: none
+      img
+        @media (max-width: 1650px)
+          width: 80%
+        @media (max-width: 1450px)
+          width: 70%
+        @media (max-width: 1199px)
+          width: 50%
+    .hero__car-right 
+      bottom: 6%
+      right: 3%
+      text-align: right
+      @media (max-width: 991px)
+        display: none
+      img
+        @media (max-width: 1650px)
+          width: 80%
+        @media (max-width: 1450px)
+          width: 60%
+        @media (max-width: 1199px)
+          width: 45%
+
+.video-btn 
+  width: 37px
+  height: 37px
+  color: #ffffff
+  text-align: center
+  line-height: 40px
+  display: flex
+  align-items: center
+  justify-content: center
+  +gradient-two
+  +border-radius(50%)
+  position: relative
+  z-index: 1
+  &::before 
+    position: absolute
+    content: ''
+    top: 50%
+    left: 50%
+    width: 57px
+    height: 54px
+    +gradient-two
+    opacity: 0.6
+    +transform(translate(-50%, -50%))
+    z-index: -1
+    +border-radius(27% 33% 15% 48% / 21% 47% 35% 51%)
+    animation: flowRubber 5s infinite linear
+    animation-delay: 0.5s
+  &::after 
+    position: absolute
+    content: ''
+    top: 50%
+    left: 50%
+    width: 73px
+    height: 74px
+    +gradient-two
+    opacity: 0.4
+    +transform(translate(-50%, -50%))
+    z-index: -1
+    +border-radius(20% 38% 25% 53%/12% 47% 35% 51%)
+    animation: flowRubber 5s infinite linear
++keyframes (flowRubber)
+  0%
+    +border-radius(20% 38% 25% 53%/12% 47% 35% 51%)
+  25%
+    +border-radius(84% 43% 59% 45% / 62% 38% 67% 49%)
+  50%
+    +border-radius(69% 70% 59% 86% / 80% 77% 67% 49%)
+  75%
+    +border-radius(35% 70% 24% 94% / 64% 61% 67% 49%)
+  100%
+    +border-radius(20% 38% 25% 53%/12% 47% 35% 51%)
+/* hero css end */
+
+/* inner-hero-section css start */
+.inner-hero-section 
+  padding-top: 230px
+  padding-bottom: 375px
+  background-image: linear-gradient( 360deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  background-image: -moz-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  background-image: -webkit-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  background-image: -ms-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  position: relative
+  overflow: hidden
+  .bg-shape 
+    position: absolute
+    left: 0
+    bottom: -5px
+  .inner-page-content 
+    text-align: center
+    .title  
+      font-size: 60px
+      font-weight: 700 
+      text-transform: uppercase
+      @media (max-width: 1199px)
+        font-size: 56px
+      @media (max-width: 991px)
+        font-size: 48px
+      @media (max-width: 767px)
+        font-size: 36px
+      @media (max-width: 575px)
+        font-size: 32px
+    p 
+      color: #e4e3fc
+  &.style--two 
+    padding-bottom: 150px
+  &.style--three
+    padding-bottom: 190px
+  &.style--four
+    padding-bottom: 250px
+  &.style--five
+    padding-bottom: 150px
+  &.style--six
+    padding-bottom: 350px
+.page-list 
+  +d-flex 
+  margin: -5px -15px
+  @media (max-width: 575px)
+    padding-left: 15px
+  li 
+    padding: 5px 15px
+    position: relative
+    text-transform: capitalize
+    color: #ffffff
+    &:first-child
+      &::before 
+        display: none
+    &::before 
+      position: absolute
+      content: "\f30b"
+      font-family: 'Line Awesome Free'
+      font-weight: 900
+      color: #ffffff
+      left: -8px
+    a 
+      text-transform: capitalize
+/* inner-hero-section css end */

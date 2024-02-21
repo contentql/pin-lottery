@@ -1,0 +1,128 @@
+/* sidebar css start */
+.sidebar 
+  @media (max-width: 991px)
+    margin-top: 50px
+  .widget + .widget
+    margin-top: 40px
+  .widget 
+    padding: 30px 30px
+    background-color: #683df5
+    +border-radius(10px)
+    &__title 
+      text-transform: capitalize
+      margin-bottom: 30px
+  .sidebar-search 
+    input 
+      border: none
+      border-bottom: 1px solid #8380f7
+      padding-left: 0
+      padding-top: 0
+      font-size: 14px
+      color: #ffffff
+      +placeholder(#9face8)
+      border-radius: 0 
+    button 
+      margin-top: 30px
+      +gradient-one
+      text-transform: uppercase
+      color: #ffffff
+      font-size: 16px
+      padding: 10px 40px
+      +border-radius(999px)
+      i 
+        margin-right: 5px
+        color: rgba(#ffffff, 0.7)
+  .social-link-list 
+    +d-flex
+    margin: -5px -7px
+    li 
+      margin: 5px 7px
+      a 
+        width: 40px 
+        height: 40px 
+        border: 1px solid #7b98e0
+        display: flex 
+        justify-content: center
+        align-items: center
+        color: #ffffff
+        +border-radius(50%)
+        &:hover 
+          border: none
+          background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+  .category-list 
+    li 
+      &:first-child
+        a 
+          padding-top: 0
+      &:last-child
+        a 
+          padding-bottom: 0 
+          border-bottom: none
+      a 
+        display: block
+        color: $para-color
+        padding: 10px 0 
+        border-bottom: 1px dashed #213a68
+        +transition(all 0.3s)
+        &:hover 
+          color: #ffffff
+          padding-left: 10px
+          span 
+            color: #ffffff
+        span 
+          float: right
+          +transition(all 0.3s)
+  .tags 
+    margin: -5px -4px
+    a 
+      margin: 5px 4px
+      font-size: 14px
+      color: $para-color
+      padding: 11px 30px 
+      border: 1px solid rgba(#eaeaea, 0.1)
+      +border-radius(999px)
+      +transition(all 0.3s)
+      &:hover 
+        border-color: #fb6468
+        background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, #fb6468 44%, rgb(251,185,54) 100%)
+        background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, #fb6468 44%, rgb(251,185,54) 100%)
+        background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+.small-post 
+  &__thumb 
+    img 
+      +border-radius(10px)
+      height: 200px
+      width: 100%
+      +object-fit
+  &__content
+    margin-top: 30px
+  &__title 
+    margin-bottom: 10px
+.small-post-slider 
+  .slick-arrow 
+    position: absolute
+    top: -57px
+    right: 0
+    width: 20px 
+    height: 20px
+    box-shadow: 0px 2px 5px 0px rgba(0, 18, 50, 0.2)
+    +border-radius(50%)
+    color: #ffffff
+    font-size: 12px
+    display: flex 
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    +gradient-one
+    &.slick-disabled 
+      background-color: #7b6fd6
+      background-image: none
+    &.prev 
+      right: 30px
+/* sidebar css end */

@@ -1,0 +1,3806 @@
+/* about section css start */
+.about-wrapper
+  padding: 120px 50px 200px 50px
+  background-image: linear-gradient( 320deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -moz-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -webkit-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -ms-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+  +border-radius(20px)
+  position: relative 
+  @media (max-width: 991px)
+    padding-bottom: 150px
+  @media (max-width: 767px)
+    padding: 30px 30px 120px 30px
+  &__header 
+    text-align: center
+    width: 80%
+    margin-left: auto 
+    margin-right: auto
+    margin-bottom: 20px
+    @media (max-width: 575px)
+      width: 100% 
+  &__title-top 
+    font-size: 24px
+    font-weight: 600
+    color: #ffb200
+    margin-bottom: 10px
+  &__title
+    font-size: 60px
+    font-weight: 700
+    color: #ffffff
+    text-transform: uppercase
+    @media (max-width: 1199px)
+      font-size: 56px
+    @media (max-width: 991px)
+      font-size: 48px
+    @media (max-width: 767px)
+      font-size: 36px
+    @media (max-width: 575px)
+      font-size: 32px
+  &__content
+    p + p 
+      margin-top: 20px
+/* about section css end */
+
+
+/* next-draw-section css start */
+.next-draw-area 
+  padding: 50px 50px
+  background-color: #0f0233
+  border: 1px solid rgba(92, 82, 172, 0.4)
+  +d-flex 
+  align-items: center
+  justify-content: space-between
+  @media (max-width: 1199px)
+    padding: 30px
+  .left
+    width: 26%
+    @media (max-width: 1199px)
+      width: 32%
+    @media (max-width: 991px)
+      width: 100%
+      text-align: center
+      margin-bottom: 30px
+    .title 
+      font-size: 40px
+      @media (max-width: 575px) 
+        font-size: 32px
+  .middle
+    width: 43%
+    @media (max-width: 1199px)
+      width: 45%
+    @media (max-width: 991px)
+      width: 60%
+    @media (max-width: 767px)
+      width: 100%
+    p 
+      color: #22b868
+      font-size: 24px
+      text-align: center
+    .clock2 
+      justify-content: center
+      margin: 0
+      div 
+        width: 25%
+        margin: 0
+        position: relative 
+        justify-content: center
+        &:last-child
+          &::after 
+            display: none
+        &::after 
+          position: absolute
+          content: ''
+          top: 9px
+          right: 0 
+          width: 3px 
+          height: 35px 
+          background-color: #444781
+          @media (max-width: 440px) 
+            height: 25px
+            top: 5px
+      span, p 
+        font-size: 36px 
+        font-weight: 500 
+        color: #ffffff
+        @media (max-width: 440px)
+          font-size: 24px
+        @media (max-width: 380px) 
+          font-size: 22px
+  .right
+    width: 16%
+    text-align: right
+    @media (max-width: 1199px)
+      width: 20%
+    @media (max-width: 991px)
+      width: 30%
+      text-align: center
+    @media (max-width: 767px)
+      width: 100%
+      margin-top: 15px
+/* next-draw-section css end */
+
+
+/* how to play section css start */
+.z-index-two 
+  z-index: 1
+
+.play-elements
+  position: absolute 
+  top: 0
+  right: 0
+  text-align: right
+  z-index: -1 
+  @media (max-width: 575px)
+    display: none
+  img 
+    @media (max-width: 1199px)
+      width: 60%
+    @media (max-width: 767px)
+      width: 45%
+.play-card
+  padding: 30px 25px
+  +border-radius(10px)
+  +transition(all 0.3s)
+  &--one
+    background-image: url("/images/elements/card-bg-1.jpg")
+  &--two
+    background-image: url("/images/elements/card-bg-2.jpg")
+  &--three
+    background-image: url("/images/elements/card-bg-3.jpg")
+  &:hover 
+    +transform(scale(1.05, 1.05))
+    .play-card__icon 
+      &::after 
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+        opacity: 0
+  &__icon 
+    position: relative
+    width: 100px
+    height: 100px
+    text-align: center
+    line-height: 100px
+    margin: 0 auto
+    background-color: rgb(53, 40, 130)
+    box-shadow: 0px 13px 21px 0px rgba(215, 38, 116, 0.6), inset 0px 0px 15px 5px rgba(#fd4099, 1)
+    +border-radius(50%)
+    z-index: 1
+    &::after 
+      position: absolute
+      content: ''
+      top: -15px
+      left: -15px
+      width: 130px
+      height: 130px
+      border: 1px solid rgba(#ffffff, 0.4)
+      +border-radius(50%)
+      z-index: -1
+      +transition(all 0.3s)
+    .play-card__number 
+      position: absolute
+      bottom: -6px
+      right: -21px
+      width: 40px
+      height: 40px
+      background-image: -moz-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+      background-image: -webkit-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+      background-image: -ms-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+      +border-radius(50%)
+      text-align: center
+      line-height: 44px
+      font-size: 22px
+      color: #ffffff
+  &__content
+    text-align: center
+    margin-top: 50px
+    p 
+      margin-top: 10px
+  &__title 
+    text-transform: uppercase
+/* how to play section css end */
+
+/* contest section css start */
+.bg-el 
+  position: absolute
+  top: 0
+  left: 0
+  z-index: -1
+  img 
+    height: 100%
+.nav-tabs:not(.winner-tab-nav)
+  li 
+    margin: 5px 15px
+  .nav-item 
+    .cmn-btn
+      &.active
+        +gradient-one
+        box-shadow: 0px 17px 40px 0px #7c4e1959
+.contest-card 
+  background-color: #4939c1
+  position: relative
+  z-index: 1
+  &:hover 
+    .contest-card__thumb 
+      img 
+        -webkit-animation-name: zoomIn
+        animation-name: zoomIn
+        -webkit-animation-duration: 1.5s
+        animation-duration: 1.5s
+        -webkit-animation-fill-mode: both
+        animation-fill-mode: both
+  .item-link 
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    z-index: 1
+  &__thumb 
+    position: relative
+    height: 260px
+    padding: 15px
+    background-color: #5a4bcc
+    +d-flex 
+    align-items: center
+    justify-content: center
+    img 
+      max-height: 260px
+    .action-icon 
+      position: absolute
+      top: 20px
+      left: 20px
+      width: 30px
+      height: 30px
+      text-align: center
+      line-height: 30px
+      background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      box-shadow: 0px 6px 5px 0px rgba(243, 42, 126, 0.43)
+      +border-radius(50%)
+      &:hover 
+        color: #ffffff
+    .contest-num 
+      position: absolute
+      bottom: -40px
+      left: 50%
+      width: 85px
+      height: 85px
+      +transform(translateX(-50%))
+      background-image: linear-gradient( 110deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+      background-image: -moz-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+      background-image: -webkit-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+      background-image: -ms-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+      box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35)
+      +border-radius(50%)
+      +d-flex
+      justify-content: center
+      align-content: center
+      span 
+        color: #ffffff
+        text-transform: capitalize
+        font-size: 12px
+      .number 
+        text-transform: uppercase
+  &__content 
+    padding: 30px 30px 20px 30px
+    +d-flex 
+    align-items: center
+    @media (max-width: 575px)
+      padding-top: 65px
+    .left 
+      width: 50%
+      padding-right: 25px
+      @media (max-width: 575px) 
+        padding-right: 0
+        width: 100%
+        text-align: center
+    .right 
+      width: 50%
+      padding-left: 15px
+      text-align: right
+      @media (max-width: 575px)
+        padding-left: 0
+        width: 100%
+        text-align: center
+      p 
+        text-transform: capitalize
+  &__price 
+    font-size: 28px
+    font-weight: 600
+    color: #22b868
+    line-height: 1.4
+  &__footer 
+    padding: 15px 30px
+    border-top: 1px solid rgba(#ffffff, 0.07)
+  &__meta 
+    +d-flex
+    justify-content: space-between
+    li 
+      +d-flex 
+      align-items: center
+      &:first-child
+        width: 30%
+        border-right: 1px solid rgba(#ffffff, 0.15)
+      &:last-child
+        width: 60%
+        @media (max-width: 340px)
+          width: 70%
+          padding-left: 15px
+      i 
+        font-size: 24px
+        margin-right: 8px
+      span 
+        font-size: 18px
+        color: $base-color
+        line-height: 1.2
+      p 
+        font-size: 14px
+        margin-left: 5px
+
++keyframes (zoomIn)
+  from
+    opacity: 0
+    -webkit-transform: scale3d(0.3, 0.3, 0.3)
+    transform: scale3d(0.3, 0.3, 0.3)
+  50%
+    opacity: 1
+
+.contest-wrapper 
+  position: relative 
+  &__header
+    background-color: #5a4bcc
+  &__title 
+    font-size: 60px 
+    font-weight: 700 
+    color: #ffffff
+    text-transform: uppercase
+    padding-left: 15px 
+    padding-right: 15px
+    text-align: center
+    margin-bottom: 30px
+    @media (max-width: 1199px)
+      font-size: 56px
+    @media (max-width: 991px)
+      font-size: 48px
+    @media (max-width: 767px)
+      font-size: 42px
+    @media (max-width: 575px)
+      font-size: 36px
+  .contest-filter-wrapper 
+    select
+      padding-left: 20px
+  .contest-search-form
+    position: relative
+    input 
+      width: 100% 
+      +border-radius(999px)
+      border-color: #271c48
+      +placeholder(#6775a8)
+      font-size: 14px
+    button 
+      position: absolute
+      top: 10px
+      //top: 13px
+      right: 16px
+      color: #a2aae4
+      background: transparent
+      font-size: 20px
+
+  .rang-slider 
+
+    input
+      padding: 0
+      min-height: 4px
+      height: 4px
+      border-radius: 3px
+      margin: 0
+      -webkit-appearance: none
+      background: #5a4bcc
+      border-radius: 5px
+      background-image: linear-gradient(90deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%)
+      background-repeat: no-repeat
+      border: 0
+
+      &::-webkit-slider-thumb
+        -webkit-appearance: none
+        height: 24px
+        width: 24px
+        border-radius: 50%
+        background-image: linear-gradient(90deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%)
+        cursor: pointer
+        box-shadow: 0 0 2px 0 #555
+
+      &::-webkit-slider-runnable-track
+        -webkit-appearance: none
+        box-shadow: none
+        border: none
+        background: transparent
+
+    .caption 
+      color: #ffffff
+      font-size: 14px 
+      text-transform: uppercase
+      display: block
+      text-align: center
+      //margin-bottom: 12px
+    .ui-widget.ui-widget-content
+      background-color: #5a4bcc
+      border: none
+      height: 4px
+      +border-radius(999px)
+    .ui-state-default, .ui-widget-content .ui-state-default
+      width: 24px
+      height: 24px
+      background-image: -moz-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+      background-image: -webkit-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+      background-image: -ms-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+      box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35)
+      +border-radius(50%)
+      border: none
+      top: -10px
+      cursor: pointer
+      &::before 
+        position: absolute
+        content: "\f104"
+        color: #ffffff
+        font-family: 'Line Awesome Free'
+        font-weight: 900
+        font-size: 15px
+        left: 0px
+      &::after 
+        position: absolute
+        content: "\f105"
+        color: #ffffff
+        font-family: 'Line Awesome Free'
+        font-weight: 900
+        font-size: 15px
+        right: 1px
+    .ui-widget-header
+        background-image: -moz-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+        background-image: -webkit-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+        background-image: -ms-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+        box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35)
+    .amount-wrapper 
+      +d-flex 
+      justify-content: space-between
+      //margin-top: 5px
+      .min-amount, .max-amount 
+        color: #ffffff
+        font-size: 16px
+
+  .action-btn-wrapper 
+    +d-flex 
+    align-items: center
+    margin: -5px -10px
+  .action-btn 
+    width: 30px 
+    height: 30px
+    background-color: #5a4bcc
+    font-size: 20px
+    color: #aeaef1 
+    +border-radius(50%)
+    display: flex 
+    align-items: center
+    justify-content: center
+    margin: 5px 10px
+/* contest section css end */
+
+/* contest slider section css start */
+.contest-slider-section 
+  margin-top: -200px
+  position: relative
+  z-index: 2
+.contest-slider 
+  .slick-list 
+    margin: 0 -15px
+  .contest-card 
+    margin: 0 15px
+  .slick-arrow 
+    position: absolute
+    top: -50px
+    right: 0
+    z-index: 2
+    color: #ffffff
+    width: 50px
+    height: 26px
+    font-size: 24px
+    +d-flex 
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    +border-radius(999px)
+    +transition(all 0.3s)
+    background-image: linear-gradient( 90deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+    background-image: -moz-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+    background-image: -webkit-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+    background-image: -ms-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35)
+    &.prev 
+      right: 65px
+    &.slick-disabled
+      background-image: none 
+      background-color: #7b6fd6
+      box-shadow: none
+  &.style--two 
+    .slick-arrow 
+      top: 50%
+      right: auto 
+      left: -25px
+      @media (max-width: 575px)
+        left: 10px
+      &.next
+        right: -25px
+        left: auto
+        @media (max-width: 575px)
+          right: 10px 
+/* contest slider section css end */
+
+/* contest feature section css start */
+.icon-item2 
+  text-align: center
+  &__content
+    margin-top: 30px
+    .title 
+      color: #ffffff
+      text-transform: capitalize
+    p 
+      margin-top: 10px
+/* contest feature section css end */
+
+/* winner section start */
+.winner-wrapper 
+  background-image: linear-gradient( 360deg, #e82a7a 0%, #360354 100%)
+  background-image: -moz-linear-gradient( 90deg, #e82a7a 0%, #360354 100%)
+  background-image: -webkit-linear-gradient( 90deg, #e82a7a 0%, #360354 100%)
+  background-image: -ms-linear-gradient( 90deg, #e82a7a 0%, #360354 100%)
+  padding-right: 30px
+  padding-top: 30px
+  margin-bottom: 75px
+  +d-flex 
+  justify-content: space-between
+  @media (max-width: 575px)
+    padding-left: 30px
+  .left 
+    width: 75%
+    +d-flex 
+    align-items: flex-end
+    @media (max-width: 1199px)
+      width: 65%
+    @media (max-width: 767px)
+      width: 60%
+    @media (max-width: 575px)
+      display: none
+    .winner-prize-thumb 
+      margin-left: -65px
+      margin-bottom: -100px
+      +transform(translateY(25px))
+      @media (max-width: 1350px)
+        margin-left: -25px
+      @media (max-width: 1199px)
+        margin-bottom: 0
+        +transform(translateY(0))
+  .right 
+    +d-flex 
+    align-items: flex-end
+    justify-content: center
+    width: 25%
+    @media (max-width: 991px)
+      width: 30%
+    @media (max-width: 767px)
+      width: 35%
+    @media (max-width: 575px)
+      width: 100%
+    .winner-slider 
+      width: 100%
+.winner-slide-item 
+  position: relative
+  .winner-thumb
+    text-align: center
+    img 
+      display: inline-block
+  .winner-content
+    background-image: url("/images/elements/winner-content-bg.jpg")
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    height: auto
+    padding: 15px 30px
+    text-align: center
+    +border-radius(20px 20px 0 0)
+    .winner-name 
+      font-size: 18px
+      text-transform: capitalize
+    p 
+      font-size: 15px
+      color: #0f0233
+    .draw-date 
+      font-size: 24px
+      font-weight: 600 
+      color: #ffffff
+      line-height: 1.4
+.winner-slider 
+  .slick-arrow 
+    position: absolute
+    //bottom: -70px
+    bottom: -80px
+    right: -30px
+    cursor: pointer
+    &:hover 
+      i 
+        color: #ff0000
+    i 
+      color: #57538e
+      //font-size: 70px
+      font-size: 58px
+      +transition(all 0.3s)
+    &.prev 
+      right: 75px
+/* winner section edn */
+
+/* winner details section css start */
+.winner-details-wrapper
+  background-image: url("/images/elements/winner-details.jpg")
+  padding: 50px 20px
+  +d-flex 
+  align-items: flex-end
+  +border-radius(20px)
+  position: relative 
+  @media (max-width: 575px)
+    padding: 30px 20px
+  .left 
+    width: 25%
+    @media (max-width: 1199px)
+      width: 20%
+    @media (max-width: 991px)
+      display: none
+  .body
+    width: 50%
+    text-align: center
+    padding: 0 20px
+    @media (max-width: 1199px)
+      width: 60%
+    @media (max-width: 991px)
+      width: 100%
+    p, span 
+      font-size: 16px
+      color: #ffffff
+    .contest-date 
+      span 
+        color: #27ff5a
+    .line 
+      width: 215px
+      height: 3px
+      background-color: #ffffff
+      +border-radius(50%)
+      margin: 25px auto
+    .title 
+      font-weight: 400
+      margin-bottom: 15px
+    .numbers 
+      +d-flex
+      justify-content: space-between
+      margin-bottom: 30px
+      @media (max-width: 767px)
+        justify-content: center
+      li 
+        padding: 10px 10px
+        width: calc((100% / 7) - 10px)
+        background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        box-shadow: 0px 17px 40px 0px rgba(243, 42, 126, 0.35)
+        +border-radius(5px)
+        font-size: 38px
+        color: #ffffff
+        line-height: 1
+        @media (max-width: 767px)
+          font-size: 32px
+          width: auto
+          margin: 3px
+    .btn-border 
+      color: #ffffff
+      padding: 10px 35px
+      +transition(all 0.3s)
+      &:hover 
+        background-color: $base-color
+  .right
+    width: 25%
+    @media (max-width: 1199px)
+      width: 20%
+    @media (max-width: 991px)
+      display: none
+/* winner details section css end */
+
+/* latest winner section css start */
+.latest-winner-section 
+  z-index: 1
+  .el-1, .el-2, .el-3
+    position: absolute
+    z-index: -1
+  .el-1
+    top: 0
+    left: 10%
+  .el-2
+    top: 4%
+    left: 39%
+  .el-3
+    top: 0
+    right: 12%
+.number-check-wrapper 
+  position: sticky 
+  top: 100px 
+  padding: 30px 
+  background-color: #4939c1
+  +border-radius(20px)
+.check-number-form
+  .number-list-wrapper 
+    p 
+      color: #ffffff
+    .number-list
+      +d-flex
+      justify-content: space-between
+      @media (max-width: 991px)
+        justify-content: flex-start
+      input 
+        width: 36px
+        min-height: 36px
+        background-image: linear-gradient( 320deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+        background-image: -moz-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+        background-image: -moz-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+        background-image: -webkit-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+        background-image: -ms-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+        box-shadow: 0px 19px 56px 0px rgba(0, 0, 0, 0.2)
+        +border-radius(50%)
+        font-size: 18px
+        color: $para-color
+        border: none
+        padding: 5px
+        text-align: center
+        margin-bottom: 10px
+        color: #ffffff
+        @media (max-width: 991px)
+          margin-right: 15px
+  button.cmn-btn 
+    @media (max-width: 1199px)
+      padding: 12px 30px
+  .form-control 
+    min-height: 48px
+    background-color: #392ba6
+    border: none
+    color: #ffffff
+    padding: 10px 30px
+    +border-radius(999px)
+    +placeholder(#897edb)
+  .nice-select 
+    min-height: 48px
+    background-color: #392ba6
+    border: none
+    +border-radius(999px)
+    .current 
+      color: #897edb
+    .list 
+      +gradient-three
+    .option 
+      font-weight: 400
+      &.selected, &.focus, &:hover 
+        background-color: rgba(#000000, 0.1)
+        font-weight: 600
+        color: #ffffff
+    select
+      //background-color: #382aa3 
+      padding-left: 30px     
+.winner-card 
+  +d-flex
+  background-image: linear-gradient( 360deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -moz-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -webkit-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -ms-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  &__thumb
+    padding: 30px 10px
+    width: 30%
+    background-image: linear-gradient( 360deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -moz-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -webkit-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -ms-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    +d-flex
+    align-items: center
+    @media (max-width: 767px)
+      width: 100%
+      justify-content: center
+  &__content
+    width: 70%
+    position: relative
+    @media (max-width: 767px)
+      width: 100%
+    .winner-thumb
+      position: absolute
+      top: 50%
+      left: -46px
+      width: 86px
+      height: 86px
+      +border-radius(50%)
+      overflow: hidden
+      margin-top: -43px
+      @media (max-width: 767px)
+        top: 0
+        left: 50%
+        margin-left: -43px
+    .content-top 
+      padding: 30px 30px 30px 50px
+      border-bottom: 1px solid #c4a1f8
+      +d-flex
+      @media (max-width: 767px) 
+        padding: 65px 20px 20px 20px
+      .left
+        width: 50%
+        padding-right: 50px
+        @media (max-width: 767px)
+          width: 100%
+          text-align: center
+          padding-right: 0
+      .right
+        width: 50%
+        text-align: center
+        @media (max-width: 767px)
+          width: 100%
+          text-align: center
+          margin-top: 15px
+        span 
+          color: #27ff5a
+    .content-bottom
+      padding: 30px 30px 30px 50px
+      +d-flex
+      @media (max-width: 767px)
+        text-align: center
+        padding: 20px
+      .number-list-wrapper 
+        width: 75%
+        @media (max-width: 767px)
+          width: 100%
+      .number-list
+        +d-flex
+        justify-content: space-between
+        padding-right: 30px
+        @media (max-width: 1199px)
+          padding-right: 0
+        @media (max-width: 767px)
+          justify-content: center
+        li, input
+          width: 36px
+          min-height: 36px
+          height: 36px
+          background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          box-shadow: 0px 17px 40px 0px rgba(243, 42, 126, 0.35)
+          +border-radius(50%)
+          font-size: 20px
+          color: #ffffff
+          border: none
+          padding: 2px
+          text-align: center
+          margin-top: 10px
+          @media (max-width: 767px)
+            margin-right: 15px
+      .right
+        width: 25%
+        text-align: center
+        @media (max-width: 767px)
+          width: 100%
+          +d-flex
+          align-items: center
+          margin-top: 15px
+          justify-content: center
+        p 
+          color: #ffffff
+        .contest-num 
+          color: #ffffff
+          font-size: 28px
+          @media (max-width: 767px) 
+            margin-left: 15px
+.winner-tab-nav 
+  border-bottom: 1px solid #2d246d
+  @media (max-width: 575px)
+    justify-content: center
+  .nav-item
+    width: calc(100% / 5)
+    text-align: center 
+    @media (max-width: 575px)
+      width: auto
+    .nav-link 
+      background-color: transparent
+      border-color: transparent!important
+      border-bottom: 4px solid transparent
+      width: 100% 
+      &.active, &:hover 
+        background-color: transparent!important
+        border-color: transparent!important
+        border-bottom: 4px solid #ff5800!important
+      .icon-thumb 
+        height: 75px
+        position: relative
+        +d-flex 
+        justify-content: center
+        align-items: center
+        z-index: 1
+        @media (max-width: 575px)
+          width: 50px
+          height: 50px
+          margin: auto
+        &::before 
+          position: absolute
+          content: ''
+          top: 50%
+          left: 50%
+          width: 80px
+          height: 80px
+          background-color: rgba(75, 61, 186, 0.2)
+          +border-radius(50%)
+          margin-top: -40px
+          margin-left: -40px
+          z-index: -1
+          @media (max-width: 575px) 
+            width: 40px
+            height: 40px
+            margin-top: -20px
+            margin-left: -20px
+      span 
+        font-size: 18px
+        font-weight: 600 
+        text-transform: uppercase
+        margin-top: 20px
+        color: #ffffff
+        padding-bottom: 10px
+        @media (max-width: 991px)
+          font-size: 16px
+        @media (max-width: 575px)
+          font-size: 14px
+/* latest winner section css end */
+
+/* overview section css start */
+.overview-section 
+  position: relative
+  z-index: 1
+  &::before 
+    position: absolute
+    content: ''
+    bottom: 65px
+    left: 0
+    width: 100%
+    height: 1px 
+    background-color: #270d6f
+    z-index: -1
+  .map-el 
+    position: absolute
+    bottom: 65px
+    left: 0
+    right: 0
+    width: 100%
+    text-align: center
+    z-index: -2
+    @media (max-width: 1199px)
+      bottom: 16%
+    @media (max-width: 991px)
+      bottom: 37%
+    @media (max-width: 767px)
+      bottom: 49%
+    @media (max-width: 575px)
+      bottom: 65%
+  [class*="obj-"]
+    position: absolute
+  .obj-1
+    top: 0
+    left: 0
+  .obj-2
+    top: 2%
+    right: 3%
+  .obj-3
+    top: 5%
+    right: 30%
+  .obj-4
+    top: 5%
+    right: 5%
+.map-pointer
+  height: 285px
+  position: relative
+  .pointer 
+    position: absolute
+    &.num-1
+      top: 48%
+      left: 13%
+    &.num-2
+      top: -30px
+      left: 23%
+      @media (max-width: 1199px)
+        top: 55px
+    &.num-3
+      top: 55%
+      left: 25%
+    &.num-4
+      top: 5%
+      left: 38%
+    &.num-5
+      top: 55%
+      left: 48%
+    &.num-6
+      top: 35%
+      left: 53%
+    &.num-7
+      top: 7%
+      left: 71%
+    &.num-8
+      top: 27%
+      left: 81%
+    &.num-9
+      top: 60%
+      right: 10%
+.pointer
+  width: 16px
+  height: 16px
+  +border-radius(50%)
+  display: inline-block
+  background-color: #04aecd
+  +animation(pulse 2000ms linear infinite)
+  z-index: 1
+  &::before, &::after 
+    position: absolute
+    content: ""
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    border-radius: 74px
+    background-color: #04aecd
+    opacity: 0.15
+  &::before
+    +animation(inner-ripple 2000ms linear infinite)
+  &::after
+    +animation(outer-ripple 2000ms linear infinite)
++keyframes(outer-ripple)
+  0%
+    +transform(scale(1))
+    opacity: 0.2
+  50%
+    +transform(scale(1.5))
+    opacity: 0.5
+  100%
+    +transform(scale(2.5))
+    opacity: 0
+
++keyframes(inner-ripple)
+  0%
+    +transform(scale(1))
+    opacity: 0.3
+  50%
+    +transform(scale(1.2))
+    opacity: 0.7
+  100%
+    +transform(scale(1.5))
+    opacity: 0
+
+.overview-card 
+  padding: 30px 30px
+  +d-flex
+  align-items: center
+  background-image: linear-gradient( 360deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -moz-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -webkit-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -ms-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  +border-radius(10px)
+  @media (max-width: 767px) 
+    text-align: center
+  &__icon 
+    width: 82px
+    @media (max-width: 767px)
+      margin-left: auto 
+      margin-right: auto
+  &__content
+    width: calc(100% - 82px)
+    padding-left: 30px
+    @media (max-width: 767px)
+      width: 100% 
+      padding-left: 0
+      margin-top: 20px
+    .number 
+      font-size: 36px
+      font-weight: 600 
+      color: #ffffff
+      line-height: 1.3
+    p 
+      font-size: 18px
+/* overview section css end */
+
+/* features section css start */
+.feature-card 
+  padding: 30px 30px
+  text-align: center
+  background-image: linear-gradient( 45deg, rgb(215,61,245) 0%, rgb(143,61,245) 100%)
+  background-image: -moz-linear-gradient( 45deg, rgb(215,61,245) 0%, rgb(143,61,245) 100%)
+  background-image: -webkit-linear-gradient( 45deg, rgb(215,61,245) 0%, rgb(143,61,245) 100%)
+  background-image: -ms-linear-gradient( 45deg, rgb(215,61,245) 0%, rgb(143,61,245) 100%)
+  +border-radius(10px)
+  +transition(all 0.3s)
+  &__icon 
+    margin-bottom: 25px
+  &__content
+    p 
+      color: #f4f5ff
+      margin-top: 8px
+  &.style--two 
+    padding: 0 30px
+    background: transparent
+    &:hover 
+      .feature-card__icon
+        .inner
+          box-shadow: inset 0 0px 50px 2px #ec1379a3
+    .feature-card__icon 
+      width: 165px
+      height: 165px
+      background-color: #170543
+      border: 2px solid rgba(#ffffff, 0.2)
+      +border-radius(50%)
+      +d-flex 
+      align-items: center
+      justify-content: center
+      margin-left: auto
+      margin-right: auto
+      .inner 
+        width: 135px
+        height: 135px
+        background-image: linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+        background-image: -moz-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+        background-image: -webkit-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+        background-image: -ms-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+        +border-radius(50%)
+        +d-flex 
+        align-items: center
+        justify-content: center
+        box-shadow: inset 0 0px 19px 2px #ec137954
+        +transition(all 0.3s)
+.feature-car
+  position: absolute
+  top: 35%
+  right: 0
+  text-align: right
+  @media (max-width: 1199px)
+    display: none
+  img 
+    @media (max-width: 1650px)
+      width: 80%
+    @media (max-width: 1450px)
+      width: 70%
+/* features section css end */
+
+/* team section css start */
+.team-card 
+  text-align: center
+  &:hover 
+    .team-card__thumb
+      .obj 
+        width: 100px
+        height: 91px
+        top: 50%
+        left: 50%
+        +transform(translate(-50%, -50%))
+  &__thumb
+    width: 167px
+    height: 167px
+    +border-radius(100%)
+    display: inline-block
+    position: relative
+    .obj 
+      position: absolute
+      top: 0
+      left: -23px
+      width: 200px
+      height: 182px
+      z-index: -1
+      +transition(all 0.5s)
+  &__content
+    margin-top: 50px
+    .name 
+      text-transform: capitalize
+    .designation
+      color: #22b868
+/* team section css end */
+
+/* testimonial section css start */
+.has-bg--shape
+  position: relative
+  z-index: 1
+  .bg-shape 
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 690px
+    background-image: linear-gradient( 360deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -moz-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -webkit-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -ms-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    +d-flex 
+    justify-content: center
+    align-items: flex-end
+    z-index: -1
+    overflow: hidden
+    z-index: -1 
+    .round-shape 
+      margin-bottom: -1px
+    .shape-1, .shape-2, .shape-3, .shape-4, .shape-5, .shape-6
+      position: absolute
+      z-index: -2
+      background-color: #ffffff
+      opacity: 0.102
+    .shape-1 
+      bottom: -14%
+      left: -1%
+      width: 420px
+      height: 420px
+      +border-radius(40px)
+      +transform(rotate(45deg))
+    .shape-2
+      top: 14%
+      left: 25%
+      width: 75px
+      height: 75px
+      +border-radius(5px)
+      +transform(rotate(15deg))
+    .shape-3
+      top: 3%
+      right: 38%
+      width: 90px
+      height: 90px
+      +border-radius(50%)
+    .shape-4
+      top: 13%
+      right: 27%
+      width: 200px
+      height: 200px
+      +border-radius(50%)
+    .shape-5
+      top: 47%
+      right: 14%
+      width: 155px
+      height: 145px
+      +border-radius(10px)
+      +transform(rotate(15deg))
+    .shape-6
+      top: -18%
+      right: -10%
+      width: 400px
+      height: 400px
+      +border-radius(50%)
+.testimonial-area 
+  background-image: url("/images/elements/testimonial-single.jpg")
+  padding: 50px 50px
+  +border-radius(50px)
+  @media (max-width: 575px)
+    padding: 30px 30px
+.testimonial-single 
+  text-align: center
+  &__thumb 
+    width: 90px 
+    height: 90px 
+    display: inline-block
+    img 
+      display: inline-block
+      width: 90px
+      height: 90px
+      object-fit: cover
+      -o-object-fit: cover 
+      object-position: center
+      -o-object-position: center
+      +border-radius(50%)
+  &__content 
+    padding: 0 50px
+    margin-top: 30px
+    @media (max-width: 767px)
+      padding: 0
+    .client-name 
+      margin-bottom: 10px
+    p 
+      color: #f1f3ff
+    .ratings
+      background-color: rgba(38, 56, 169, 0.2)
+      border: 1px solid rgba(#ffffff, 0.4)
+      display: inline-flex
+      gap: 5px
+      padding: 6px 15px
+      +border-radius(999px)
+      margin-top: 15px
+      i 
+        //font-size: 14px
+        color: #ffffff
+/* testimonial section css end */
+
+/* support section css start */
+.support-card 
+  background-image: linear-gradient( 360deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -moz-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -webkit-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -ms-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  +border-radius(30px)
+  padding: 30px 30px
+  +d-flex
+  align-items: center
+  &__thumb 
+    width: 140px
+    height: 190px
+    +d-flex 
+    align-items: center
+    @media (max-width: 1199px)
+      margin-left: auto 
+      margin-right: auto
+  &__content
+    width: calc(100% - 140px)
+    padding-left: 30px
+    @media (max-width: 1199px)
+      width: 100%
+      padding-left: 0
+      margin-top: 25px
+      text-align: center
+    p 
+      color: #f1f3ff
+  &__title 
+    margin-bottom: 10px
+/* support section css end */
+
+/* counter section css start */
+.counter-section 
+  margin-top: -140px
+  @media (max-width: 767px)
+    margin-top: -185px
+  @media (max-width: 575px)
+    margin-top: -230px
+.counter-wrapper 
+  padding: 45px 40px 10px 40px
+  background-color: rgb(53, 40, 130)
+  box-shadow: inset 0 -3px 8px 3px #ec137954, 0px 10px 21px 0px rgba(53, 40, 130, 0.6)
+  +border-radius(999px)
+  position: relative
+  z-index: 3
+  @media (max-width: 991px)
+    +border-radius(25px)
+  &.style--two
+    padding: 30px 30px
+    margin: -80px 60px 0 60px
+    @media (max-width: 480px)
+      margin: -80px 30px 0 30px
+.counter-item 
+  +d-flex 
+  align-items: center
+  &__icon 
+    width: 95px
+    @media (max-width: 1199px)
+      width: 65px
+    @media (max-width: 767px)
+      width: 100%
+      text-align: center
+  &__content
+    width: calc(100% - 95px)
+    padding-left: 15px
+    @media (max-width: 1199px)
+      width: calc(100% - 65px)
+    @media (max-width: 767px)
+      width: 100%
+      text-align: center
+      padding-left: 0
+      margin-top: 15px
+    span 
+      font-family: $heading-font 
+      font-weight: 600
+      font-size: 60px
+      line-height: 1
+      color: #ffffff
+      @media (max-width: 1199px)
+        font-size: 42px
+    p 
+      color: #22b868
+  &.style--two
+    .counter-item__content 
+      width: 100%
+  &.style--three
+    padding: 25px
+    background-color: rgb(15, 2, 51)
+    border: 1px solid rgba(#ffffff, 0.1)
+    +border-radius(10px)
+    .counter-item__content 
+      width: 100%
+/* counter section css end */
+
+/* contest-details-section css start */
+.clock-wrapper 
+  background-color: rgba(#ffffff, 0.2)
+  padding: 15px 30px 
+  +border-radius(25px 25px 0 0)
+  text-align: center
+  >p 
+    color: #eceafe
+  .clock 
+    +d-flex 
+    justify-content: center
+    div 
+      width: 25%
+      span 
+        font-size: 40px
+        line-height: 1
+        font-weight: 700 
+        color: #ffb200
+        text-shadow: 0px 7px 4px rgba(87, 74, 179, 0.65)
+        @media (max-width: 575px)
+          font-size: 32px
+      p 
+        font-size: 14px
+        text-transform: capitalize
+.contest-cart 
+  background-color: #12023e
+  padding: 30px 30px 120px 30px
+  position: relative 
+  +d-flex 
+  &__left 
+    width: 50%
+    padding-right: 15px
+    @media (max-width: 991px)
+      width: 100%
+      padding-right: 0
+  &__thumb-slider
+    height: 500px
+    background-color: #5a4bcc
+    display: flex !important
+    flex-wrap: wrap
+    justify-content: center
+    align-items: center
+    padding: 15px
+    +border-radius(25px)
+    @media (max-width: 575px)
+      height: 285px
+    .single-slide 
+      text-align: center
+      img
+        width: 100%
+  &__nav-slider
+    margin-top: 30px
+    padding: 0 60px
+    .slick-list 
+      margin: 0 -10px
+    .single-slide 
+      height: 120px
+      +d-flex 
+      background-color: #5a4bcc
+      justify-content: center
+      align-items: center
+      +border-radius(25px)
+      text-align: center
+      margin: 0 10px
+      img 
+        display: inline-block
+    .slick-arrow 
+      width: 40px
+      height: 40px
+      background-color: #5a4bcc 
+      color: #ffffff
+      font-size: 24px
+      display: flex
+      align-items: center
+      justify-content: center
+      +border-radius(50px)
+      position: absolute
+      top: 60px 
+      left: 0
+      margin-top: -20px
+      cursor: pointer
+      &:hover 
+        +gradient-three
+      &.next 
+        left: auto 
+        right: 0
+  &__right
+    width: 50%
+    padding-left: 15px
+    @media (max-width: 991px)
+      width: 100%
+      padding-left: 0
+      margin-top: 50px
+    .subtitle 
+      color: $base-color
+      margin-bottom: 15px
+    .contest-name 
+      font-size: 36px
+      margin-bottom: 45px
+    .contest-num 
+      color: #ffffff
+      text-transform: capitalize
+      margin-top: 15px
+      margin-bottom: 30px
+      span 
+        color: #ec1379
+    .ticket-amount 
+      margin-top: 20px
+      .left 
+        font-weight: 600 
+        color: #ffffff
+      .right 
+        float: right
+        font-weight: 600 
+        color: #ffffff
+      p 
+        font-size: 14px
+        margin-top: 10px
+    .progressbar
+      position: relative
+      display: block
+      width: 100%
+      height: 10px
+      background-color: #200e54
+      margin-top: 10px
+      +border-radius(999px)
+      .bar
+        position: absolute
+        //width: 0px
+        width: 75%
+        height: 100%
+        top: 0
+        left: 0
+        background: #ec6624
+        overflow: hidden
+        +border-radius(999px)
+    .ticket-price 
+      margin-top: 25px
+      margin-bottom: 25px
+      .amount 
+        color: #ffffff 
+        font-weight: 600 
+        font-size: 36px
+      small 
+        font-size: 14px
+        margin-left: 15px
+        color: $para-color
+        text-transform: capitalize
+    .select-quantity 
+      width: 53%
+      +d-flex
+      align-items: center
+      @media (max-width: 767px)
+        width: 58%
+      @media (max-width: 575px)
+        width: 100%
+    .caption 
+      color: #ffffff
+      margin-right: 15px
+    .quantity 
+      position: relative
+      width: 170px
+      height: 60px
+      input 
+        border: none
+        text-align: center
+        padding: 0
+        font-size: 28px
+        font-weight: 600 
+        color: #ffffff
+        height: 60px
+        padding-left: 5px
+        margin-top: 3px
+    .quantity-nav 
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      +d-flex
+      border: 1px solid rgba(#ffffff, 0.2)
+      +border-radius(999px)
+      justify-content: space-between
+      align-items: center
+      padding: 0px 10px
+      .quantity-button 
+        width: 40px
+        height: 40px
+        background-color: #20115a
+        +border-radius(50%)
+        color: $para-color
+        +d-flex 
+        justify-content: center
+        align-items: center
+        font-size: 24px
+        cursor: pointer
+        &.quantity-up 
+          background-color: #5a4bcc
+.contest-description 
+  margin-top: -35px
+  position: relative 
+  .nav-tabs 
+    .nav-item 
+      .cmn-btn 
+        background-color: #5a4bcc
+        background-image: none
+        box-shadow: none
+        &.active 
+          +gradient-three
+.content-block 
+  .title 
+    margin-bottom: 20px
+    font-size: 28px
+.content-block + .content-block 
+  margin-top: 45px
+.icon-item 
+  +d-flex
+  align-items: center
+  padding: 20px 
+  background-color: #170943
+  &__thumb
+    width: 65px
+  &__content
+    padding-left: 25px
+    width: calc(100% - 65px)
+    p 
+      color: #22b868
+    span 
+      color: #ffffff 
+      font-size: 24px
+      line-height: 1.5
+
+.contest-details__thumb-slider 
+  background-color: #5a4bcc
+  min-height: 585px 
+  display: flex!important 
+  flex-wrap: wrap
+  justify-content: center
+  align-items: center
+  @media (max-width: 767px)
+    min-height: 440px
+  @media (max-width: 480px)
+    min-height: 350px
+  .single-slide 
+    text-align: center
+    img 
+      display: inline-block
+.contest-details__nav-slider 
+  margin-top: 30px
+  padding: 0 60px
+  .slick-list 
+    margin: 0 -10px
+  .single-slide 
+    height: 120px
+    +d-flex 
+    background-color: #5a4bcc
+    justify-content: center
+    align-items: center
+    +border-radius(25px)
+    text-align: center
+    margin: 0 10px
+    img 
+      display: inline-block
+  .slick-arrow 
+    width: 40px
+    height: 40px
+    background-color: #5a4bcc 
+    color: #ffffff
+    font-size: 24px
+    display: flex
+    align-items: center
+    justify-content: center
+    +border-radius(50px)
+    position: absolute
+    top: 60px 
+    left: 0
+    margin-top: -20px
+    cursor: pointer
+    &:hover 
+      +gradient-three
+    &.next 
+      left: auto 
+      right: 0
+.contest-details-content 
+  .subtitle 
+    font-size: 24px
+    font-weight: 600 
+    color: #ffb200
+    margin-bottom: 10px
+  .contest-name 
+    font-size: 50px
+    @media (max-width: 767px)
+      font-size: 42px
+    @media (max-width: 575px)
+      font-size: 32px
+  .contest-details-meta 
+    +d-flex 
+    justify-content: space-between
+    margin-top: 10px
+    ul 
+      +d-flex 
+      margin: -5px -15px
+      li 
+        padding: 5px 15px
+        position: relative
+        &:first-child
+          &::before 
+            display: none
+        &::before 
+          position: absolute
+          content: ''
+          top: 50%
+          left: -1px
+          width: 2px 
+          height: 18px 
+          background-color: #ada8f7
+          margin-top: -11px
+    span 
+      color: #ec1379
+  .contest-description 
+    border-top: 1px solid #1e1659
+    margin-top: 15px
+    padding-top: 40px
+.contest-sidebar 
+  &__cart 
+    padding: 30px 30px
+    background-color: #4939c0 
+    +border-radius(25px)
+    .clock-wrapper 
+      padding: 0 
+      background-color: transparent 
+      margin-bottom: 30px
+      p 
+        color: $para-color
+      .clock 
+        div 
+          span 
+            font-weight: 600 
+            color: #ec6624
+  .title 
+    color: #eceafe
+  .ticket-amount 
+    margin-top: 10px
+    .left 
+      font-weight: 600 
+      color: #ffffff
+    .right 
+      float: right
+      font-weight: 600 
+      color: #ffffff
+    p 
+      font-size: 14px
+      margin-top: 10px
+  .progressbar
+    position: relative
+    display: block
+    width: 100%
+    height: 10px
+    background-color: #3b2bb1
+    margin-top: 5px
+    +border-radius(999px)
+    .bar
+      position: absolute
+      //width: 0px
+      width: 75%
+      height: 100%
+      top: 0
+      left: 0
+      background: #ec6624
+      overflow: hidden
+      +border-radius(999px)
+  .ticket-price 
+    margin-top: 25px
+    margin-bottom: 25px
+    .amount 
+      color: #ffffff 
+      font-weight: 600 
+      font-size: 36px
+    small 
+      font-size: 14px
+      margin-left: 15px
+      color: $para-color
+      text-transform: capitalize
+  .select-quantity 
+    text-align: center
+  .caption 
+    color: #ffffff
+    margin-right: 15px
+  .quantity 
+    position: relative
+    width: 170px
+    height: 60px
+    display: inline-block
+    input 
+      border: none
+      text-align: center
+      padding: 0
+      font-size: 28px
+      font-weight: 600 
+      color: #ffffff
+      height: 60px
+      padding-left: 5px
+      //padding-left: 15px
+  .quantity-nav 
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    +d-flex
+    border: 1px solid rgba(#ffffff, 0.2)
+    +border-radius(999px)
+    justify-content: space-between
+    align-items: center
+    padding: 0px 10px
+    .quantity-button 
+      width: 40px
+      height: 40px
+      background-color: rgba(90, 75, 204, 0.3)
+      +border-radius(50%)
+      color: $para-color
+      +d-flex 
+      justify-content: center
+      align-items: center
+      font-size: 24px
+      cursor: pointer
+      &.quantity-up 
+        background-color: #5a4bcc
+  .bottom 
+    text-align: center
+    margin-bottom: -50px
+    margin-top: 30px
+  .social-links 
+    margin-top: 50px
+/* contest-details-section css end */
+
+
+/* lottery-details css start */
+.lottery-wrapper
+  padding: 100px 30px 50px 30px
+  background-color: #12023e
+  position: relative 
+  @media (max-width: 991px)
+    padding: 90px 30px 50px 30px
+  @media (max-width: 575px)
+    padding: 70px 30px 50px 30px
+  &__title 
+    font-size: 60px 
+    text-transform: uppercase
+    font-weight: 700 
+    color: #ffffff
+    text-align: center
+    margin-bottom: 5px
+    @media (max-width: 991px)
+      font-size: 48px
+    @media (max-width: 767px)
+      font-size: 36px
+    @media (max-width: 575px)
+      font-size: 32px
+  p 
+    text-align: center
+  &__btn 
+    text-align: center
+    margin-top: 45px
+  &.style--two
+    padding: 0 
+    background-color: transparent
+  .action-header 
+    +d-flex 
+    align-items: center
+    padding: 50px 40px 
+    background-color: #5a4bcc
+    +border-radius(10px)
+    @media (max-width: 991px)
+      padding: 30px
+    .left
+      width: 50% 
+      @media (max-width: 1199px)
+        width: 41%
+      @media (max-width: 991px)
+        width: 100%
+      ul 
+        margin: -5px -10px
+        li 
+          display: inline-block
+          margin: 5px 10px
+    .right 
+      width: 50%
+      @media (max-width: 1199px)
+        width: 59%
+      @media (max-width: 991px)
+        width: 100%
+        margin-top: 15px
+      ul 
+        +d-flex 
+        margin: -5px -10px 
+        justify-content: flex-end
+        @media (max-width: 991px)
+          justify-content: flex-start
+        li 
+          display: flex
+          margin: 5px 10px
+          i 
+            color: #ffffff
+            font-size: 28px
+            padding-right: 10px
+          button 
+            background-color: transparent
+            display: flex
+            align-items: center
+            span 
+              color: #ffffff
+.clock2
+  +d-flex 
+  align-items: center
+  margin: -5px -8px
+  div 
+    +d-flex 
+    align-items: center 
+    margin: 5px 8px 
+    span 
+      color: #ffffff
+    p 
+      color: #ffffff
+.lottery-single 
+  background-color: #5a4bcc
+  position: relative
+  &:hover 
+    .lottery-single__close 
+      opacity: 1 
+      visibility: 1
+      +transform(scale(1))
+  &__close 
+    position: absolute
+    width: 30px 
+    height: 30px
+    background-color: #5a4bcc
+    color: #ffffff
+    +border-radius(50%)
+    display: flex 
+    align-items: center
+    justify-content: center
+    top: -15px
+    right: -15px
+    opacity: 0
+    visibility: 0
+    +transform(scale(0.5))
+    +transition(all 0.3s)
+  &__header 
+    background-color: #4939c1
+    padding: 20px 20px
+    .titcket-number 
+      color: #ffffff
+      margin-bottom: 10px
+    .top 
+      +d-flex 
+      align-items: center
+      justify-content: space-between
+      padding-bottom: 10px 
+      margin-bottom: 20px 
+      border-bottom: 1px solid #6d62c7
+      .titcket-number 
+        font-size: 24px 
+        font-weight: 600  
+        margin-bottom: 0
+      ul 
+        +d-flex 
+        align-items: center
+        li 
+          button 
+            background-color: transparent
+            display: flex
+            align-items: center
+            span 
+              color: #ffffff
+            i 
+              font-size: 28px 
+              color: #ffffff
+  &__selected-number 
+    +d-flex 
+    margin: -3px
+    li 
+      width: 36px 
+      height: 36px 
+      background-image: linear-gradient( 338deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+      background-image: -moz-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+      background-image: -webkit-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+      background-image: -ms-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+      box-shadow: 0px 19px 56px 0px rgba(0, 0, 0, 0.2)
+      color: rgba(#ffffff, 0.4)
+      +d-flex 
+      justify-content: center
+      align-items: center
+      +border-radius(50%)
+      margin: 3px
+      &.active 
+        background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+        border: none
+        color: #ffffff
+  &__number 
+    +d-flex
+    margin: -3px
+    justify-content: center
+    li 
+      width: 36px 
+      height: 36px 
+      border: 1px solid rgba(#ffffff, 0.4)
+      +border-radius(50%)
+      +d-flex 
+      justify-content: center
+      align-items: center
+      color: #ffffff
+      cursor: pointer
+      margin: 4px 3px
+      &.active 
+        background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+        border: none
+  &__body 
+    padding: 20px 20px
+  &__footer 
+    margin-left: 20px 
+    margin-right: 20px
+    padding: 20px 0 30px 0
+    border-top: 1px solid #7d73cd
+  &.style--two 
+    .lottery-single__number 
+      justify-content: flex-start
+      margin: -4px
+      @media (max-width: 575px)
+        justify-content: center
+      li 
+        margin: 4px 4px
+.buy-lottery-ticket 
+  border: 1px solid #201456 
+  padding: 30px 30px
+  +border-radius(25px)
+  +d-flex 
+  align-items: center
+  .left 
+    width: 35%
+    @media (max-width: 991px)
+      width: 60%
+    @media (max-width: 767px)
+      width: 100%
+  .right
+    width: 65%
+    text-align: right
+    @media (max-width: 991px)
+      width: 40%
+    @media (max-width: 767px)
+      width: 100%
+      margin-top: 30px
+      text-align: center
+  .sub-total-price , .total-price
+    +d-flex 
+    align-items: center
+    justify-content: space-between
+    span 
+      font-size: 18px
+  .sub-total-price 
+    padding-bottom: 20px
+  .total-price 
+    padding-top: 20px
+    border-top: 1px solid #201456
+    p, span 
+      color: #ffffff
+.pick-lottery-package 
+  .title 
+    color: #ffffff
+    font-weight: 700 
+    font-size: 60px
+    text-align: center
+    text-transform: uppercase
+    margin-bottom: 30px
+    @media (max-width: 991px)
+      font-size: 48px
+    @media (max-width: 767px)
+      font-size: 36px
+    @media (max-width: 575px)
+      font-size: 32px
+.lottery-package-list 
+  text-align: center
+  margin: -10px -15px
+  a 
+    padding: 20px 20px 
+    background-image: linear-gradient( 90deg, rgb(233,56,142) 0%, rgb(185,33,122) 43%, rgb(136,9,101) 100%)
+    background-image: -moz-linear-gradient( 0deg, rgb(233,56,142) 0%, rgb(185,33,122) 43%, rgb(136,9,101) 100%)
+    background-image: -webkit-linear-gradient( 0deg, rgb(233,56,142) 0%, rgb(185,33,122) 43%, rgb(136,9,101) 100%)
+    background-image: -ms-linear-gradient( 0deg, rgb(233,56,142) 0%, rgb(185,33,122) 43%, rgb(136,9,101) 100%) 
+    color: #ffffff
+    +border-radius(10px)
+    margin: 10px 15px
+    &:hover 
+      background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+/* lottery-details css end */
+
+/* cart section css start */
+.cart-wrapper 
+  padding: 120px 30px 60px 30px
+  background-color: #12023e
+  @media (max-width: 991px)
+    padding-top: 90px
+  @media (max-width: 575px)
+    padding-top: 80px
+  &__title 
+    font-weight: 700 
+    font-size: 60px
+    text-align: center
+    margin-bottom: 50px
+    @media (max-width: 1199px)
+      font-size: 56px
+    @media (max-width: 991px)
+      font-size: 48px
+    @media (max-width: 767px)
+      font-size: 36px
+.ticket-wrapper 
+  &__header 
+    +d-flex
+    justify-content: space-between
+    background-color: #4939c1 
+    padding: 30px 20px
+    button 
+      font-size: 14px 
+      text-transform: uppercase
+      background-color: transparent
+      color: #ffffff
+  &__body 
+    background-color: #5a4bcc
+    padding: 20px 20px
+    .single-row 
+      +d-flex 
+      justify-content: space-between
+      padding: 20px 0 
+      border-bottom: 1px solid #8a80d9
+      &:first-child
+        padding-top: 0
+      &:last-child
+        padding-bottom: 0
+        border-bottom: none
+      .numbers 
+        +d-flex
+        margin: -3px
+        @media (max-width: 575px)
+          width: 100%
+          justify-content: center
+        li 
+          margin: 3px
+          width: 36px 
+          height: 36px
+          background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+          +border-radius(50%)
+          +d-flex
+          justify-content: center
+          align-items: center
+          color: #ffffff
+      .action-btns 
+        +d-flex 
+        margin: -5px -10px
+        @media (max-width: 575px)
+          width: 100%
+          margin-top: 15px
+          justify-content: center
+        button
+          width: 40px
+          height: 40px
+          +border-radius(50%)
+          +d-flex 
+          justify-content: center
+          align-items: center
+          color: #ffffff
+          font-size: 22px
+          margin: 5px 10px
+          &:hover 
+            background-position: 120% 50%
+        .edit-btn 
+          width: 40px
+          height: 40px
+          border-radius: 50%
+          display: -ms-flexbox
+          display: flex
+          flex-wrap: wrap
+          justify-content: center
+          align-items: center
+          color: #ffffff
+          font-size: 22px
+          margin: 5px 10px
+          background-image: linear-gradient( 90deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+          background-image: -moz-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+          background-image: -webkit-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+          background-image: -ms-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+          box-shadow: 0px 7px 7px 0px rgba(163, 15, 110, 0.35)
+        .del-btn
+          background-image: linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(209,15,126) 100%)
+          background-image: -moz-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(209,15,126) 100%)
+          background-image: -webkit-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(209,15,126) 100%)
+          background-image: -ms-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(209,15,126) 100%)
+          box-shadow: 0px 7px 7px 0px rgba(209, 15, 126, 0.35)
+.checkout-wrapper 
+  position: sticky
+  top: 110px
+  &__header
+    padding: 30px 20px 30px 20px
+    background-color: #4939c1
+  &__body 
+    padding: 20px
+    background-color: #5a4bcc
+    .price 
+      li 
+        padding: 30px 0
+        border-bottom: 1px solid #867cd5
+        &:first-child
+          padding-top: 0
+        &:last-child
+          padding-bottom: 0
+          border-bottom: none
+        +d-flex 
+        justify-content: space-between
+        .caption + span 
+          color: #24e980
+          font-size: 15px
+        .price 
+          font-size: 22px
+          color: #ffffff
+  &__btn 
+    text-align: center
+    margin-bottom: -40px
+    margin-top: 50px
+/* cart section css end */
+
+/* checkout section css start */
+.checkout-area 
+  padding: 50px 30px
+  background-color: #12023e
+  @media (max-width: 575px)
+    padding: 30px 15px
+.checkout-form-area 
+  .top 
+    padding: 30px 
+    background-color: #5a4bcc
+    +d-flex 
+    align-items: center
+    justify-content: space-between
+    .right 
+      @media (max-width: 575px)
+        width: 100%
+        margin-top: 15px
+      a 
+        +d-flex 
+        align-items: center
+        i 
+          width: 40px 
+          height: 40px 
+          color: #ffffff
+          font-size: 28px
+          background-image: linear-gradient( 90deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+          background-image: -moz-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+          background-image: -webkit-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+          background-image: -ms-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+          box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35)
+          +d-flex 
+          align-items: center
+          justify-content: center
+          +border-radius(50%)
+        span 
+          color: #ffffff
+          padding-left: 8px
+          font-size: 16px
+  .personal-details 
+    padding: 30px
+    background-color: #5a4bcc
+    .title 
+      padding-bottom: 15px 
+      border-bottom: 1px dashed #9387e9
+      margin-bottom: 30px
+  .payment-details 
+    padding: 30px
+    background-color: #5a4bcc
+    .title 
+      padding-bottom: 15px 
+      margin-bottom: 30px
+      border-bottom: 1px solid #9387e9
+  .info-text 
+    font-size: 14px
+    margin-top: 10px
+    a 
+      color: #07ff7b
+.personal-details-form 
+    .form-row 
+      margin: -10px -15px
+    .form-group 
+      padding: 10px 15px
+    input 
+      padding-top: 0 
+      padding-left: 0
+      padding-bottom: 5px
+      min-height: auto
+      font-size: 14px
+      +placeholder(#9aace5)
+      border: none 
+      border-bottom: 1px solid #8991d3
+      +border-radius(0)
+      color: #ffffff
+    button 
+      text-transform: capitalize
+      padding: 9px 30px
+      width: 160px
+      font-size: 16px
+.payment-form 
+  .payment-methods 
+    margin: -15px
+    button 
+      background-color: transparent
+      padding: 5px 15px
+      border: 1px solid #6472d9
+      +border-radius(10px)
+      margin: 15px
+      &.checked 
+        border-color: #06bcdd
+        position: relative
+        &::before 
+          position: absolute
+          content: "\f00c"
+          font-family: 'Line Awesome Free'
+          font-weight: 900
+          width: 33px 
+          height: 33px
+          background-color: #06bcdd 
+          color: #ffffff
+          +border-radius(50%)
+          top: -15px
+          right: -15px
+          border: 3px solid #5a4bcc
+      i 
+        color: #b2c8ff 
+        font-size: 36px 
+        line-height: 1
+      span 
+        display: block 
+        color: #ffffff
+        text-transform: capitalize
+        font-size: 12px
+  &__title 
+    font-size: 18px
+    margin-top: 30px 
+    margin-bottom: 30px
+  label 
+    font-size: 16px
+  input 
+    height: 60px
+    font-size: 15px
+  button 
+    font-size: 16px
+    text-transform: capitalize
+    padding: 10px 35px
+    margin-top: 20px 
+  .form-row
+    margin-left: -15px
+    margin-right: -15px
+  .form-group 
+    padding-left: 15px 
+    padding-right: 15px
+/* checkout section css end */
+
+/* affiliate single section css start */
+.affiliate-single-wrapper 
+  position: relative
+  padding-left: 65px
+  padding-right: 65px
+  background-image: linear-gradient( 320deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -moz-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -webkit-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -ms-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+  +border-radius(20px)
+  @media (max-width: 991px)
+    padding-left: 50px
+    padding-right: 50px
+  @media (max-width: 575px)
+    padding-left: 30px
+    padding-right: 30px
+  &__obj 
+    position: absolute
+    right: 0
+    bottom: 0
+    text-align: right
+    img 
+      @media (max-width: 991px)
+        width: 70%
+/* affiliate single section css end */
+
+/* how it work section css start */
+.work-card
+  padding: 0 30px
+  background: transparent
+  &:hover 
+    .work-card__icon
+      .inner
+        box-shadow: inset 0 0px 50px 2px #ec1379a3
+  &__icon 
+    width: 165px
+    height: 165px
+    background-color: #170543
+    border: 2px solid rgba(#ffffff, 0.2)
+    +border-radius(50%)
+    +d-flex 
+    align-items: center
+    justify-content: center
+    margin-left: auto
+    margin-right: auto
+    .inner 
+      width: 135px
+      height: 135px
+      background-image: linear-gradient( 120deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+      background-image: -moz-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+      background-image: -webkit-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+      background-image: -ms-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+      +border-radius(50%)
+      +d-flex 
+      align-items: center
+      justify-content: center
+      box-shadow: inset 0 0px 19px 2px #ec137954
+      +transition(all 0.3s)
+  &__content 
+    margin-top: 30px
+    p 
+      margin-top: 10px
+  &__title 
+    text-transform: uppercase
+/* how it work section css end */
+
+/* affiliate partner section css start */
+.affiliate-card 
+  padding: 40px 30px
+  background-image: linear-gradient( 360deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -moz-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -webkit-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -ms-linear-gradient( 90deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  +border-radius(10px)
+  text-align: center
+  overflow: hidden
+  &:hover 
+    background-image: linear-gradient( 360deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -moz-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -webkit-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+    background-image: -ms-linear-gradient( 90deg, rgb(232,42,122) 0%, rgb(54,3,84) 100%)
+  &__content 
+    margin-top: 25px
+    p 
+      margin-top: 8px
+      color: #ffffff
+  &__title 
+    text-transform: capitalize
+    color: #ffffff
+/* affiliate partner section css end */
+
+/* top affiliate section css start */
+.top-affiliate-card 
+  text-align: center
+  text-align: center
+  &:hover 
+    .top-affiliate-card__thumb 
+      &::before 
+        top: 0
+  &__thumb 
+    width: 267px 
+    height: 328px
+    position: relative
+    z-index: 1
+    display: inline-block
+    &::before 
+      position: absolute
+      content: ''
+      left: 0
+      top: 12px
+      width: 100% 
+      height: 100%
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)
+      background-color: #e22979
+      z-index: -1
+      +transition(all 0.3s)
+    .inner 
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)
+    img 
+      height: 100%
+      +object-fit
+  &__content 
+    margin-top: 50px
+    .name 
+      text-transform: capitalize
+    .amount 
+      color: #22b868
+      margin-top: 8px
+/* top affiliate section css end */
+
+/* video section css start */
+.video-wrapper
+  background-image: url("/images/elements/video-bg.jpg")
+  padding: 30px 30px
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+  +border-radius(20px)
+  min-height: 490px
+  position: relative
+  @media (max-width: 991px)
+    min-height: 400px
+  .cmn-btn 
+    padding: 25px 45px
+    position: absolute
+    top: 50%
+    left: 50%
+    +transform(translate(-50%, -50%))
+    @media (max-width: 575px)
+      padding: 15px 35px
+      display: inline-block
+      white-space: nowrap
+/* video section css end */
+
+/* buy ticket section css start */
+.buy-ticket-section 
+  position: relative
+  padding-top: 310px
+  padding-bottom: 140px
+  @media (max-width: 1450px)
+    padding-top: 215px
+  @media (max-width: 1199px)
+    padding-top: 110px
+.winner-obj 
+  position: absolute
+  top: 60px
+  right: 0
+  width: 54%
+  @media (max-width: 1650px)
+    width: 40%
+  @media (max-width: 991px)
+    display: none
+.buy-btn-wrapper 
+  position: relative
+  display: inline-block
+  .arrow
+    position: absolute
+    top: 10%
+    left: 240px
+    @media (max-width: 450px)
+      left: 200px
+  span 
+    display: block
+    font-weight: 600 
+    color: #ffffff
+    margin-bottom: 20px
+.winner-stat-wrapper 
+  margin-top: 265px
+  @media (max-width: 1650px)
+    margin-top: 185px
+  @media (max-width: 1199px)
+    margin-top: 110px
+  &__title 
+    margin-bottom: 30px
+    color: $para-color
+/* buy ticket section css end */
+
+/* client section css start */
+.client-wrapper 
+  &__title 
+    font-weight: 600 
+    font-size: 36px
+    text-transform: uppercase
+    text-align: center
+    margin-bottom: 45px
+    color: #dfe2fa
+.client-slider 
+  padding: 50px 80px
+  background-image: linear-gradient( 90deg, rgb(15,90,224) 0%, rgb(116,0,186) 100%)
+  background-image: -moz-linear-gradient( 0deg, rgb(15,90,224) 0%, rgb(116,0,186) 100%)
+  background-image: -webkit-linear-gradient( 0deg, rgb(15,90,224) 0%, rgb(116,0,186) 100%)
+  background-image: -ms-linear-gradient( 0deg, rgb(15,90,224) 0%, rgb(116,0,186) 100%)
+  +border-radius(999px)
+  .slick-track 
+    +d-flex 
+    align-items: center
+  .client-single 
+    text-align: center
+    img 
+      display: inline-block
+/* client section css end */
+
+/* faq section css start */
+.faq-el 
+  position: absolute 
+  top: 0 
+  left: 0
+  z-index: -1 
+  @media (max-width: 1550px)
+    width: 40%
+    top: 20%
+  @media (max-width: 991px)
+    display: none
+
+.btn-link 
+  text-decoration: none 
+
+.faq-top-wrapper 
+  padding-left: 50px 
+  padding-right: 50px
+  padding-bottom: 30px
+  background-image: linear-gradient( 320deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -moz-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -webkit-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -ms-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+  +border-radius(20px)
+  @media (max-width: 575px)
+    padding-left: 30px 
+    padding-right: 30px
+.faq-body-wrapper 
+  margin-top: 40px
+/* faq section css end */
+
+/* blog section css start */
+.blog-card 
+  &__thumb 
+    +border-radius(20px)
+    overflow: hidden
+    img 
+      width: 100%
+  &__content
+    padding: 40px 60px 
+    margin-left: 40px
+    margin-right: 40px
+    margin-top: -105px
+    background-color: #683df5
+    +border-radius(20px)
+    position: relative
+    z-index: 1
+    @media (max-width: 1199px)
+      margin-left: 30px
+      margin-right: 30px
+      padding: 30px
+    @media (max-width: 575px)
+      margin-left: 0
+      margin-right: 0
+      margin-top: -30px
+    p 
+      color: #ffffff
+      margin-top: 20px
+  &__title 
+    font-size: 36px
+    margin-bottom: 10px
+    @media (max-width: 1199px)
+      font-size: 32px
+    @media (max-width: 991px)
+      font-size: 28px
+  &__meta
+    +d-flex
+    margin: -5px -15px
+    li 
+      margin: 5px 15px
+      svg 
+        font-size: 14px
+        color: #31d7a9
+        margin-right: 3px
+      span 
+        font-size: 14px
+  &__footer 
+    border-top: 1px solid #8380f7
+    margin-top: 30px 
+    padding-top: 20px
+    +d-flex
+    justify-content: space-between
+    .left 
+      +d-flex 
+      align-items: center
+      span 
+        font-size: 14px
+      .name 
+        color: #31d7a9
+        padding-left: 10px
+      .post-author 
+        +d-flex 
+        align-items: center
+        margin-left: 20px
+        @media (max-width: 575px)
+          margin-left: 8px
+        img 
+          width: 30px 
+          height: 30px
+          +object-fit
+          +border-radius(50%)
+    .right 
+      .read-btn  
+        color: #31d7a9
+        i 
+          font-size: 24px
+  &.style--two 
+    background-color: #683df5
+    padding: 10px
+    +border-radius(20px)
+    +d-flex
+    .blog-card__thumb 
+      width: 36%
+      +border-radius(10px)
+      @media (max-width: 767px)
+        width: 100%
+      img 
+        height: 100%
+        +object-fit
+    .blog-card__content
+      width: 64%
+      padding: 20px 25px
+      margin: 0
+      +border-radius(0)
+      @media (max-width: 767px)
+        width: 100%
+      @media (max-width: 575px)
+        padding: 20px 15px
+    .blog-card__title
+      font-size: 28px 
+      @media (max-width: 575px)
+        font-size: 24px
+/* blog section css end */
+
+/* blog single section css start */
+.blog-single 
+  &__title 
+    font-size: 50px
+    @media (max-width: 1199px)
+      font-size: 42px
+    @media (max-width: 991px)
+      font-size: 36px
+    @media (max-width: 575px)
+      font-size: 32px
+  &__meta 
+    +d-flex 
+    justify-content: space-between
+    align-items: center
+    margin-top: 10px
+    .left 
+      +d-flex 
+      align-items: center
+      span 
+        font-size: 14px
+        color: #ffffff
+      .name 
+        padding-left: 10px
+      .post-author 
+        +d-flex 
+        align-items: center
+        margin-left: 20px
+        img 
+          width: 30px 
+          height: 30px
+          +object-fit
+          +border-radius(50%)
+    .right 
+      +d-flex 
+      justify-content: space-between
+      align-items: center
+      @media (max-width: 767px)
+        margin-top: 15px
+      > span 
+        margin-right: 15px
+        color: #ffffff
+      .social-link-list 
+        +d-flex
+        margin: -5px -7px
+        li 
+          margin: 5px 7px
+          a 
+            width: 40px 
+            height: 40px 
+            border: 1px solid rgba(#ffffff, 0.4)
+            display: flex 
+            justify-content: center
+            align-items: center
+            color: #ffffff
+            +border-radius(50%)
+            &:hover 
+              border: none
+              background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+              background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+              background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+              background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+              box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+  &__body 
+    margin-top: 30px
+    padding: 50px 
+    +border-radius(20px)
+    background-color: rgb(15, 2, 51)
+    box-shadow: 0px 9px 50px 0px rgba(49, 65, 156, 0.15)
+    @media (max-width: 575px)
+      padding: 15px
+    .title 
+      font-size: 40px
+      margin-bottom: 20px
+      @media (max-width: 1199px)
+        font-size: 36px
+      @media (max-width: 991px)
+        font-size: 32px
+    .title ~ .title 
+      margin-top: 20px
+    img 
+      +object-fit 
+      width: 100% 
+      +border-radius(20px)
+      margin: 30px 0
+/* blog single section css end */
+
+/* contact section css start */
+.contact-wrapper 
+  background-image: linear-gradient( 340deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -moz-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -webkit-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -ms-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+  +border-radius(20px)
+  @media (max-width: 991px)
+    padding: 50px 30px 0 30px
+.contact-form-wrapper 
+  padding: 50px 0 50px 50px
+  @media (max-width: 991px)
+    padding: 0
+  .title 
+    font-size: 28px
+    margin-bottom: 30px
+.contact-form 
+  .form-group 
+    margin-bottom: 0
+  .form-group + .form-group 
+    margin-top: 30px
+  label 
+    font-size: 16px
+    text-transform: capitalize
+    sup 
+      color: #f1481f 
+      font-size: 100%
+      top: 0
+      right: 3px
+  input, textarea
+    height: 60px
+    background-color: rgba(0, 18, 50, 0.102)
+    +placeholder(#8b99d7)
+    font-size: 16px
+    color: #ffffff
+    border-color: #7279cd
+    padding: 20px
+    &:focus, &:checked
+      border-color: lighten(#7279cd, 10%)
+  button 
+    padding: 14px 30px
+    font-size: 16px 
+.contact-info-wrapper 
+  padding-top: 150px
+  +d-flex 
+  height: 100%
+  @media (max-width: 991px)
+    padding-top: 100px
+.contact-info 
+  width: calc(50% - 15px)
+  +d-flex
+  position: relative
+  @media (max-width: 575px)
+    width: 100%
+    margin-top: 20px
+  &:last-child
+    &::after 
+      display: none
+  &::after 
+    position: absolute
+    content: ''
+    top: 6px
+    right: 0
+    width: 1px 
+    height: 48px
+    background-color: #516184
+    @media (max-width: 575px)
+      display: none
+  &__icon
+    width: 60px
+  &__content
+    width: calc(100% - 60px)
+    padding-left: 15px
+    p 
+      color: #ffffff
+      text-transform: uppercase
+    span 
+      font-size: 16px 
+      color: #31d7a9
+.contact-thumb 
+  align-self: flex-end
+  width: 100% 
+  text-align: center
+  @media (max-width: 991px)
+    margin-top: 50px
+  img 
+    width: 70%
+.social-card
+  text-align: center
+  background-color: #0f0233
+  padding: 20px
+  border: 1px solid rgba(84, 67, 160, 0.59)
+  +border-radius(30px)
+  &:hover 
+    background-image: -moz-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+    background-image: -webkit-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+    background-image: -ms-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+  &__icon 
+    width: 50px 
+    height: 50px
+    +border-radius(50%)
+    display: flex 
+    flex-wrap: wrap
+    justify-content: center
+    align-content: center
+    color: #ffffff
+    font-size: 28px
+    margin-left: auto 
+    margin-right: auto
+    margin-top: 10px
+    background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+    background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+    background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+    background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+    box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+  &__content 
+    margin-top: 25px
+    span 
+      font-size: 16px
+      text-transform: capitalize
+      color: #31d7a9
+      margin-top: 5px
+/* contact section css end */
+
+/* login css start */
+.modal 
+  background-color: rgba(0,0,0,0.5)
+  .modal-content 
+    background-color: transparent 
+  .modal-body 
+    padding: 0
+.account-form-area 
+  padding: 30px 20px 20px 20px
+  background-color: rgb(90, 75, 204)
+  box-shadow: 0px 0px 29.4px 0.6px rgba(0, 0, 0, 0.5)
+  +border-radius(20px)
+  position: relative
+  .close-btn 
+    position: absolute
+    top: 27px
+    right: 20px
+    width: 40px
+    height: 40px
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    align-items: center
+    color: #ffffff
+    font-size: 20px
+    background-color: rgba(#ffffff, 0.2)
+    +border-radius(50%)
+  .title 
+    font-size: 28px
+    text-transform: uppercase
+    text-align: center
+    margin-bottom: 20px
+  .account-form-wrapper 
+    background-color: rgb(78, 64, 185)
+    +border-radius(20px)
+    padding: 30px
+  form 
+    .form-group 
+      margin-bottom: 0
+    .form-group + .form-group 
+      margin-top: 30px
+    label
+      text-transform: uppercase
+      font-size: 16px
+      color: rgba(#ffffff, .7)
+      sup 
+        color: #f1481f 
+        font-size: 100%
+        top: 0
+        right: 3px
+    input 
+      padding: 0 
+      padding-bottom: 10px
+      min-height: auto
+      font-size: 16px
+      color: #ffffff
+      +placeholder(#94a1dc)
+      border: none 
+      border-bottom: 1px solid #766bcb
+      +border-radius(0)
+    .link
+      color: $para-color
+      font-size: 14px
+      margin-top: 3px
+      color: #00ffb8
+    .cmn-btn 
+      width: 200px
+      display: inline-block
+  p 
+    font-size: 16px 
+    a 
+      color: #31d7a9 
+      font-size: 16px 
+      text-transform: uppercase
+  .divider 
+    position: relative
+    z-index: 1
+    margin-top: 10px
+    text-align: center
+    &::after 
+      position: absolute
+      content: ''
+      left: 0
+      top: 50%
+      transform: translateY(-50%)
+      width: 100%
+      height: 2px
+      border-radius: 50%
+      background-color: rgba(#bdbdbd, 0.502)
+      z-index: -1
+    span 
+      font-size: 16px
+      text-transform: uppercase
+      color: #ffffff
+      font-weight: 600
+      padding: 5px 30px
+      background-color: #4e40b9
+  .social-link-list 
+    +d-flex
+    justify-content: center
+    margin-top: 20px
+    li 
+      margin: 0 10px
+      a 
+        width: 50px 
+        height: 50px
+        background-color: rgba(12, 18, 32, 0)
+        border: 1px solid #655dca
+        +border-radius(50%)
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        align-items: center
+        font-size: 18px
+        &:hover 
+          color: #ffffff
+          background-image: linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+          box-shadow: 0px 9px 4px 0px rgba(124, 78, 25, 0.35)
+/* login css end */
+
+/* user section css start */
+.user-card 
+  padding: 50px 30px
+  background-image: linear-gradient( 320deg, rgb(123,25,203) 0%, rgb(59,38,219) 99%)
+  background-image: -moz-linear-gradient( 120deg, rgb(123,25,203) 0%, rgb(59,38,219) 99%)
+  background-image: -webkit-linear-gradient( 120deg, rgb(123,25,203) 0%, rgb(59,38,219) 99%)
+  background-image: -ms-linear-gradient( 120deg, rgb(123,25,203) 0%, rgb(59,38,219) 99%)
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+  +border-radius(20px)
+  text-align: center
+  position: relative 
+  &__name 
+    font-size: 28px
+    text-transform: uppercase
+    margin-top: 40px
+  &__id 
+    color: #22b868
+    font-size: 18px
+    margin-top: 3px
+.avatar-upload 
+  position: relative
+  max-width: 160px
+  margin: auto
+  .obj-el 
+    position: absolute
+    top: 0
+    left: 0
+    width: 124%
+    height: 124%
+    margin-left: -14% 
+    margin-top: -5%
+  .avatar-edit 
+    position: absolute
+    right: 6px
+    z-index: 1
+    bottom: 0
+    input 
+      display: none
+      + label 
+        display: inline-block
+        width: 34px
+        height: 34px
+        margin-bottom: 0
+        border-radius: 50%
+        background-image: linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+        background-image: -webkit-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+        background-image: -ms-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
+        box-shadow: 0px 19px 56px 0px rgba(0, 0, 0, 0.2)
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12)
+        cursor: pointer
+        font-weight: normal
+        transition: all .2s ease-in-out
+        &:after 
+          content: "\f030"
+          font-family: "Line Awesome Free"
+          font-weight: 900
+          color: #ffffff
+          position: absolute
+          top: 3px
+          left: 0
+          right: 0
+          text-align: center
+          margin: auto
+  .avatar-preview
+    background-image: url("/images/user/pp.png") 
+    width: 160px
+    height: 160px
+    position: relative
+    border-radius: 100%
+    > div 
+      width: 100%
+      height: 100%
+      border-radius: 100%
+      background-size: cover
+      background-repeat: no-repeat
+      background-position: center
+.user-action-card 
+  padding: 10px 0
+  margin-top: 20px
+  background-image: linear-gradient( 320deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -moz-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -webkit-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  background-image: -ms-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+  +border-radius(10px)
+.user-action-list 
+  li 
+    &.active 
+      a 
+        background: #3b26db
+        background: -webkit-linear-gradient(to right, #ad1f83, rgba(#6c0092, 0.25), rgba(#3b26db, 0.001))
+        background: linear-gradient(to right, #ad1f83, rgba(#6c0092, 0.25), rgba(#3b26db, 0.001))
+        border-color: #ff002a
+    a 
+      font-size: 18px
+      text-transform: capitalize
+      padding: 12px 30px
+      display: block
+      border-left: 2px solid transparent
+      .badge 
+        float: right
+        padding: 4px 8px 
+        color: #ffffff
+        background-color: #7368f5
+        +border-radius(999px)
+.upcoming-draw-wrapper 
+  background-color: #5a4bcc
+  padding: 30px
+  +border-radius(10px)
+  position: relative 
+  .title 
+    font-size: 28px
+    margin-bottom: 25px
+.draw-single-ticket 
+  border: 2px solid rgba(#ffffff, 0.2)
+  padding: 20px
+  +border-radius(10px)
+  position: relative
+  background-origin: #5a4bcc
+  &::before 
+    position: absolute
+    content: ''
+    top: 39%
+    left: -19px
+    width: 34px
+    height: 34px
+    background-color: #5a4bcc
+    border: 2px solid #7b6fd6
+    +border-radius(50%)
+    border-left-color: transparent
+    border-bottom-color: transparent
+    +transform(rotate(45deg))
+  &::after 
+    position: absolute
+    content: ''
+    top: 39%
+    right: -19px
+    width: 34px
+    height: 34px
+    background-color: #5a4bcc
+    border: 2px solid #7b6fd6
+    +border-radius(50%)
+    border-left-color: transparent
+    border-bottom-color: transparent
+    +transform(rotate(-135deg))
+  &__header
+    +d-flex 
+    justify-content: space-between
+    align-items: center
+    .left 
+      font-size: 22px
+      color: #ffffff
+    .right 
+      font-size: 14px
+      color: #ffffff
+  .circle-divider
+    text-align: center
+    margin: 10px 0
+    img 
+      width: 96%
+      margin-left: auto
+      margin-right: auto
+  .ticket-numbers-list 
+    +d-flex 
+    justify-content: space-between
+    margin: -2px
+    @media (max-width: 1199px)
+      justify-content: flex-start
+    &.active 
+      li 
+        background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+        border: none
+    li 
+      width: 36px
+      height: 36px
+      border: 1px solid rgba(#ffffff, 0.3)
+      background-color: #5a4bcc
+      +border-radius(50px)
+      display: flex 
+      flex-wrap: wrap
+      justify-content: center
+      align-items: center
+      font-size: 18px
+      color: #ffffff
+      margin: 2px
+
+.draw-ticket-slider 
+  @media (max-width: 575px)
+    padding-bottom: 50px
+  .slick-list 
+    margin: 0 -5px
+  .draw-single-ticket 
+    margin: 0 5px
+  .slick-arrow 
+    position: absolute 
+    top: -50px
+    right: 0
+    width: 50px 
+    height: 26px 
+    color: #ffffff
+    background-image: linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+    background-image: -moz-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+    background-image: -webkit-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+    background-image: -ms-linear-gradient( 7deg, rgb(236,19,121) 0%, rgb(108,0,146) 100%)
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35)
+    +border-radius(999px)
+    text-align: center
+    line-height: 26px 
+    font-size: 24px
+    cursor: pointer 
+    @media (max-width: 575px)
+      top: auto 
+      bottom: 0
+    &.prev 
+      right: 65px
+    &.slick-disabled 
+      background-color: rgb(115, 104, 245)
+      background-image: none
+      box-shadow: none
+.past-draw-wrapper
+  background-color: #5a4bcc
+  +border-radius(10px)
+  margin-top: 30px
+  padding-top: 30px
+  .title 
+    font-size: 28px
+    margin-bottom: 15px
+    padding-left: 30px
+  table
+    width: 100%
+    th 
+      font-size: 14px
+      font-weight: 600 
+      color: #b0bbde 
+      text-transform: uppercase
+      text-align: center
+      padding: 15px 30px
+      border-bottom: 1px solid #9186e6
+      &:first-child
+        text-align: left
+      &:last-child
+        text-align: right
+    tbody 
+      background-color: #4c3eb9
+      tr + tr 
+        td 
+          border-top: 1px solid #6a5ec3
+    td 
+      padding: 15px
+      text-align: center
+      &:first-child
+        text-align: left
+        padding-left: 30px
+      &:last-child
+        text-align: right
+        padding-right: 30px
+      span 
+        color: #ffffff
+        font-size: 16px
+        text-transform: uppercase
+      .number-list 
+        +d-flex 
+        flex-wrap: nowrap
+        align-items: center
+        justify-content: space-between
+        margin: -4px
+        @media (max-width: 1199px)
+          justify-content: flex-start
+        &.win-list  
+          li 
+            border: none
+            background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+            background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+            background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+            background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+            box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+        li 
+          width: 35px
+          height: 35px
+          font-size: 18px
+          color: #ffffff
+          background-color: #5a4bcc
+          border: 1px solid rgba(#ffffff, 0.3)
+          +border-radius(50%)
+          display: flex
+          flex-wrap: wrap
+          justify-content: center
+          align-items: center
+          margin: 4px
+      .win 
+        color: #ff0000
+  .load-more 
+    border-top: 2px solid #6a5ec3
+    button 
+      background-color: transparent 
+      color: #b2acf2
+      width: 100% 
+      font-size: 16px
+      padding: 25px 
+.user-info-card  + .user-info-card  
+  margin-top: 30px
+.user-info-card 
+  background-color: rgb(90, 75, 204) 
+  padding: 30px 30px 
+  +border-radius(10px)
+  @media (max-width: 575px)
+    padding: 20px
+  &__header 
+    +d-flex 
+    justify-content: space-between 
+    button 
+      background-color: transparent 
+      color: #ada3f7
+      i 
+        font-size: 22px
+  &__list 
+    margin-top: 30px
+    li + li 
+      margin-top: 8px
+      @media (max-width: 530px)
+        margin-top: 15px
+    li 
+      +d-flex 
+      align-items: center
+      span 
+        color: #ffffff 
+        font-size: 18px 
+        @media (max-width: 575px)
+          font-size: 14px
+      .caption
+        width: 20% 
+        position: relative
+        text-align: right
+        padding-right: 20px
+        @media (max-width: 991px)
+          width: 25%
+        @media (max-width: 767px)
+          width: 30%
+        @media (max-width: 575px)
+          text-align: left
+          width: 42%
+        &::after 
+          position: absolute
+          content: ':'
+          right: 0
+          top: -3%
+      .value 
+        width: 70%
+        padding-left: 25px
+        @media (max-width: 991px)
+          width: 60%
+        @media (max-width: 575px)
+          width: 58%
+          padding-left: 15px
+        &.user-password 
+          padding-top: 10px
+        &.status-active 
+          font-size: 14px
+          position: relative 
+          padding-left: 45px
+          &::before 
+            position: absolute
+            content: "\f058"
+            top: 0
+            left: 25px
+            font-family: "Line Awesome Free"
+            font-weight: 900
+            color: #22b455
+.transaction-balance-wrapper 
+  padding: 65px 30px 
+  background-color: #5a4bcc
+  +border-radius(10px)
+  +d-flex
+  align-items: center 
+  @media (max-width: 767px)
+    padding: 30px
+  .left 
+    width: 50%
+    @media (max-width: 767px)
+      width: 100%
+      text-align: center
+  .transaction-balance 
+    padding: 30px 50px 
+    background-color: #4c3eb9
+    +border-radius(10px)
+    .balance 
+      font-size: 28px 
+    span 
+      font-size: 18px 
+      color: #22b868
+      margin-top: 5px
+  .right 
+    width: 50%
+    display: flex 
+    justify-content: flex-end
+    @media (max-width: 767px)
+      width: 100%
+      justify-content: center
+      margin-top: 20px
+  .transaction-action-btn 
+    width: 120px 
+    height: 115px
+    background-color: #4c3eb9
+    +border-radius(10px)
+    +d-flex
+    align-items: center 
+    justify-content: center 
+    text-align: center
+    padding: 15px 0
+    span 
+      width: 100%
+      font-size: 18px
+      color: #22b868
+.all-transaction
+  background-color: #5a4bcc
+  +border-radius(10px)
+  margin-top: 30px
+  padding-top: 30px
+  &__header 
+    +d-flex 
+    justify-content: space-between
+    align-items: center
+    padding: 0 30px
+    margin-bottom: 20px
+    .date-range 
+      width: 320px
+      position: relative
+      @media (max-width: 767px) 
+        margin-top: 20px
+      i 
+        position: absolute
+        //top: 10px 
+        top: 3px 
+        right: 30px 
+        color: #e5e2ff 
+        //font-size: 32px
+        font-size: 28px
+      input 
+        border-color: #9c93e0
+        +border-radius(999px)
+        padding: 10px 30px
+        font-size: 14px 
+        color: #ffffff
+    .title 
+      font-size: 28px
+      width: calc(100% - 320px)
+      @media (max-width: 767px)
+        width: 100%
+  table
+    width: 100%
+    th 
+      font-size: 14px
+      font-weight: 600 
+      color: #b0bbde 
+      text-transform: uppercase
+      text-align: center
+      padding: 15px 30px
+      border-bottom: 1px solid #9186e6
+      white-space: nowrap
+      &:first-child
+        text-align: left
+      &:last-child
+        text-align: right
+    tbody 
+      background-color: #4c3eb9
+      tr + tr 
+        td 
+          border-top: 1px solid #6a5ec3
+    td 
+      padding: 20px
+      text-align: center
+      white-space: nowrap
+      &:first-child
+        text-align: left
+        padding-left: 30px
+      &:last-child
+        text-align: right
+        padding-right: 30px
+      span 
+        font-size: 12px
+    p 
+      font-size: 16px 
+      color: #ffffff
+      line-height: 1.4
+      text-transform: uppercase
+    .date 
+      span 
+        display: block 
+        text-align: center 
+        font-size: 14px 
+        text-transform: uppercase
+        color: #d5daf1
+    .amount 
+      font-size: 16px 
+      &.minus-amount 
+        color: #eb6623
+      &.plus-amount 
+        color: #22b868
+    .status-pending 
+      i 
+        color: #ffc107
+    .status-success 
+      i 
+        color: #22b868
+  .load-more 
+    border-top: 2px solid #6a5ec3
+    button 
+      background-color: transparent 
+      color: #b2acf2
+      width: 100% 
+      font-size: 16px
+      padding: 25px 
+
+.referral-link-wrapper 
+  padding: 30px 
+  background-color: #5a4bcc
+  +border-radius(10px)
+  .title 
+    font-size: 28px 
+    margin-bottom: 30px
+.copy-link
+  border: 1px solid #7b6fd6
+  +border-radius(999px)
+  position: relative
+  height: 60px
+  background-color: #4c3eb9
+  overflow: hidden
+  .copy-link-icon 
+    position: absolute
+    top: 4px
+    left: 5px
+    width: 50px 
+    height: 50px
+    color: #ffffff
+    background-color: #5351fb
+    +border-radius(50%)
+    display: flex 
+    flex-wrap: wrap
+    justify-content: center
+    align-items: center
+    font-size: 26px
+  .label 
+    font-size: 18px 
+    color: #ffffff
+    position: absolute
+    left: 75px 
+    top: 15px
+  input 
+    border: none
+  input[data-click-select-all]
+    padding-right: 160px
+    padding-left: 200px
+    height: 60px
+    color: #00cca2
+    font-size: 16px
+  //input[type="submit"]
+  input[type="button"]
+    position: absolute
+    top: 4px
+    right: 5px
+    width: auto
+    color: #ffffff
+    padding: 10px 35px
+    background-image: linear-gradient( 195deg, rgb(239,119,76) 0%, rgb(237,104,79) 35%, rgb(232,67,81) 76%, rgb(231,51,81) 100%)
+    background-image: -moz-linear-gradient( -103deg, rgb(239,119,76) 0%, rgb(237,104,79) 35%, rgb(232,67,81) 76%, rgb(231,51,81) 100%)
+    background-image: -webkit-linear-gradient( -103deg, rgb(239,119,76) 0%, rgb(237,104,79) 35%, rgb(232,67,81) 76%, rgb(231,51,81) 100%)
+    background-image: -ms-linear-gradient( -103deg, rgb(239,119,76) 0%, rgb(237,104,79) 35%, rgb(232,67,81) 76%, rgb(231,51,81) 100%)
+    +border-radius(999px)
+
+.referral-overview
+  padding: 30px 
+  background-color: #5a4bcc
+  +border-radius(10px)
+.referral-crad 
+  padding: 30px 
+  background-color: #4c3eb9 
+  +border-radius(10px)
+  +d-flex
+  &__icon 
+    width: 60px
+    @media (max-width: 1199px)
+      width: 100%
+      text-align: center
+  &__content
+    width: calc(100% - 60px)
+    padding-left: 15px
+    @media (max-width: 1199px)
+      width: 100%
+      text-align: center
+      padding-left: 0
+      margin-top: 15px
+    .number 
+      font-size: 28px
+    span 
+      color: #22b868
+
+.referral-transaction
+  background-color: #5a4bcc
+  +border-radius(10px)
+  margin-top: 30px
+  padding-top: 30px
+  &__header 
+    +d-flex 
+    justify-content: space-between
+    align-items: center
+    padding: 0 30px
+    margin-bottom: 20px
+    .date-range 
+      width: 320px
+      position: relative
+      i 
+        position: absolute
+        //top: 10px 
+        top: 3px 
+        right: 30px 
+        color: #e5e2ff 
+        //font-size: 32px
+        font-size: 28px
+      input 
+        border-color: #9c93e0
+        +border-radius(999px)
+        padding: 10px 30px
+        font-size: 14px 
+        color: #ffffff
+    .title 
+      font-size: 28px
+      width: calc(100% - 320px)
+  table
+    width: 100%
+    th 
+      font-size: 14px
+      font-weight: 600 
+      color: #b0bbde 
+      text-transform: uppercase
+      text-align: center
+      padding: 15px 30px
+      border-bottom: 1px solid #9186e6
+      &:first-child
+        text-align: left
+      &:last-child
+        text-align: right
+    tbody 
+      background-color: #4c3eb9
+      tr + tr 
+        td 
+          border-top: 1px solid #6a5ec3
+    td 
+      padding: 15px 20px
+      text-align: center
+      font-size: 16px
+      color: #ffffff
+      &:first-child
+        text-align: left
+      &:last-child
+        text-align: right
+        padding-right: 30px
+    .date 
+      span 
+        display: block 
+        text-align: center 
+        font-size: 16px 
+        text-transform: uppercase
+        color: #d5daf1
+      .month 
+        font-size: 12px
+  .load-more 
+    border-top: 2px solid #6a5ec3
+    button 
+      background-color: transparent 
+      color: #b2acf2
+      width: 100% 
+      font-size: 16px
+      padding: 25px 
+/* user section css end */
+
+/* error-section start */
+.error-wrapper
+  padding-top: 100px
+  padding-bottom: 100px
+  min-height: 100vh 
+  +d-flex 
+  align-items: center
+  justify-content: center
+  align-content: center
+  &__inner 
+    width: 100%
+    text-align: center
+    position: relative
+    z-index: 1
+    &::after 
+      position: absolute
+      content: ''
+      bottom: 9px
+      left: 0
+      width: 100% 
+      height: 80% 
+      background-image: linear-gradient( 320deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+      background-image: -moz-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+      background-image: -webkit-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+      background-image: -ms-linear-gradient( 120deg, rgb(59,38,219) 1%, rgb(123,25,203) 100%)
+      z-index: -1
+      animation: colorFlow 5s infinite linear
+  &__content 
+    width: 100%
+    text-align: center
+    margin-top: 50px
+    .cmn-btn 
+      margin-left: auto
+      margin-right: auto
+      width: fit-content
+      margin-top: 20px
+      i 
+        margin-left: 6px
+        font-size: 32px
+/* error-section end */

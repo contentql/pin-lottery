@@ -24,6 +24,7 @@
     "payload": "^2.11.1",
     "react": "^18",
     "react-dom": "^18",
+    "sass": "^1.71.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
