@@ -23,7 +23,7 @@
       "@/views/*": ["./src/views/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/public/*": ["./public/*"],
-      "@/context/*": ["./app/context/*"]
+      "@/context/*": ["./src/context/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

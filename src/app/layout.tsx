@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Metadata } from 'next';
 
 import Layout from '@/components/layout';
+import { AppProvider } from '@/context/context';
 import Providers from '@/providers/Providers';
 import '@/public/css/line-awesome.min.css';
 import '@/public/css/modal-video.scss';
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <Providers>
-          <Layout>{children}</Layout>
+          <AppProvider>
+            <Layout>{children}</Layout>
+          </AppProvider>
         </Providers>
       </body>
     </html>
