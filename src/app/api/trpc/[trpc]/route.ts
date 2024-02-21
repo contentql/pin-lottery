@@ -3,7 +3,7 @@ import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
 
 const handler = (req: Request) => {
   fetchRequestHandler({
-    endpoint: '/api/trpc', // TODO: NOTE 6
+    endpoint: '/api/trpc',
     req,
     router: appRouter,
 
