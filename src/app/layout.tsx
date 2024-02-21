@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Metadata } from 'next';
 
+import Layout from '@/components/layout';
 import Providers from '@/providers/Providers';
 import '@/public/css/line-awesome.min.css';
 import '@/public/css/modal-video.scss';
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );
