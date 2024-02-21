@@ -9,7 +9,7 @@ const LeftSide = () => {
       {/* blog section here */}
       {blogData.map((blog) => (
         <div key={blog.id} className='blog-card style--two mb-30 has-link'>
-          <Link href='/blog-single' className='item-link'></Link>
+          <Link href={`/blog/${blog.id}`} className='item-link'></Link>
           <div className='blog-card__thumb'>
             <Image src={blog.img} alt={blog.title} />
           </div>
