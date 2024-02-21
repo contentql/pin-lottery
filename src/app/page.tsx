@@ -1,9 +1,9 @@
-import WinnerView from '@/views/WinnerView';
+import HomeView from '@/views/HomeView';
 export default function Home() {
   return (
     <>
       <div>
-        <WinnerView />
+        <HomeView />
       </div>
     </>
   );
