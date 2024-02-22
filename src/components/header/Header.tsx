@@ -66,14 +66,14 @@ const Header = () => {
                     <span className='cart__num'>{cartData.length}</span>
                   </Link>
                 </div>
-                <a
-                  href='#0'
+                <Link
+                  href='/user'
                   className='user__btn d-flex align-items-center justify-content-center'
                   data-bs-toggle='modal'
                   data-bs-target='#loginModal'
                 >
                   <i className='las la-user'></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -85,6 +85,7 @@ const Header = () => {
             <Link href='/' className='site-logo site-title'>
               <Image
                 src='/images/client/3.png'
+                priority={true}
                 alt='logo'
                 width={200}
                 height={20}
