@@ -1,3 +1,5 @@
+'use client';
+
 import LatestWinner from '../components/common/LatestWinner';
 import Support from '../components/common/Support';
 import Testimonial from '../components/common/Testimonial';

@@ -1,4 +1,5 @@
 'use client';
+
 import Boost from '@/components/affiliate/Boost';
 import Getting from '@/components/affiliate/Getting';
 import Partner from '@/components/affiliate/Partner';

@@ -1,3 +1,5 @@
+'use client';
+
 import Banner from '@/components/common/Banner';
 import Details from '@/components/single-blog/Details';
 import Image from 'next/image';

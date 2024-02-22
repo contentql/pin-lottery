@@ -1,4 +1,5 @@
 'use client';
+
 import Contest from '@/components/common/Contest';
 import Features from '@/components/common/Features';
 import HowToPlay from '@/components/common/HowToPlay';

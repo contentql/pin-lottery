@@ -1,3 +1,5 @@
+'use client';
+
 import Banner from '@/components/common/Banner';
 import ContactBody from '@/components/contact/ContactBody';
 import Image from 'next/image';

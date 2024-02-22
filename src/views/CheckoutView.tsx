@@ -1,4 +1,5 @@
 'use client';
+
 import Image from 'next/image';
 import Details from '../components/checkout/Details';
 import Banner from '../components/common/Banner';

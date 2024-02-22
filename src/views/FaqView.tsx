@@ -1,3 +1,5 @@
+'use client';
+
 import FaqBody from '@/components/faq/FaqBody';
 import Image from 'next/image';
 import Banner from '../components/common/Banner';

@@ -1,4 +1,5 @@
 'use client';
+
 import Banner from '@/components/common/Banner';
 import HowToPlay from '@/components/common/HowToPlay';
 import BuyTicket from '@/components/how-work/BuyTicket';
