@@ -1,8 +1,8 @@
 import { authRouter } from '../routers/auth-router';
-import { publicProcedure, router } from './trpc';
+import { publicProcedure, router, userProcedure } from './trpc';
 
 export const appRouter = router({
-  anyApiRoute: publicProcedure.query(() => {
+  anyApiRoute: userProcedure.query(() => {
     return { name: 'akhil' };
   }),
 

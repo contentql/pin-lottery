@@ -33,10 +33,6 @@ export const authRouter = router({
           password,
         },
       });
-      /* 
-        TODO:
-        2. Create an account for the user, if user doesn't exists
-      */
 
       return { succuss: true, sentEmailTo: newUserEmail };
     }),
