@@ -4,15 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
+    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@payloadcms/bundler-webpack": "^1.0.6",
     "@payloadcms/db-mongodb": "^1.4.2",
     "@payloadcms/richtext-slate": "^1.4.0",
     "@tanstack/react-query": "^5.22.2",
+    "@tanstack/react-query-devtools": "^5.24.0",
     "@trpc/client": "^11.0.0-next-beta.289",
     "@trpc/next": "^11.0.0-next-beta.289",
     "@trpc/react-query": "^11.0.0-next-beta.289",
@@ -35,6 +38,7 @@
     "react-slick": "^0.30.2",
     "sass": "^1.71.1",
     "slick-carousel": "^1.8.1",
+    "react-hook-form": "^7.50.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {

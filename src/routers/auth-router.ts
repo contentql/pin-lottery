@@ -1,17 +1,39 @@
+import { TRPCError } from '@trpc/server';
+import { getPayloadClient } from '../get-payload';
+import { AuthCredentialsValidator } from '../lib/validators/account-credentials-validator';
 import { publicProcedure, router } from '../trpc/trpc';
-import { z } from 'zod';
 
 export const authRouter = router({
   createUser: publicProcedure
-    .input(
-      z.object({
-        email: z.string(),
-        password: z.string(),
-      }),
-    )
-    .mutation(async ({ ctx, input }) => {
+    .input(AuthCredentialsValidator)
+    .mutation(async ({ input }) => {
       const { email, password } = input;
 
-      return { email, password };
+      const payload = await getPayloadClient();
+
+      const { totalDocs: userExisted } = await payload.find({
+        collection: 'users',
+        where: {
+          email: {
+            equals: email,
+          },
+        },
+      });
+
+      if (!!userExisted) {
+        throw new TRPCError({
+          code: 'CONFLICT',
+        });
+      }
+
+      const { id, email: newUserEmail } = await payload.create({
+        collection: 'users',
+        data: {
+          email,
+          password,
+        },
+      });
+
+      return { succuss: true, sentEmailTo: newUserEmail };
     }),
 });
