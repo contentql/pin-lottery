@@ -10,7 +10,7 @@ const Header = () => {
   const [windowHeight, setWindowHeight] = useState(0);
   const [show, setShow] = useState(false);
 
-  const handleOpen = (e) => {
+  const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text);
     } else {
@@ -54,18 +54,6 @@ const Header = () => {
                   <i className='las la-phone-volume'></i>
                   Customer Support
                 </a>
-                <div className='language'>
-                  <i className='las la-globe-europe'></i>
-                  <div className='select'>
-                    <select className='border-0'>
-                      <option>En</option>
-                      <option>Rus</option>
-                      <option>Bn</option>
-                      <option>Hp</option>
-                      <option>Frn</option>
-                    </select>
-                  </div>
-                </div>
               </div>
             </div>
             <div className='col-sm-6'>
@@ -94,7 +82,7 @@ const Header = () => {
         <div className='container'>
           <nav className='navbar navbar-expand-xl p-0 align-items-center'>
             <Link href='/' className='site-logo site-title'>
-              <Image src={logo} alt='logo' />
+              <Image src={logo} alt='logo' width={250} />
               <span className='logo-icon'>
                 <i className='flaticon-fire'></i>
               </span>
@@ -116,89 +104,24 @@ const Header = () => {
               // id="navbarContent"
             >
               <ul className='navbar-nav main-menu ms-auto'>
-                <li
-                  className={`menu_has_children ${
-                    open === 'Home' ? 'open' : ''
-                  }`}
-                >
-                  <Link href='/#' onClick={(e) => handleOpen(e)}>
-                    Home
-                  </Link>
-                  <ul className='sub-menu'>
-                    {[
-                      ['Home One', '/'],
-                      ['Home Two', '/index-two'],
-                      ['Home Three', '/index-three'],
-                      ['Home Four', '/index-four'],
-                    ].map(([itm, url], i) => (
-                      <li key={i}>
-                        <Link href={url} onClick={() => setShow(false)}>
-                          {itm}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-                <li
-                  className={`menu_has_children ${
-                    open === 'Contest' ? 'open' : ''
-                  }`}
-                >
-                  <Link href='/#' onClick={(e) => handleOpen(e)}>
+                <li>
+                  <Link href='/contest' onClick={() => setShow(false)}>
                     Contest
                   </Link>
-                  <ul className='sub-menu'>
-                    {[
-                      ['All contest', '/contest'],
-                      ['Contest Details One', '/contest-details-one'],
-                      [' Contest Details Two', '/contest-details-two'],
-                      ['Lottery Details One', '/lottery-details'],
-                      [' Lottery Details Two', '/lottery-details-two'],
-                    ].map(([itm, url], i) => (
-                      <li key={i}>
-                        <Link href={url} onClick={() => setShow(false)}>
-                          {itm}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
                 </li>
                 <li>
                   <Link href='/winner' onClick={() => setShow(false)}>
                     Winners
                   </Link>
                 </li>
-                <li
-                  className={`menu_has_children ${
-                    open === 'pages' ? 'open' : ''
-                  }`}
-                >
-                  <Link href='#0' onClick={(e) => handleOpen(e)}>
-                    pages
-                  </Link>
-                  <ul className='sub-menu'>
-                    {[
-                      ['About Us', '/about'],
-                      ['Affiliate Page', '/affiliate'],
-                      ['How it works', '/how-work'],
-                      ['User Panel', '/user'],
-                      ['Blog Single', '/blog-single'],
-                      ['Cart Page', '/cart'],
-                      ['Checkout Page', '/checkout'],
-                      ['FAQ Page', '/faq'],
-                      ['404 Page', '/404'],
-                    ].map(([itm, url], i) => (
-                      <li key={i}>
-                        <Link href={url} onClick={() => setShow(false)}>
-                          {itm}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
                 <li>
                   <Link href='/contact' onClick={() => setShow(false)}>
                     contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/how-work' onClick={() => setShow(false)}>
+                    how to use
                   </Link>
                 </li>
               </ul>
