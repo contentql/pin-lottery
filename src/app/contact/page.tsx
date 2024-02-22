@@ -1,10 +1,14 @@
-import ContactView from '@/views/ContactView';
 import { Metadata } from 'next';
+
+import ContactView from '@/views/ContactView';
 
 export const metadata: Metadata = {
   title: 'Contact',
   description: 'This is a contact page',
 };
-export default function ContactPage() {
+
+const Contact = () => {
   return <ContactView />;
-}
+};
+
+export default Contact;

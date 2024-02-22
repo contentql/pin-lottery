@@ -1,11 +1,14 @@
-import HowWorksView from '@/views/HowWorksView';
 import { Metadata } from 'next';
+
+import HowWorksView from '@/views/HowWorksView';
 
 export const metadata: Metadata = {
   title: 'How it works',
   description: 'This is a  how works page',
 };
 
-export default function HowWorkView() {
+const HowWork = () => {
   return <HowWorksView />;
-}
+};
+
+export default HowWork;

@@ -1,10 +1,14 @@
-import WinnerView from '@/views/WinnerView';
 import { Metadata } from 'next';
+
+import WinnerView from '@/views/WinnerView';
 
 export const metadata: Metadata = {
   title: 'Winner',
   description: 'This is a winner page',
 };
-export default function WinnerPage() {
+
+const Winner = () => {
   return <WinnerView />;
-}
+};
+
+export default Winner;

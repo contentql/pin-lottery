@@ -1,9 +1,14 @@
-import AboutView from '@/views/AboutView';
 import { Metadata } from 'next';
+
+import AboutView from '@/views/AboutView';
+
 export const metadata: Metadata = {
   title: 'About',
   description: 'This is a about page',
 };
-export default function AboutPage() {
+
+const About = () => {
   return <AboutView />;
-}
+};
+
+export default About;

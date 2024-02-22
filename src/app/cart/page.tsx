@@ -1,10 +1,14 @@
-import CartView from '@/views/CartView';
 import { Metadata } from 'next';
+
+import CartView from '@/views/CartView';
 
 export const metadata: Metadata = {
   title: 'Cart',
   description: 'this is cart page',
 };
-export default function CartPage() {
+
+const Cart = () => {
   return <CartView />;
-}
+};
+
+export default Cart;

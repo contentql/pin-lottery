@@ -1,5 +1,6 @@
-import ContestDetailsView from '@/views/ContestDetailsView';
 import { Metadata } from 'next';
+
+import ContestDetailsView from '@/views/ContestDetailsView';
 
 export const metadata: Metadata = {
   title: 'Contest Details',
