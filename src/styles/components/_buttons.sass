@@ -1,0 +1,51 @@
+/* button css start */
+.cmn-btn
+  display: inline-flex
+  align-items: center
+  gap: 5px
+  padding: 15px 35px
+  +font(18px, weight("semi"), uppercase)
+  +border-radius(999px)
+  +gradient-one
+  box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+  +transition(background-size 0.3s)
+  color: #ffffff
+  @media (max-width: 991px)
+    font-size: 16px
+  @media (max-width: 767px)
+    font-size: 14px
+  &:hover 
+    background-size: 300%
+    color: #ffffff
+  &.style--two
+    +gradient-two
+    box-shadow: -1.113px 7.922px 16px 0px rgba(143, 61, 245, 0.63)
+  &.style--three 
+    +gradient-three
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35)
+  &.btn--sm 
+    padding: 10px 22px 
+    font-size: 14px
+.btn-border 
+  display: inline-flex
+  align-items: center
+  gap: 5px
+  padding: 12px 35px
+  +font(16px, weight("semi"), capitalize)
+  color: $para-color
+  +border-radius(999px)
+  border: 1px solid rgba(#ffffff, 0.25)
+.btn-grp 
+  +d-flex
+  justify-content: center
+  margin-left: -10px
+  margin-right: -10px
+  *[class*="btn"]
+    margin: 5px 10px
+    align-items: center
+    &.d-flex 
+      padding: 8px 35px
+*[class*="btn"] 
+  .btn-sm 
+    padding: 6px 20px
+/* button css end */

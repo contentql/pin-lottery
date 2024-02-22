@@ -1,0 +1,294 @@
+/* header start */
+.header
+  position: fixed
+  width: 100%
+  left: 0
+  top: 0
+  z-index: 9
+  &.menu-fixed 
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    z-index: 9
+    .header__top 
+      display: none
+    .header__bottom
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.1)
+      background-color: #070B28
+      padding: 5px 0
+      .main-menu  
+        li 
+          a 
+            padding: 30px 15px 30px 0
+            @media (max-width: 1199px)
+              padding: 10px 0
+          .sub-menu 
+            li 
+              a
+                padding: 8px 20px
+  &__top
+    padding: 10px 0
+    border-bottom: 1px solid rgba(90, 75, 204, 0.502)
+    @media (max-width: 1199px)
+      padding: 8px 0
+    .left 
+      @media (max-width: 575px)
+        justify-content: center
+      a 
+        font-size: 16px
+        @media (max-width: 1199px)
+          font-size: 14px
+      .language 
+        margin-left: 30px
+        +d-flex
+        align-items: center
+        i 
+          color: #ffffff
+          //font-size: 18px
+          font-size: 15px
+          //margin-right: 5px
+          @media (max-width: 1199px)
+            font-size: 15px  
+        select
+          padding-right: 25px    
+          padding-left: 2px   
+    .right
+      +d-flex
+      align-items: center
+      justify-content: flex-end
+      @media (max-width: 575px)
+        justify-content: center
+      .product__cart
+        +d-flex 
+        align-items: center
+      .total__amount
+        background-color: #2c0341
+        padding: 5px 18px
+        color: #ffffff
+        font-size: 12px
+        @media (max-width: 1199px)
+          padding: 4px 10px
+          font-size: 14px
+      .amount__btn 
+        background-color: transparent 
+        margin-left: 15px
+        position: relative
+        padding-top: 7px
+        i 
+          color: #ffffff
+          font-size: 30px
+          @media (max-width: 1199px)
+            font-size: 24px
+        .cart__num 
+          position: absolute
+          top: -2px
+          right: -8px
+          min-width: 22px
+          min-height: 22px
+          font-size: 12px
+          line-height: 22px
+          +border-radius(50%)
+          background-image: linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
+          background-image: -moz-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
+          background-image: -webkit-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
+          background-image: -ms-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
+          box-shadow: 0px 19px 56px 0px rgba(0, 0, 0, 0.2)
+          color: #ffffff
+          display: flex 
+          flex-wrap: wrap
+          justify-content: center
+          align-items: center
+      .user__btn 
+        margin-left: 38px
+        width: 40px
+        height: 40px
+        background-color: $base-color-two
+        +border-radius(50%)
+        text-align: center
+        line-height: 48px
+        @media (max-width: 1199px)
+          width: 30px
+          height: 30px
+          line-height: 36px
+        i 
+          font-size: 24px
+          @media (max-width: 1199px)
+            font-size: 20px
+  &__bottom
+    +transition(all 0.3s)
+    @media (max-width: 1199px)
+      padding: 10px 0
+  .site-logo
+    img 
+      @media (max-width: 1199px)
+        max-width: 100px
+  .main-menu 
+    @media (max-width: 1199px)
+      padding: 15px 0
+    li 
+      position: relative
+      &.menu_has_children
+        position: relative
+        &.open 
+          .sub-menu 
+            display: block
+        >a
+          @media (max-width: 1199px)
+            display: block
+          &::before
+            position: absolute
+            content: "\f107"
+            font-family: 'Line Awesome Free'
+            font-size: 16px
+            font-weight: 900
+            top: 0
+            right: 0
+            color: $para-color
+            +transition(all 0.3s)
+            display: none
+            @media (max-width: 1199px)
+              display: block
+              top: 9px
+        &:hover
+          >a::before
+            +transform(rotate(180deg))
+            color: $base-color
+      a
+        padding: 42px 15px 42px 0
+        text-transform: uppercase
+        font-size: 16px
+        color: #e7e7f4
+        position: relative
+        @media (max-width: 1199px)
+          padding: 8px 0
+          display: block
+          border-bottom: 1px solid rgba(#ffffff, 0.1)
+        &:hover,&:focus
+          color: #ff0000
+      .sub-menu
+        position: absolute
+        width: 220px
+        top: 105%
+        left: -20px
+        z-index: 999
+        +gradient-three
+        padding: 10px 0
+        -webkit-box-shadow: 0px 18px 54px -8px rgba(0,0,0,0.15)
+        box-shadow: 0px 18px 54px -8px rgba(0,0,0,0.15)
+        +border-radius(5px)
+        +transition(all 0.3s)
+        opacity: 0
+        visibility: hidden
+        @media (max-width: 1199px)
+          opacity: 1
+          visibility: visible
+          display: none
+          position: static
+          +transition(none)
+          width: 100%
+
+        li
+          a
+            padding: 8px 20px
+            display: block
+            color: $heading-color
+            font-size: 14px
+            @media (max-width: 1199px)
+              font-size: 16px
+            &:hover 
+              background-color: rgba(38, 174, 97, 0.05)
+              color: #ffffff
+              text-decoration: underline
+        li+li
+          margin-left: 0
+      &:hover .sub-menu
+        top: 100%
+        opacity: 1
+        visibility: visible
+    li+li
+      margin-left: 20px
+      @media (max-width: 1199px)
+        margin-left: 0
+  .nav-right
+    margin-left: 30px
+    @media (max-width: 1199px)
+      margin-left: 0
+    .cmn-btn 
+      +d-flex 
+      align-items: center
+      justify-content: center
+      @media (max-width: 1199px)
+        display: inline-block
+        margin-bottom: 15px
+      i 
+        margin-right: 6px
+        font-size: 22px
+        color: #ffb200
+.navbar-collapse 
+  @media (max-width: 1199px)
+    padding: 0 20px
+    background-color: #070B28
+  @media (max-width: 1199px)
+    max-height: 550px
+    overflow: auto
+  @media (max-width: 767px)
+    max-height: 320px
+    overflow: auto
+.navbar-toggler
+  padding: 0
+  border: none
+  &:focus
+    border: none
+    outline: none
+.menu-toggle
+  margin: 10px 0
+  position: relative
+  display: block
+  width: 35px
+  height: 20px
+  cursor: pointer
+  background: transparent
+  border-top: 2px solid
+  border-bottom: 2px solid
+  color: #000000
+  font-size: 0
+  +transition(all 0.25s ease-in-out)
+  cursor: pointer
+  @media (max-width: 1199px)
+    color: #ffffff
+.menu-toggle:before, .menu-toggle:after
+  content: ''
+  display: block
+  width: 100%
+  height: 2px
+  position: absolute
+  top: 50%
+  left: 50%
+  background: currentColor
+  +transform(translate(-50%, -50%))
+  transition: -webkit-transform 0.25s ease-in-out
+  -webkit-transition: -webkit-transform 0.25s ease-in-out
+  -o-transition: -webkit-transform 0.25s ease-in-out
+  transition: transform 0.25s ease-in-out
+  -moz-transition: -webkit-transform 0.25s ease-in-out
+  -ms-transition: -webkit-transform 0.25s ease-in-out
+  @media (max-width: 1199px)
+    background-color: #ffffff
+span.is-active 
+  border-color: transparent
+span.is-active:before
+  +transform(translate(-50%, -50%) rotate(45deg))
+span.is-active:after
+  +transform(translate(-50%, -50%) rotate(-45deg))
+span.menu-toggle:hover 
+  color: #000000
+  @media (max-width: 1199px)
+    color: #ffffff
+span.is-active
+  border-color: transparent
+span.is-active:before 
+  +transform(translate(-50%, -50%) rotate(45deg))
+span.is-active:after
+  +transform(translate(-50%, -50%) rotate(-45deg))
+/* header end */

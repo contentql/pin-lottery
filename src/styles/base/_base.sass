@@ -1,0 +1,557 @@
+@import ./_reset
+/* global css strat */
+// margin global css 
+.mb-30
+  margin-bottom: 30px
+.mt-30 
+  margin-top: 30px
+.mt-40 
+  margin-top: 40px
+.mt-50 
+  margin-top: 50px
+.mt-80 
+  margin-top: 80px
+.mb-50 
+  margin-bottom: 50px
+.mb-none-30
+  margin-bottom: -30px!important
+.mb-none-50
+  margin-bottom: -50px!important
+
+// padding global css
+.pt-90
+  padding-top: 90px
+.pb-90
+  padding-bottom: 90px
+.pt-120 
+  padding-top: 120px
+  @media (max-width: 991px)
+    padding-top: 90px
+  @media (max-width: 575px)
+    padding-top: 80px
+.pb-120 
+  padding-bottom: 120px
+  @media (max-width: 991px)
+    padding-bottom: 90px
+  @media (max-width: 575px)
+    padding-bottom: 80px
+.pt-150 
+  padding-top: 150px
+  @media (max-width: 991px)
+    padding-top: 90px
+  @media (max-width: 575px)
+    padding-top: 80px
+.pb-150 
+  padding-bottom: 150px
+  @media (max-width: 991px)
+    padding-bottom: 90px
+  @media (max-width: 575px)
+    padding-bottom: 80px
+
+.form-group 
+  margin-bottom: 20px 
+
+.mt-minus-50
+  margin-top: -50px
+.mt-minus-100
+  margin-top: -100px
+  position: relative
+.mt-minus-150
+  margin-top: -150px
+  position: relative
+.mt-minus-270
+  margin-top: -270px
+  position: relative
+.mt-minus-300
+  margin-top: -300px
+  position: relative
+.mt-100 
+  margin-top: 100px
+.bg_img 
+  background-size: cover
+  background-position: center
+.bg--one
+  background-color: $bg-one!important
+.bg--two 
+  background-color: $bg-two!important
+.curve-shape 
+  position: relative
+  z-index: 9
+  &::after 
+    position: absolute
+    content: ''
+    top: -85px
+    left: 0
+    width: 100%
+    height: 150px
+    background-color: $bg-one
+    -webkit-clip-path: ellipse(55% 75% at 50% 75%)
+    clip-path: ellipse(55% 75% at 50% 75%)
+    +transform(rotate(180deg))
+    z-index: -1
+    @media (max-width: 1199px)
+      display: none
+.slice-shape-two 
+  clip-path: polygon(50% 10%, 100% 0, 100% 100%, 0 100%, 0 0)
+.overlay-one
+  position: relative
+  z-index: 9
+  &::before 
+    position: absolute
+    content: ''
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: $bg-two
+    opacity: 0.95
+    z-index: -1
+.slice-shape 
+  clip-path: polygon(0 0, 100% 8%, 100% 100%, 0% 100%)
+  @media (max-width: 1199px)
+    clip-path: polygon(0 0, 100% 5%, 100% 100%, 0% 100%)
+  @media (max-width: 991px)
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%)
+select 
+  option 
+    background-color: $bg-two
+    height: 10px
+label 
+  color: #ffffff
+  margin-bottom: 13px
+input 
+  min-height: 50px
+  +border-radius(3px)
+.nice-select
+  width: 100%
+  min-height: 50px
+  line-height: 50px
+  +border-radius(3px)
+  .list 
+    width: 100%
+    box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15)
+.section-bg
+  background-color: $bg-one
+.section-bg-two 
+  background-color: $bg-two
+.section-header
+  margin-bottom: 70px
+  margin-top: -8px
+  @media (max-width: 991px)
+    margin-bottom: 50px
+  p 
+    margin-top: 10px
+    font-size: 18px
+    color: #f1f3ff
+.section-sub-title 
+  font-size: 24px
+  font-family: $para-font
+  color: $base-color
+  margin-bottom: 13px
+  @media (max-width: 767px)
+    font-size: 20px 
+.section-title
+  font-size: 60px
+  text-transform: uppercase
+  @media (max-width: 1199px)
+    font-size: 56px
+  @media (max-width: 991px)
+    font-size: 48px
+  @media (max-width: 767px)
+    font-size: 36px
+  @media (max-width: 575px)
+    font-size: 32px
+  &.style--two
+    text-transform: unset
+.border-radius-100 
+  +border-radius(50%!important)
+.hover--effect-1
+  +transition(all 0.3s)
+  &:hover 
+    +transform(translateY(-5px) scale(1.05))
+.has-link 
+  position: relative
+.item-link 
+  position: absolute
+  top: 0
+  left: 0
+  width: 100% 
+  height: 100%
+  z-index: 2
+.video-button
+  width: 105px
+  height: 105px
+  color: #ffffff
+  +border-radius(50%)
+  display: inline-block
+  background-color: $base-color
+  text-align: center
+  line-height: 125px
+  +animation(pulse 2000ms linear infinite)
+  &::before, &::after 
+    position: absolute
+    content: ""
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    border-radius: 74px
+    background-color: $base-color
+    opacity: 0.15
+    z-index: -10
+  &::before
+    z-index: -10
+    +animation(inner-ripple 2000ms linear infinite)
+  &::after
+    z-index: -10
+    +animation(outer-ripple 2000ms linear infinite)
+  i 
+    margin-left: 10px
+    font-size: 36px
++keyframes(outer-ripple)
+  0%
+    +transform(scale(1))
+    opacity: 0.5
+  80%
+    +transform(scale(1.5))
+    opacity: 0
+  100%
+    +transform(scale(2.5))
+    opacity: 0
+
++keyframes(inner-ripple)
+  0%
+    +transform(scale(1))
+    opacity: 0.5
+  30%
+    +transform(scale(1))
+    opacity: 0.5
+  100%
+    +transform(scale(1.5))
+    opacity: 0
+
+.d-pagination 
+  margin-top: 50px
+  .pagination
+    margin: -5px
+    li 
+      margin: 5px 5px
+      &.active 
+        a 
+          background-color: $base-color
+          color: #ffffff
+          &:hover 
+            background-color: $base-color
+            color: #ffffff
+      a 
+        +border-radius(50%!important)
+        color: $para-color
+        font-weight: 500
+        width: 45px
+        height: 45px
+        border: 1px solid #e\5e5e5
+        //text-align: center
+        line-height: 28px
+        &:hover 
+          color: $base-color
+          background-color: transparent
+          border-color: $base-color
+.cmn-list
+  margin-top: 20px
+  li+li 
+    margin-top: 15px
+  li 
+    position: relative
+    padding-left: 40px
+    &::before 
+      position: absolute
+      content: ''
+      top: 5px
+      left: 0
+      width: 20px
+      height: 10px
+      border-left: 1px solid $base-color
+      border-bottom: 1px solid $base-color
+      +transform(rotate(-45deg))
+.cmn-list-2
+  margin-top: 20px
+  li+li 
+    margin-top: 10px
+  li 
+    position: relative
+    padding-left: 45px
+    &:nth-last-of-type(3n+3)
+      &::before 
+        border-color: #a22546 
+    &:nth-last-of-type(3n+2)
+      &::before 
+        border-color: #f7a139
+    &:nth-last-of-type(3n+1)
+      &::before 
+        border-color: #3097d1
+    &::before 
+      position: absolute
+      content: ''
+      top: 5px
+      left: 0
+      width: 20px
+      height: 10px
+      border-left: 1px solid red
+      border-bottom: 1px solid red
+      +transform(rotate(-45deg))
+.number-list--style 
+  list-style-type: decimal
+  padding-left: 15px
+  li 
+    span 
+      font-weight: 500 
+      color: $base-color
+.pagination
+  margin-top: 50px
+  li+li 
+    margin-left: 10px
+  li 
+    &.active 
+      a 
+        background-color: $base-color 
+        border-color: $base-color
+        color: #ffffff
+    a 
+      border: 1px solid $border-color
+      +border-radius(3px!important)
+      padding: 12px 25px
+      background-color: transparent
+      color: $para-color
+      font-weight: 700
+      &:hover 
+        background-color: $base-color 
+        border-color: $base-color
+        color: #ffffff
+.cmn-accordion 
+  .card+.card 
+    margin-top: 20px
+  .card 
+    border: none
+    background-color: #683df5
+    padding-left: 30px 
+    padding-right: 30px
+    +border-radius(20px!important)
+  .card-header 
+    background-color: #683df5
+    padding: 0
+    margin-bottom: 0!important
+    border: none
+    .btn-link
+      padding: 25px 0
+      display: block
+      width: 100%
+      justify-content: space-between
+      cursor: pointer
+      position: relative
+      text-align: left
+      padding-right: 20px
+      font-size: 22px
+      color: #ffffff
+      @media (max-width: 767px)
+        font-size: 18px
+      @media (max-width: 575px)
+        font-size: 16px
+      &.collapsed 
+        &::after 
+          +transform(rotate(0deg))
+      &::after 
+        position: absolute
+        content: "\f107"
+        right: 0 
+        top: 25px
+        font-family: 'Line Awesome Free'
+        font-weight: 900 
+        color: #918fde
+        font-size: 20px
+        +transform(rotate(180deg))
+        +transition(all 0.3s)
+      &:focus, &:hover 
+        outline: none
+        text-decoration: none
+        box-shadow: none
+  .card-body 
+    padding: 30px 0
+    border-top: 1px solid #9a80e5
+    p 
+      @media (max-width: 575px)
+        font-size: 16px
+.cmn-tabs 
+  border: none
+  .nav-item
+    .nav-link
+      padding: 14px 35px
+      font-size: 18px 
+      font-weight: 600
+      color: #ffffff
+      +border-radius(999px !important)
+      background-image: linear-gradient( 45deg, rgb(215,61,245) 0%, rgb(143,61,245) 100%)
+      background-image: -moz-linear-gradient( 45deg, rgb(215,61,245) 0%, rgb(143,61,245) 100%)
+      background-image: -webkit-linear-gradient( 45deg, rgb(215,61,245) 0%, rgb(143,61,245) 100%)
+      background-image: -ms-linear-gradient( 45deg, rgb(215,61,245) 0%, rgb(143,61,245) 100%)
+      box-shadow: -1.113px 7.922px 16px 0px rgba(143, 61, 245, 0.63)
+      border: none!important
+      text-transform: capitalize
+      @media (max-width: 575px)
+        padding: 12px 25px
+        font-size: 16px
+      &.active 
+        background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+        box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+        color: #ffffff!important
+blockquote
+  p 
+    font-weight: 700
+    font-size: 24px
+    color: #ffffff
+input:focus,
+textarea:focus,
+.nice-select.open
+  border-color: $base-color
+
+.page-breadcrumb 
+  +d-flex
+  margin-top: 15px
+  li
+    color: #ffffff
+    text-transform: capitalize
+    &::after 
+      content: '-'
+      color: #ffffff
+      margin: 0 5px
+    &:first-child
+      &::before 
+        content: "\f102"
+        font-family: 'Flaticon'
+        color: #ef428c
+        margin-right: 6px
+    &:last-child
+      &::after 
+        display: none
+    a
+      color: #ffffff
+      text-transform: capitalize
+// custom animation 
++keyframes(customBounce)
+  0%
+    +transform(translateY(0))
+  25%
+    +transform(translateY(-10px))
+  50%
+    +transform(translateY(-20px))
+  75%
+    +transform(translateY(-10px))
+  100%
+    +transform(translateY(0))
+
+.scroll-to-top 
+  height: 60px
+  width: 60px
+  position: fixed
+  bottom: 5%
+  right: 5%
+  display: none
+  z-index: 99999
+  cursor: pointer
+  text-align: center
+  border-radius: 50%
+  +gradient-three
+  line-height: 77px
+  box-shadow: 0 5px 15px 0 rgba(#000000, 0.25)
+  .scroll-icon 
+    font-size: 36px
+    color: #ffffff
+    display: inline-block
+.preloader 
+  position: fixed
+  top: 0
+  left: 0
+  width: 100% 
+  height: 100vh
+  +gradient-three
+  z-index: 999
+  overflow: hidden
+  svg 
+    width: 100% 
+    height: 100% 
+    visibility: hidden
+/* global css end */
+
+/* theme-switcher css start */
+.theme-switcher 
+  position: fixed
+  top: 20%
+  right: -190px
+  z-index: 99999
+  +d-flex
+  align-items: center
+  +transition(all 0.3s)
+  @media (max-width: 1199px)
+    top: auto 
+    bottom: 10%
+  &.active
+    right: 0
+  &__icon
+    width: 45px
+    height: 45px
+    background-color: #ffffff
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    font-size: 24px
+    cursor: pointer
+    box-shadow: 0 0 10px rgba(#000000, 0.25)
+    i 
+      animation: spin 3s infinite linear
+  &__body 
+    padding: 20px
+    background-color: #ffffff
+    overflow: hidden
+    +border-radius(8px 0 0 8px)
+    .single 
+      width: 150px 
+      height: 100px
+      background-color: #ffffff
+      box-shadow: 0 0 10px rgba(#000000, 0.25)
+      +border-radius(5px)
+      &.dark 
+        background-color: #000000
+      &.light 
+        +gradient-three
+      &.active 
+        position: relative
+        &::after 
+          position: absolute
+          top: -8px
+          right: -6px
+          width: 25px
+          height: 25px
+          background-color: #5039fb
+          font-size: 14px
+          text-align: center
+          line-height: 25px
+          color: #ffffff
+          content: "\f00c"
+          font-family: 'Line Awesome Free'
+          font-weight: 900
+          +border-radius(50%)
+    a 
+      width: 100%
+      height: 100%
+      color: #ffffff
+      display: flex
+      justify-content: center
+      align-items: center
++keyframes (spin) 
+  0% 
+    +transform(rotate(0deg))
+  100% 
+    +transform(rotate(180deg))
+/* theme-switcher css end */

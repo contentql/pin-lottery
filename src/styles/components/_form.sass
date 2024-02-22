@@ -1,0 +1,61 @@
+/* form css start */
+.form-control 
+  &:focus 
+    background-color: transparent
+    box-shadow: none
+    border-color: #c0464d
+input, textarea
+  &:focus, &:active
+    border-color: #c0464d!important
+.custom-checkbox 
+  padding-left: 30px
+  position: relative
+  overflow: hidden
+  label 
+    font-size: 14px!important
+    cursor: pointer
+    -webkit-transition: all 0.3s
+    transition: all 0.3s
+    text-transform: capitalize!important
+  .checkbox
+    width: 18px
+    height: 18px
+    border-radius: 50%
+    display: inline-block
+    position: absolute
+    left: 0
+    top: 5px
+    -webkit-transition: all 0.3s
+    transition: all 0.3s
+    background-image: linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+    background-image: -moz-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+    background-image: -webkit-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+    background-image: -ms-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+    &::before
+      position: absolute
+      content: "\f00c"
+      font-family: "Line Awesome Free"
+      font-weight: 900
+      color: #ffffff
+      font-size: 10px
+      top: 50%
+      left: 50%
+      +transform(translate(-50%, -50%) scale(1.1, 1.1))
+      opacity: 0
+      +transition(all 0.3s)
+.custom-checkbox input[type="checkbox"] 
+  position: absolute
+  left: -100px
+  width: auto
+
+.custom-checkbox input[type="checkbox"]:checked + label ~ .checkbox 
+  background-image: -moz-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -webkit-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+  background-image: -ms-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(92,39,254) 100%)
+
+.custom-checkbox input[type="checkbox"]:checked + label ~ .checkbox::before 
+  opacity: 1
+  +transform(translate(-50%, -50%) scale(1, 1))
+  -webkit-transition-delay: 0.3s
+  transition-delay: 0.3s
+/* form css end*/

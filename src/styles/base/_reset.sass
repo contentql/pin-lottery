@@ -1,0 +1,84 @@
+/* reset css start */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap')
+
+// font-family: 'Josefin Sans', sans-serif;
+
+$heading-font: 'Josefin Sans', sans-serif
+$para-font: 'Josefin Sans', sans-serif
+
+html 
+  scroll-behavior: smooth
+body 
+  scroll-behavior: smooth
+  font-family: $para-font
+  font-size: 18px
+  padding: 0
+  margin: 0
+  font-weight: 400
+  position: relative
+  background-color: $bg-one
+img 
+  max-width: 100%
+  height: auto
+
+ul, ol 
+  padding: 0
+  margin: 0
+  list-style: none
+button 
+  cursor: pointer
+*:focus
+  outline: none
+
+button
+  border: none
+button:focus
+  outline: none
+input:not([type="radio"]), textarea
+  padding: 10px 20px
+  border: 1px solid #6472d9
+  width: 100%
+  background-color: transparent
+  +placeholder(#9aace5)
+  +border-radius(8px)
+  color: $para-color
+.select
+  position: relative
+  min-height: 48px
+  background-color: transparent
+  &::after
+    content: "\f107"
+    font-family: 'Line Awesome Free'
+    font-weight: 900
+    font-size: 12px
+    position: absolute
+    color: #fff
+    top: 50%
+    right: 5%
+    transform: translateY(-50%)
+select
+  -webkit-appearance: none 
+  //padding: 10px 20px
+  height: full
+  width: 100%
+  border: 1px solid $border-color
+  cursor: pointer
+  color: $para-color
+  background-color: transparent
+  height: 50px
+  +border-radius(4px)
+
+textarea 
+  min-height: 150px
+  resize: none
+  width: 100%
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button 
+  -webkit-appearance: none
+input[type=number] 
+  -moz-appearance: textfield
+span 
+  display: inline-block
+a:hover 
+  color: $base-color
+/* reset css end */
