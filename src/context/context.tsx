@@ -1,7 +1,8 @@
 'use client';
 
 import { createContext, useState } from 'react';
-const AppContext = createContext('');
+
+const AppContext = createContext({});
 
 /* @TODO: These is for lottery one data */
 const lotteryData = [
@@ -31,7 +32,7 @@ const lotteryDataTwo = [
   },
 ];
 
-const AppProvider = ({ children }) => {
+const AppProvider = ({ children }: { children: React.ReactNode }) => {
   /* @TODO: These is for lottery one */
   const [lotteris, setLotteris] = useState(lotteryData);
   const [quantity, setQuantity] = useState(3);
@@ -52,12 +53,12 @@ const AppProvider = ({ children }) => {
     ]);
   };
 
-  const removeTicket = (id) => {
+  const removeTicket = (id: any) => {
     const data = lotteris.filter((item) => item.id !== id);
     setLotteris(data);
   };
 
-  const pickNumbr = (e, id) => {
+  const pickNumbr = (e: any, id: any) => {
     const data = lotteris.map((obj) =>
       obj.id === id
         ? {
@@ -67,10 +68,10 @@ const AppProvider = ({ children }) => {
         : obj
     );
 
-    setLotteris(data);
+    setLotteris(data as any);
   };
 
-  const luckyNumbr = (e, id) => {
+  const luckyNumbr = (e: any, id: any) => {
     const data = lotteris.map((obj) =>
       obj.id === id
         ? {
@@ -80,13 +81,13 @@ const AppProvider = ({ children }) => {
         : obj
     );
 
-    setLotteris(data);
+    setLotteris(data as any);
   };
 
-  const checkActive = (id, ele, start, end) => {
+  const checkActive = (id: any, ele: any, start: any, end: any) => {
     const findActiveItem = lotteris.find((item) => item.id === id);
 
-    return findActiveItem.ticket
+    return findActiveItem?.ticket
       .slice(start, end)
       ?.some((element) => element === ele.toString());
   };
@@ -124,12 +125,12 @@ const AppProvider = ({ children }) => {
     ]);
   };
 
-  const removeTicketTwo = (id) => {
+  const removeTicketTwo = (id: any) => {
     const data = lotterisTwo.filter((item) => item.id !== id);
     setLotterisTwo(data);
   };
 
-  const pickNumbrTwo = (e, id) => {
+  const pickNumbrTwo = (e: any, id: any) => {
     const data = lotterisTwo.map((obj) =>
       obj.id === id
         ? {
@@ -139,10 +140,10 @@ const AppProvider = ({ children }) => {
         : obj
     );
 
-    setLotterisTwo(data);
+    setLotterisTwo(data as any);
   };
 
-  const luckyNumbrTwo = (e, id) => {
+  const luckyNumbrTwo = (e: any, id: any) => {
     const data = lotterisTwo.map((obj) =>
       obj.id === id
         ? {
@@ -152,19 +153,19 @@ const AppProvider = ({ children }) => {
         : obj
     );
 
-    setLotterisTwo(data);
+    setLotterisTwo(data as any);
   };
 
-  const checkActiveTwo = (id, ele, start, end) => {
+  const checkActiveTwo = (id: any, ele: any, start: any, end: any) => {
     const findActiveItem = lotterisTwo.find((item) => item.id === id);
 
-    return findActiveItem.ticket
+    return findActiveItem?.ticket
       .slice(start, end)
       ?.some((element) => element === ele.toString());
   };
 
-  const addQuickPickTwo = (id) => {
-    let randomValue = [];
+  const addQuickPickTwo = (id: any) => {
+    let randomValue: any[] = [];
 
     for (let i = 0; i < 5; i++) {
       const random = (Math.floor(Math.random() * (50 - 1)) + 1).toString();
@@ -180,10 +181,10 @@ const AppProvider = ({ children }) => {
         : obj
     );
 
-    setLotterisTwo(data);
+    setLotterisTwo(data as any);
   };
 
-  const clearTicketTwo = (id) => {
+  const clearTicketTwo = (id: any) => {
     const data = lotterisTwo.map((obj) =>
       obj.id === id
         ? {
