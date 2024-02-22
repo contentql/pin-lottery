@@ -1,12 +1,13 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Metadata } from 'next';
 
-import Layout from '@/components/layout';
 import { AppProvider } from '@/context/context';
 import Providers from '@/providers/Providers';
+import LayoutView from '@/views/LayoutView';
+
 import '@/public/css/line-awesome.min.css';
 import '@/public/css/modal-video.scss';
 import '@/styles/main.sass';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const metadata: Metadata = {
   title: 'Lottery - Online Lotto & Lottery',
@@ -27,7 +28,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <AppProvider>
-            <Layout>{children}</Layout>
+            <LayoutView>{children}</LayoutView>
           </AppProvider>
         </Providers>
       </body>
