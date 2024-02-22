@@ -18,7 +18,7 @@ const DataTable = () => {
             selectsRange={true}
             startDate={startDate}
             endDate={endDate}
-            onChange={(update) => {
+            onChange={(update: any) => {
               setDateRange(update);
             }}
             placeholderText='min - max date'
