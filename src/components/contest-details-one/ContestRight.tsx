@@ -1,10 +1,14 @@
 import { AppContext } from '@/context/context';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useContext } from 'react';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 
 const ContestRight = () => {
-  const { incrementHandle, decrementHandle, quantity } = useContext(AppContext);
+  const { incrementHandle, decrementHandle, quantity, setQuantity }: any =
+    useContext(AppContext);
+
+  const pathname = usePathname();
 
   return (
     <div className='contest-cart__right'>
@@ -56,7 +60,10 @@ const ContestRight = () => {
           </div>
         </div>
         <div className='mt-sm-0 mt-3'>
-          <Link href='/lottery-details' className='cmn-btn style--three'>
+          <Link
+            href={`${pathname}/lottery-details`}
+            className='cmn-btn style--three'
+          >
             buy tickets
           </Link>
         </div>
