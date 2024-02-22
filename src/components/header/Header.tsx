@@ -82,7 +82,7 @@ const Header = () => {
         <div className='container'>
           <nav className='navbar navbar-expand-xl p-0 align-items-center'>
             <Link href='/' className='site-logo site-title'>
-              <Image src={logo} alt='logo' />
+              <Image src={logo} alt='logo' width={250} />
               <span className='logo-icon'>
                 <i className='flaticon-fire'></i>
               </span>
