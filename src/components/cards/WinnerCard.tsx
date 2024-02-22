@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const WinnerCard = ({ winner }) => {
+const WinnerCard = ({ winner }: any) => {
   const {
     title,
     draw_at,
@@ -31,7 +31,7 @@ const WinnerCard = ({ winner }) => {
           <div className='number-list-wrapper'>
             <p>Winning Numbers:</p>
             <ul className='number-list mt-2'>
-              {winning_number.map((itm, i) => (
+              {winning_number.map((itm: any, i: any) => (
                 <li key={i}>{itm}</li>
               ))}
             </ul>

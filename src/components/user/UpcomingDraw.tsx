@@ -1,15 +1,16 @@
-import Image from "next/image";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import Slider from "react-slick";
-import circle_border from "/public/images/elements/circle-border.png";
+import Image from 'next/image';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import Slider from 'react-slick';
 
-import "slick-carousel/slick/slick.css";
+import circle_border from '/public/images/elements/circle-border.png';
 
-const NextBtn = ({ onClick }) => {
+import 'slick-carousel/slick/slick.css';
+
+const NextBtn = ({ onClick }: any) => {
   return (
     <button
-      type="button"
-      className="d-flex align-items-center justify-content-center slick-arrow prev"
+      type='button'
+      className='d-flex align-items-center justify-content-center slick-arrow prev'
       onClick={onClick}
     >
       <BsArrowLeft />
@@ -17,11 +18,11 @@ const NextBtn = ({ onClick }) => {
   );
 };
 
-const PrevBtn = ({ onClick }) => {
+const PrevBtn = ({ onClick }: any) => {
   return (
     <button
-      type="button"
-      className="d-flex align-items-center justify-content-center slick-arrow next"
+      type='button'
+      className='d-flex align-items-center justify-content-center slick-arrow next'
       onClick={onClick}
     >
       <BsArrowRight />
@@ -55,20 +56,20 @@ const UpcomingDraw = () => {
     ],
   };
   return (
-    <div className="upcoming-draw-wrapper">
-      <h3 className="title">Upcoming Draw</h3>
-      <Slider {...settings} className="draw-ticket-slider">
+    <div className='upcoming-draw-wrapper'>
+      <h3 className='title'>Upcoming Draw</h3>
+      <Slider {...settings} className='draw-ticket-slider'>
         {[1, 2, 3, 4, 5].map((_, i) => (
-          <div key={i} className="silgle">
-            <div className="draw-single-ticket">
-              <div className="draw-single-ticket__header">
-                <div className="left">Tickey#1</div>
-                <div className="right">Contest No:R9D</div>
+          <div key={i} className='silgle'>
+            <div className='draw-single-ticket'>
+              <div className='draw-single-ticket__header'>
+                <div className='left'>Tickey#1</div>
+                <div className='right'>Contest No:R9D</div>
               </div>
-              <div className="circle-divider">
-                <Image src={circle_border} alt="circle border" />
+              <div className='circle-divider'>
+                <Image src={circle_border} alt='circle border' />
               </div>
-              <ul className="ticket-numbers-list">
+              <ul className='ticket-numbers-list'>
                 <li>23</li>
                 <li>22</li>
                 <li>19</li>

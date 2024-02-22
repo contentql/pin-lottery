@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaRegHeart } from 'react-icons/fa';
 
-const ContestCard = ({ itm }) => {
+const ContestCard = ({ itm }: any) => {
   return (
     <div className='contest-card'>
       <Link href={`/contest/${itm.id}`} className='item-link'></Link>

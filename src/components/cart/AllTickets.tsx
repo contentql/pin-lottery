@@ -1,32 +1,32 @@
-import Link from "next/link";
-import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import Link from 'next/link';
+import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
-const AllTickets = ({ removeTicket, allTicket }) => {
+const AllTickets = ({ removeTicket, allTicket }: any) => {
   return (
-    <div className="col-lg-7">
-      <div className="ticket-wrapper">
-        <div className="ticket-wrapper__header">
+    <div className='col-lg-7'>
+      <div className='ticket-wrapper'>
+        <div className='ticket-wrapper__header'>
           <h3>Your tickets:</h3>
-          <button type="button">clear all</button>
+          <button type='button'>clear all</button>
         </div>
-        <div className="ticket-wrapper__body">
-          {allTicket.map((itm) => (
-            <div key={itm.id} className="single-row">
-              <ul className="numbers">
-                {itm.ticket.map((single, i) => (
+        <div className='ticket-wrapper__body'>
+          {allTicket.map((itm: any) => (
+            <div key={itm.id} className='single-row'>
+              <ul className='numbers'>
+                {itm.ticket.map((single: any, i: any) => (
                   <li key={i}>{single}</li>
                 ))}
               </ul>
-              <div className="action-btns">
-                <Link href="/lottery-details" className="edit-btn">
-                  <FaPencilAlt className="fs-5" />
+              <div className='action-btns'>
+                <Link href='/lottery-details' className='edit-btn'>
+                  <FaPencilAlt className='fs-5' />
                 </Link>
                 <button
-                  type="button"
-                  className="del-btn"
+                  type='button'
+                  className='del-btn'
                   onClick={() => removeTicket(itm.id)}
                 >
-                  <FaTrashAlt className="fs-6" />
+                  <FaTrashAlt className='fs-6' />
                 </button>
               </div>
             </div>

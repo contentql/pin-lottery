@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import map from '/public/images/elements/map.png';
 import overview_obj_1 from '/public/images/elements/overview-obj-1.png';
 import overview_obj_2 from '/public/images/elements/overview-obj-2.png';

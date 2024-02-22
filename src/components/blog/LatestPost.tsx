@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 
-const NextBtn = ({ onClick }) => {
+const NextBtn = ({ onClick }: any) => {
   return (
     <button type='button' className='slick-arrow prev' onClick={onClick}>
       <i className='d-flex align-items-center justify-content-center'>
@@ -15,7 +15,7 @@ const NextBtn = ({ onClick }) => {
   );
 };
 
-const PrevBtn = ({ onClick }) => {
+const PrevBtn = ({ onClick }: any) => {
   return (
     <button type='button' className='slick-arrow next' onClick={onClick}>
       <i className='d-flex align-items-center justify-content-center'>
@@ -25,7 +25,7 @@ const PrevBtn = ({ onClick }) => {
   );
 };
 
-const LatestPost = ({ blogData }) => {
+const LatestPost = ({ blogData }: any) => {
   const settings = {
     infinite: false,
     speed: 700,
@@ -38,7 +38,7 @@ const LatestPost = ({ blogData }) => {
     <div className='widget'>
       <h3 className='widget__title'>Latest Post</h3>
       <Slider {...settings} className='small-post-slider'>
-        {blogData.map((blog, i) => (
+        {blogData.map((blog: any, i: any) => (
           <div key={i} className='small-post'>
             <div className='small-post__thumb'>
               <Image src={blog.img} alt={blog.title} />

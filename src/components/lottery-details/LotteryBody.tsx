@@ -1,5 +1,6 @@
 import BuyLotteryTicketCard from '@/components/cards/BuyLotteryTicketCard';
 import QuickPick from '@/components/quickPick/QuickPick';
+
 import Lotteries from './Lotteries';
 
 const LotteryBody = () => {

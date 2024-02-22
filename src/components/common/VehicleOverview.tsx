@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import specification_1 from '/public/images/icon/specification/1.png';
 import specification_2 from '/public/images/icon/specification/2.png';
 import specification_3 from '/public/images/icon/specification/3.png';

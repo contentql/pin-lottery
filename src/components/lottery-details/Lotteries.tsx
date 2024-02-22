@@ -1,6 +1,9 @@
-import SingleLotteryCardTwo from '@/components/cards/SingleLotteryCardTwo';
-import { AppContext } from '@/context/context';
 import { useContext } from 'react';
+
+import SingleLotteryCardTwo from '@/components/cards/SingleLotteryCardTwo';
+
+import { AppContext } from '@/context/context';
+
 import Actions from './Actions';
 
 const Lotteries = () => {

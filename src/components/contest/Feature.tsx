@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import contest_feature_1 from '/public/images/icon/contest-feature/1.png';
 import contest_feature_2 from '/public/images/icon/contest-feature/2.png';
 import contest_feature_3 from '/public/images/icon/contest-feature/3.png';

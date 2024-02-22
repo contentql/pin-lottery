@@ -1,6 +1,6 @@
 import { BsXLg } from 'react-icons/bs';
 
-const VedioModal = ({ isOpen, setIsOpen, link }) => {
+const VedioModal = ({ isOpen, setIsOpen, link }: any) => {
   return (
     <div
       className={`modal-video ${
@@ -21,8 +21,8 @@ const VedioModal = ({ isOpen, setIsOpen, link }) => {
               height='230'
               src={link}
               allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-              allowFullScreen=''
-              tabIndex='-1'
+              allowFullScreen={true}
+              tabIndex={-1}
             ></iframe>
           </div>
         </div>

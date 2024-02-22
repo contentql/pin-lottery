@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import Slider from 'react-slick';
+
 import contest_b1 from '/public/images/contest/b1.png';
 import contest_s1 from '/public/images/contest/s1.png';
 
 import 'slick-carousel/slick/slick.css';
 
-const NextBtn = ({ onClick }) => {
+const NextBtn = ({ onClick }: any) => {
   return (
     <button type='button' className='slick-arrow prev' onClick={onClick}>
       <i className='las la-angle-left'></i>
@@ -14,7 +15,7 @@ const NextBtn = ({ onClick }) => {
   );
 };
 
-const PrevBtn = ({ onClick }) => {
+const PrevBtn = ({ onClick }: any) => {
   return (
     <button type='button' className='slick-arrow next' onClick={onClick}>
       <i className='las la-angle-right'></i>
@@ -33,7 +34,6 @@ const ContestSlider = () => {
     nextArrow: <PrevBtn />,
     prevArrow: <NextBtn />,
     centerPadding: '0px',
-    focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -62,7 +62,7 @@ const ContestSlider = () => {
         <Slider
           asNavFor={nav2}
           arrows={false}
-          ref={(slider1) => setNav1(slider1)}
+          ref={(slider1: any) => setNav1(slider1)}
           className='contest-cart__thumb-slider'
         >
           {[1, 2, 3, 4, 5, 6].map((itm) => (
@@ -76,7 +76,7 @@ const ContestSlider = () => {
 
         <Slider
           asNavFor={nav1}
-          ref={(slider2) => setNav2(slider2)}
+          ref={(slider2: any) => setNav2(slider2)}
           {...settings}
           className='contest-cart__nav-slider'
         >

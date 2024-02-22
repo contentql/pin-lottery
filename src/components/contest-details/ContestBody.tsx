@@ -1,6 +1,8 @@
+import Countdown from 'react-countdown';
+
 import RendererCountdown from '@/components/common/RendererCountdown';
 import VehicleOverview from '@/components/common/VehicleOverview';
-import Countdown from 'react-countdown';
+
 import ContestRight from './ContestRight';
 import ContestSlider from './ContestSlider';
 

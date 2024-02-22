@@ -1,19 +1,19 @@
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-import { BsChevronDown } from "react-icons/bs";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import { BsChevronDown } from 'react-icons/bs';
+import { FaRegCalendarAlt } from 'react-icons/fa';
 
 //css
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
 const DataTable = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   return (
-    <div className="referral-transaction">
-      <div className="all-transaction__header">
-        <h3 className="title">Your Partners:</h3>
-        <div className="date-range">
+    <div className='referral-transaction'>
+      <div className='all-transaction__header'>
+        <h3 className='title'>Your Partners:</h3>
+        <div className='date-range'>
           <DatePicker
             selectsRange={true}
             startDate={startDate}
@@ -21,7 +21,7 @@ const DataTable = () => {
             onChange={(update) => {
               setDateRange(update);
             }}
-            placeholderText="min - max date"
+            placeholderText='min - max date'
           />
           <i>
             <FaRegCalendarAlt />
@@ -29,7 +29,7 @@ const DataTable = () => {
         </div>
       </div>
 
-      <div className="table-responsive-lg">
+      <div className='table-responsive-lg'>
         <table>
           <thead>
             <tr>
@@ -42,9 +42,9 @@ const DataTable = () => {
           <tbody>
             <tr>
               <td>
-                <div className="date">
+                <div className='date'>
                   <span>16</span>
-                  <span className="month">APR</span>
+                  <span className='month'>APR</span>
                 </div>
               </td>
               <td>Level01</td>
@@ -53,9 +53,9 @@ const DataTable = () => {
             </tr>
             <tr>
               <td>
-                <div className="date">
+                <div className='date'>
                   <span>16</span>
-                  <span className="month">APR</span>
+                  <span className='month'>APR</span>
                 </div>
               </td>
               <td>Level01</td>
@@ -64,9 +64,9 @@ const DataTable = () => {
             </tr>
             <tr>
               <td>
-                <div className="date">
+                <div className='date'>
                   <span>16</span>
-                  <span className="month">APR</span>
+                  <span className='month'>APR</span>
                 </div>
               </td>
               <td>Level01</td>
@@ -75,9 +75,9 @@ const DataTable = () => {
             </tr>
             <tr>
               <td>
-                <div className="date">
+                <div className='date'>
                   <span>16</span>
-                  <span className="month">APR</span>
+                  <span className='month'>APR</span>
                 </div>
               </td>
               <td>Level01</td>
@@ -86,9 +86,9 @@ const DataTable = () => {
             </tr>
             <tr>
               <td>
-                <div className="date">
+                <div className='date'>
                   <span>16</span>
-                  <span className="month">APR</span>
+                  <span className='month'>APR</span>
                 </div>
               </td>
               <td>Level01</td>
@@ -97,9 +97,9 @@ const DataTable = () => {
             </tr>
             <tr>
               <td>
-                <div className="date">
+                <div className='date'>
                   <span>16</span>
-                  <span className="month">APR</span>
+                  <span className='month'>APR</span>
                 </div>
               </td>
               <td>Level01</td>
@@ -109,10 +109,10 @@ const DataTable = () => {
           </tbody>
         </table>
       </div>
-      <div className="load-more">
+      <div className='load-more'>
         <button
-          type="button"
-          className="d-flex align-items-center justify-content-lg-center gap-1"
+          type='button'
+          className='d-flex align-items-center justify-content-lg-center gap-1'
         >
           Show More Lotteries <BsChevronDown />
         </button>

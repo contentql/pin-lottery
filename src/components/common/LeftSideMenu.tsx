@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 import team_obj from '/public/images/elements/team-obj.png';
 
 const LeftSideMenu = () => {

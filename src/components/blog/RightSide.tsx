@@ -6,8 +6,11 @@ import {
   FaRedditAlien,
   FaTwitter,
 } from 'react-icons/fa';
-import { blogData } from '../../data/blogData';
-import Social from '../social/Social';
+
+import Social from '@/components/social/Social';
+
+import { blogData } from '@/data/blogData';
+
 import Categories from './Categories';
 import LatestPost from './LatestPost';
 

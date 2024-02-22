@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaRegComments, FaRegEye } from 'react-icons/fa';
+
 import author from '/public/images/blog/author.png';
 import blog_b1 from '/public/images/blog/b1.jpg';
 

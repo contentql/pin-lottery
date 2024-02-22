@@ -1,13 +1,16 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { FaRedo, FaRegHeart, FaSearch } from 'react-icons/fa';
-import contestData from '../../data/contestData';
-import ContestCard from '../cards/ContestCard';
+
 import winner_tab_1 from '/public/images/icon/winner-tab/1.png';
 import winner_tab_2 from '/public/images/icon/winner-tab/2.png';
 import winner_tab_3 from '/public/images/icon/winner-tab/3.png';
 import winner_tab_4 from '/public/images/icon/winner-tab/4.png';
 import winner_tab_5 from '/public/images/icon/winner-tab/5.png';
+
+import ContestCard from '@/components/cards/ContestCard';
+
+import contestData from '@/data/contestData';
 
 const LatestContest = () => {
   const [sliderValue, setSliderValue] = useState<number>(0);

@@ -1,5 +1,6 @@
-import Social from '@/components/social/Social';
 import { FaFacebookF, FaGooglePlusG, FaTwitter } from 'react-icons/fa';
+
+import Social from '@/components/social/Social';
 
 const SignUp = () => {
   return (

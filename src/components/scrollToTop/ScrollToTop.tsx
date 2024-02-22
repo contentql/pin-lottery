@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 const ScrollToTop = () => {
-  const scrollTop = useRef();
+  const scrollTop = useRef<HTMLAnchorElement>(null);
+
   useEffect(() => {
     window.scroll({
       top: 0,
@@ -12,11 +13,11 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', (e) => {
-      if (window.scrollY > 200) {
+      if (scrollTop.current && window.scrollY > 200) {
         scrollTop.current.style.display = 'inline-block';
         scrollTop.current.style.bottom = '30px';
         scrollTop.current.style.transform = 'translateY(0%)';
-      } else {
+      } else if (scrollTop.current) {
         scrollTop.current.style.display = 'none';
       }
     });

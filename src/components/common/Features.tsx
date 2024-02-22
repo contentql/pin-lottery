@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import feature_1 from '/public/images/icon/feature/1.png';
 import feature_2 from '/public/images/icon/feature/2.png';
 import feature_3 from '/public/images/icon/feature/3.png';

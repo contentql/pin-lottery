@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaPhoneAlt, FaRegEnvelope } from 'react-icons/fa';
+
 import support_1 from '/public/images/icon/support/1.png';
 import support_2 from '/public/images/icon/support/2.png';
 

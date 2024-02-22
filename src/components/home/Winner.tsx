@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import Slider from 'react-slick';
+
 import winner from '/public/images/bg/winner.jpg';
 import car from '/public/images/elements/car.png';
 import w_1 from '/public/images/winner/w-1.png';
 
 import 'slick-carousel/slick/slick.css';
 
-const NextBtn = ({ onClick }) => {
+const NextBtn = ({ onClick }: any) => {
   return (
     <button
       type='button'
@@ -21,7 +22,7 @@ const NextBtn = ({ onClick }) => {
   );
 };
 
-const PrevBtn = ({ onClick }) => {
+const PrevBtn = ({ onClick }: any) => {
   return (
     <button
       type='button'

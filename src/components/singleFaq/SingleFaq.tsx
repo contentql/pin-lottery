@@ -1,5 +1,6 @@
 const SingleFaq = ({ singleFaq, index }: { singleFaq: any; index: any }) => {
   const { id, question, answer } = singleFaq;
+
   return (
     <div className='card'>
       <div className='card-header' id={`heading${id}`}>

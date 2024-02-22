@@ -1,8 +1,9 @@
-import { AppContext } from '@/context/context';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext } from 'react';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+
+import { AppContext } from '@/context/context';
 
 const ContestRight = () => {
   const { incrementHandle, decrementHandle, quantity, setQuantity }: any =

@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import winnerData from '../../data/winnerData';
-import TicketCheckCard from '../cards/TicketCheckCard';
-import WinnerCard from '../cards/WinnerCard';
+
 import w_el_1 from '/public/images/elements/w-el-1.png';
 import w_el_2 from '/public/images/elements/w-el-2.png';
 import w_el_3 from '/public/images/elements/w-el-3.png';
@@ -12,6 +10,11 @@ import winner_tab_2 from '/public/images/icon/winner-tab/2.png';
 import winner_tab_3 from '/public/images/icon/winner-tab/3.png';
 import winner_tab_4 from '/public/images/icon/winner-tab/4.png';
 import winner_tab_5 from '/public/images/icon/winner-tab/5.png';
+
+import TicketCheckCard from '@/components/cards/TicketCheckCard';
+import WinnerCard from '@/components/cards/WinnerCard';
+
+import winnerData from '@/data/winnerData';
 
 const LatestWinner = () => {
   const [winners, setWinners] = useState(winnerData);

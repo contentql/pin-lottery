@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BsFillPlayFill } from 'react-icons/bs';
 
-import VedioModal from '../vedioModal/VedioModal';
+import VedioModal from '@/components/vedioModal/VedioModal';
 
 const Vedio = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,11 +1,12 @@
 'use client';
 
+import React from 'react';
+
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import Login from '@/components/modal/Login';
 import SignUp from '@/components/modal/SignUp';
 import ScrollToTop from '@/components/scrollToTop/ScrollToTop';
-import React from 'react';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

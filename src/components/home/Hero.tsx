@@ -1,9 +1,8 @@
-'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaPlay } from 'react-icons/fa';
-import VedioModal from '../vedioModal/VedioModal';
+
 import car_light from '/public/images/elements/car-light.png';
 import car_main from '/public/images/elements/car-main.png';
 import car_ray from '/public/images/elements/car-ray.png';
@@ -12,6 +11,8 @@ import car_star from '/public/images/elements/car-star.png';
 import hero_building from '/public/images/elements/hero-building.png';
 import hero_car from '/public/images/elements/hero-car.png';
 import hero_shape from '/public/images/elements/hero-shape.jpg.png';
+
+import VedioModal from '@/components/vedioModal/VedioModal';
 
 const Hero = () => {
   const [isOpen, setIsOpen] = useState(false);

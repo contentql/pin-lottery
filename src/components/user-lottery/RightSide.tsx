@@ -1,5 +1,6 @@
 import ContestCard from '@/components/cards/ContestCard';
 import contestData from '@/data/contestData';
+
 import UpcomingDraw from './UpcomingDraw';
 
 const RightSide = () => {

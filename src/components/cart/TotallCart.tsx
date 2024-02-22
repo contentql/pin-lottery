@@ -1,13 +1,16 @@
 import { useState } from 'react';
-import cartData from '../../data/cartData';
-import QuickPick from '../quickPick/QuickPick';
+
+import QuickPick from '@/components/quickPick/QuickPick';
+
+import cartData from '@/data/cartData';
+
 import AllTickets from './AllTickets';
 import Prices from './Prices';
 
 const TotallCart = () => {
   const [allTicket, setAllTicket] = useState(cartData);
 
-  const removeTicket = (id) => {
+  const removeTicket = (id: any) => {
     const data = allTicket.filter((item) => item.id !== id);
     setAllTicket(data);
   };

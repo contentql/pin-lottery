@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Slider from 'react-slick';
-import { clients } from '../../data/affiliate';
+
+import { clients } from '@/data/affiliate';
 
 import 'slick-carousel/slick/slick.css';
 

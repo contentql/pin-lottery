@@ -1,8 +1,9 @@
-import { allTransactions } from '@/data/userData';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { BsChevronDown } from 'react-icons/bs';
 import { FaCheckCircle, FaEllipsisH, FaRegCalendarAlt } from 'react-icons/fa';
+
+import { allTransactions } from '@/data/userData';
 
 //css
 import 'react-datepicker/dist/react-datepicker.css';

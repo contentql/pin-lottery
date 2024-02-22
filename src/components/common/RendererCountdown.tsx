@@ -1,4 +1,4 @@
-const RendererCountdown = ({ hours, minutes, seconds, days }) => {
+const RendererCountdown = ({ hours, minutes, seconds, days }: any) => {
   return (
     <>
       <div>

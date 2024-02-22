@@ -1,5 +1,6 @@
-import { postDrawData } from '@/data/userData';
 import { BsChevronDown } from 'react-icons/bs';
+
+import { postDrawData } from '@/data/userData';
 
 const PastDraws = () => {
   return (

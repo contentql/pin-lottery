@@ -1,6 +1,8 @@
 import Image from 'next/image';
-import teamData from '../../data/teamData';
+
 import team_obj from '/public/images/elements/team-obj.png';
+
+import teamData from '@/data/teamData';
 
 const Team = () => {
   return (

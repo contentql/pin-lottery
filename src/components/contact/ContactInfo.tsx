@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import contact from '/public/images/elements/contact.png';
 import contact_1 from '/public/images/icon/contact/1.png';
 import contact_2 from '/public/images/icon/contact/2.png';

@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import { FaStar } from 'react-icons/fa';
 import Slider from 'react-slick';
-import testimonialData from '../../data/testimonialData';
+
 import round_shape from '/public/images/elements/round-shape.png';
+
+import testimonialData from '@/data/testimonialData';
 
 // css
 import 'slick-carousel/slick/slick.css';

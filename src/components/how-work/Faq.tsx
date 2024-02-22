@@ -1,7 +1,11 @@
-import faqData from '@/data/faqData';
 import Image from 'next/image';
-import SingleFaq from '../singleFaq/SingleFaq';
+
 import faq_el from '/public/images/elements/faq-el.png';
+
+import SingleFaq from '@/components/singleFaq/SingleFaq';
+
+import faqData from '@/data/faqData';
+
 const Faq = () => {
   return (
     <section className='pb-120 position-relative'>

@@ -1,6 +1,7 @@
-import { AppContext } from '@/context/context';
 import { useContext } from 'react';
 import Countdown from 'react-countdown';
+
+import { AppContext } from '@/context/context';
 
 const renderer = ({ hours, minutes, seconds, days }: any) => {
   return (

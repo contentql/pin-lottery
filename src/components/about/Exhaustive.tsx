@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import feature_car from '/public/images/elements/feature-car.png';
 import feature_10 from '/public/images/icon/feature/10.png';
 import feature_5 from '/public/images/icon/feature/5.png';
@@ -45,11 +46,11 @@ const Exhaustive = () => {
                   <div className='feature-card style--two'>
                     <div className='feature-card__icon'>
                       <div className='inner'>
-                        <Image src={icon} alt={title} />
+                        <Image src={icon} alt={title as string} />
                       </div>
                     </div>
                     <div className='feature-card__content'>
-                      <h3>{title}</h3>
+                      <h3>{title as string}</h3>
                     </div>
                   </div>
                 </div>

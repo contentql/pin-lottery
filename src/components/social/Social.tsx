@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-const Social = ({ items }) => {
+const Social = ({ items }: any) => {
   return (
-    <ul className="social-link-list">
-      {items?.map(([Item, url], i) => (
+    <ul className='social-link-list'>
+      {items?.map(([Item, url]: any, i: any) => (
         <li key={i}>
           <Link href={url}>
             <i>

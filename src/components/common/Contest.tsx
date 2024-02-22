@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import contestData from '../../data/contestData';
-import ContestCard from '../cards/ContestCard';
+
 import contest_bg from '/public/images/elements/contest-bg.png';
 import box from '/public/images/icon/btn/box.png';
 import car from '/public/images/icon/btn/car.png';
+
+import ContestCard from '@/components/cards/ContestCard';
+
+import contestData from '@/data/contestData';
 
 const Contest = () => {
   const [filterData, setFilterData] = useState([]);
@@ -14,7 +17,7 @@ const Contest = () => {
   useEffect(() => {
     const data = contestData.filter((itm) =>
       itm.tags?.find((itme) => itme === filterBy)
-    );
+    ) as [];
 
     setFilterData(data);
   }, [filterBy]);
@@ -92,7 +95,7 @@ const Contest = () => {
                 aria-labelledby='home-tab'
               >
                 <div className='row mb-none-30'>
-                  {filterData.map((itm) => (
+                  {filterData.map((itm: any) => (
                     <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
                       <ContestCard itm={itm} />
                     </div>
@@ -106,7 +109,7 @@ const Contest = () => {
                 aria-labelledby='profile-tab'
               >
                 <div className='row mb-none-30'>
-                  {filterData.map((itm) => (
+                  {filterData.map((itm: any) => (
                     <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
                       <ContestCard itm={itm} />
                     </div>
