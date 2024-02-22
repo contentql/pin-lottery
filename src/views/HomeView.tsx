@@ -10,7 +10,7 @@ import Testimonial from '@/components/common/Testimonial';
 import Hero from '@/components/home/Hero';
 import Winner from '@/components/home/Winner';
 
-export default function HomeView() {
+const HomeView = () => {
   return (
     <>
       <Hero />
@@ -24,4 +24,6 @@ export default function HomeView() {
       <Support />
     </>
   );
-}
+};
+
+export default HomeView;

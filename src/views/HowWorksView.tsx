@@ -1,12 +1,14 @@
 'use client';
 
+import Image from 'next/image';
+
+import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+
 import Banner from '@/components/common/Banner';
 import HowToPlay from '@/components/common/HowToPlay';
 import BuyTicket from '@/components/how-work/BuyTicket';
 import Faq from '@/components/how-work/Faq';
 import Vedio from '@/components/how-work/Vedio';
-import Image from 'next/image';
-import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
 
 const HowWorksView = () => {
   return (

@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
+
+import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+
 import Banner from '@/components/common/Banner';
 import Details from '@/components/single-blog/Details';
-import Image from 'next/image';
-import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
 
 const BlogDetailsView = () => {
   return (

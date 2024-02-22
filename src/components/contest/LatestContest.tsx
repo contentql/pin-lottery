@@ -10,7 +10,7 @@ import winner_tab_4 from '/public/images/icon/winner-tab/4.png';
 import winner_tab_5 from '/public/images/icon/winner-tab/5.png';
 
 const LatestContest = () => {
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState<number>(0);
   const MAX = 16;
 
   const getBackgroundSize = () => {
@@ -152,7 +152,9 @@ const LatestContest = () => {
                             type={'range'}
                             min='0'
                             max={MAX}
-                            onChange={(e) => setSliderValue(e.target.value)}
+                            onChange={(e) =>
+                              setSliderValue(Number(e.target.value))
+                            }
                             style={getBackgroundSize()}
                             value={sliderValue}
                           />

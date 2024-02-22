@@ -1,9 +1,11 @@
 'use client';
 
-import FaqBody from '@/components/faq/FaqBody';
 import Image from 'next/image';
-import Banner from '../components/common/Banner';
+
 import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+
+import Banner from '@/components/common/Banner';
+import FaqBody from '@/components/faq/FaqBody';
 
 const FaqView = () => {
   return (

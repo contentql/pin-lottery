@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
+
+import inner_hero_shape from '/public/images/elements/inner-hero-shape.png';
+
 import Banner from '@/components/common/Banner';
 import ContestBody from '@/components/contest-details-one/ContestBody';
-import inner_hero_shape from '@/public/images/elements/inner-hero-shape.png';
-import Image from 'next/image';
 
 const ContestDetailsView = () => {
   return (
