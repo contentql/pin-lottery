@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import cartData from '../../data/cartData';
+
 import tag from '/public/images/icon/btn/tag.png';
-import logo from '/public/images/logo.png';
+
+import cartData from '@/data/cartData';
 
 const Header = () => {
   const [open, setOpen] = useState('');
@@ -82,7 +83,12 @@ const Header = () => {
         <div className='container'>
           <nav className='navbar navbar-expand-xl p-0 align-items-center'>
             <Link href='/' className='site-logo site-title'>
-              <Image src={logo} alt='logo' width={250} />
+              <Image
+                src='/images/client/3.png'
+                alt='logo'
+                width={200}
+                height={20}
+              />
               <span className='logo-icon'>
                 <i className='flaticon-fire'></i>
               </span>
