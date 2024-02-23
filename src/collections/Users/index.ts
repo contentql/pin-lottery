@@ -8,6 +8,13 @@ const Users: CollectionConfig = {
       sameSite: 'strict',
       // domain: process.env.PAYLOAD_COOKIE_DOMAIN,
     },
+    verify: {
+      generateEmailHTML: ({ token }) => {
+        //TODO: Should replace the frontendURL
+        const frontendUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/test/auth/verify-email`;
+        return `<p>click on the <a href=${frontendUrl}?token=${token}>link</a> to verify</p>`;
+      },
+    },
   },
   admin: {
     useAsTitle: 'email',

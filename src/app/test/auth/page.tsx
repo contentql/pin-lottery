@@ -8,7 +8,7 @@ import { trpc } from '@/trpc/client';
 import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
-} from '@/lib/validators/account-credentials-validator';
+} from '@/lib/validators/auth-router/account-credentials-validator';
 
 export default function Auth() {
   const {
