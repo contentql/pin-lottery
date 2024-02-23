@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 
 import { AppProvider } from '@/context/context';
 import Providers from '@/providers/Providers';
-import LayoutView from '@/views/LayoutView';
 
 import '@/public/css/line-awesome.min.css';
 import '@/public/css/modal-video.scss';
@@ -27,9 +26,7 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <Providers>
-          <AppProvider>
-            <LayoutView>{children}</LayoutView>
-          </AppProvider>
+          <AppProvider>{children}</AppProvider>
         </Providers>
       </body>
     </html>
