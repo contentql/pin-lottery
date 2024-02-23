@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-
+import UserVerification from '../../components/email-templates/UserVerification';
 const Users: CollectionConfig = {
   slug: 'users',
   auth: {
@@ -9,11 +9,7 @@ const Users: CollectionConfig = {
       // domain: process.env.PAYLOAD_COOKIE_DOMAIN,
     },
     verify: {
-      generateEmailHTML: ({ token }) => {
-        //TODO: Should replace the frontendURL
-        const frontendUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/test/auth/verify-email`;
-        return `<p>click on the <a href=${frontendUrl}?token=${token}>link</a> to verify</p>`;
-      },
+      generateEmailHTML: UserVerification,
     },
   },
   admin: {
