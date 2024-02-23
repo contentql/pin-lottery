@@ -1,3 +1,5 @@
+'use client';
+
 import SignUp from '@/components/modal/SignUp';
 
 const RegisterView = () => {

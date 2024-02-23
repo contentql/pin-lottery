@@ -1,20 +1,16 @@
-import { FaFacebookF, FaGooglePlusG, FaTwitter } from 'react-icons/fa';
-
-import Social from '@/components/social/Social';
-
 const SignUp = () => {
   return (
     <div className='register-main'>
       <div className='register'>
         <div className='account-form-area'>
-          <button
+          {/* <button
             type='button'
             className='close-btn'
             data-bs-dismiss='modal'
             aria-label='Close'
           >
             <i className='las la-times'></i>
-          </button>
+          </button> */}
           <h3 className='title'>Open Free Account</h3>
           <div className='account-form-wrapper'>
             <form>
@@ -70,23 +66,20 @@ const SignUp = () => {
             </form>
             <p className='text-center mt-4'>
               {' '}
-              Already have an account?{' '}
-              <a href='#0' data-bs-toggle='modal' data-bs-target='#loginModal'>
-                Login
-              </a>
+              Already have an account? <a href='/login'>Login</a>
             </p>
-            <div className='divider'>
+            {/* <div className='divider'>
               <span>or</span>
-            </div>
+            </div> */}
 
             {/* social links here */}
-            <Social
+            {/* <Social
               items={[
                 [FaFacebookF, '/'],
                 [FaTwitter, '/'],
                 [FaGooglePlusG, '/'],
               ]}
-            />
+            /> */}
           </div>
         </div>
       </div>

@@ -1,0 +1,51 @@
+/* button css start */
+.cmn-back-btn
+  display: inline-flex
+  align-items: center
+  margin: 40px 0px 0px 40px
+  gap: 5px
+  padding: 10px 36px 10px 48px
+  +font(18px, weight("semi"), uppercase)
+  +border-radius(999px)
+  border: 2px solid #ffffff
+  box-shadow: none
+  color: #ffffff
+  background-color: transparent
+  position: fixed
+  top: 0px
+  z-index: 100
+  @media (max-width: 991px)
+    font-size: 16px
+  @media (max-width: 767px)
+    font-size: 14px
+
+  .icon
+    position: absolute
+    left: 24px
+    transition: left 0.3s ease
+
+  &:hover 
+    .icon
+      left: 14px
+    color: #fba93f
+    border-color: #fba93f
+    
+  &.style--two
+    border-color: #8f3df5
+    color: #8f3df5
+    &:hover 
+      color: #fba93f
+      border-color: #fba93f
+  &.style--three 
+    border-color: #000000
+    color: #000000
+    &:hover 
+      color: #fba93f
+      border-color: #fba93f
+  &.btn--sm 
+    padding: 10px 22px 
+    font-size: 14px
+    &:hover 
+      color: #fba93f
+      border-color: #fba93f
+/* button css end */
