@@ -5,14 +5,13 @@ import React from 'react';
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import Login from '@/components/modal/Login';
-import SignUp from '@/components/modal/SignUp';
 import ScrollToTop from '@/components/scrollToTop/ScrollToTop';
 
 const LayoutView = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {/* SignUp Modal */}
-      <SignUp />
+      {/* <SignUp /> */}
 
       {/* Login Modal */}
       <Login />
