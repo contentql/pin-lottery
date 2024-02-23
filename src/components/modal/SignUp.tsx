@@ -1,44 +1,122 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { ZodError } from 'zod';
+
+import {
+  AuthCredentialsValidator,
+  TAuthCredentialsValidator,
+} from '@/lib/validators/auth-router/account-credentials-validator';
+import { trpc } from '@/trpc/client';
+
 const SignUp = () => {
-  return (
+  const [isEmailSent, setIsEmailSent] = useState(false);
+  const [sentEmail, setSentEmail] = useState('');
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<TAuthCredentialsValidator>({
+    resolver: zodResolver(AuthCredentialsValidator),
+  });
+
+  const { mutate: addUser } = trpc.auth.createUser.useMutation({
+    onError: (err) => {
+      if (err.data?.code === 'CONFLICT') {
+        // in toast
+        console.error('This email is already in use. Sign in instead?');
+
+        return;
+      }
+
+      if (err instanceof ZodError) {
+        // in toast
+        console.error(err.issues[0].message);
+
+        return;
+      }
+
+      console.error('Something went wrong. Please try again.');
+    },
+    onSuccess: ({ sentEmailTo }) => {
+      // clear the form
+      setValue('email', '');
+      setValue('password', '');
+
+      // Store the sent email
+      setIsEmailSent(true);
+      setSentEmail(sentEmailTo);
+
+      // redirect to email verification page
+      // TODO: Integrate with Resend and Sendgrid
+      // console.log(
+      //   'you will redirect to a page, where we ask the user to verify their email at' +
+      //     ` ${sentEmailTo}`
+      // );
+    },
+  });
+
+  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+    addUser({ email, password });
+  };
+
+  return isEmailSent ? (
+    <div className='email-container'>
+      <div className='email-inner-container'>
+        <div className='account-form-area'>
+          <h2 className='email-sent-title'>Email Sent Successfully</h2>
+          <div className='email-sent-content'>
+            <p className='email-sent-text'>
+              An email has been sent to <strong>{sentEmail}</strong>. Please
+              check your inbox and follow the instructions to verify your email.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className='register-main'>
       <div className='register'>
         <div className='account-form-area'>
-          {/* <button
-            type='button'
-            className='close-btn'
-            data-bs-dismiss='modal'
-            aria-label='Close'
-          >
-            <i className='las la-times'></i>
-          </button> */}
-          <h3 className='title'>Open Free Account</h3>
+          <h3 className='title'>Create Account</h3>
           <div className='account-form-wrapper'>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className='form-group'>
-                <label>
+                <label htmlFor='email'>
                   Email <sup>*</sup>
                 </label>
                 <input
-                  type='email'
-                  name='signup_name'
-                  id='signup_name'
+                  {...register('email')}
+                  name='email'
+                  id='email'
                   placeholder='Enter your Email'
                   required
                 />
+                {errors?.email && (
+                  <p className='form-errors'>{errors.email.message}</p>
+                )}
               </div>
+
               <div className='form-group'>
                 <label>
                   password <sup>*</sup>
                 </label>
                 <input
+                  {...register('password')}
                   type='password'
-                  name='signup_pass'
-                  id='signup_pass'
+                  name='password'
+                  id='password'
                   placeholder='password'
                   required
                 />
+                {errors?.password && (
+                  <p className='form-errors'>{errors.password.message}</p>
+                )}
               </div>
-              <div className='form-group'>
+
+              {/* <div className='form-group'>
                 <label>
                   confirm password <sup>*</sup>
                 </label>
@@ -49,7 +127,8 @@ const SignUp = () => {
                   placeholder='Confirm Password'
                   required
                 />
-              </div>
+              </div> */}
+
               <div className='d-flex flex-wrap mt-2'>
                 <div className='custom-checkbox'>
                   <input type='checkbox' name='id-2' id='id-2' defaultChecked />
@@ -60,26 +139,16 @@ const SignUp = () => {
                   Terms, Privacy Policy and Fees
                 </a>
               </div>
+
               <div className='form-group text-center mt-5'>
-                <button className='cmn-btn'>log in</button>
+                <button className='cmn-btn'>sign up</button>
               </div>
             </form>
+
             <p className='text-center mt-4'>
               {' '}
               Already have an account? <a href='/login'>Login</a>
             </p>
-            {/* <div className='divider'>
-              <span>or</span>
-            </div> */}
-
-            {/* social links here */}
-            {/* <Social
-              items={[
-                [FaFacebookF, '/'],
-                [FaTwitter, '/'],
-                [FaGooglePlusG, '/'],
-              ]}
-            /> */}
           </div>
         </div>
       </div>
