@@ -67,10 +67,8 @@ const Header = () => {
                   </Link>
                 </div>
                 <Link
-                  href='/user'
+                  href='/login'
                   className='user__btn d-flex align-items-center justify-content-center'
-                  data-bs-toggle='modal'
-                  data-bs-target='#loginModal'
                 >
                   <i className='las la-user'></i>
                 </Link>
