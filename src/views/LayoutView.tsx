@@ -4,7 +4,6 @@ import React from 'react';
 
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
-import Login from '@/components/modal/Login';
 import ScrollToTop from '@/components/scrollToTop/ScrollToTop';
 
 const LayoutView = ({ children }: { children: React.ReactNode }) => {
@@ -14,7 +13,7 @@ const LayoutView = ({ children }: { children: React.ReactNode }) => {
       {/* <SignUp /> */}
 
       {/* Login Modal */}
-      <Login />
+      {/* <Login /> */}
 
       {/* Header section */}
       <Header />
