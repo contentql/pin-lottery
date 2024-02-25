@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types';
+import { ForgotPassword } from '../../components/email-templates/ForgotPassword';
 import UserVerification from '../../components/email-templates/UserVerification';
 const Users: CollectionConfig = {
   slug: 'users',
@@ -7,6 +8,9 @@ const Users: CollectionConfig = {
       secure: true,
       sameSite: 'strict',
       // domain: process.env.PAYLOAD_COOKIE_DOMAIN,
+    },
+    forgotPassword: {
+      generateEmailHTML: ForgotPassword,
     },
     verify: {
       generateEmailHTML: UserVerification,
