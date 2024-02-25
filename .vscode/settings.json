@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["hookform", "nextjs", "payloadcms", "tanstack", "trpc"]
+  "cSpell.words": [
+    "cmds",
+    "healthcheck",
+    "hookform",
+    "nextjs",
+    "nixpacks",
+    "payloadcms",
+    "tanstack",
+    "trpc"
+  ]
 }

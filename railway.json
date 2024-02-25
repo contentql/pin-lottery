@@ -1,0 +1,20 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "nixpacksPlan": {
+      "phases": {
+        "install": {
+          "cmds": ["yarn"]
+        }
+      }
+    },
+    "buildCommand": "yarn run build"
+  },
+  "deploy": {
+    "startCommand": "yarn run start",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 100,
+    "restartPolicyType": "NEVER"
+  }
+}
