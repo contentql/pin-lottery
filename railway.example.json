@@ -6,7 +6,7 @@
       "phases": {
         "install": {
           "dependsOn": ["setup"],
-          "cmds": ["yarn"]
+          "cmds": ["cd ../.. && yarn"]
         }
       }
     },
@@ -17,7 +17,6 @@
     "healthcheckPath": "/",
     "healthcheckTimeout": 100,
     "restartPolicyType": "NEVER",
-    "sleepApplication": true,
-    "numReplicas": 1
+    "sleepApplication": true
   }
 }
