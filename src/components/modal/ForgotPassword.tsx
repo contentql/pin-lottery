@@ -3,16 +3,19 @@ import { useForm } from 'react-hook-form';
 import { ZodError } from 'zod';
 
 import { trpc } from '@/trpc/client';
+import { useState } from 'react';
 import {
   ForgotPasswordValidator,
   TForgotPasswordValidator,
 } from '../../lib/validators/auth-router/forgot-password-validator';
 
 const ForgotPassword = () => {
+  const [sentEmail, setSentEmail] = useState('');
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const {
     register,
+    getValues,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<TForgotPasswordValidator>({
     resolver: zodResolver(ForgotPasswordValidator),
@@ -36,14 +39,32 @@ const ForgotPassword = () => {
 
       console.error('Something went wrong. Please try again.');
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      setIsEmailSent(true);
+      setSentEmail(getValues('email'));
+    },
   });
 
   const onSubmit = ({ email }: TForgotPasswordValidator) => {
     forgotPassword({ email });
   };
 
-  return (
+  return isEmailSent ? (
+    <div className='email-container'>
+      <div className='email-inner-container'>
+        <div className='account-form-area'>
+          <h2 className='email-sent-title'>Email Sent Successfully</h2>
+          <div className='email-sent-content'>
+            <p className='email-sent-text'>
+              An email has been sent to <strong>{sentEmail}</strong>. Please
+              check your inbox and follow the instructions to reset your
+              password.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className='register-main'>
       <div className='register'>
         <div className='account-form-area'>

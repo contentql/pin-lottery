@@ -1,22 +1,68 @@
-const ResetPassword = () => {
+import {
+  ResetPasswordValidator,
+  TResetPasswordValidator,
+} from '@/lib/validators/auth-router/reset-password-validator';
+import { trpc } from '@/trpc/client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+
+interface PageProps {
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+}
+const ResetPassword = ({ searchParams }: PageProps) => {
+  const token = searchParams?.token as string;
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<TResetPasswordValidator>({
+    defaultValues: {
+      token: token,
+    },
+    resolver: zodResolver(ResetPasswordValidator),
+  });
+
+  const { mutate: resetPassword } = trpc.auth.resetPassword.useMutation({
+    onSuccess: () => {
+      console.log('reset password successful');
+      router.push('/user');
+    },
+    onError: (err: any) => {
+      console.log('reset password failed');
+    },
+  });
+
+  const onSubmit = ({ password, token }: TResetPasswordValidator) => {
+    setValue('token', token);
+    resetPassword({ password, token: token });
+  };
+
   return (
     <div className='register-main'>
       <div className='register'>
         <div className='account-form-area'>
           <h3 className='title'>Reset password</h3>
           <div className='account-form-wrapper'>
-            <form noValidate>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className='form-group'>
                 <label>
                   password <sup>*</sup>
                 </label>
                 <input
+                  {...register('password')}
                   type='password'
                   name='password'
                   id='password'
                   placeholder='password'
                   required
                 />
+                {errors?.password && <p>{errors.password.message}</p>}
+                {errors?.token && <p>{errors.token.message}</p>}
               </div>
 
               <div className='form-group'>
@@ -31,18 +77,6 @@ const ResetPassword = () => {
                   required
                 />
               </div>
-
-              {/* <div className='d-flex flex-wrap mt-2'>
-                <div className='custom-checkbox'>
-                  <input type='checkbox' name='id-2' id='id-2' defaultChecked />
-                  <label htmlFor='id-2'>I agree to the</label>
-                  <span className='checkbox'></span>
-                </div>
-                <a href='#0' className='link ml-1'>
-                  Terms, Privacy Policy and Fees
-                </a>
-              </div> */}
-
               <div className='form-group text-center mt-5'>
                 <button className='cmn-btn' type='submit'>
                   reset

@@ -82,6 +82,29 @@ export const authRouter = router({
       }
     }),
 
+  resetPassword: publicProcedure
+    .input(ResetPasswordValidator)
+    .mutation(async ({ input }) => {
+      const { password, token } = input;
+
+      const payload = await getPayloadClient();
+
+      try {
+        await payload.resetPassword({
+          collection: 'users',
+          data: {
+            token,
+            password,
+          },
+          overrideAccess: true,
+        });
+
+        return { success: true };
+      } catch (err) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+    }),
+
   forgotPassword: publicProcedure
     .input(ForgotPasswordValidator)
     .mutation(async ({ input, ctx }) => {
@@ -119,26 +142,26 @@ export const authRouter = router({
       }
     }),
 
-  resetPassword: publicProcedure
-    .input(ResetPasswordValidator)
-    .mutation(async ({ input, ctx }) => {
-      const { password } = input;
+  // resetPassword: publicProcedure
+  //   .input(ResetPasswordValidator)
+  //   .mutation(async ({ input, ctx }) => {
+  //     const { password, token } = input;
 
-      const payload = await getPayloadClient();
+  //     const payload = await getPayloadClient();
 
-      try {
-        await payload.resetPassword({
-          collection: 'users',
-          data: {
-            password,
-            token: '',
-          },
-          overrideAccess: false,
-        });
+  //     try {
+  //       await payload.resetPassword({
+  //         collection: 'users',
+  //         data: {
+  //           password,
+  //           token,
+  //         },
+  //         overrideAccess: false,
+  //       });
 
-        return { success: true };
-      } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' });
-      }
-    }),
+  //       return { success: true };
+  //     } catch (err) {
+  //       throw new TRPCError({ code: 'UNAUTHORIZED' });
+  //     }
+  //   }),
 });
