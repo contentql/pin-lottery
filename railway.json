@@ -5,7 +5,8 @@
     "nixpacksPlan": {
       "phases": {
         "install": {
-          "cmds": ["yarn"]
+          "dependsOn": ["setup"],
+          "cmds": ["cd ../.. && yarn"]
         }
       }
     },
