@@ -7,9 +7,9 @@ const ToastConfig: React.FC<ToastContainerConfigProps> = (props) => {
   const { ...additionalProps } = props;
 
   const toastifyConfig: ToastContainerProps = {
-    toastClassName: 'toast',
-    bodyClassName: 'toast-body',
-    progressClassName: 'toast-progress',
+    toastClassName: 'custom-toast',
+    bodyClassName: 'custom-toast-body',
+    progressClassName: 'custom-toast-progress',
     position: 'bottom-right',
     autoClose: 5000,
     hideProgressBar: false,
@@ -17,7 +17,6 @@ const ToastConfig: React.FC<ToastContainerConfigProps> = (props) => {
     pauseOnHover: true,
     draggable: 'touch',
     closeButton: true,
-    stacked: true,
     limit: 5,
     transition: Bounce,
     theme: 'colored',

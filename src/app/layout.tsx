@@ -2,11 +2,11 @@ import { Metadata } from 'next';
 
 import { AppProvider } from '@/context/context';
 import Providers from '@/providers/Providers';
+import ToastConfig from '@/utils/ToastConfig';
 
 import '@/public/css/line-awesome.min.css';
 import '@/public/css/modal-video.scss';
 import '@/styles/main.sass';
-import ToastConfig from '@/utils/ToastConfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const metadata: Metadata = {

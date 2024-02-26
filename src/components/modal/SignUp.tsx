@@ -29,7 +29,8 @@ const SignUp = () => {
   const { mutate: addUser } = trpc.auth.createUser.useMutation({
     onError: (err) => {
       if (err.data?.code === 'CONFLICT') {
-        toast.error(`This email already exists. Please sign in instead.`, {
+        toast.error(`This email already exists. Please sign in instead.`);
+        toast.info('Redirecting to login page...', {
           onClose: () => router.push('/login'),
         });
 
@@ -45,8 +46,10 @@ const SignUp = () => {
       console.error('Something went wrong. Please try again.');
     },
     onSuccess: ({ sentEmailTo }) => {
+      setValue('user_name', '');
       setValue('email', '');
       setValue('password', '');
+      setValue('confirm_password', '');
 
       setIsEmailSent(true);
       setSentEmail(sentEmailTo);
@@ -57,8 +60,9 @@ const SignUp = () => {
     user_name,
     email,
     password,
+    confirm_password,
   }: TAuthCredentialsValidator) => {
-    addUser({ user_name, email, password });
+    addUser({ user_name, email, password, confirm_password });
   };
 
   return isEmailSent ? (
@@ -132,16 +136,22 @@ const SignUp = () => {
               </div>
 
               <div className='form-group'>
-                <label>
+                <label htmlFor='confirm_password'>
                   confirm password <sup>*</sup>
                 </label>
                 <input
+                  {...register('confirm_password')}
                   type='password'
-                  name='signup_re-pass'
-                  id='confirmPassword'
+                  name='confirm_password'
+                  id='confirm_password'
                   placeholder='Confirm Password'
                   required
                 />
+                {errors?.confirm_password && (
+                  <p className='form-errors'>
+                    {errors.confirm_password.message}
+                  </p>
+                )}
               </div>
 
               <div className='d-flex flex-wrap mt-2'>
