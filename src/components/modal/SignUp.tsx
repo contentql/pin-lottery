@@ -121,18 +121,12 @@ const SignUp = () => {
                   confirm password <sup>*</sup>
                 </label>
                 <input
-                  {...register('confirmPassword')}
                   type='password'
                   name='signup_re-pass'
                   id='confirmPassword'
                   placeholder='Confirm Password'
                   required
                 />
-                {errors.confirmPassword && (
-                  <p className='form-errors'>
-                    {errors.confirmPassword.message}
-                  </p>
-                )}
               </div>
 
               <div className='d-flex flex-wrap mt-2'>

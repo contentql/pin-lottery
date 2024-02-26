@@ -23,7 +23,6 @@ const ResetPassword = ({ searchParams }: PageProps) => {
   } = useForm<TResetPasswordValidator>({
     defaultValues: {
       token: token,
-      confirmPassword: 'password',
     },
     resolver: zodResolver(ResetPasswordValidator),
   });
@@ -38,9 +37,16 @@ const ResetPassword = ({ searchParams }: PageProps) => {
     },
   });
 
-  const onSubmit = ({ password, token }: TResetPasswordValidator) => {
-    setValue('token', token);
-    resetPassword({ password, token: token });
+  const onSubmit = ({
+    password,
+    token,
+    confirmPassword,
+  }: TResetPasswordValidator) => {
+    resetPassword({
+      password,
+      token: token,
+      confirmPassword,
+    });
   };
 
   return (

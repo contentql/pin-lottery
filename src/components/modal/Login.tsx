@@ -1,4 +1,4 @@
-import { TAuthCredentialsValidator } from '@/lib/validators/auth-router/account-credentials-validator';
+import { TLoginValidator } from '@/lib/validators/auth-router/login-validator';
 import { trpc } from '@/trpc/client';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -9,7 +9,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TAuthCredentialsValidator>();
+  } = useForm<TLoginValidator>();
   const router = useRouter();
   const { mutate: loginUser } = trpc.auth.signIn.useMutation({
     onError: (err) => {
@@ -30,7 +30,7 @@ const Login = () => {
     },
   });
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+  const onSubmit = ({ email, password }: TLoginValidator) => {
     loginUser({ email, password });
   };
   return (

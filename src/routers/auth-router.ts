@@ -3,6 +3,7 @@ import { TRPCError } from '@trpc/server';
 import { getPayloadClient } from '../get-payload';
 import { AuthCredentialsValidator } from '../lib/validators/auth-router/account-credentials-validator';
 import { ForgotPasswordValidator } from '../lib/validators/auth-router/forgot-password-validator';
+import { LoginValidator } from '../lib/validators/auth-router/login-validator';
 import { ResetPasswordValidator } from '../lib/validators/auth-router/reset-password-validator';
 import { TokenValidator } from '../lib/validators/auth-router/token-validator';
 import { publicProcedure, router } from '../trpc/trpc';
@@ -59,7 +60,7 @@ export const authRouter = router({
     }),
 
   signIn: publicProcedure
-    .input(AuthCredentialsValidator)
+    .input(LoginValidator)
     .mutation(async ({ input, ctx }) => {
       const { email, password } = input;
       const { res } = ctx;
@@ -88,8 +89,9 @@ export const authRouter = router({
       const { password, token } = input;
 
       const payload = await getPayloadClient();
-
+      console.log('1');
       try {
+        console.log('2');
         await payload.resetPassword({
           collection: 'users',
           data: {
@@ -98,9 +100,10 @@ export const authRouter = router({
           },
           overrideAccess: true,
         });
-
+        console.log('3');
         return { success: true };
       } catch (err) {
+        console.log('4');
         throw new TRPCError({ code: 'UNAUTHORIZED' });
       }
     }),
