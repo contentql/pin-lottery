@@ -1,7 +1,26 @@
-export const ForgotPassword = (data: any) => {
-  console.log('Forgot Password', data);
-  const resetPasswordURL = `${process.env.NEXT_PUBLIC_SERVER_URL}/reset-password?token=${data.token}`;
-  const username = data.user.email.split('@').at(0);
+import { PayloadRequest } from 'payload/types';
+
+interface GenerateForgotPasswordEmailHtml {
+  (
+    args:
+      | {
+          req?: PayloadRequest | undefined;
+          token?: string | undefined;
+          user?: unknown;
+        }
+      | undefined
+  ): string;
+}
+
+export const ForgotPassword: GenerateForgotPasswordEmailHtml = (request) => {
+  const { token, user } = request || {};
+
+  const resetPasswordURL = `${process.env.NEXT_PUBLIC_SERVER_URL}/reset-password?token=${token}`;
+
+  const userData = user as { email: string } | undefined;
+
+  const username = userData ? userData.email.split('@')[0] : '';
+
   return `
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html

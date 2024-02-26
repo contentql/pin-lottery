@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload/types';
-import { ForgotPassword } from '../../components/email-templates/ForgotPassword';
-import UserVerification from '../../components/email-templates/UserVerification';
+import { ForgotPassword } from '../../email-templates/ForgotPassword';
+import UserVerification from '../../email-templates/UserVerification';
 const Users: CollectionConfig = {
   slug: 'users',
   auth: {
