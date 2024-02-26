@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { ZodError } from 'zod';
 
 import {
@@ -12,6 +14,8 @@ import { trpc } from '@/trpc/client';
 const SignUp = () => {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [sentEmail, setSentEmail] = useState('');
+
+  const router = useRouter();
 
   const {
     register,
@@ -25,15 +29,15 @@ const SignUp = () => {
   const { mutate: addUser } = trpc.auth.createUser.useMutation({
     onError: (err) => {
       if (err.data?.code === 'CONFLICT') {
-        // in toast
-        console.error('This email is already in use. Sign in instead?');
+        toast.error(`This email already exists. Please sign in instead.`, {
+          onClose: () => router.push('/login'),
+        });
 
         return;
       }
 
       if (err instanceof ZodError) {
-        // in toast
-        console.error(err.issues[0].message);
+        toast.error(err.issues[0].message);
 
         return;
       }
@@ -41,20 +45,11 @@ const SignUp = () => {
       console.error('Something went wrong. Please try again.');
     },
     onSuccess: ({ sentEmailTo }) => {
-      // clear the form
       setValue('email', '');
       setValue('password', '');
 
-      // Store the sent email
       setIsEmailSent(true);
       setSentEmail(sentEmailTo);
-
-      // redirect to email verification page
-      // TODO: Integrate with Resend and Sendgrid
-      // console.log(
-      //   'you will redirect to a page, where we ask the user to verify their email at' +
-      //     ` ${sentEmailTo}`
-      // );
     },
   });
 
