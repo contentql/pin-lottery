@@ -58,8 +58,12 @@ const SignUp = () => {
     },
   });
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    addUser({ email, password });
+  const onSubmit = ({
+    user_name,
+    email,
+    password,
+  }: TAuthCredentialsValidator) => {
+    addUser({ user_name, email, password });
   };
 
   return isEmailSent ? (
@@ -83,6 +87,22 @@ const SignUp = () => {
           <h3 className='title'>Create Account</h3>
           <div className='account-form-wrapper'>
             <form onSubmit={handleSubmit(onSubmit)}>
+              <div className='form-group'>
+                <label htmlFor='user_name'>
+                  Username <sup>*</sup>
+                </label>
+                <input
+                  {...register('user_name')}
+                  name='user_name'
+                  id='user_name'
+                  placeholder='Enter your Username'
+                  required
+                />
+                {errors?.user_name && (
+                  <p className='form-errors'>{errors.user_name.message}</p>
+                )}
+              </div>
+
               <div className='form-group'>
                 <label htmlFor='email'>
                   Email <sup>*</sup>

@@ -11,7 +11,7 @@ export const authRouter = router({
   createUser: publicProcedure
     .input(AuthCredentialsValidator)
     .mutation(async ({ input }) => {
-      const { email, password } = input;
+      const { user_name, email, password } = input;
 
       const payload = await getPayloadClient();
 
@@ -33,6 +33,7 @@ export const authRouter = router({
       const { id, email: newUserEmail } = await payload.create({
         collection: 'users',
         data: {
+          user_name,
           email,
           password,
         },
