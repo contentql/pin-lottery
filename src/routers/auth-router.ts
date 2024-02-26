@@ -141,27 +141,4 @@ export const authRouter = router({
         throw new TRPCError({ code: 'UNAUTHORIZED' });
       }
     }),
-
-  // resetPassword: publicProcedure
-  //   .input(ResetPasswordValidator)
-  //   .mutation(async ({ input, ctx }) => {
-  //     const { password, token } = input;
-
-  //     const payload = await getPayloadClient();
-
-  //     try {
-  //       await payload.resetPassword({
-  //         collection: 'users',
-  //         data: {
-  //           password,
-  //           token,
-  //         },
-  //         overrideAccess: false,
-  //       });
-
-  //       return { success: true };
-  //     } catch (err) {
-  //       throw new TRPCError({ code: 'UNAUTHORIZED' });
-  //     }
-  //   }),
 });
