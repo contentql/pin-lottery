@@ -6,6 +6,7 @@ import Providers from '@/providers/Providers';
 import '@/public/css/line-awesome.min.css';
 import '@/public/css/modal-video.scss';
 import '@/styles/main.sass';
+import ToastConfig from '@/utils/ToastConfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const metadata: Metadata = {
@@ -26,7 +27,20 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <Providers>
-          <AppProvider>{children}</AppProvider>
+          <AppProvider>
+            {children}
+            {/* Customizable toast configuration */}
+            {/* 
+              Example of customizing toast configuration:
+              <ToastConfig 
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={true}
+                closeButton={false}
+              />
+            */}
+            <ToastConfig />
+          </AppProvider>
         </Providers>
       </body>
     </html>
