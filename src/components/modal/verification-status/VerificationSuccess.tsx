@@ -3,9 +3,9 @@ const VerificationSuccess = () => {
     <div className='register-main'>
       <div className='register'>
         <div className='account-form-area'>
-          <h3 className='title'>Email verification success</h3>
+          <h3 className='title-success'>Email verification success</h3>
           <div className='account-form-wrapper'>
-            <div className='success-description'>
+            <div className='verify-description'>
               Thank you for verifying your account successfully! This crucial
               step ensures the security of your account. We are now redirecting
               you to the login page, where you can access our platforms

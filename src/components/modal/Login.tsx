@@ -1,9 +1,5 @@
-import {
-  AuthCredentialsValidator,
-  TAuthCredentialsValidator,
-} from '@/lib/validators/auth-router/account-credentials-validator';
+import { TAuthCredentialsValidator } from '@/lib/validators/auth-router/account-credentials-validator';
 import { trpc } from '@/trpc/client';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { ZodError } from 'zod';
@@ -13,9 +9,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TAuthCredentialsValidator>({
-    resolver: zodResolver(AuthCredentialsValidator),
-  });
+  } = useForm<TAuthCredentialsValidator>();
   const router = useRouter();
   const { mutate: loginUser } = trpc.auth.signIn.useMutation({
     onError: (err) => {
@@ -45,7 +39,7 @@ const Login = () => {
         <div className='account-form-area'>
           <h3 className='title'>Login</h3>
           <div className='account-form-wrapper'>
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className='form-group'>
                 <label>
                   Email <sup>*</sup>
@@ -57,7 +51,6 @@ const Login = () => {
                   required
                   {...register('email')}
                 />
-                {errors?.email && <p>{errors.email.message}</p>}
               </div>
               <div className='form-group'>
                 <label>
@@ -87,7 +80,6 @@ const Login = () => {
                 <a href='/forgot-password' className='link'>
                   Forgot Password?
                 </a>
-                {errors?.password && <p>{errors.password.message}</p>}
               </div>
 
               <div className='form-group text-center mt-5'>
