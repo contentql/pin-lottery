@@ -81,7 +81,7 @@ const SignUp = () => {
         <div className='account-form-area'>
           <h3 className='title'>Create Account</h3>
           <div className='account-form-wrapper'>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className='form-group'>
                 <label htmlFor='user_name'>
                   Username <sup>*</sup>
@@ -131,18 +131,18 @@ const SignUp = () => {
                 )}
               </div>
 
-              {/* <div className='form-group'>
+              <div className='form-group'>
                 <label>
                   confirm password <sup>*</sup>
                 </label>
                 <input
                   type='password'
                   name='signup_re-pass'
-                  id='signup_re-pass'
+                  id='confirmPassword'
                   placeholder='Confirm Password'
                   required
                 />
-              </div> */}
+              </div>
 
               <div className='d-flex flex-wrap mt-2'>
                 <div className='custom-checkbox'>

@@ -37,9 +37,16 @@ const ResetPassword = ({ searchParams }: PageProps) => {
     },
   });
 
-  const onSubmit = ({ password, token }: TResetPasswordValidator) => {
-    setValue('token', token);
-    resetPassword({ password, token: token });
+  const onSubmit = ({
+    password,
+    token,
+    confirmPassword,
+  }: TResetPasswordValidator) => {
+    resetPassword({
+      password,
+      token: token,
+      confirmPassword,
+    });
   };
 
   return (
@@ -62,7 +69,6 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                   required
                 />
                 {errors?.password && <p>{errors.password.message}</p>}
-                {errors?.token && <p>{errors.token.message}</p>}
               </div>
 
               <div className='form-group'>
@@ -70,12 +76,15 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                   confirm password <sup>*</sup>
                 </label>
                 <input
+                  {...register('confirmPassword')}
                   type='password'
-                  name='signup_re-pass'
-                  id='conform_re-pass'
+                  name='confirmPassword'
+                  id='confirmPassword'
                   placeholder='Confirm Password'
-                  required
                 />
+                {errors?.confirmPassword && (
+                  <p>{errors.confirmPassword.message}</p>
+                )}
               </div>
               <div className='form-group text-center mt-5'>
                 <button className='cmn-btn' type='submit'>
