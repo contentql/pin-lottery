@@ -90,9 +90,7 @@ export const authRouter = router({
       const { password, token } = input;
 
       const payload = await getPayloadClient();
-      console.log('1');
       try {
-        console.log('2');
         await payload.resetPassword({
           collection: 'users',
           data: {
@@ -101,10 +99,8 @@ export const authRouter = router({
           },
           overrideAccess: true,
         });
-        console.log('3');
         return { success: true };
       } catch (err) {
-        console.log('4');
         throw new TRPCError({ code: 'UNAUTHORIZED' });
       }
     }),

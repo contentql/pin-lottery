@@ -1,11 +1,14 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { ZodError } from 'zod';
+
 import {
   ResetPasswordValidator,
   TResetPasswordValidator,
 } from '@/lib/validators/auth-router/reset-password-validator';
 import { trpc } from '@/trpc/client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
 
 interface PageProps {
   searchParams: {
@@ -29,11 +32,17 @@ const ResetPassword = ({ searchParams }: PageProps) => {
 
   const { mutate: resetPassword } = trpc.auth.resetPassword.useMutation({
     onSuccess: () => {
-      console.log('reset password successful');
+      toast.success(`Success! Your password has been reset`);
       router.push('/user');
     },
     onError: (err: any) => {
-      console.log('reset password failed');
+      if (err.data?.code === 'UNAUTHORIZED') {
+        toast.error(`Invalid token, please recheck your email.`);
+      }
+      if (err instanceof ZodError) {
+        toast.error(`Please provide correct information.`);
+        return;
+      }
     },
   });
 

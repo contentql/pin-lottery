@@ -1,9 +1,12 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+
 import VerificationFailed from '@/components/modal/verification-status/VerificationFailed';
 import VerificationLoading from '@/components/modal/verification-status/VerificationLoading';
 import VerificationSuccess from '@/components/modal/verification-status/VerificationSuccess';
 import { trpc } from '@/trpc/client';
-import { useRouter } from 'next/navigation';
 
 interface PageProps {
   searchParams: {
@@ -20,14 +23,16 @@ const EmailVerificationView = ({ searchParams }: PageProps) => {
   });
 
   if (isSuccess) {
+    toast.success(`Your email successfully verified`);
     setTimeout(() => {
       router.push('/login');
-    }, 5000);
+    }, 2000);
   }
   if (isError) {
+    toast.error(`Failed to verify your email address`);
     setTimeout(() => {
       router.push('/register');
-    }, 5000);
+    }, 2000);
   }
   return (
     <div>
