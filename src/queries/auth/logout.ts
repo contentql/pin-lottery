@@ -13,11 +13,11 @@ export const logout = async () => {
 
     const data = await res.json();
 
-    if (data.errors[0].message === 'No User') {
+    if (data.errors && data.errors[0].message === 'No User') {
       throw new Error('CONFLICT');
     }
 
-    if (!data.ok) {
+    if (data.message !== 'You have been logged out successfully.') {
       throw new Error('Logout failed');
     }
 
