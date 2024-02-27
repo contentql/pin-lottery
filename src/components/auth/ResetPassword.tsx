@@ -77,7 +77,9 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                   placeholder='password'
                   required
                 />
-                {errors?.password && <p>{errors.password.message}</p>}
+                {errors?.password && (
+                  <p className='form-errors'>{errors.password.message}</p>
+                )}
               </div>
 
               <div className='form-group'>
@@ -92,7 +94,9 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                   placeholder='Confirm Password'
                 />
                 {errors?.confirmPassword && (
-                  <p>{errors.confirmPassword.message}</p>
+                  <p className='form-errors'>
+                    {errors.confirmPassword.message}
+                  </p>
                 )}
               </div>
               <div className='form-group text-center mt-5'>

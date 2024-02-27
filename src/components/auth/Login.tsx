@@ -57,7 +57,9 @@ const Login = () => {
                   required
                   {...register('email')}
                 />
-                {errors?.email && <p>{errors?.email.message}</p>}
+                {errors?.email && (
+                  <p className='form-errors'>{errors?.email.message}</p>
+                )}
               </div>
               <div className='form-group'>
                 <label>
