@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
-import VerificationFailed from '@/components/modal/verification-status/VerificationFailed';
-import VerificationLoading from '@/components/modal/verification-status/VerificationLoading';
-import VerificationSuccess from '@/components/modal/verification-status/VerificationSuccess';
+import VerificationFailed from '@/components/auth/verification-status/VerificationFailed';
+import VerificationLoading from '@/components/auth/verification-status/VerificationLoading';
+import VerificationSuccess from '@/components/auth/verification-status/VerificationSuccess';
+
 import { trpc } from '@/trpc/client';
 
 interface PageProps {

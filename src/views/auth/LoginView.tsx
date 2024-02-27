@@ -1,6 +1,6 @@
 'use client';
 
-import Login from '@/components/modal/Login';
+import Login from '@/components/auth/Login';
 
 const LoginView = () => {
   return <Login />;

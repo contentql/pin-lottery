@@ -1,5 +1,7 @@
-import EmailVerificationView from '@/views/auth/EmailVerificationView';
 import { Metadata } from 'next';
+
+import EmailVerificationView from '@/views/auth/EmailVerificationView';
+
 interface PageProps {
   searchParams: {
     [key: string]: string | string[] | undefined;
@@ -8,6 +10,7 @@ interface PageProps {
 
 export const metadata: Metadata = {
   title: 'Email verification',
+  description: 'This is a verify page',
 };
 
 const VerifyEmail = ({ searchParams }: PageProps) => {
