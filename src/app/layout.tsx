@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 import { AppProvider } from '@/context/context';
 import Providers from '@/providers/Providers';
+import ToastConfig from '@/utils/ToastConfig';
 
 import '@/public/css/line-awesome.min.css';
 import '@/public/css/modal-video.scss';
@@ -26,7 +27,20 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <Providers>
-          <AppProvider>{children}</AppProvider>
+          <AppProvider>
+            {children}
+            {/* Customizable toast configuration */}
+            {/* 
+              Example of customizing toast configuration:
+              <ToastConfig 
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={true}
+                closeButton={false}
+              />
+            */}
+            <ToastConfig />
+          </AppProvider>
         </Providers>
       </body>
     </html>

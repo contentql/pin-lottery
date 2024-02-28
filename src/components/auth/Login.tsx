@@ -1,44 +1,47 @@
-import {
-  AuthCredentialsValidator,
-  TAuthCredentialsValidator,
-} from '@/lib/validators/auth-router/account-credentials-validator';
-import { trpc } from '@/trpc/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { ZodError } from 'zod';
+
+import {
+  LoginValidator,
+  TLoginValidator,
+} from '@/lib/validators/auth-router/login-validator';
+import { trpc } from '@/trpc/client';
 
 const Login = () => {
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<TAuthCredentialsValidator>({
-    resolver: zodResolver(AuthCredentialsValidator),
+  } = useForm<TLoginValidator>({
+    resolver: zodResolver(LoginValidator),
   });
+
   const router = useRouter();
   const { mutate: loginUser } = trpc.auth.signIn.useMutation({
     onError: (err) => {
       if (err.data?.code === 'UNAUTHORIZED') {
-        console.error('invalid email or password');
+        toast.error(`Invalid email or password.`);
       }
-      if (err instanceof ZodError) {
-        // in toast
-        console.error(err.issues[0].message);
 
+      if (err instanceof ZodError) {
+        toast.error(`Please provide correct information.`);
         return;
       }
-
       console.error(err);
     },
     onSuccess: () => {
-      router.push('/user');
+      setValue('email', ''), setValue('password', ''), router.push('/user');
     },
   });
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+  const onSubmit = ({ email, password }: TLoginValidator) => {
     loginUser({ email, password });
   };
+
   return (
     <div className='register-main'>
       <div className='register'>
@@ -57,7 +60,9 @@ const Login = () => {
                   required
                   {...register('email')}
                 />
-                {errors?.email && <p>{errors.email.message}</p>}
+                {errors?.email && (
+                  <p className='form-errors'>{errors?.email.message}</p>
+                )}
               </div>
               <div className='form-group'>
                 <label>
@@ -87,7 +92,6 @@ const Login = () => {
                 <a href='/forgot-password' className='link'>
                   Forgot Password?
                 </a>
-                {errors?.password && <p>{errors.password.message}</p>}
               </div>
 
               <div className='form-group text-center mt-5'>

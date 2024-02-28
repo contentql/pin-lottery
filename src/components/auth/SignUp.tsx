@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { ZodError } from 'zod';
 
 import {
@@ -12,6 +14,8 @@ import { trpc } from '@/trpc/client';
 const SignUp = () => {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [sentEmail, setSentEmail] = useState('');
+
+  const router = useRouter();
 
   const {
     register,
@@ -25,15 +29,21 @@ const SignUp = () => {
   const { mutate: addUser } = trpc.auth.createUser.useMutation({
     onError: (err) => {
       if (err.data?.code === 'CONFLICT') {
-        // in toast
-        console.error('This email is already in use. Sign in instead?');
+        toast.error(`This email already exists. Please sign in instead.`, {
+          autoClose: 3000,
+          onClose: () => {
+            toast.info('Redirecting to login page...', {
+              autoClose: 2000,
+              onClose: () => router.push('/login'),
+            });
+          },
+        });
 
         return;
       }
 
       if (err instanceof ZodError) {
-        // in toast
-        console.error(err.issues[0].message);
+        toast.error(err.issues[0].message);
 
         return;
       }
@@ -41,25 +51,23 @@ const SignUp = () => {
       console.error('Something went wrong. Please try again.');
     },
     onSuccess: ({ sentEmailTo }) => {
-      // clear the form
+      setValue('user_name', '');
       setValue('email', '');
       setValue('password', '');
+      setValue('confirm_password', '');
 
-      // Store the sent email
       setIsEmailSent(true);
       setSentEmail(sentEmailTo);
-
-      // redirect to email verification page
-      // TODO: Integrate with Resend and Sendgrid
-      // console.log(
-      //   'you will redirect to a page, where we ask the user to verify their email at' +
-      //     ` ${sentEmailTo}`
-      // );
     },
   });
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    addUser({ email, password });
+  const onSubmit = ({
+    user_name,
+    email,
+    password,
+    confirm_password,
+  }: TAuthCredentialsValidator) => {
+    addUser({ user_name, email, password, confirm_password });
   };
 
   return isEmailSent ? (
@@ -82,7 +90,23 @@ const SignUp = () => {
         <div className='account-form-area'>
           <h3 className='title'>Create Account</h3>
           <div className='account-form-wrapper'>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+              <div className='form-group'>
+                <label htmlFor='user_name'>
+                  Username <sup>*</sup>
+                </label>
+                <input
+                  {...register('user_name')}
+                  name='user_name'
+                  id='user_name'
+                  placeholder='Enter your Username'
+                  required
+                />
+                {errors?.user_name && (
+                  <p className='form-errors'>{errors.user_name.message}</p>
+                )}
+              </div>
+
               <div className='form-group'>
                 <label htmlFor='email'>
                   Email <sup>*</sup>
@@ -116,18 +140,24 @@ const SignUp = () => {
                 )}
               </div>
 
-              {/* <div className='form-group'>
-                <label>
+              <div className='form-group'>
+                <label htmlFor='confirm_password'>
                   confirm password <sup>*</sup>
                 </label>
                 <input
+                  {...register('confirm_password')}
                   type='password'
-                  name='signup_re-pass'
-                  id='signup_re-pass'
+                  name='confirm_password'
+                  id='confirm_password'
                   placeholder='Confirm Password'
                   required
                 />
-              </div> */}
+                {errors?.confirm_password && (
+                  <p className='form-errors'>
+                    {errors.confirm_password.message}
+                  </p>
+                )}
+              </div>
 
               <div className='d-flex flex-wrap mt-2'>
                 <div className='custom-checkbox'>

@@ -1,12 +1,7 @@
 import { z } from 'zod';
 
-export const AuthCredentialsValidator = z
+export const ResetPasswordValidator = z
   .object({
-    user_name: z
-      .string()
-      .min(3, 'Username must contain at least 3 character(s)')
-      .max(20, 'Username must contain at most 20 character(s)'),
-    email: z.string().email('Not a valid email'),
     password: z
       .string()
       .regex(
@@ -23,13 +18,12 @@ export const AuthCredentialsValidator = z
         'Must contain at least one special character'
       )
       .min(8, 'Must be at least 8 characters in length'),
-    confirm_password: z.string(),
+    confirmPassword: z.string().optional(),
+    token: z.string(),
   })
-  .refine((data) => data.password === data.confirm_password, {
-    path: ['confirm_password'],
-    message: 'Passwords do not match',
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ['confirmPassword'],
+    message: 'passwords do not match',
   });
 
-export type TAuthCredentialsValidator = z.infer<
-  typeof AuthCredentialsValidator
->;
+export type TResetPasswordValidator = z.infer<typeof ResetPasswordValidator>;

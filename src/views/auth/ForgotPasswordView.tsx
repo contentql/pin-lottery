@@ -1,5 +1,6 @@
 'use client';
-import ForgotPassword from '@/components/modal/ForgotPassword';
+
+import ForgotPassword from '@/components/auth/ForgotPassword';
 
 const ForgotPasswordView = () => {
   return <ForgotPassword />;

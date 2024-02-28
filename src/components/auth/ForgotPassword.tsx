@@ -1,9 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { ZodError } from 'zod';
 
 import { trpc } from '@/trpc/client';
-import { useState } from 'react';
 import {
   ForgotPasswordValidator,
   TForgotPasswordValidator,
@@ -25,8 +26,7 @@ const ForgotPassword = () => {
     onError: (err) => {
       if (err.data?.code === 'CONFLICT') {
         // in toast
-        console.error('email does not exist');
-
+        toast.error(`Email not found`);
         return;
       }
 
@@ -42,6 +42,7 @@ const ForgotPassword = () => {
     onSuccess: () => {
       setIsEmailSent(true);
       setSentEmail(getValues('email'));
+      toast.success(`Email sent successfully`);
     },
   });
 
