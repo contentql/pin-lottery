@@ -56,29 +56,25 @@
   align-items: center
   gap: 5px
   padding: 6px 20px
-  margin-left: 12px
+  margin-left: 30px
   +font(18px, weight("semi"), capitalize)
   +border-radius(999px)
-  border: 2px solid #ffffff
   +transition(all 0.3s)
   color: #ffffff
+  background-size: 100%
+  border-color: transparent
+  +gradient-three
+  &:hover 
+    background-size: 300%
+    border-color: transparent
+    color: #ffffff
+    +gradient-three
   @media (max-width: 991px)
     font-size: 16px
   @media (max-width: 767px)
     font-size: 14px
-  &:hover 
-    background-size: cover
-    border-color: transparent
-    color: #ffffff
-    +gradient-three
-  &.style--two
-    +gradient-two
-    box-shadow: -1.113px 7.922px 16px 0px rgba(143, 61, 245, 0.63)
-  &.style--three 
-    +gradient-three
-    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35)
   &.btn--sm 
     padding: 10px 22px 
     font-size: 14px
 
-/* button css end */
+/* login button css end */
