@@ -109,6 +109,7 @@ const Header = () => {
                       <span className='cart__num'>{cartData.length}</span>
                     </Link>
                   </div>
+                  <button className='login-btn btn login-btn--sm'>Login</button>
                   <Link
                     href='/login'
                     className='user__btn d-flex align-items-center justify-content-center'
