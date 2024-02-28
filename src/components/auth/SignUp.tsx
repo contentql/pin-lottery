@@ -29,9 +29,14 @@ const SignUp = () => {
   const { mutate: addUser } = trpc.auth.createUser.useMutation({
     onError: (err) => {
       if (err.data?.code === 'CONFLICT') {
-        toast.error(`This email already exists. Please sign in instead.`);
-        toast.info('Redirecting to login page...', {
-          onClose: () => router.push('/login'),
+        toast.error(`This email already exists. Please sign in instead.`, {
+          autoClose: 3000,
+          onClose: () => {
+            toast.info('Redirecting to login page...', {
+              autoClose: 2000,
+              onClose: () => router.push('/login'),
+            });
+          },
         });
 
         return;

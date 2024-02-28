@@ -1,11 +1,47 @@
+import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
+import { logout } from '@/queries/auth/logout';
 import team_obj from '/public/images/elements/team-obj.png';
 
 const LeftSideMenu = () => {
   const pathname = usePathname();
+
+  const router = useRouter();
+
+  const {
+    isPending: isLogoutPending,
+    variables: logoutVariables,
+    mutate: logoutMutation,
+  } = useMutation({
+    mutationKey: ['/api/users/logout', 'post'],
+    mutationFn: () => logout(),
+    onSuccess: async () => {
+      router.push('/login');
+    },
+    onError: async (err) => {
+      if (err.message === 'CONFLICT') {
+        toast.error('User not found.', {
+          autoClose: 3000,
+          onClose: () => {
+            toast.info('Redirecting to login page...', {
+              autoClose: 2000,
+              onClose: () => router.push('/login'),
+            });
+          },
+        });
+      }
+
+      console.error('Something went wrong. Please try again.');
+    },
+  });
+
+  const handleLogout = () => {
+    logoutMutation();
+  };
 
   return (
     <div className='col-lg-4'>
@@ -34,7 +70,6 @@ const LeftSideMenu = () => {
             ['Referral Program', '/user-referral'],
             ['Favorite Lotteries', '/user-lottery'],
             ['Help Center', '/contact'],
-            ['Log Out', '/#'],
           ].map(([item, url], i) => (
             <li key={item} className={`${pathname === url && 'active'} `}>
               <Link href={url}>
@@ -43,6 +78,11 @@ const LeftSideMenu = () => {
               </Link>
             </li>
           ))}
+          <li>
+            <a href='#' onClick={handleLogout}>
+              Log Out
+            </a>
+          </li>
         </ul>
       </div>
     </div>

@@ -19,12 +19,14 @@ const Login = () => {
   } = useForm<TLoginValidator>({
     resolver: zodResolver(LoginValidator),
   });
+
   const router = useRouter();
   const { mutate: loginUser } = trpc.auth.signIn.useMutation({
     onError: (err) => {
       if (err.data?.code === 'UNAUTHORIZED') {
         toast.error(`Invalid email or password.`);
       }
+
       if (err instanceof ZodError) {
         toast.error(`Please provide correct information.`);
         return;
@@ -39,6 +41,7 @@ const Login = () => {
   const onSubmit = ({ email, password }: TLoginValidator) => {
     loginUser({ email, password });
   };
+
   return (
     <div className='register-main'>
       <div className='register'>
