@@ -26,9 +26,17 @@ const Info = () => {
               8198 Fieldstone Dr.La Crosse, WI 54601
             </span>
           </li>
+          <li>
+            <span className='caption'>Email</span>
+            <span className='value'>albert349@gmail.com</span>
+          </li>
+          <li>
+            <span className='caption'>Mobile</span>
+            <span className='value'>+1 234-567-8925</span>
+          </li>
         </ul>
       </div>
-      <div className='user-info-card'>
+      {/* <div className='user-info-card'>
         <div className='user-info-card__header'>
           <h3 className='user-info-card__title'>Account Settings</h3>
           <button type='button' className='d-flex align-items-start gap-1'>
@@ -57,12 +65,7 @@ const Info = () => {
             <FaRegEdit className='fs-4' /> Edit
           </button>
         </div>
-        <ul className='user-info-card__list'>
-          <li>
-            <span className='caption'>Email</span>
-            <span className='value'>albert349@gmail.com</span>
-          </li>
-        </ul>
+        <ul className='user-info-card__list'></ul>
       </div>
       <div className='user-info-card'>
         <div className='user-info-card__header'>
@@ -77,7 +80,7 @@ const Info = () => {
             <span className='value'>+1 234-567-8925</span>
           </li>
         </ul>
-      </div>
+      </div> */}
       <div className='user-info-card'>
         <div className='user-info-card__header'>
           <h3 className='user-info-card__title'>Security</h3>

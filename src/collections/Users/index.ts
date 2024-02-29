@@ -14,17 +14,17 @@ const Users: CollectionConfig = {
         return ResetPassword({
           actionLabel: 'Reset Your Password',
           buttonText: 'Reset Password',
-          href: `${process.env.NEXT_PUBLIC_SERVER_URL}/reset-password?token=${args?.token}`, 
+          href: `${process.env.NEXT_PUBLIC_SERVER_URL}/reset-password?token=${args?.token}`,
         });
       },
     },
     verify: {
-      generateEmailHTML: ({ token,user }) => {
-        console.log('Verifying user',user)
+      generateEmailHTML: ({ token, user }) => {
+        console.log('Verifying user', user);
         return UserAccountVerification({
           actionLabel: 'verify your account',
           buttonText: 'Verify Account',
-          userName:user.user_name,
+          userName: user.user_name,
           href: `${process.env.NEXT_PUBLIC_SERVER_URL}/verify?token=${token}`,
         });
       },
@@ -38,6 +38,21 @@ const Users: CollectionConfig = {
       name: 'user_name',
       type: 'text',
       label: 'User Name',
+    },
+    {
+      name: 'address',
+      type: 'richText',
+      label: 'User Address',
+    },
+    {
+      name: 'phone_number',
+      type: 'number',
+      label: 'Phone Number',
+    },
+    {
+      name: 'date_of_birth',
+      type: 'date',
+      label: 'Date of Birth',
     },
     {
       name: 'roles',

@@ -1,10 +1,10 @@
+import { logout } from '@/queries/auth/logout';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-
-import { logout } from '@/queries/auth/logout';
+import PersonalInfo from '../modals/user-information/PersonalInfo';
 import team_obj from '/public/images/elements/team-obj.png';
 
 const LeftSideMenu = () => {
@@ -59,7 +59,8 @@ const LeftSideMenu = () => {
           </div>
         </div>
         <h3 className='user-card__name'>Albert Owens</h3>
-        <span className='user-card__id'>ID : 19535909</span>
+        <p className='user-card__id'>ID : 19535909</p>
+        <PersonalInfo/>
       </div>
       <div className='user-action-card'>
         <ul className='user-action-list'>
