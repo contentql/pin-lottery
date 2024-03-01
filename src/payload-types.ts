@@ -10,6 +10,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    contest: Contest;
+    tags: Tag;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -93,6 +95,35 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contest".
+ */
+export interface Contest {
+  id: string;
+  title?: string | null;
+  ticket_price?: string | null;
+  img?: string | null;
+  contest_no?: string | null;
+  day_remain?: number | null;
+  ticket_remain?: number | null;
+  tag?: {
+    relationTo: 'tags';
+    value: string | Tag;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string;
+  tag?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

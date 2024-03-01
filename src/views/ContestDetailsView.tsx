@@ -2,12 +2,17 @@
 
 import Image from 'next/image';
 
-import inner_hero_shape from '/public/images/elements/inner-hero-shape.png';
-
 import Banner from '@/components/common/Banner';
 import ContestBody from '@/components/contest-details/ContestBody';
+import inner_hero_shape from '/public/images/elements/inner-hero-shape.png';
+interface PageProps {
+  params: {
+    [key: string]: string | string[] | undefined;
+  };
+}
 
-const ContestDetailsView = () => {
+const ContestDetailsView = ({ params }: PageProps) => {
+
   return (
     <>
       {/* Banner section here */}

@@ -7,7 +7,7 @@ const ContestCard = ({ itm }: any) => {
     <div className='contest-card'>
       <Link href={`/contest/${itm.id}`} className='item-link'></Link>
       <div className='contest-card__thumb'>
-        <Image src={itm.img} alt={itm.title} />
+        <Image src={itm.img} alt={itm.title}/>
         <a href='#0' className='action-icon'>
           <FaRegHeart />
         </a>
