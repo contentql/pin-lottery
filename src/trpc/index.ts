@@ -1,5 +1,6 @@
 import { authRouter } from '../routers/auth-router';
-import { publicProcedure, router, userProcedure } from './trpc';
+import { contestRouter } from '../routers/contest-router';
+import { router, userProcedure } from './trpc';
 
 export const appRouter = router({
   anyApiRoute: userProcedure.query(() => {
@@ -7,6 +8,7 @@ export const appRouter = router({
   }),
 
   auth: authRouter,
+  contest: contestRouter,
 });
 
 export type AppRouter = typeof appRouter;

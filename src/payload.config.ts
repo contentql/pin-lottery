@@ -1,13 +1,15 @@
-import { buildConfig } from 'payload/config';
 import { webpackBundler } from '@payloadcms/bundler-webpack';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { slateEditor } from '@payloadcms/richtext-slate';
-import path from 'path';
-import Users from './collections/Users';
-import dotenv from 'dotenv';
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
-import { s3StorageAdapter } from './plugins/s3';
+import { slateEditor } from '@payloadcms/richtext-slate';
+import dotenv from 'dotenv';
+import path from 'path';
+import { buildConfig } from 'payload/config';
+import Contest from './collections/Contest';
 import { Media } from './collections/Media';
+import Tags from './collections/Tags';
+import Users from './collections/Users';
+import { s3StorageAdapter } from './plugins/s3';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -15,7 +17,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
-  collections: [Users, Media],
+  collections: [Users, Media,Contest,Tags],
   routes: {
     admin: '/admin',
   },

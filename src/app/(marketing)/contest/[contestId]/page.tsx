@@ -7,8 +7,14 @@ export const metadata: Metadata = {
   description: 'This is a contest details page',
 };
 
-const ContestDetails = () => {
-  return <ContestDetailsView />;
+interface PageProps {
+  params: {
+    [key: string]: string | string[] | undefined;
+  };
+}
+
+const ContestDetails = ({ params }: PageProps) => {
+  return <ContestDetailsView params={params} />;
 };
 
 export default ContestDetails;

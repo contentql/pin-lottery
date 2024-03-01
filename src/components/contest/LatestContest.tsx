@@ -12,7 +12,7 @@ import ContestCard from '@/components/cards/ContestCard';
 
 import contestData from '@/data/contestData';
 
-const LatestContest = () => {
+const LatestContest = ({ contestDetails}:any) => {
   const [sliderValue, setSliderValue] = useState<number>(0);
   const MAX = 16;
 
@@ -199,9 +199,12 @@ const LatestContest = () => {
                     aria-labelledby='dream-tab'
                   >
                     <div className='row mb-none-30 mt-50'>
-                      {contestData.map((itm) => (
-                        <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
-                          <ContestCard itm={itm} />
+                      {contestDetails?.map((contest: any) => (
+                        <div
+                          key={contest.id}
+                          className='col-xl-4 col-md-6 mb-30'
+                        >
+                          <ContestCard itm={contest} />
                         </div>
                       ))}
                     </div>
