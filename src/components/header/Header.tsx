@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import tag from '/public/images/icon/btn/tag.png';
 
 import cartData from '@/data/cartData';
+import { useAuth } from '@/providers/Auth';
 
 const Header = () => {
   const [open, setOpen] = useState('');
   const [windowHeight, setWindowHeight] = useState(0);
   const [show, setShow] = useState(false);
 
+  const {status }=useAuth()
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text);
@@ -103,21 +105,23 @@ const Header = () => {
 
                 <div className='right'>
                   <div className='product__cart'>
-                    <span className='total__amount'>0.00</span>
                     <Link href='/cart' className='amount__btn'>
                       <i className='las la-shopping-basket'></i>
                       <span className='cart__num'>{cartData.length}</span>
                     </Link>
                   </div>
-                  <Link href='/login' className='login-btn btn--sm'>
-                    Login
-                  </Link>
-                  <Link
-                    href='/user'
-                    className='user__btn d-flex align-items-center justify-content-center'
-                  >
-                    <i className='las la-user'></i>
-                  </Link>
+                  {status === 'loggedIn' ? (
+                    <Link
+                      href='/user'
+                      className='user__btn d-flex align-items-center justify-content-center'
+                    >
+                      <i className='las la-user'></i>
+                    </Link>
+                  ) : (
+                    <Link href='/login' className='login-btn btn--sm'>
+                      Login
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
