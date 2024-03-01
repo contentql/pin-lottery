@@ -49,3 +49,32 @@
       color: #fba93f
       border-color: #fba93f
 /* button css end */
+
+/* login button css start */
+.login-btn
+  display: inline-flex
+  align-items: center
+  gap: 5px
+  padding: 6px 20px
+  margin-left: 30px
+  +font(18px, weight("semi"), capitalize)
+  +border-radius(999px)
+  +transition(all 0.3s)
+  color: #ffffff
+  background-size: 100%
+  border-color: transparent
+  +gradient-three
+  &:hover 
+    background-size: 300%
+    border-color: transparent
+    color: #ffffff
+    +gradient-three
+  @media (max-width: 991px)
+    font-size: 16px
+  @media (max-width: 767px)
+    font-size: 14px
+  &.btn--sm 
+    padding: 10px 22px 
+    font-size: 14px
+
+/* login button css end */

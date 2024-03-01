@@ -53,68 +53,6 @@
         select
           padding-right: 25px    
           padding-left: 2px   
-    .right
-      +d-flex
-      align-items: center
-      justify-content: flex-end
-      @media (max-width: 575px)
-        justify-content: center
-      .product__cart
-        +d-flex 
-        align-items: center
-      .total__amount
-        background-color: #2c0341
-        padding: 5px 18px
-        color: #ffffff
-        font-size: 12px
-        @media (max-width: 1199px)
-          padding: 4px 10px
-          font-size: 14px
-      .amount__btn 
-        background-color: transparent 
-        margin-left: 15px
-        position: relative
-        padding-top: 7px
-        i 
-          color: #ffffff
-          font-size: 30px
-          @media (max-width: 1199px)
-            font-size: 24px
-        .cart__num 
-          position: absolute
-          top: -2px
-          right: -8px
-          min-width: 22px
-          min-height: 22px
-          font-size: 12px
-          line-height: 22px
-          +border-radius(50%)
-          background-image: linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
-          background-image: -moz-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
-          background-image: -webkit-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
-          background-image: -ms-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
-          box-shadow: 0px 19px 56px 0px rgba(0, 0, 0, 0.2)
-          color: #ffffff
-          display: flex 
-          flex-wrap: wrap
-          justify-content: center
-          align-items: center
-      .user__btn 
-        margin-left: 38px
-        width: 40px
-        height: 40px
-        background-color: $base-color-two
-        +border-radius(50%)
-        text-align: center
-        line-height: 48px
-        @media (max-width: 1199px)
-          width: 30px
-          height: 30px
-          line-height: 36px
-        i 
-          font-size: 24px
-          @media (max-width: 1199px)
-            font-size: 20px
   &__bottom
     +transition(all 0.3s)
     @media (max-width: 1199px)
@@ -156,7 +94,7 @@
             color: $base-color
       a
         padding: 42px 15px 42px 0
-        text-transform: uppercase
+        text-transform: capitalize
         font-size: 16px
         color: #e7e7f4
         position: relative
@@ -212,6 +150,7 @@
         margin-left: 0
   .nav-right
     margin-left: 30px
+    +d-flex
     @media (max-width: 1199px)
       margin-left: 0
     .cmn-btn 
@@ -225,6 +164,69 @@
         margin-right: 6px
         font-size: 22px
         color: #ffb200
+    .right
+      +d-flex
+      align-items: center
+      justify-content: flex-end
+      margin-left: 12px
+      @media (max-width: 575px)
+        justify-content: center
+      .product__cart
+        +d-flex 
+        align-items: center
+      .total__amount
+        background-color: #2c0341
+        padding: 5px 18px
+        color: #ffffff
+        font-size: 12px
+        @media (max-width: 1199px)
+          padding: 4px 10px
+          font-size: 14px
+      .amount__btn 
+        background-color: transparent 
+        margin-left: 6px
+        position: relative
+        padding-top: 7px
+        i 
+          color: #ffffff
+          font-size: 30px
+          @media (max-width: 1199px)
+            font-size: 24px
+        .cart__num 
+          position: absolute
+          top: -2px
+          right: -8px
+          min-width: 22px
+          min-height: 22px
+          font-size: 12px
+          line-height: 22px
+          +border-radius(50%)
+          background-image: linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
+          background-image: -moz-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
+          background-image: -webkit-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
+          background-image: -ms-linear-gradient( 135deg, rgb(135,57,230) 0%, rgb(84,150,255) 100%)
+          box-shadow: 0px 19px 56px 0px rgba(0, 0, 0, 0.2)
+          color: #ffffff
+          display: flex 
+          flex-wrap: wrap
+          justify-content: center
+          align-items: center
+      .user__btn 
+        margin-left: 28px
+        width: 40px
+        height: 40px
+        background-color: $base-color-two
+        +border-radius(50%)
+        text-align: center
+        line-height: 48px
+        @media (max-width: 1199px)
+          width: 30px
+          height: 30px
+          line-height: 36px
+        i 
+          font-size: 24px
+          @media (max-width: 1199px)
+            font-size: 20px
 .navbar-collapse 
   @media (max-width: 1199px)
     padding: 0 20px
