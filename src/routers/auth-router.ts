@@ -6,8 +6,8 @@ import { ForgotPasswordValidator } from '../lib/validators/auth-router/forgot-pa
 import { LoginValidator } from '../lib/validators/auth-router/login-validator';
 import { ResetPasswordValidator } from '../lib/validators/auth-router/reset-password-validator';
 import { TokenValidator } from '../lib/validators/auth-router/token-validator';
-import { publicProcedure, router } from '../trpc/trpc';
-
+import { UserDetailsValidator } from '../lib/validators/auth-router/user-details-validator';
+import { publicProcedure, router, userProcedure } from '../trpc/trpc';
 export const authRouter = router({
   createUser: publicProcedure
     .input(AuthCredentialsValidator)
@@ -141,4 +141,31 @@ export const authRouter = router({
         throw new TRPCError({ code: 'UNAUTHORIZED' });
       }
     }),
+
+  updateUserDetails: userProcedure
+    .input(UserDetailsValidator)
+    .mutation(async ({ input, ctx }) => {
+    
+    const { first_name,last_name,address,phone_number } = input;
+    const { user } = ctx;
+
+      const payload = await getPayloadClient();
+
+      try {
+        await payload.update({
+          collection: 'users',
+          id:user.id,
+          data: {
+            first_name:first_name,
+            last_name: last_name,
+            address: address,
+            phone_number: phone_number,
+          
+          }
+        })
+      } catch (err) {
+         throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+      
+  })
 });

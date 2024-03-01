@@ -40,19 +40,24 @@ const Users: CollectionConfig = {
       label: 'User Name',
     },
     {
+      name: 'first_name',
+      type: 'text',
+      label: 'First Name',
+    },
+    {
+      name: 'last_name',
+      type: 'text',
+      label: 'Last Name',
+    },
+    {
       name: 'address',
-      type: 'richText',
+      type: 'textarea',
       label: 'User Address',
     },
     {
       name: 'phone_number',
-      type: 'number',
+      type: 'text',
       label: 'Phone Number',
-    },
-    {
-      name: 'date_of_birth',
-      type: 'date',
-      label: 'Date of Birth',
     },
     {
       name: 'roles',
