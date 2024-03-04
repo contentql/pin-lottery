@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { getMeUser } from '@/utils/getMeUser';
 import UserTransactionView from '@/views/UserTransactionView';
 
 export const metadata: Metadata = {
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   description: 'This is a user transaction page',
 };
 
-const UserTransaction = () => {
+const UserTransaction = async () => {
+  await getMeUser({ nullUserRedirect: '/login' });
+
   return <UserTransactionView />;
 };
 
