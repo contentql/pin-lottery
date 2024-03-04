@@ -6,6 +6,9 @@ const urlField: Field = {
 };
 
 export const Media: CollectionConfig = {
+  access: {
+    read:()=>true,
+  },
   slug: 'media',
   upload: {
     imageSizes: [
