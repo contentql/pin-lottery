@@ -3,19 +3,27 @@ import { ContactFormValidator, TContactFormValidator } from '@/lib/validators/co
 import { trpc } from '@/trpc/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 const ContactForm = () => {
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TContactFormValidator>({
     resolver: zodResolver(ContactFormValidator),
   });
 
-  const { mutate:addNewContact } = trpc.contact.newContact.useMutation({
-    onSuccess: () => console.log('Contact successfully updated'),
-    onError:(error) => console.log('Contact failed to be updated'),
-  })
+  const { mutate: addNewContact } = trpc.public.newContact.useMutation({
+    onSuccess: () => {
+      setValue("name", '')
+      setValue("email", '')
+      setValue('subject', '')
+      setValue('message', '')
+      toast.success(`Thank you for contacting us`)
+    },
+    onError: (error) =>toast.error(`error while submitting`)
+  });
   const onSubmit = ({name,email,message,subject}:TContactFormValidator) => {
     addNewContact({name,email,message,subject})
   }

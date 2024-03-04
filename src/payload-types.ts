@@ -12,6 +12,7 @@ export interface Config {
     media: Media;
     contest: Contest;
     contact: Contact;
+    faq: Faq;
     tags: Tag;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -140,6 +141,22 @@ export interface Contact {
   email?: string | null;
   subject?: string | null;
   message?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: string;
+  faqs?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
