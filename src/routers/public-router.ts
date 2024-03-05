@@ -66,14 +66,17 @@ export const publicRouter = router({
     
      getBlogDetailsById: publicProcedure
     .input(BlogIdValidator)
-    .query(async ({ input }) => {
-      const payload = await getPayloadClient();
+       .query(async ({ input }) => {
+      
+         const payload = await getPayloadClient();
+         
+         const {id }=input
 
       const blogById = await payload.find({
         collection: 'blog',
         where: {
           id: {
-            equals: '65e6fa640f173b82a9c7a7dc',
+            equals: id,
           },
         },
       });
