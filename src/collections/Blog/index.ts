@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload/types'
 const Blog: CollectionConfig = {
   slug: 'blog',
   admin: {
@@ -10,6 +10,6 @@ const Blog: CollectionConfig = {
     { name: 'content', type: 'richText', label: 'Content' },
     { name: 'img', type: 'upload', relationTo: 'media' },
   ],
-};
+}
 
-export default Blog;
+export default Blog

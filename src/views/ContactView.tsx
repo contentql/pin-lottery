@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
+import Image from 'next/image'
 
-import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 
-import Banner from '@/components/common/Banner';
-import ContactBody from '@/components/contact/ContactBody';
+import Banner from '@/components/common/Banner'
+import ContactBody from '@/components/contact/ContactBody'
 
 const ContactView = () => {
   return (
@@ -26,7 +26,7 @@ const ContactView = () => {
       {/*Contact body section here */}
       <ContactBody />
     </>
-  );
-};
+  )
+}
 
-export default ContactView;
+export default ContactView

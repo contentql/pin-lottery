@@ -48,7 +48,7 @@ export const postDrawData = [
     result: '1234567',
     status: false,
   },
-];
+]
 
 export const allTransactions = [
   {
@@ -106,4 +106,4 @@ export const allTransactions = [
     transection: 'withdraw',
     status: 1,
   },
-];
+]

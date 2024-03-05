@@ -1,7 +1,7 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import referral_1 from '/public/images/icon/referral/1.png';
-import referral_2 from '/public/images/icon/referral/2.png';
+import referral_1 from '/public/images/icon/referral/1.png'
+import referral_2 from '/public/images/icon/referral/2.png'
 
 const Overview = () => {
   return (
@@ -31,7 +31,7 @@ const Overview = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Overview;
+export default Overview

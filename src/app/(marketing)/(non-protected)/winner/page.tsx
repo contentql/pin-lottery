@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import WinnerView from '@/views/WinnerView';
+import WinnerView from '@/views/WinnerView'
 
 export const metadata: Metadata = {
   title: 'Winner',
   description: 'This is a winner page',
-};
+}
 
 const Winner = async () => {
-  return <WinnerView />;
-};
+  return <WinnerView />
+}
 
-export default Winner;
+export default Winner

@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { FaRegComments, FaRegEye } from 'react-icons/fa';
-import Slider from 'react-slick';
+import Image from 'next/image'
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
+import { FaRegComments, FaRegEye } from 'react-icons/fa'
+import Slider from 'react-slick'
 
-import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick.css'
 
 const NextBtn = ({ onClick }: any) => {
   return (
@@ -12,8 +12,8 @@ const NextBtn = ({ onClick }: any) => {
         <BsChevronLeft />
       </i>
     </button>
-  );
-};
+  )
+}
 
 const PrevBtn = ({ onClick }: any) => {
   return (
@@ -22,8 +22,8 @@ const PrevBtn = ({ onClick }: any) => {
         <BsChevronRight />
       </i>
     </button>
-  );
-};
+  )
+}
 
 const LatestPost = ({ blogData }: any) => {
   const settings = {
@@ -33,7 +33,7 @@ const LatestPost = ({ blogData }: any) => {
     dots: false,
     nextArrow: <NextBtn />,
     prevArrow: <PrevBtn />,
-  };
+  }
   return (
     <div className='widget'>
       <h3 className='widget__title'>Latest Post</h3>
@@ -62,7 +62,7 @@ const LatestPost = ({ blogData }: any) => {
         ))}
       </Slider>
     </div>
-  );
-};
+  )
+}
 
-export default LatestPost;
+export default LatestPost

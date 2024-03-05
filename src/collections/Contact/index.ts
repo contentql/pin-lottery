@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload/types'
 const Contact: CollectionConfig = {
   slug: 'contact',
   // hooks: {
@@ -10,6 +10,6 @@ const Contact: CollectionConfig = {
     { name: 'subject', type: 'text', label: 'Subject' },
     { name: 'message', type: 'textarea', label: 'Message' },
   ],
-};
+}
 
-export default Contact;
+export default Contact

@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import Link from 'next/link'
+import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'
 
 const AllTickets = ({ removeTicket, allTicket }: any) => {
   return (
@@ -34,7 +34,7 @@ const AllTickets = ({ removeTicket, allTicket }: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AllTickets;
+export default AllTickets

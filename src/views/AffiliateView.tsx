@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
+import Image from 'next/image'
 
-import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 
-import Boost from '@/components/affiliate/Boost';
-import Getting from '@/components/affiliate/Getting';
-import Partner from '@/components/affiliate/Partner';
-import TopAffiliate from '@/components/affiliate/TopAffiliate';
-import Trusted from '@/components/affiliate/Trusted';
-import Banner from '@/components/common/Banner';
+import Boost from '@/components/affiliate/Boost'
+import Getting from '@/components/affiliate/Getting'
+import Partner from '@/components/affiliate/Partner'
+import TopAffiliate from '@/components/affiliate/TopAffiliate'
+import Trusted from '@/components/affiliate/Trusted'
+import Banner from '@/components/common/Banner'
 
 const AffiliateView = () => {
   return (
@@ -33,7 +33,7 @@ const AffiliateView = () => {
       <Partner />
       <TopAffiliate />
     </>
-  );
-};
+  )
+}
 
-export default AffiliateView;
+export default AffiliateView

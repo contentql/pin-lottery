@@ -8,22 +8,22 @@ export const logout = async () => {
         headers: {
           'Content-Type': 'application/json',
         },
-      }
-    );
+      },
+    )
 
-    const data = await res.json();
+    const data = await res.json()
 
     if (data.errors && data.errors[0].message === 'No User') {
-      throw new Error('CONFLICT');
+      throw new Error('CONFLICT')
     }
 
     if (data.message !== 'You have been logged out successfully.') {
-      throw new Error('Logout failed');
+      throw new Error('Logout failed')
     }
 
-    return data;
+    return data
   } catch (err) {
-    console.log(err);
-    throw err;
+    console.log(err)
+    throw err
   }
-};
+}

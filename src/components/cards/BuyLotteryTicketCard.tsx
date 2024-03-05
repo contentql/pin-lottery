@@ -17,7 +17,7 @@ const BuyLotteryTicketCard = () => {
         </a>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BuyLotteryTicketCard;
+export default BuyLotteryTicketCard

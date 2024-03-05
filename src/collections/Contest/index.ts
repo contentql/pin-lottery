@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload/types'
 const Contest: CollectionConfig = {
   slug: 'contest',
   admin: {
@@ -59,7 +59,11 @@ const Contest: CollectionConfig = {
               maxLength: 5,
             },
             { name: 'day_remain', type: 'number', label: 'Days Remaining' },
-            { name: 'ticket_remain', type: 'number', label: 'Tickets Remaining' },
+            {
+              name: 'ticket_remain',
+              type: 'number',
+              label: 'Tickets Remaining',
+            },
           ],
         },
 
@@ -97,6 +101,6 @@ const Contest: CollectionConfig = {
       ],
     },
   ],
-};
+}
 
-export default Contest;
+export default Contest

@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
-import arrow from '/public/images/elements/arrow.png';
-import winner_obj from '/public/images/elements/winner-obj.png';
+import arrow from '/public/images/elements/arrow.png'
+import winner_obj from '/public/images/elements/winner-obj.png'
 
 const BuyTicket = () => {
   return (
@@ -59,7 +59,7 @@ const BuyTicket = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default BuyTicket;
+export default BuyTicket

@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-import Slider from 'react-slick';
+import Image from 'next/image'
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
+import Slider from 'react-slick'
 
-import winner from '/public/images/bg/winner.jpg';
-import car from '/public/images/elements/car.png';
-import w_1 from '/public/images/winner/w-1.png';
+import winner from '/public/images/bg/winner.jpg'
+import car from '/public/images/elements/car.png'
+import w_1 from '/public/images/winner/w-1.png'
 
-import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick.css'
 
 const NextBtn = ({ onClick }: any) => {
   return (
@@ -19,8 +19,8 @@ const NextBtn = ({ onClick }: any) => {
         <BsArrowLeft />
       </i>
     </button>
-  );
-};
+  )
+}
 
 const PrevBtn = ({ onClick }: any) => {
   return (
@@ -33,8 +33,8 @@ const PrevBtn = ({ onClick }: any) => {
         <BsArrowRight />
       </i>
     </button>
-  );
-};
+  )
+}
 
 const Winner = () => {
   const settings = {
@@ -43,7 +43,7 @@ const Winner = () => {
     dots: false,
     nextArrow: <PrevBtn />,
     prevArrow: <NextBtn />,
-  };
+  }
   return (
     <section className='position-relative pt-120 pb-120'>
       <div className='bg-el'>
@@ -93,7 +93,7 @@ const Winner = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Winner;
+export default Winner

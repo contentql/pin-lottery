@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
-import error from '/public/images/elements/error.png';
+import error from '/public/images/elements/error.png'
 
 const NotFoundView = () => {
   return (
@@ -31,7 +31,7 @@ const NotFoundView = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NotFoundView;
+export default NotFoundView

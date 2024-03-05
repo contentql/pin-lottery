@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import LeftSideMenu from '@/components/common/LeftSideMenu';
-import Info from '@/components/user-info/Info';
+import LeftSideMenu from '@/components/common/LeftSideMenu'
+import Info from '@/components/user-info/Info'
 
 const UserInfoView = () => {
   return (
@@ -20,7 +20,7 @@ const UserInfoView = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default UserInfoView;
+export default UserInfoView

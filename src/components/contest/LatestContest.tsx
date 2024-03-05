@@ -1,26 +1,26 @@
-import Image from 'next/image';
-import { useState } from 'react';
-import { FaRedo, FaRegHeart, FaSearch } from 'react-icons/fa';
+import Image from 'next/image'
+import { useState } from 'react'
+import { FaRedo, FaRegHeart, FaSearch } from 'react-icons/fa'
 
-import winner_tab_1 from '/public/images/icon/winner-tab/1.png';
-import winner_tab_2 from '/public/images/icon/winner-tab/2.png';
-import winner_tab_3 from '/public/images/icon/winner-tab/3.png';
-import winner_tab_4 from '/public/images/icon/winner-tab/4.png';
-import winner_tab_5 from '/public/images/icon/winner-tab/5.png';
+import winner_tab_1 from '/public/images/icon/winner-tab/1.png'
+import winner_tab_2 from '/public/images/icon/winner-tab/2.png'
+import winner_tab_3 from '/public/images/icon/winner-tab/3.png'
+import winner_tab_4 from '/public/images/icon/winner-tab/4.png'
+import winner_tab_5 from '/public/images/icon/winner-tab/5.png'
 
-import ContestCard from '@/components/cards/ContestCard';
+import ContestCard from '@/components/cards/ContestCard'
 
-import contestData from '@/data/contestData';
+import contestData from '@/data/contestData'
 
-const LatestContest = ({ contestDetails}:any) => {
-  const [sliderValue, setSliderValue] = useState<number>(0);
-  const MAX = 16;
+const LatestContest = ({ contestDetails }: any) => {
+  const [sliderValue, setSliderValue] = useState<number>(0)
+  const MAX = 16
 
   const getBackgroundSize = () => {
     return {
       backgroundSize: `${(sliderValue * 100) / MAX}% 100%`,
-    };
-  };
+    }
+  }
 
   return (
     <section className='pb-120 mt-minus-100'>
@@ -155,7 +155,7 @@ const LatestContest = ({ contestDetails}:any) => {
                             type={'range'}
                             min='0'
                             max={MAX}
-                            onChange={(e) =>
+                            onChange={e =>
                               setSliderValue(Number(e.target.value))
                             }
                             style={getBackgroundSize()}
@@ -216,7 +216,7 @@ const LatestContest = ({ contestDetails}:any) => {
                     aria-labelledby='bike-tab'
                   >
                     <div className='row mb-none-30 mt-50'>
-                      {contestData.map((itm) => (
+                      {contestData.map(itm => (
                         <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
                           <ContestCard itm={itm} />
                         </div>
@@ -230,7 +230,7 @@ const LatestContest = ({ contestDetails}:any) => {
                     aria-labelledby='watch-tab'
                   >
                     <div className='row mb-none-30 mt-50'>
-                      {contestData.map((itm) => (
+                      {contestData.map(itm => (
                         <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
                           <ContestCard itm={itm} />
                         </div>
@@ -244,7 +244,7 @@ const LatestContest = ({ contestDetails}:any) => {
                     aria-labelledby='laptop-tab'
                   >
                     <div className='row mb-none-30 mt-50'>
-                      {contestData.map((itm) => (
+                      {contestData.map(itm => (
                         <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
                           <ContestCard itm={itm} />
                         </div>
@@ -258,7 +258,7 @@ const LatestContest = ({ contestDetails}:any) => {
                     aria-labelledby='money-tab'
                   >
                     <div className='row mb-none-30 mt-50'>
-                      {contestData.map((itm) => (
+                      {contestData.map(itm => (
                         <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
                           <ContestCard itm={itm} />
                         </div>
@@ -272,7 +272,7 @@ const LatestContest = ({ contestDetails}:any) => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default LatestContest;
+export default LatestContest

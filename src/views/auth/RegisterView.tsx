@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import SignUp from '@/components/auth/SignUp';
+import SignUp from '@/components/auth/SignUp'
 
 const RegisterView = () => {
-  return <SignUp />;
-};
+  return <SignUp />
+}
 
-export default RegisterView;
+export default RegisterView

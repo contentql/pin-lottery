@@ -1,4 +1,4 @@
-import { FaEnvelope, FaFacebookF, FaTwitter, FaUsers } from 'react-icons/fa';
+import { FaEnvelope, FaFacebookF, FaTwitter, FaUsers } from 'react-icons/fa'
 
 const SocialMedia = () => {
   return (
@@ -48,7 +48,7 @@ const SocialMedia = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SocialMedia;
+export default SocialMedia

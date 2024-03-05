@@ -1,7 +1,7 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import transaction_1 from '/public/images/icon/transaction/1.png';
-import transaction_2 from '/public/images/icon/transaction/2.png';
+import transaction_1 from '/public/images/icon/transaction/1.png'
+import transaction_2 from '/public/images/icon/transaction/2.png'
 
 const Balance = () => {
   return (
@@ -25,7 +25,7 @@ const Balance = () => {
         </a>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Balance;
+export default Balance

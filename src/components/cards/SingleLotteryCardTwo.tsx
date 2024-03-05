@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { useContext } from 'react'
+import { FaTimes } from 'react-icons/fa'
 
-import { AppContext } from '@/context/context';
+import { AppContext } from '@/context/context'
 
 const SingleLotteryCardTwo = ({ itm, i }: any) => {
   const {
@@ -11,7 +11,7 @@ const SingleLotteryCardTwo = ({ itm, i }: any) => {
     checkActiveTwo,
     addQuickPickTwo,
     clearTicketTwo,
-  }: any = useContext(AppContext);
+  }: any = useContext(AppContext)
 
   return (
     <div className='lottery-single style--two'>
@@ -52,7 +52,7 @@ const SingleLotteryCardTwo = ({ itm, i }: any) => {
           {[...Array(50)].map((_, i) => (
             <li
               key={i}
-              onClick={(e) => pickNumbrTwo(e, itm.id)}
+              onClick={e => pickNumbrTwo(e, itm.id)}
               className={`${itm.ticket.length >= 5 ? 'pe-none' : ''} 
                                 ${
                                   checkActiveTwo(itm.id, i + 1, 0, 5)
@@ -72,7 +72,7 @@ const SingleLotteryCardTwo = ({ itm, i }: any) => {
           {[...Array(10)].map((_, i) => (
             <li
               key={i}
-              onClick={(e) => luckyNumbrTwo(e, itm.id)}
+              onClick={e => luckyNumbrTwo(e, itm.id)}
               className={`${
                 itm.ticket.length >= 7 || itm.ticket.length < 5 ? 'pe-none' : ''
               }  ${checkActiveTwo(itm.id, i + 1, 5) ? 'active' : ''}`}
@@ -83,7 +83,7 @@ const SingleLotteryCardTwo = ({ itm, i }: any) => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SingleLotteryCardTwo;
+export default SingleLotteryCardTwo

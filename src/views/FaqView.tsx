@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
+import Image from 'next/image'
 
-import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 
-import Banner from '@/components/common/Banner';
-import FaqBody from '@/components/faq/FaqBody';
+import Banner from '@/components/common/Banner'
+import FaqBody from '@/components/faq/FaqBody'
 
 const FaqView = () => {
   return (
@@ -28,7 +28,7 @@ const FaqView = () => {
       {/* Faq boday here */}
       <FaqBody />
     </>
-  );
-};
+  )
+}
 
-export default FaqView;
+export default FaqView

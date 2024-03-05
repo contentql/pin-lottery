@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import ResetPassword from '@/components/auth/ResetPassword';
+import ResetPassword from '@/components/auth/ResetPassword'
 
 interface PageProps {
   searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
+    [key: string]: string | string[] | undefined
+  }
 }
 
 const ResetPasswordView = ({ searchParams }: PageProps) => {
-  return <ResetPassword searchParams={searchParams} />;
-};
+  return <ResetPassword searchParams={searchParams} />
+}
 
-export default ResetPasswordView;
+export default ResetPasswordView

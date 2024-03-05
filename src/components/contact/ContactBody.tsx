@@ -1,6 +1,6 @@
-import ContactForm from './ContactForm';
-import ContactInfo from './ContactInfo';
-import SocialMedia from './SocialMedia';
+import ContactForm from './ContactForm'
+import ContactInfo from './ContactInfo'
+import SocialMedia from './SocialMedia'
 
 const ContactBody = () => {
   return (
@@ -37,7 +37,7 @@ const ContactBody = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ContactBody;
+export default ContactBody

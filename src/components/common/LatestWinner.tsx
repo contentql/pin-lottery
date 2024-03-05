@@ -1,23 +1,23 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
 
-import w_el_1 from '/public/images/elements/w-el-1.png';
-import w_el_2 from '/public/images/elements/w-el-2.png';
-import w_el_3 from '/public/images/elements/w-el-3.png';
-import winner_tab_1 from '/public/images/icon/winner-tab/1.png';
-import winner_tab_2 from '/public/images/icon/winner-tab/2.png';
-import winner_tab_3 from '/public/images/icon/winner-tab/3.png';
-import winner_tab_4 from '/public/images/icon/winner-tab/4.png';
-import winner_tab_5 from '/public/images/icon/winner-tab/5.png';
+import w_el_1 from '/public/images/elements/w-el-1.png'
+import w_el_2 from '/public/images/elements/w-el-2.png'
+import w_el_3 from '/public/images/elements/w-el-3.png'
+import winner_tab_1 from '/public/images/icon/winner-tab/1.png'
+import winner_tab_2 from '/public/images/icon/winner-tab/2.png'
+import winner_tab_3 from '/public/images/icon/winner-tab/3.png'
+import winner_tab_4 from '/public/images/icon/winner-tab/4.png'
+import winner_tab_5 from '/public/images/icon/winner-tab/5.png'
 
-import TicketCheckCard from '@/components/cards/TicketCheckCard';
-import WinnerCard from '@/components/cards/WinnerCard';
+import TicketCheckCard from '@/components/cards/TicketCheckCard'
+import WinnerCard from '@/components/cards/WinnerCard'
 
-import winnerData from '@/data/winnerData';
+import winnerData from '@/data/winnerData'
 
 const LatestWinner = () => {
-  const [winners, setWinners] = useState(winnerData);
+  const [winners, setWinners] = useState(winnerData)
 
   return (
     <section className='latest-winner-section position-relative pt-120 pb-120'>
@@ -148,7 +148,7 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.map((winner) => (
+                    {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
                     ))}
 
@@ -175,7 +175,7 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.map((winner) => (
+                    {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
                     ))}
 
@@ -202,7 +202,7 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.map((winner) => (
+                    {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
                     ))}
 
@@ -229,7 +229,7 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.map((winner) => (
+                    {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
                     ))}
 
@@ -255,7 +255,7 @@ const LatestWinner = () => {
                   </div>
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
-                    {winners.map((winner) => (
+                    {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
                     ))}
 
@@ -272,7 +272,7 @@ const LatestWinner = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default LatestWinner;
+export default LatestWinner

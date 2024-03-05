@@ -1,9 +1,9 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import play_el from '/public/images/elements/play-el.png';
-import play_1 from '/public/images/icon/play/1.png';
-import play_2 from '/public/images/icon/play/2.png';
-import play_3 from '/public/images/icon/play/3.png';
+import play_el from '/public/images/elements/play-el.png'
+import play_1 from '/public/images/icon/play/1.png'
+import play_2 from '/public/images/icon/play/2.png'
+import play_3 from '/public/images/icon/play/3.png'
 
 const HowToPlay = () => {
   return (
@@ -61,7 +61,7 @@ const HowToPlay = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default HowToPlay;
+export default HowToPlay

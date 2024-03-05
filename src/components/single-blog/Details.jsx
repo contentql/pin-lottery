@@ -1,17 +1,16 @@
-
-import Image from 'next/image';
+import Image from 'next/image'
 import {
   FaFacebookF,
   FaInstagram,
   FaPinterestP,
   FaRedditAlien,
   FaTwitter,
-} from 'react-icons/fa';
+} from 'react-icons/fa'
 
-import Social from '@/components/social/Social';
+import Social from '@/components/social/Social'
 
 const Details = ({ blogDetails }) => {
-  const blog = blogDetails?.at(0);
+  const blog = blogDetails?.at(0)
   return (
     <section className='mt-minus-270 pb-120'>
       <div className='container'>
@@ -90,7 +89,7 @@ const Details = ({ blogDetails }) => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Details;
+export default Details

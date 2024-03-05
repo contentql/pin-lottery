@@ -3,7 +3,7 @@ const PageLoading = () => {
     <div className='spinner'>
       <span className='loader'></span>
     </div>
-  );
-};
+  )
+}
 
-export default PageLoading;
+export default PageLoading

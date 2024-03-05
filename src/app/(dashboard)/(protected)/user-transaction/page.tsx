@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import UserTransactionView from '@/views/UserTransactionView';
+import UserTransactionView from '@/views/UserTransactionView'
 
 export const metadata: Metadata = {
   title: 'User Transaction',
   description: 'This is a user transaction page',
-};
+}
 
 const UserTransaction = async () => {
-  return <UserTransactionView />;
-};
+  return <UserTransactionView />
+}
 
-export default UserTransaction;
+export default UserTransaction

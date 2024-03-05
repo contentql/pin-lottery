@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useContext } from 'react';
-import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useContext } from 'react'
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 
-import { AppContext } from '@/context/context';
+import { AppContext } from '@/context/context'
 
 const ContestRight = () => {
   const { incrementHandle, decrementHandle, quantity, setQuantity }: any =
-    useContext(AppContext);
+    useContext(AppContext)
 
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
     <div className='contest-cart__right'>
@@ -88,7 +88,7 @@ const ContestRight = () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default ContestRight;
+export default ContestRight

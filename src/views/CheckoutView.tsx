@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
+import Image from 'next/image'
 
-import inner_hero_shape from '/public/images/elements/inner-hero-shape.png';
+import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
 
-import Details from '@/components/checkout/Details';
-import Banner from '@/components/common/Banner';
+import Details from '@/components/checkout/Details'
+import Banner from '@/components/common/Banner'
 
 const CheckoutView = () => {
   return (
@@ -31,7 +31,7 @@ const CheckoutView = () => {
       {/* Details section here */}
       <Details />
     </>
-  );
-};
+  )
+}
 
-export default CheckoutView;
+export default CheckoutView

@@ -1,15 +1,15 @@
-import winner_car_1 from '/public/images/win-car/1.png';
-import winner_car_2 from '/public/images/win-car/2.png';
-import winner_car_3 from '/public/images/win-car/3.png';
-import winner_car_4 from '/public/images/win-car/4.png';
-import winner_car_5 from '/public/images/win-car/5.png';
-import winner_car_6 from '/public/images/win-car/6.png';
-import winner_1 from '/public/images/winner/1.png';
-import winner_2 from '/public/images/winner/2.png';
-import winner_3 from '/public/images/winner/3.png';
-import winner_4 from '/public/images/winner/4.png';
-import winner_5 from '/public/images/winner/5.png';
-import winner_6 from '/public/images/winner/6.png';
+import winner_car_1 from '/public/images/win-car/1.png'
+import winner_car_2 from '/public/images/win-car/2.png'
+import winner_car_3 from '/public/images/win-car/3.png'
+import winner_car_4 from '/public/images/win-car/4.png'
+import winner_car_5 from '/public/images/win-car/5.png'
+import winner_car_6 from '/public/images/win-car/6.png'
+import winner_1 from '/public/images/winner/1.png'
+import winner_2 from '/public/images/winner/2.png'
+import winner_3 from '/public/images/winner/3.png'
+import winner_4 from '/public/images/winner/4.png'
+import winner_5 from '/public/images/winner/5.png'
+import winner_6 from '/public/images/winner/6.png'
 
 const winnerData = [
   {
@@ -66,6 +66,6 @@ const winnerData = [
     winer_img: winner_6,
     winning_price_img: winner_car_6,
   },
-];
+]
 
-export default winnerData;
+export default winnerData

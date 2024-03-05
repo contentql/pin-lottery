@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import CopyToClipboard from 'react-copy-to-clipboard';
+import { useState } from 'react'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 const Referral = () => {
   const [copyValue, setCopyValue] = useState({
     value: 'https://rifa.com/?ref=albert24',
     copied: false,
-  });
+  })
 
   return (
     <div className='referral-link-wrapper'>
@@ -19,7 +19,7 @@ const Referral = () => {
           <form data-copy={true}>
             <input
               type='text'
-              onChange={(e) =>
+              onChange={e =>
                 setCopyValue({ value: e.target.value, copied: false })
               }
               value={copyValue.value}
@@ -41,7 +41,7 @@ const Referral = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Referral;
+export default Referral

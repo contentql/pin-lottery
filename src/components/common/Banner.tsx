@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 const Banner = ({ breadcrumb }: any) => {
   return (
@@ -15,7 +15,7 @@ const Banner = ({ breadcrumb }: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Banner;
+export default Banner

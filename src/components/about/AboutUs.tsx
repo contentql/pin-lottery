@@ -60,7 +60,7 @@ const AboutUs = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default AboutUs;
+export default AboutUs

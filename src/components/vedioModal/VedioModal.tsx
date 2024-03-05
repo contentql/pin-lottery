@@ -1,4 +1,4 @@
-import { BsXLg } from 'react-icons/bs';
+import { BsXLg } from 'react-icons/bs'
 
 const VedioModal = ({ isOpen, setIsOpen, link }: any) => {
   return (
@@ -28,7 +28,7 @@ const VedioModal = ({ isOpen, setIsOpen, link }: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default VedioModal;
+export default VedioModal

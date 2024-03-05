@@ -1,6 +1,6 @@
-import team_1 from '/public/images/team/1.png';
-import team_2 from '/public/images/team/2.png';
-import team_3 from '/public/images/team/3.png';
+import team_1 from '/public/images/team/1.png'
+import team_2 from '/public/images/team/2.png'
+import team_3 from '/public/images/team/3.png'
 
 const teamData = [
   {
@@ -21,6 +21,6 @@ const teamData = [
     title: 'VP, Lottery Operations',
     img: team_3,
   },
-];
+]
 
-export default teamData;
+export default teamData

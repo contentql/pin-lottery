@@ -1,8 +1,8 @@
-import AboutRifa from './AboutRifa';
-import Banking from './Banking';
-import ResultsAndAlerts from './ResultsAndAlerts';
-import Tickets from './Tickets';
-import Winning from './Winning';
+import AboutRifa from './AboutRifa'
+import Banking from './Banking'
+import ResultsAndAlerts from './ResultsAndAlerts'
+import Tickets from './Tickets'
+import Winning from './Winning'
 
 const FaqBody = () => {
   return (
@@ -148,7 +148,7 @@ const FaqBody = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default FaqBody;
+export default FaqBody

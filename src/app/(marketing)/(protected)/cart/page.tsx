@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import CartView from '@/views/CartView';
+import CartView from '@/views/CartView'
 
 export const metadata: Metadata = {
   title: 'Cart',
   description: 'this is cart page',
-};
+}
 
 const Cart = async () => {
-  return <CartView />;
-};
+  return <CartView />
+}
 
-export default Cart;
+export default Cart

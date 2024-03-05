@@ -1,10 +1,10 @@
-import blog_1 from '/public/images/blog/1.jpg';
-import blog_2 from '/public/images/blog/2.jpg';
-import blog_3 from '/public/images/blog/3.jpg';
-import blog_4 from '/public/images/blog/4.jpg';
-import blog_5 from '/public/images/blog/5.jpg';
-import blog_6 from '/public/images/blog/6.jpg';
-import author from '/public/images/blog/author.png';
+import blog_1 from '/public/images/blog/1.jpg'
+import blog_2 from '/public/images/blog/2.jpg'
+import blog_3 from '/public/images/blog/3.jpg'
+import blog_4 from '/public/images/blog/4.jpg'
+import blog_5 from '/public/images/blog/5.jpg'
+import blog_6 from '/public/images/blog/6.jpg'
+import author from '/public/images/blog/author.png'
 
 export const blogData = [
   {
@@ -79,4 +79,4 @@ export const blogData = [
     author_name: 'Alvin Mcdaniel',
     author_avt: author,
   },
-];
+]

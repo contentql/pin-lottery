@@ -1,13 +1,13 @@
-import Image from 'next/image';
-import { FaStar } from 'react-icons/fa';
-import Slider from 'react-slick';
+import Image from 'next/image'
+import { FaStar } from 'react-icons/fa'
+import Slider from 'react-slick'
 
-import round_shape from '/public/images/elements/round-shape.png';
+import round_shape from '/public/images/elements/round-shape.png'
 
-import testimonialData from '@/data/testimonialData';
+import testimonialData from '@/data/testimonialData'
 
 // css
-import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick.css'
 
 const Testimonial = () => {
   const settings = {
@@ -18,7 +18,7 @@ const Testimonial = () => {
     // arrows: false,
     vertical: true,
     verticalSwiping: true,
-  };
+  }
   return (
     <section className='has-bg--shape pt-120 pb-120'>
       <div className='bg-shape'>
@@ -76,7 +76,7 @@ const Testimonial = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Testimonial;
+export default Testimonial

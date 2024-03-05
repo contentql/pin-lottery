@@ -15,7 +15,7 @@ const VerificationSuccess = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default VerificationSuccess;
+export default VerificationSuccess

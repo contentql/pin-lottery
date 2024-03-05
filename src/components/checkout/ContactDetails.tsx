@@ -39,7 +39,7 @@ const ContactDetails = () => {
         </form>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ContactDetails;
+export default ContactDetails

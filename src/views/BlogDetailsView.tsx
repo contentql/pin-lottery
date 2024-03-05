@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { trpc } from '@/trpc/client';
+import { trpc } from '@/trpc/client'
 
-import Image from 'next/image';
+import Image from 'next/image'
 
-import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 
-import Banner from '@/components/common/Banner';
-import Details from '@/components/single-blog/Details';
+import Banner from '@/components/common/Banner'
+import Details from '@/components/single-blog/Details'
 
 interface PageProps {
   params: {
-    blogId: string;
-  };
+    blogId: string
+  }
 }
 
 const BlogDetailsView = ({ params }: PageProps) => {
   const { data: blogDetails } = trpc.public.getBlogDetailsById.useQuery({
     id: params.blogId,
-  });
+  })
 
-  console.log('blog individual details', blogDetails);
+  console.log('blog individual details', blogDetails)
 
   return (
     <>
@@ -42,7 +42,7 @@ const BlogDetailsView = ({ params }: PageProps) => {
       {/* Details section here */}
       <Details blogDetails={blogDetails} />
     </>
-  );
-};
+  )
+}
 
-export default BlogDetailsView;
+export default BlogDetailsView

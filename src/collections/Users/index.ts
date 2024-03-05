@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload/types';
-import { ResetPassword } from '../../email-templates/resetPassword';
-import { UserAccountVerification } from '../../email-templates/userAccountVerification';
+import { CollectionConfig } from 'payload/types'
+import { ResetPassword } from '../../email-templates/resetPassword'
+import { UserAccountVerification } from '../../email-templates/userAccountVerification'
 const Users: CollectionConfig = {
   slug: 'users',
   auth: {
@@ -10,23 +10,23 @@ const Users: CollectionConfig = {
       // domain: process.env.PAYLOAD_COOKIE_DOMAIN,
     },
     forgotPassword: {
-      generateEmailHTML: (args) => {
+      generateEmailHTML: args => {
         return ResetPassword({
           actionLabel: 'Reset Your Password',
           buttonText: 'Reset Password',
           href: `${process.env.NEXT_PUBLIC_SERVER_URL}/reset-password?token=${args?.token}`,
-        });
+        })
       },
     },
     verify: {
       generateEmailHTML: ({ token, user }) => {
-        console.log('Verifying user', user);
+        console.log('Verifying user', user)
         return UserAccountVerification({
           actionLabel: 'verify your account',
           buttonText: 'Verify Account',
           userName: user.user_name,
           href: `${process.env.NEXT_PUBLIC_SERVER_URL}/verify?token=${token}`,
-        });
+        })
       },
     },
   },
@@ -72,6 +72,6 @@ const Users: CollectionConfig = {
       saveToJWT: true,
     },
   ],
-};
+}
 
-export default Users;
+export default Users

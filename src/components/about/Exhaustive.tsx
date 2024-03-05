@@ -1,12 +1,12 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import feature_car from '/public/images/elements/feature-car.png';
-import feature_10 from '/public/images/icon/feature/10.png';
-import feature_5 from '/public/images/icon/feature/5.png';
-import feature_6 from '/public/images/icon/feature/6.png';
-import feature_7 from '/public/images/icon/feature/7.png';
-import feature_8 from '/public/images/icon/feature/8.png';
-import feature_9 from '/public/images/icon/feature/9.png';
+import feature_car from '/public/images/elements/feature-car.png'
+import feature_10 from '/public/images/icon/feature/10.png'
+import feature_5 from '/public/images/icon/feature/5.png'
+import feature_6 from '/public/images/icon/feature/6.png'
+import feature_7 from '/public/images/icon/feature/7.png'
+import feature_8 from '/public/images/icon/feature/8.png'
+import feature_9 from '/public/images/icon/feature/9.png'
 
 const Exhaustive = () => {
   return (
@@ -60,7 +60,7 @@ const Exhaustive = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Exhaustive;
+export default Exhaustive

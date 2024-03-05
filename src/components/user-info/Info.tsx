@@ -1,4 +1,4 @@
-import { FaRegEdit } from 'react-icons/fa';
+import { FaRegEdit } from 'react-icons/fa'
 
 const Info = () => {
   return (
@@ -96,7 +96,7 @@ const Info = () => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Info;
+export default Info

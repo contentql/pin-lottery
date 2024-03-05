@@ -1,6 +1,6 @@
-import Checkout from './Checkout';
-import ContactDetails from './ContactDetails';
-import Payment from './Payment';
+import Checkout from './Checkout'
+import ContactDetails from './ContactDetails'
+import Payment from './Payment'
 
 const Details = () => {
   return (
@@ -36,7 +36,7 @@ const Details = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Details;
+export default Details

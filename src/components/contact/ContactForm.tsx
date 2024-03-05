@@ -1,9 +1,11 @@
-
-import { ContactFormValidator, TContactFormValidator } from '@/lib/validators/contact-form-validator';
-import { trpc } from '@/trpc/client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import {
+  ContactFormValidator,
+  TContactFormValidator,
+} from '@/lib/validators/contact-form-validator'
+import { trpc } from '@/trpc/client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 const ContactForm = () => {
   const {
     register,
@@ -12,26 +14,36 @@ const ContactForm = () => {
     formState: { errors },
   } = useForm<TContactFormValidator>({
     resolver: zodResolver(ContactFormValidator),
-  });
+  })
 
   const { mutate: addNewContact } = trpc.public.newContact.useMutation({
     onSuccess: () => {
-      setValue("name", '')
-      setValue("email", '')
+      setValue('name', '')
+      setValue('email', '')
       setValue('subject', '')
       setValue('message', '')
       toast.success(`Thank you for contacting us`)
     },
-    onError: (error) =>toast.error(`error while submitting`)
-  });
-  const onSubmit = ({name,email,message,subject}:TContactFormValidator) => {
-    addNewContact({name,email,message,subject})
+    onError: error => toast.error(`error while submitting`),
+  })
+  const onSubmit = ({
+    name,
+    email,
+    message,
+    subject,
+  }: TContactFormValidator) => {
+    addNewContact({ name, email, message, subject })
   }
-  
+
   return (
     <div className='contact-form-wrapper'>
       <h3 className='title'>Drop us a message</h3>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className='contact-form' action='/'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className='contact-form'
+        action='/'
+      >
         <div className='form-group'>
           <label>
             Name <sup>*</sup>
@@ -97,7 +109,7 @@ const ContactForm = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ContactForm;
+export default ContactForm

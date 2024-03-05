@@ -147,7 +147,7 @@ const Banking = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Banking;
+export default Banking

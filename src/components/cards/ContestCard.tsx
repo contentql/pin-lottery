@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { FaRegHeart } from 'react-icons/fa';
+import Image from 'next/image'
+import Link from 'next/link'
+import { FaRegHeart } from 'react-icons/fa'
 
 const ContestCard = ({ itm }: any) => {
   return (
@@ -44,7 +44,7 @@ const ContestCard = ({ itm }: any) => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ContestCard;
+export default ContestCard

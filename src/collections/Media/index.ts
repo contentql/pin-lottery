@@ -1,13 +1,13 @@
-import type { CollectionConfig, Field } from 'payload/types';
+import type { CollectionConfig, Field } from 'payload/types'
 
 const urlField: Field = {
   name: 'url',
   type: 'text',
-};
+}
 
 export const Media: CollectionConfig = {
   access: {
-    read:()=>true,
+    read: () => true,
   },
   slug: 'media',
   upload: {
@@ -71,4 +71,4 @@ export const Media: CollectionConfig = {
       ],
     },
   ],
-};
+}

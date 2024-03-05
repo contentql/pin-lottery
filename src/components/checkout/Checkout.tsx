@@ -21,7 +21,7 @@ const Checkout = () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout

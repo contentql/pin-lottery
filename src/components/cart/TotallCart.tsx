@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import QuickPick from '@/components/quickPick/QuickPick';
+import QuickPick from '@/components/quickPick/QuickPick'
 
-import cartData from '@/data/cartData';
+import cartData from '@/data/cartData'
 
-import AllTickets from './AllTickets';
-import Prices from './Prices';
+import AllTickets from './AllTickets'
+import Prices from './Prices'
 
 const TotallCart = () => {
-  const [allTicket, setAllTicket] = useState(cartData);
+  const [allTicket, setAllTicket] = useState(cartData)
 
   const removeTicket = (id: any) => {
-    const data = allTicket.filter((item) => item.id !== id);
-    setAllTicket(data);
-  };
+    const data = allTicket.filter(item => item.id !== id)
+    setAllTicket(data)
+  }
 
   return (
     <section className='pb-120 mt-minus-300'>
@@ -37,7 +37,7 @@ const TotallCart = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default TotallCart;
+export default TotallCart

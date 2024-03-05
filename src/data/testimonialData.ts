@@ -1,5 +1,5 @@
-import winner_1 from '/public/images/winner/1.png';
-import winner_2 from '/public/images/winner/2.png';
+import winner_1 from '/public/images/winner/1.png'
+import winner_2 from '/public/images/winner/2.png'
 
 const testimonialData = [
   {
@@ -16,6 +16,6 @@ const testimonialData = [
     comment: `“Unbelievable this is a dream come true,no way would I
       ever think I would own a car like this”`,
   },
-];
+]
 
-export default testimonialData;
+export default testimonialData

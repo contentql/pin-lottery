@@ -1,16 +1,20 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
-
-const LeftSide = ({ blogData }:any) => {
+const LeftSide = ({ blogData }: any) => {
   return (
     <div className='col-lg-8 mb-none-30'>
       {/* blog section here */}
-      {blogData?.map((blog:any) => (
+      {blogData?.map((blog: any) => (
         <div key={blog.id} className='blog-card style--two mb-30 has-link'>
           <Link href={`/blog/${blog.id}`} className='item-link'></Link>
           <div className='blog-card__thumb'>
-            <Image src={blog.img?.url} alt={blog.title} width={100} height={100}/>
+            <Image
+              src={blog.img?.url}
+              alt={blog.title}
+              width={100}
+              height={100}
+            />
           </div>
           <div className='blog-card__content'>
             <h3 className='blog-card__title'>{blog.title}</h3>
@@ -38,7 +42,7 @@ const LeftSide = ({ blogData }:any) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default LeftSide;
+export default LeftSide

@@ -41,7 +41,7 @@ const TicketCheckCard = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default TicketCheckCard;
+export default TicketCheckCard

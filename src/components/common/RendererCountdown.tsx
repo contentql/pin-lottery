@@ -18,7 +18,7 @@ const RendererCountdown = ({ hours, minutes, seconds, days }: any) => {
         <p>seconds</p>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default RendererCountdown;
+export default RendererCountdown

@@ -1,15 +1,15 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { ZodError } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { ZodError } from 'zod'
 
 import {
   LoginValidator,
   TLoginValidator,
-} from '@/lib/validators/auth-router/login-validator';
-import { useAuth } from '@/providers/Auth';
-import { useMutation } from '@tanstack/react-query';
+} from '@/lib/validators/auth-router/login-validator'
+import { useAuth } from '@/providers/Auth'
+import { useMutation } from '@tanstack/react-query'
 
 const Login = () => {
   const {
@@ -19,35 +19,35 @@ const Login = () => {
     formState: { errors },
   } = useForm<TLoginValidator>({
     resolver: zodResolver(LoginValidator),
-  });
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const { login } = useAuth();
+  const { login } = useAuth()
 
   const { mutate: loginUser } = useMutation({
     mutationFn: (args: { email: string; password: string }) => login(args),
     onError: (err: Error) => {
       if (err.message === 'Invalid login') {
-        toast.error(`Invalid email or password.`);
+        toast.error(`Invalid email or password.`)
       }
 
       if (err instanceof ZodError) {
-        toast.error(`Please provide correct information.`);
-        return;
+        toast.error(`Please provide correct information.`)
+        return
       }
-      console.error(err);
+      console.error(err)
     },
     onSuccess: () => {
-      setValue('email', '');
-      setValue('password', '');
-      router.push('/user');
+      setValue('email', '')
+      setValue('password', '')
+      router.push('/user')
     },
-  });
+  })
 
   const onSubmit = ({ email, password }: TLoginValidator) => {
-    loginUser({ email, password });
-  };
+    loginUser({ email, password })
+  }
 
   return (
     <div className='register-main'>
@@ -115,7 +115,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

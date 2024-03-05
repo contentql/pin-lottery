@@ -1,6 +1,6 @@
-import DataTable from './DataTable';
-import Overview from './Overview';
-import Referral from './Referral';
+import DataTable from './DataTable'
+import Overview from './Overview'
+import Referral from './Referral'
 
 const RightSide = () => {
   return (
@@ -14,7 +14,7 @@ const RightSide = () => {
       {/* Data table here */}
       <DataTable />
     </div>
-  );
-};
+  )
+}
 
-export default RightSide;
+export default RightSide

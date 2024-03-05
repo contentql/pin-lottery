@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import LeftSideMenu from '@/components/common/LeftSideMenu';
-import RightSide from '@/components/user/RightSide';
+import LeftSideMenu from '@/components/common/LeftSideMenu'
+import RightSide from '@/components/user/RightSide'
 
 const UserView = () => {
   return (
@@ -20,7 +20,7 @@ const UserView = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default UserView;
+export default UserView

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 const Categories = () => {
   return (
@@ -22,7 +22,7 @@ const Categories = () => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Categories;
+export default Categories

@@ -1,16 +1,15 @@
-'use client';
+'use client'
 
-import Banner from '@/components/common/Banner';
-import Feature from '@/components/contest/Feature';
-import LatestContest from '@/components/contest/LatestContest';
-import { trpc } from '../trpc/client';
+import Banner from '@/components/common/Banner'
+import Feature from '@/components/contest/Feature'
+import LatestContest from '@/components/contest/LatestContest'
+import { trpc } from '../trpc/client'
 
 const ContestView = () => {
+  const { data: contestDetails, isLoading } =
+    trpc.contest.getContests.useQuery()
 
- const { data: contestDetails, isLoading } =
-    trpc.contest.getContests.useQuery();
-  
-console.log('contest', contestDetails);
+  console.log('contest', contestDetails)
   return (
     <>
       {/* Banner section here */}
@@ -30,7 +29,7 @@ console.log('contest', contestDetails);
       {/* Feature section here */}
       <Feature />
     </>
-  );
-};
+  )
+}
 
-export default ContestView;
+export default ContestView

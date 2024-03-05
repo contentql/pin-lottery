@@ -89,7 +89,7 @@ const Winning = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Winning;
+export default Winning

@@ -1,5 +1,5 @@
-const SingleFaq = ({ singleFaq}: { singleFaq: any }) => {
-  const { id, question, answer } = singleFaq;
+const SingleFaq = ({ singleFaq }: { singleFaq: any }) => {
+  const { id, question, answer } = singleFaq
 
   return (
     <div className='card'>
@@ -26,7 +26,7 @@ const SingleFaq = ({ singleFaq}: { singleFaq: any }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SingleFaq;
+export default SingleFaq

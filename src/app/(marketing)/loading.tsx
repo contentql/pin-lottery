@@ -1,7 +1,7 @@
-import Loading from '@/components/loading/PageLoading';
+import Loading from '@/components/loading/PageLoading'
 
 const MarketingLoading = () => {
-  return <Loading />;
-};
+  return <Loading />
+}
 
-export default MarketingLoading;
+export default MarketingLoading

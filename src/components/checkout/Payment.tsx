@@ -1,5 +1,5 @@
-import { BsPaypal } from 'react-icons/bs';
-import { FiCreditCard } from 'react-icons/fi';
+import { BsPaypal } from 'react-icons/bs'
+import { FiCreditCard } from 'react-icons/fi'
 
 const Payment = () => {
   return (
@@ -56,7 +56,7 @@ const Payment = () => {
         <a href='#0'>terms and conditions</a>
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Payment;
+export default Payment

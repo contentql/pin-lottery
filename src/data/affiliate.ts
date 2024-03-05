@@ -1,17 +1,17 @@
-import client_1 from '/public/images/client/1.png';
-import client_2 from '/public/images/client/2.png';
-import client_3 from '/public/images/client/3.png';
-import client_4 from '/public/images/client/4.png';
-import affiliate_1 from '/public/images/icon/affiliate/1.png';
-import affiliate_2 from '/public/images/icon/affiliate/2.png';
-import affiliate_3 from '/public/images/icon/affiliate/3.png';
-import affiliate_4 from '/public/images/icon/affiliate/4.png';
-import how_work_1 from '/public/images/icon/how-work/1.png';
-import how_work_2 from '/public/images/icon/how-work/2.png';
-import how_work_3 from '/public/images/icon/how-work/3.png';
-import top_affiliate_1 from '/public/images/top-affiliate/1.jpg';
-import top_affiliate_2 from '/public/images/top-affiliate/2.jpg';
-import top_affiliate_3 from '/public/images/top-affiliate/3.jpg';
+import client_1 from '/public/images/client/1.png'
+import client_2 from '/public/images/client/2.png'
+import client_3 from '/public/images/client/3.png'
+import client_4 from '/public/images/client/4.png'
+import affiliate_1 from '/public/images/icon/affiliate/1.png'
+import affiliate_2 from '/public/images/icon/affiliate/2.png'
+import affiliate_3 from '/public/images/icon/affiliate/3.png'
+import affiliate_4 from '/public/images/icon/affiliate/4.png'
+import how_work_1 from '/public/images/icon/how-work/1.png'
+import how_work_2 from '/public/images/icon/how-work/2.png'
+import how_work_3 from '/public/images/icon/how-work/3.png'
+import top_affiliate_1 from '/public/images/top-affiliate/1.jpg'
+import top_affiliate_2 from '/public/images/top-affiliate/2.jpg'
+import top_affiliate_3 from '/public/images/top-affiliate/3.jpg'
 
 export const how_it_work = [
   {
@@ -32,7 +32,7 @@ export const how_it_work = [
     desc: 'You receive commission on every refferal',
     icon: how_work_3,
   },
-];
+]
 
 export const affiliate_partner = [
   {
@@ -59,7 +59,7 @@ export const affiliate_partner = [
     desc: 'Lorem ipsum dolor sit amet, consectetur eget varius diameget.',
     icon: affiliate_4,
   },
-];
+]
 
 export const top_affiliate = [
   {
@@ -80,6 +80,6 @@ export const top_affiliate = [
     earn: '5,026.66',
     img: top_affiliate_3,
   },
-];
+]
 
-export const clients = [client_1, client_2, client_3, client_4, client_1];
+export const clients = [client_1, client_2, client_3, client_4, client_1]

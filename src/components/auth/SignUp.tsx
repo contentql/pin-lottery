@@ -1,21 +1,21 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { ZodError } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { ZodError } from 'zod'
 
 import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
-} from '@/lib/validators/auth-router/account-credentials-validator';
-import { trpc } from '@/trpc/client';
+} from '@/lib/validators/auth-router/account-credentials-validator'
+import { trpc } from '@/trpc/client'
 
 const SignUp = () => {
-  const [isEmailSent, setIsEmailSent] = useState(false);
-  const [sentEmail, setSentEmail] = useState('');
+  const [isEmailSent, setIsEmailSent] = useState(false)
+  const [sentEmail, setSentEmail] = useState('')
 
-  const router = useRouter();
+  const router = useRouter()
 
   const {
     register,
@@ -24,10 +24,10 @@ const SignUp = () => {
     formState: { errors },
   } = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator),
-  });
+  })
 
   const { mutate: addUser } = trpc.auth.createUser.useMutation({
-    onError: (err) => {
+    onError: err => {
       if (err.data?.code === 'CONFLICT') {
         toast.error(`This email already exists. Please sign in instead.`, {
           autoClose: 3000,
@@ -35,31 +35,31 @@ const SignUp = () => {
             toast.info('Redirecting to login page...', {
               autoClose: 2000,
               onClose: () => router.push('/login'),
-            });
+            })
           },
-        });
+        })
 
-        return;
+        return
       }
 
       if (err instanceof ZodError) {
-        toast.error(err.issues[0].message);
+        toast.error(err.issues[0].message)
 
-        return;
+        return
       }
 
-      console.error('Something went wrong. Please try again.');
+      console.error('Something went wrong. Please try again.')
     },
     onSuccess: ({ sentEmailTo }) => {
-      setValue('user_name', '');
-      setValue('email', '');
-      setValue('password', '');
-      setValue('confirm_password', '');
+      setValue('user_name', '')
+      setValue('email', '')
+      setValue('password', '')
+      setValue('confirm_password', '')
 
-      setIsEmailSent(true);
-      setSentEmail(sentEmailTo);
+      setIsEmailSent(true)
+      setSentEmail(sentEmailTo)
     },
-  });
+  })
 
   const onSubmit = ({
     user_name,
@@ -67,8 +67,8 @@ const SignUp = () => {
     password,
     confirm_password,
   }: TAuthCredentialsValidator) => {
-    addUser({ user_name, email, password, confirm_password });
-  };
+    addUser({ user_name, email, password, confirm_password })
+  }
 
   return isEmailSent ? (
     <div className='email-container'>
@@ -183,7 +183,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

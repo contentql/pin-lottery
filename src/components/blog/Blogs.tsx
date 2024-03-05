@@ -1,5 +1,5 @@
-import LeftSide from './LeftSide';
-import RightSide from './RightSide';
+import LeftSide from './LeftSide'
+import RightSide from './RightSide'
 
 const Blogs = ({ blogData }: any) => {
   return (
@@ -10,7 +10,7 @@ const Blogs = ({ blogData }: any) => {
       {/* Right side section here */}
       <RightSide />
     </div>
-  );
-};
+  )
+}
 
-export default Blogs;
+export default Blogs
