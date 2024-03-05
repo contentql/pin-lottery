@@ -8,7 +8,8 @@ import {
   LoginValidator,
   TLoginValidator,
 } from '@/lib/validators/auth-router/login-validator';
-import { trpc } from '@/trpc/client';
+import { useAuth } from '@/providers/Auth';
+import { useMutation } from '@tanstack/react-query';
 
 const Login = () => {
   const {
@@ -21,9 +22,13 @@ const Login = () => {
   });
 
   const router = useRouter();
-  const { mutate: loginUser } = trpc.auth.signIn.useMutation({
-    onError: (err) => {
-      if (err.data?.code === 'UNAUTHORIZED') {
+
+  const { login } = useAuth();
+
+  const { mutate: loginUser } = useMutation({
+    mutationFn: (args: { email: string; password: string }) => login(args),
+    onError: (err: Error) => {
+      if (err.message === 'Invalid login') {
         toast.error(`Invalid email or password.`);
       }
 
@@ -34,7 +39,9 @@ const Login = () => {
       console.error(err);
     },
     onSuccess: () => {
-      setValue('email', ''), setValue('password', ''), router.push('/user');
+      setValue('email', '');
+      setValue('password', '');
+      router.push('/user');
     },
   });
 

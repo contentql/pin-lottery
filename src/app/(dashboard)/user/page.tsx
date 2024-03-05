@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { getMeUser } from '@/utils/getMeUser';
 import UserView from '@/views/UserView';
 
 export const metadata: Metadata = {
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   description: 'This is a user page',
 };
 
-const User = () => {
+const User = async () => {
+  await getMeUser({ nullUserRedirect: '/login' });
+
   return <UserView />;
 };
 

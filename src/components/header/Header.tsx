@@ -12,7 +12,7 @@ const Header = () => {
   const [windowHeight, setWindowHeight] = useState(0);
   const [show, setShow] = useState(false);
 
-  const {status }=useAuth()
+  const { status } = useAuth();
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text);
@@ -104,12 +104,14 @@ const Header = () => {
                 </Link>
 
                 <div className='right'>
-                  <div className='product__cart'>
-                    <Link href='/cart' className='amount__btn'>
-                      <i className='las la-shopping-basket'></i>
-                      <span className='cart__num'>{cartData.length}</span>
-                    </Link>
-                  </div>
+                  {status === 'loggedIn' && (
+                    <div className='product__cart'>
+                      <Link href='/cart' className='amount__btn'>
+                        <i className='las la-shopping-basket'></i>
+                        <span className='cart__num'>{cartData.length}</span>
+                      </Link>
+                    </div>
+                  )}
                   {status === 'loggedIn' ? (
                     <Link
                       href='/user'
