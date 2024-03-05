@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { getMeUser } from '@/utils/getMeUser';
 import UserLotteryView from '@/views/UserLotteryView';
 
 export const metadata: Metadata = {
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   description: 'This is a user lottery page',
 };
 
-const UserLottery = () => {
+const UserLottery = async () => {
+  await getMeUser({ nullUserRedirect: '/login' });
+
   return <UserLotteryView />;
 };
 

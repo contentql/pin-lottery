@@ -1,16 +1,21 @@
-import { logout } from '@/queries/auth/logout';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import PersonalInfo from '../modals/user-information/PersonalInfo';
+
+import PersonalInfo from '@/components/modals/user-information/PersonalInfo';
+
+import { useAuth } from '@/providers/Auth';
+
 import team_obj from '/public/images/elements/team-obj.png';
 
 const LeftSideMenu = () => {
   const pathname = usePathname();
 
   const router = useRouter();
+
+  const { logout } = useAuth();
 
   const {
     isPending: isLogoutPending,
@@ -60,7 +65,7 @@ const LeftSideMenu = () => {
         </div>
         <h3 className='user-card__name'>Albert Owens</h3>
         <p className='user-card__id'>ID : 19535909</p>
-        <PersonalInfo/>
+        <PersonalInfo />
       </div>
       <div className='user-action-card'>
         <ul className='user-action-list'>

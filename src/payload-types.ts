@@ -11,6 +11,8 @@ export interface Config {
     users: User;
     media: Media;
     contest: Contest;
+    contact: Contact;
+    faq: Faq;
     tags: Tag;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -108,7 +110,6 @@ export interface Contest {
   id: string;
   title?: string | null;
   ticket_price?: string | null;
-  img?: string | null;
   contest_no?: string | null;
   day_remain?: number | null;
   ticket_remain?: number | null;
@@ -116,6 +117,7 @@ export interface Contest {
     relationTo: 'tags';
     value: string | Tag;
   } | null;
+  img?: string | Media | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -126,6 +128,35 @@ export interface Contest {
 export interface Tag {
   id: string;
   tag?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  subject?: string | null;
+  message?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: string;
+  faqs?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }

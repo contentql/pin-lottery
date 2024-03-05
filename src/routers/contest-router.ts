@@ -16,6 +16,7 @@ export const contestRouter = router({
             tag,
             ticket_price,
             ticket_remain,
+            img,
             updatedAt,
             createdAt,
         }) => {
@@ -27,6 +28,7 @@ export const contestRouter = router({
               tag: tag,
               ticket_remain: ticket_remain,
               ticket_price: ticket_price,
+              img:img,
               updatedAt: updatedAt,
               createdAt: createdAt,
             };
