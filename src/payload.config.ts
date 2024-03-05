@@ -5,6 +5,7 @@ import { slateEditor } from '@payloadcms/richtext-slate';
 import dotenv from 'dotenv';
 import path from 'path';
 import { buildConfig } from 'payload/config';
+import Blog from './collections/Blog';
 import Contact from './collections/Contact';
 import Contest from './collections/Contest';
 import Faq from './collections/Faq';
@@ -19,7 +20,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
-  collections: [Users, Media, Contest, Contact,Faq, Tags],
+  collections: [Users, Media, Contest, Contact, Blog,Faq, Tags],
   routes: {
     admin: '/admin',
   },
