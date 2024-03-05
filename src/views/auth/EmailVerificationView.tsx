@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 
 import VerificationFailed from '@/components/auth/verification-status/VerificationFailed';
-import VerificationLoading from '@/components/auth/verification-status/VerificationLoading';
 import VerificationSuccess from '@/components/auth/verification-status/VerificationSuccess';
+import VerificationLoading from '@/components/loading/VerificationLoading';
 
 import { trpc } from '@/trpc/client';
 import { toast } from 'react-toastify';
