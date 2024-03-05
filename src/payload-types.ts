@@ -108,16 +108,35 @@ export interface Media {
  */
 export interface Contest {
   id: string;
-  title?: string | null;
-  ticket_price?: string | null;
-  contest_no?: string | null;
-  day_remain?: number | null;
-  ticket_remain?: number | null;
+  title: string;
+  product_price: number;
+  ticket_price: number;
+  img?: string | Media | null;
   tag?: {
     relationTo: 'tags';
     value: string | Tag;
   } | null;
-  img?: string | Media | null;
+  contest_no: string;
+  day_remain?: number | null;
+  ticket_remain?: number | null;
+  product_features: {
+    images?:
+      | {
+          product_images?: string | Media | null;
+          id?: string | null;
+        }[]
+      | null;
+    features?:
+      | {
+          [k: string]: unknown;
+        }[]
+      | null;
+    description?:
+      | {
+          [k: string]: unknown;
+        }[]
+      | null;
+  };
   updatedAt: string;
   createdAt: string;
 }

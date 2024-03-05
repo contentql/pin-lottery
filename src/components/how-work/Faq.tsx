@@ -31,7 +31,7 @@ const Faq = () => {
             </div>
             <div className='accordion cmn-accordion' id='accordionExample'>
               {faqs?.map((singleFaq, i) => (
-                <SingleFaq key={singleFaq.id} index={i} singleFaq ={singleFaq} />
+                <SingleFaq key={singleFaq.id} singleFaq ={singleFaq} />
               ))}
             </div>
           </div>
