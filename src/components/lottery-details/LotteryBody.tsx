@@ -1,7 +1,7 @@
-import BuyLotteryTicketCard from '@/components/cards/BuyLotteryTicketCard';
-import QuickPick from '@/components/quickPick/QuickPick';
+import BuyLotteryTicketCard from '@/components/cards/BuyLotteryTicketCard'
+import QuickPick from '@/components/quickPick/QuickPick'
 
-import Lotteries from './Lotteries';
+import Lotteries from './Lotteries'
 
 const LotteryBody = () => {
   return (
@@ -23,7 +23,7 @@ const LotteryBody = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default LotteryBody;
+export default LotteryBody

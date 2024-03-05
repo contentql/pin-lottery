@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 
 const Banner = () => {
   return (
@@ -20,7 +20,7 @@ const Banner = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Banner;
+export default Banner

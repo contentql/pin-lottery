@@ -9,14 +9,14 @@ export const currentUser = async (token: string) => {
           'Content-Type': 'application/json',
           Authorization: `JWT ${token}`,
         },
-      }
-    );
+      },
+    )
 
-    const data = await res.json();
+    const data = await res.json()
 
-    return data;
+    return data
   } catch (err) {
-    console.log(err);
-    throw err;
+    console.log(err)
+    throw err
   }
-};
+}

@@ -1,5 +1,5 @@
-import AllTransactions from './AllTransactions';
-import Balance from './Balance';
+import AllTransactions from './AllTransactions'
+import Balance from './Balance'
 
 const RightSilde = () => {
   return (
@@ -10,7 +10,7 @@ const RightSilde = () => {
       {/* All Transactions */}
       <AllTransactions />
     </div>
-  );
-};
+  )
+}
 
-export default RightSilde;
+export default RightSilde

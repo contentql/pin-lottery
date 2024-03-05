@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { BsFillPlayFill } from 'react-icons/bs';
+import { useState } from 'react'
+import { BsFillPlayFill } from 'react-icons/bs'
 
-import VedioModal from '@/components/vedioModal/VedioModal';
+import VedioModal from '@/components/vedioModal/VedioModal'
 
 const Vedio = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className='pb-120 mt-minus-150'>
@@ -30,7 +30,7 @@ const Vedio = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Vedio;
+export default Vedio

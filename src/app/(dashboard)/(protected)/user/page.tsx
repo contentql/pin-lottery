@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import UserView from '@/views/UserView';
+import UserView from '@/views/UserView'
 
 export const metadata: Metadata = {
   title: 'User',
   description: 'This is a user page',
-};
+}
 
 const User = async () => {
-  return <UserView />;
-};
+  return <UserView />
+}
 
-export default User;
+export default User

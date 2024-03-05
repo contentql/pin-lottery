@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import CheckoutView from '@/views/CheckoutView';
+import CheckoutView from '@/views/CheckoutView'
 
 export const metadata: Metadata = {
   title: 'Checkout',
   description: 'this is a checkout page',
-};
+}
 
 const Checkout = async () => {
-  return <CheckoutView />;
-};
+  return <CheckoutView />
+}
 
-export default Checkout;
+export default Checkout

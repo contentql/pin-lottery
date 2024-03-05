@@ -1,6 +1,6 @@
-import { BsChevronDown } from 'react-icons/bs';
+import { BsChevronDown } from 'react-icons/bs'
 
-import { postDrawData } from '@/data/userData';
+import { postDrawData } from '@/data/userData'
 
 const PastDraws = () => {
   return (
@@ -17,7 +17,7 @@ const PastDraws = () => {
             </tr>
           </thead>
           <tbody>
-            {postDrawData.map((singleData) => (
+            {postDrawData.map(singleData => (
               <tr key={singleData.id}>
                 <td>
                   <span className='date'>{singleData.draw}</span>
@@ -57,7 +57,7 @@ const PastDraws = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PastDraws;
+export default PastDraws

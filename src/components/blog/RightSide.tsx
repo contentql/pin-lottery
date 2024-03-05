@@ -1,18 +1,18 @@
-import Link from 'next/link';
+import Link from 'next/link'
 import {
   FaFacebookF,
   FaInstagram,
   FaPinterestP,
   FaRedditAlien,
   FaTwitter,
-} from 'react-icons/fa';
+} from 'react-icons/fa'
 
-import Social from '@/components/social/Social';
+import Social from '@/components/social/Social'
 
-import { blogData } from '@/data/blogData';
+import { blogData } from '@/data/blogData'
 
-import Categories from './Categories';
-import LatestPost from './LatestPost';
+import Categories from './Categories'
+import LatestPost from './LatestPost'
 
 const RightSide = () => {
   return (
@@ -65,7 +65,7 @@ const RightSide = () => {
         </div>
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default RightSide;
+export default RightSide

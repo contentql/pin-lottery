@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import { top_affiliate } from '@/data/affiliate';
+import { top_affiliate } from '@/data/affiliate'
 
 const TopAffiliate = () => {
   return (
@@ -36,7 +36,7 @@ const TopAffiliate = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default TopAffiliate;
+export default TopAffiliate

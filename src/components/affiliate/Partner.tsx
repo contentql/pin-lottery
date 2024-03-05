@@ -1,8 +1,8 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import { affiliate_partner } from '@/data/affiliate';
+import { affiliate_partner } from '@/data/affiliate'
 
-import affiliate_bg from '/public/images/elements/affiliate-bg.jpg';
+import affiliate_bg from '/public/images/elements/affiliate-bg.jpg'
 
 const Partner = () => {
   return (
@@ -40,7 +40,7 @@ const Partner = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Partner;
+export default Partner

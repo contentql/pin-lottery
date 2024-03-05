@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
 const WinnerCard = ({ winner }: any) => {
   const {
@@ -8,7 +8,7 @@ const WinnerCard = ({ winner }: any) => {
     contest_no,
     winer_img,
     winning_price_img,
-  } = winner;
+  } = winner
   return (
     <div className='winner-card mb-30'>
       <div className='winner-card__thumb'>
@@ -43,7 +43,7 @@ const WinnerCard = ({ winner }: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WinnerCard;
+export default WinnerCard

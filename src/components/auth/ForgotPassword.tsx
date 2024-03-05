@@ -1,18 +1,18 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { ZodError } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { ZodError } from 'zod'
 
-import { trpc } from '@/trpc/client';
+import { trpc } from '@/trpc/client'
 import {
   ForgotPasswordValidator,
   TForgotPasswordValidator,
-} from '../../lib/validators/auth-router/forgot-password-validator';
+} from '../../lib/validators/auth-router/forgot-password-validator'
 
 const ForgotPassword = () => {
-  const [sentEmail, setSentEmail] = useState('');
-  const [isEmailSent, setIsEmailSent] = useState(false);
+  const [sentEmail, setSentEmail] = useState('')
+  const [isEmailSent, setIsEmailSent] = useState(false)
   const {
     register,
     getValues,
@@ -20,35 +20,35 @@ const ForgotPassword = () => {
     formState: { errors },
   } = useForm<TForgotPasswordValidator>({
     resolver: zodResolver(ForgotPasswordValidator),
-  });
+  })
 
   const { mutate: forgotPassword } = trpc.auth.forgotPassword.useMutation({
-    onError: (err) => {
+    onError: err => {
       if (err.data?.code === 'CONFLICT') {
         // in toast
-        toast.error(`Email not found`);
-        return;
+        toast.error(`Email not found`)
+        return
       }
 
       if (err instanceof ZodError) {
         // in toast
-        console.error(err.issues[0].message);
+        console.error(err.issues[0].message)
 
-        return;
+        return
       }
 
-      console.error('Something went wrong. Please try again.');
+      console.error('Something went wrong. Please try again.')
     },
     onSuccess: () => {
-      setIsEmailSent(true);
-      setSentEmail(getValues('email'));
-      toast.success(`Email sent successfully`);
+      setIsEmailSent(true)
+      setSentEmail(getValues('email'))
+      toast.success(`Email sent successfully`)
     },
-  });
+  })
 
   const onSubmit = ({ email }: TForgotPasswordValidator) => {
-    forgotPassword({ email });
-  };
+    forgotPassword({ email })
+  }
 
   return isEmailSent ? (
     <div className='email-container'>
@@ -111,7 +111,7 @@ const ForgotPassword = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ForgotPassword;
+export default ForgotPassword

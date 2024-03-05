@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import Login from '@/components/auth/Login';
+import Login from '@/components/auth/Login'
 
 const LoginView = () => {
-  return <Login />;
-};
+  return <Login />
+}
 
-export default LoginView;
+export default LoginView

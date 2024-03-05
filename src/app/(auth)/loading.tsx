@@ -1,7 +1,7 @@
-import Loading from '@/components/loading/PageLoading';
+import Loading from '@/components/loading/PageLoading'
 
 const AuthLoading = () => {
-  return <Loading />;
-};
+  return <Loading />
+}
 
-export default AuthLoading;
+export default AuthLoading

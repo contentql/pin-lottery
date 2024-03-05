@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload/types'
 const Faq: CollectionConfig = {
   slug: 'faq',
 
@@ -18,6 +18,6 @@ const Faq: CollectionConfig = {
       ],
     },
   ],
-};
+}
 
-export default Faq;
+export default Faq

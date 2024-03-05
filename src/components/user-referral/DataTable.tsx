@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import { BsChevronDown } from 'react-icons/bs';
-import { FaRegCalendarAlt } from 'react-icons/fa';
+import { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import { BsChevronDown } from 'react-icons/bs'
+import { FaRegCalendarAlt } from 'react-icons/fa'
 
 //css
-import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datepicker/dist/react-datepicker.css'
 
 const DataTable = () => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
+  const [dateRange, setDateRange] = useState([null, null])
+  const [startDate, endDate] = dateRange
   return (
     <div className='referral-transaction'>
       <div className='all-transaction__header'>
@@ -19,7 +19,7 @@ const DataTable = () => {
             startDate={startDate}
             endDate={endDate}
             onChange={(update: any) => {
-              setDateRange(update);
+              setDateRange(update)
             }}
             placeholderText='min - max date'
           />
@@ -118,7 +118,7 @@ const DataTable = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DataTable;
+export default DataTable

@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import Banner from '@/components/common/Banner';
-import LotteryBody from '@/components/lottery-details/LotteryBody';
+import Banner from '@/components/common/Banner'
+import LotteryBody from '@/components/lottery-details/LotteryBody'
 
 const LotteryDetailsView = () => {
   return (
@@ -21,7 +21,7 @@ const LotteryDetailsView = () => {
       {/* Lottery body here */}
       <LotteryBody />
     </>
-  );
-};
+  )
+}
 
-export default LotteryDetailsView;
+export default LotteryDetailsView

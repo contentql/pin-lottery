@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import Countdown from 'react-countdown';
+import { useContext } from 'react'
+import Countdown from 'react-countdown'
 
-import { AppContext } from '@/context/context';
+import { AppContext } from '@/context/context'
 
 const renderer = ({ hours, minutes, seconds, days }: any) => {
   return (
@@ -23,11 +23,11 @@ const renderer = ({ hours, minutes, seconds, days }: any) => {
         <p>s</p>
       </div>
     </>
-  );
-};
+  )
+}
 
 const Actions = () => {
-  const { clearAllTicketTwo }: any = useContext(AppContext);
+  const { clearAllTicketTwo }: any = useContext(AppContext)
 
   return (
     <div className='action-header'>
@@ -70,7 +70,7 @@ const Actions = () => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Actions;
+export default Actions

@@ -1,10 +1,10 @@
-import Countdown from 'react-countdown';
+import Countdown from 'react-countdown'
 
-import RendererCountdown from '@/components/common/RendererCountdown';
-import VehicleOverview from '@/components/common/VehicleOverview';
+import RendererCountdown from '@/components/common/RendererCountdown'
+import VehicleOverview from '@/components/common/VehicleOverview'
 
-import ContestRight from './ContestRight';
-import ContestSlider from './ContestSlider';
+import ContestRight from './ContestRight'
+import ContestSlider from './ContestSlider'
 
 const ContestBody = () => {
   return (
@@ -104,7 +104,7 @@ const ContestBody = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ContestBody;
+export default ContestBody

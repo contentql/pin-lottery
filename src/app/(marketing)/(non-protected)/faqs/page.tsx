@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import FaqView from '@/views/FaqView';
+import FaqView from '@/views/FaqView'
 
 export const metadata: Metadata = {
   title: 'Faq',
   description: 'This is a Faq page',
-};
+}
 
 const Faq = () => {
-  return <FaqView />;
-};
+  return <FaqView />
+}
 
-export default Faq;
+export default Faq

@@ -1,9 +1,9 @@
-import contest_1 from '/public/images/contest/1.png';
-import contest_2 from '/public/images/contest/2.png';
-import contest_3 from '/public/images/contest/3.png';
-import contest_4 from '/public/images/contest/4.png';
-import contest_5 from '/public/images/contest/5.png';
-import contest_6 from '/public/images/contest/6.png';
+import contest_1 from '/public/images/contest/1.png'
+import contest_2 from '/public/images/contest/2.png'
+import contest_3 from '/public/images/contest/3.png'
+import contest_4 from '/public/images/contest/4.png'
+import contest_5 from '/public/images/contest/5.png'
+import contest_6 from '/public/images/contest/6.png'
 
 const contestData = [
   {
@@ -66,6 +66,6 @@ const contestData = [
     ticket_remain: 9805,
     tags: ['dream_car', 'lifestyle'],
   },
-];
+]
 
-export default contestData;
+export default contestData

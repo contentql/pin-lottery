@@ -1,26 +1,26 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-import contest_bg from '/public/images/elements/contest-bg.png';
-import box from '/public/images/icon/btn/box.png';
-import car from '/public/images/icon/btn/car.png';
+import contest_bg from '/public/images/elements/contest-bg.png'
+import box from '/public/images/icon/btn/box.png'
+import car from '/public/images/icon/btn/car.png'
 
-import ContestCard from '@/components/cards/ContestCard';
+import ContestCard from '@/components/cards/ContestCard'
 
-import contestData from '@/data/contestData';
+import contestData from '@/data/contestData'
 
 const Contest = () => {
-  const [filterData, setFilterData] = useState([]);
-  const [filterBy, setFilterBy] = useState('dream_car');
+  const [filterData, setFilterData] = useState([])
+  const [filterBy, setFilterBy] = useState('dream_car')
 
   useEffect(() => {
-    const data = contestData.filter((itm) =>
-      itm.tags?.find((itme) => itme === filterBy)
-    ) as [];
+    const data = contestData.filter(itm =>
+      itm.tags?.find(itme => itme === filterBy),
+    ) as []
 
-    setFilterData(data);
-  }, [filterBy]);
+    setFilterData(data)
+  }, [filterBy])
 
   return (
     <section className='position-relative pt-120 pb-120'>
@@ -130,7 +130,7 @@ const Contest = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Contest;
+export default Contest

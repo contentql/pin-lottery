@@ -1,16 +1,14 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import faq_el from '/public/images/elements/faq-el.png';
+import faq_el from '/public/images/elements/faq-el.png'
 
-import SingleFaq from '@/components/singleFaq/SingleFaq';
+import SingleFaq from '@/components/singleFaq/SingleFaq'
 
-
-import { trpc } from '@/trpc/client';
+import { trpc } from '@/trpc/client'
 
 const Faq = () => {
-
-  const { data: faqs } = trpc.public.getFaqs.useQuery();
-  console.log('faqs', faqs);
+  const { data: faqs } = trpc.public.getFaqs.useQuery()
+  console.log('faqs', faqs)
   return (
     <section className='pb-120 position-relative'>
       <div className='faq-el'>
@@ -31,14 +29,14 @@ const Faq = () => {
             </div>
             <div className='accordion cmn-accordion' id='accordionExample'>
               {faqs?.map((singleFaq, i) => (
-                <SingleFaq key={singleFaq.id} singleFaq ={singleFaq} />
+                <SingleFaq key={singleFaq.id} singleFaq={singleFaq} />
               ))}
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Faq;
+export default Faq

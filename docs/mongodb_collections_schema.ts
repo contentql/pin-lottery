@@ -141,4 +141,4 @@ const collections = [
       { name: 'winning_price_img', type: 'String' },
     ],
   },
-];
+]

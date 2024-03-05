@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import { how_it_work } from '@/data/affiliate';
+import { how_it_work } from '@/data/affiliate'
 
 const Getting = () => {
   return (
@@ -39,7 +39,7 @@ const Getting = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Getting;
+export default Getting

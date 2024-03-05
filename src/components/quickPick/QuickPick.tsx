@@ -11,7 +11,7 @@ const QuickPick = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default QuickPick;
+export default QuickPick

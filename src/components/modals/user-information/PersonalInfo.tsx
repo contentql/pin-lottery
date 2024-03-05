@@ -1,42 +1,53 @@
 'use client'
 
-import { trpc } from '@/trpc/client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import { trpc } from '@/trpc/client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
-import { TUserDetailsValidator, UserDetailsValidator } from '@/lib/validators/auth-router/user-details-validator';
-import Modal from './Modal';
+import {
+  TUserDetailsValidator,
+  UserDetailsValidator,
+} from '@/lib/validators/auth-router/user-details-validator'
+import Modal from './Modal'
 
 const PersonalInfo = () => {
-
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const openModal = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
 
   const closeModal = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
-  const { register,handleSubmit,formState:{errors} } = useForm<TUserDetailsValidator>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TUserDetailsValidator>({
     resolver: zodResolver(UserDetailsValidator),
-  });
+  })
 
   const { mutate: userUpdate } = trpc.auth.updateUserDetails.useMutation({
     onSuccess: () => {
       toast.success(`Details updated successfully`)
     },
     onError: () => {
-      toast.error(`Unable to update user details`);
-    }
+      toast.error(`Unable to update user details`)
+    },
   })
 
-  const onSubmit = ({first_name,last_name,address,phone_number}: TUserDetailsValidator) => {
-    userUpdate({first_name,last_name, address, phone_number });
-  };
+  const onSubmit = ({
+    first_name,
+    last_name,
+    address,
+    phone_number,
+  }: TUserDetailsValidator) => {
+    userUpdate({ first_name, last_name, address, phone_number })
+  }
 
   return (
     <div>
@@ -53,7 +64,7 @@ const PersonalInfo = () => {
                   <form onSubmit={handleSubmit(onSubmit)} noValidate>
                     <div className='form-group'>
                       <label>
-                       First Name <sup>*</sup>
+                        First Name <sup>*</sup>
                       </label>
                       <input
                         {...register('first_name')}
@@ -134,7 +145,7 @@ const PersonalInfo = () => {
         </div>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default PersonalInfo;
+export default PersonalInfo

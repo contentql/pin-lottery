@@ -1,25 +1,26 @@
-import { webpackBundler } from '@payloadcms/bundler-webpack';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
-import { slateEditor } from '@payloadcms/richtext-slate';
-import dotenv from 'dotenv';
-import path from 'path';
-import { buildConfig } from 'payload/config';
-import Contact from './collections/Contact';
-import Contest from './collections/Contest';
-import Faq from './collections/Faq';
-import { Media } from './collections/Media';
-import Tags from './collections/Tags';
-import Users from './collections/Users';
-import { s3StorageAdapter } from './plugins/s3';
+import { webpackBundler } from '@payloadcms/bundler-webpack'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { slateEditor } from '@payloadcms/richtext-slate'
+import dotenv from 'dotenv'
+import path from 'path'
+import { buildConfig } from 'payload/config'
+import Blog from './collections/Blog'
+import Contact from './collections/Contact'
+import Contest from './collections/Contest'
+import Faq from './collections/Faq'
+import { Media } from './collections/Media'
+import Tags from './collections/Tags'
+import Users from './collections/Users'
+import { s3StorageAdapter } from './plugins/s3'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
-});
+})
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
-  collections: [Users, Media, Contest, Contact,Faq, Tags],
+  collections: [Users, Media, Contest, Contact, Blog, Faq, Tags],
   routes: {
     admin: '/admin',
   },
@@ -32,8 +33,8 @@ export default buildConfig({
         fs: false,
         util: false,
         os: false,
-      };
-      return config;
+      }
+      return config
     },
     meta: {
       titleSuffix: '- ContentQL',
@@ -60,4 +61,4 @@ export default buildConfig({
   },
   cors: [process.env.NEXT_PUBLIC_SERVER_URL!].filter(Boolean),
   csrf: [process.env.NEXT_PUBLIC_SERVER_URL!].filter(Boolean),
-});
+})

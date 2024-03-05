@@ -1,21 +1,21 @@
-import { useMutation } from '@tanstack/react-query';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
+import { useMutation } from '@tanstack/react-query'
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
-import PersonalInfo from '@/components/modals/user-information/PersonalInfo';
+import PersonalInfo from '@/components/modals/user-information/PersonalInfo'
 
-import { useAuth } from '@/providers/Auth';
+import { useAuth } from '@/providers/Auth'
 
-import team_obj from '/public/images/elements/team-obj.png';
+import team_obj from '/public/images/elements/team-obj.png'
 
 const LeftSideMenu = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const { logout } = useAuth();
+  const { logout } = useAuth()
 
   const {
     isPending: isLogoutPending,
@@ -25,9 +25,9 @@ const LeftSideMenu = () => {
     mutationKey: ['/api/users/logout', 'post'],
     mutationFn: () => logout(),
     onSuccess: async () => {
-      router.push('/login');
+      router.push('/login')
     },
-    onError: async (err) => {
+    onError: async err => {
       if (err.message === 'CONFLICT') {
         toast.error('User not found.', {
           autoClose: 3000,
@@ -35,18 +35,18 @@ const LeftSideMenu = () => {
             toast.info('Redirecting to login page...', {
               autoClose: 2000,
               onClose: () => router.push('/login'),
-            });
+            })
           },
-        });
+        })
       }
 
-      console.error('Something went wrong. Please try again.');
+      console.error('Something went wrong. Please try again.')
     },
-  });
+  })
 
   const handleLogout = () => {
-    logoutMutation();
-  };
+    logoutMutation()
+  }
 
   return (
     <div className='col-lg-4'>
@@ -92,7 +92,7 @@ const LeftSideMenu = () => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LeftSideMenu;
+export default LeftSideMenu

@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { BsChevronLeft } from 'react-icons/bs';
+import Link from 'next/link'
+import { BsChevronLeft } from 'react-icons/bs'
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,7 +11,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default AuthLayout;
+export default AuthLayout

@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
+import Image from 'next/image'
 
-import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
+import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 
-import AboutUs from '@/components/about/AboutUs';
-import Exhaustive from '@/components/about/Exhaustive';
-import Banner from '@/components/common/Banner';
-import Testimonial from '@/components/common/Testimonial';
-import Team from '@/components/team/Team';
+import AboutUs from '@/components/about/AboutUs'
+import Exhaustive from '@/components/about/Exhaustive'
+import Banner from '@/components/common/Banner'
+import Testimonial from '@/components/common/Testimonial'
+import Team from '@/components/team/Team'
 
 const AboutView = () => {
   return (
@@ -31,7 +31,7 @@ const AboutView = () => {
       <Testimonial />
       <Team />
     </>
-  );
-};
+  )
+}
 
-export default AboutView;
+export default AboutView

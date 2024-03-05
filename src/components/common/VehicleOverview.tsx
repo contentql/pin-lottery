@@ -1,11 +1,11 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import specification_1 from '/public/images/icon/specification/1.png';
-import specification_2 from '/public/images/icon/specification/2.png';
-import specification_3 from '/public/images/icon/specification/3.png';
-import specification_4 from '/public/images/icon/specification/4.png';
-import specification_5 from '/public/images/icon/specification/5.png';
-import specification_6 from '/public/images/icon/specification/6.png';
+import specification_1 from '/public/images/icon/specification/1.png'
+import specification_2 from '/public/images/icon/specification/2.png'
+import specification_3 from '/public/images/icon/specification/3.png'
+import specification_4 from '/public/images/icon/specification/4.png'
+import specification_5 from '/public/images/icon/specification/5.png'
+import specification_6 from '/public/images/icon/specification/6.png'
 
 const VehicleOverview = () => {
   return (
@@ -93,7 +93,7 @@ const VehicleOverview = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default VehicleOverview;
+export default VehicleOverview

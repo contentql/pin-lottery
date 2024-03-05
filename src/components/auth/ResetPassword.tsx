@@ -1,23 +1,23 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { ZodError } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { ZodError } from 'zod'
 
 import {
   ResetPasswordValidator,
   TResetPasswordValidator,
-} from '@/lib/validators/auth-router/reset-password-validator';
-import { trpc } from '@/trpc/client';
+} from '@/lib/validators/auth-router/reset-password-validator'
+import { trpc } from '@/trpc/client'
 
 interface PageProps {
   searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
+    [key: string]: string | string[] | undefined
+  }
 }
 const ResetPassword = ({ searchParams }: PageProps) => {
-  const token = searchParams?.token as string;
-  const router = useRouter();
+  const token = searchParams?.token as string
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -28,23 +28,23 @@ const ResetPassword = ({ searchParams }: PageProps) => {
       token: token,
     },
     resolver: zodResolver(ResetPasswordValidator),
-  });
+  })
 
   const { mutate: resetPassword } = trpc.auth.resetPassword.useMutation({
     onSuccess: () => {
-      toast.success(`Success! Your password has been reset`);
-      router.push('/user');
+      toast.success(`Success! Your password has been reset`)
+      router.push('/user')
     },
     onError: (err: any) => {
       if (err.data?.code === 'UNAUTHORIZED') {
-        toast.error(`Invalid token, please recheck your email.`);
+        toast.error(`Invalid token, please recheck your email.`)
       }
       if (err instanceof ZodError) {
-        toast.error(`Please provide correct information.`);
-        return;
+        toast.error(`Please provide correct information.`)
+        return
       }
     },
-  });
+  })
 
   const onSubmit = ({
     password,
@@ -55,8 +55,8 @@ const ResetPassword = ({ searchParams }: PageProps) => {
       password,
       token: token,
       confirmPassword,
-    });
-  };
+    })
+  }
 
   return (
     <div className='register-main'>
@@ -109,7 +109,7 @@ const ResetPassword = ({ searchParams }: PageProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ResetPassword;
+export default ResetPassword

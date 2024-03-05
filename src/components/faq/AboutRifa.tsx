@@ -89,7 +89,7 @@ const AboutRifa = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AboutRifa;
+export default AboutRifa

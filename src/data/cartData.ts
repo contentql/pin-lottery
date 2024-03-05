@@ -31,6 +31,6 @@ const cartData = [
     id: 8,
     ticket: [1, 24, 50, 2, 3, 4, 9],
   },
-];
+]
 
-export default cartData;
+export default cartData

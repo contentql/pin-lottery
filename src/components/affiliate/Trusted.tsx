@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import Slider from 'react-slick';
+import Image from 'next/image'
+import Slider from 'react-slick'
 
-import { clients } from '@/data/affiliate';
+import { clients } from '@/data/affiliate'
 
-import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick.css'
 
 const Trusted = () => {
   const settings = {
@@ -27,7 +27,7 @@ const Trusted = () => {
         },
       },
     ],
-  };
+  }
   return (
     <section className='pb-120'>
       <div className='container'>
@@ -49,7 +49,7 @@ const Trusted = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Trusted;
+export default Trusted

@@ -89,7 +89,7 @@ const ResultsAndAlerts = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ResultsAndAlerts;
+export default ResultsAndAlerts

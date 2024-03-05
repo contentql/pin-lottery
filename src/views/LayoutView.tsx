@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import React from 'react';
+import React from 'react'
 
-import Footer from '@/components/footer/Footer';
-import Header from '@/components/header/Header';
-import ScrollToTop from '@/components/scrollToTop/ScrollToTop';
+import Footer from '@/components/footer/Footer'
+import Header from '@/components/header/Header'
+import ScrollToTop from '@/components/scrollToTop/ScrollToTop'
 
 const LayoutView = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -26,7 +26,7 @@ const LayoutView = ({ children }: { children: React.ReactNode }) => {
       {/* scroll-to-top start */}
       <ScrollToTop />
     </>
-  );
-};
+  )
+}
 
-export default LayoutView;
+export default LayoutView

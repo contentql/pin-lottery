@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import LeftSideMenu from '@/components/common/LeftSideMenu';
-import RightSide from '@/components/user-referral/RightSide';
+import LeftSideMenu from '@/components/common/LeftSideMenu'
+import RightSide from '@/components/user-referral/RightSide'
 
 const UserReferralView = () => {
   return (
@@ -20,7 +20,7 @@ const UserReferralView = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default UserReferralView;
+export default UserReferralView

@@ -1,42 +1,42 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-import tag from '/public/images/icon/btn/tag.png';
+import tag from '/public/images/icon/btn/tag.png'
 
-import cartData from '@/data/cartData';
-import { useAuth } from '@/providers/Auth';
+import cartData from '@/data/cartData'
+import { useAuth } from '@/providers/Auth'
 
 const Header = () => {
-  const [open, setOpen] = useState('');
-  const [windowHeight, setWindowHeight] = useState(0);
-  const [show, setShow] = useState(false);
+  const [open, setOpen] = useState('')
+  const [windowHeight, setWindowHeight] = useState(0)
+  const [show, setShow] = useState(false)
 
-  const { status } = useAuth();
+  const { status } = useAuth()
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
-      setOpen(e.target.text);
+      setOpen(e.target.text)
     } else {
-      setOpen('');
+      setOpen('')
     }
-  };
+  }
 
   const navBarTop = () => {
     if (window !== undefined) {
-      let height = window.scrollY;
-      setWindowHeight(height);
+      let height = window.scrollY
+      setWindowHeight(height)
     }
-  };
+  }
 
   useEffect(() => {
     window.onbeforeunload = function () {
-      window.scrollTo(0, 0);
-    };
-    window.addEventListener('scroll', navBarTop);
+      window.scrollTo(0, 0)
+    }
+    window.addEventListener('scroll', navBarTop)
     return () => {
-      window.removeEventListener('scroll', navBarTop);
-    };
-  }, []);
+      window.removeEventListener('scroll', navBarTop)
+    }
+  }, [])
 
   return (
     <header
@@ -131,7 +131,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

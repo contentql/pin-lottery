@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import { BsChevronDown } from 'react-icons/bs';
-import { FaCheckCircle, FaEllipsisH, FaRegCalendarAlt } from 'react-icons/fa';
+import { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import { BsChevronDown } from 'react-icons/bs'
+import { FaCheckCircle, FaEllipsisH, FaRegCalendarAlt } from 'react-icons/fa'
 
-import { allTransactions } from '@/data/userData';
+import { allTransactions } from '@/data/userData'
 
 //css
-import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datepicker/dist/react-datepicker.css'
 
 const AllTransactions = () => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
+  const [dateRange, setDateRange] = useState([null, null])
+  const [startDate, endDate] = dateRange
   return (
     <div className='all-transaction'>
       <div className='all-transaction__header'>
@@ -21,7 +21,7 @@ const AllTransactions = () => {
             startDate={startDate}
             endDate={endDate}
             onChange={(update: any) => {
-              setDateRange(update);
+              setDateRange(update)
             }}
             placeholderText='min - max date'
           />
@@ -42,7 +42,7 @@ const AllTransactions = () => {
             </tr>
           </thead>
           <tbody>
-            {allTransactions.map((singleTran) => (
+            {allTransactions.map(singleTran => (
               <tr key={singleTran.id}>
                 <td>
                   <div className='date'>
@@ -97,7 +97,7 @@ const AllTransactions = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AllTransactions;
+export default AllTransactions

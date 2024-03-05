@@ -1,30 +1,30 @@
 import {
-    Body,
-    Button,
-    Column,
-    Container,
-    Head,
-    Heading,
-    Html,
-    Img,
-    Preview,
-    Row,
-    Section,
-    Text,
-    render
-} from '@react-email/components';
+  Body,
+  Button,
+  Column,
+  Container,
+  Head,
+  Heading,
+  Html,
+  Img,
+  Preview,
+  Row,
+  Section,
+  Text,
+  render,
+} from '@react-email/components'
 
 interface YelpRecentLoginEmailProps {
-  userFirstName?: string;
-  loginDate?: Date;
-  loginDevice?: string;
-  loginLocation?: string;
-  loginIp?: string;
+  userFirstName?: string
+  loginDate?: Date
+  loginDevice?: string
+  loginLocation?: string
+  loginIp?: string
 }
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : '';
+  : ''
 
 export const ContactEmail = ({
   userFirstName,
@@ -36,7 +36,7 @@ export const ContactEmail = ({
   const formattedDate = new Intl.DateTimeFormat('en', {
     dateStyle: 'long',
     timeStyle: 'short',
-  }).format(loginDate);
+  }).format(loginDate)
 
   return (
     <Html>
@@ -139,38 +139,37 @@ export const ContactEmail = ({
         </Container>
       </Body>
     </Html>
-  );
-};
+  )
+}
 export const ResetPassword = (props: YelpRecentLoginEmailProps) =>
-  render(<ContactEmail {...props} />, { pretty: true });
+  render(<ContactEmail {...props} />, { pretty: true })
 ContactEmail.PreviewProps = {
   userFirstName: 'Alan',
   loginDate: new Date('September 7, 2022, 10:58 am'),
   loginDevice: 'Chrome on Mac OS X',
   loginLocation: 'Upland, California, United States',
   loginIp: '47.149.53.167',
-} as YelpRecentLoginEmailProps;
-
+} as YelpRecentLoginEmailProps
 
 const main = {
   backgroundColor: '#fff',
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
-};
+}
 
 const paragraph = {
   fontSize: 16,
-};
+}
 
 const logo = {
   padding: '30px 20px',
-};
+}
 
 const containerButton = {
   display: 'flex',
   justifyContent: 'center',
   width: '100%',
-};
+}
 
 const button = {
   backgroundColor: '#e00707',
@@ -180,22 +179,22 @@ const button = {
   border: '1px solid rgb(0,0,0, 0.1)',
   cursor: 'pointer',
   padding: '12px 30px',
-};
+}
 
 const content = {
   border: '1px solid rgb(0,0,0, 0.1)',
   borderRadius: '3px',
   overflow: 'hidden',
-};
+}
 
 const image = {
   maxWidth: '100%',
-};
+}
 
 const boxInfos = {
   padding: '20px',
-};
+}
 
 const containerImageFooter = {
   padding: '45px 0 0 0',
-};
+}

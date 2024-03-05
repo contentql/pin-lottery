@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import ContactView from '@/views/ContactView';
+import ContactView from '@/views/ContactView'
 
 export const metadata: Metadata = {
   title: 'Contact',
   description: 'This is a contact page',
-};
+}
 
 const Contact = async () => {
-  return <ContactView />;
-};
+  return <ContactView />
+}
 
-export default Contact;
+export default Contact

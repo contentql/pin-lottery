@@ -1,6 +1,7 @@
 ## MongoDB Data Structure for Lottery Project
 
-This README file outlines the MongoDB schema for the data files provided in the rifa template project.
+This README file outlines the MongoDB schema for the data files provided in the
+rifa template project.
 
 ## Collections
 
@@ -86,7 +87,8 @@ This README file outlines the MongoDB schema for the data files provided in the 
 - **short_desc**: String representing a short description of the blog post.
 - **date**: String representing the date of the blog post.
 - **author_name**: String representing the name of the author of the blog post.
-- **author_avt**: String representing the path or URL to the author's avatar image.
+- **author_avt**: String representing the path or URL to the author's avatar
+  image.
 
 ### 6\. `cartData` Collection
 
@@ -98,7 +100,8 @@ This README file outlines the MongoDB schema for the data files provided in the 
 
 - **\_id**: MongoDB automatically assigns a unique identifier to each document.
 - **id**: Represents the identifier of each item.
-- **ticket**: Array of Numbers representing the lottery ticket numbers in the cart.
+- **ticket**: Array of Numbers representing the lottery ticket numbers in the
+  cart.
 
 ### 7\. `contestData` Collection
 
@@ -120,8 +123,10 @@ This README file outlines the MongoDB schema for the data files provided in the 
 - **ticket_price**: String representing the price of a contest ticket.
 - **img**: String representing the path or URL to the contest image.
 - **contest_no**: String representing the contest number.
-- **day_remain**: Number representing the number of days remaining for the contest.
-- **ticket_remain**: Number representing the number of tickets remaining for the contest.
+- **day_remain**: Number representing the number of days remaining for the
+  contest.
+- **ticket_remain**: Number representing the number of tickets remaining for the
+  contest.
 - **tags**: Array of Strings representing tags associated with the contest.
 
 ### 8\. `faqData` Collection
@@ -209,9 +214,11 @@ This README file outlines the MongoDB schema for the data files provided in the 
 - **month**: String representing the month of the transaction.
 - **description**: String representing the description of the transaction.
 - **referral**: String representing the referral of the transaction.
-- **pay_method**: String representing the payment method used in the transaction.
+- **pay_method**: String representing the payment method used in the
+  transaction.
 - **amount**: String representing the amount of the transaction.
-- **transaction**: String representing the type of transaction (e.g., deposit, withdrawal).
+- **transaction**: String representing the type of transaction (e.g., deposit,
+  withdrawal).
 - **status**: Number representing the status of the transaction.
 
 ### 13\. `winnerData` Collection
@@ -234,4 +241,5 @@ This README file outlines the MongoDB schema for the data files provided in the 
 - **winning_number**: Array of Numbers representing the winning numbers.
 - **contest_no**: String representing the contest number.
 - **winer_img**: String representing the path or URL to the image of the winner.
-- **winning_price_img**: String representing the path or URL to the image of the winning prize.
+- **winning_price_img**: String representing the path or URL to the image of the
+  winning prize.

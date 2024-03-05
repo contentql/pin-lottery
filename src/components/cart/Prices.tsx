@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import payment from '/public/images/elements/payment.png';
+import payment from '/public/images/elements/payment.png'
 
 const Prices = () => {
   return (
@@ -40,7 +40,7 @@ const Prices = () => {
         <Image src={payment} alt='payment' />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Prices;
+export default Prices

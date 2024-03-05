@@ -1,7 +1,7 @@
-import Loading from '@/components/loading/PageLoading';
+import Loading from '@/components/loading/PageLoading'
 
 const DashboardLoading = () => {
-  return <Loading />;
-};
+  return <Loading />
+}
 
-export default DashboardLoading;
+export default DashboardLoading

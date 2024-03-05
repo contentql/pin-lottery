@@ -1,11 +1,11 @@
-import Image from 'next/image';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-import Slider from 'react-slick';
+import Image from 'next/image'
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
+import Slider from 'react-slick'
 
-import circle_border from '/public/images/elements/circle-border.png';
+import circle_border from '/public/images/elements/circle-border.png'
 
 // css
-import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick.css'
 
 const NextBtn = ({ onClick }: any) => {
   return (
@@ -16,8 +16,8 @@ const NextBtn = ({ onClick }: any) => {
     >
       <BsArrowLeft />
     </button>
-  );
-};
+  )
+}
 
 const PrevBtn = ({ onClick }: any) => {
   return (
@@ -28,8 +28,8 @@ const PrevBtn = ({ onClick }: any) => {
     >
       <BsArrowRight />
     </button>
-  );
-};
+  )
+}
 
 const UpcomingDraw = () => {
   const settings = {
@@ -55,7 +55,7 @@ const UpcomingDraw = () => {
         },
       },
     ],
-  };
+  }
 
   return (
     <div className='upcoming-draw-wrapper'>
@@ -85,7 +85,7 @@ const UpcomingDraw = () => {
         ))}
       </Slider>
     </div>
-  );
-};
+  )
+}
 
-export default UpcomingDraw;
+export default UpcomingDraw

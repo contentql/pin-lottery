@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { trpc } from '@/trpc/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { httpBatchLink } from '@trpc/client';
-import { PropsWithChildren, useState } from 'react';
-import { AuthProvider } from './Auth';
+import { trpc } from '@/trpc/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { httpBatchLink } from '@trpc/client'
+import { PropsWithChildren, useState } from 'react'
+import { AuthProvider } from './Auth'
 
 const Providers = ({ children }: PropsWithChildren) => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient())
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
@@ -18,12 +18,12 @@ const Providers = ({ children }: PropsWithChildren) => {
             return fetch(url, {
               ...options,
               credentials: 'include',
-            });
+            })
           },
         }),
       ],
-    })
-  );
+    }),
+  )
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
@@ -32,7 +32,7 @@ const Providers = ({ children }: PropsWithChildren) => {
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </trpc.Provider>
-  );
-};
+  )
+}
 
-export default Providers;
+export default Providers

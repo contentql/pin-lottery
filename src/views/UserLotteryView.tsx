@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import LeftSideMenu from '@/components/common/LeftSideMenu';
-import RightSide from '@/components/user-lottery/RightSide';
+import LeftSideMenu from '@/components/common/LeftSideMenu'
+import RightSide from '@/components/user-lottery/RightSide'
 
 const UserLotteryView = () => {
   return (
@@ -20,7 +20,7 @@ const UserLotteryView = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default UserLotteryView;
+export default UserLotteryView

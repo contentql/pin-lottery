@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import RegisterView from '@/views/auth/RegisterView';
+import RegisterView from '@/views/auth/RegisterView'
 
 export const metadata: Metadata = {
   title: 'Register',
   description: 'This is a register page',
-};
+}
 
 const Register = () => {
-  return <RegisterView />;
-};
+  return <RegisterView />
+}
 
-export default Register;
+export default Register

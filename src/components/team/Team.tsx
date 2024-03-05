@@ -1,8 +1,8 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import team_obj from '/public/images/elements/team-obj.png';
+import team_obj from '/public/images/elements/team-obj.png'
 
-import teamData from '@/data/teamData';
+import teamData from '@/data/teamData'
 
 const Team = () => {
   return (
@@ -22,7 +22,7 @@ const Team = () => {
         </div>
         <div className='row mb-none-30 justify-content-center'>
           {/* single team section */}
-          {teamData.map((singleTeam) => (
+          {teamData.map(singleTeam => (
             <div key={singleTeam.id} className='col-lg-4 col-sm-6 mb-30'>
               <div className='team-card'>
                 <div className='team-card__thumb'>
@@ -41,7 +41,7 @@ const Team = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Team;
+export default Team

@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import LeftSideMenu from '@/components/common/LeftSideMenu';
-import RightSilde from '@/components/user-transaction/RightSilde';
+import LeftSideMenu from '@/components/common/LeftSideMenu'
+import RightSilde from '@/components/user-transaction/RightSilde'
 
 const UserTransactionView = () => {
   return (
@@ -20,7 +20,7 @@ const UserTransactionView = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default UserTransactionView;
+export default UserTransactionView

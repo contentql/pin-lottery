@@ -1,7 +1,7 @@
-import ContestCard from '@/components/cards/ContestCard';
-import contestData from '@/data/contestData';
+import ContestCard from '@/components/cards/ContestCard'
+import contestData from '@/data/contestData'
 
-import UpcomingDraw from './UpcomingDraw';
+import UpcomingDraw from './UpcomingDraw'
 
 const RightSide = () => {
   return (
@@ -10,7 +10,7 @@ const RightSide = () => {
       <UpcomingDraw />
 
       <div className='row mt-30  mb-none-30'>
-        {contestData.slice(0, 4).map((itm) => (
+        {contestData.slice(0, 4).map(itm => (
           <div key={itm.id} className='col-xl-6 col-lg-12 col-md-6 mb-30'>
             {/* Contest card */}
             <ContestCard itm={itm} />
@@ -18,7 +18,7 @@ const RightSide = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RightSide;
+export default RightSide

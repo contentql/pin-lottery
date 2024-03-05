@@ -1,5 +1,5 @@
-import PastDraws from './PastDraws';
-import UpcomingDraw from './UpcomingDraw';
+import PastDraws from './PastDraws'
+import UpcomingDraw from './UpcomingDraw'
 
 const RightSide = () => {
   return (
@@ -10,7 +10,7 @@ const RightSide = () => {
       {/* Past Draws */}
       <PastDraws />
     </div>
-  );
-};
+  )
+}
 
-export default RightSide;
+export default RightSide

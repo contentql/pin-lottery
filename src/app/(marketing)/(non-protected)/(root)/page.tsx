@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import HomeView from '@/views/HomeView';
+import HomeView from '@/views/HomeView'
 
 export const metadata: Metadata = {
   title: 'Lottery',
   description: 'This is a home page',
-};
+}
 
 const Home = () => {
-  return <HomeView />;
-};
+  return <HomeView />
+}
 
-export default Home;
+export default Home

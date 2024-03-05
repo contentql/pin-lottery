@@ -89,7 +89,7 @@ const Tickets = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Tickets;
+export default Tickets

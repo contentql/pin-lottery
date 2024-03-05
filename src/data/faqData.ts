@@ -32,6 +32,6 @@ const faqData = [
         aspernatur expedita aut reiciendis magni tempore ullam libero, voluptate nam accusamus est a
         debitis, obcaecati beatae possimus veniam distinctio?`,
   },
-];
+]
 
-export default faqData;
+export default faqData

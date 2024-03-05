@@ -1,10 +1,10 @@
-import { Bounce, ToastContainer, ToastContainerProps } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Bounce, ToastContainer, ToastContainerProps } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface ToastContainerConfigProps extends ToastContainerProps {}
 
-const ToastConfig: React.FC<ToastContainerConfigProps> = (props) => {
-  const { ...additionalProps } = props;
+const ToastConfig: React.FC<ToastContainerConfigProps> = props => {
+  const { ...additionalProps } = props
 
   const toastifyConfig: ToastContainerProps = {
     toastClassName: 'custom-toast',
@@ -21,9 +21,9 @@ const ToastConfig: React.FC<ToastContainerConfigProps> = (props) => {
     transition: Bounce,
     theme: 'colored',
     ...additionalProps,
-  };
+  }
 
-  return <ToastContainer {...toastifyConfig} />;
-};
+  return <ToastContainer {...toastifyConfig} />
+}
 
-export default ToastConfig;
+export default ToastConfig

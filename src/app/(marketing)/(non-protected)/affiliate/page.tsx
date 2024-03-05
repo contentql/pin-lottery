@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-import AffiliateView from '@/views/AffiliateView';
+import AffiliateView from '@/views/AffiliateView'
 
 export const metadata: Metadata = {
   title: 'Affiliate',
   description: 'This is a about page',
-};
+}
 
 const Affiliate = () => {
-  return <AffiliateView />;
-};
+  return <AffiliateView />
+}
 
-export default Affiliate;
+export default Affiliate

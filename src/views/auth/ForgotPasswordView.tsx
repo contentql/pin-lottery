@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import ForgotPassword from '@/components/auth/ForgotPassword';
+import ForgotPassword from '@/components/auth/ForgotPassword'
 
 const ForgotPasswordView = () => {
-  return <ForgotPassword />;
-};
+  return <ForgotPassword />
+}
 
-export default ForgotPasswordView;
+export default ForgotPasswordView

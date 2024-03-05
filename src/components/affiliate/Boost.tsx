@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
-import affiliate_obj from '/public/images/elements/affiliate-obj.png';
+import affiliate_obj from '/public/images/elements/affiliate-obj.png'
 
 const Boost = () => {
   return (
@@ -31,7 +31,7 @@ const Boost = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Boost;
+export default Boost

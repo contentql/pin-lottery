@@ -1,13 +1,13 @@
-import { useContext } from 'react';
+import { useContext } from 'react'
 
-import SingleLotteryCardTwo from '@/components/cards/SingleLotteryCardTwo';
+import SingleLotteryCardTwo from '@/components/cards/SingleLotteryCardTwo'
 
-import { AppContext } from '@/context/context';
+import { AppContext } from '@/context/context'
 
-import Actions from './Actions';
+import Actions from './Actions'
 
 const Lotteries = () => {
-  const { addTicketsTwo, lotterisTwo }: any = useContext(AppContext);
+  const { addTicketsTwo, lotterisTwo }: any = useContext(AppContext)
 
   return (
     <div className='lottery-wrapper style--two'>
@@ -32,7 +32,7 @@ const Lotteries = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Lotteries;
+export default Lotteries

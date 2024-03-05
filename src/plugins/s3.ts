@@ -1,4 +1,4 @@
-import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3';
+import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3'
 
 export const s3StorageAdapter = s3Adapter({
   config: {
@@ -10,4 +10,4 @@ export const s3StorageAdapter = s3Adapter({
     },
   },
   bucket: process.env.S3_BUCKET!,
-});
+})
