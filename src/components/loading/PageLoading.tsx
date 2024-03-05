@@ -1,4 +1,4 @@
-const Loading = () => {
+const PageLoading = () => {
   return (
     <div className='spinner'>
       <span className='loader'></span>
@@ -6,4 +6,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default PageLoading;
