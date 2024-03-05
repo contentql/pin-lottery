@@ -12,6 +12,7 @@ export interface Config {
     media: Media;
     contest: Contest;
     contact: Contact;
+    blog: Blog;
     faq: Faq;
     tags: Tag;
     'payload-preferences': PayloadPreference;
@@ -160,6 +161,23 @@ export interface Contact {
   email?: string | null;
   subject?: string | null;
   message?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog".
+ */
+export interface Blog {
+  id: string;
+  title?: string | null;
+  short_desc?: string | null;
+  content?:
+    | {
+        [k: string]: unknown;
+      }[]
+    | null;
+  img?: string | Media | null;
   updatedAt: string;
   createdAt: string;
 }

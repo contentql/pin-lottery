@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import {
   FaFacebookF,
@@ -7,13 +8,10 @@ import {
   FaTwitter,
 } from 'react-icons/fa';
 
-import author from '/public/images/blog/author.png';
-import blog_b1 from '/public/images/blog/b1.jpg';
-import blog_b2 from '/public/images/blog/b2.jpg';
-
 import Social from '@/components/social/Social';
 
-const Details = () => {
+const Details = ({ blogDetails }) => {
+  const blog = blogDetails?.at(0);
   return (
     <section className='mt-minus-270 pb-120'>
       <div className='container'>
@@ -21,17 +19,14 @@ const Details = () => {
           <div className='col-lg-12'>
             <div className='blog-single'>
               <div className='blog-single__header'>
-                <h3 className='blog-single__title'>
-                  Lottery mistakes – check out the most common mistakes of lotto
-                  players and winners
-                </h3>
+                <h3 className='blog-single__title'>{blog?.title}</h3>
                 <div className='blog-single__meta'>
                   <div className='left'>
-                    <span className='post-date'>Dece 15, 2020 BY</span>
-                    <div className='post-author'>
+                    <span className='post-date'>{blog?.createdAt}</span>
+                    {/* <div className='post-author'>
                       <Image src={author} alt='author' />
                       <span className='name'>Alvin Mcdaniel</span>
-                    </div>
+                    </div> */}
                   </div>
                   <div className='right'>
                     <span>Share : </span>
@@ -50,18 +45,26 @@ const Details = () => {
                 </div>
               </div>
               <div className='blog-single__body'>
-                <h4 className='title'>Lottery mistakes made by players</h4>
-                <p>
-                  When you want to win the lottery, you can make a lot of
-                  lottery mistakes, which will make it difficult to win. Before
-                  you will start playing the lottery, you should find out which
-                  situations you should avoid to be safe and smart lottery
-                  player. All the situations below are really common – we know a
-                  lot of players, who made those lottery mistakes. We hope that
-                  you will not be one of them.
-                </p>
-                <Image src={blog_b2} alt='b2' />
-                <h4 className='title'>Lottery winners mistakes</h4>
+                {/* <h4 className='title'>Lottery mistakes made by players</h4> */}
+                <Image src={blog?.img?.url} width={100} height={100} alt='b2' />
+                {/* <p>{blogDetails?.content}</p> */}
+                {blog?.content?.map((content, index) => (
+                  <div key={index}>
+                    {content?.type ? (
+                      <>
+                        <content.type>{content.children[0].text}</content.type>{' '}
+                      </>
+                    ) : content.children[0].text === '' ? (
+                      <p>{`\n`}</p>
+                    ) : (
+                      <>
+                        <p>{content.children[0].text}</p>{' '}
+                      </>
+                    )}
+                  </div>
+                ))}
+
+                {/* <h4 className='title'>Lottery winners mistakes</h4>
                 <p>
                   Lottery winners are lucky people, but they can also make a lot
                   of lottery mistakes. Probably they can make more mistakes than
@@ -80,7 +83,7 @@ const Details = () => {
                   money. Their method was very dangerous because it was not an
                   investment. They went to the casino or used the bookmaker and
                   they… lost all the money.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

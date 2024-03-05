@@ -1,5 +1,7 @@
 'use client';
 
+import { trpc } from '@/trpc/client';
+
 import Image from 'next/image';
 
 import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
@@ -7,7 +9,19 @@ import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png';
 import Banner from '@/components/common/Banner';
 import Details from '@/components/single-blog/Details';
 
-const BlogDetailsView = () => {
+interface PageProps {
+  params: {
+    blogId: string;
+  };
+}
+
+const BlogDetailsView = ({ params }: PageProps) => {
+  const { data: blogDetails } = trpc.public.getBlogDetailsById.useQuery({
+    id: params.blogId,
+  });
+
+  console.log('blog individual details', blogDetails);
+
   return (
     <>
       {/* Banner section here */}
@@ -26,7 +40,7 @@ const BlogDetailsView = () => {
       </div>
 
       {/* Details section here */}
-      <Details />
+      <Details blogDetails={blogDetails} />
     </>
   );
 };
