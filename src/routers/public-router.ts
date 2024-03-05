@@ -1,4 +1,5 @@
 import { getPayloadClient } from '../get-payload';
+import { BlogIdValidator } from '../lib/validators/blog-id-validator';
 import { ContactFormValidator } from '../lib/validators/contact-form-validator';
 import { publicProcedure, router } from '../trpc/trpc';
 
@@ -47,7 +48,6 @@ export const publicRouter = router({
             id,
             title,
             short_desc,
-            content,
             img,
             updatedAt,
             createdAt,
@@ -56,12 +56,29 @@ export const publicRouter = router({
           id: id,
           title: title,
           short_desc: short_desc,
-          content: content,
           img: img,
           updatedAt: updatedAt,
           createdAt: createdAt,
         };
     });
     return blogDetails;
-  }),
-});
+    }),
+    
+     getBlogDetailsById: publicProcedure
+    .input(BlogIdValidator)
+    .query(async ({ input }) => {
+      const payload = await getPayloadClient();
+
+      const blogById = await payload.find({
+        collection: 'blog',
+        where: {
+          id: {
+            equals: '65e6fa640f173b82a9c7a7dc',
+          },
+        },
+      });
+      const blogDetails = blogById.docs;
+      return blogDetails;
+    }),
+})
+    

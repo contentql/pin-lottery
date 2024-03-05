@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-export const ContestIdValidator = z.object({
+export const BlogIdValidator = z.object({
   id: z.string() || null,
 });
 
-export type TContestIdValidator = z.infer<typeof ContestIdValidator>;
+export type TBlogIdValidator = z.infer<typeof BlogIdValidator>;
