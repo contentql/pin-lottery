@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import { getMeUser } from '@/utils/getMeUser';
 import UserInfoView from '@/views/UserInfoView';
 
 export const metadata: Metadata = {
@@ -9,8 +8,6 @@ export const metadata: Metadata = {
 };
 
 const UserInfo = async () => {
-  await getMeUser({ nullUserRedirect: '/login' });
-
   return <UserInfoView />;
 };
 

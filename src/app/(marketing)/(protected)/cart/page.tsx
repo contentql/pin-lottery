@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import { getMeUser } from '@/utils/getMeUser';
 import CartView from '@/views/CartView';
 
 export const metadata: Metadata = {
@@ -9,8 +8,6 @@ export const metadata: Metadata = {
 };
 
 const Cart = async () => {
-  await getMeUser({ nullUserRedirect: '/login' });
-
   return <CartView />;
 };
 
