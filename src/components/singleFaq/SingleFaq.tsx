@@ -1,4 +1,4 @@
-const SingleFaq = ({ singleFaq, index }: { singleFaq: any; index: any }) => {
+const SingleFaq = ({ singleFaq}: { singleFaq: any }) => {
   const { id, question, answer } = singleFaq;
 
   return (
