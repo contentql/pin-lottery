@@ -17,7 +17,7 @@ const SingleFaq = ({ singleFaq, index }: { singleFaq: any; index: any }) => {
       </div>
       <div
         id={`collapse${id}`}
-        className={`collapse ${index === 0 && 'show'}`}
+        className={`collapse show`}
         aria-labelledby={`heading${id}`}
         data-bs-parent='#accordionExample'
       >

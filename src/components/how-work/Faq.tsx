@@ -4,9 +4,13 @@ import faq_el from '/public/images/elements/faq-el.png';
 
 import SingleFaq from '@/components/singleFaq/SingleFaq';
 
-import faqData from '@/data/faqData';
+
+import { trpc } from '@/trpc/client';
 
 const Faq = () => {
+
+  const { data: faqs } = trpc.public.getFaqs.useQuery();
+  console.log('faqs', faqs);
   return (
     <section className='pb-120 position-relative'>
       <div className='faq-el'>
@@ -26,8 +30,8 @@ const Faq = () => {
               </p>
             </div>
             <div className='accordion cmn-accordion' id='accordionExample'>
-              {faqData.map((singleFaq, i) => (
-                <SingleFaq key={singleFaq.id} index={i} singleFaq={singleFaq} />
+              {faqs?.map((singleFaq, i) => (
+                <SingleFaq key={singleFaq.id} index={i} singleFaq ={singleFaq} />
               ))}
             </div>
           </div>
