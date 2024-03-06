@@ -18,5 +18,5 @@ export const generateImage: GenerateImage = (data: any) => {
 }
 
 export const generateURL: GenerateURL = (data: any) => {
-  return `http://localhost:3000/${data?.locale ? data?.locale + '/' : ''}${data?.slug || ''}`
+  return `https://pin-lottery-production.up.railway.app/${data?.locale ? data?.locale + '/' : ''}${data?.slug || ''}`
 }
