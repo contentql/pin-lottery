@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 interface PageProps {
   params: {
-    [key: string]: string | string[] | undefined
+    contestId: string
   }
 }
 

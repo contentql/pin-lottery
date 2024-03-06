@@ -6,7 +6,7 @@ import VehicleOverview from '@/components/common/VehicleOverview'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
 
-const ContestBody = () => {
+const ContestBody = ({ contestDetails }:any) => {
   return (
     <section className='pb-120 mt-minus-300'>
       <div className='container'>
@@ -26,7 +26,7 @@ const ContestBody = () => {
           <div className='col-lg-12'>
             <div className='contest-cart'>
               {/* Context slider for one */}
-              <ContestSlider />
+              <ContestSlider contestDetails={contestDetails} />
 
               {/* Contest right section */}
               <ContestRight />
@@ -38,8 +38,7 @@ const ContestBody = () => {
               <ul
                 className='nav nav-tabs justify-content-center mb-30 pb-4 border-0'
                 id='myTab'
-                role='tablist'
-              >
+                role='tablist'>
                 <li className='nav-item' role='presentation'>
                   <button
                     className='cmn-btn active'
@@ -48,8 +47,7 @@ const ContestBody = () => {
                     data-bs-target='#description'
                     role='tab'
                     aria-controls='description'
-                    aria-selected='true'
-                  >
+                    aria-selected='true'>
                     <span className='mr-3'></span> description
                   </button>
                 </li>
@@ -61,8 +59,7 @@ const ContestBody = () => {
                     data-bs-target='#details'
                     role='tab'
                     aria-controls='details'
-                    aria-selected='false'
-                  >
+                    aria-selected='false'>
                     <span className='mr-3'></span>competition details
                   </button>
                 </li>
@@ -73,8 +70,7 @@ const ContestBody = () => {
                   className='tab-pane fade show active'
                   id='description'
                   role='tabpanel'
-                  aria-labelledby='description-tab'
-                >
+                  aria-labelledby='description-tab'>
                   {/* vehicle Overview here */}
                   <VehicleOverview />
                 </div>
@@ -82,8 +78,7 @@ const ContestBody = () => {
                   className='tab-pane fade'
                   id='details'
                   role='tabpanel'
-                  aria-labelledby='details-tab'
-                >
+                  aria-labelledby='details-tab'>
                   <div className='content-block'>
                     <h3 className='title'>Competition Details</h3>
                     <p>

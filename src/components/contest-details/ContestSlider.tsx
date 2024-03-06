@@ -23,7 +23,7 @@ const PrevBtn = ({ onClick }: any) => {
   )
 }
 
-const ContestSlider = () => {
+const ContestSlider = ({ contestDetails }:any) => {
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
 
@@ -63,8 +63,7 @@ const ContestSlider = () => {
           asNavFor={nav2}
           arrows={false}
           ref={(slider1: any) => setNav1(slider1)}
-          className='contest-cart__thumb-slider'
-        >
+          className='contest-cart__thumb-slider'>
           {[1, 2, 3, 4, 5, 6].map(itm => (
             <div key={itm} className='single'>
               <div className='single-slide'>
@@ -78,8 +77,7 @@ const ContestSlider = () => {
           asNavFor={nav1}
           ref={(slider2: any) => setNav2(slider2)}
           {...settings}
-          className='contest-cart__nav-slider'
-        >
+          className='contest-cart__nav-slider'>
           {[1, 2, 3, 4, 5, 6].map(itm => (
             <div key={itm} className='single'>
               <div className='single-slide'>
