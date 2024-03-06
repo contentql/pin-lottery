@@ -10,11 +10,6 @@ interface PageProps {
   }
 }
 
-export const metadata: Metadata = {
-  title: 'Blog Details',
-  description: 'This is a blog details page',
-}
-
 const BlogDetails = ({ params }: PageProps) => {
   const { blogId } = params
   console.log('parmas in page', params)
