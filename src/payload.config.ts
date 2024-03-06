@@ -20,7 +20,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
-  collections: [Users, Media, Contest, Contact, Blog, Faq, Tags],
+  collections: [Users, Media,Contest, Contact, Blog, Faq, Tags],
   routes: {
     admin: '/admin',
   },

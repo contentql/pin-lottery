@@ -1,11 +1,11 @@
+import { AppContext } from '@/context/context'
+import { Contest } from '@/payload-types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 
-import { AppContext } from '@/context/context'
-
-const ContestRight = () => {
+const ContestRight = ({ contestDetails }: { contestDetails:Contest }) => {
   const { incrementHandle, decrementHandle, quantity, setQuantity }: any =
     useContext(AppContext)
 
@@ -14,12 +14,12 @@ const ContestRight = () => {
   return (
     <div className='contest-cart__right'>
       <h4 className='subtitle'>Enter now for a chance to win</h4>
-      <h3 className='contest-name'>The Breeze Zodiac IX</h3>
-      <p>This competition has a maximum of 29994 entries.</p>
+      <h3 className='contest-name'>{contestDetails?.title}</h3>
+      {/* <p>This competition has a maximum of 29994 entries.</p> */}
       <div className='contest-num'>
-        Contest no: <span>B2T</span>
+        Contest no: <span>{contestDetails?.contest_no}</span>
       </div>
-      <h4>Tickets Sold</h4>
+      {/* <h4>Tickets Sold</h4>
       <div className='ticket-amount'>
         <span className='left'>0</span>
         <span className='right'>29994</span>
@@ -27,9 +27,9 @@ const ContestRight = () => {
           <div className='bar'></div>
         </div>
         <p>Only 12045 remaining!</p>
-      </div>
+      </div> */}
       <div className='ticket-price'>
-        <span className='amount'>$4.99</span>
+        <span className='amount'>{contestDetails?.ticket_price}</span>
         <small>Per ticket</small>
       </div>
       <div className='d-flex flex-wrap align-items-center mb-30'>
@@ -45,16 +45,14 @@ const ContestRight = () => {
             <div className='quantity-nav'>
               <div
                 className={`quantity-button ${quantity <= 0 && 'pe-none'}`}
-                onClick={decrementHandle}
-              >
+                onClick={decrementHandle}>
                 <i className='las la-minus'></i>
               </div>
               <div
                 className={`quantity-button quantity-up ${
                   quantity >= 16 && 'pe-none'
                 }`}
-                onClick={incrementHandle}
-              >
+                onClick={incrementHandle}>
                 <i className='las la-plus'></i>
               </div>
             </div>
@@ -63,8 +61,7 @@ const ContestRight = () => {
         <div className='mt-sm-0 mt-3'>
           <Link
             href={`${pathname}/lottery-details`}
-            className='cmn-btn style--three'
-          >
+            className='cmn-btn style--three'>
             buy tickets
           </Link>
         </div>
