@@ -4,7 +4,7 @@ const Tags: CollectionConfig = {
   admin: {
     useAsTitle: 'tag',
   },
-  fields: [{ name: 'tag', type: 'text', label: 'Tag' }],
+  fields: [{ name: 'tag', type: 'text', label: 'Product Type' }],
 }
 
 export default Tags
