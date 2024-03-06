@@ -15,11 +15,11 @@ export const generateMeta = async (args: {
     `${process.env.NEXT_PUBLIC_SERVER_URL}${doc.meta.image.url}`
 
   return {
-    title: doc?.meta?.title || 'Payload',
-    description: doc?.meta?.description,
+    title: doc?.meta?.title || 'Lottery',
+    description: doc?.meta?.description || 'Lottery - Description',
     openGraph: mergeOpenGraph({
-      title: doc?.meta?.title || 'Payload',
-      description: doc?.meta?.description || '',
+      title: doc?.meta?.title || 'Lottery',
+      description: doc?.meta?.description || 'Lottery - Description',
       url: Array.isArray(doc?.meta?.title) ? doc?.meta?.title.join('/') : '/',
       images: ogImage
         ? [

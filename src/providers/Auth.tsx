@@ -236,8 +236,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         resetPassword,
         forgotPassword,
         status,
-      }}
-    >
+      }}>
       {children}
     </Context.Provider>
   )
