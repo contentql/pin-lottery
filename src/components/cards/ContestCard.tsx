@@ -8,7 +8,7 @@ const ContestCard = ({ itm }: any) => {
       <Link href={`/contest/${itm.id}`} className='item-link'></Link>
       <div className='contest-card__thumb'>
         <Image
-          src={itm.img?.url}
+          src={itm.img.url || '/'}
           alt={itm.title}
           width={itm?.img?.width}
           height={itm?.img?.height}
@@ -38,8 +38,7 @@ const ContestCard = ({ itm }: any) => {
           </li>
           <li>
             <i className='las la-ticket-alt'></i>
-            <span>{itm.ticket_remain}</span>
-            <p>Remaining</p>
+            <p>tickets available</p>
           </li>
         </ul>
       </div>

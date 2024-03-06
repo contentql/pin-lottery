@@ -1,12 +1,22 @@
-import Countdown from 'react-countdown'
-
 import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
+import { Contest, Media } from '@/payload-types'
+import Countdown from 'react-countdown'
 
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
 
-const ContestBody = ({ contestDetails }:any) => {
+interface ContestDetails extends Contest {
+  img: Media
+  images?:
+    | {
+        product_images: Media
+        id?: string | null
+      }[]
+    | null
+}
+
+const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
   return (
     <section className='pb-120 mt-minus-300'>
       <div className='container'>
@@ -26,10 +36,12 @@ const ContestBody = ({ contestDetails }:any) => {
           <div className='col-lg-12'>
             <div className='contest-cart'>
               {/* Context slider for one */}
-              <ContestSlider contestDetails={contestDetails} />
+              <ContestSlider
+                contestDetails={contestDetails as ContestDetails}
+              />
 
               {/* Contest right section */}
-              <ContestRight />
+              <ContestRight contestDetails={contestDetails} />
             </div>
           </div>
 

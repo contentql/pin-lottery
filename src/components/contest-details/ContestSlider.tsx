@@ -1,11 +1,19 @@
+import { Contest, Media } from '@/payload-types'
 import Image from 'next/image'
 import { useState } from 'react'
 import Slider from 'react-slick'
 
-import contest_b1 from '/public/images/contest/b1.png'
-import contest_s1 from '/public/images/contest/s1.png'
-
 import 'slick-carousel/slick/slick.css'
+
+interface ContestDetails extends Contest {
+  img: Media
+  images?:
+    | {
+        product_images: Media
+        id?: string | null
+      }[]
+    | null
+}
 
 const NextBtn = ({ onClick }: any) => {
   return (
@@ -23,7 +31,11 @@ const PrevBtn = ({ onClick }: any) => {
   )
 }
 
-const ContestSlider = ({ contestDetails }:any) => {
+const ContestSlider = ({
+  contestDetails,
+}: {
+  contestDetails: ContestDetails
+}) => {
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
 
@@ -64,10 +76,15 @@ const ContestSlider = ({ contestDetails }:any) => {
           arrows={false}
           ref={(slider1: any) => setNav1(slider1)}
           className='contest-cart__thumb-slider'>
-          {[1, 2, 3, 4, 5, 6].map(itm => (
-            <div key={itm} className='single'>
+          {contestDetails?.images?.map(itm => (
+            <div key={itm.id} className='single'>
               <div className='single-slide'>
-                <Image src={contest_b1} alt='image' />
+                <Image
+                  src={itm?.product_images?.url || '/'}
+                  width={100}
+                  height={100}
+                  alt='image'
+                />
               </div>
             </div>
           ))}
@@ -78,10 +95,15 @@ const ContestSlider = ({ contestDetails }:any) => {
           ref={(slider2: any) => setNav2(slider2)}
           {...settings}
           className='contest-cart__nav-slider'>
-          {[1, 2, 3, 4, 5, 6].map(itm => (
-            <div key={itm} className='single'>
+          {contestDetails?.images?.map(itm => (
+            <div key={itm.id} className='single'>
               <div className='single-slide'>
-                <Image src={contest_s1} alt='image' />
+                <Image
+                  src={itm?.product_images?.url || '/'}
+                  width={100}
+                  height={100}
+                  alt='image'
+                />
               </div>
             </div>
           ))}
