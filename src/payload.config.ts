@@ -63,7 +63,7 @@ export default buildConfig({
       },
     }),
     seo({
-      collections: ['blog', 'contest', 'faq'],
+      collections: ['blog', 'contest'],
       uploadsCollection: 'media',
       generateTitle,
       generateDescription,
