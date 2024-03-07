@@ -12,7 +12,11 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '649f07b28a7583914dfd1580a91610df.r2.cloudflarestorage.com',
+        hostname: 'r2.cloudflarestorage.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'r2.dev',
       },
     ],
   },
