@@ -1,10 +1,9 @@
 import { Blog } from '@/payload-types'
 import { generateMeta } from '@/utils/generateMeta'
 import BlogDetailsView from '@/views/BlogDetailsView'
-import { error } from 'console'
 import { Metadata } from 'next'
 // import { headers } from 'next/headers'
-import payload from 'payload'
+import { getPayloadClient } from '@/get-payload'
 
 interface PageProps {
   params: {
@@ -19,7 +18,14 @@ const BlogDetails = ({ params }: PageProps) => {
 }
 
 export async function generateStaticParams() {
-  return [{ blogId: '65e748b51d080fcf7554a29a' }]
+  const payload = await getPayloadClient()
+  const allBlogs = await payload.find({
+    collection: 'blog',
+    pagination: false,
+  })
+
+  const blogIdsArray = allBlogs.docs.map(blog => ({ blogId: blog.id }))
+  return blogIdsArray
 }
 
 export const generateMetadata = async ({
@@ -28,11 +34,12 @@ export const generateMetadata = async ({
   params: { blogId: string }
 }): Promise<Metadata> => {
   let blog: Blog | null = null
+  const payload = await getPayloadClient()
 
   try {
     const result = await payload.findByID({
       collection: 'blog',
-      id: blogId
+      id: blogId,
     })
 
     // const result = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog/${blogId}`).then((res) => res.json()).catch((error) => console.log(error))
