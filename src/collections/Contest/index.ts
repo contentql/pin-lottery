@@ -1,3 +1,4 @@
+import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
 const Contest: CollectionConfig = {
   slug: 'contest',
@@ -23,11 +24,45 @@ const Contest: CollectionConfig = {
                   required: true,
                 },
                 {
-                  name: 'ticket_price',
-                  type: 'number',
-                  label: 'Ticket Price',
-                  required: true,
+                  name: 'tag',
+                  type: 'relationship',
+                  relationTo: ['tags'],
+                  hasMany: false,
+                  label: 'Tag',
                 },
+              ],
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'features',
+                  type: 'richText',
+                  label: 'Product Features',
+                  editor: lexicalEditor({
+                    features: ({ defaultFeatures }) => [
+                      ...defaultFeatures,
+                      HTMLConverterFeature({}),
+                    ],
+                  }),
+                },
+                {
+                  name: 'description',
+                  type: 'richText',
+                  label: 'Product Description',
+                  editor: lexicalEditor({
+                    features: ({ defaultFeatures }) => [
+                      ...defaultFeatures,
+                      HTMLConverterFeature({}),
+                    ],
+                  }),
+                },
+                lexicalHTML('features', {
+                  name: 'features_html',
+                }),
+                lexicalHTML('description', {
+                  name: 'description_html',
+                }),
               ],
             },
             {
@@ -35,13 +70,21 @@ const Contest: CollectionConfig = {
               type: 'upload',
               label: 'Cover Image',
               relationTo: 'media',
+              required: true,
             },
             {
-              name: 'tag',
-              type: 'relationship',
-              relationTo: ['tags'],
-              hasMany: false,
-              label: 'Tag',
+              name: 'images',
+              type: 'array',
+              label: 'Product Images',
+              fields: [
+                {
+                  name: 'product_images',
+                  type: 'upload',
+                  label: 'Images',
+                  relationTo: 'media',
+                  required: true,
+                },
+              ],
             },
           ],
         },
@@ -58,43 +101,21 @@ const Contest: CollectionConfig = {
               required: true,
               maxLength: 5,
             },
-            { name: 'day_remain', type: 'number', label: 'Days Remaining' },
             {
-              name: 'ticket_remain',
-              type: 'number',
-              label: 'Tickets Remaining',
-            },
-          ],
-        },
-
-        // tab three
-        {
-          name: 'product_features',
-          label: 'Product Features',
-          description: 'Please provide  product features details.',
-          fields: [
-            {
-              name: 'images',
-              type: 'array',
-              label: 'Images',
+              type: 'row',
               fields: [
                 {
-                  name: 'product_images',
-                  type: 'upload',
-                  label: 'Images',
-                  relationTo: 'media',
+                  name: 'ticket_price',
+                  type: 'number',
+                  label: 'Ticket Price',
+                  required: true,
+                },
+                {
+                  name: 'day_remain',
+                  type: 'number',
+                  label: 'Days after threshold reached',
                 },
               ],
-            },
-            {
-              name: 'features',
-              type: 'richText',
-              label: 'Features',
-            },
-            {
-              name: 'description',
-              type: 'richText',
-              label: 'Description',
             },
           ],
         },

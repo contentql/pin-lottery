@@ -6,7 +6,7 @@ import payload from 'payload'
 
 interface PageProps {
   params: {
-    [key: string]: string | string[] | undefined
+    contestId: string
   }
 }
 

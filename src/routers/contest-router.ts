@@ -15,7 +15,6 @@ export const contestRouter = router({
         day_remain,
         tag,
         ticket_price,
-        ticket_remain,
         img,
         updatedAt,
         createdAt,
@@ -26,7 +25,6 @@ export const contestRouter = router({
           contest_no: contest_no,
           day_remain: day_remain,
           tag: tag,
-          ticket_remain: ticket_remain,
           ticket_price: ticket_price,
           img: img,
           updatedAt: updatedAt,
@@ -42,14 +40,15 @@ export const contestRouter = router({
     .query(async ({ input }) => {
       const payload = await getPayloadClient()
 
+      const {id}=input
       const contestById = await payload.find({
         collection: 'contest',
         where: {
           id: {
-            equals: input?.id,
+            equals: id
           },
         },
       })
-      return contestById
+      return contestById.docs
     }),
 })
