@@ -33,38 +33,28 @@ const Contest: CollectionConfig = {
               ],
             },
             {
-              type: 'row',
-              fields: [
-                {
-                  name: 'features',
-                  type: 'richText',
-                  label: 'Product Features',
-                  editor: lexicalEditor({
-                    features: ({ defaultFeatures }) => [
-                      ...defaultFeatures,
-                      HTMLConverterFeature({}),
-                    ],
-                  }),
-                },
-                {
-                  name: 'description',
-                  type: 'richText',
-                  label: 'Product Description',
-                  editor: lexicalEditor({
-                    features: ({ defaultFeatures }) => [
-                      ...defaultFeatures,
-                      HTMLConverterFeature({}),
-                    ],
-                  }),
-                },
-                lexicalHTML('features', {
-                  name: 'features_html',
-                }),
-                lexicalHTML('description', {
-                  name: 'description_html',
-                }),
-              ],
+              name: 'features',
+              type: 'richText',
+              label: 'Product Features',
+              editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                  ...defaultFeatures,
+                  HTMLConverterFeature({}),
+                ],
+              }),
             },
+            {
+              name: 'description',
+              type: 'richText',
+              label: 'Product Description',
+              editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                  ...defaultFeatures,
+                  HTMLConverterFeature({}),
+                ],
+              }),
+            },
+
             {
               name: 'img',
               type: 'upload',
@@ -86,6 +76,12 @@ const Contest: CollectionConfig = {
                 },
               ],
             },
+            lexicalHTML('features', {
+              name: 'features_html',
+            }),
+            lexicalHTML('description', {
+              name: 'description_html',
+            }),
           ],
         },
 
