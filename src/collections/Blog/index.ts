@@ -4,6 +4,9 @@ const Blog: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     { name: 'title', type: 'text', label: 'Title' },
     { name: 'short_desc', type: 'textarea', label: 'Description' },

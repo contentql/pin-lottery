@@ -10,14 +10,12 @@ import Banner from '@/components/common/Banner'
 import Details from '@/components/single-blog/Details'
 
 interface PageProps {
-  params: {
-    blogId: string
-  }
+  blogId: string
 }
 
-const BlogDetailsView = ({ params }: PageProps) => {
+const BlogDetailsView = ({ blogId }: PageProps) => {
   const { data: blogDetails } = trpc.public.getBlogDetailsById.useQuery({
-    id: params.blogId,
+    id: blogId,
   })
 
   console.log('blog individual details', blogDetails)

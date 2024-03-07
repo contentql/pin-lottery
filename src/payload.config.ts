@@ -53,7 +53,7 @@ export default buildConfig({
     components: {
       graphics: {
         Logo: Logo,
-        Icon:Icon
+        Icon: Icon,
       },
     },
   },

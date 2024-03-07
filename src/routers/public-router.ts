@@ -40,9 +40,9 @@ export const publicRouter = router({
   getBlogData: publicProcedure.query(async () => {
     const payload = await getPayloadClient()
 
-    const faqs = await payload.find({ collection: 'blog' })
+    const blogs = await payload.find({ collection: 'blog' })
 
-    const blogDetails = faqs.docs.map(
+    const blogDetails = blogs.docs.map(
       ({ id, title, short_desc, img, updatedAt, createdAt }) => {
         return {
           id: id,

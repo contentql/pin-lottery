@@ -1,4 +1,8 @@
-import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
+import {
+  HTMLConverterFeature,
+  lexicalEditor,
+  lexicalHTML,
+} from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
 const Contest: CollectionConfig = {
   slug: 'contest',

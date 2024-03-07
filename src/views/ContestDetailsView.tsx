@@ -13,12 +13,11 @@ interface PageProps {
 }
 
 const ContestDetailsView = ({ params }: PageProps) => {
-
-  const {data} = trpc.contest.getContestById.useQuery({
+  const { data } = trpc.contest.getContestById.useQuery({
     id: params.contestId,
   })
   console.log('contest details', data)
-  const contestDetails=data?.at(0)
+  const contestDetails = data?.at(0)
   return (
     <>
       {/* Banner section here */}
