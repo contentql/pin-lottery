@@ -12,15 +12,16 @@ import Faq from './collections/Faq'
 import { Media } from './collections/Media'
 import Tags from './collections/Tags'
 import Users from './collections/Users'
+import Logo from './components/payload-icons/Logo'
+import Icon from './components/payload-icons/Icon'
 import { s3StorageAdapter } from './plugins/s3'
-
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
-  collections: [Users, Media,Contest, Contact, Blog, Faq, Tags],
+  collections: [Users, Media, Contest, Contact, Blog, Faq, Tags],
   routes: {
     admin: '/admin',
   },
@@ -38,6 +39,14 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: '- ContentQL',
+      favicon: 'favicon.ico',
+      ogImage: 'images/client/2.png',
+    },
+    components: {
+      graphics: {
+        Logo: Logo,
+        Icon:Icon
+      },
     },
   },
   rateLimit: {
