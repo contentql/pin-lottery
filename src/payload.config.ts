@@ -1,7 +1,7 @@
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
-import { slateEditor } from '@payloadcms/richtext-slate'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
@@ -43,7 +43,7 @@ export default buildConfig({
   rateLimit: {
     max: 2000, // only for development
   },
-  editor: slateEditor({}),
+  editor: lexicalEditor({}),
   db: mongooseAdapter({
     url: process.env.MONGODB_URL!,
   }),

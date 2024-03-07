@@ -1,27 +1,28 @@
-import Image from 'next/image'
 
-import specification_1 from '/public/images/icon/specification/1.png'
-import specification_2 from '/public/images/icon/specification/2.png'
-import specification_3 from '/public/images/icon/specification/3.png'
-import specification_4 from '/public/images/icon/specification/4.png'
-import specification_5 from '/public/images/icon/specification/5.png'
-import specification_6 from '/public/images/icon/specification/6.png'
+import { Contest } from '@/payload-types'
+import ConvertToHtml from '@/utils/convertToHtml'
 
-const VehicleOverview = () => {
+interface ContestDetails extends Contest {
+  features_html: string
+  description_html:string
+}
+
+const VehicleOverview = ({
+  contestDetails,
+}: {
+  contestDetails: ContestDetails
+}) => {
   return (
     <>
       <div className='content-block'>
-        <h3 className='title'>Vehicle Overview</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed ex
-          eget mi sollicitudin consequat. Sed rhoncus ligula vel justo dignissim
-          aliquam. Maecenas non est vitae ipsum luctus feugiat. Fusce purus
-          nunc, sodales at condimentum sed, ullamcorper a nulla. Nam justo est,
-          venenatis quis tellus in, volutpat eleifend nunc. Vestibulum congue
-          laoreet mi non interdum. Ut ut dapibus tellus.
-        </p>
+        <h3 className='title'>Description</h3>
+        <ConvertToHtml htmlContent={contestDetails?.description_html} />
       </div>
       <div className='content-block'>
+        <h3 className='title'>Features</h3>
+        <ConvertToHtml htmlContent={contestDetails?.features_html} />
+      </div>
+      {/* <div className='content-block'>
         <h3 className='title'>Specifications</h3>
         <div className='row mb-none-30'>
           <div className='col-lg-4 col-sm-6 mb-30'>
@@ -91,7 +92,7 @@ const VehicleOverview = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

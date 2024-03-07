@@ -6,7 +6,6 @@ import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
-
 interface PageProps {
   params: {
     contestId: string

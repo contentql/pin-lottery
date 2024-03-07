@@ -14,6 +14,8 @@ interface ContestDetails extends Contest {
         id?: string | null
       }[]
     | null
+  features_html: string
+  description_html:string
 }
 
 const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
@@ -84,7 +86,9 @@ const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
                   role='tabpanel'
                   aria-labelledby='description-tab'>
                   {/* vehicle Overview here */}
-                  <VehicleOverview />
+                  <VehicleOverview
+                    contestDetails={contestDetails as ContestDetails}
+                  />s
                 </div>
                 <div
                   className='tab-pane fade'
@@ -94,14 +98,13 @@ const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
                   <div className='content-block'>
                     <h3 className='title'>Competition Details</h3>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Duis sed ex eget mi sollicitudin consequat. Sed rhoncus
-                      ligula vel justo dignissim aliquam. Maecenas non est vitae
-                      ipsum luctus feugiat. Fusce purus nunc, sodales at
-                      condimentum sed, ullamcorper a nulla. Nam justo est,
-                      venenatis quis tellus in, volutpat eleifend nunc.
-                      Vestibulum congue laoreet mi non interdum. Ut ut dapibus
-                      tellus.
+                      Lorem ipsum dolor, consectetur adipiscing elit. Duis sed
+                      ex eget mi sollicitudin consequat. Sed rhoncus ligula vel
+                      justo dignissim aliquam. Maecenas non est vitae ipsum
+                      luctus feugiat. Fusce purus nunc, sodales at condimentum
+                      sed, ullamcorper a nulla. Nam justo est, venenatis quis
+                      tellus in, volutpat eleifend nunc. Vestibulum congue
+                      laoreet mi non interdum. Ut ut dapibus tellus.
                     </p>
                   </div>
                 </div>
