@@ -12,7 +12,9 @@ export const generateMeta = async (args: {
     typeof doc?.meta?.image === 'object' &&
     doc?.meta?.image !== null &&
     'url' in doc?.meta?.image &&
-    `${process.env.NEXT_PUBLIC_SERVER_URL}${doc.meta.image.url}`
+    doc.meta.image.url
+
+  const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/${doc?.title}/${doc?.id}`
 
   return {
     title: doc?.meta?.title || 'Lottery',
@@ -20,7 +22,7 @@ export const generateMeta = async (args: {
     openGraph: mergeOpenGraph({
       title: doc?.meta?.title || 'Lottery',
       description: doc?.meta?.description || 'Lottery - Description',
-      url: Array.isArray(doc?.meta?.title) ? doc?.meta?.title.join('/') : '/',
+      url,
       images: ogImage
         ? [
             {
