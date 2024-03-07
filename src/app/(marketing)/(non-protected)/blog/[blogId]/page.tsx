@@ -16,6 +16,10 @@ const BlogDetails = ({ params }: PageProps) => {
   return <BlogDetailsView params={params} />
 }
 
+export async function getStaticParams() {
+  return [{ blogId: '65e701cfce4aa870f5168e0d' }]
+}
+
 export const generateMetadata = async ({
   params: { blogId },
 }: {
@@ -33,7 +37,7 @@ export const generateMetadata = async ({
       },
     })
 
-    blog = result?.docs?.at(0) as Blog
+    blog = (await result?.docs?.at(0)) as Blog
   } catch (error) {
     console.error('Error fetching blog:', error)
   }
