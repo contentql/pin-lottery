@@ -1,9 +1,9 @@
 import { Blog } from '@/payload-types'
-import { trpc } from '@/trpc/client'
 import { generateMeta } from '@/utils/generateMeta'
 import BlogDetailsView from '@/views/BlogDetailsView'
+import { error } from 'console'
 import { Metadata } from 'next'
-import { headers } from 'next/headers'
+// import { headers } from 'next/headers'
 import payload from 'payload'
 
 interface PageProps {
@@ -30,18 +30,14 @@ export const generateMetadata = async ({
   let blog: Blog | null = null
 
   try {
-    // const result = await payload.find({
-    //   collection: 'blog',
-    //   where: {
-    //     id: {
-    //       equals: '65e748b51d080fcf7554a29a',
-    //     },
-    //   },
-    // })
+    const result = await payload.findByID({
+      collection: 'blog',
+      id: blogId
+    })
 
-    const result = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog/${blogId}`).then((res) => res.json())
+    // const result = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog/${blogId}`).then((res) => res.json()).catch((error) => console.log(error))
 
-    blog = result?.docs?.at(0) as Blog
+    blog = result as Blog
   } catch (error) {
     console.error('Error fetching blog:', error)
   }
