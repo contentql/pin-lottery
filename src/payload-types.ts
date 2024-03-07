@@ -8,229 +8,269 @@
 
 export interface Config {
   collections: {
-    users: User
-    media: Media
-    contest: Contest
-    contact: Contact
-    blog: Blog
-    faq: Faq
-    tags: Tag
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  globals: {}
+    users: User;
+    media: Media;
+    contest: Contest;
+    contact: Contact;
+    blog: Blog;
+    faq: Faq;
+    tags: Tag;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  globals: {};
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: string
-  user_name?: string | null
-  first_name?: string | null
-  last_name?: string | null
-  address?: string | null
-  phone_number?: string | null
-  roles?: ('admin' | 'user' | 'seller')[] | null
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  _verified?: boolean | null
-  _verificationToken?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
-  password: string | null
+  id: string;
+  user_name?: string | null;
+  first_name?: string | null;
+  last_name?: string | null;
+  address?: string | null;
+  phone_number?: string | null;
+  roles?: ('admin' | 'user' | 'seller')[] | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: string
-  alt?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
   sizes?: {
     square?: {
-      url?: string | null
-      width?: number | null
-      height?: number | null
-      mimeType?: string | null
-      filesize?: number | null
-      filename?: string | null
-    }
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     sixteenByNineMedium?: {
-      url?: string | null
-      width?: number | null
-      height?: number | null
-      mimeType?: string | null
-      filesize?: number | null
-      filename?: string | null
-    }
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     thumbnail?: {
-      url?: string | null
-      width?: number | null
-      height?: number | null
-      mimeType?: string | null
-      filesize?: number | null
-      filename?: string | null
-    }
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     card?: {
-      url?: string | null
-      width?: number | null
-      height?: number | null
-      mimeType?: string | null
-      filesize?: number | null
-      filename?: string | null
-    }
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     tablet?: {
-      url?: string | null
-      width?: number | null
-      height?: number | null
-      mimeType?: string | null
-      filesize?: number | null
-      filename?: string | null
-    }
-  }
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contest".
  */
 export interface Contest {
-  id: string
-  title: string
-  product_price: number
-  ticket_price: number
-  img?: string | Media | null
+  id: string;
+  title: string;
+  product_price: number;
   tag?: {
-    relationTo: 'tags'
-    value: string | Tag
-  } | null
-  contest_no: string
-  day_remain?: number | null
-  ticket_remain?: number | null
-  product_features: {
-    images?:
-      | {
-          product_images?: string | Media | null
-          id?: string | null
-        }[]
-      | null
-    features?:
-      | {
-          [k: string]: unknown
-        }[]
-      | null
-    description?:
-      | {
-          [k: string]: unknown
-        }[]
-      | null
-  }
-  updatedAt: string
-  createdAt: string
+    relationTo: 'tags';
+    value: string | Tag;
+  } | null;
+  features?: {
+    root: {
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  description?: {
+    root: {
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  features_html?: string | null;
+  description_html?: string | null;
+  img: string | Media;
+  images?:
+    | {
+        product_images: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  contest_no: string;
+  ticket_price: number;
+  day_remain?: number | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tags".
  */
 export interface Tag {
-  id: string
-  tag?: string | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  tag?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact".
  */
 export interface Contact {
-  id: string
-  name?: string | null
-  email?: string | null
-  subject?: string | null
-  message?: string | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  subject?: string | null;
+  message?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog".
  */
 export interface Blog {
-  id: string
-  title?: string | null
-  short_desc?: string | null
-  content?:
-    | {
-        [k: string]: unknown
-      }[]
-    | null
-  img?: string | Media | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  title?: string | null;
+  short_desc?: string | null;
+  content?: {
+    root: {
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  img?: string | Media | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faq".
  */
 export interface Faq {
-  id: string
+  id: string;
   faqs?:
     | {
-        question?: string | null
-        answer?: string | null
-        id?: string | null
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
       }[]
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string
+  id: string;
   user: {
-    relationTo: 'users'
-    value: string | User
-  }
-  key?: string | null
+    relationTo: 'users';
+    value: string | User;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
