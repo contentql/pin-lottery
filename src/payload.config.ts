@@ -1,6 +1,7 @@
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import seo from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import dotenv from 'dotenv'
 import path from 'path'
@@ -15,6 +16,13 @@ import Users from './collections/Users'
 import Logo from './components/payload-icons/Logo'
 import Icon from './components/payload-icons/Icon'
 import { s3StorageAdapter } from './plugins/s3'
+import {
+  generateDescription,
+  generateImage,
+  generateTitle,
+  generateURL,
+} from './utils/seo'
+
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
@@ -63,6 +71,14 @@ export default buildConfig({
           adapter: s3StorageAdapter,
         },
       },
+    }),
+    seo({
+      collections: ['blog', 'contest'],
+      uploadsCollection: 'media',
+      generateTitle,
+      generateDescription,
+      generateImage,
+      generateURL,
     }),
   ],
   typescript: {
