@@ -1,3 +1,4 @@
+import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
 const Contest: CollectionConfig = {
   slug: 'contest',
@@ -38,12 +39,30 @@ const Contest: CollectionConfig = {
                   name: 'features',
                   type: 'richText',
                   label: 'Product Features',
+                  editor: lexicalEditor({
+                    features: ({ defaultFeatures }) => [
+                      ...defaultFeatures,
+                      HTMLConverterFeature({}),
+                    ],
+                  }),
                 },
                 {
                   name: 'description',
                   type: 'richText',
                   label: 'Product Description',
+                  editor: lexicalEditor({
+                    features: ({ defaultFeatures }) => [
+                      ...defaultFeatures,
+                      HTMLConverterFeature({}),
+                    ],
+                  }),
                 },
+                lexicalHTML('features', {
+                  name: 'features_html',
+                }),
+                lexicalHTML('description', {
+                  name: 'description_html',
+                }),
               ],
             },
             {
