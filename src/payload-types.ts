@@ -112,31 +112,6 @@ export interface Contest {
   title: string;
   product_price: number;
   tag?: {
-    relationTo: 'tags';
-    value: string | Tag;
-  } | null;
-  features?:
-    | {
-        [k: string]: unknown;
-      }[]
-    | null;
-  description?:
-    | {
-        [k: string]: unknown;
-      }[]
-    | null;
-  img: string | Media;
-  images?:
-    | {
-        product_images: string | Media;
-        id?: string | null;
-      }[]
-    | null;
-  contest_no: string;
-  ticket_price: number;
-  day_remain?: number | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -173,10 +148,6 @@ export interface Blog {
     | {
         [k: string]: unknown;
       }[]
-    | null;
-  img?: string | Media | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -190,9 +161,6 @@ export interface Faq {
         answer?: string | null;
         id?: string | null;
       }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

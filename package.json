@@ -28,6 +28,8 @@
     "@payloadcms/db-mongodb": "^1.4.2",
     "@payloadcms/plugin-cloud": "^3.0.0",
     "@payloadcms/plugin-cloud-storage": "^1.1.2",
+    "@payloadcms/plugin-seo": "^2.2.1",
+    "@payloadcms/richtext-slate": "^1.4.0",
     "@payloadcms/richtext-lexical": "^0.7.0",
     "@react-email/components": "0.0.15",
     "@tanstack/react-query": "^5.22.2",
