@@ -1,3 +1,3 @@
 export const envConfig = {
-  SERVER_URL: 'http://localhost:3000',
+  SERVER_URL: 'https://pin-lottery-production.up.railway.app',
 }

@@ -145,8 +145,6 @@ export interface Contest {
     };
     [k: string]: unknown;
   } | null;
-  features_html?: string | null;
-  description_html?: string | null;
   img: string | Media;
   images?:
     | {
@@ -154,6 +152,8 @@ export interface Contest {
         id?: string | null;
       }[]
     | null;
+  features_html?: string | null;
+  description_html?: string | null;
   contest_no: string;
   ticket_price: number;
   day_remain?: number | null;
