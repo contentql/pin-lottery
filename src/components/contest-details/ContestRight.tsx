@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 
-const ContestRight = ({ contestDetails }: { contestDetails:Contest }) => {
+const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
   const { incrementHandle, decrementHandle, quantity, setQuantity }: any =
     useContext(AppContext)
 
@@ -45,14 +45,16 @@ const ContestRight = ({ contestDetails }: { contestDetails:Contest }) => {
             <div className='quantity-nav'>
               <div
                 className={`quantity-button ${quantity <= 0 && 'pe-none'}`}
-                onClick={decrementHandle}>
+                onClick={decrementHandle}
+              >
                 <i className='las la-minus'></i>
               </div>
               <div
                 className={`quantity-button quantity-up ${
                   quantity >= 16 && 'pe-none'
                 }`}
-                onClick={incrementHandle}>
+                onClick={incrementHandle}
+              >
                 <i className='las la-plus'></i>
               </div>
             </div>
@@ -61,7 +63,8 @@ const ContestRight = ({ contestDetails }: { contestDetails:Contest }) => {
         <div className='mt-sm-0 mt-3'>
           <Link
             href={`${pathname}/lottery-details`}
-            className='cmn-btn style--three'>
+            className='cmn-btn style--three'
+          >
             buy tickets
           </Link>
         </div>

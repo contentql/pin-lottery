@@ -15,7 +15,7 @@ interface ContestDetails extends Contest {
       }[]
     | null
   features_html: string
-  description_html:string
+  description_html: string
 }
 
 const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
@@ -52,7 +52,8 @@ const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
               <ul
                 className='nav nav-tabs justify-content-center mb-30 pb-4 border-0'
                 id='myTab'
-                role='tablist'>
+                role='tablist'
+              >
                 <li className='nav-item' role='presentation'>
                   <button
                     className='cmn-btn active'
@@ -61,7 +62,8 @@ const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
                     data-bs-target='#description'
                     role='tab'
                     aria-controls='description'
-                    aria-selected='true'>
+                    aria-selected='true'
+                  >
                     <span className='mr-3'></span> description
                   </button>
                 </li>
@@ -73,7 +75,8 @@ const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
                     data-bs-target='#details'
                     role='tab'
                     aria-controls='details'
-                    aria-selected='false'>
+                    aria-selected='false'
+                  >
                     <span className='mr-3'></span>competition details
                   </button>
                 </li>
@@ -84,17 +87,20 @@ const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
                   className='tab-pane fade show active'
                   id='description'
                   role='tabpanel'
-                  aria-labelledby='description-tab'>
+                  aria-labelledby='description-tab'
+                >
                   {/* vehicle Overview here */}
                   <VehicleOverview
                     contestDetails={contestDetails as ContestDetails}
-                  />s
+                  />
+                  s
                 </div>
                 <div
                   className='tab-pane fade'
                   id='details'
                   role='tabpanel'
-                  aria-labelledby='details-tab'>
+                  aria-labelledby='details-tab'
+                >
                   <div className='content-block'>
                     <h3 className='title'>Competition Details</h3>
                     <p>

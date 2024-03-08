@@ -1,5 +1,4 @@
-
-const ConvertToHtml = ({ htmlContent }: { htmlContent :string}) => {
+const ConvertToHtml = ({ htmlContent }: { htmlContent: string }) => {
   return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
 }
 

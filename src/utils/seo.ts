@@ -4,7 +4,6 @@ import {
   GenerateTitle,
   GenerateURL,
 } from '@payloadcms/plugin-seo/dist/types'
-import { envConfig } from '../../env.config'
 
 export const generateTitle: GenerateTitle = (data: any) => {
   const title = `${data?.slug || 'lottery'} - ${data?.doc?.title.value || ''}`
@@ -25,7 +24,7 @@ export const generateImage: GenerateImage = (data: any) => {
 }
 
 export const generateURL: GenerateURL = (data: any) => {
-  const url = `${envConfig.SERVER_URL}/${data?.locale ? data?.locale + '/' : ''}${data?.slug || ''}/${data?.id || ''}`
+  const url = `https://pin-lottery-production.up.railway.app/${data?.locale ? data?.locale + '/' : ''}${data?.slug || ''}/${data?.id || ''}`
 
   return url
 }

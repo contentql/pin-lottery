@@ -1,10 +1,9 @@
-
 import { Contest } from '@/payload-types'
 import ConvertToHtml from '@/utils/convertToHtml'
 
 interface ContestDetails extends Contest {
   features_html: string
-  description_html:string
+  description_html: string
 }
 
 const VehicleOverview = ({
