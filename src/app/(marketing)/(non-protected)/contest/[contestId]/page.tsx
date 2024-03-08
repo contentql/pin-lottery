@@ -42,7 +42,7 @@ export const generateMetadata = async ({
 
   try {
     const result = await payload.findByID({
-      collection: 'blog',
+      collection: 'contest',
       id: contestId,
     })
 
