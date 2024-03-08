@@ -6,18 +6,18 @@ import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
+
 interface PageProps {
-  params: {
-    contestId: string
-  }
+  contestId: string
 }
 
-const ContestDetailsView = ({ params }: PageProps) => {
+const ContestDetailsView = ({ contestId }: PageProps) => {
   const { data } = trpc.contest.getContestById.useQuery({
-    id: params.contestId,
+    id: contestId,
   })
-  console.log('contest details', data)
+
   const contestDetails = data?.at(0)
+
   return (
     <>
       {/* Banner section here */}

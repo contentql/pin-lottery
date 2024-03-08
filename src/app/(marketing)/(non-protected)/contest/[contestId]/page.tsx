@@ -1,8 +1,8 @@
+import { getPayloadClient } from '@/get-payload'
 import { Contest } from '@/payload-types'
 import { generateMeta } from '@/utils/generateMeta'
 import ContestDetailsView from '@/views/ContestDetailsView'
 import { Metadata } from 'next'
-import payload from 'payload'
 
 interface PageProps {
   params: {
@@ -11,7 +11,24 @@ interface PageProps {
 }
 
 const ContestDetails = ({ params }: PageProps) => {
-  return <ContestDetailsView params={params} />
+  const { contestId } = params
+
+  return <ContestDetailsView contestId={contestId} />
+}
+
+export async function generateStaticParams() {
+  const payload = await getPayloadClient()
+
+  const allContests = await payload.find({
+    collection: 'contest',
+    pagination: false,
+  })
+
+  const contestIdsArray = allContests.docs.map(contest => ({
+    contestId: contest.id,
+  }))
+
+  return contestIdsArray
 }
 
 export const generateMetadata = async ({
@@ -21,17 +38,15 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   let contest: Contest | null = null
 
+  const payload = await getPayloadClient()
+
   try {
-    const result = await payload.find({
-      collection: 'contest',
-      where: {
-        id: {
-          equals: contestId,
-        },
-      },
+    const result = await payload.findByID({
+      collection: 'blog',
+      id: contestId,
     })
 
-    contest = result?.docs?.at(0) as Contest
+    contest = result as Contest
   } catch (error) {
     console.error('Error fetching contest:', error)
   }
