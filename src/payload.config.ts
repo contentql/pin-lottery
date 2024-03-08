@@ -36,6 +36,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    // css: path.resolve(__dirname, '/src/styles/new.scss'),
     webpack: (config: any) => {
       config.resolve.fallback = {
         ...config.resolve.fallback,
