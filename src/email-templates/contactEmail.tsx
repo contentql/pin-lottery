@@ -1,200 +1,128 @@
-import {
+  import {
   Body,
   Button,
   Column,
   Container,
   Head,
-  Heading,
   Html,
   Img,
   Preview,
   Row,
   Section,
   Text,
-  render,
+  render
 } from '@react-email/components'
 
-interface YelpRecentLoginEmailProps {
-  userFirstName?: string
-  loginDate?: Date
-  loginDevice?: string
-  loginLocation?: string
-  loginIp?: string
-}
+  interface UserContactEmailProps {
+    userName: 'string'
+    email: 'string'
+    subject: 'string'
+    message: 'string'
+  }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : ''
+  export const ContactEmail = ({
+    userName,
+    email,
+    subject,
+    message,
+  }: UserContactEmailProps) => {
+    const imageUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/images/client/2.png`
+    return (
+      <Html>
+        <Head />
+        <Preview>Yelp recent login</Preview>
+        <Body style={main}>
+          <Container>
+            <Section style={logo}>
+              <Img src={imageUrl} />
+            </Section>
 
-export const ContactEmail = ({
-  userFirstName,
-  loginDate,
-  loginDevice,
-  loginLocation,
-  loginIp,
-}: YelpRecentLoginEmailProps) => {
-  const formattedDate = new Intl.DateTimeFormat('en', {
-    dateStyle: 'long',
-    timeStyle: 'short',
-  }).format(loginDate)
+            <Section style={content}>
+              <Row style={{ ...boxInfos, paddingBottom: '0' }}>
+                <Column>
+                  <Text style={{ ...paragraph, marginTop: -5 }}>
+                    <b>Name: </b>
+                    {userName}
+                  </Text>
+                  <Text style={{ ...paragraph, marginTop: -5 }}>
+                    <b>Email: </b>
+                    {email}
+                  </Text>
+                  <Text
+                    style={{
+                      color: 'rgb(0,0,0, 0.5)',
+                      fontSize: 14,
+                      marginTop: -5,
+                    }}>
+                    {subject}
+                  </Text>
 
-  return (
-    <Html>
-      <Head />
-      <Preview>Yelp recent login</Preview>
-      <Body style={main}>
-        <Container>
-          <Section style={logo}>
-            <Img src={`${baseUrl}/static/yelp-logo.png`} />
-          </Section>
+                  <Text style={paragraph}>{message}</Text>
+                </Column>
+              </Row>
+              <Row style={{ ...boxInfos, paddingTop: '0' }}>
+                <Column style={containerButton} colSpan={2}>
+                  <Button style={button}>Learn More</Button>
+                </Column>
+              </Row>
+            </Section>
 
-          <Section style={content}>
-            <Row>
-              <Img
-                style={image}
-                width={620}
-                src={`${baseUrl}/static/yelp-header.png`}
-              />
-            </Row>
+            <Section style={containerImageFooter}>
+              <Img style={image} width={620} src={imageUrl} />
+            </Section>
 
-            <Row style={{ ...boxInfos, paddingBottom: '0' }}>
-              <Column>
-                <Heading
-                  style={{
-                    fontSize: 32,
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}
-                >
-                  Hi {userFirstName},
-                </Heading>
-                <Heading
-                  as='h2'
-                  style={{
-                    fontSize: 26,
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}
-                >
-                  We noticed a recent login to your Yelp account.
-                </Heading>
+          </Container>
+        </Body>
+      </Html>
+    )
+  }
+  export const newContactForm = (props: UserContactEmailProps) =>
+    render(<ContactEmail {...props} />, { pretty: true })
 
-                <Text style={paragraph}>
-                  <b>Time: </b>
-                  {formattedDate}
-                </Text>
-                <Text style={{ ...paragraph, marginTop: -5 }}>
-                  <b>Device: </b>
-                  {loginDevice}
-                </Text>
-                <Text style={{ ...paragraph, marginTop: -5 }}>
-                  <b>Location: </b>
-                  {loginLocation}
-                </Text>
-                <Text
-                  style={{
-                    color: 'rgb(0,0,0, 0.5)',
-                    fontSize: 14,
-                    marginTop: -5,
-                  }}
-                >
-                  *Approximate geographic location based on IP address:
-                  {loginIp}
-                </Text>
+  const main = {
+    backgroundColor: '#fff',
+    fontFamily:
+      '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+  }
 
-                <Text style={paragraph}>
-                  If this was you, theres nothing else you need to do.
-                </Text>
-                <Text style={{ ...paragraph, marginTop: -5 }}>
-                  If this wasnt you or if you have additional questions, please
-                  see our support page.
-                </Text>
-              </Column>
-            </Row>
-            <Row style={{ ...boxInfos, paddingTop: '0' }}>
-              <Column style={containerButton} colSpan={2}>
-                <Button style={button}>Learn More</Button>
-              </Column>
-            </Row>
-          </Section>
+  const paragraph = {
+    fontSize: 16,
+  }
 
-          <Section style={containerImageFooter}>
-            <Img
-              style={image}
-              width={620}
-              src={`${baseUrl}/static/yelp-footer.png`}
-            />
-          </Section>
+  const logo = {
+    padding: '30px 20px',
+  }
 
-          <Text
-            style={{
-              textAlign: 'center',
-              fontSize: 12,
-              color: 'rgb(0,0,0, 0.7)',
-            }}
-          >
-            © 2022 | Yelp Inc., 350 Mission Street, San Francisco, CA 94105,
-            U.S.A. | www.yelp.com
-          </Text>
-        </Container>
-      </Body>
-    </Html>
-  )
-}
-export const ResetPassword = (props: YelpRecentLoginEmailProps) =>
-  render(<ContactEmail {...props} />, { pretty: true })
-ContactEmail.PreviewProps = {
-  userFirstName: 'Alan',
-  loginDate: new Date('September 7, 2022, 10:58 am'),
-  loginDevice: 'Chrome on Mac OS X',
-  loginLocation: 'Upland, California, United States',
-  loginIp: '47.149.53.167',
-} as YelpRecentLoginEmailProps
+  const containerButton = {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+  }
 
-const main = {
-  backgroundColor: '#fff',
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
-}
+  const button = {
+    backgroundColor: '#e00707',
+    borderRadius: 3,
+    color: '#FFF',
+    fontWeight: 'bold',
+    border: '1px solid rgb(0,0,0, 0.1)',
+    cursor: 'pointer',
+    padding: '12px 30px',
+  }
 
-const paragraph = {
-  fontSize: 16,
-}
+  const content = {
+    border: '1px solid rgb(0,0,0, 0.1)',
+    borderRadius: '3px',
+    overflow: 'hidden',
+  }
 
-const logo = {
-  padding: '30px 20px',
-}
+  const image = {
+    maxWidth: '100%',
+  }
 
-const containerButton = {
-  display: 'flex',
-  justifyContent: 'center',
-  width: '100%',
-}
+  const boxInfos = {
+    padding: '20px',
+  }
 
-const button = {
-  backgroundColor: '#e00707',
-  borderRadius: 3,
-  color: '#FFF',
-  fontWeight: 'bold',
-  border: '1px solid rgb(0,0,0, 0.1)',
-  cursor: 'pointer',
-  padding: '12px 30px',
-}
-
-const content = {
-  border: '1px solid rgb(0,0,0, 0.1)',
-  borderRadius: '3px',
-  overflow: 'hidden',
-}
-
-const image = {
-  maxWidth: '100%',
-}
-
-const boxInfos = {
-  padding: '20px',
-}
-
-const containerImageFooter = {
-  padding: '45px 0 0 0',
-}
+  const containerImageFooter = {
+    padding: '45px 0 0 0',
+  }

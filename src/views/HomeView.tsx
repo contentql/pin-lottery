@@ -1,6 +1,6 @@
 'use client'
 
-import Contest from '@/components/common/Contest'
+import ContestDetailsPage from '@/components/common/ContestDetailsPage'
 import Features from '@/components/common/Features'
 import HowToPlay from '@/components/common/HowToPlay'
 import LatestWinner from '@/components/common/LatestWinner'
@@ -9,13 +9,22 @@ import Support from '@/components/common/Support'
 import Testimonial from '@/components/common/Testimonial'
 import Hero from '@/components/home/Hero'
 import Winner from '@/components/home/Winner'
+import { Contest } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 const HomeView = () => {
+
+  // get contests
+
+  const { data: contestDetails, isLoading } =
+    trpc.contest.getContests.useQuery()
+  
+  console.log('contest home', contestDetails)
   return (
     <>
       <Hero />
       <HowToPlay />
-      <Contest />
+      <ContestDetailsPage contestDetails={contestDetails as [Contest]} />
       <Winner />
       <LatestWinner />
       <Overview />
