@@ -172,6 +172,7 @@ export interface Contest {
 export interface Tag {
   id: string;
   tag?: string | null;
+  img?: string | Media | null;
   updatedAt: string;
   createdAt: string;
 }

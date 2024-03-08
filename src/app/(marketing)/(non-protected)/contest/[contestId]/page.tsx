@@ -11,9 +11,8 @@ interface PageProps {
 }
 
 const ContestDetails = ({ params }: PageProps) => {
-  const { contestId } = params
 
-  return <ContestDetailsView contestId={contestId} />
+  return <ContestDetailsView contestId={params.contestId} />
 }
 
 export async function generateStaticParams() {
