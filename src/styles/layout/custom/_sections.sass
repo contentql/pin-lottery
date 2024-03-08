@@ -131,5 +131,34 @@
 /* email-send css end */
 
 
+.button-container
+  display: flex
+  align-items: center
 
+.cancel-button,
+.save-button
+  padding: 0.5rem 1rem
+  border: none
+  border-radius: 5px
+  cursor: pointer
+  font-size: 1rem
+  font-weight: bold
+  transition: all 0.3s ease
+  text-transform: capitalize
+  outline: none
+  width: 120px
+  color: white
+  &:hover
+    transform: translateY(-0.3px)
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 
+.cancel-button
+  margin-right: 0.5rem
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+  background-color: #e74c3c
+button
+  background-color: #e74c3c
+
+.save-button
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+  background-color: #2ecc71
