@@ -6,7 +6,7 @@ import {
 } from '@payloadcms/plugin-seo/dist/types'
 
 export const generateTitle: GenerateTitle = (data: any) => {
-  const title = `${data?.slug || 'lottery'} - ${data?.doc?.title.value || ''}`
+  const title = `${data?.doc?.title.value || ''}`
 
   return title
 }

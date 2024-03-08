@@ -18,8 +18,6 @@ const BlogDetailsView = ({ blogId }: PageProps) => {
     id: blogId,
   })
 
-  console.log('blog individual details', blogDetails)
-
   return (
     <>
       {/* Banner section here */}
