@@ -31,10 +31,7 @@ export const publicRouter = router({
 
     const faqs = await payload.find({ collection: 'faq' })
 
-    const allFaqs = faqs.docs.map(doc => {
-      return doc
-    })
-    return allFaqs.at(0)?.faqs
+    return faqs.docs.at(0)?.faqs
   }),
 
   getBlogData: publicProcedure.query(async () => {
@@ -64,15 +61,10 @@ export const publicRouter = router({
 
       const { id } = input
 
-      const blogById = await payload.find({
+      const blogDetails = await payload.findByID({
         collection: 'blog',
-        where: {
-          id: {
-            equals: id,
-          },
-        },
+        id: id,
       })
-      const blogDetails = blogById.docs
       return blogDetails
     }),
 })

@@ -212,6 +212,7 @@ export interface Blog {
     [k: string]: unknown;
   } | null;
   img?: string | Media | null;
+  content_html?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
