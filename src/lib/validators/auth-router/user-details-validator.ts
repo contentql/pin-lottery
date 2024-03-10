@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 export const UserDetailsValidator = z.object({
-  first_name: z.string(),
-  last_name: z.string(),
+  username: z.string(),
+  dob: z.date(),
   address: z.string(),
   phone_number: z.string(),
 })

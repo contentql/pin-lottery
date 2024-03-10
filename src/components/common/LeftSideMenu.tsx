@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import PersonalInfo from '@/components/modals/user-information/PersonalInfo'
-
 import { useAuth } from '@/providers/Auth'
 
 import team_obj from '/public/images/elements/team-obj.png'
@@ -65,7 +63,6 @@ const LeftSideMenu = () => {
         </div>
         <h3 className='user-card__name'>Albert Owens</h3>
         <p className='user-card__id'>ID : 19535909</p>
-        <PersonalInfo />
       </div>
       <div className='user-action-card'>
         <ul className='user-action-list'>
