@@ -15,6 +15,7 @@ const Info = () => {
 
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TUserDetailsValidator>({
@@ -23,6 +24,7 @@ const Info = () => {
 
   const { mutate: userUpdate } = trpc.auth.updateUserDetails.useMutation({
     onSuccess: () => {
+      handleCancel()
       toast.success(`Details updated successfully`)
     },
     onError: () => {
@@ -31,12 +33,20 @@ const Info = () => {
   })
 
   const onSubmit = ({
-    username,
+    user_name,
     dob,
     address,
     phone_number,
   }: TUserDetailsValidator) => {
-    userUpdate({ username, dob, address, phone_number })
+    userUpdate({ user_name, dob, address, phone_number })
+  }
+
+  const handleCancel = () => {
+    setIsEditMode(false)
+    setValue('user_name', '')
+    setValue('dob', undefined)
+    setValue('address', '')
+    setValue('phone_number', '')
   }
 
   return (
@@ -50,7 +60,7 @@ const Info = () => {
                 <button
                   type='button'
                   className='cancel-button'
-                  onClick={() => setIsEditMode(false)}>
+                  onClick={() => handleCancel}>
                   Cancel
                 </button>{' '}
                 <button type='submit' className='save-button'>
@@ -72,14 +82,21 @@ const Info = () => {
               <span className='caption'>Name</span>
               <span className='value'>
                 {isEditMode ? (
-                  <input
-                    {...register('username')}
-                    type='text'
-                    name='username'
-                    id='username'
-                    placeholder='Username'
-                    required
-                  />
+                  <>
+                    <input
+                      {...register('user_name')}
+                      type='text'
+                      name='user_name'
+                      id='user_name'
+                      placeholder='Username'
+                      required
+                    />
+                    {errors?.user_name && (
+                      <p className='form-errors'>
+                        {errors?.user_name?.message}
+                      </p>
+                    )}
+                  </>
                 ) : (
                   'Albert Owens'
                 )}
@@ -89,13 +106,19 @@ const Info = () => {
               <span className='caption'>Date of Birth</span>
               <span className='value'>
                 {isEditMode ? (
-                  <input
-                    type='date'
-                    name='dob'
-                    id='dob'
-                    placeholder='DOB'
-                    required
-                  />
+                  <>
+                    <input
+                      {...register('dob')}
+                      type='date'
+                      name='dob'
+                      id='dob'
+                      placeholder='DOB'
+                      required
+                    />
+                    {errors?.dob && (
+                      <p className='form-errors'>{errors?.dob?.message}</p>
+                    )}
+                  </>
                 ) : (
                   '15-03-1974'
                 )}
@@ -105,13 +128,19 @@ const Info = () => {
               <span className='caption'>Address</span>
               <span className='value'>
                 {isEditMode ? (
-                  <input
-                    type='text'
-                    name='address'
-                    id='address'
-                    placeholder='Address'
-                    required
-                  />
+                  <>
+                    <input
+                      {...register('address')}
+                      type='text'
+                      name='address'
+                      id='address'
+                      placeholder='Address'
+                      required
+                    />
+                    {errors?.address && (
+                      <p className='form-errors'>{errors?.address?.message}</p>
+                    )}
+                  </>
                 ) : (
                   '8198 Fieldstone Dr.La Crosse, WI 54601'
                 )}
@@ -121,13 +150,21 @@ const Info = () => {
               <span className='caption'>Mobile</span>
               <span className='value'>
                 {isEditMode ? (
-                  <input
-                    type='text'
-                    name='mobile'
-                    id='mobile'
-                    placeholder='mobile'
-                    required
-                  />
+                  <>
+                    <input
+                      {...register('phone_number')}
+                      type='text'
+                      name='mobile'
+                      id='mobile'
+                      placeholder='mobile'
+                      required
+                    />
+                    {errors?.phone_number && (
+                      <p className='form-errors'>
+                        {errors?.phone_number?.message}
+                      </p>
+                    )}
+                  </>
                 ) : (
                   '+1 234-567-8925'
                 )}
@@ -136,51 +173,22 @@ const Info = () => {
           </ul>
         </form>
       </div>
-      {/* <div className='user-info-card'>
-        <div className='user-info-card__header'>
-          <h3 className='user-info-card__title'>Account Settings</h3>
-          <button type='button' className='d-flex align-items-start gap-1 transparent-button'>
-            <FaRegEdit className='fs-4' /> Edit
-          </button>
-        </div>
-        <ul className='user-info-card__list'>
-          <li>
-            <span className='caption'>Language</span>
-            <span className='value'>English (United States)</span>
-          </li>
-          <li>
-            <span className='caption'>Time Zone</span>
-            <span className='value'>(GMT-06:00) Central America</span>
-          </li>
-          <li>
-            <span className='caption'>Status</span>
-            <span className='value status-active'>Active</span>
-          </li>
-        </ul>
-      </div>
       <div className='user-info-card'>
         <div className='user-info-card__header'>
           <h3 className='user-info-card__title'>Email Addresses</h3>
-          <button type='button' className='d-flex align-items-start gap-1 transparent-button'>
-            <FaRegEdit className='fs-4' /> Edit
-          </button>
-        </div>
-        <ul className='user-info-card__list'></ul>
-      </div>
-      <div className='user-info-card'>
-        <div className='user-info-card__header'>
-          <h3 className='user-info-card__title'>Phone</h3>
-          <button type='button' className='d-flex align-items-start gap-1 transparent-button'>
+          <button
+            type='button'
+            className='d-flex align-items-start gap-1 transparent-button'>
             <FaRegEdit className='fs-4' /> Edit
           </button>
         </div>
         <ul className='user-info-card__list'>
           <li>
-            <span className='caption'>Mobile</span>
-            <span className='value'>+1 234-567-8925</span>
+            <span className='caption'>Email</span>
+            <span className='value'>albert349@gmail.com</span>
           </li>
         </ul>
-      </div> */}
+      </div>
       <div className='user-info-card'>
         <div className='user-info-card__header'>
           <h3 className='user-info-card__title'>Security</h3>

@@ -40,14 +40,9 @@ const Users: CollectionConfig = {
       label: 'User Name',
     },
     {
-      name: 'first_name',
-      type: 'text',
-      label: 'First Name',
-    },
-    {
-      name: 'last_name',
-      type: 'text',
-      label: 'Last Name',
+      name: 'dob',
+      type: 'date',
+      label: 'DOB',
     },
     {
       name: 'address',

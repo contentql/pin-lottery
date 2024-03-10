@@ -145,7 +145,7 @@ export const authRouter = router({
   updateUserDetails: userProcedure
     .input(UserDetailsValidator)
     .mutation(async ({ input, ctx }) => {
-      const { first_name, last_name, address, phone_number } = input
+      const { user_name, dob, address, phone_number } = input
       const { user } = ctx
 
       const payload = await getPayloadClient()
@@ -155,10 +155,10 @@ export const authRouter = router({
           collection: 'users',
           id: user.id,
           data: {
-            first_name: first_name,
-            last_name: last_name,
-            address: address,
-            phone_number: phone_number,
+            user_name,
+            dob,
+            address,
+            phone_number,
           },
         })
       } catch (err) {

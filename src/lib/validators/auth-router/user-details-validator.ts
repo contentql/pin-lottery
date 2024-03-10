@@ -1,10 +1,13 @@
 import { z } from 'zod'
 
 export const UserDetailsValidator = z.object({
-  username: z.string(),
-  dob: z.date(),
-  address: z.string(),
-  phone_number: z.string(),
+  user_name: z
+    .string()
+    .min(3, 'Username must contain at least 3 character(s)')
+    .max(20, 'Username must contain at most 20 character(s)'),
+  dob: z.string().optional(),
+  address: z.string().optional(),
+  phone_number: z.string().optional(),
 })
 
 export type TUserDetailsValidator = z.infer<typeof UserDetailsValidator>
