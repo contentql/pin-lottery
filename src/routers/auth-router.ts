@@ -6,7 +6,7 @@ import { ForgotPasswordValidator } from '../lib/validators/auth-router/forgot-pa
 import { LoginValidator } from '../lib/validators/auth-router/login-validator'
 import { ResetPasswordValidator } from '../lib/validators/auth-router/reset-password-validator'
 import { TokenValidator } from '../lib/validators/auth-router/token-validator'
-import { UserDetailsValidator } from '../lib/validators/auth-router/user-details-validator'
+import { UserPersonalDetailsValidator } from '../lib/validators/auth-router/user-details-validator'
 import { publicProcedure, router, userProcedure } from '../trpc/trpc'
 export const authRouter = router({
   createUser: publicProcedure
@@ -142,8 +142,8 @@ export const authRouter = router({
       }
     }),
 
-  updateUserDetails: userProcedure
-    .input(UserDetailsValidator)
+  updateUserPersonalDetails: userProcedure
+    .input(UserPersonalDetailsValidator)
     .mutation(async ({ input, ctx }) => {
       const { user_name, dob, address, phone_number } = input
       const { user } = ctx

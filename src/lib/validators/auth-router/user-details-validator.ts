@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const UserDetailsValidator = z.object({
+export const UserPersonalDetailsValidator = z.object({
   user_name: z
     .string()
     .min(3, 'Username must contain at least 3 character(s)')
@@ -10,4 +10,6 @@ export const UserDetailsValidator = z.object({
   phone_number: z.string().optional(),
 })
 
-export type TUserDetailsValidator = z.infer<typeof UserDetailsValidator>
+export type TUserPersonalDetailsValidator = z.infer<
+  typeof UserPersonalDetailsValidator
+>

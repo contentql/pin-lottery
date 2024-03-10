@@ -6,43 +6,48 @@ import { FaRegEdit } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 
 import {
-  TUserDetailsValidator,
-  UserDetailsValidator,
+  TUserPersonalDetailsValidator,
+  UserPersonalDetailsValidator,
 } from '@/lib/validators/auth-router/user-details-validator'
 
 const Info = () => {
-  const [isEditMode, setIsEditMode] = useState(false)
+  const [isEditMode, setIsEditMode] = useState({
+    personalDetails: false,
+    email: false,
+    password: false,
+  })
 
   const {
     register,
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<TUserDetailsValidator>({
-    resolver: zodResolver(UserDetailsValidator),
+  } = useForm<TUserPersonalDetailsValidator>({
+    resolver: zodResolver(UserPersonalDetailsValidator),
   })
 
-  const { mutate: userUpdate } = trpc.auth.updateUserDetails.useMutation({
-    onSuccess: () => {
-      handleCancel()
-      toast.success(`Details updated successfully`)
-    },
-    onError: () => {
-      toast.error(`Unable to update user details`)
-    },
-  })
+  const { mutate: userUpdate } =
+    trpc.auth.updateUserPersonalDetails.useMutation({
+      onSuccess: () => {
+        handleCancel()
+        toast.success(`Details updated successfully`)
+      },
+      onError: () => {
+        toast.error(`Unable to update user details`)
+      },
+    })
 
   const onSubmit = ({
     user_name,
     dob,
     address,
     phone_number,
-  }: TUserDetailsValidator) => {
+  }: TUserPersonalDetailsValidator) => {
     userUpdate({ user_name, dob, address, phone_number })
   }
 
   const handleCancel = () => {
-    setIsEditMode(false)
+    setIsEditMode(prev => ({ ...prev, personalDetails: false }))
     setValue('user_name', '')
     setValue('dob', undefined)
     setValue('address', '')
@@ -55,7 +60,7 @@ const Info = () => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className='user-info-card__header'>
             <h3 className='user-info-card__title'>Personal Details</h3>
-            {isEditMode ? (
+            {isEditMode.personalDetails ? (
               <div className='button-container'>
                 <button
                   type='button'
@@ -71,7 +76,9 @@ const Info = () => {
               <button
                 type='button'
                 className='d-flex align-items-start gap-1 transparent-button'
-                onClick={() => setIsEditMode(true)}>
+                onClick={() =>
+                  setIsEditMode(prev => ({ ...prev, personalDetails: true }))
+                }>
                 <FaRegEdit className='fs-4' />
                 Edit
               </button>
@@ -81,7 +88,7 @@ const Info = () => {
             <li>
               <span className='caption'>Name</span>
               <span className='value'>
-                {isEditMode ? (
+                {isEditMode.personalDetails ? (
                   <>
                     <input
                       {...register('user_name')}
@@ -105,7 +112,7 @@ const Info = () => {
             <li>
               <span className='caption'>Date of Birth</span>
               <span className='value'>
-                {isEditMode ? (
+                {isEditMode.personalDetails ? (
                   <>
                     <input
                       {...register('dob')}
@@ -127,7 +134,7 @@ const Info = () => {
             <li>
               <span className='caption'>Address</span>
               <span className='value'>
-                {isEditMode ? (
+                {isEditMode.personalDetails ? (
                   <>
                     <input
                       {...register('address')}
@@ -149,7 +156,7 @@ const Info = () => {
             <li>
               <span className='caption'>Mobile</span>
               <span className='value'>
-                {isEditMode ? (
+                {isEditMode.personalDetails ? (
                   <>
                     <input
                       {...register('phone_number')}
@@ -174,36 +181,80 @@ const Info = () => {
         </form>
       </div>
       <div className='user-info-card'>
-        <div className='user-info-card__header'>
-          <h3 className='user-info-card__title'>Email Addresses</h3>
-          <button
-            type='button'
-            className='d-flex align-items-start gap-1 transparent-button'>
-            <FaRegEdit className='fs-4' /> Edit
-          </button>
-        </div>
-        <ul className='user-info-card__list'>
-          <li>
-            <span className='caption'>Email</span>
-            <span className='value'>albert349@gmail.com</span>
-          </li>
-        </ul>
+        <form>
+          <div className='user-info-card__header'>
+            <h3 className='user-info-card__title'>Email Addresses</h3>
+            <button
+              type='button'
+              className='d-flex align-items-start gap-1 transparent-button'>
+              <FaRegEdit className='fs-4' /> Edit
+            </button>
+          </div>
+          <ul className='user-info-card__list'>
+            <li>
+              <span className='caption'>Email</span>
+              <span className='value'>
+                {isEditMode.email ? (
+                  <>
+                    <input
+                      {...register('phone_number')}
+                      type='text'
+                      name='mobile'
+                      id='mobile'
+                      placeholder='mobile'
+                      required
+                    />
+                    {errors?.phone_number && (
+                      <p className='form-errors'>
+                        {errors?.phone_number?.message}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  'albert349@gmail.com'
+                )}
+              </span>
+            </li>
+          </ul>
+        </form>
       </div>
       <div className='user-info-card'>
-        <div className='user-info-card__header'>
-          <h3 className='user-info-card__title'>Security</h3>
-          <button
-            type='button'
-            className='d-flex align-items-start gap-1 transparent-button'>
-            <FaRegEdit className='fs-4' /> Edit
-          </button>
-        </div>
-        <ul className='user-info-card__list'>
-          <li>
-            <span className='caption'>Password</span>
-            <span className='value user-password'>***************</span>
-          </li>
-        </ul>
+        <form>
+          <div className='user-info-card__header'>
+            <h3 className='user-info-card__title'>Security</h3>
+            <button
+              type='button'
+              className='d-flex align-items-start gap-1 transparent-button'>
+              <FaRegEdit className='fs-4' /> Edit
+            </button>
+          </div>
+          <ul className='user-info-card__list'>
+            <li>
+              <span className='caption'>Password</span>
+              <span className='value user-password'>
+                {isEditMode.password ? (
+                  <>
+                    <input
+                      {...register('phone_number')}
+                      type='text'
+                      name='mobile'
+                      id='mobile'
+                      placeholder='mobile'
+                      required
+                    />
+                    {errors?.phone_number && (
+                      <p className='form-errors'>
+                        {errors?.phone_number?.message}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  '***************'
+                )}
+              </span>
+            </li>
+          </ul>
+        </form>
       </div>
     </div>
   )
