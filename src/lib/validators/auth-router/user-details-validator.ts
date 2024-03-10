@@ -13,3 +13,31 @@ export const UserPersonalDetailsValidator = z.object({
 export type TUserPersonalDetailsValidator = z.infer<
   typeof UserPersonalDetailsValidator
 >
+
+export const UserEmailValidator = z.object({
+  email: z.string().email('Not a valid email'),
+})
+
+export type TUserEmailValidator = z.infer<typeof UserEmailValidator>
+
+export const UserPasswordValidator = z.object({
+  password: z
+    .string()
+    .regex(
+      new RegExp('.*[A-Z].*'),
+      'Must contain at least one uppercase character',
+    )
+    .regex(
+      new RegExp('.*[a-z].*'),
+      'Must contain at least  one lowercase character',
+    )
+    .regex(new RegExp('.*\\d.*'), 'Must contain at least one number')
+    .regex(
+      new RegExp('.*[`~<>?,./!@#$%^&*()\\-_+="\'|{}\\[\\];:\\\\].*'),
+      'Must contain at least one special character',
+    )
+    .min(8, 'Must be at least 8 characters in length'),
+  confirm_password: z.string().optional(),
+})
+
+export type TUserPasswordValidator = z.infer<typeof UserPasswordValidator>

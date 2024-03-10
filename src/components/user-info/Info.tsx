@@ -6,7 +6,11 @@ import { FaRegEdit } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 
 import {
+  TUserEmailValidator,
+  TUserPasswordValidator,
   TUserPersonalDetailsValidator,
+  UserEmailValidator,
+  UserPasswordValidator,
   UserPersonalDetailsValidator,
 } from '@/lib/validators/auth-router/user-details-validator'
 
@@ -18,18 +22,36 @@ const Info = () => {
   })
 
   const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
+    register: registerPersonalDetails,
+    setValue: setPersonalDetailsValue,
+    handleSubmit: handlePersonalDetailsSubmit,
+    formState: { errors: personalDetailsErrors },
   } = useForm<TUserPersonalDetailsValidator>({
     resolver: zodResolver(UserPersonalDetailsValidator),
+  })
+
+  const {
+    register: registerEmail,
+    setValue: setEmailValue,
+    handleSubmit: handleEmailSubmit,
+    formState: { errors: emailErrors },
+  } = useForm<TUserEmailValidator>({
+    resolver: zodResolver(UserEmailValidator),
+  })
+
+  const {
+    register: registerPassword,
+    setValue: setPasswordValue,
+    handleSubmit: handlePasswordSubmit,
+    formState: { errors: passwordErrors },
+  } = useForm<TUserPasswordValidator>({
+    resolver: zodResolver(UserPasswordValidator),
   })
 
   const { mutate: userUpdate } =
     trpc.auth.updateUserPersonalDetails.useMutation({
       onSuccess: () => {
-        handleCancel()
+        handlePersonalDetailsCancel()
         toast.success(`Details updated successfully`)
       },
       onError: () => {
@@ -37,7 +59,7 @@ const Info = () => {
       },
     })
 
-  const onSubmit = ({
+  const onPersonalDetailsSubmit = ({
     user_name,
     dob,
     address,
@@ -46,18 +68,38 @@ const Info = () => {
     userUpdate({ user_name, dob, address, phone_number })
   }
 
-  const handleCancel = () => {
+  const onEmailSubmit = ({ email }: TUserEmailValidator) => {}
+
+  const onPasswordSubmit = ({
+    password,
+    confirm_password,
+  }: TUserPasswordValidator) => {}
+
+  const handlePersonalDetailsCancel = () => {
     setIsEditMode(prev => ({ ...prev, personalDetails: false }))
-    setValue('user_name', '')
-    setValue('dob', undefined)
-    setValue('address', '')
-    setValue('phone_number', '')
+    setPersonalDetailsValue('user_name', '')
+    setPersonalDetailsValue('dob', undefined)
+    setPersonalDetailsValue('address', '')
+    setPersonalDetailsValue('phone_number', '')
+  }
+
+  const handleEmailCancel = () => {
+    setIsEditMode(prev => ({ ...prev, email: false }))
+    setEmailValue('email', '')
+  }
+
+  const handlePasswordCancel = () => {
+    setIsEditMode(prev => ({ ...prev, password: false }))
+    setPasswordValue('password', '')
+    setPasswordValue('confirm_password', '')
   }
 
   return (
     <div className='col-lg-8 mt-lg-0 mt-5'>
       <div className='user-info-card'>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form
+          onSubmit={handlePersonalDetailsSubmit(onPersonalDetailsSubmit)}
+          noValidate>
           <div className='user-info-card__header'>
             <h3 className='user-info-card__title'>Personal Details</h3>
             {isEditMode.personalDetails ? (
@@ -65,7 +107,7 @@ const Info = () => {
                 <button
                   type='button'
                   className='cancel-button'
-                  onClick={() => handleCancel}>
+                  onClick={() => handlePersonalDetailsCancel()}>
                   Cancel
                 </button>{' '}
                 <button type='submit' className='save-button'>
@@ -91,16 +133,16 @@ const Info = () => {
                 {isEditMode.personalDetails ? (
                   <>
                     <input
-                      {...register('user_name')}
+                      {...registerPersonalDetails('user_name')}
                       type='text'
                       name='user_name'
                       id='user_name'
                       placeholder='Username'
                       required
                     />
-                    {errors?.user_name && (
+                    {personalDetailsErrors?.user_name && (
                       <p className='form-errors'>
-                        {errors?.user_name?.message}
+                        {personalDetailsErrors?.user_name?.message}
                       </p>
                     )}
                   </>
@@ -115,15 +157,17 @@ const Info = () => {
                 {isEditMode.personalDetails ? (
                   <>
                     <input
-                      {...register('dob')}
+                      {...registerPersonalDetails('dob')}
                       type='date'
                       name='dob'
                       id='dob'
                       placeholder='DOB'
                       required
                     />
-                    {errors?.dob && (
-                      <p className='form-errors'>{errors?.dob?.message}</p>
+                    {personalDetailsErrors?.dob && (
+                      <p className='form-errors'>
+                        {personalDetailsErrors?.dob?.message}
+                      </p>
                     )}
                   </>
                 ) : (
@@ -137,15 +181,17 @@ const Info = () => {
                 {isEditMode.personalDetails ? (
                   <>
                     <input
-                      {...register('address')}
+                      {...registerPersonalDetails('address')}
                       type='text'
                       name='address'
                       id='address'
                       placeholder='Address'
                       required
                     />
-                    {errors?.address && (
-                      <p className='form-errors'>{errors?.address?.message}</p>
+                    {personalDetailsErrors?.address && (
+                      <p className='form-errors'>
+                        {personalDetailsErrors?.address?.message}
+                      </p>
                     )}
                   </>
                 ) : (
@@ -159,16 +205,16 @@ const Info = () => {
                 {isEditMode.personalDetails ? (
                   <>
                     <input
-                      {...register('phone_number')}
+                      {...registerPersonalDetails('phone_number')}
                       type='text'
                       name='mobile'
                       id='mobile'
                       placeholder='mobile'
                       required
                     />
-                    {errors?.phone_number && (
+                    {personalDetailsErrors?.phone_number && (
                       <p className='form-errors'>
-                        {errors?.phone_number?.message}
+                        {personalDetailsErrors?.phone_number?.message}
                       </p>
                     )}
                   </>
@@ -181,14 +227,32 @@ const Info = () => {
         </form>
       </div>
       <div className='user-info-card'>
-        <form>
+        <form onSubmit={handleEmailSubmit(onEmailSubmit)} noValidate>
           <div className='user-info-card__header'>
             <h3 className='user-info-card__title'>Email Addresses</h3>
-            <button
-              type='button'
-              className='d-flex align-items-start gap-1 transparent-button'>
-              <FaRegEdit className='fs-4' /> Edit
-            </button>
+            {isEditMode.email ? (
+              <div className='button-container'>
+                <button
+                  type='button'
+                  className='cancel-button'
+                  onClick={() => handleEmailCancel()}>
+                  Cancel
+                </button>{' '}
+                <button type='submit' className='save-button'>
+                  Save
+                </button>{' '}
+              </div>
+            ) : (
+              <button
+                type='button'
+                className='d-flex align-items-start gap-1 transparent-button'
+                onClick={() =>
+                  setIsEditMode(prev => ({ ...prev, email: true }))
+                }>
+                <FaRegEdit className='fs-4' />
+                Edit
+              </button>
+            )}
           </div>
           <ul className='user-info-card__list'>
             <li>
@@ -197,16 +261,16 @@ const Info = () => {
                 {isEditMode.email ? (
                   <>
                     <input
-                      {...register('phone_number')}
+                      {...registerEmail('email')}
                       type='text'
-                      name='mobile'
-                      id='mobile'
-                      placeholder='mobile'
+                      name='email'
+                      id='email'
+                      placeholder='email'
                       required
                     />
-                    {errors?.phone_number && (
+                    {emailErrors?.email && (
                       <p className='form-errors'>
-                        {errors?.phone_number?.message}
+                        {emailErrors?.email?.message}
                       </p>
                     )}
                   </>
@@ -219,14 +283,32 @@ const Info = () => {
         </form>
       </div>
       <div className='user-info-card'>
-        <form>
+        <form onSubmit={handlePasswordSubmit(onPasswordSubmit)} noValidate>
           <div className='user-info-card__header'>
             <h3 className='user-info-card__title'>Security</h3>
-            <button
-              type='button'
-              className='d-flex align-items-start gap-1 transparent-button'>
-              <FaRegEdit className='fs-4' /> Edit
-            </button>
+            {isEditMode.password ? (
+              <div className='button-container'>
+                <button
+                  type='button'
+                  className='cancel-button'
+                  onClick={() => handlePasswordCancel()}>
+                  Cancel
+                </button>{' '}
+                <button type='submit' className='save-button'>
+                  Save
+                </button>{' '}
+              </div>
+            ) : (
+              <button
+                type='button'
+                className='d-flex align-items-start gap-1 transparent-button'
+                onClick={() =>
+                  setIsEditMode(prev => ({ ...prev, password: true }))
+                }>
+                <FaRegEdit className='fs-4' />
+                Edit
+              </button>
+            )}
           </div>
           <ul className='user-info-card__list'>
             <li>
@@ -235,16 +317,16 @@ const Info = () => {
                 {isEditMode.password ? (
                   <>
                     <input
-                      {...register('phone_number')}
-                      type='text'
-                      name='mobile'
-                      id='mobile'
-                      placeholder='mobile'
+                      {...registerPassword('password')}
+                      type='password'
+                      name='password'
+                      id='password'
+                      placeholder='******'
                       required
                     />
-                    {errors?.phone_number && (
+                    {passwordErrors?.password && (
                       <p className='form-errors'>
-                        {errors?.phone_number?.message}
+                        {passwordErrors?.password?.message}
                       </p>
                     )}
                   </>
@@ -253,6 +335,26 @@ const Info = () => {
                 )}
               </span>
             </li>
+            {isEditMode.password && (
+              <li>
+                <span className='caption'>Confirm Password</span>
+                <span className='value user-password'>
+                  <input
+                    {...registerPassword('confirm_password')}
+                    type='password'
+                    name='confirm_password'
+                    id='confirm_password'
+                    placeholder='******'
+                    required
+                  />
+                  {passwordErrors?.confirm_password && (
+                    <p className='form-errors'>
+                      {passwordErrors?.confirm_password?.message}
+                    </p>
+                  )}
+                </span>
+              </li>
+            )}
           </ul>
         </form>
       </div>
