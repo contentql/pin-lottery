@@ -2,20 +2,15 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { FaRedo, FaRegHeart, FaSearch } from 'react-icons/fa'
 
-import winner_tab_1 from '/public/images/icon/winner-tab/1.png'
-import winner_tab_2 from '/public/images/icon/winner-tab/2.png'
-import winner_tab_3 from '/public/images/icon/winner-tab/3.png'
-import winner_tab_4 from '/public/images/icon/winner-tab/4.png'
-import winner_tab_5 from '/public/images/icon/winner-tab/5.png'
 
 import ContestCard from '@/components/cards/ContestCard'
 
 import contestData from '@/data/contestData'
 
-const LatestContest = ({ contestDetails }: any) => {
+const LatestContest = ({ contestDetails, allTags }: any) => {
   const [sliderValue, setSliderValue] = useState<number>(0)
-  const MAX = 16
-
+  const MAX = 120
+console.log('tags', allTags)
   const getBackgroundSize = () => {
     return {
       backgroundSize: `${(sliderValue * 100) / MAX}% 100%`,
@@ -33,25 +28,30 @@ const LatestContest = ({ contestDetails }: any) => {
                 <ul
                   className='nav nav-tabs winner-tab-nav'
                   id='myTab'
-                  role='tablist'
-                >
-                  <li className='nav-item' role='presentation'>
-                    <button
-                      className='nav-link active'
-                      id='dream-tab'
-                      data-bs-toggle='tab'
-                      data-bs-target='#dream'
-                      role='tab'
-                      aria-controls='dream'
-                      aria-selected='true'
-                    >
-                      <span className='icon-thumb'>
-                        <Image src={winner_tab_1} alt='winner tab 1' />
-                      </span>
-                      <span>Dream Car</span>
-                    </button>
-                  </li>
-                  <li className='nav-item' role='presentation'>
+                  role='tablist'>
+                  {allTags?.map((tag: any) => (
+                    <li key={tag?.id} className='nav-item' role='presentation'>
+                      <button
+                        className='nav-link' //TODO: active can be added EX: className='nav-link active'
+                        id={tag.tag}
+                        data-bs-toggle='tab'
+                        data-bs-target='#dream'
+                        role='tab'
+                        aria-controls='dream'
+                        aria-selected='true'>
+                        <span className='icon-thumb'>
+                          <Image
+                            src={tag?.img.url}
+                            alt='winner tab 1'
+                            width={100}
+                            height={100}
+                          />
+                        </span>
+                        <span>{tag.tag}</span>
+                      </button>
+                    </li>
+                  ))}
+                  {/* <li className='nav-item' role='presentation'>
                     <button
                       className='nav-link'
                       id='bike-tab'
@@ -59,8 +59,7 @@ const LatestContest = ({ contestDetails }: any) => {
                       data-bs-target='#bike'
                       role='tab'
                       aria-controls='bike'
-                      aria-selected='false'
-                    >
+                      aria-selected='false'>
                       <span className='icon-thumb'>
                         <Image src={winner_tab_2} alt='winner tab 2' />
                       </span>
@@ -75,8 +74,7 @@ const LatestContest = ({ contestDetails }: any) => {
                       data-bs-target='#watch'
                       role='tab'
                       aria-controls='watch'
-                      aria-selected='false'
-                    >
+                      aria-selected='false'>
                       <span className='icon-thumb'>
                         <Image src={winner_tab_3} alt='winner tab 3' />
                       </span>
@@ -91,8 +89,7 @@ const LatestContest = ({ contestDetails }: any) => {
                       data-bs-target='#laptop'
                       role='tab'
                       aria-controls='laptop'
-                      aria-selected='false'
-                    >
+                      aria-selected='false'>
                       <span className='icon-thumb'>
                         <Image src={winner_tab_4} alt='winner tab 4' />
                       </span>
@@ -107,14 +104,13 @@ const LatestContest = ({ contestDetails }: any) => {
                       data-bs-target='#money'
                       role='tab'
                       aria-controls='money'
-                      aria-selected='false'
-                    >
+                      aria-selected='false'>
                       <span className='icon-thumb'>
                         <Image src={winner_tab_5} alt='winner tab 5' />
                       </span>
                       <span>Money</span>
                     </button>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div className='contest-wrapper__body'>
@@ -196,14 +192,12 @@ const LatestContest = ({ contestDetails }: any) => {
                     className='tab-pane fade show active'
                     id='dream'
                     role='tabpanel'
-                    aria-labelledby='dream-tab'
-                  >
+                    aria-labelledby='dream-tab'>
                     <div className='row mb-none-30 mt-50'>
                       {contestDetails?.map((contest: any) => (
                         <div
                           key={contest.id}
-                          className='col-xl-4 col-md-6 mb-30'
-                        >
+                          className='col-xl-4 col-md-6 mb-30'>
                           <ContestCard itm={contest} />
                         </div>
                       ))}
@@ -213,8 +207,7 @@ const LatestContest = ({ contestDetails }: any) => {
                     className='tab-pane fade'
                     id='bike'
                     role='tabpanel'
-                    aria-labelledby='bike-tab'
-                  >
+                    aria-labelledby='bike-tab'>
                     <div className='row mb-none-30 mt-50'>
                       {contestData.map(itm => (
                         <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
@@ -227,8 +220,7 @@ const LatestContest = ({ contestDetails }: any) => {
                     className='tab-pane fade'
                     id='watch'
                     role='tabpanel'
-                    aria-labelledby='watch-tab'
-                  >
+                    aria-labelledby='watch-tab'>
                     <div className='row mb-none-30 mt-50'>
                       {contestData.map(itm => (
                         <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
@@ -241,8 +233,7 @@ const LatestContest = ({ contestDetails }: any) => {
                     className='tab-pane fade'
                     id='laptop'
                     role='tabpanel'
-                    aria-labelledby='laptop-tab'
-                  >
+                    aria-labelledby='laptop-tab'>
                     <div className='row mb-none-30 mt-50'>
                       {contestData.map(itm => (
                         <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
@@ -255,8 +246,7 @@ const LatestContest = ({ contestDetails }: any) => {
                     className='tab-pane fade'
                     id='money'
                     role='tabpanel'
-                    aria-labelledby='money-tab'
-                  >
+                    aria-labelledby='money-tab'>
                     <div className='row mb-none-30 mt-50'>
                       {contestData.map(itm => (
                         <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
