@@ -20,24 +20,29 @@ export const UserEmailValidator = z.object({
 
 export type TUserEmailValidator = z.infer<typeof UserEmailValidator>
 
-export const UserPasswordValidator = z.object({
-  password: z
-    .string()
-    .regex(
-      new RegExp('.*[A-Z].*'),
-      'Must contain at least one uppercase character',
-    )
-    .regex(
-      new RegExp('.*[a-z].*'),
-      'Must contain at least  one lowercase character',
-    )
-    .regex(new RegExp('.*\\d.*'), 'Must contain at least one number')
-    .regex(
-      new RegExp('.*[`~<>?,./!@#$%^&*()\\-_+="\'|{}\\[\\];:\\\\].*'),
-      'Must contain at least one special character',
-    )
-    .min(8, 'Must be at least 8 characters in length'),
-  confirm_password: z.string().optional(),
-})
+export const UserPasswordValidator = z
+  .object({
+    password: z
+      .string()
+      .regex(
+        new RegExp('.*[A-Z].*'),
+        'Must contain at least one uppercase character',
+      )
+      .regex(
+        new RegExp('.*[a-z].*'),
+        'Must contain at least  one lowercase character',
+      )
+      .regex(new RegExp('.*\\d.*'), 'Must contain at least one number')
+      .regex(
+        new RegExp('.*[`~<>?,./!@#$%^&*()\\-_+="\'|{}\\[\\];:\\\\].*'),
+        'Must contain at least one special character',
+      )
+      .min(8, 'Must be at least 8 characters in length'),
+    confirm_password: z.string().optional(),
+  })
+  .refine(data => data.password === data.confirm_password, {
+    path: ['confirm_password'],
+    message: 'Passwords do not match',
+  })
 
 export type TUserPasswordValidator = z.infer<typeof UserPasswordValidator>
