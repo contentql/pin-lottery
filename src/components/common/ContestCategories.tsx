@@ -2,6 +2,8 @@ import { Tag } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 
+
+
 function ContestCategories({ allTags }: { allTags: [Tag] }) {
   return (
     <section className='position-relative z-index-two pt-120 pb-120 overflow-hidden'>

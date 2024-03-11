@@ -24,7 +24,7 @@ const searchParams=useSearchParams()
 
   const {data:allTags}=trpc.public.getTags.useQuery()
 
-  console.log('contest', contestDetails)
+  console.log('tags setting', allTags)
   return (
     <>
       {/* Banner section here */}

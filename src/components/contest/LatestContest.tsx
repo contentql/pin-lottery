@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { FaRedo, FaRegHeart, FaSearch } from 'react-icons/fa'
 
 import ContestCard from '@/components/cards/ContestCard'
+import { useRouter } from 'next/navigation'
 
 import contestData from '@/data/contestData'
 
@@ -14,7 +15,7 @@ const LatestContest = ({
 }: any) => {
   const [sliderValue, setSliderValue] = useState<number>(0)
   const MAX = 120
-  console.log('tags', allTags)
+  const router = useRouter()
   const getBackgroundSize = () => {
     return {
       backgroundSize: `${(sliderValue * 100) / MAX}% 100%`,
@@ -24,10 +25,10 @@ const LatestContest = ({
     if (filterByName === 'all') return true
     return filterByName?.includes(tag?.tag?.value?.tag)
   }
-  const [activeTab, setActiveTab] = useState<string>('')
 
   const handleTabClick = (tag: string) => {
-    setFilterByName(filterByName)
+    router.replace(`?tag=${tag}`)
+    setFilterByName(tag)
   }
   return (
     <section className='pb-120 mt-minus-100'>
@@ -45,7 +46,7 @@ const LatestContest = ({
                     <li key={tag?.id} className='nav-item' role='presentation'>
                       <button
                         className={`nav-link ${filterByName === tag.tag ? 'active' : ''}`}
-                        onClick={() => handleTabClick(tag.tag)} //TODO: active can be added EX: className='nav-link active'
+                        onClick={(e) => handleTabClick(tag.tag)} //TODO: active can be added EX: className='nav-link active'
                         id={tag.tag}
                         data-bs-toggle='tab'
                         data-bs-target='#dream'
