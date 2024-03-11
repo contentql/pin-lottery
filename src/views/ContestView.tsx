@@ -1,11 +1,19 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
+
 import Banner from '@/components/common/Banner'
 import Feature from '@/components/contest/Feature'
 import LatestContest from '@/components/contest/LatestContest'
+import { useState } from 'react'
 import { trpc } from '../trpc/client'
 
 const ContestView = () => {
+const searchParams=useSearchParams()
+  //filters
+    const [filterByName, setFilterByName] = useState(
+      searchParams?.get('tag') ? searchParams?.get('tag') : 'all',
+    )
 
   // getting all contests
 
@@ -31,7 +39,12 @@ const ContestView = () => {
       </div>
 
       {/* Letest contest here */}
-      <LatestContest contestDetails={contestDetails} allTags={allTags} />
+      <LatestContest
+        contestDetails={contestDetails}
+        allTags={allTags}
+        filterByName={filterByName}
+        setFilterByName={setFilterByName}
+      />
 
       {/* Feature section here */}
       <Feature />

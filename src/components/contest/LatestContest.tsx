@@ -2,21 +2,33 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { FaRedo, FaRegHeart, FaSearch } from 'react-icons/fa'
 
-
 import ContestCard from '@/components/cards/ContestCard'
 
 import contestData from '@/data/contestData'
 
-const LatestContest = ({ contestDetails, allTags }: any) => {
+const LatestContest = ({
+  contestDetails,
+  allTags,
+  filterByName,
+  setFilterByName,
+}: any) => {
   const [sliderValue, setSliderValue] = useState<number>(0)
   const MAX = 120
-console.log('tags', allTags)
+  console.log('tags', allTags)
   const getBackgroundSize = () => {
     return {
       backgroundSize: `${(sliderValue * 100) / MAX}% 100%`,
     }
   }
+  const handleFilterByName = (tag: any) => {
+    if (filterByName === 'all') return true
+    return filterByName?.includes(tag?.tag?.value?.tag)
+  }
+  const [activeTab, setActiveTab] = useState<string>('')
 
+  const handleTabClick = (tag: string) => {
+    setFilterByName(filterByName)
+  }
   return (
     <section className='pb-120 mt-minus-100'>
       <div className='container'>
@@ -32,7 +44,8 @@ console.log('tags', allTags)
                   {allTags?.map((tag: any) => (
                     <li key={tag?.id} className='nav-item' role='presentation'>
                       <button
-                        className='nav-link' //TODO: active can be added EX: className='nav-link active'
+                        className={`nav-link ${filterByName === tag.tag ? 'active' : ''}`}
+                        onClick={() => handleTabClick(tag.tag)} //TODO: active can be added EX: className='nav-link active'
                         id={tag.tag}
                         data-bs-toggle='tab'
                         data-bs-target='#dream'
@@ -194,13 +207,15 @@ console.log('tags', allTags)
                     role='tabpanel'
                     aria-labelledby='dream-tab'>
                     <div className='row mb-none-30 mt-50'>
-                      {contestDetails?.map((contest: any) => (
-                        <div
-                          key={contest.id}
-                          className='col-xl-4 col-md-6 mb-30'>
-                          <ContestCard itm={contest} />
-                        </div>
-                      ))}
+                      {contestDetails
+                        ?.filter(handleFilterByName)
+                        .map((contest: any) => (
+                          <div
+                            key={contest.id}
+                            className='col-xl-4 col-md-6 mb-30'>
+                            <ContestCard itm={contest} />
+                          </div>
+                        ))}
                     </div>
                   </div>
                   <div

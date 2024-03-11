@@ -3,8 +3,6 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import contest_bg from '/public/images/elements/contest-bg.png'
-import box from '/public/images/icon/btn/box.png'
-import car from '/public/images/icon/btn/car.png'
 
 import ContestCard from '@/components/cards/ContestCard'
 
@@ -46,7 +44,7 @@ const ContestDetailsPage = ({ contestDetails }: { contestDetails :[Contest]}) =>
 
         <div className='row'>
           <div className='col-lg-12'>
-            <ul
+            {/* <ul
               className='nav nav-tabs justify-content-center mb-30 border-0'
               id='myTab'
               role='tablist'>
@@ -84,7 +82,7 @@ const ContestDetailsPage = ({ contestDetails }: { contestDetails :[Contest]}) =>
                   All lifestyle
                 </button>
               </li>
-            </ul>
+            </ul> */}
             <div className='tab-content' id='myTabContent'>
               <div
                 className='tab-pane fade show active'
@@ -99,7 +97,7 @@ const ContestDetailsPage = ({ contestDetails }: { contestDetails :[Contest]}) =>
                   ))}
                 </div>
               </div>
-              <div
+              {/* <div
                 className='tab-pane fade'
                 id='profile-tab-pane'
                 role='tabpanel'
@@ -111,14 +109,14 @@ const ContestDetailsPage = ({ contestDetails }: { contestDetails :[Contest]}) =>
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
         <div className='row mt-30'>
           <div className='col-lg-12'>
             <div className='btn-grp'>
-              <Link href='/contest' className='btn-border'>
+              <Link href={`/contest?tag=${'all'}`} className='btn-border'>
                 browse more
               </Link>
             </div>
