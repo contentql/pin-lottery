@@ -7,6 +7,7 @@ import { LoginValidator } from '../lib/validators/auth-router/login-validator'
 import { ResetPasswordValidator } from '../lib/validators/auth-router/reset-password-validator'
 import { TokenValidator } from '../lib/validators/auth-router/token-validator'
 import {
+  UserEmailValidator,
   UserPasswordValidator,
   UserPersonalDetailsValidator,
 } from '../lib/validators/auth-router/user-details-validator'
@@ -204,6 +205,29 @@ export const authRouter = router({
           id: user.id,
           data: {
             password,
+          },
+        })
+
+        return { success: true }
+      } catch (err) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      }
+    }),
+
+  changeEmail: userProcedure
+    .input(UserEmailValidator)
+    .mutation(async ({ input, ctx }) => {
+      const { email } = input
+      const { user } = ctx
+
+      const payload = await getPayloadClient()
+
+      try {
+        await payload.update({
+          collection: 'users',
+          id: user.id,
+          data: {
+            email,
           },
         })
 

@@ -14,6 +14,7 @@ import {
   UserPersonalDetailsValidator,
 } from '@/lib/validators/auth-router/user-details-validator'
 import { currentUser } from '@/queries/auth/currentUser'
+import { refreshToken } from '@/queries/auth/refreshToken'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { ZodError } from 'zod'
 
@@ -26,6 +27,19 @@ const Info = () => {
 
   const queryClient = useQueryClient()
 
+  const { data: userData, isPending: isUserDataPending } = useQuery({
+    queryKey: ['/api/users/me', 'get'],
+    queryFn: async () => currentUser(),
+    select: data => data.user,
+  })
+
+  const { data: refreshTokenData, refetch: refetchRefreshToken } = useQuery({
+    queryKey: ['api/users/refresh-token', 'post'],
+    queryFn: async () => refreshToken(),
+    enabled: false,
+    refetchOnWindowFocus: false,
+  })
+
   const {
     register: registerPersonalDetails,
     setValue: setPersonalDetailsValue,
@@ -34,6 +48,36 @@ const Info = () => {
   } = useForm<TUserPersonalDetailsValidator>({
     resolver: zodResolver(UserPersonalDetailsValidator),
   })
+
+  const { mutate: userUpdate } =
+    trpc.auth.updateUserPersonalDetails.useMutation({
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
+
+        handlePersonalDetailsCancel()
+        toast.success(`Details updated successfully`)
+      },
+      onError: () => {
+        toast.error(`Unable to update user details`)
+      },
+    })
+
+  const handlePersonalDetailsCancel = () => {
+    setIsEditMode(prev => ({ ...prev, personalDetails: false }))
+    setPersonalDetailsValue('user_name', '')
+    setPersonalDetailsValue('dob', undefined)
+    setPersonalDetailsValue('address', '')
+    setPersonalDetailsValue('phone_number', '')
+  }
+
+  const onPersonalDetailsSubmit = ({
+    user_name,
+    dob,
+    address,
+    phone_number,
+  }: TUserPersonalDetailsValidator) => {
+    userUpdate({ user_name, dob, address, phone_number })
+  }
 
   const {
     register: registerEmail,
@@ -44,6 +88,39 @@ const Info = () => {
     resolver: zodResolver(UserEmailValidator),
   })
 
+  const { mutate: changeEmail } = trpc.auth.changeEmail.useMutation({
+    onSuccess: () => {
+      refetchRefreshToken()
+      queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
+
+      handlePasswordCancel()
+      toast.success(`Email updated successfully`)
+    },
+    onError: err => {
+      if (err.data?.code === 'UNAUTHORIZED') {
+        toast.error(`User not found`)
+        return
+      }
+
+      if (err instanceof ZodError) {
+        console.error(err.issues[0].message)
+
+        return
+      }
+
+      console.error('Something went wrong. Please try again.')
+    },
+  })
+
+  const handleEmailCancel = () => {
+    setIsEditMode(prev => ({ ...prev, email: false }))
+    setEmailValue('email', '')
+  }
+
+  const onEmailSubmit = ({ email }: TUserEmailValidator) => {
+    changeEmail({ email })
+  }
+
   const {
     register: registerPassword,
     setValue: setPasswordValue,
@@ -53,21 +130,11 @@ const Info = () => {
     resolver: zodResolver(UserPasswordValidator),
   })
 
-  const { mutate: userUpdate } =
-    trpc.auth.updateUserPersonalDetails.useMutation({
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
-        handlePersonalDetailsCancel()
-        toast.success(`Details updated successfully`)
-      },
-      onError: () => {
-        toast.error(`Unable to update user details`)
-      },
-    })
-
   const { mutate: changePassword } = trpc.auth.changePassword.useMutation({
     onSuccess: () => {
+      refetchRefreshToken()
       queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
+
       handlePasswordCancel()
       toast.success(`Password updated successfully`)
     },
@@ -87,16 +154,11 @@ const Info = () => {
     },
   })
 
-  const onPersonalDetailsSubmit = ({
-    user_name,
-    dob,
-    address,
-    phone_number,
-  }: TUserPersonalDetailsValidator) => {
-    userUpdate({ user_name, dob, address, phone_number })
+  const handlePasswordCancel = () => {
+    setIsEditMode(prev => ({ ...prev, password: false }))
+    setPasswordValue('password', '')
+    setPasswordValue('confirm_password', '')
   }
-
-  const onEmailSubmit = ({ email }: TUserEmailValidator) => {}
 
   const onPasswordSubmit = ({
     password,
@@ -105,32 +167,24 @@ const Info = () => {
     changePassword({ password, confirm_password })
   }
 
-  const handlePersonalDetailsCancel = () => {
-    setIsEditMode(prev => ({ ...prev, personalDetails: false }))
-    setPersonalDetailsValue('user_name', '')
-    setPersonalDetailsValue('dob', undefined)
-    setPersonalDetailsValue('address', '')
-    setPersonalDetailsValue('phone_number', '')
+  const dob = userData?.dob
+    ? new Date(userData.dob).toISOString().split('T')[0]
+    : ''
+
+  const handlePersonalDetailsEdit = () => {
+    setIsEditMode(prev => ({ ...prev, personalDetails: true }))
+
+    setPersonalDetailsValue('user_name', userData?.user_name)
+    setPersonalDetailsValue('dob', `${dob}`)
+    setPersonalDetailsValue('address', userData?.address)
+    setPersonalDetailsValue('phone_number', userData?.phone_number)
   }
 
-  const handleEmailCancel = () => {
-    setIsEditMode(prev => ({ ...prev, email: false }))
-    setEmailValue('email', '')
+  const handleEmailEdit = () => {
+    setIsEditMode(prev => ({ ...prev, email: true }))
+
+    setEmailValue('email', userData?.email)
   }
-
-  const handlePasswordCancel = () => {
-    setIsEditMode(prev => ({ ...prev, password: false }))
-    setPasswordValue('password', '')
-    setPasswordValue('confirm_password', '')
-  }
-
-  const { data: userData, isPending: isUserDataPending } = useQuery({
-    queryKey: ['/api/users/me', 'get'],
-    queryFn: async () => await currentUser(),
-    select: data => data.user,
-  })
-
-  const dob = new Date(userData?.dob || '')
 
   return (
     <div className='col-lg-8 mt-lg-0 mt-5'>
@@ -156,9 +210,7 @@ const Info = () => {
               <button
                 type='button'
                 className='d-flex align-items-start gap-1 transparent-button'
-                onClick={() =>
-                  setIsEditMode(prev => ({ ...prev, personalDetails: true }))
-                }>
+                onClick={() => handlePersonalDetailsEdit()}>
                 <FaRegEdit className='fs-4' />
                 Edit
               </button>
@@ -209,11 +261,7 @@ const Info = () => {
                     )}
                   </>
                 ) : (
-                  dob.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                  })
+                  dob
                 )}
               </span>
             </li>
@@ -288,9 +336,7 @@ const Info = () => {
               <button
                 type='button'
                 className='d-flex align-items-start gap-1 transparent-button'
-                onClick={() =>
-                  setIsEditMode(prev => ({ ...prev, email: true }))
-                }>
+                onClick={() => handleEmailEdit()}>
                 <FaRegEdit className='fs-4' />
                 Edit
               </button>
@@ -354,7 +400,9 @@ const Info = () => {
           </div>
           <ul className='user-info-card__list'>
             <li>
-              <span className='caption'>Password</span>
+              <span className='caption'>
+                {isEditMode.password ? 'New Password' : 'Password'}
+              </span>
               <span className='value user-password'>
                 {isEditMode.password ? (
                   <>
@@ -379,7 +427,7 @@ const Info = () => {
             </li>
             {isEditMode.password && (
               <li>
-                <span className='caption'>Confirm Password</span>
+                <span className='caption'>Confirm New Password</span>
                 <span className='value user-password'>
                   <input
                     {...registerPassword('confirm_password')}
