@@ -13,6 +13,8 @@ import {
   UserPasswordValidator,
   UserPersonalDetailsValidator,
 } from '@/lib/validators/auth-router/user-details-validator'
+import { currentUser } from '@/queries/auth/currentUser'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 const Info = () => {
   const [isEditMode, setIsEditMode] = useState({
@@ -20,6 +22,8 @@ const Info = () => {
     email: false,
     password: false,
   })
+
+  const queryClient = useQueryClient()
 
   const {
     register: registerPersonalDetails,
@@ -51,6 +55,7 @@ const Info = () => {
   const { mutate: userUpdate } =
     trpc.auth.updateUserPersonalDetails.useMutation({
       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
         handlePersonalDetailsCancel()
         toast.success(`Details updated successfully`)
       },
@@ -93,6 +98,14 @@ const Info = () => {
     setPasswordValue('password', '')
     setPasswordValue('confirm_password', '')
   }
+
+  const { data: userData, isPending: isUserDataPending } = useQuery({
+    queryKey: ['/api/users/me', 'get'],
+    queryFn: async () => await currentUser(),
+    select: data => data.user,
+  })
+
+  const dob = new Date(userData?.dob || '')
 
   return (
     <div className='col-lg-8 mt-lg-0 mt-5'>
@@ -147,7 +160,7 @@ const Info = () => {
                     )}
                   </>
                 ) : (
-                  'Albert Owens'
+                  userData?.user_name
                 )}
               </span>
             </li>
@@ -171,7 +184,11 @@ const Info = () => {
                     )}
                   </>
                 ) : (
-                  '15-03-1974'
+                  dob.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                  })
                 )}
               </span>
             </li>
@@ -195,7 +212,7 @@ const Info = () => {
                     )}
                   </>
                 ) : (
-                  '8198 Fieldstone Dr.La Crosse, WI 54601'
+                  userData?.address
                 )}
               </span>
             </li>
@@ -207,8 +224,8 @@ const Info = () => {
                     <input
                       {...registerPersonalDetails('phone_number')}
                       type='text'
-                      name='mobile'
-                      id='mobile'
+                      name='phone_number'
+                      id='phone_number'
                       placeholder='mobile'
                       required
                     />
@@ -219,7 +236,7 @@ const Info = () => {
                     )}
                   </>
                 ) : (
-                  '+1 234-567-8925'
+                  userData?.phone_number
                 )}
               </span>
             </li>
@@ -275,7 +292,7 @@ const Info = () => {
                     )}
                   </>
                 ) : (
-                  'albert349@gmail.com'
+                  userData?.email
                 )}
               </span>
             </li>

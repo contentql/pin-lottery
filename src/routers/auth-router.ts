@@ -165,4 +165,25 @@ export const authRouter = router({
         throw new TRPCError({ code: 'UNAUTHORIZED' })
       }
     }),
+
+  currentUser: userProcedure.query(async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+
+      const currentUser = await res.json()
+
+      return currentUser
+    } catch (err) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
+  }),
 })
