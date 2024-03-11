@@ -15,6 +15,7 @@ import {
 } from '@/lib/validators/auth-router/user-details-validator'
 import { currentUser } from '@/queries/auth/currentUser'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { ZodError } from 'zod'
 
 const Info = () => {
   const [isEditMode, setIsEditMode] = useState({
@@ -64,6 +65,28 @@ const Info = () => {
       },
     })
 
+  const { mutate: changePassword } = trpc.auth.changePassword.useMutation({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
+      handlePasswordCancel()
+      toast.success(`Password updated successfully`)
+    },
+    onError: err => {
+      if (err.data?.code === 'UNAUTHORIZED') {
+        toast.error(`User not found`)
+        return
+      }
+
+      if (err instanceof ZodError) {
+        console.error(err.issues[0].message)
+
+        return
+      }
+
+      console.error('Something went wrong. Please try again.')
+    },
+  })
+
   const onPersonalDetailsSubmit = ({
     user_name,
     dob,
@@ -78,7 +101,9 @@ const Info = () => {
   const onPasswordSubmit = ({
     password,
     confirm_password,
-  }: TUserPasswordValidator) => {}
+  }: TUserPasswordValidator) => {
+    changePassword({ password, confirm_password })
+  }
 
   const handlePersonalDetailsCancel = () => {
     setIsEditMode(prev => ({ ...prev, personalDetails: false }))
