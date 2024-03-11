@@ -11,9 +11,10 @@ import { trpc } from '../trpc/client'
 const ContestView = () => {
 const searchParams=useSearchParams()
   //filters
-    const [filterByName, setFilterByName] = useState(
-      searchParams?.get('tag') ? searchParams?.get('tag') : 'all',
-    )
+  const [filters, setFilters] = useState({
+    filterByName: searchParams?.get('tag') ? searchParams?.get('tag') : 'all',
+    filterByTitle: searchParams?.get('title') ? searchParams?.get('title') : '',
+  })
 
   // getting all contests
 
@@ -42,8 +43,8 @@ const searchParams=useSearchParams()
       <LatestContest
         contestDetails={contestDetails}
         allTags={allTags}
-        filterByName={filterByName}
-        setFilterByName={setFilterByName}
+        filters={filters}
+        setFilters={setFilters}
       />
 
       {/* Feature section here */}

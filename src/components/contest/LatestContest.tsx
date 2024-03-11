@@ -1,35 +1,62 @@
 import Image from 'next/image'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { FaRedo, FaRegHeart, FaSearch } from 'react-icons/fa'
+import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
-import { useRouter } from 'next/navigation'
 
 import contestData from '@/data/contestData'
+import Link from 'next/link'
 
 const LatestContest = ({
   contestDetails,
   allTags,
-  filterByName,
-  setFilterByName,
+  filters,
+  setFilters
 }: any) => {
   const [sliderValue, setSliderValue] = useState<number>(0)
-  const MAX = 120
   const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const title=searchParams.get('title')??''
+  const MAX = 120
   const getBackgroundSize = () => {
     return {
       backgroundSize: `${(sliderValue * 100) / MAX}% 100%`,
     }
   }
+
   const handleFilterByName = (tag: any) => {
-    if (filterByName === 'all') return true
-    return filterByName?.includes(tag?.tag?.value?.tag)
+    if (filters.filterByName === 'all') return true
+    return filters.filterByName?.includes(tag?.tag?.value?.tag)
   }
 
+   const handleFilterByTitle = (contest: any) => {
+     if (title === '') return true
+     return contest?.title
+       ?.toLowerCase()
+       ?.includes(filters.filterByTitle?.toLowerCase())
+   }
+
   const handleTabClick = (tag: string) => {
-    router.replace(`?tag=${tag}`)
-    setFilterByName(tag)
+    setFilters({...filters,filterByName:tag})
+   
   }
+  
+  const handleSearchTitle = (value: string) => {
+    const search = new URLSearchParams(searchParams)
+    if (value.trim() === "") {
+      search.delete('title')
+    } else {
+      search.set('title', value)
+    }
+    router.push(`${pathname}?${search.toString()}`)
+    setFilters({ ...filters, filterByTitle: value })
+  }
+
+   const debounce = useDebounceCallback(handleSearchTitle, 700)
+
   return (
     <section className='pb-120 mt-minus-100'>
       <div className='container'>
@@ -44,9 +71,14 @@ const LatestContest = ({
                   role='tablist'>
                   {allTags?.map((tag: any) => (
                     <li key={tag?.id} className='nav-item' role='presentation'>
-                      <button
-                        className={`nav-link ${filterByName === tag.tag ? 'active' : ''}`}
-                        onClick={(e) => handleTabClick(tag.tag)} //TODO: active can be added EX: className='nav-link active'
+                      <Link
+                        href={{
+                          query: {
+                            tag: tag?.tag,
+                          },
+                        }}
+                        className={`nav-link ${filters.filterByName === tag.tag ? 'active' : ''}`}
+                        onClick={e => handleTabClick(tag.tag)} //TODO: active can be added EX: className='nav-link active'
                         id={tag.tag}
                         data-bs-toggle='tab'
                         data-bs-target='#dream'
@@ -62,69 +94,9 @@ const LatestContest = ({
                           />
                         </span>
                         <span>{tag.tag}</span>
-                      </button>
+                      </Link>
                     </li>
                   ))}
-                  {/* <li className='nav-item' role='presentation'>
-                    <button
-                      className='nav-link'
-                      id='bike-tab'
-                      data-bs-toggle='tab'
-                      data-bs-target='#bike'
-                      role='tab'
-                      aria-controls='bike'
-                      aria-selected='false'>
-                      <span className='icon-thumb'>
-                        <Image src={winner_tab_2} alt='winner tab 2' />
-                      </span>
-                      <span>bike</span>
-                    </button>
-                  </li>
-                  <li className='nav-item' role='presentation'>
-                    <button
-                      className='nav-link'
-                      id='watch-tab'
-                      data-bs-toggle='tab'
-                      data-bs-target='#watch'
-                      role='tab'
-                      aria-controls='watch'
-                      aria-selected='false'>
-                      <span className='icon-thumb'>
-                        <Image src={winner_tab_3} alt='winner tab 3' />
-                      </span>
-                      <span>watch</span>
-                    </button>
-                  </li>
-                  <li className='nav-item' role='presentation'>
-                    <button
-                      className='nav-link'
-                      id='laptop-tab'
-                      data-bs-toggle='tab'
-                      data-bs-target='#laptop'
-                      role='tab'
-                      aria-controls='laptop'
-                      aria-selected='false'>
-                      <span className='icon-thumb'>
-                        <Image src={winner_tab_4} alt='winner tab 4' />
-                      </span>
-                      <span>laptop</span>
-                    </button>
-                  </li>
-                  <li className='nav-item' role='presentation'>
-                    <button
-                      className='nav-link'
-                      id='money-tab'
-                      data-bs-toggle='tab'
-                      data-bs-target='#money'
-                      role='tab'
-                      aria-controls='money'
-                      aria-selected='false'>
-                      <span className='icon-thumb'>
-                        <Image src={winner_tab_5} alt='winner tab 5' />
-                      </span>
-                      <span>Money</span>
-                    </button>
-                  </li> */}
                 </ul>
               </div>
               <div className='contest-wrapper__body'>
@@ -193,6 +165,8 @@ const LatestContest = ({
                         className='pe-5'
                         type='text'
                         placeholder='SEARCH HERE'
+                        onChange={e => debounce(e.target.value)}
+                        defaultValue={title}
                       />
                       <button>
                         <FaSearch />
@@ -210,6 +184,7 @@ const LatestContest = ({
                     <div className='row mb-none-30 mt-50'>
                       {contestDetails
                         ?.filter(handleFilterByName)
+                        ?.filter(handleFilterByTitle)
                         .map((contest: any) => (
                           <div
                             key={contest.id}
