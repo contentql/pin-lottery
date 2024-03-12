@@ -12,6 +12,7 @@ import {
   UserPersonalDetailsValidator,
 } from '../lib/validators/auth-router/user-details-validator'
 import { publicProcedure, router, userProcedure } from '../trpc/trpc'
+
 export const authRouter = router({
   createUser: publicProcedure
     .input(AuthCredentialsValidator)

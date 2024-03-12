@@ -2,8 +2,16 @@
 
 import LeftSideMenu from '@/components/common/LeftSideMenu'
 import Info from '@/components/user-info/Info'
+import { currentUser } from '@/queries/auth/currentUser'
+import { useQuery } from '@tanstack/react-query'
 
 const UserInfoView = () => {
+  const { data: userData, isPending: isUserDataPending } = useQuery({
+    queryKey: ['/api/users/me', 'get'],
+    queryFn: async () => currentUser(),
+    select: data => data.user,
+  })
+
   return (
     <>
       <div className='inner-hero-section style--five'></div>
@@ -15,7 +23,7 @@ const UserInfoView = () => {
             <LeftSideMenu />
 
             {/* Personal details */}
-            <Info />
+            <Info userData={userData} />
           </div>
         </div>
       </div>

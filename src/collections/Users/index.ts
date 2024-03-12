@@ -33,6 +33,9 @@ const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
+  hooks: {
+    // afterChange: [verifyUserEmail],
+  },
   fields: [
     {
       name: 'user_name',
