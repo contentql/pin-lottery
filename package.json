@@ -29,8 +29,8 @@
     "@payloadcms/plugin-cloud": "^3.0.0",
     "@payloadcms/plugin-cloud-storage": "^1.1.2",
     "@payloadcms/plugin-seo": "^2.2.1",
-    "@payloadcms/richtext-slate": "^1.4.0",
     "@payloadcms/richtext-lexical": "^0.7.0",
+    "@payloadcms/richtext-slate": "^1.4.0",
     "@react-email/components": "0.0.15",
     "@tanstack/react-query": "^5.22.2",
     "@tanstack/react-query-devtools": "^5.24.0",
@@ -61,6 +61,7 @@
     "react-toastify": "^10.0.4",
     "sass": "^1.71.1",
     "slick-carousel": "^1.8.1",
+    "usehooks-ts": "^3.0.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {

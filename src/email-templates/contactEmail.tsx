@@ -12,7 +12,7 @@
   Text,
   render
 } from '@react-email/components'
-
+import * as React from 'react'
   interface UserContactEmailProps {
     userName: 'string'
     email: 'string'
@@ -48,21 +48,11 @@
                     <b>Email: </b>
                     {email}
                   </Text>
-                  <Text
-                    style={{
-                      color: 'rgb(0,0,0, 0.5)',
-                      fontSize: 14,
-                      marginTop: -5,
-                    }}>
+                  <Text style={{ ...paragraph, marginTop: -5 }}>
+                    <b>Subject: </b>
                     {subject}
                   </Text>
-
                   <Text style={paragraph}>{message}</Text>
-                </Column>
-              </Row>
-              <Row style={{ ...boxInfos, paddingTop: '0' }}>
-                <Column style={containerButton} colSpan={2}>
-                  <Button style={button}>Learn More</Button>
                 </Column>
               </Row>
             </Section>
@@ -80,7 +70,8 @@
     render(<ContactEmail {...props} />, { pretty: true })
 
   const main = {
-    backgroundColor: '#fff',
+    backgroundColor: '#0f0232',
+    color:'#fff',
     fontFamily:
       '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
   }
@@ -99,18 +90,9 @@
     width: '100%',
   }
 
-  const button = {
-    backgroundColor: '#e00707',
-    borderRadius: 3,
-    color: '#FFF',
-    fontWeight: 'bold',
-    border: '1px solid rgb(0,0,0, 0.1)',
-    cursor: 'pointer',
-    padding: '12px 30px',
-  }
 
   const content = {
-    border: '1px solid rgb(0,0,0, 0.1)',
+    border: '1px solid rgba(255, 255, 255, 0.1);',
     borderRadius: '3px',
     overflow: 'hidden',
   }

@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload/types'
 import { newContactEmail } from './hooks/newContactEmail'
 const Contact: CollectionConfig = {
   slug: 'contact',
+  admin: {
+    useAsTitle: 'name',
+  },
   hooks: {
     afterChange: [newContactEmail],
   },
