@@ -2,16 +2,24 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { BsChevronRight } from 'react-icons/bs'
-import { FaCheck } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 
 import { useAuth } from '@/providers/Auth'
 
 import { currentUser } from '@/queries/auth/currentUser'
+import { ProgressData } from '@/views/UserInfoView'
+
+import CompleteProfile from './CompleteProfile'
+
 import team_obj from '/public/images/elements/team-obj.png'
 
-const LeftSideMenu = () => {
+const LeftSideMenu = ({
+  progressData,
+  setIsEditMode,
+}: {
+  progressData: ProgressData[]
+  setIsEditMode: Function
+}) => {
   const pathname = usePathname()
 
   const router = useRouter()
@@ -74,47 +82,10 @@ const LeftSideMenu = () => {
         <p className='user-card__id'>ID : {userData?.id}</p>
       </div>
 
-      <div className='complete-profile-container'>
-        <div className='complete-profile-screen'>
-          <div className='complete-profile-app-body'>
-            <div className='complete-profile-summary-wrapper'>
-              <div className='complete-profile-summary'>
-                <div className='complete-profile-summary-body'>
-                  <div className='complete-profile-summary-title'>
-                    Complete your profile (0/1)
-                  </div>
-                  <div className='complete-profile-summary-progress'>
-                    <div className='complete-profile-summary-progress-value'></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='complete-profile-progress-container'>
-              <div className='complete-profile-progress completed'>
-                <div className='complete-profile-progress-left'>
-                  <div className='complete-profile-progress-icon'>
-                    <FaCheck className='material-icons' />
-                  </div>
-                </div>
-                <div className='complete-profile-progress-right'>
-                  <div className='complete-profile-progress-title'>
-                    Personal Information
-                  </div>
-                  <div className='complete-profile-progress-status completed'>
-                    Completed
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='complete-profile-app-footer'>
-            <button className='complete-profile-complete-button'>
-              Complete Your Profile
-              <BsChevronRight className='material-icons' />
-            </button>
-          </div>
-        </div>
-      </div>
+      <CompleteProfile
+        progressData={progressData}
+        setIsEditMode={setIsEditMode}
+      />
 
       <div className='user-action-card'>
         <ul className='user-action-list'>

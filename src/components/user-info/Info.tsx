@@ -1,6 +1,5 @@
 import { trpc } from '@/trpc/client'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaRegEdit } from 'react-icons/fa'
 import { toast } from 'react-toastify'
@@ -15,16 +14,19 @@ import {
 } from '@/lib/validators/auth-router/user-details-validator'
 import { User } from '@/payload-types'
 import { refreshToken } from '@/queries/auth/refreshToken'
+import { IsEditMode } from '@/views/UserInfoView'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { ZodError } from 'zod'
 
-const Info = ({ userData }: { userData: User }) => {
-  const [isEditMode, setIsEditMode] = useState({
-    personalDetails: false,
-    email: false,
-    password: false,
-  })
-
+const Info = ({
+  userData,
+  isEditMode,
+  setIsEditMode,
+}: {
+  userData: User
+  isEditMode: IsEditMode
+  setIsEditMode: Function
+}) => {
   const queryClient = useQueryClient()
 
   const { data: refreshTokenData, refetch: refetchRefreshToken } = useQuery({
@@ -57,7 +59,7 @@ const Info = ({ userData }: { userData: User }) => {
     })
 
   const handlePersonalDetailsCancel = () => {
-    setIsEditMode(prev => ({ ...prev, personalDetails: false }))
+    setIsEditMode((prev: IsEditMode) => ({ ...prev, personalDetails: false }))
     setPersonalDetailsValue('user_name', '')
     setPersonalDetailsValue('dob', undefined)
     setPersonalDetailsValue('address', '')
@@ -107,7 +109,7 @@ const Info = ({ userData }: { userData: User }) => {
   })
 
   const handleEmailCancel = () => {
-    setIsEditMode(prev => ({ ...prev, email: false }))
+    setIsEditMode((prev: IsEditMode) => ({ ...prev, email: false }))
     setEmailValue('email', '')
   }
 
@@ -149,7 +151,7 @@ const Info = ({ userData }: { userData: User }) => {
   })
 
   const handlePasswordCancel = () => {
-    setIsEditMode(prev => ({ ...prev, password: false }))
+    setIsEditMode((prev: IsEditMode) => ({ ...prev, password: false }))
     setPasswordValue('password', '')
     setPasswordValue('confirm_password', '')
   }
@@ -166,7 +168,7 @@ const Info = ({ userData }: { userData: User }) => {
     : ''
 
   const handlePersonalDetailsEdit = () => {
-    setIsEditMode(prev => ({ ...prev, personalDetails: true }))
+    setIsEditMode((prev: IsEditMode) => ({ ...prev, personalDetails: true }))
 
     setPersonalDetailsValue('user_name', userData?.user_name || '')
     setPersonalDetailsValue('dob', dob)
@@ -175,7 +177,7 @@ const Info = ({ userData }: { userData: User }) => {
   }
 
   const handleEmailEdit = () => {
-    setIsEditMode(prev => ({ ...prev, email: true }))
+    setIsEditMode((prev: IsEditMode) => ({ ...prev, email: true }))
 
     setEmailValue('email', userData?.email)
   }
@@ -385,7 +387,10 @@ const Info = ({ userData }: { userData: User }) => {
                 type='button'
                 className='d-flex align-items-start gap-1 transparent-button'
                 onClick={() =>
-                  setIsEditMode(prev => ({ ...prev, password: true }))
+                  setIsEditMode((prev: IsEditMode) => ({
+                    ...prev,
+                    password: true,
+                  }))
                 }>
                 <FaRegEdit className='fs-4' />
                 Edit
