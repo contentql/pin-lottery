@@ -7,19 +7,10 @@ import { toast } from 'react-toastify'
 import { useAuth } from '@/providers/Auth'
 
 import { currentUser } from '@/queries/auth/currentUser'
-import { ProgressData } from '@/views/UserInfoView'
-
-import CompleteProfile from './CompleteProfile'
 
 import team_obj from '/public/images/elements/team-obj.png'
 
-const LeftSideMenu = ({
-  progressData,
-  setIsEditMode,
-}: {
-  progressData: ProgressData[]
-  setIsEditMode: Function
-}) => {
+const LeftSideMenu = () => {
   const pathname = usePathname()
 
   const router = useRouter()
@@ -81,11 +72,6 @@ const LeftSideMenu = ({
         <h3 className='user-card__name'>{userData?.user_name}</h3>
         <p className='user-card__id'>ID : {userData?.id}</p>
       </div>
-
-      <CompleteProfile
-        progressData={progressData}
-        setIsEditMode={setIsEditMode}
-      />
 
       <div className='user-action-card'>
         <ul className='user-action-list'>
