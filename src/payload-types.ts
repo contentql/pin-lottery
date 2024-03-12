@@ -169,10 +169,11 @@ export interface Contest {
  * via the `definition` "tags".
  */
 export interface Tag {
-  id: string
-  tag?: string | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  tag?: string | null;
+  img?: string | Media | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

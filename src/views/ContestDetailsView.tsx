@@ -12,11 +12,9 @@ interface PageProps {
 }
 
 const ContestDetailsView = ({ contestId }: PageProps) => {
-  const { data } = trpc.contest.getContestById.useQuery({
+  const { data: contestDetails } = trpc.contest.getContestById.useQuery({
     id: contestId,
   })
-
-  const contestDetails = data?.at(0)
 
   return (
     <>
