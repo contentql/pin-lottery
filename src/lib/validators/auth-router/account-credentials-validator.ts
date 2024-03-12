@@ -23,7 +23,7 @@ export const AuthCredentialsValidator = z
         'Must contain at least one special character',
       )
       .min(8, 'Must be at least 8 characters in length'),
-    confirm_password: z.string(),
+    confirm_password: z.string().optional(),
   })
   .refine(data => data.password === data.confirm_password, {
     path: ['confirm_password'],

@@ -1,17 +1,13 @@
-export const currentUser = async (token?: string) => {
+export const refreshToken = async () => {
   try {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
     }
 
-    if (token) {
-      headers.Authorization = `JWT ${token}`
-    }
-
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/refresh-token`,
       {
-        method: 'GET',
+        method: 'POST',
         credentials: 'include',
         headers,
       },
