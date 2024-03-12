@@ -18,6 +18,7 @@ const HomeView = () => {
   const { data: contestDetails, isLoading } =
     trpc.contest.getContests.useQuery()
   
+  const contest = contestDetails?.slice(0, 6)
   // get tags
   const { data: allTags } = trpc.public.getTags.useQuery()
 
@@ -26,7 +27,7 @@ const HomeView = () => {
     <>
       <Hero />
       <ContestCategories allTags={allTags as [Tag]} />
-      <ContestDetailsPage contestDetails={contestDetails as [Contest]} />
+      <ContestDetailsPage contestDetails={contest as [Contest]} />
       <Winner />
       <LatestWinner />
       <Overview />
