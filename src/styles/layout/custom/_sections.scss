@@ -417,3 +417,16 @@
     }
   }
 }
+
+.image-empty {
+  width: 30%;
+  object-fit: contain;
+}
+
+.footer-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px
+}

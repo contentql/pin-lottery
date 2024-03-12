@@ -2,11 +2,10 @@ import Image from 'next/image'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import Slider from 'react-slick'
 
-import winner from '/public/images/bg/winner.jpg'
-import car from '/public/images/elements/car.png'
-import w_1 from '/public/images/winner/w-1.png'
-
 import 'slick-carousel/slick/slick.css'
+import winner from '/public/images/bg/winner.jpg'
+import mobile_single from '/public/images/mobiles/mobile-single.png'
+import mobile_tilt from '/public/images/mobiles/mobile-tilt.png'
 
 const NextBtn = ({ onClick }: any) => {
   return (
@@ -69,7 +68,7 @@ const Winner = () => {
             <div className='winner-wrapper'>
               <div className='left'>
                 <div className='winner-prize-thumb'>
-                  <Image src={car} alt='image' />
+                  <Image src={mobile_tilt} alt='image'/>
                 </div>
               </div>
               <div className='right'>
@@ -77,7 +76,7 @@ const Winner = () => {
                   {[1, 2, 3, 4, 5].map((itm, i) => (
                     <div key={itm} className='winner-slide-item'>
                       <div className='winner-thumb'>
-                        <Image src={w_1} alt='image' />
+                        <Image src={mobile_single} alt='image' />
                       </div>
                       <div className='winner-content bg_img'>
                         <h6 className='winner-name'>Breeze Zodiac</h6>
