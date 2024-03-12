@@ -4,13 +4,12 @@ import { useState } from 'react'
 import { FaPlay } from 'react-icons/fa'
 
 import car_light from '/public/images/elements/car-light.png'
-import car_main from '/public/images/elements/car-main.png'
 import car_ray from '/public/images/elements/car-ray.png'
 import car_shadow from '/public/images/elements/car-shadow.png'
 import car_star from '/public/images/elements/car-star.png'
 import hero_building from '/public/images/elements/hero-building.png'
-import hero_car from '/public/images/elements/hero-car.png'
 import hero_shape from '/public/images/elements/hero-shape.jpg.png'
+import main_mobile from '/public/images/mobiles/main-mobile.png'
 
 import VedioModal from '@/components/vedioModal/VedioModal'
 
@@ -35,7 +34,7 @@ const Hero = () => {
           <Image src={car_shadow} alt='image' className='car-shadow' />
           <Image src={car_ray} alt='image' className='car-ray' />
           <Image src={car_light} alt='image' className='car-light' />
-          <Image src={hero_car} alt='image' className='hero-car' />
+          <Image src={main_mobile} alt='image' className='hero-car' />
           <Image src={car_star} alt='image' className='car-star' />
         </div>
         <div className='container'>
@@ -61,7 +60,7 @@ const Hero = () => {
             </div>
             <div className='col-lg-6'>
               <div className='hero__thumb'>
-                <Image src={car_main} alt='' />
+                <Image src={main_mobile} alt='' />
               </div>
             </div>
           </div>
