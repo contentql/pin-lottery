@@ -6,7 +6,6 @@ import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
 
-import contestData from '@/data/contestData'
 import Link from 'next/link'
 
 const LatestContest = ({
@@ -184,17 +183,34 @@ const LatestContest = ({
                     <div className='row mb-none-30 mt-50'>
                       {contestDetails
                         ?.filter(handleFilterByName)
-                        ?.filter(handleFilterByTitle)
-                        .map((contest: any) => (
-                          <div
-                            key={contest.id}
-                            className='col-xl-4 col-md-6 mb-30'>
-                            <ContestCard itm={contest} />
-                          </div>
-                        ))}
+                        ?.filter(handleFilterByTitle).length > 0 ? (
+                        contestDetails
+                          ?.filter(handleFilterByName)
+                          ?.filter(handleFilterByTitle)
+                          .map((contest: any) => (
+                            <div
+                              key={contest.id}
+                              className='col-xl-4 col-md-6 mb-30'>
+                              <ContestCard itm={contest} />
+                            </div>
+                          ))
+                      ) : (
+                        <div className='section-header text-center'>
+                          {/* <Image
+                            className='image-empty'
+                            src='/images/empty-states/empty-state.png'
+                            alt='empty state'
+                            width={120}
+                            height={120}
+                          /> */}
+                          <span className='section-sub-title'>
+                           No contests available
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div
+                  {/* <div
                     className='tab-pane fade'
                     id='bike'
                     role='tabpanel'
@@ -245,7 +261,7 @@ const LatestContest = ({
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

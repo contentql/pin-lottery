@@ -13,8 +13,8 @@ import Faq from './collections/Faq'
 import { Media } from './collections/Media'
 import Tags from './collections/Tags'
 import Users from './collections/Users'
-import Logo from './components/payload-icons/Logo'
 import Icon from './components/payload-icons/Icon'
+import Logo from './components/payload-icons/Logo'
 import { s3StorageAdapter } from './plugins/s3'
 import {
   generateDescription,

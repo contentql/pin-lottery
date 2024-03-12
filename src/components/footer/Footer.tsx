@@ -3,8 +3,6 @@ import Link from 'next/link'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 
 import round_shape_2 from '/public/images/elements/round-shape-2.png'
-import store_btn_1 from '/public/images/icon/store-btn/1.png'
-import store_btn_2 from '/public/images/icon/store-btn/2.png'
 
 const Footer = () => {
   return (
@@ -41,15 +39,16 @@ const Footer = () => {
           <div className='col-lg-4'>
             <ul className='app-btn'>
               <li>
-                <Link href='/#'>
-                  <Image src={store_btn_1} alt='image' />
-                </Link>
+                <Link href='/'>
+              <Image
+                src='/images/client/3.png'
+                alt='footer'
+                width={200}
+                height={200}
+              />
+            </Link>
               </li>
-              <li>
-                <Link href='/#'>
-                  <Image src={store_btn_2} alt='image' />
-                </Link>
-              </li>
+
             </ul>
           </div>
           <div className='col-lg-8'>
@@ -76,8 +75,8 @@ const Footer = () => {
         <div className='row py-5 align-items-center'>
           <div className='col-lg-6'>
             <p className='copy-right-text text-lg-start text-center mb-lg-0 mb-3'>
-              Copyright © 2020.All Rights Reserved By{' '}
-              <Link href='/'>Rifa</Link>
+              Copyright © 2024.All Rights Reserved By{' '}
+              <Link href='/'>Lottery</Link>
             </p>
           </div>
           <div className='col-lg-6'>
