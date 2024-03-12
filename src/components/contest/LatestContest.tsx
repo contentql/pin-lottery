@@ -55,7 +55,7 @@ const LatestContest = ({
     setFilters({ ...filters, filterByTitle: value })
   }
 
-   const debounce = useDebounceCallback(handleSearchTitle, 700)
+   const debounce = useDebounceCallback(handleSearchTitle, 500)
 
   return (
     <section className='pb-120 mt-minus-100'>
