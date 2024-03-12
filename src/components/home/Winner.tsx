@@ -4,7 +4,7 @@ import Slider from 'react-slick'
 
 import winner from '/public/images/bg/winner.jpg'
 import car from '/public/images/elements/car.png'
-import w_1 from '/public/images/winner/w-1.png'
+import mobile_single from '/public/images/mobiles/mobile-single.png'
 
 import 'slick-carousel/slick/slick.css'
 
@@ -77,7 +77,7 @@ const Winner = () => {
                   {[1, 2, 3, 4, 5].map((itm, i) => (
                     <div key={itm} className='winner-slide-item'>
                       <div className='winner-thumb'>
-                        <Image src={w_1} alt='image' />
+                        <Image src={mobile_single} alt='image' />
                       </div>
                       <div className='winner-content bg_img'>
                         <h6 className='winner-name'>Breeze Zodiac</h6>

@@ -27,8 +27,7 @@ export interface Config {
 export interface User {
   id: string;
   user_name?: string | null;
-  first_name?: string | null;
-  last_name?: string | null;
+  dob?: string | null;
   address?: string | null;
   phone_number?: string | null;
   roles?: ('admin' | 'user' | 'seller')[] | null;
@@ -172,6 +171,7 @@ export interface Contest {
 export interface Tag {
   id: string;
   tag?: string | null;
+  img?: string | Media | null;
   updatedAt: string;
   createdAt: string;
 }

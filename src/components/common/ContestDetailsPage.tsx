@@ -3,14 +3,13 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import contest_bg from '/public/images/elements/contest-bg.png'
-import box from '/public/images/icon/btn/box.png'
-import car from '/public/images/icon/btn/car.png'
 
 import ContestCard from '@/components/cards/ContestCard'
 
 import contestData from '@/data/contestData'
+import { Contest } from '@/payload-types'
 
-const Contest = () => {
+const ContestDetailsPage = ({ contestDetails }: { contestDetails :[Contest]}) => {
   const [filterData, setFilterData] = useState([])
   const [filterBy, setFilterBy] = useState('dream_car')
 
@@ -45,11 +44,10 @@ const Contest = () => {
 
         <div className='row'>
           <div className='col-lg-12'>
-            <ul
+            {/* <ul
               className='nav nav-tabs justify-content-center mb-30 border-0'
               id='myTab'
-              role='tablist'
-            >
+              role='tablist'>
               <li className='nav-item' role='presentation'>
                 <button
                   className='cmn-btn style--two d-flex align-items-center active'
@@ -60,8 +58,7 @@ const Contest = () => {
                   role='tab'
                   aria-controls='home-tab-pane'
                   aria-selected='true'
-                  onClick={() => setFilterBy('dream_car')}
-                >
+                  onClick={() => setFilterBy('dream_car')}>
                   <span className='me-3'>
                     <Image src={car} alt='icon' />
                   </span>
@@ -78,51 +75,48 @@ const Contest = () => {
                   role='tab'
                   aria-controls='profile-tab-pane'
                   aria-selected='false'
-                  onClick={() => setFilterBy('lifestyle')}
-                >
+                  onClick={() => setFilterBy('lifestyle')}>
                   <span className='me-3'>
                     <Image src={box} alt='icon' />
                   </span>
                   All lifestyle
                 </button>
               </li>
-            </ul>
+            </ul> */}
             <div className='tab-content' id='myTabContent'>
               <div
                 className='tab-pane fade show active'
                 id='home-tab-pane'
                 role='tabpanel'
-                aria-labelledby='home-tab'
-              >
+                aria-labelledby='home-tab'>
                 <div className='row mb-none-30'>
-                  {filterData.map((itm: any) => (
+                  {contestDetails?.map((itm: any) => (
                     <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
                       <ContestCard itm={itm} />
                     </div>
                   ))}
                 </div>
               </div>
-              <div
+              {/* <div
                 className='tab-pane fade'
                 id='profile-tab-pane'
                 role='tabpanel'
-                aria-labelledby='profile-tab'
-              >
+                aria-labelledby='profile-tab'>
                 <div className='row mb-none-30'>
-                  {filterData.map((itm: any) => (
+                  {contestDetails?.map((itm: any) => (
                     <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
                       <ContestCard itm={itm} />
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
         <div className='row mt-30'>
           <div className='col-lg-12'>
             <div className='btn-grp'>
-              <Link href='/contest' className='btn-border'>
+              <Link href={`/contest?tag=${'all'}`} className='btn-border'>
                 browse more
               </Link>
             </div>
@@ -133,4 +127,4 @@ const Contest = () => {
   )
 }
 
-export default Contest
+export default ContestDetailsPage

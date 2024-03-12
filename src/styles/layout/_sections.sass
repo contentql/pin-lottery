@@ -908,9 +908,12 @@
           @media (max-width: 767px) 
             margin-left: 15px
 .winner-tab-nav 
+  justify-content: center
+  align-items: center
   border-bottom: 1px solid #2d246d
   @media (max-width: 575px)
     justify-content: center
+    
   .nav-item
     width: calc(100% / 5)
     text-align: center 
@@ -3399,9 +3402,10 @@
   &__header 
     +d-flex 
     justify-content: space-between 
-    button 
-      background-color: transparent 
+    .transparent-button
+      background-color: transparent
       color: #ada3f7
+    button 
       i 
         font-size: 22px
   &__list 

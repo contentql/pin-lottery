@@ -6,8 +6,13 @@ import { ForgotPasswordValidator } from '../lib/validators/auth-router/forgot-pa
 import { LoginValidator } from '../lib/validators/auth-router/login-validator'
 import { ResetPasswordValidator } from '../lib/validators/auth-router/reset-password-validator'
 import { TokenValidator } from '../lib/validators/auth-router/token-validator'
-import { UserDetailsValidator } from '../lib/validators/auth-router/user-details-validator'
+import {
+  UserEmailValidator,
+  UserPasswordValidator,
+  UserPersonalDetailsValidator,
+} from '../lib/validators/auth-router/user-details-validator'
 import { publicProcedure, router, userProcedure } from '../trpc/trpc'
+
 export const authRouter = router({
   createUser: publicProcedure
     .input(AuthCredentialsValidator)
@@ -142,10 +147,10 @@ export const authRouter = router({
       }
     }),
 
-  updateUserDetails: userProcedure
-    .input(UserDetailsValidator)
+  updateUserPersonalDetails: userProcedure
+    .input(UserPersonalDetailsValidator)
     .mutation(async ({ input, ctx }) => {
-      const { first_name, last_name, address, phone_number } = input
+      const { user_name, dob, address, phone_number } = input
       const { user } = ctx
 
       const payload = await getPayloadClient()
@@ -155,12 +160,79 @@ export const authRouter = router({
           collection: 'users',
           id: user.id,
           data: {
-            first_name: first_name,
-            last_name: last_name,
-            address: address,
-            phone_number: phone_number,
+            user_name,
+            dob,
+            address,
+            phone_number,
           },
         })
+      } catch (err) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      }
+    }),
+
+  currentUser: userProcedure.query(async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+
+      const currentUser = await res.json()
+
+      return currentUser
+    } catch (err) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
+  }),
+
+  changePassword: userProcedure
+    .input(UserPasswordValidator)
+    .mutation(async ({ input, ctx }) => {
+      const { password } = input
+      const { user } = ctx
+
+      const payload = await getPayloadClient()
+
+      try {
+        await payload.update({
+          collection: 'users',
+          id: user.id,
+          data: {
+            password,
+          },
+        })
+
+        return { success: true }
+      } catch (err) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      }
+    }),
+
+  changeEmail: userProcedure
+    .input(UserEmailValidator)
+    .mutation(async ({ input, ctx }) => {
+      const { email } = input
+      const { user } = ctx
+
+      const payload = await getPayloadClient()
+
+      try {
+        await payload.update({
+          collection: 'users',
+          id: user.id,
+          data: {
+            email,
+          },
+        })
+
+        return { success: true }
       } catch (err) {
         throw new TRPCError({ code: 'UNAUTHORIZED' })
       }

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import mobile_single from '/public/images/mobiles/mobile-single.png'
 
 const WinnerCard = ({ winner }: any) => {
   const {
@@ -12,7 +13,7 @@ const WinnerCard = ({ winner }: any) => {
   return (
     <div className='winner-card mb-30'>
       <div className='winner-card__thumb'>
-        <Image src={winning_price_img} alt={title} />
+        <Image src={mobile_single} alt={title} />
       </div>
       <div className='winner-card__content'>
         <div className='winner-thumb'>

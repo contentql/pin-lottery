@@ -1,17 +1,25 @@
 import { CollectionAfterChangeHook } from 'payload/types'
-import { getPayloadClient } from '../../../get-payload'
+import { newContactForm } from '../../../email-templates/contactEmail'
 const OPERATION = 'create'
-const SUBJECT = 'Welcome To ContentQL'
+const SUBJECT = 'New contact submission'
 export const newContactEmail: CollectionAfterChangeHook = async ({
   operation,
   doc,
+  req
 }) => {
-  const payload = await getPayloadClient()
+  console.log('docas',doc)
   if (operation === OPERATION) {
-    payload.sendEmail({
+    req.payload.sendEmail({
       to: doc.email,
-      from: process.env.SENDGRID_SENDER_EMAIL,
+      from: process.env.RESEND_SENDER_EMAIL,
       subject: SUBJECT,
+      html: newContactForm({
+        userName: doc.name,
+        email: doc.email,
+        subject: doc.subject,
+        message: doc.message,
+      }),
+
     })
   }
 }

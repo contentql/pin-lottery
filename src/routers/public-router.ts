@@ -67,4 +67,12 @@ export const publicRouter = router({
       })
       return blogDetails
     }),
+  
+  getTags: publicProcedure.query(async() => {
+    
+    const payload = await getPayloadClient();
+
+    const tags=await payload.find({ collection: 'tags' })
+    return tags.docs
+  })
 })
