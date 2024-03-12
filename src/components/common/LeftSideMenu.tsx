@@ -1,13 +1,14 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { BsChevronRight } from 'react-icons/bs'
+import { FaCheck } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 
 import { useAuth } from '@/providers/Auth'
 
-import { FaCheck } from 'react-icons/fa'
+import { currentUser } from '@/queries/auth/currentUser'
 import team_obj from '/public/images/elements/team-obj.png'
 
 const LeftSideMenu = () => {
@@ -16,6 +17,12 @@ const LeftSideMenu = () => {
   const router = useRouter()
 
   const { logout } = useAuth()
+
+  const { data: userData, isPending: isUserDataPending } = useQuery({
+    queryKey: ['/api/users/me', 'get'],
+    queryFn: async () => currentUser(),
+    select: data => data.user,
+  })
 
   const {
     isPending: isLogoutPending,
@@ -63,8 +70,8 @@ const LeftSideMenu = () => {
             <div id='imagePreview'></div>
           </div>
         </div>
-        <h3 className='user-card__name'>Albert Owens</h3>
-        <p className='user-card__id'>ID : 19535909</p>
+        <h3 className='user-card__name'>{userData?.user_name}</h3>
+        <p className='user-card__id'>ID : {userData?.id}</p>
       </div>
 
       <div className='complete-profile-container'>

@@ -13,12 +13,12 @@ import {
   UserPasswordValidator,
   UserPersonalDetailsValidator,
 } from '@/lib/validators/auth-router/user-details-validator'
-import { currentUser } from '@/queries/auth/currentUser'
+import { User } from '@/payload-types'
 import { refreshToken } from '@/queries/auth/refreshToken'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { ZodError } from 'zod'
 
-const Info = () => {
+const Info = ({ userData }: { userData: User }) => {
   const [isEditMode, setIsEditMode] = useState({
     personalDetails: false,
     email: false,
@@ -26,12 +26,6 @@ const Info = () => {
   })
 
   const queryClient = useQueryClient()
-
-  const { data: userData, isPending: isUserDataPending } = useQuery({
-    queryKey: ['/api/users/me', 'get'],
-    queryFn: async () => currentUser(),
-    select: data => data.user,
-  })
 
   const { data: refreshTokenData, refetch: refetchRefreshToken } = useQuery({
     queryKey: ['api/users/refresh-token', 'post'],
@@ -174,10 +168,10 @@ const Info = () => {
   const handlePersonalDetailsEdit = () => {
     setIsEditMode(prev => ({ ...prev, personalDetails: true }))
 
-    setPersonalDetailsValue('user_name', userData?.user_name)
-    setPersonalDetailsValue('dob', `${dob}`)
-    setPersonalDetailsValue('address', userData?.address)
-    setPersonalDetailsValue('phone_number', userData?.phone_number)
+    setPersonalDetailsValue('user_name', userData?.user_name || '')
+    setPersonalDetailsValue('dob', dob)
+    setPersonalDetailsValue('address', userData?.address || '')
+    setPersonalDetailsValue('phone_number', userData?.phone_number || '')
   }
 
   const handleEmailEdit = () => {
