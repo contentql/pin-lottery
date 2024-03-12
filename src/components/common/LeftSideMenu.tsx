@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { FaArrowRightLong } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
 
 import { useAuth } from '@/providers/Auth'
@@ -71,6 +72,10 @@ const LeftSideMenu = () => {
         </div>
         <h3 className='user-card__name'>{userData?.user_name}</h3>
         <p className='user-card__id'>ID : {userData?.id}</p>
+        <Link href='/user-info' className='complete-profile-button'>
+          Complete Your Profile
+          <FaArrowRightLong className='material-icons' />
+        </Link>
       </div>
 
       <div className='user-action-card'>

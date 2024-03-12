@@ -465,3 +465,30 @@
     }
   }
 }
+
+.complete-profile-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  color: #fdac04;
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 20px;
+
+  .material-icons {
+    display: block;
+    margin-left: 10px;
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+
+  &:hover .material-icons {
+    transform: translateX(12px);
+  }
+}
