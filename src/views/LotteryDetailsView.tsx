@@ -21,9 +21,15 @@ const LotteryDetailsView = ({ contestId }: Props) => {
         <Banner
           breadcrumb={[
             ['Home', '/'],
-            ['Lottery', '/'],
-            [`Contest No: ${contestDetails?.contest_no}`, '/'],
-            ['Pick your Lottery Number', '/'],
+            ['Contest', '/contest'],
+            [
+              `Contest No: ${contestDetails?.contest_no}`,
+              `/contest/${contestDetails?.id}`,
+            ],
+            [
+              'Pick your Lottery Number',
+              `/contest/${contestDetails?.id}/lottery-details`,
+            ],
           ]}
         />
       </div>
