@@ -10,16 +10,12 @@ const lotteryData = [
     id: 1,
     ticket: [],
   },
-  {
-    id: 2,
-    ticket: [],
-  },
 ]
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   /* @TODO: These is for lottery two */
-  const [lotteris, setLotteris] = useState(lotteryData)
-  const [quantity, setQuantity] = useState(2)
+  const [lotteris, setLotteris] = useState([...lotteryData])
+  const [quantity, setQuantity] = useState(1)
 
   /* @TODO: These is for lottery two */
   const addTickets = () => {
