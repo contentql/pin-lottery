@@ -27,7 +27,7 @@ const renderer = ({ hours, minutes, seconds, days }: any) => {
 }
 
 const Actions = () => {
-  const { clearAllTicket }: any = useContext(AppContext)
+  const { clearAllTickets }: any = useContext(AppContext)
 
   return (
     <div className='action-header'>
@@ -56,7 +56,7 @@ const Actions = () => {
             </div>
           </li>
           <li>
-            <button type='button' onClick={clearAllTicket}>
+            <button type='button' onClick={clearAllTickets}>
               <i className='las la-trash'></i>
               <span>Erase All</span>
             </button>

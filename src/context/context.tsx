@@ -5,65 +5,67 @@ import { createContext, useState } from 'react'
 const AppContext = createContext({})
 
 /* @TODO: These is for lottery two data */
-const lotteryData = [
+const ticketsData = [
   {
     id: 1,
-    ticket: [],
+    numbers: [],
   },
 ]
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   /* @TODO: These is for lottery two */
-  const [lotteris, setLotteris] = useState([...lotteryData])
+  const [tickets, setTickets] = useState([...ticketsData])
   const [quantity, setQuantity] = useState(1)
 
   /* @TODO: These is for lottery two */
   const addTickets = () => {
-    setLotteris(prev => [
+    setTickets(prev => [
       ...prev,
       {
-        id: lotteris.length + 1,
-        // ticket: Math.floor(1000000 + Math.random() * 9000000).toString(),
-        ticket: [],
+        id: tickets.length + 1,
+        // numbers: Math.floor(1000000 + Math.random() * 9000000).toString(),
+        numbers: [],
       },
     ])
   }
 
   const removeTicket = (id: any) => {
-    const data = lotteris.filter(item => item.id !== id)
-    setLotteris(data)
+    const data = tickets
+      .filter(ticket => ticket.id !== id)
+      .map((ticket, idx) => ({ ...ticket, id: idx + 1 }))
+    setTickets(data)
   }
 
-  const pickNumbr = (e: any, id: any) => {
-    const data = lotteris.map(obj =>
+  const pickNumber = (e: any, id: any) => {
+    const data = tickets.map(obj =>
       obj.id === id
         ? {
             ...obj,
-            ticket: [...obj.ticket, e.target.innerText],
+            numbers: [...obj.numbers, e.target.innerText],
           }
         : obj,
     )
 
-    setLotteris(data as any)
+    setTickets(data as any)
   }
 
-  const luckyNumbr = (e: any, id: any) => {
-    const data = lotteris.map(obj =>
+  const luckyNumber = (e: any, id: any) => {
+    const data = tickets.map(obj =>
       obj.id === id
         ? {
             ...obj,
-            ticket: [...obj.ticket, e.target.innerText],
+            numbers: [...obj.numbers, e.target.innerText],
           }
         : obj,
     )
 
-    setLotteris(data as any)
+    setTickets(data as any)
   }
 
   const checkActive = (id: any, ele: any, start: any, end: any) => {
-    const findActiveItem = lotteris.find(item => item.id === id)
+    const findActiveItem = tickets.find(item => item.id === id)
 
-    return findActiveItem?.ticket
+    return findActiveItem?.numbers
       .slice(start, end)
       ?.some(element => element === ele.toString())
   }
@@ -76,38 +78,38 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
       randomValue = [...randomValue, random]
     }
 
-    const data = lotteris.map(obj =>
+    const data = tickets.map(obj =>
       obj.id === id
         ? {
             ...obj,
-            ticket: randomValue,
+            numbers: randomValue,
           }
         : obj,
     )
 
-    setLotteris(data as any)
+    setTickets(data as any)
   }
 
   const clearTicket = (id: any) => {
-    const data = lotteris.map(obj =>
+    const data = tickets.map(obj =>
       obj.id === id
         ? {
             ...obj,
-            ticket: [],
+            numbers: [],
           }
         : obj,
     )
 
-    setLotteris(data)
+    setTickets(data)
   }
 
-  const clearAllTicket = () => {
-    const data = lotteris.map(obj => ({
+  const clearAllTickets = () => {
+    const data = tickets.map(obj => ({
       ...obj,
-      ticket: [],
+      numbers: [],
     }))
 
-    setLotteris(data)
+    setTickets(data)
   }
 
   const incrementHandle = () => {
@@ -121,8 +123,8 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const decrementHandle = () => {
-    const removeItem = lotteris.slice(0, lotteris.length - 1)
-    setLotteris(removeItem)
+    const removeItem = tickets.slice(0, tickets.length - 1)
+    setTickets(removeItem)
 
     if (quantity <= 0) {
       setQuantity(0)
@@ -139,16 +141,16 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
         decrementHandle,
         addTickets,
         removeTicket,
-        pickNumbr,
-        luckyNumbr,
+        pickNumber,
+        luckyNumber,
         checkActive,
-        setLotteris,
+        setTickets,
         addQuickPick,
         clearTicket,
-        clearAllTicket,
+        clearAllTickets,
         setQuantity,
         quantity,
-        lotteris,
+        tickets,
       }}>
       {children}
     </AppContext.Provider>
