@@ -63,6 +63,17 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setTickets(data)
   }
 
+  const addTickets = (numTickets: number) => {
+    setQuantity(numTickets)
+
+    const newTickets = Array.from({ length: numTickets }, (_, index) => ({
+      id: index + 1,
+      numbers: [],
+    }))
+
+    setTickets(newTickets)
+  }
+
   const pickNumber = (e: any, id: any) => {
     const data = tickets.map(obj =>
       obj.id === id
@@ -149,6 +160,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
         decrementHandle,
         addTicket,
         removeTicket,
+        addTickets,
         pickNumber,
         luckyNumber,
         checkActive,
