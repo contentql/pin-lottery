@@ -1,5 +1,13 @@
+import { useState } from 'react'
+
 const SingleFaq = ({ singleFaq }: { singleFaq: any }) => {
   const { id, question, answer } = singleFaq
+
+  const [isCollapsed, setIsCollapsed] = useState(true)
+
+  const handleToggleCollapse = () => {
+    setIsCollapsed(!isCollapsed)
+  }
 
   return (
     <div className='card'>
@@ -7,20 +15,17 @@ const SingleFaq = ({ singleFaq }: { singleFaq: any }) => {
         <button
           className='btn btn-link btn-block text-left'
           type='button'
-          data-bs-toggle='collapse'
-          data-bs-target={`#collapse${id}`}
-          aria-expanded='true'
-          aria-controls={`collapse${id}`}
-        >
+          onClick={handleToggleCollapse}
+          aria-expanded={!isCollapsed}
+          aria-controls={`collapse${id}`}>
           {question}
         </button>
       </div>
       <div
         id={`collapse${id}`}
-        className={`collapse show`}
+        className={`collapse ${isCollapsed ? '' : 'show'}`}
         aria-labelledby={`heading${id}`}
-        data-bs-parent='#accordionExample'
-      >
+        data-bs-parent='#accordionExample'>
         <div className='card-body'>
           <p>{answer}</p>
         </div>
