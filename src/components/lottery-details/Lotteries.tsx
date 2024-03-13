@@ -1,13 +1,12 @@
 import { useContext } from 'react'
 
-import SingleLotteryCardTwo from '@/components/cards/SingleLotteryCardTwo'
-
+import SingleLotteryCard from '@/components/cards/SingleLotteryCard'
 import { AppContext } from '@/context/context'
 
 import Actions from './Actions'
 
 const Lotteries = () => {
-  const { addTicketsTwo, lotterisTwo }: any = useContext(AppContext)
+  const { addTickets, lotteris }: any = useContext(AppContext)
 
   return (
     <div className='lottery-wrapper style--two'>
@@ -15,10 +14,10 @@ const Lotteries = () => {
       <Actions />
 
       <div className='row mt-50 mb-none-30'>
-        {lotterisTwo.map((itm: any, i: any) => (
+        {lotteris.map((itm: any, i: any) => (
           <div key={itm.id} className='col-lg-6 mb-30'>
             {/* single lottey here */}
-            <SingleLotteryCardTwo itm={itm} i={i} />
+            <SingleLotteryCard itm={itm} i={i} />
           </div>
         ))}
       </div>
@@ -26,8 +25,7 @@ const Lotteries = () => {
         <button
           type='button'
           className='btn-border text-white bg-transparent'
-          onClick={addTicketsTwo}
-        >
+          onClick={addTickets}>
           Add Tickets
         </button>
       </div>

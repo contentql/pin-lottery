@@ -3,22 +3,21 @@ import { FaTimes } from 'react-icons/fa'
 
 import { AppContext } from '@/context/context'
 
-const SingleLotteryCardTwo = ({ itm, i }: any) => {
+const SingleLotteryCard = ({ itm, i }: any) => {
   const {
-    removeTicketTwo,
-    pickNumbrTwo,
-    luckyNumbrTwo,
-    checkActiveTwo,
-    addQuickPickTwo,
-    clearTicketTwo,
+    removeTicket,
+    pickNumbr,
+    luckyNumbr,
+    checkActive,
+    addQuickPick,
+    clearTicket,
   }: any = useContext(AppContext)
 
   return (
     <div className='lottery-single style--two'>
       <button
         className='lottery-single__close'
-        onClick={() => removeTicketTwo(itm.id)}
-      >
+        onClick={() => removeTicket(itm.id)}>
         <FaTimes />
       </button>
       <div className='lottery-single__header'>
@@ -26,13 +25,13 @@ const SingleLotteryCardTwo = ({ itm, i }: any) => {
           <span className='titcket-number'>Ticket #{i + 1}</span>
           <ul>
             <li>
-              <button className='gap-1' onClick={() => addQuickPickTwo(itm.id)}>
+              <button className='gap-1' onClick={() => addQuickPick(itm.id)}>
                 <i className='las la-table'></i>
                 <span>Quick Pick</span>
               </button>
             </li>
             <li>
-              <button onClick={() => clearTicketTwo(itm.id)}>
+              <button onClick={() => clearTicket(itm.id)}>
                 <i className='las la-trash'></i>
               </button>
             </li>
@@ -52,15 +51,14 @@ const SingleLotteryCardTwo = ({ itm, i }: any) => {
           {[...Array(50)].map((_, i) => (
             <li
               key={i}
-              onClick={e => pickNumbrTwo(e, itm.id)}
+              onClick={e => pickNumbr(e, itm.id)}
               className={`${itm.ticket.length >= 5 ? 'pe-none' : ''} 
                                 ${
-                                  checkActiveTwo(itm.id, i + 1, 0, 5)
+                                  checkActive(itm.id, i + 1, 0, 5)
                                     ? 'active'
                                     : ''
                                 }
-                                `}
-            >
+                                `}>
               {i + 1}
             </li>
           ))}
@@ -72,11 +70,10 @@ const SingleLotteryCardTwo = ({ itm, i }: any) => {
           {[...Array(10)].map((_, i) => (
             <li
               key={i}
-              onClick={e => luckyNumbrTwo(e, itm.id)}
+              onClick={e => luckyNumbr(e, itm.id)}
               className={`${
                 itm.ticket.length >= 7 || itm.ticket.length < 5 ? 'pe-none' : ''
-              }  ${checkActiveTwo(itm.id, i + 1, 5) ? 'active' : ''}`}
-            >
+              }  ${checkActive(itm.id, i + 1, 5) ? 'active' : ''}`}>
               {i + 1}
             </li>
           ))}
@@ -86,4 +83,4 @@ const SingleLotteryCardTwo = ({ itm, i }: any) => {
   )
 }
 
-export default SingleLotteryCardTwo
+export default SingleLotteryCard
