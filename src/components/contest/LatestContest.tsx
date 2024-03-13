@@ -86,13 +86,13 @@ const LatestContest = ({
                         aria-selected='true'>
                         <span className='icon-thumb'>
                           <Image
-                            src={tag?.img.url}
+                            src={tag?.img?.url}
                             alt='winner tab 1'
                             width={100}
                             height={100}
                           />
                         </span>
-                        <span>{tag.tag}</span>
+                        <span>{tag?.tag}</span>
                       </Link>
                     </li>
                   ))}
