@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { getMeUser } from '@/utils/getMeUser'
+import { getMeUser } from '@/utils/get-me-user'
 import LayoutView from '@/views/LayoutView'
 
 export const metadata: Metadata = {
