@@ -2,6 +2,8 @@ import { useContext } from 'react'
 import Countdown from 'react-countdown'
 
 import { AppContext } from '@/context/context'
+import { Contest } from '@/payload-types'
+import { isThresholdReached } from '@/utils/is-threshold-reached'
 
 const renderer = ({ hours, minutes, seconds, days }: any) => {
   return (
@@ -26,8 +28,10 @@ const renderer = ({ hours, minutes, seconds, days }: any) => {
   )
 }
 
-const Actions = () => {
-  const { clearAllTickets }: any = useContext(AppContext)
+const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
+  const { clearAllTickets, tickets }: any = useContext(AppContext)
+
+  const totalTicketsSold = tickets?.length
 
   return (
     <div className='action-header'>
@@ -49,12 +53,21 @@ const Actions = () => {
       </div>
       <div className='right'>
         <ul>
-          <li>
-            <i className='las la-clock'></i>
-            <div className='clock2'>
-              <Countdown date={Date.now() + 1000000000} renderer={renderer} />
-            </div>
-          </li>
+          {isThresholdReached(
+            contestDetails?.product_price,
+            contestDetails?.ticket_price,
+            totalTicketsSold,
+          ) ? (
+            <li>
+              <i className='las la-clock'></i>
+              <div className='clock2'>
+                <Countdown date={Date.now() + 1000000000} renderer={renderer} />
+              </div>
+            </li>
+          ) : (
+            ''
+          )}
+
           <li>
             <button type='button' onClick={clearAllTickets}>
               <i className='las la-trash'></i>

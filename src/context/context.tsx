@@ -26,7 +26,9 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const decrementHandleAndRemoveTicket = (id?: any) => {
     decrementHandle()
 
-    id ? removeTicket(id) : setTickets(tickets.slice(0, tickets.length - 1))
+    id
+      ? removeTicket(id)
+      : setTickets(prev => prev.slice(0, tickets.length - 1))
   }
 
   const incrementHandle = () => {

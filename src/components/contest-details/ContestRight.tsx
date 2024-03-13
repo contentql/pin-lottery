@@ -48,14 +48,14 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
             <div className='quantity-nav'>
               <div
                 className={`quantity-button ${quantity <= 0 && 'pe-none'}`}
-                onClick={decrementHandleAndRemoveTicket}>
+                onClick={() => decrementHandleAndRemoveTicket()}>
                 <i className='las la-minus'></i>
               </div>
               <div
                 className={`quantity-button quantity-up ${
                   quantity >= 16 && 'pe-none'
                 }`}
-                onClick={incrementHandleAndAddTicket}>
+                onClick={() => incrementHandleAndAddTicket()}>
                 <i className='las la-plus'></i>
               </div>
             </div>

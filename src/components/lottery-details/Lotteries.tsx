@@ -12,7 +12,7 @@ const Lotteries = ({ contestDetails }: { contestDetails: Contest }) => {
   return (
     <div className='lottery-wrapper style--two'>
       {/* Actions Here */}
-      <Actions />
+      <Actions contestDetails={contestDetails} />
 
       <div className='row mt-50 mb-none-30'>
         {tickets.map((ticket: any) => (
