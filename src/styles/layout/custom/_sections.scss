@@ -2,30 +2,33 @@
 .register-main {
   display: flex;
   justify-content: center;
-  align-items: center;
-
+  
   .register {
-    padding: 50px 0px;
+    padding: 100px 0px;
     width: 40%;
   }
    @media screen and (max-width: 440px) {
   .register {
+    padding-top: 100px;
     width: 94%;
   }
 }
  @media screen and (min-width: 441px) and (max-width: 575px) {
   .register {
-    width: 80%;
+    padding-top: 100px;
+    width: 90%;
   }
 }
   @media screen and (min-width: 576px) and (max-width: 767px) {
   .register {
+     padding-top: 100px;
     width: 70%;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) { 
   .register {
+    padding-top: 100px;
     width: 60%;
   }
 }
@@ -526,3 +529,20 @@
   gap: 12px;
   font-size: 24px;
 }
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-button{
+  border: 2px solid #c6cbc8;
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  gap: 10px;
+  font-size: 20;
+  font-weight: bolder;
+}
+

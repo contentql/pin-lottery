@@ -1,14 +1,8 @@
-import Link from 'next/link'
-import { BsChevronLeft } from 'react-icons/bs'
-
+import AuthLayoutView from '@/views/AuthLayoutView'
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <Link href='/' className='cmn-back-btn'>
-        <BsChevronLeft className='icon' />
-        Back to home
-      </Link>
-
+      <AuthLayoutView/>
       {children}
     </div>
   )
