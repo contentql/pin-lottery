@@ -11,7 +11,6 @@ interface PageProps {
 }
 
 const ContestDetails = ({ params }: PageProps) => {
-
   return <ContestDetailsView contestId={params.contestId} />
 }
 

@@ -3,9 +3,10 @@ import { useContext } from 'react'
 import SingleLotteryCard from '@/components/cards/SingleLotteryCard'
 import { AppContext } from '@/context/context'
 
+import { Contest } from '@/payload-types'
 import Actions from './Actions'
 
-const Lotteries = () => {
+const Lotteries = ({ contestDetails }: { contestDetails: Contest }) => {
   const { incrementHandleAndAddTicket, tickets }: any = useContext(AppContext)
 
   return (
@@ -17,7 +18,11 @@ const Lotteries = () => {
         {tickets.map((ticket: any) => (
           <div key={ticket.id} className='col-lg-4 mb-30'>
             {/* Single lottery  */}
-            <SingleLotteryCard ticket={ticket} totalTickets={tickets.length} />
+            <SingleLotteryCard
+              ticket={ticket}
+              totalTickets={tickets.length}
+              contestDetails={contestDetails}
+            />
           </div>
         ))}
       </div>

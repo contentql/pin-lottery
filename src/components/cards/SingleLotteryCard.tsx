@@ -1,10 +1,19 @@
+import { Contest } from '@/payload-types'
 import Image from 'next/image'
 import { useContext } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { AppContext } from '../../context/context'
 import circle_border from '/public/images/elements/circle-border.png'
 
-const SingleLotteryCard = ({ ticket, totalTickets }: any) => {
+const SingleLotteryCard = ({
+  ticket,
+  totalTickets,
+  contestDetails,
+}: {
+  ticket: any
+  totalTickets: any
+  contestDetails: Contest
+}) => {
   const { decrementHandleAndRemoveTicket }: any = useContext(AppContext)
 
   return (
@@ -21,7 +30,9 @@ const SingleLotteryCard = ({ ticket, totalTickets }: any) => {
           <div className='draw-single-ticket'>
             <div className='draw-single-ticket__header'>
               <div className='left'>Ticket #{ticket?.id}</div>
-              <div className='right'>Contest No:R9D</div>
+              <div className='right'>
+                Contest No: {contestDetails?.contest_no}
+              </div>
             </div>
             <div className='circle-divider'>
               <Image src={circle_border} alt='circle border' />
