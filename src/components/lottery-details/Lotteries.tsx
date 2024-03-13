@@ -6,7 +6,7 @@ import { AppContext } from '@/context/context'
 import Actions from './Actions'
 
 const Lotteries = () => {
-  const { addTickets, tickets }: any = useContext(AppContext)
+  const { incrementHandleAndAddTicket, tickets }: any = useContext(AppContext)
 
   return (
     <div className='lottery-wrapper style--two'>
@@ -26,7 +26,7 @@ const Lotteries = () => {
         <button
           type='button'
           className='btn-border text-white bg-transparent'
-          onClick={addTickets}>
+          onClick={incrementHandleAndAddTicket}>
           Add Tickets
         </button>
       </div>

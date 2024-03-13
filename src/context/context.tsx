@@ -18,7 +18,34 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [quantity, setQuantity] = useState(1)
 
   /* @TODO: These is for lottery two */
-  const addTickets = () => {
+  const incrementHandleAndAddTicket = () => {
+    incrementHandle()
+    addTicket()
+  }
+
+  const decrementHandleAndRemoveTicket = (id?: any) => {
+    decrementHandle()
+
+    id ? removeTicket(id) : setTickets(tickets.slice(0, tickets.length - 1))
+  }
+
+  const incrementHandle = () => {
+    if (quantity >= 16) {
+      setQuantity(16)
+    } else {
+      setQuantity(prev => prev + 1)
+    }
+  }
+
+  const decrementHandle = () => {
+    if (quantity <= 1) {
+      setQuantity(1)
+    } else {
+      setQuantity(prev => prev - 1)
+    }
+  }
+
+  const addTicket = () => {
     setTickets(prev => [
       ...prev,
       {
@@ -112,34 +139,15 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setTickets(data)
   }
 
-  const incrementHandle = () => {
-    addTickets()
-
-    if (quantity >= 16) {
-      setQuantity(16)
-    } else {
-      setQuantity(prev => prev + 1)
-    }
-  }
-
-  const decrementHandle = () => {
-    const removeItem = tickets.slice(0, tickets.length - 1)
-    setTickets(removeItem)
-
-    if (quantity <= 0) {
-      setQuantity(0)
-    } else {
-      setQuantity(prev => prev - 1)
-    }
-  }
-
   return (
     <AppContext.Provider
       value={{
         /* lottery two */
+        incrementHandleAndAddTicket,
+        decrementHandleAndRemoveTicket,
         incrementHandle,
         decrementHandle,
-        addTickets,
+        addTicket,
         removeTicket,
         pickNumber,
         luckyNumber,

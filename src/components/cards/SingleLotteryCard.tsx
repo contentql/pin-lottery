@@ -5,14 +5,14 @@ import { AppContext } from '../../context/context'
 import circle_border from '/public/images/elements/circle-border.png'
 
 const SingleLotteryCard = ({ ticket, totalTickets }: any) => {
-  const { removeTicket }: any = useContext(AppContext)
+  const { decrementHandleAndRemoveTicket }: any = useContext(AppContext)
 
   return (
     <div className='lottery-single'>
       {totalTickets > 1 && (
         <button
           className='lottery-single__close'
-          onClick={() => removeTicket(ticket?.id)}>
+          onClick={() => decrementHandleAndRemoveTicket(ticket?.id)}>
           <FaTimes />
         </button>
       )}
