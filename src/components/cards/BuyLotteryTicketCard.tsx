@@ -1,14 +1,34 @@
-const BuyLotteryTicketCard = () => {
+import { Contest } from '@/payload-types'
+import { useContext } from 'react'
+
+import { AppContext } from '@/context/context'
+
+const BuyLotteryTicketCard = ({
+  contestDetails,
+}: {
+  contestDetails: Contest
+}) => {
+  const { tickets }: any = useContext(AppContext)
+
+  const ticketPrice = contestDetails?.ticket_price
+  const totalTickets = tickets?.length
+
+  const totalTicketsPrice = totalTickets * ticketPrice
+
   return (
     <div className='buy-lottery-ticket'>
       <div className='left'>
         <div className='sub-total-price'>
-          <p>Ticket Price (3 tickets X $ 4.99)</p>
-          <span>$14.97</span>
+          <p>
+            Ticket Price ({totalTickets} tickets X ${ticketPrice})
+          </p>
+          <span>${totalTicketsPrice}</span>
         </div>
         <div className='total-price'>
-          <p>Ticket Price (3 tickets X $ 4.99)</p>
-          <span>$14.97</span>
+          <p>
+            Ticket Price ({totalTickets} tickets X ${ticketPrice})
+          </p>
+          <span>${totalTicketsPrice}</span>
         </div>
       </div>
       <div className='right'>

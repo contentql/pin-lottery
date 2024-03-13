@@ -16,7 +16,7 @@ const LotteryBody = ({ contestDetails }: { contestDetails: Contest }) => {
 
           <div className='col-lg-12 mt-50'>
             {/* Buy lottery tickets */}
-            <BuyLotteryTicketCard />
+            <BuyLotteryTicketCard contestDetails={contestDetails} />
           </div>
 
           {/* Quick pick */}
