@@ -8,6 +8,7 @@ const urlField: Field = {
 export const Media: CollectionConfig = {
   access: {
     read: () => true,
+    delete: () => true,
   },
   slug: 'media',
   hooks: {
@@ -27,6 +28,12 @@ export const Media: CollectionConfig = {
   },
   upload: {
     imageSizes: [
+      {
+        height: 160,
+        width: 160,
+        crop: 'center',
+        name: 'userProfile',
+      },
       {
         height: 400,
         width: 400,

@@ -1,5 +1,8 @@
 import { TRPCError } from '@trpc/server'
-
+ 
+import { Media } from '@/payload-types'
+import { produce } from 'immer'
+import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { AuthCredentialsValidator } from '../lib/validators/auth-router/account-credentials-validator'
 import { ForgotPasswordValidator } from '../lib/validators/auth-router/forgot-password-validator'
@@ -236,5 +239,34 @@ export const authRouter = router({
       } catch (err) {
         throw new TRPCError({ code: 'UNAUTHORIZED' })
       }
+    }),
+  updateUserImage: userProcedure
+    .input(
+      z.object({
+        id: z.any(),
+      }),
+    )
+     .mutation(async ({ input, ctx }) => {
+
+      const { id } = input
+
+      const payload = await getPayloadClient()
+
+      const updatedData = produce(ctx.user, (draft) => {
+        draft.image = id
+      })
+
+      await payload.update({
+        collection: 'users',
+        id: ctx.user.id,
+        data: updatedData,
+      })
+
+      await payload.delete({
+        collection: 'media',
+        id: (ctx.user.image as Media).id,
+      })
+
+      return {status:'success'}
     }),
 })
