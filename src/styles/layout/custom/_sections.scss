@@ -2,12 +2,36 @@
 .register-main {
   display: flex;
   justify-content: center;
-  align-items: center;
-
+  
   .register {
-    padding: 50px 0px;
+    padding: 100px 0px;
     width: 40%;
   }
+   @media screen and (max-width: 440px) {
+  .register {
+    padding-top: 100px;
+    width: 94%;
+  }
+}
+ @media screen and (min-width: 441px) and (max-width: 575px) {
+  .register {
+    padding-top: 100px;
+    width: 90%;
+  }
+}
+  @media screen and (min-width: 576px) and (max-width: 767px) {
+  .register {
+     padding-top: 100px;
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) { 
+  .register {
+    padding-top: 100px;
+    width: 60%;
+  }
+}
 }
 
 .form-errors {
@@ -493,6 +517,18 @@
   }
 }
 
+.update-profile-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
 .image-empty {
   width: 30%;
   object-fit: contain;
@@ -504,4 +540,82 @@
   align-items: center;
   gap: 12px;
   font-size: 24px;
+}
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-button{
+  border: 2px solid #c6cbc8;
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  gap: 10px;
+  font-size: 20;
+  font-weight: bolder;
+}
+
+.tabs-container-custom {
+  width: 100%;
+}
+
+.tabs-custom {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tab-custom {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  color:white;
+  border-radius: 25px;
+  border: 1px solid white;
+  cursor: pointer;
+  background-color: transparent;
+  transition:background-color 0.8s;
+}
+
+.tab-custom:last-child {
+  margin-right: 0;
+}
+
+.tab-custom.active {
+  border: none;
+  background-color: #5a4bcc;
+}
+
+.tab-content-custom {
+  padding: 20px;
+}
+
+ul.bullet {
+  list-style: disc;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+ul.bullet>li {
+  list-style: disc;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+ul.number {
+  list-style: decimal;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+body h1,body h2,body h3,body h4,body h5,body h6 {
+  margin-bottom: 2%;
+}
+body br{
+  margin: 10%;
+}
+
+strong{
+  color:rgb(240, 6, 170);
+
 }

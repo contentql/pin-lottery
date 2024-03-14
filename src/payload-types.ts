@@ -30,6 +30,7 @@ export interface User {
   dob?: string | null;
   address?: string | null;
   phone_number?: string | null;
+  image?: string | Media | null;
   roles?: ('admin' | 'user' | 'seller')[] | null;
   updatedAt: string;
   createdAt: string;
@@ -60,6 +61,22 @@ export interface Media {
   width?: number | null;
   height?: number | null;
   sizes?: {
+    navUserImage?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    userProfile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     square?: {
       url?: string | null;
       width?: number | null;
@@ -110,11 +127,11 @@ export interface Contest {
   id: string;
   title: string;
   product_price: number;
-  tag?: {
+  tag: {
     relationTo: 'tags';
     value: string | Tag;
-  } | null;
-  features?: {
+  };
+  features: {
     root: {
       children: {
         type: string;
@@ -128,8 +145,8 @@ export interface Contest {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
-  description?: {
+  };
+  description: {
     root: {
       children: {
         type: string;
@@ -143,7 +160,7 @@ export interface Contest {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   img: string | Media;
   images?:
     | {
@@ -155,7 +172,7 @@ export interface Contest {
   description_html?: string | null;
   contest_no: string;
   ticket_price: number;
-  day_remain?: number | null;
+  day_remain: number;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -170,8 +187,8 @@ export interface Contest {
  */
 export interface Tag {
   id: string;
-  tag?: string | null;
-  img?: string | Media | null;
+  tag: string;
+  img: string | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -194,9 +211,9 @@ export interface Contact {
  */
 export interface Blog {
   id: string;
-  title?: string | null;
-  short_desc?: string | null;
-  content?: {
+  title: string;
+  short_desc: string;
+  content: {
     root: {
       children: {
         type: string;
@@ -210,7 +227,7 @@ export interface Blog {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   img?: string | Media | null;
   content_html?: string | null;
   meta?: {
@@ -229,8 +246,8 @@ export interface Faq {
   id: string;
   faqs?:
     | {
-        question?: string | null;
-        answer?: string | null;
+        question: string;
+        answer: string;
         id?: string | null;
       }[]
     | null;

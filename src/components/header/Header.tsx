@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import tag from '/public/images/icon/btn/tag.png'
 
 import cartData from '@/data/cartData'
+import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 
 const Header = () => {
@@ -12,7 +13,7 @@ const Header = () => {
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
 
-  const { status } = useAuth()
+  const { status, user } = useAuth()
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text)
@@ -43,8 +44,7 @@ const Header = () => {
       id='gotoTop'
       className={`header ${
         windowHeight > 50 && 'menu-fixed animated fadeInDown'
-      }`}
-    >
+      }`}>
       <div className='header__bottom'>
         <div className='container'>
           <nav className='navbar navbar-expand-xl p-0 align-items-center'>
@@ -116,8 +116,11 @@ const Header = () => {
                     <Link
                       href='/user'
                       className='user__btn d-flex align-items-center justify-content-center'
-                    >
-                      <i className='las la-user'></i>
+                      style={{
+                        backgroundImage: `url(${user?.image!==undefined?(user?.image as Media)?.sizes?.navUserImage?.url :'/images/user/pp.png'})`,
+                      }}>
+                      <i>
+                      </i>
                     </Link>
                   ) : (
                     <Link href='/login' className='login-btn btn--sm'>
