@@ -24,8 +24,9 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const decrementHandleAndRemoveTicket = (id?: any) => {
-    decrementHandle()
+    if (tickets.length <= 1) return
 
+    decrementHandle()
     id
       ? removeTicket(id)
       : setTickets(prev => prev.slice(0, tickets.length - 1))
@@ -59,6 +60,8 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const removeTicket = (id: any) => {
+    if (tickets.length <= 1) return
+
     const data = tickets
       .filter(ticket => ticket.id !== id)
       .map((ticket, idx) => ({ ...ticket, id: idx + 1 }))
