@@ -1,3 +1,4 @@
+import { useAuth } from '@/providers/Auth'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,10 +7,7 @@ import { useState } from 'react'
 import { FaArrowRightLong } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
 
-import { useAuth } from '@/providers/Auth'
-
 import { currentUser } from '@/queries/auth/currentUser'
-
 
 import { trpc } from '@/trpc/client'
 import uploadMedia from '@/utils/uploadMedia'
@@ -46,16 +44,17 @@ const LeftSideMenu = () => {
     select: data => data.user,
   })
 
-  const { mutate: uploadUserImage } = trpc.auth.updateUserImage.useMutation({
-    onSuccess: () => {
-      toast.success(`Image updated successfully`)
-      setUserImage(null)
-      queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
-    },
-    onError: () => {
-      toast.error(`unable to update image please try again`)
-    }
-  })
+  const { mutate: uploadUserImage, isPending: isUserImagePending ,} =
+    trpc.auth.updateUserImage.useMutation({
+      onSuccess: async(data) => {
+        toast.success(`Image updated successfully`)
+        setUserImage(null)
+        queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
+      },
+      onError: () => {
+        toast.error(`unable to update image please try again`)
+      },
+    })
 
  const handleUpdateUserProfile = async () => {
    try {
@@ -117,7 +116,7 @@ const LeftSideMenu = () => {
           <div
             className='avatar-preview'
             style={{
-              backgroundImage: `url(${uploadedImage ? uploadedImage : userData?.image !== null ? userData?.image?.url : '/images/user/pp.png'})`,
+              backgroundImage: `url(${uploadedImage ? uploadedImage : userData?.image !== undefined ? userData?.image?.sizes?.userProfile?.url : '/images/user/pp.png'})`,
             }}>
             <div id='imagePreview'></div>
           </div>
@@ -126,6 +125,7 @@ const LeftSideMenu = () => {
           <button
             className='cmn-btn style--two d-flex align-items-center update-profile-image'
             type='button'
+            disabled={isUserImagePending}
             onClick={() => handleUpdateUserProfile()}>
             Update Image
           </button>

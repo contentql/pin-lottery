@@ -29,7 +29,13 @@ export const Media: CollectionConfig = {
   upload: {
     imageSizes: [
       {
-        height: 160,
+        height: 40,
+        width:undefined,
+        crop: 'center',
+        name: 'navUserImage',
+      },
+      {
+        height: undefined,
         width: 160,
         crop: 'center',
         name: 'userProfile',

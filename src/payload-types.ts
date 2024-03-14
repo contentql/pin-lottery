@@ -61,6 +61,22 @@ export interface Media {
   width?: number | null;
   height?: number | null;
   sizes?: {
+    navUserImage?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    userProfile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     square?: {
       url?: string | null;
       width?: number | null;
