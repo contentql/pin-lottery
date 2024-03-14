@@ -1,17 +1,17 @@
-import { Contest } from '@/payload-types'
 import Image from 'next/image'
 import { useContext } from 'react'
 import { FaTimes } from 'react-icons/fa'
-import { AppContext } from '../../context/context'
+
+import { AppContext } from '@/context/context'
+import { Contest } from '@/payload-types'
+
 import circle_border from '/public/images/elements/circle-border.png'
 
-const SingleLotteryCard = ({
+const SingleTicketCard = ({
   ticket,
-  totalTickets,
   contestDetails,
 }: {
   ticket: any
-  totalTickets: any
   contestDetails: Contest
 }) => {
   const { decrementHandleAndRemoveTicket }: any = useContext(AppContext)
@@ -50,4 +50,4 @@ const SingleLotteryCard = ({
   )
 }
 
-export default SingleLotteryCard
+export default SingleTicketCard

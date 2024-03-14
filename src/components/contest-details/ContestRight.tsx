@@ -67,7 +67,7 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
         </div>
         <div className='mt-sm-0 mt-3'>
           <Link
-            href={`${pathname}/lottery-details`}
+            href={`${pathname}/ticket-details`}
             className='cmn-btn style--three'>
             buy tickets
           </Link>

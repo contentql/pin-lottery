@@ -1,22 +1,22 @@
-import BuyLotteryTicketCard from '@/components/cards/BuyLotteryTicketCard'
+import BuyTicketCard from '@/components/cards/BuyTicketCard'
 import QuickPick from '@/components/quickPick/QuickPick'
-
 import { Contest } from '@/payload-types'
-import Lotteries from './Lotteries'
 
-const LotteryBody = ({ contestDetails }: { contestDetails: Contest }) => {
+import Tickets from './Tickets'
+
+const TicketBody = ({ contestDetails }: { contestDetails: Contest }) => {
   return (
     <section className='pb-120 mt-minus-50'>
       <div className='container'>
         <div className='row'>
           <div className='col-lg-12'>
             {/* ALl Lotteries */}
-            <Lotteries contestDetails={contestDetails} />
+            <Tickets contestDetails={contestDetails} />
           </div>
 
           <div className='col-lg-12 mt-50'>
             {/* Buy lottery tickets */}
-            <BuyLotteryTicketCard contestDetails={contestDetails} />
+            <BuyTicketCard contestDetails={contestDetails} />
           </div>
 
           {/* Quick pick */}
@@ -27,4 +27,4 @@ const LotteryBody = ({ contestDetails }: { contestDetails: Contest }) => {
   )
 }
 
-export default LotteryBody
+export default TicketBody

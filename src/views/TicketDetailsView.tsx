@@ -1,7 +1,7 @@
 'use client'
 
 import Banner from '@/components/common/Banner'
-import LotteryBody from '@/components/lottery-details/LotteryBody'
+import TicketBody from '@/components/ticket-details/TicketBody'
 import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 
@@ -9,7 +9,7 @@ interface Props {
   contestId: string
 }
 
-const LotteryDetailsView = ({ contestId }: Props) => {
+const TicketDetailsView = ({ contestId }: Props) => {
   const { data: contestDetails } = trpc.contest.getContestById.useQuery({
     id: contestId,
   })
@@ -27,17 +27,17 @@ const LotteryDetailsView = ({ contestId }: Props) => {
               `/contest/${contestDetails?.id}`,
             ],
             [
-              'Pick your Lottery Number',
-              `/contest/${contestDetails?.id}/lottery-details`,
+              'Pick your Tickets',
+              `/contest/${contestDetails?.id}/ticket-details`,
             ],
           ]}
         />
       </div>
 
       {/* Lottery body here */}
-      <LotteryBody contestDetails={contestDetails as Contest} />
+      <TicketBody contestDetails={contestDetails as Contest} />
     </>
   )
 }
 
-export default LotteryDetailsView
+export default TicketDetailsView

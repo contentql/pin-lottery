@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import LotteryDetailsView from '@/views/LotteryDetailsView'
+import TicketDetailsView from '@/views/TicketDetailsView'
 
 interface PageProps {
   params: {
@@ -9,12 +9,12 @@ interface PageProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Lottery Details',
-  description: 'This is a lottery details page',
+  title: 'Ticket Details',
+  description: 'This is a ticket details page',
 }
 
 const LotteryDetails = ({ params }: PageProps) => {
-  return <LotteryDetailsView contestId={params.contestId} />
+  return <TicketDetailsView contestId={params.contestId} />
 }
 
 export default LotteryDetails

@@ -3,11 +3,7 @@ import { useContext } from 'react'
 
 import { AppContext } from '@/context/context'
 
-const BuyLotteryTicketCard = ({
-  contestDetails,
-}: {
-  contestDetails: Contest
-}) => {
+const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
   const { tickets }: any = useContext(AppContext)
 
   const ticketPrice = contestDetails?.ticket_price
@@ -40,4 +36,4 @@ const BuyLotteryTicketCard = ({
   )
 }
 
-export default BuyLotteryTicketCard
+export default BuyTicketCard
