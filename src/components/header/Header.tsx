@@ -14,7 +14,6 @@ const Header = () => {
   const [show, setShow] = useState(false)
 
   const { status, user } = useAuth()
-  console.log('user',user)
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text)
