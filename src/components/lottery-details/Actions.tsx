@@ -4,6 +4,7 @@ import Countdown from 'react-countdown'
 import { AppContext } from '@/context/context'
 import { Contest } from '@/payload-types'
 import { isThresholdReached } from '@/utils/is-threshold-reached'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 
 const renderer = ({ hours, minutes, seconds, days }: any) => {
   return (
@@ -29,26 +30,26 @@ const renderer = ({ hours, minutes, seconds, days }: any) => {
 }
 
 const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
-  const { clearAllTickets, tickets }: any = useContext(AppContext)
+  const { tickets, removeAllTickets, mergeTickets }: any =
+    useContext(AppContext)
 
   const totalTicketsSold = tickets?.length
+  const totalTickets = tickets?.length
+
+  const quickAdds = ticketsMetadata?.quickAdds
+  const minTickets = ticketsMetadata?.minTickets
 
   return (
     <div className='action-header'>
       <div className='left'>
         <ul>
-          <li>
-            <a href='#0'>5 Tickets</a>
-          </li>
-          <li>
-            <a href='#0'>10 Tickets</a>
-          </li>
-          <li>
-            <a href='#0'>15 Tickets</a>
-          </li>
-          <li>
-            <a href='#0'>20 Tickets</a>
-          </li>
+          {quickAdds?.map(quickAdd => (
+            <li key={quickAdd?.id}>
+              <a href='#0' onClick={() => mergeTickets(quickAdd?.tickets)}>
+                +{quickAdd?.tickets} Tickets
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
       <div className='right'>
@@ -68,12 +69,14 @@ const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
             ''
           )}
 
-          <li>
-            <button type='button' onClick={clearAllTickets}>
-              <i className='las la-trash'></i>
-              <span>Erase All</span>
-            </button>
-          </li>
+          {totalTickets > minTickets && (
+            <li>
+              <button type='button' onClick={() => removeAllTickets()}>
+                <i className='las la-trash'></i>
+                <span>Erase All</span>
+              </button>
+            </li>
+          )}
           <li className='d-none'>
             <button type='button'>
               <i className='las la-table'></i>

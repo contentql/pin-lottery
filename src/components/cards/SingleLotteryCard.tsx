@@ -18,13 +18,12 @@ const SingleLotteryCard = ({
 
   return (
     <div className='lottery-single'>
-      {totalTickets > 1 && (
-        <button
-          className='lottery-single__close'
-          onClick={() => decrementHandleAndRemoveTicket(ticket?.id)}>
-          <FaTimes />
-        </button>
-      )}
+      <button
+        className='lottery-single__close'
+        onClick={() => decrementHandleAndRemoveTicket(ticket?.id)}>
+        <FaTimes />
+      </button>
+
       <div className='lottery-single__header'>
         <div className='silgle'>
           <div className='draw-single-ticket'>

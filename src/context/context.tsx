@@ -1,30 +1,53 @@
 'use client'
 
 import { createContext, useState } from 'react'
+import { toast } from 'react-toastify'
+
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 
 const AppContext = createContext({})
 
 /* @TODO: These is for lottery two data */
-const ticketsData = [
-  {
-    id: 1,
-    numbers: [],
-  },
-]
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   /* @TODO: These is for lottery two */
-  const [tickets, setTickets] = useState([...ticketsData])
-  const [quantity, setQuantity] = useState(1)
+  const minTickets = ticketsMetadata?.minTickets
+  const maxTickets = ticketsMetadata?.maxTickets
+
+  const initialTickets = Array.from({ length: minTickets }, (_, index) => ({
+    id: index + 1,
+    numbers: [],
+  }))
+
+  const [tickets, setTickets] = useState([...initialTickets])
+  const [quantity, setQuantity] = useState(minTickets)
 
   /* @TODO: These is for lottery two */
   const incrementHandleAndAddTicket = () => {
+    const totalTickets = tickets.length
+
+    if (quantity >= maxTickets && totalTickets >= maxTickets) {
+      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
+        toastId: 'max-tickets-toast',
+      })
+
+      return
+    }
+
     incrementHandle()
     addTicket()
   }
 
   const decrementHandleAndRemoveTicket = (id?: any) => {
-    if (tickets.length <= 1) return
+    const totalTickets = tickets.length
+
+    if (quantity <= minTickets && totalTickets <= minTickets) {
+      toast.info(`Minimum of ${minTickets} tickets required.`, {
+        toastId: 'min-tickets-toast',
+      })
+
+      return
+    }
 
     decrementHandle()
     id
@@ -33,22 +56,37 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const incrementHandle = () => {
-    if (quantity >= 16) {
-      setQuantity(16)
-    } else {
-      setQuantity(prev => prev + 1)
+    if (quantity >= maxTickets) {
+      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
+        toastId: 'max-tickets-toast',
+      })
+      return
     }
+
+    setQuantity(prev => prev + 1)
   }
 
   const decrementHandle = () => {
-    if (quantity <= 1) {
-      setQuantity(1)
-    } else {
-      setQuantity(prev => prev - 1)
+    if (quantity <= minTickets) {
+      toast.info(`Minimum of ${minTickets} tickets required.`, {
+        toastId: 'min-tickets-toast',
+      })
+      return
     }
+
+    setQuantity(prev => prev - 1)
   }
 
   const addTicket = () => {
+    const totalTickets = tickets.length
+
+    if (totalTickets >= maxTickets) {
+      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
+        toastId: 'max-tickets-toast',
+      })
+      return
+    }
+
     setTickets(prev => [
       ...prev,
       {
@@ -57,15 +95,6 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
         numbers: [],
       },
     ])
-  }
-
-  const removeTicket = (id: any) => {
-    if (tickets.length <= 1) return
-
-    const data = tickets
-      .filter(ticket => ticket.id !== id)
-      .map((ticket, idx) => ({ ...ticket, id: idx + 1 }))
-    setTickets(data)
   }
 
   const addTickets = (numTickets: number) => {
@@ -77,6 +106,37 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }))
 
     setTickets(newTickets)
+  }
+
+  const mergeTickets = (numTicketsToAdd: number) => {
+    const newTickets = Array.from({ length: numTicketsToAdd }, (_, index) => ({
+      id: tickets.length + index + 1,
+      numbers: [],
+    }))
+
+    setQuantity(prev => prev + numTicketsToAdd)
+    setTickets(prevTickets => [...prevTickets, ...newTickets])
+  }
+
+  const removeTicket = (id: any) => {
+    const totalTickets = tickets.length
+
+    if (totalTickets <= minTickets) {
+      toast.info(`Minimum of ${minTickets} tickets required.`, {
+        toastId: 'min-tickets-toast',
+      })
+      return
+    }
+
+    const data = tickets
+      .filter(ticket => ticket.id !== id)
+      .map((ticket, idx) => ({ ...ticket, id: idx + 1 }))
+    setTickets(data)
+  }
+
+  const removeAllTickets = () => {
+    setQuantity(1)
+    setTickets(prev => prev.slice(0, 1))
   }
 
   const pickNumber = (e: any, id: any) => {
@@ -133,7 +193,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setTickets(data as any)
   }
 
-  const clearTicket = (id: any) => {
+  const clearNumbers = (id: any) => {
     const data = tickets.map(obj =>
       obj.id === id
         ? {
@@ -146,7 +206,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setTickets(data)
   }
 
-  const clearAllTickets = () => {
+  const clearAllNumbers = () => {
     const data = tickets.map(obj => ({
       ...obj,
       numbers: [],
@@ -164,15 +224,17 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
         incrementHandle,
         decrementHandle,
         addTicket,
-        removeTicket,
         addTickets,
+        mergeTickets,
+        removeTicket,
+        removeAllTickets,
         pickNumber,
         luckyNumber,
         checkActive,
         setTickets,
         addQuickPick,
-        clearTicket,
-        clearAllTickets,
+        clearNumbers,
+        clearAllNumbers,
         setQuantity,
         quantity,
         tickets,
