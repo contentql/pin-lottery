@@ -32,7 +32,7 @@ const BuyLotteryTicketCard = ({
         </div>
       </div>
       <div className='right'>
-        <a href='#0' className='cmn-btn'>
+        <a href='/checkout' className='cmn-btn'>
           buy tickets
         </a>
       </div>

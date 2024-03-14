@@ -109,8 +109,17 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const mergeTickets = (numTicketsToAdd: number) => {
+    const totalTickets = tickets.length
+
+    if (totalTickets + numTicketsToAdd > maxTickets) {
+      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
+        toastId: 'max-tickets-toast',
+      })
+      numTicketsToAdd = maxTickets - totalTickets
+    }
+
     const newTickets = Array.from({ length: numTicketsToAdd }, (_, index) => ({
-      id: tickets.length + index + 1,
+      id: totalTickets + index + 1,
       numbers: [],
     }))
 
@@ -135,6 +144,10 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const removeAllTickets = () => {
+    toast.info(`Minimum of ${minTickets} tickets required.`, {
+      toastId: 'min-tickets-toast',
+    })
+
     setQuantity(1)
     setTickets(prev => prev.slice(0, 1))
   }
