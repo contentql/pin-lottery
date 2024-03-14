@@ -8,10 +8,14 @@ export const metadata: Metadata = {
   description: 'This is dashboard layout',
 }
 
-const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
+const DashboardProtectedLayout = async ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   await getMeUser({ nullUserRedirect: '/login' })
 
   return <LayoutView>{children}</LayoutView>
 }
 
-export default DashboardLayout
+export default DashboardProtectedLayout
