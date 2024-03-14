@@ -30,7 +30,7 @@ const renderer = ({ hours, minutes, seconds, days }: any) => {
 }
 
 const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
-  const { tickets, removeAllTickets, mergeTickets }: any =
+  const { tickets, removeAllTicketsWithToast, mergeTickets }: any =
     useContext(AppContext)
 
   const totalTicketsSold = tickets?.length
@@ -71,7 +71,7 @@ const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
 
           {totalTickets > minTickets && (
             <li>
-              <button type='button' onClick={() => removeAllTickets()}>
+              <button type='button' onClick={() => removeAllTicketsWithToast()}>
                 <i className='las la-trash'></i>
                 <span>Erase All</span>
               </button>
