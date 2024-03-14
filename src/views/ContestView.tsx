@@ -14,6 +14,8 @@ const ContestView = () => {
   const [filters, setFilters] = useState({
     filterByName: searchParams?.get('tag') ? searchParams?.get('tag') : 'all',
     filterByTitle: searchParams?.get('title') ? searchParams?.get('title') : '',
+    filterByPrice: searchParams?.get('price') ? searchParams?.get('price') : 0,
+    filterBySelect: searchParams?.get('select') ? searchParams?.get('select') : 0,
   })
 
   // getting all contests
