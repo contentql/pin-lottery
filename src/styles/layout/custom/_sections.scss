@@ -609,11 +609,13 @@ ul.number {
   padding: 10px;
 }
 body h1,body h2,body h3,body h4,body h5,body h6 {
-  margin-bottom: 2%;
+  margin-top: 2%;
 }
-body br{
+p  br {
+  display: block;
   margin: 10%;
 }
+
 
 strong{
   color:rgb(240, 6, 170);
@@ -634,6 +636,7 @@ strong{
   transform: translateX(-100%);
   background-color: #4939c1;
   border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.632);
   z-index: 1000;
 }
 
@@ -646,7 +649,7 @@ strong{
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #4939c1; 
+    border-bottom: 10px solid #5043b8; 
     z-index: 1000;
 }
 
