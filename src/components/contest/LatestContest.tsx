@@ -61,6 +61,8 @@ const LatestContest = ({
      else if (filters.filterBySelect === 'sortByName') {
        return value1.title.localeCompare(value2.title)
      }
+     else 
+       return false
    }
 
   const handleSearchTag = (tag: string) => {
