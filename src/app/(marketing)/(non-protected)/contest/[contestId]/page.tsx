@@ -1,6 +1,6 @@
 import { getPayloadClient } from '@/get-payload'
 import { Contest } from '@/payload-types'
-import { generateMeta } from '@/utils/generateMeta'
+import { generateMeta } from '@/utils/generate-meta'
 import ContestDetailsView from '@/views/ContestDetailsView'
 import { Metadata } from 'next'
 
@@ -11,7 +11,6 @@ interface PageProps {
 }
 
 const ContestDetails = ({ params }: PageProps) => {
-
   return <ContestDetailsView contestId={params.contestId} />
 }
 

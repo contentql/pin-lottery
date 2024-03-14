@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import type { Blog, Contest } from '../payload-types'
-import { mergeOpenGraph } from './mergeOpenGraph'
+import { mergeOpenGraph } from './merge-open-graph'
 
 export const generateMeta = async (args: {
   doc: Contest | Blog
@@ -20,8 +20,8 @@ export const generateMeta = async (args: {
     title: doc?.meta?.title || 'Lottery',
     description: doc?.meta?.description || 'Lottery - Description',
     openGraph: mergeOpenGraph({
-      title: doc?.meta?.title || 'Lottery',
-      description: doc?.meta?.description || 'Lottery - Description',
+      title: doc?.meta?.title!,
+      description: doc?.meta?.description!,
       url,
       images: ogImage
         ? [

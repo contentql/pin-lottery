@@ -1955,6 +1955,7 @@
 .lottery-single 
   background-color: #5a4bcc
   position: relative
+  +border-radius(10px)
   &:hover 
     .lottery-single__close 
       opacity: 1 
@@ -1977,6 +1978,7 @@
     +transform(scale(0.5))
     +transition(all 0.3s)
   &__header 
+    +border-radius(10px)
     background-color: #4939c1
     padding: 20px 20px
     .titcket-number 
@@ -2022,7 +2024,7 @@
       justify-content: center
       align-items: center
       +border-radius(50%)
-      margin: 3px
+      margin: 6px
       &.active 
         background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
         background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
@@ -2096,8 +2098,8 @@
   .sub-total-price 
     padding-bottom: 20px
   .total-price 
-    padding-top: 20px
-    border-top: 1px solid #201456
+    //padding-top: 20px
+    //border-top: 1px solid #201456
     p, span 
       color: #ffffff
 .pick-lottery-package 

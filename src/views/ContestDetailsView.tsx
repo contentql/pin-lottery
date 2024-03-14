@@ -26,8 +26,11 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
         <Banner
           breadcrumb={[
             ['Home', '/'],
-            ['Lottery', '/'],
-            ['Contest No: B2T', '/'],
+            ['Contest', '/contest'],
+            [
+              `Contest No: ${contestDetails?.contest_no}`,
+              `/contest/${contestDetails?.id}`,
+            ],
           ]}
         />
       </div>
