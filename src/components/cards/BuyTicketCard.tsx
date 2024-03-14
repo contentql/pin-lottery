@@ -1,7 +1,9 @@
-import { Contest } from '@/payload-types'
 import { useContext } from 'react'
+import { FaCartPlus } from 'react-icons/fa'
+import { MdOutlineShoppingCartCheckout } from 'react-icons/md'
 
 import { AppContext } from '@/context/context'
+import { Contest } from '@/payload-types'
 
 const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
   const { tickets }: any = useContext(AppContext)
@@ -28,9 +30,21 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
         </div>
       </div>
       <div className='right'>
-        <a href='/checkout' className='cmn-btn'>
+        {/* <a href='/checkout' className='cmn-btn'>
           buy tickets
-        </a>
+        </a> */}
+        <div className='btn-grp justify-content-xl-end'>
+          <button
+            type='button'
+            className='btn-border text-capitalize btn-transparent'>
+            <FaCartPlus />
+            Add to cart
+          </button>
+          <button type='button' className='cmn-btn text-capitalize'>
+            <MdOutlineShoppingCartCheckout />
+            Go to cart
+          </button>
+        </div>
       </div>
     </div>
   )
