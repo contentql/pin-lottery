@@ -116,7 +116,7 @@ const ContestDetailsPage = ({ contestDetails }: { contestDetails :[Contest]}) =>
         <div className='row mt-30'>
           <div className='col-lg-12'>
             <div className='btn-grp'>
-              <Link href={`/contest?tag=${'all'}`} className='btn-border'>
+              <Link href='/contest' className='btn-border'>
                 browse more
               </Link>
             </div>

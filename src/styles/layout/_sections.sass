@@ -226,12 +226,12 @@
   &:hover 
     .contest-card__thumb 
       img 
-        -webkit-animation-name: zoomIn
-        animation-name: zoomIn
-        -webkit-animation-duration: 1.5s
-        animation-duration: 1.5s
+        -webkit-animation-name: scaleUp
+        animation-name: scaleUp
+        -webkit-animation-duration: 1s
+        animation-duration: 1s
         -webkit-animation-fill-mode: both
-        animation-fill-mode: both
+        
   .item-link 
     position: absolute
     top: 0
@@ -350,6 +350,14 @@
     transform: scale3d(0.3, 0.3, 0.3)
   50%
     opacity: 1
+
++keyframes (scaleUp) 
+    from 
+      -webkit-transform: scale(1)
+      transform: scale(1)
+    to 
+      -webkit-transform: scale(1.1)
+
 
 .contest-wrapper 
   position: relative 

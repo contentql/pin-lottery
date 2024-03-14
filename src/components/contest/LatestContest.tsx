@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
-import { FaRedo, FaRegHeart, FaSearch } from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa'
 import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
@@ -40,7 +40,6 @@ const LatestContest = ({
 
   const handleTabClick = (tag: string) => {
     setFilters({...filters,filterByName:tag})
-   
   }
   
   const handleSearchTitle = (value: string) => {
@@ -54,7 +53,16 @@ const LatestContest = ({
     setFilters({ ...filters, filterByTitle: value })
   }
 
-   const debounce = useDebounceCallback(handleSearchTitle, 500)
+  const debounce = useDebounceCallback(handleSearchTitle, 500)
+  
+  const handleClearFilters = () => {
+    const params = new URLSearchParams()
+    router.push(`${pathname}?${params.toString()}`)
+    setFilters({
+      filterByName: 'all',
+      filterByTitle:''
+    })
+  }
 
   return (
     <section className='pb-120 mt-minus-100'>
@@ -86,13 +94,13 @@ const LatestContest = ({
                         aria-selected='true'>
                         <span className='icon-thumb'>
                           <Image
-                            src={tag?.img.url}
+                            src={tag?.img?.url}
                             alt='winner tab 1'
                             width={100}
                             height={100}
                           />
                         </span>
-                        <span>{tag.tag}</span>
+                        <span>{tag?.tag}</span>
                       </Link>
                     </li>
                   ))}
@@ -113,7 +121,7 @@ const LatestContest = ({
                       </select>
                     </div>
                   </div>
-                  <div className='col-lg-2 col-sm-6 mb-30'>
+                  {/* <div className='col-lg-2 col-sm-6 mb-30'>
                     <div className='select border border-dark rounded-pill pe-2'>
                       <select className='border-0 rounded-pill'>
                         <option>ALL MAKES</option>
@@ -125,7 +133,7 @@ const LatestContest = ({
                         <option>Filter option</option>
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                   <div className='col-lg-3 mb-30'>
                     <div className='rang-slider'>
                       <span className='caption'>Ticket Price</span>
@@ -148,7 +156,7 @@ const LatestContest = ({
                       </div>
                     </div>
                   </div>
-                  <div className='col-lg-2 col-sm-4 mb-30'>
+                  {/* <div className='col-lg-2 col-sm-4 mb-30'>
                     <div className='action-btn-wrapper'>
                       <button type='button' className='action-btn'>
                         <FaRegHeart />
@@ -157,7 +165,7 @@ const LatestContest = ({
                         <FaRedo />
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                   <div className='col-lg-3 col-sm-8 mb-30'>
                     <form className='contest-search-form'>
                       <input
@@ -171,6 +179,15 @@ const LatestContest = ({
                         <FaSearch />
                       </button>
                     </form>
+                  </div>
+                  <div className='col-lg-3 col-sm-6 mb-30'>
+                    <div className=''>
+                      <button
+                        className='cmn-btn active'
+                        onClick={handleClearFilters}>
+                        Clear filters
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -204,7 +221,7 @@ const LatestContest = ({
                             height={120}
                           /> */}
                           <span className='section-sub-title'>
-                           No contests available
+                            No contests available
                           </span>
                         </div>
                       )}

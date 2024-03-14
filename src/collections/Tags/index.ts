@@ -4,8 +4,8 @@ const Tags: CollectionConfig = {
   admin: {
     useAsTitle: 'tag',
   },
-  fields: [{ name: 'tag', type: 'text', label: 'Product Type' },
-    {name:'img',type:'upload',label:'icon',relationTo:'media'}
+  fields: [{ name: 'tag', type: 'text', label: 'Product Type' ,required:true},
+    {name:'img',type:'upload',label:'icon',relationTo:'media',required:true}
   ],
 }
 

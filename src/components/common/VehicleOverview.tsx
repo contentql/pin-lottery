@@ -1,5 +1,6 @@
 import { Contest } from '@/payload-types'
 import ConvertToHtml from '@/utils/convertToHtml'
+import Tabs from './Tabs'
 
 interface ContestDetails extends Contest {
   features_html: string
@@ -10,17 +11,70 @@ const VehicleOverview = ({
   contestDetails,
 }: {
   contestDetails: ContestDetails
-}) => {
+  }) => {
+   const tabs = [
+     {
+       title: 'Description',
+       content: (
+         <ConvertToHtml htmlContent={contestDetails?.description_html} />
+       ),
+     },
+     {
+       title: 'Features',
+       content: <ConvertToHtml htmlContent={contestDetails?.features_html} />,
+     },
+  ]
+  console.log('desc', contestDetails?.description_html)
   return (
     <>
-      <div className='content-block'>
+      {/* <ul
+        className='nav nav-tabs justify-content-center mb-30 border-0'
+        id='myTab'
+        role='tablist'>
+        <li className='nav-item' role='presentation'>
+          <button
+            className='cmn-btn style--two d-flex align-items-center active'
+            id='home-tab'
+            data-bs-toggle='tab'
+            data-bs-target='#home-tab-pane'
+            type='button'
+            role='tab'
+            aria-controls='home-tab-pane'
+            aria-selected='true'
+            >
+            <span className='me-3'>
+            </span>
+            Dream Car
+          </button>
+        </li>
+        <li className='nav-item' role='presentation'>
+          <button
+            className='cmn-btn style--two d-flex align-items-center'
+            id='profile-tab'
+            data-bs-toggle='tab'
+            data-bs-target='#profile-tab-pane'
+            type='button'
+            role='tab'
+            aria-controls='profile-tab-pane'
+            aria-selected='false'
+            >
+            <span className='me-3'>
+            </span>
+            All lifestyle
+          </button>
+        </li>
+      </ul> */}
+      <div>
+        <Tabs tabs={tabs} />
+      </div>
+      {/* <div className='content-block'>
         <h3 className='title'>Description</h3>
         <ConvertToHtml htmlContent={contestDetails?.description_html} />
       </div>
       <div className='content-block'>
         <h3 className='title'>Features</h3>
-        <ConvertToHtml htmlContent={contestDetails?.features_html} />
-      </div>
+        
+      </div> */}
       {/* <div className='content-block'>
         <h3 className='title'>Specifications</h3>
         <div className='row mb-none-30'>

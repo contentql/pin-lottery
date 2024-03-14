@@ -58,6 +58,12 @@ const Users: CollectionConfig = {
       label: 'Phone Number',
     },
     {
+      name: 'image',
+      type: 'upload',
+      label: 'User Image',
+      relationTo:'media'
+    },
+    {
       name: 'roles',
       type: 'select',
       options: [
