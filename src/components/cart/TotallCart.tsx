@@ -1,20 +1,9 @@
-import { useState } from 'react'
-
-import QuickPick from '@/components/quickPick/QuickPick'
-
-import cartData from '@/data/cartData'
+import { Cart } from '@/payload-types'
 
 import AllTickets from './AllTickets'
 import Prices from './Prices'
 
-const TotallCart = () => {
-  const [allTicket, setAllTicket] = useState(cartData)
-
-  const removeTicket = (id: any) => {
-    const data = allTicket.filter(item => item.id !== id)
-    setAllTicket(data)
-  }
-
+const TotallCart = ({ cartData }: { cartData: Cart[] }) => {
   return (
     <section className='pb-120 mt-minus-300'>
       <div className='container'>
@@ -24,16 +13,16 @@ const TotallCart = () => {
               <h2 className='cart-wrapper__title'>My Cart</h2>
               <div className='row justify-content-lg-between'>
                 {/* All tickets section here */}
-                <AllTickets allTicket={allTicket} removeTicket={removeTicket} />
+                <AllTickets cartData={cartData} />
 
                 {/* Prices section here */}
-                <Prices />
+                <Prices cartData={cartData} />
               </div>
             </div>
           </div>
 
           {/* QuickPick section here */}
-          <QuickPick />
+          {/* <QuickPick /> */}
         </div>
       </div>
     </section>

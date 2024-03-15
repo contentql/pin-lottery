@@ -1,15 +1,52 @@
-import { Contest } from '@/payload-types'
 import { useContext } from 'react'
+import { FaCartPlus } from 'react-icons/fa'
+import { MdOutlineShoppingCartCheckout } from 'react-icons/md'
 
 import { AppContext } from '@/context/context'
+import { Contest } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
+import { trpc } from '@/trpc/client'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
-  const { tickets }: any = useContext(AppContext)
+  const { tickets, removeAllTickets }: any = useContext(AppContext)
+
+  const { status } = useAuth()
+
+  const router = useRouter()
 
   const ticketPrice = contestDetails?.ticket_price
   const totalTickets = tickets?.length
 
   const totalTicketsPrice = totalTickets * ticketPrice
+
+  const { mutate: addTicketsMutation } = trpc.cart.addTickets.useMutation({
+    onSuccess: async () => {
+      toast.success('Successfully tickets are added to cart')
+      removeAllTickets()
+      router.push('/cart')
+    },
+    onError: async () => {
+      toast.error('Unable to add tickets to cart')
+    },
+  })
+
+  const handleAddToCart = () => {
+    if (status !== 'loggedIn') {
+      toast.error('Login to add tickets to cart')
+
+      return
+    }
+
+    addTicketsMutation({
+      contest_id: contestDetails?.id,
+      contest_no: contestDetails?.contest_no,
+      tickets: totalTickets,
+      each_ticket_price: ticketPrice,
+      total_price: totalTicketsPrice,
+    })
+  }
 
   return (
     <div className='buy-lottery-ticket'>
@@ -28,9 +65,22 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
         </div>
       </div>
       <div className='right'>
-        <a href='/checkout' className='cmn-btn'>
+        {/* <a href='/checkout' className='cmn-btn'>
           buy tickets
-        </a>
+        </a> */}
+        <div className='btn-grp justify-content-xl-end'>
+          <button
+            type='button'
+            className='btn-border text-capitalize btn-transparent'
+            onClick={() => handleAddToCart()}>
+            <FaCartPlus />
+            Add to cart
+          </button>
+          <button type='button' className='cmn-btn text-capitalize'>
+            <MdOutlineShoppingCartCheckout />
+            Go to cart
+          </button>
+        </div>
       </div>
     </div>
   )

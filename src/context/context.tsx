@@ -144,6 +144,11 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const removeAllTickets = () => {
+    setQuantity(1)
+    setTickets(prev => prev.slice(0, 1))
+  }
+
+  const removeAllTicketsWithToast = () => {
     toast.info(`Minimum of ${minTickets} tickets required.`, {
       toastId: 'min-tickets-toast',
     })
@@ -241,6 +246,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
         mergeTickets,
         removeTicket,
         removeAllTickets,
+        removeAllTicketsWithToast,
         pickNumber,
         luckyNumber,
         checkActive,

@@ -1,6 +1,8 @@
 import { authRouter } from '../routers/auth-router'
+import { cartRouter } from '../routers/cart-router'
 import { contestRouter } from '../routers/contest-router'
 import { publicRouter } from '../routers/public-router'
+import { ticketRouter } from '../routers/ticket-router'
 import { WinnerRouter } from '../routers/winner-router'
 import { router, userProcedure } from './trpc'
 
@@ -11,6 +13,8 @@ export const appRouter = router({
 
   auth: authRouter,
   contest: contestRouter,
+  cart: cartRouter,
+  ticket: ticketRouter,
   public: publicRouter,
   winner: WinnerRouter
 })
