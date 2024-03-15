@@ -5,8 +5,12 @@ import Image from 'next/image'
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
 
 import TotallCart from '@/components/cart/TotallCart'
+import { Cart } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 const CartView = () => {
+  const { data: cartData } = trpc.cart.getTickets.useQuery()
+
   return (
     <>
       {/* Banner Section here */}
@@ -26,7 +30,7 @@ const CartView = () => {
       </div>
 
       {/* Total Cart Section here */}
-      <TotallCart />
+      <TotallCart cartData={cartData as Cart[]} />
     </>
   )
 }
