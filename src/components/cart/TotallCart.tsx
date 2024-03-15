@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import QuickPick from '@/components/quickPick/QuickPick'
-
 import cartData from '@/data/cartData'
 
 import AllTickets from './AllTickets'
@@ -33,7 +31,7 @@ const TotallCart = () => {
           </div>
 
           {/* QuickPick section here */}
-          <QuickPick />
+          {/* <QuickPick /> */}
         </div>
       </div>
     </section>

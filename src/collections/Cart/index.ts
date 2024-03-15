@@ -2,8 +2,14 @@ import { CollectionConfig } from 'payload/types'
 
 const Cart: CollectionConfig = {
   slug: 'cart',
-  labels: { plural: 'Cart' },
+  labels: { plural: 'carts', singular: 'cart' },
   fields: [
+    {
+      name: 'contest_id',
+      type: 'text',
+      label: 'Contest Id',
+      required: true,
+    },
     {
       name: 'contest_no',
       type: 'text',
@@ -14,6 +20,18 @@ const Cart: CollectionConfig = {
       name: 'tickets',
       type: 'number',
       label: 'Tickets',
+      required: true,
+    },
+    {
+      name: 'each_ticket_price',
+      type: 'number',
+      label: 'Each Ticket Price',
+      required: true,
+    },
+    {
+      name: 'total_price',
+      type: 'number',
+      label: 'Total Price',
       required: true,
     },
     {

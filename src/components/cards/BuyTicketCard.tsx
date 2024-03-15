@@ -40,8 +40,11 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
     }
 
     addTicketsMutation({
+      contest_id: contestDetails?.id,
       contest_no: contestDetails?.contest_no,
       tickets: totalTickets,
+      each_ticket_price: ticketPrice,
+      total_price: totalTicketsPrice,
     })
   }
 

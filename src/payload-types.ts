@@ -261,8 +261,11 @@ export interface Faq {
  */
 export interface Cart {
   id: string;
+  contest_id: string;
   contest_no: string;
   tickets: number;
+  each_ticket_price: number;
+  total_price: number;
   user: {
     relationTo: 'users';
     value: string | User;
