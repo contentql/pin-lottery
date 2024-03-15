@@ -3,7 +3,9 @@ import Image from 'next/image'
 import payment from '/public/images/elements/payment.png'
 
 import { Cart } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
+import { toast } from 'react-toastify'
 
 const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const currency = ticketsMetadata?.currency
@@ -12,6 +14,28 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     (acc, cart) => acc + cart?.total_price,
     0,
   )
+
+  const arrayOfTicketsWithPrices = cartData?.flatMap(item =>
+    Array.from({ length: item.tickets }, () => ({
+      ticket_price: item.each_ticket_price,
+      contest_id: item.contest_id,
+    })),
+  )
+
+  const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
+    onSuccess: async () => {
+      toast.success(
+        'Tickets successfully purchased. Draw date will be announced shortly.',
+      )
+    },
+    onError: async () => {
+      toast.error('Failed to purchase tickets. Please try again later.')
+    },
+  })
+
+  const handlePurchase = () => {
+    createTicketsMutation(arrayOfTicketsWithPrices)
+  }
 
   return (
     <div className='col-lg-4 mt-lg-0 mt-4'>
@@ -51,7 +75,10 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
             </li>
           </ul>
           <div className='checkout-wrapper__btn'>
-            <button type='submit' className='cmn-btn'>
+            <button
+              type='button'
+              className='cmn-btn'
+              onClick={() => handlePurchase()}>
               buy tickets
             </button>
           </div>

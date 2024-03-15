@@ -28,7 +28,7 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
       router.push('/cart')
     },
     onError: async () => {
-      toast.success('Unable to add tickets to cart')
+      toast.error('Unable to add tickets to cart')
     },
   })
 

@@ -287,14 +287,14 @@ export interface Ticket {
       }[]
     | null;
   ticket_price: number;
-  contest_no?: {
+  contest_id: {
     relationTo: 'contest';
     value: string | Contest;
-  } | null;
-  purchased_by?: {
+  };
+  purchased_by: {
     relationTo: 'users';
     value: string | User;
-  } | null;
+  };
   updatedAt: string;
   createdAt: string;
 }

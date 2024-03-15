@@ -23,11 +23,12 @@ const Ticket: CollectionConfig = {
       required: true,
     },
     {
-      name: 'contest_no',
+      name: 'contest_id',
       type: 'relationship',
-      label: 'Contest No',
+      label: 'Contest Id',
       relationTo: ['contest'],
       hasMany: false,
+      required: true,
     },
     {
       name: 'purchased_by',
@@ -35,6 +36,7 @@ const Ticket: CollectionConfig = {
       label: 'Purchased By',
       relationTo: ['users'],
       hasMany: false,
+      required: true,
     },
   ],
 }

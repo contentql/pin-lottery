@@ -37,7 +37,7 @@ const AllTickets = ({ cartData }: { cartData: Cart[] }) => {
                   return (
                     <div key={idx} className='single-row'>
                       <ul className='numbers'>
-                        {[...Array(7)].map((i: number) => (
+                        {[...Array(7)].map((_, i: number) => (
                           <li key={i}>00</li>
                         ))}
                       </ul>
