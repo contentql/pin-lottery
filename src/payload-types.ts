@@ -16,6 +16,7 @@ export interface Config {
     faq: Faq;
     tags: Tag;
     cart: Cart;
+    tickets: Ticket;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -270,6 +271,30 @@ export interface Cart {
     relationTo: 'users';
     value: string | User;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tickets".
+ */
+export interface Ticket {
+  id: string;
+  ticket_numbers?:
+    | {
+        number?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  ticket_price: number;
+  contest_no?: {
+    relationTo: 'contest';
+    value: string | Contest;
+  } | null;
+  purchased_by?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
