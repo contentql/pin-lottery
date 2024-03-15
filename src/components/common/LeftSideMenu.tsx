@@ -50,6 +50,7 @@ const LeftSideMenu = () => {
         toast.success(`Image updated successfully`)
         setUserImage(null)
         setUser(data?.data)
+        setUploadedImage(null)
         console.log('data in use auth', data?.data)
         queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
       },
