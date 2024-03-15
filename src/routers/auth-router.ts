@@ -256,7 +256,7 @@ export const authRouter = router({
         draft.image = id
       })
 
-      await payload.update({
+      const user=await payload.update({
         collection: 'users',
         id: ctx.user.id,
         data: updatedData,
@@ -267,6 +267,6 @@ export const authRouter = router({
         id: (ctx.user.image as Media).id,
       })
 
-      return {status:'success'}
+      return { data: user }
     }),
 })

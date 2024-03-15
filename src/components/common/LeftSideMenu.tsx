@@ -24,7 +24,7 @@ const LeftSideMenu = () => {
 
   const queryClient = useQueryClient()
 
-  const { logout } = useAuth()
+  const { logout,setUser } = useAuth()
 
   const handleUpload = (event: any) => {
      setUserImage(event.target.files)
@@ -49,6 +49,8 @@ const LeftSideMenu = () => {
       onSuccess: async(data) => {
         toast.success(`Image updated successfully`)
         setUserImage(null)
+        setUser(data?.data)
+        console.log('data in use auth', data?.data)
         queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
       },
       onError: () => {
