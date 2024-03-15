@@ -107,8 +107,8 @@ const LatestContest = ({
 
   }
 
-  const updatedTitle = useDebounceCallback(handleSearchTitle, 500)
-  const updatedPrice = useDebounceCallback(handleSearchPrice, 500)
+  const updatedTitle = useDebounceCallback(handleSearchTitle, 200)
+  const updatedPrice = useDebounceCallback(handleSearchPrice, 200)
 
   const handleClearFilters = () => {
     const params = new URLSearchParams()

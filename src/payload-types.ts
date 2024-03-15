@@ -12,6 +12,7 @@ export interface Config {
     media: Media;
     contest: Contest;
     contact: Contact;
+    winner: Winner;
     blog: Blog;
     faq: Faq;
     tags: Tag;
@@ -202,6 +203,24 @@ export interface Contact {
   email?: string | null;
   subject?: string | null;
   message?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "winner".
+ */
+export interface Winner {
+  id: string;
+  ticket_number?: number | null;
+  user?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
+  contest?: {
+    relationTo: 'contest';
+    value: string | Contest;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
