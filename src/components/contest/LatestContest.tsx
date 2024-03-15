@@ -6,23 +6,31 @@ import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
 
-import Link from 'next/link'
 
 const LatestContest = ({
   contestDetails,
   allTags,
   filters,
-  setFilters
+  setFilters,
 }: any) => {
-  const [sliderValue, setSliderValue] = useState<number>(0)
+
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const title=searchParams.get('title')??''
-  const MAX = 120
+  const title = searchParams.get('title') ?? ''
+  const price = searchParams.get('price') ?? 0
+  const select = searchParams.get('select') ?? ''
+  const MAX = 1000
+
+  const [resetValues, setResetValues] = useState({
+    sliderValue: price ? Number(price) : 0,
+    inputValue: title ? title : '',
+    selectValue: select ? select : '',
+  })
+  
   const getBackgroundSize = () => {
     return {
-      backgroundSize: `${(sliderValue * 100) / MAX}% 100%`,
+      backgroundSize: `${(resetValues?.sliderValue * 100) / MAX}% 100%`,
     }
   }
 
@@ -31,36 +39,89 @@ const LatestContest = ({
     return filters.filterByName?.includes(tag?.tag?.value?.tag)
   }
 
-   const handleFilterByTitle = (contest: any) => {
-     if (title === '') return true
-     return contest?.title
-       ?.toLowerCase()
-       ?.includes(filters.filterByTitle?.toLowerCase())
+  const handleFilterByPrice = (contest:any) => {
+    if (filters.filterByPrice === 0) return true
+    return contest?.ticket_price <= filters.filterByPrice
+  }
+
+  const handleFilterByTitle = (contest: any) => {
+    if (title === '') return true
+    return contest?.title
+      ?.toLowerCase()
+      ?.includes(filters.filterByTitle?.toLowerCase())
+  }
+
+   const handleFilterBySort = (value1:any,value2:any) => {
+     if (filters.filterBySelect === 'priceLowToHigh') {
+       return value1.ticket_price - value2.ticket_price
+     }
+     else if (filters.filterBySelect === "priceHighToLow") {
+       return value2.ticket_price - value1.ticket_price
+     }
+     else if (filters.filterBySelect === 'sortByName') {
+       return value1.title.localeCompare(value2.title)
+     }
+     else 
+       return false
    }
 
-  const handleTabClick = (tag: string) => {
-    setFilters({...filters,filterByName:tag})
+  const handleSearchTag = (tag: string) => {
+    const search = new URLSearchParams(searchParams)
+    search.set('tag', tag.toString())
+    router.push(`${pathname}?${search.toString()}#myTab`)
+    setFilters({ ...filters, filterByName: tag })
   }
-  
+
   const handleSearchTitle = (value: string) => {
     const search = new URLSearchParams(searchParams)
-    if (value.trim() === "") {
+    if (value.trim() === '') {
       search.delete('title')
     } else {
       search.set('title', value)
     }
-    router.push(`${pathname}?${search.toString()}`)
+    router.push(`${pathname}?${search.toString()}#myTab`)
     setFilters({ ...filters, filterByTitle: value })
   }
 
-  const debounce = useDebounceCallback(handleSearchTitle, 500)
-  
+  const handleSearchPrice = (value: number) => {
+    const search = new URLSearchParams(searchParams)
+    if (value == 0) {
+      search.delete('price')
+    } else {
+      search.set('price', value.toString())
+    }
+    router.push(`${pathname}?${search.toString()}#myTab`)
+    setFilters({ ...filters, filterByPrice: value })
+    console.log('types', value)
+  }
+
+  const handleSearchSortBy = (value:string) => {
+    const search = new URLSearchParams(searchParams)
+    if (value ==='') {
+      search.delete('select')
+    } else {
+      search.set('select', value.toString())
+    } 
+    router.push(`${pathname}${search.toString()}`)
+    setFilters({ ...filters, filterBySelect:value })
+
+  }
+
+  const updatedTitle = useDebounceCallback(handleSearchTitle, 200)
+  const updatedPrice = useDebounceCallback(handleSearchPrice, 200)
+
   const handleClearFilters = () => {
     const params = new URLSearchParams()
-    router.push(`${pathname}?${params.toString()}`)
+    router.push(`${pathname}?${params.toString()}#myTab`)
     setFilters({
       filterByName: 'all',
-      filterByTitle:''
+      filterByTitle: '',
+      filterByPrice: 0,
+    })
+    setResetValues({
+      sliderValue: 0,
+      inputValue: '',
+      selectValue:'',
     })
   }
 
@@ -71,21 +132,15 @@ const LatestContest = ({
           <div className='col-lg-12'>
             <div className='contest-wrapper'>
               <div className='contest-wrapper__header pt-120'>
-                <h2 className='contest-wrapper__title'>Latest Contest</h2>
-                <ul
-                  className='nav nav-tabs winner-tab-nav'
-                  id='myTab'
-                  role='tablist'>
+                <h2 className='contest-wrapper__title' id='myTab'>
+                  Latest Contest
+                </h2>
+                <ul className='nav nav-tabs winner-tab-nav' role='tablist'>
                   {allTags?.map((tag: any) => (
                     <li key={tag?.id} className='nav-item' role='presentation'>
-                      <Link
-                        href={{
-                          query: {
-                            tag: tag?.tag,
-                          },
-                        }}
+                      <button
                         className={`nav-link ${filters.filterByName === tag.tag ? 'active' : ''}`}
-                        onClick={e => handleTabClick(tag.tag)} //TODO: active can be added EX: className='nav-link active'
+                        onClick={e => handleSearchTag(tag.tag)} //TODO: active can be added EX: className='nav-link active'
                         id={tag.tag}
                         data-bs-toggle='tab'
                         data-bs-target='#dream'
@@ -101,23 +156,33 @@ const LatestContest = ({
                           />
                         </span>
                         <span>{tag?.tag}</span>
-                      </Link>
+                      </button>
                     </li>
                   ))}
                 </ul>
               </div>
               <div className='contest-wrapper__body'>
                 <div className='row contest-filter-wrapper justify-content-center mt-30 mb-none-30'>
-                  <div className='col-lg-2 col-sm-6 mb-30'>
+                  <div className='col-lg-3 mb-30'>
                     <div className='select border border-dark rounded-pill'>
-                      <select className='border-0 rounded-pill'>
-                        <option>SORT BY</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
+                      <select
+                        value={resetValues.selectValue}
+                        onChange={e => {
+                          setResetValues({
+                            ...resetValues,
+                            selectValue: e.target.value,
+                          })
+                          handleSearchSortBy(e.target.value)
+                        }}
+                        className='border-0 rounded-pill'>
+                        <option value={''}>SORT BY</option>
+                        <option value={'priceLowToHigh'}>
+                          Price -- Low to High
+                        </option>
+                        <option value={'priceHighToLow'}>
+                          Price -- High to Low
+                        </option>
+                        <option value={'sortByName'}>Contest Name</option>
                       </select>
                     </div>
                   </div>
@@ -144,15 +209,22 @@ const LatestContest = ({
                             type={'range'}
                             min='0'
                             max={MAX}
-                            onChange={e =>
-                              setSliderValue(Number(e.target.value))
-                            }
+                            onChange={e => {
+                              setResetValues({
+                                ...resetValues,
+                                sliderValue: Number(e.target.value),
+                              })
+                              updatedPrice(Number(e.target.value))
+                            }}
                             style={getBackgroundSize()}
-                            value={sliderValue}
+                            defaultValue={price}
+                            value={resetValues.sliderValue}
                           />
                         </div>
                         <span className='min-amount'>0</span>
-                        <span className='max-amount'>{sliderValue}</span>
+                        <span className='max-amount'>
+                          {price !== 0 ? price : resetValues.sliderValue}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -166,28 +238,33 @@ const LatestContest = ({
                       </button>
                     </div>
                   </div> */}
-                  <div className='col-lg-3 col-sm-8 mb-30'>
+                  <div className='col-lg-3 mb-30'>
                     <form className='contest-search-form'>
                       <input
                         className='pe-5'
                         type='text'
                         placeholder='SEARCH HERE'
-                        onChange={e => debounce(e.target.value)}
+                        onChange={e => {
+                          setResetValues({
+                            ...resetValues,
+                            inputValue: e.target.value,
+                          })
+                          updatedTitle(e.target.value)
+                        }}
                         defaultValue={title}
+                        value={resetValues.inputValue}
                       />
                       <button>
                         <FaSearch />
                       </button>
                     </form>
                   </div>
-                  <div className='col-lg-3 col-sm-6 mb-30'>
-                    <div className=''>
-                      <button
-                        className='cmn-btn active'
-                        onClick={handleClearFilters}>
-                        Clear filters
-                      </button>
-                    </div>
+                  <div className='col-lg-3 mb-30'>
+                    <button
+                      className='cmn-btn active'
+                      onClick={handleClearFilters}>
+                      Clear filters
+                    </button>
                   </div>
                 </div>
 
@@ -200,10 +277,13 @@ const LatestContest = ({
                     <div className='row mb-none-30 mt-50'>
                       {contestDetails
                         ?.filter(handleFilterByName)
-                        ?.filter(handleFilterByTitle).length > 0 ? (
+                        ?.filter(handleFilterByTitle)
+                        ?.filter(handleFilterByPrice).length > 0 ? (
                         contestDetails
                           ?.filter(handleFilterByName)
                           ?.filter(handleFilterByTitle)
+                          ?.filter(handleFilterByPrice)
+                          ?.sort(handleFilterBySort)
                           .map((contest: any) => (
                             <div
                               key={contest.id}

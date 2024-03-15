@@ -609,13 +609,73 @@ ul.number {
   padding: 10px;
 }
 body h1,body h2,body h3,body h4,body h5,body h6 {
-  margin-bottom: 2%;
+  margin-top: 2%;
 }
-body br{
+p  br {
+  display: block;
   margin: 10%;
 }
+
 
 strong{
   color:rgb(240, 6, 170);
 
+}
+
+.user-profile {
+  position: relative;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  top: 90%;
+  left: 100%;
+  width: 300px;
+  padding: 10px;
+  transform: translateX(-100%);
+  background-color: #4939c1;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.632);
+  z-index: 1000;
+}
+
+.popup-arrow {
+    position: absolute;
+    top: -10px; 
+    left: 92%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #5043b8; 
+    z-index: 1000;
+}
+
+.popup-btn{
+  width: 100%;
+  text-align: left;
+  color: white;
+  padding-left: 4px;
+  background-color: transparent;
+}
+.popup-btn:hover{
+  background-color: #fb6468;
+  color:white;
+  border-radius: 10px;
+}
+@media only screen and (min-width: 1199px) {
+  .popup {
+    display: block;
+  }
+}
+.border-between{
+  border-bottom: 1px solid black;
+  padding-top: 4px;
+  padding-bottom: 8px;
+}
+
+.winner-sample{
+  padding: 40px 80px;
 }

@@ -12,6 +12,11 @@ const Header = () => {
   const [open, setOpen] = useState('')
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
+  const [popupVisible, setPopupVisible] = useState(false)
+
+  const togglePopup = () => {
+    setPopupVisible(!popupVisible)
+  }
 
   const { status, user } = useAuth()
   const handleOpen = (e: any) => {
@@ -114,13 +119,36 @@ const Header = () => {
                   )}
                   {status === 'loggedIn' ? (
                     <Link
-                      href='/user'
+                      href=''
                       className='user__btn d-flex align-items-center justify-content-center'
+                      onClick={togglePopup}
                       style={{
-                        backgroundImage: `url(${user?.image!==undefined?(user?.image as Media)?.sizes?.navUserImage?.url :'/images/user/pp.png'})`,
+                        backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
                       }}>
-                      <i>
-                      </i>
+                      {popupVisible && (
+                        <div className='popup'>
+                          <div className='popup-arrow'></div>
+                          {/* <div className='popup-btn user-profile'>
+                            <button
+                              className='user__btn d-flex align-items-center justify-content-center'
+                              onClick={togglePopup}
+                              style={{
+                                backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
+                              }}></button>
+                            <p>Text for showing</p>
+                          </div> */}
+                          <Link href='/user-info' className='popup-btn'>
+                            Personal Info
+                          </Link>
+                          <Link href='/user' className='popup-btn'>
+                            My Tickets
+                          </Link>
+                          <Link href='/user-transaction' className='popup-btn'>
+                            Transactions
+                          </Link>
+                          <button className='popup-btn'>Logout</button>
+                        </div>
+                      )}
                     </Link>
                   ) : (
                     <Link href='/login' className='login-btn btn--sm'>
