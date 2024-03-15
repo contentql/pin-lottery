@@ -13,6 +13,7 @@ import Faq from './collections/Faq'
 import { Media } from './collections/Media'
 import Tags from './collections/Tags'
 import Users from './collections/Users'
+import Winner from './collections/Winner'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import { s3StorageAdapter } from './plugins/s3'
@@ -29,7 +30,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
-  collections: [Users, Media, Contest, Contact, Blog, Faq, Tags],
+  collections: [Users, Media, Contest, Contact,Winner, Blog, Faq, Tags],
   routes: {
     admin: '/admin',
   },
