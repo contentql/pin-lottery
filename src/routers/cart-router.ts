@@ -2,7 +2,6 @@ import { TRPCError } from '@trpc/server'
 
 import { getPayloadClient } from '../get-payload'
 import { CartDetailsValidator } from '../lib/validators/cart-details-validator'
-import { UserIdValidator } from '../lib/validators/user-id-validator'
 import { router, userProcedure } from '../trpc/trpc'
 
 export const cartRouter = router({
@@ -51,26 +50,25 @@ export const cartRouter = router({
       }
     }),
 
-  deleteTickets: userProcedure
-    .input(UserIdValidator)
-    .mutation(async ({ input }) => {
-      const { id } = input
+  deleteTickets: userProcedure.mutation(async ({ ctx }) => {
+    const { user } = ctx
 
-      const payload = await getPayloadClient()
+    const payload = await getPayloadClient()
 
-      try {
-        await payload.delete({
-          collection: 'cart',
-          where: {
-            user: {
-              equals: id,
-            },
+    try {
+      await payload.delete({
+        collection: 'cart',
+        where: {
+          id: {
+            exists: true,
           },
-        })
+        },
+        user,
+      })
 
-        return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
-      }
-    }),
+      return { success: true }
+    } catch (err) {
+      throw new TRPCError({ code: 'BAD_REQUEST' })
+    }
+  }),
 })

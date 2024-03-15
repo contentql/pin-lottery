@@ -3,6 +3,16 @@ import { CollectionConfig } from 'payload/types'
 const Cart: CollectionConfig = {
   slug: 'cart',
   labels: { plural: 'carts', singular: 'cart' },
+  access: {
+    delete: ({ req, data, id }) => {
+      const { user } = req
+
+      // if(user.id === data.)
+      // console.log(data, id)
+      // console.log(user)
+      return true
+    },
+  },
   fields: [
     {
       name: 'contest_id',

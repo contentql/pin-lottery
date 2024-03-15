@@ -30,13 +30,13 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
       router.push('/user')
     },
     onError: async () => {
-      toast.error('Failed to purchase tickets. Please try again later.')
+      toast.error('Failed to empty cart.')
     },
   })
 
   const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
     onSuccess: async () => {
-      deleteCartTickets({ id: cartData?.at(0)?.user?.value as string })
+      deleteCartTickets()
       toast.success(
         'Tickets successfully purchased. Draw date will be announced shortly.',
       )

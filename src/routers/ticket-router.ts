@@ -1,4 +1,5 @@
 import { TRPCError } from '@trpc/server'
+import { customAlphabet } from 'nanoid'
 
 import { getPayloadClient } from '../get-payload'
 import { TicketValidator } from '../lib/validators/ticket-validator'
@@ -12,13 +13,16 @@ export const ticketRouter = router({
 
       const { user } = ctx
 
+      const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      const nanoid = customAlphabet(alphabet, 14)
+
       try {
         await Promise.all(
           input.map(async ({ ticket_price, contest_id }) => {
             await payload.create({
               collection: 'tickets',
               data: {
-                ticket_number: '',
+                ticket_number: nanoid(),
                 ticket_price,
                 contest_id: { relationTo: 'contest', value: contest_id },
                 purchased_by: { relationTo: 'users', value: user?.id },
