@@ -68,7 +68,7 @@ const LatestContest = ({
   const handleSearchTag = (tag: string) => {
     const search = new URLSearchParams(searchParams)
     search.set('tag', tag.toString())
-    router.push(`${pathname}?${search.toString()}`)
+    router.push(`${pathname}?${search.toString()}#myTab`)
     setFilters({ ...filters, filterByName: tag })
   }
 
@@ -79,7 +79,7 @@ const LatestContest = ({
     } else {
       search.set('title', value)
     }
-    router.push(`${pathname}?${search.toString()}`)
+    router.push(`${pathname}?${search.toString()}#myTab`)
     setFilters({ ...filters, filterByTitle: value })
   }
 
@@ -90,7 +90,7 @@ const LatestContest = ({
     } else {
       search.set('price', value.toString())
     }
-    router.push(`${pathname}?${search.toString()}`)
+    router.push(`${pathname}?${search.toString()}#myTab`)
     setFilters({ ...filters, filterByPrice: value })
     console.log('types', value)
   }
@@ -101,8 +101,8 @@ const LatestContest = ({
       search.delete('select')
     } else {
       search.set('select', value.toString())
-    }
-    router.push(`${pathname}?${search.toString()}`)
+    } 
+    router.push(`${pathname}${search.toString()}`)
     setFilters({ ...filters, filterBySelect:value })
 
   }
@@ -112,7 +112,7 @@ const LatestContest = ({
 
   const handleClearFilters = () => {
     const params = new URLSearchParams()
-    router.push(`${pathname}?${params.toString()}`)
+    router.push(`${pathname}?${params.toString()}#myTab`)
     setFilters({
       filterByName: 'all',
       filterByTitle: '',
@@ -132,11 +132,10 @@ const LatestContest = ({
           <div className='col-lg-12'>
             <div className='contest-wrapper'>
               <div className='contest-wrapper__header pt-120'>
-                <h2 className='contest-wrapper__title'>Latest Contest</h2>
-                <ul
-                  className='nav nav-tabs winner-tab-nav'
-                  id='myTab'
-                  role='tablist'>
+                <h2 className='contest-wrapper__title' id='myTab'>
+                  Latest Contest
+                </h2>
+                <ul className='nav nav-tabs winner-tab-nav' role='tablist'>
                   {allTags?.map((tag: any) => (
                     <li key={tag?.id} className='nav-item' role='presentation'>
                       <button
@@ -183,9 +182,7 @@ const LatestContest = ({
                         <option value={'priceHighToLow'}>
                           Price -- High to Low
                         </option>
-                        <option value={'sortByName'}>
-                          Contest Name
-                        </option>
+                        <option value={'sortByName'}>Contest Name</option>
                       </select>
                     </div>
                   </div>
