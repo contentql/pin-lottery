@@ -1,6 +1,8 @@
 import { TRPCError } from '@trpc/server'
+
 import { getPayloadClient } from '../get-payload'
 import { CartDetailsValidator } from '../lib/validators/cart-details-validator'
+import { UserIdValidator } from '../lib/validators/user-id-validator'
 import { router, userProcedure } from '../trpc/trpc'
 
 export const cartRouter = router({
@@ -40,6 +42,29 @@ export const cartRouter = router({
             each_ticket_price,
             total_price,
             user: { relationTo: 'users', value: user.id },
+          },
+        })
+
+        return { success: true }
+      } catch (err) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      }
+    }),
+
+  deleteTickets: userProcedure
+    .input(UserIdValidator)
+    .mutation(async ({ input }) => {
+      const { id } = input
+
+      const payload = await getPayloadClient()
+
+      try {
+        await payload.delete({
+          collection: 'cart',
+          where: {
+            user: {
+              equals: id,
+            },
           },
         })
 

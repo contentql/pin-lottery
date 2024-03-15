@@ -11,13 +11,13 @@ export interface Config {
     users: User;
     media: Media;
     contest: Contest;
-    contact: Contact;
+    cart: Cart;
+    tickets: Ticket;
     winner: Winner;
+    contact: Contact;
     blog: Blog;
     faq: Faq;
     tags: Tag;
-    cart: Cart;
-    tickets: Ticket;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -197,14 +197,38 @@ export interface Tag {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact".
+ * via the `definition` "cart".
  */
-export interface Contact {
+export interface Cart {
   id: string;
-  name?: string | null;
-  email?: string | null;
-  subject?: string | null;
-  message?: string | null;
+  contest_id: string;
+  contest_no: string;
+  tickets: number;
+  each_ticket_price: number;
+  total_price: number;
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tickets".
+ */
+export interface Ticket {
+  id: string;
+  ticket_number: string;
+  ticket_price: number;
+  contest_id: {
+    relationTo: 'contest';
+    value: string | Contest;
+  };
+  purchased_by: {
+    relationTo: 'users';
+    value: string | User;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -223,6 +247,19 @@ export interface Winner {
     relationTo: 'contest';
     value: string | Contest;
   } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  subject?: string | null;
+  message?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -272,43 +309,6 @@ export interface Faq {
         id?: string | null;
       }[]
     | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cart".
- */
-export interface Cart {
-  id: string;
-  contest_id: string;
-  contest_no: string;
-  tickets: number;
-  each_ticket_price: number;
-  total_price: number;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tickets".
- */
-export interface Ticket {
-  id: string;
-  ticket_numbers?: number | null;
-  ticket_price: number;
-  contest_id: {
-    relationTo: 'contest';
-    value: string | Contest;
-  };
-  purchased_by: {
-    relationTo: 'users';
-    value: string | User;
-  };
   updatedAt: string;
   createdAt: string;
 }

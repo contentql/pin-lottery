@@ -5,9 +5,12 @@ import payment from '/public/images/elements/payment.png'
 import { Cart } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
+import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 const Prices = ({ cartData }: { cartData: Cart[] }) => {
+  const router = useRouter()
+
   const currency = ticketsMetadata?.currency
 
   const total_price_of_cart = cartData?.reduce(
@@ -22,8 +25,18 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     })),
   )
 
+  const { mutate: deleteCartTickets } = trpc.cart.deleteTickets.useMutation({
+    onSuccess: async () => {
+      router.push('/user')
+    },
+    onError: async () => {
+      toast.error('Failed to purchase tickets. Please try again later.')
+    },
+  })
+
   const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
     onSuccess: async () => {
+      deleteCartTickets({ id: cartData?.at(0)?.user?.value as string })
       toast.success(
         'Tickets successfully purchased. Draw date will be announced shortly.',
       )

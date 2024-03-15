@@ -18,6 +18,7 @@ export const ticketRouter = router({
             await payload.create({
               collection: 'tickets',
               data: {
+                ticket_number: '',
                 ticket_price,
                 contest_id: { relationTo: 'contest', value: contest_id },
                 purchased_by: { relationTo: 'users', value: user?.id },

@@ -9,9 +9,10 @@ const Ticket: CollectionConfig = {
   fields: [
     {
       name: 'ticket_number',
-      type: 'number',
+      type: 'text',
       label: 'Ticket Number',
       unique: true,
+      required: true,
     },
     {
       name: 'ticket_price',
