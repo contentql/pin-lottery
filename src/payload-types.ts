@@ -280,12 +280,7 @@ export interface Cart {
  */
 export interface Ticket {
   id: string;
-  ticket_numbers?:
-    | {
-        number?: number | null;
-        id?: string | null;
-      }[]
-    | null;
+  ticket_numbers?: number | null;
   ticket_price: number;
   contest_id: {
     relationTo: 'contest';

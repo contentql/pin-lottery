@@ -3,18 +3,15 @@ import { CollectionConfig } from 'payload/types'
 const Ticket: CollectionConfig = {
   slug: 'tickets',
   labels: { plural: 'tickets', singular: 'ticket' },
+  hooks: {
+    // afterOperation: [generateTicketNumbers],
+  },
   fields: [
     {
-      name: 'ticket_numbers',
-      type: 'array',
-      label: 'Ticket Numbers',
-      fields: [
-        {
-          name: 'number',
-          type: 'number',
-          label: 'Number',
-        },
-      ],
+      name: 'ticket_number',
+      type: 'number',
+      label: 'Ticket Number',
+      unique: true,
     },
     {
       name: 'ticket_price',
