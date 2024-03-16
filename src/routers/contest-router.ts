@@ -41,10 +41,12 @@ export const contestRouter = router({
       const payload = await getPayloadClient()
 
       const { id } = input
+
       const contestById = await payload.findByID({
         collection: 'contest',
-        id:id
+        id: id,
       })
+
       return contestById
     }),
 })

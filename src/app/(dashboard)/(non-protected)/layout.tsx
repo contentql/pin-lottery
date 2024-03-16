@@ -7,8 +7,12 @@ export const metadata: Metadata = {
   description: 'This is dashboard layout',
 }
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardNonProtectedLayout = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   return <LayoutView>{children}</LayoutView>
 }
 
-export default DashboardLayout
+export default DashboardNonProtectedLayout

@@ -30,9 +30,10 @@ const Contest: CollectionConfig = {
                 {
                   name: 'tag',
                   type: 'relationship',
+                  label: 'Tag',
                   relationTo: ['tags'],
                   hasMany: false,
-                  label: 'Tag',
+                  required:true
                 },
               ],
             },
@@ -40,6 +41,7 @@ const Contest: CollectionConfig = {
               name: 'features',
               type: 'richText',
               label: 'Product Features',
+              required: true,
               editor: lexicalEditor({
                 features: ({ defaultFeatures }) => [
                   ...defaultFeatures,
@@ -51,6 +53,7 @@ const Contest: CollectionConfig = {
               name: 'description',
               type: 'richText',
               label: 'Product Description',
+              required: true,
               editor: lexicalEditor({
                 features: ({ defaultFeatures }) => [
                   ...defaultFeatures,
@@ -114,6 +117,7 @@ const Contest: CollectionConfig = {
                   name: 'day_remain',
                   type: 'number',
                   label: 'Days after threshold reached',
+                  required:true
                 },
               ],
             },

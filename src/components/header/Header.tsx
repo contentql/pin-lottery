@@ -1,18 +1,26 @@
+import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import tag from '/public/images/icon/btn/tag.png'
 
-import cartData from '@/data/cartData'
+import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 
 const Header = () => {
   const [open, setOpen] = useState('')
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
+  const [popupVisible, setPopupVisible] = useState(false)
 
-  const { status } = useAuth()
+  const togglePopup = () => {
+    setPopupVisible(!popupVisible)
+  }
+
+  const { data: cartData } = trpc.cart.getCartTickets.useQuery()
+
+  const { status, user } = useAuth()
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text)
@@ -43,8 +51,7 @@ const Header = () => {
       id='gotoTop'
       className={`header ${
         windowHeight > 50 && 'menu-fixed animated fadeInDown'
-      }`}
-    >
+      }`}>
       <div className='header__bottom'>
         <div className='container'>
           <nav className='navbar navbar-expand-xl p-0 align-items-center'>
@@ -108,16 +115,42 @@ const Header = () => {
                     <div className='product__cart'>
                       <Link href='/cart' className='amount__btn'>
                         <i className='las la-shopping-basket'></i>
-                        <span className='cart__num'>{cartData.length}</span>
+                        <span className='cart__num'>{cartData?.length}</span>
                       </Link>
                     </div>
                   )}
                   {status === 'loggedIn' ? (
                     <Link
-                      href='/user'
+                      href=''
                       className='user__btn d-flex align-items-center justify-content-center'
-                    >
-                      <i className='las la-user'></i>
+                      onClick={togglePopup}
+                      style={{
+                        backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
+                      }}>
+                      {popupVisible && (
+                        <div className='popup'>
+                          <div className='popup-arrow'></div>
+                          {/* <div className='popup-btn user-profile'>
+                            <button
+                              className='user__btn d-flex align-items-center justify-content-center'
+                              onClick={togglePopup}
+                              style={{
+                                backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
+                              }}></button>
+                            <p>Text for showing</p>
+                          </div> */}
+                          <Link href='/user-info' className='popup-btn'>
+                            Personal Info
+                          </Link>
+                          <Link href='/user' className='popup-btn'>
+                            My Tickets
+                          </Link>
+                          <Link href='/user-transaction' className='popup-btn'>
+                            Transactions
+                          </Link>
+                          <button className='popup-btn'>Logout</button>
+                        </div>
+                      )}
                     </Link>
                   ) : (
                     <Link href='/login' className='login-btn btn--sm'>

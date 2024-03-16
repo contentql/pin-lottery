@@ -7,8 +7,12 @@ export const metadata: Metadata = {
   description: 'This is marketing layout',
 }
 
-const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
+const MarketingNonProtectedLayout = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   return <LayoutView>{children}</LayoutView>
 }
 
-export default MarketingLayout
+export default MarketingNonProtectedLayout

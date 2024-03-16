@@ -1,263 +1,257 @@
 'use client'
 
 import { createContext, useState } from 'react'
+import { toast } from 'react-toastify'
+
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 
 const AppContext = createContext({})
 
-/* @TODO: These is for lottery one data */
-const lotteryData = [
-  {
-    id: 1,
-    ticket: [],
-  },
-  {
-    id: 2,
-    ticket: [],
-  },
-  {
-    id: 3,
-    ticket: [],
-  },
-]
-
-/* @TODO: These is for lottery two data */
-const lotteryDataTwo = [
-  {
-    id: 1,
-    ticket: [],
-  },
-  {
-    id: 2,
-    ticket: [],
-  },
-]
-
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  /* @TODO: These is for lottery one */
-  const [lotteris, setLotteris] = useState(lotteryData)
-  const [quantity, setQuantity] = useState(3)
+  const minTickets = ticketsMetadata?.minTickets
+  const maxTickets = ticketsMetadata?.maxTickets
 
-  /* @TODO: These is for lottery two */
-  const [lotterisTwo, setLotterisTwo] = useState(lotteryDataTwo)
-  const [quantityTwo, setQuantityTwo] = useState(2)
+  const initialTickets = Array.from({ length: minTickets }, (_, index) => ({
+    id: index + 1,
+    ticket_number: '',
+  }))
 
-  /* @TODO: These is for lottery one */
-  const addTickets = () => {
-    setLotteris(prev => [
-      ...prev,
-      {
-        id: lotteris.length + 1,
-        // ticket: Math.floor(1000000 + Math.random() * 9000000).toString(),
-        ticket: [],
-      },
-    ])
+  const [tickets, setTickets] = useState([...initialTickets])
+  const [quantity, setQuantity] = useState(minTickets)
+
+  const incrementHandleAndAddTicket = () => {
+    const totalTickets = tickets.length
+
+    if (quantity >= maxTickets && totalTickets >= maxTickets) {
+      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
+        toastId: 'max-tickets-toast',
+      })
+
+      return
+    }
+
+    incrementHandle()
+    addTicket()
   }
 
-  const removeTicket = (id: any) => {
-    const data = lotteris.filter(item => item.id !== id)
-    setLotteris(data)
-  }
+  const decrementHandleAndRemoveTicket = (id?: any) => {
+    const totalTickets = tickets.length
 
-  const pickNumbr = (e: any, id: any) => {
-    const data = lotteris.map(obj =>
-      obj.id === id
-        ? {
-            ...obj,
-            ticket: [...obj.ticket, e.target.innerText],
-          }
-        : obj,
-    )
+    if (quantity <= minTickets && totalTickets <= minTickets) {
+      toast.info(`Minimum of ${minTickets} tickets required.`, {
+        toastId: 'min-tickets-toast',
+      })
 
-    setLotteris(data as any)
-  }
+      return
+    }
 
-  const luckyNumbr = (e: any, id: any) => {
-    const data = lotteris.map(obj =>
-      obj.id === id
-        ? {
-            ...obj,
-            ticket: [...obj.ticket, e.target.innerText],
-          }
-        : obj,
-    )
-
-    setLotteris(data as any)
-  }
-
-  const checkActive = (id: any, ele: any, start: any, end: any) => {
-    const findActiveItem = lotteris.find(item => item.id === id)
-
-    return findActiveItem?.ticket
-      .slice(start, end)
-      ?.some(element => element === ele.toString())
+    decrementHandle()
+    id
+      ? removeTicket(id)
+      : setTickets(prev => prev.slice(0, tickets.length - 1))
   }
 
   const incrementHandle = () => {
-    addTickets()
-
-    if (quantity >= 16) {
-      setQuantity(16)
-    } else {
-      setQuantity(prev => prev + 1)
+    if (quantity >= maxTickets) {
+      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
+        toastId: 'max-tickets-toast',
+      })
+      return
     }
+
+    setQuantity(prev => prev + 1)
   }
 
   const decrementHandle = () => {
-    const removeItem = lotteris.slice(0, lotteris.length - 1)
-    setLotteris(removeItem)
-
-    if (quantity <= 0) {
-      setQuantity(0)
-    } else {
-      setQuantity(prev => prev - 1)
+    if (quantity <= minTickets) {
+      toast.info(`Minimum of ${minTickets} tickets required.`, {
+        toastId: 'min-tickets-toast',
+      })
+      return
     }
+
+    setQuantity(prev => prev - 1)
   }
 
-  /* @TODO: These is for lottery two */
-  const addTicketsTwo = () => {
-    setLotterisTwo(prev => [
+  const addTicket = () => {
+    const totalTickets = tickets.length
+
+    if (totalTickets >= maxTickets) {
+      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
+        toastId: 'max-tickets-toast',
+      })
+      return
+    }
+
+    setTickets(prev => [
       ...prev,
       {
-        id: lotterisTwo.length + 1,
-        // ticket: Math.floor(1000000 + Math.random() * 9000000).toString(),
-        ticket: [],
+        id: tickets.length + 1,
+        ticket_number: '',
       },
     ])
   }
 
-  const removeTicketTwo = (id: any) => {
-    const data = lotterisTwo.filter(item => item.id !== id)
-    setLotterisTwo(data)
-  }
+  const addTickets = (numTickets: number) => {
+    setQuantity(numTickets)
 
-  const pickNumbrTwo = (e: any, id: any) => {
-    const data = lotterisTwo.map(obj =>
-      obj.id === id
-        ? {
-            ...obj,
-            ticket: [...obj.ticket, e.target.innerText],
-          }
-        : obj,
-    )
-
-    setLotterisTwo(data as any)
-  }
-
-  const luckyNumbrTwo = (e: any, id: any) => {
-    const data = lotterisTwo.map(obj =>
-      obj.id === id
-        ? {
-            ...obj,
-            ticket: [...obj.ticket, e.target.innerText],
-          }
-        : obj,
-    )
-
-    setLotterisTwo(data as any)
-  }
-
-  const checkActiveTwo = (id: any, ele: any, start: any, end: any) => {
-    const findActiveItem = lotterisTwo.find(item => item.id === id)
-
-    return findActiveItem?.ticket
-      .slice(start, end)
-      ?.some(element => element === ele.toString())
-  }
-
-  const addQuickPickTwo = (id: any) => {
-    let randomValue: any[] = []
-
-    for (let i = 0; i < 5; i++) {
-      const random = (Math.floor(Math.random() * (50 - 1)) + 1).toString()
-      randomValue = [...randomValue, random]
-    }
-
-    const data = lotterisTwo.map(obj =>
-      obj.id === id
-        ? {
-            ...obj,
-            ticket: randomValue,
-          }
-        : obj,
-    )
-
-    setLotterisTwo(data as any)
-  }
-
-  const clearTicketTwo = (id: any) => {
-    const data = lotterisTwo.map(obj =>
-      obj.id === id
-        ? {
-            ...obj,
-            ticket: [],
-          }
-        : obj,
-    )
-
-    setLotterisTwo(data)
-  }
-
-  const clearAllTicketTwo = () => {
-    const data = lotterisTwo.map(obj => ({
-      ...obj,
-      ticket: [],
+    const newTickets = Array.from({ length: numTickets }, (_, index) => ({
+      id: index + 1,
+      ticket_number: '',
     }))
 
-    setLotterisTwo(data)
+    setTickets(newTickets)
   }
 
-  const incrementHandleTwo = () => {
-    addTicketsTwo()
+  const mergeTickets = (numTicketsToAdd: number) => {
+    const totalTickets = tickets.length
 
-    if (quantityTwo >= 16) {
-      setQuantityTwo(16)
-    } else {
-      setQuantityTwo(prev => prev + 1)
+    if (totalTickets + numTicketsToAdd > maxTickets) {
+      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
+        toastId: 'max-tickets-toast',
+      })
+      numTicketsToAdd = maxTickets - totalTickets
     }
+
+    const newTickets = Array.from({ length: numTicketsToAdd }, (_, index) => ({
+      id: totalTickets + index + 1,
+      ticket_number: '',
+    }))
+
+    setQuantity(prev => prev + numTicketsToAdd)
+    setTickets(prevTickets => [...prevTickets, ...newTickets])
   }
 
-  const decrementHandleTwo = () => {
-    const removeItem = lotterisTwo.slice(0, lotterisTwo.length - 1)
-    setLotterisTwo(removeItem)
+  const removeTicket = (id: any) => {
+    const totalTickets = tickets.length
 
-    if (quantityTwo <= 0) {
-      setQuantityTwo(0)
-    } else {
-      setQuantityTwo(prev => prev - 1)
+    if (totalTickets <= minTickets) {
+      toast.info(`Minimum of ${minTickets} tickets required.`, {
+        toastId: 'min-tickets-toast',
+      })
+      return
     }
+
+    const data = tickets
+      .filter(ticket => ticket.id !== id)
+      .map((ticket, idx) => ({ ...ticket, id: idx + 1 }))
+    setTickets(data)
   }
+
+  const removeAllTickets = () => {
+    setQuantity(1)
+    setTickets(prev => prev.slice(0, 1))
+  }
+
+  const removeAllTicketsWithToast = () => {
+    toast.info(`Minimum of ${minTickets} tickets required.`, {
+      toastId: 'min-tickets-toast',
+    })
+
+    setQuantity(1)
+    setTickets(prev => prev.slice(0, 1))
+  }
+
+  // const pickNumber = (e: any, id: any) => {
+  //   const data = tickets.map(obj =>
+  //     obj.id === id
+  //       ? {
+  //           ...obj,
+  //           numbers: [...obj.numbers, e.target.innerText],
+  //         }
+  //       : obj,
+  //   )
+
+  //   setTickets(data as any)
+  // }
+
+  // const luckyNumber = (e: any, id: any) => {
+  //   const data = tickets.map(obj =>
+  //     obj.id === id
+  //       ? {
+  //           ...obj,
+  //           numbers: [...obj.numbers, e.target.innerText],
+  //         }
+  //       : obj,
+  //   )
+
+  //   setTickets(data as any)
+  // }
+
+  // const checkActive = (id: any, ele: any, start: any, end: any) => {
+  //   const findActiveItem = tickets.find(item => item.id === id)
+
+  //   return findActiveItem?.numbers
+  //     .slice(start, end)
+  //     ?.some(element => element === ele.toString())
+  // }
+
+  // const addQuickPick = (id: any) => {
+  //   let randomValue: any[] = []
+
+  //   for (let i = 0; i < 5; i++) {
+  //     const random = (Math.floor(Math.random() * (50 - 1)) + 1).toString()
+  //     randomValue = [...randomValue, random]
+  //   }
+
+  //   const data = tickets.map(obj =>
+  //     obj.id === id
+  //       ? {
+  //           ...obj,
+  //           numbers: randomValue,
+  //         }
+  //       : obj,
+  //   )
+
+  //   setTickets(data as any)
+  // }
+
+  // const clearNumbers = (id: any) => {
+  //   const data = tickets.map(obj =>
+  //     obj.id === id
+  //       ? {
+  //           ...obj,
+  //           numbers: [],
+  //         }
+  //       : obj,
+  //   )
+
+  //   setTickets(data)
+  // }
+
+  // const clearAllNumbers = () => {
+  //   const data = tickets.map(obj => ({
+  //     ...obj,
+  //     numbers: [],
+  //   }))
+
+  //   setTickets(data)
+  // }
 
   return (
     <AppContext.Provider
       value={{
+        quantity,
+        tickets,
+        setQuantity,
+        setTickets,
+        incrementHandleAndAddTicket,
+        decrementHandleAndRemoveTicket,
         incrementHandle,
         decrementHandle,
+        addTicket,
         addTickets,
+        mergeTickets,
         removeTicket,
-        pickNumbr,
-        luckyNumbr,
-        checkActive,
-        setLotteris,
-        lotteris,
-        quantity,
-
-        /* lottery two */
-        incrementHandleTwo,
-        decrementHandleTwo,
-        addTicketsTwo,
-        removeTicketTwo,
-        pickNumbrTwo,
-        luckyNumbrTwo,
-        checkActiveTwo,
-        setLotterisTwo,
-        addQuickPickTwo,
-        clearTicketTwo,
-        clearAllTicketTwo,
-        setQuantityTwo,
-        quantityTwo,
-        lotterisTwo,
-      }}
-    >
+        removeAllTickets,
+        removeAllTicketsWithToast,
+        // pickNumber,
+        // luckyNumber,
+        // checkActive,
+        // addQuickPick,
+        // clearNumbers,
+        // clearAllNumbers,
+      }}>
       {children}
     </AppContext.Provider>
   )

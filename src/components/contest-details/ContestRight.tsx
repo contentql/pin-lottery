@@ -1,15 +1,22 @@
 import { AppContext } from '@/context/context'
 import { Contest } from '@/payload-types'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 
 const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
-  const { incrementHandle, decrementHandle, quantity, setQuantity }: any =
-    useContext(AppContext)
+  const {
+    incrementHandleAndAddTicket,
+    decrementHandleAndRemoveTicket,
+    quantity,
+    setQuantity,
+  }: any = useContext(AppContext)
 
   const pathname = usePathname()
+
+  const currency = ticketsMetadata?.currency
 
   return (
     <div className='contest-cart__right'>
@@ -29,7 +36,10 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
         <p>Only 12045 remaining!</p>
       </div> */}
       <div className='ticket-price'>
-        <span className='amount'>{contestDetails?.ticket_price}</span>
+        <span className='amount'>
+          {currency}
+          {contestDetails?.ticket_price}
+        </span>
         <small>Per ticket</small>
       </div>
       <div className='d-flex flex-wrap align-items-center mb-30'>
@@ -39,22 +49,17 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
             <input
               type='number'
               value={quantity}
-              // defaultValue={quantity
               onChange={() => setQuantity(quantity)}
             />
             <div className='quantity-nav'>
               <div
-                className={`quantity-button ${quantity <= 0 && 'pe-none'}`}
-                onClick={decrementHandle}
-              >
+                className={`quantity-button`}
+                onClick={() => decrementHandleAndRemoveTicket()}>
                 <i className='las la-minus'></i>
               </div>
               <div
-                className={`quantity-button quantity-up ${
-                  quantity >= 16 && 'pe-none'
-                }`}
-                onClick={incrementHandle}
-              >
+                className={`quantity-button quantity-up`}
+                onClick={() => incrementHandleAndAddTicket()}>
                 <i className='las la-plus'></i>
               </div>
             </div>
@@ -62,9 +67,8 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
         </div>
         <div className='mt-sm-0 mt-3'>
           <Link
-            href={`${pathname}/lottery-details`}
-            className='cmn-btn style--three'
-          >
+            href={`${pathname}/ticket-details`}
+            className='cmn-btn style--three'>
             buy tickets
           </Link>
         </div>

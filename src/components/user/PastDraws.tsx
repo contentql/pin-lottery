@@ -1,8 +1,9 @@
 import { BsChevronDown } from 'react-icons/bs'
 
-import { postDrawData } from '@/data/userData'
+import { Contest, Ticket } from '@/payload-types'
+import { splitTicketNumber } from '@/utils/split-ticket-number'
 
-const PastDraws = () => {
+const PastDraws = ({ ticketsData }: { ticketsData: Ticket[] }) => {
   return (
     <div className='past-draw-wrapper'>
       <h3 className='title'>Past Draws</h3>
@@ -17,27 +18,32 @@ const PastDraws = () => {
             </tr>
           </thead>
           <tbody>
-            {postDrawData.map(singleData => (
-              <tr key={singleData.id}>
+            {ticketsData?.map(ticket => (
+              <tr key={ticket?.id}>
                 <td>
-                  <span className='date'>{singleData.draw}</span>
+                  <span className='date'>
+                    {new Date().toISOString().split('T')[0]}
+                  </span>
                 </td>
                 <td>
-                  <span className='contest-no'>{singleData.contest_no}</span>
+                  <span className='contest-no'>
+                    {(ticket?.contest_id?.value as Contest)?.contest_no}
+                  </span>
                 </td>
                 <td>
                   <ul
                     className={`number-list ${
-                      singleData.status ? 'win-list' : ''
-                    }`}
-                  >
-                    {singleData.result.split('').map((itm, i) => (
-                      <li key={i}>{itm}</li>
-                    ))}
+                      ticket?.win_status ? 'win-list' : ''
+                    }`}>
+                    {splitTicketNumber(ticket?.ticket_number).map(
+                      (num: string, idx: number) => (
+                        <li key={idx}>{num}</li>
+                      ),
+                    )}
                   </ul>
                 </td>
                 <td>
-                  {singleData.status ? (
+                  {ticket?.win_status ? (
                     <span className='win'>Win</span>
                   ) : (
                     <span className='fail'>No Win</span>
@@ -51,8 +57,7 @@ const PastDraws = () => {
       <div className='load-more'>
         <button
           type='button'
-          className='d-flex align-items-center justify-content-lg-center gap-1'
-        >
+          className='d-flex align-items-center justify-content-lg-center gap-1'>
           Show More Lotteries <BsChevronDown />
         </button>
       </div>

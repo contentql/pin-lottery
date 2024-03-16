@@ -9,21 +9,23 @@ import { useState } from 'react'
 import { trpc } from '../trpc/client'
 
 const ContestView = () => {
-const searchParams=useSearchParams()
+  const searchParams = useSearchParams()
   //filters
   const [filters, setFilters] = useState({
     filterByName: searchParams?.get('tag') ? searchParams?.get('tag') : 'all',
     filterByTitle: searchParams?.get('title') ? searchParams?.get('title') : '',
+    filterByPrice: searchParams?.get('price') ? searchParams?.get('price') : 0,
+    filterBySelect: searchParams?.get('select') ? searchParams?.get('select') : 0,
   })
 
   // getting all contests
 
   const { data: contestDetails, isLoading } =
     trpc.contest.getContests.useQuery()
-  
+
   //getting tags details
 
-  const {data:allTags}=trpc.public.getTags.useQuery()
+  const { data: allTags } = trpc.public.getTags.useQuery()
 
   console.log('tags setting', allTags)
   return (
@@ -33,8 +35,7 @@ const searchParams=useSearchParams()
         <Banner
           breadcrumb={[
             ['Home', '/'],
-            ['Lottery', '/'],
-            ['Contest', '/'],
+            ['Contest', '/contest'],
           ]}
         />
       </div>

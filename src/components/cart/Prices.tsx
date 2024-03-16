@@ -2,7 +2,55 @@ import Image from 'next/image'
 
 import payment from '/public/images/elements/payment.png'
 
-const Prices = () => {
+import { Cart } from '@/payload-types'
+import { trpc } from '@/trpc/client'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+
+const Prices = ({ cartData }: { cartData: Cart[] }) => {
+  const router = useRouter()
+
+  const currency = ticketsMetadata?.currency
+
+  const total_price_of_cart = cartData?.reduce(
+    (acc, cart) => acc + cart?.total_price,
+    0,
+  )
+
+  const arrayOfTicketsWithPrices = cartData?.flatMap(item =>
+    Array.from({ length: item.tickets }, () => ({
+      ticket_price: item.each_ticket_price,
+      contest_id: item.contest_id,
+    })),
+  )
+
+  const { mutate: deleteCartTickets } =
+    trpc.cart.deleteTicketsFromCart.useMutation({
+      onSuccess: async () => {
+        router.push('/user')
+      },
+      onError: async () => {
+        toast.error('Failed to empty cart.')
+      },
+    })
+
+  const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
+    onSuccess: async () => {
+      deleteCartTickets()
+      toast.success(
+        'Tickets successfully purchased. Draw date will be announced shortly.',
+      )
+    },
+    onError: async () => {
+      toast.error('Failed to purchase tickets. Please try again later.')
+    },
+  })
+
+  const handlePurchase = () => {
+    createTicketsMutation(arrayOfTicketsWithPrices)
+  }
+
   return (
     <div className='col-lg-4 mt-lg-0 mt-4'>
       <div className='checkout-wrapper'>
@@ -11,26 +59,40 @@ const Prices = () => {
         </div>
         <div className='checkout-wrapper__body'>
           <ul className='price'>
-            <li>
-              <div className='left'>
-                <h4 className='caption'>Ticket Price</h4>
-                <span>(8 tickets X $ 4.99)</span>
-              </div>
-              <div className='right'>
-                <span className='price'>$39.92</span>
-              </div>
-            </li>
+            {cartData?.map(cart => (
+              <li key={cart?.id}>
+                <div className='left'>
+                  <h4 className='caption'>Ticket Price - {cart?.contest_no}</h4>
+                  <span>
+                    ({cart?.tickets} tickets X {currency}
+                    {cart?.each_ticket_price})
+                  </span>
+                </div>
+                <div className='right'>
+                  <span className='price'>
+                    {currency}
+                    {cart?.total_price}
+                  </span>
+                </div>
+              </li>
+            ))}
             <li>
               <div className='left'>
                 <h4 className='caption'>Total</h4>
               </div>
               <div className='right'>
-                <span className='price'>$39.92</span>
+                <span className='price'>
+                  {currency}
+                  {total_price_of_cart}
+                </span>
               </div>
             </li>
           </ul>
           <div className='checkout-wrapper__btn'>
-            <button type='submit' className='cmn-btn'>
+            <button
+              type='button'
+              className='cmn-btn'
+              onClick={() => handlePurchase()}>
               buy tickets
             </button>
           </div>

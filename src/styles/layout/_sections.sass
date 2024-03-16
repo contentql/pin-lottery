@@ -226,12 +226,12 @@
   &:hover 
     .contest-card__thumb 
       img 
-        -webkit-animation-name: zoomIn
-        animation-name: zoomIn
-        -webkit-animation-duration: 1.5s
-        animation-duration: 1.5s
+        -webkit-animation-name: scaleUp
+        animation-name: scaleUp
+        -webkit-animation-duration: 1s
+        animation-duration: 1s
         -webkit-animation-fill-mode: both
-        animation-fill-mode: both
+        
   .item-link 
     position: absolute
     top: 0
@@ -350,6 +350,14 @@
     transform: scale3d(0.3, 0.3, 0.3)
   50%
     opacity: 1
+
++keyframes (scaleUp) 
+    from 
+      -webkit-transform: scale(1)
+      transform: scale(1)
+    to 
+      -webkit-transform: scale(1.1)
+
 
 .contest-wrapper 
   position: relative 
@@ -750,8 +758,8 @@
       @media (max-width: 991px)
         justify-content: flex-start
       input 
-        width: 36px
-        min-height: 36px
+        width: 40px
+        min-height: 40px
         background-image: linear-gradient( 320deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
         background-image: -moz-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
         background-image: -moz-linear-gradient( 135deg, rgb(177,34,230) 0%, rgb(255,99,222) 100%)
@@ -1947,6 +1955,7 @@
 .lottery-single 
   background-color: #5a4bcc
   position: relative
+  +border-radius(10px)
   &:hover 
     .lottery-single__close 
       opacity: 1 
@@ -1969,6 +1978,7 @@
     +transform(scale(0.5))
     +transition(all 0.3s)
   &__header 
+    +border-radius(10px)
     background-color: #4939c1
     padding: 20px 20px
     .titcket-number 
@@ -2014,7 +2024,7 @@
       justify-content: center
       align-items: center
       +border-radius(50%)
-      margin: 3px
+      margin: 6px
       &.active 
         background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
         background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
@@ -2088,8 +2098,8 @@
   .sub-total-price 
     padding-bottom: 20px
   .total-price 
-    padding-top: 20px
-    border-top: 1px solid #201456
+    //padding-top: 20px
+    //border-top: 1px solid #201456
     p, span 
       color: #ffffff
 .pick-lottery-package 
@@ -2159,6 +2169,8 @@
   &__body 
     background-color: #5a4bcc
     padding: 20px 20px
+    .tickets
+      margin-bottom: 30px
     .single-row 
       +d-flex 
       justify-content: space-between
@@ -3265,8 +3277,8 @@
         box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
         border: none
     li 
-      width: 36px
-      height: 36px
+      width: 40px
+      height: 40px
       border: 1px solid rgba(#ffffff, 0.3)
       background-color: #5a4bcc
       +border-radius(50px)

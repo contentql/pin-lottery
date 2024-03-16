@@ -7,12 +7,15 @@ import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
 import Blog from './collections/Blog'
+import Cart from './collections/Cart'
 import Contact from './collections/Contact'
 import Contest from './collections/Contest'
 import Faq from './collections/Faq'
 import { Media } from './collections/Media'
 import Tags from './collections/Tags'
+import Ticket from './collections/Ticket'
 import Users from './collections/Users'
+import Winner from './collections/Winner'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import { s3StorageAdapter } from './plugins/s3'
@@ -29,7 +32,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
-  collections: [Users, Media, Contest, Contact, Blog, Faq, Tags],
+  collections: [Users, Media, Contest, Cart, Ticket, Winner, Contact, Blog, Faq, Tags],
   routes: {
     admin: '/admin',
   },

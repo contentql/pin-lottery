@@ -10,10 +10,12 @@ const Faq: CollectionConfig = {
         {
           name: 'question',
           type: 'text',
+          required:true
         },
         {
           name: 'answer',
           type: 'text',
+          required:true
         },
       ],
     },

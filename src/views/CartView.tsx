@@ -5,9 +5,12 @@ import Image from 'next/image'
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
 
 import TotallCart from '@/components/cart/TotallCart'
-import Banner from '@/components/common/Banner'
+import { Cart } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 const CartView = () => {
+  const { data: cartData } = trpc.cart.getCartTickets.useQuery()
+
   return (
     <>
       {/* Banner Section here */}
@@ -15,7 +18,7 @@ const CartView = () => {
         <div className='bg-shape'>
           <Image src={inner_hero_shape} alt='inner_hero_shape' />
         </div>
-        <Banner
+        {/* <Banner
           breadcrumb={[
             ['Home', '/'],
             ['Lottery', '/'],
@@ -23,11 +26,11 @@ const CartView = () => {
             ['Pick your Lottery Number', '/'],
             ['My Cart', '/'],
           ]}
-        />
+        /> */}
       </div>
 
       {/* Total Cart Section here */}
-      <TotallCart />
+      <TotallCart cartData={cartData as Cart[]} />
     </>
   )
 }
