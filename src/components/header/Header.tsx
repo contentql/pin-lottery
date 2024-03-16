@@ -1,10 +1,10 @@
+import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import tag from '/public/images/icon/btn/tag.png'
 
-import cartData from '@/data/cartData'
 import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 
@@ -17,6 +17,8 @@ const Header = () => {
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
   }
+
+  const { data: cartData } = trpc.cart.getCartTickets.useQuery()
 
   const { status, user } = useAuth()
   const handleOpen = (e: any) => {
@@ -113,7 +115,7 @@ const Header = () => {
                     <div className='product__cart'>
                       <Link href='/cart' className='amount__btn'>
                         <i className='las la-shopping-basket'></i>
-                        <span className='cart__num'>{cartData.length}</span>
+                        <span className='cart__num'>{cartData?.length}</span>
                       </Link>
                     </div>
                   )}
