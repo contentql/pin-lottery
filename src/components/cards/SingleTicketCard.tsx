@@ -38,8 +38,8 @@ const SingleTicketCard = ({
             </div>
             <ul className='lottery-single__selected-number'>
               {[...Array(7)].map((_, i) => (
-                <li key={i} className={ticket?.numbers[i] ? 'active' : ''}>
-                  {ticket?.numbers[i] || '00'}
+                <li key={i} className=''>
+                  00
                 </li>
               ))}
             </ul>
