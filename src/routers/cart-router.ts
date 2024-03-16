@@ -13,11 +13,8 @@ export const cartRouter = router({
     try {
       const tickets = await payload.find({
         collection: 'cart',
-        where: {
-          'user.value': {
-            equals: user?.id,
-          },
-        },
+        user,
+        overrideAccess: false,
       })
 
       return tickets.docs

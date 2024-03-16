@@ -24,6 +24,27 @@ const Ticket: CollectionConfig = {
       required: true,
     },
     {
+      name: 'draw_status',
+      type: 'checkbox',
+      label: 'Draw Status',
+      defaultValue: false,
+    },
+    {
+      name: 'win_status',
+      type: 'checkbox',
+      label: 'Win Status',
+      defaultValue: false,
+      admin: {
+        condition: data => {
+          if (data.draw_status) {
+            return true
+          }
+
+          return false
+        },
+      },
+    },
+    {
       name: 'contest_id',
       type: 'relationship',
       label: 'Contest Id',

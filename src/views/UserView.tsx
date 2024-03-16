@@ -2,8 +2,12 @@
 
 import LeftSideMenu from '@/components/common/LeftSideMenu'
 import RightSide from '@/components/user/RightSide'
+import { Ticket } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 const UserView = () => {
+  const { data: ticketsData } = trpc.ticket.getTickets.useQuery()
+
   return (
     <>
       <div className='inner-hero-section style--five'></div>
@@ -15,7 +19,7 @@ const UserView = () => {
             <LeftSideMenu />
 
             {/* Right side  */}
-            <RightSide />
+            <RightSide ticketsData={ticketsData as Ticket[]} />
           </div>
         </div>
       </div>

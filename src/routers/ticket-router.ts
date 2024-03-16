@@ -14,11 +14,9 @@ export const ticketRouter = router({
     try {
       const tickets = await payload.find({
         collection: 'tickets',
-        where: {
-          'purchased_by.value': {
-            equals: user?.id,
-          },
-        },
+        user,
+        overrideAccess: false,
+        depth: 1,
       })
 
       return tickets.docs
