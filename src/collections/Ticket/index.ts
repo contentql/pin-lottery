@@ -1,10 +1,13 @@
 import { CollectionConfig } from 'payload/types'
+import { isAdminOrSelf } from './access/isAdminOrSelf'
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
   labels: { plural: 'tickets', singular: 'ticket' },
-  hooks: {
-    // afterOperation: [generateTicketNumbers],
+  access: {
+    read: isAdminOrSelf,
+    update: isAdminOrSelf,
+    delete: isAdminOrSelf,
   },
   fields: [
     {

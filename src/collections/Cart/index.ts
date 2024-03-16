@@ -1,32 +1,13 @@
 import { CollectionConfig } from 'payload/types'
+import { isAdminOrSelf } from './access/isAdminOrSelf'
 
 const Cart: CollectionConfig = {
   slug: 'cart',
   labels: { plural: 'carts', singular: 'cart' },
   access: {
-    read: ({ req: { user } }) => {
-      if (user) {
-        return {
-          'user.value': {
-            equals: user.id,
-          },
-        }
-      }
-
-      return false
-    },
-
-    delete: ({ req: { user } }) => {
-      if (user) {
-        return {
-          'user.value': {
-            equals: user.id,
-          },
-        }
-      }
-
-      return false
-    },
+    read: isAdminOrSelf,
+    update: isAdminOrSelf,
+    delete: isAdminOrSelf,
   },
   fields: [
     {

@@ -22,7 +22,7 @@ export const cartRouter = router({
 
       return tickets.docs
     } catch (err) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' })
+      throw new TRPCError({ code: 'BAD_REQUEST' })
     }
   }),
 
@@ -36,6 +36,7 @@ export const cartRouter = router({
         each_ticket_price,
         total_price,
       } = input
+
       const { user } = ctx
 
       const payload = await getPayloadClient()

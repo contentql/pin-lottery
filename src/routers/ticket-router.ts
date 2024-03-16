@@ -6,6 +6,27 @@ import { TicketValidator } from '../lib/validators/ticket-validator'
 import { router, userProcedure } from '../trpc/trpc'
 
 export const ticketRouter = router({
+  getTickets: userProcedure.query(async ({ ctx }) => {
+    const { user } = ctx
+
+    const payload = await getPayloadClient()
+
+    try {
+      const tickets = await payload.find({
+        collection: 'tickets',
+        where: {
+          'purchased_by.value': {
+            equals: user?.id,
+          },
+        },
+      })
+
+      return tickets.docs
+    } catch (err) {
+      throw new TRPCError({ code: 'BAD_REQUEST' })
+    }
+  }),
+
   addTickets: userProcedure
     .input(TicketValidator)
     .mutation(async ({ input, ctx }) => {
