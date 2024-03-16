@@ -33,7 +33,7 @@ export const ticketRouter = router({
 
         return { success: true }
       } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
+        throw new TRPCError({ code: 'BAD_REQUEST' })
       }
     }),
 })

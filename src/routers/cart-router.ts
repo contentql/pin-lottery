@@ -5,11 +5,20 @@ import { CartDetailsValidator } from '../lib/validators/cart-details-validator'
 import { router, userProcedure } from '../trpc/trpc'
 
 export const cartRouter = router({
-  getTickets: userProcedure.query(async () => {
+  getCartTickets: userProcedure.query(async ({ ctx }) => {
+    const { user } = ctx
+
     const payload = await getPayloadClient()
 
     try {
-      const tickets = await payload.find({ collection: 'cart' })
+      const tickets = await payload.find({
+        collection: 'cart',
+        where: {
+          'user.value': {
+            equals: user?.id,
+          },
+        },
+      })
 
       return tickets.docs
     } catch (err) {
@@ -17,7 +26,7 @@ export const cartRouter = router({
     }
   }),
 
-  addTickets: userProcedure
+  addTicketsToCart: userProcedure
     .input(CartDetailsValidator)
     .mutation(async ({ input, ctx }) => {
       const {
@@ -40,17 +49,17 @@ export const cartRouter = router({
             tickets,
             each_ticket_price,
             total_price,
-            user: { relationTo: 'users', value: user.id },
+            user: { relationTo: 'users', value: user?.id },
           },
         })
 
         return { success: true }
       } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
+        throw new TRPCError({ code: 'BAD_REQUEST' })
       }
     }),
 
-  deleteTickets: userProcedure.mutation(async ({ ctx }) => {
+  deleteTicketsFromCart: userProcedure.mutation(async ({ ctx }) => {
     const { user } = ctx
 
     const payload = await getPayloadClient()
@@ -59,11 +68,10 @@ export const cartRouter = router({
       await payload.delete({
         collection: 'cart',
         where: {
-          id: {
-            exists: true,
+          'user.value': {
+            equals: user?.id,
           },
         },
-        user,
       })
 
       return { success: true }

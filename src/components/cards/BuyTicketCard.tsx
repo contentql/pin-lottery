@@ -21,16 +21,18 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
 
   const totalTicketsPrice = totalTickets * ticketPrice
 
-  const { mutate: addTicketsMutation } = trpc.cart.addTickets.useMutation({
-    onSuccess: async () => {
-      toast.success('Successfully tickets are added to cart')
-      removeAllTickets()
-      router.push('/cart')
+  const { mutate: addTicketsMutation } = trpc.cart.addTicketsToCart.useMutation(
+    {
+      onSuccess: async () => {
+        toast.success('Successfully tickets are added to cart')
+        removeAllTickets()
+        router.push('/cart')
+      },
+      onError: async () => {
+        toast.error('Unable to add tickets to cart')
+      },
     },
-    onError: async () => {
-      toast.error('Unable to add tickets to cart')
-    },
-  })
+  )
 
   const handleAddToCart = () => {
     if (status !== 'loggedIn') {

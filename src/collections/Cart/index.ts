@@ -4,13 +4,28 @@ const Cart: CollectionConfig = {
   slug: 'cart',
   labels: { plural: 'carts', singular: 'cart' },
   access: {
-    delete: ({ req, data, id }) => {
-      const { user } = req
+    read: ({ req: { user } }) => {
+      if (user) {
+        return {
+          'user.value': {
+            equals: user.id,
+          },
+        }
+      }
 
-      // if(user.id === data.)
-      // console.log(data, id)
-      // console.log(user)
-      return true
+      return false
+    },
+
+    delete: ({ req: { user } }) => {
+      if (user) {
+        return {
+          'user.value': {
+            equals: user.id,
+          },
+        }
+      }
+
+      return false
     },
   },
   fields: [
@@ -46,8 +61,8 @@ const Cart: CollectionConfig = {
     },
     {
       name: 'user',
-      type: 'relationship',
       label: 'User',
+      type: 'relationship',
       relationTo: ['users'],
       hasMany: false,
       required: true,

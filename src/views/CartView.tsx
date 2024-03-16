@@ -9,7 +9,7 @@ import { Cart } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 
 const CartView = () => {
-  const { data: cartData } = trpc.cart.getTickets.useQuery()
+  const { data: cartData } = trpc.cart.getCartTickets.useQuery()
 
   return (
     <>

@@ -25,14 +25,15 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     })),
   )
 
-  const { mutate: deleteCartTickets } = trpc.cart.deleteTickets.useMutation({
-    onSuccess: async () => {
-      router.push('/user')
-    },
-    onError: async () => {
-      toast.error('Failed to empty cart.')
-    },
-  })
+  const { mutate: deleteCartTickets } =
+    trpc.cart.deleteTicketsFromCart.useMutation({
+      onSuccess: async () => {
+        router.push('/user')
+      },
+      onError: async () => {
+        toast.error('Failed to empty cart.')
+      },
+    })
 
   const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
     onSuccess: async () => {
