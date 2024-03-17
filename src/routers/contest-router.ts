@@ -1,5 +1,6 @@
 import { getPayloadClient } from '../get-payload'
 import { ContestIdValidator } from '../lib/validators/contest-id-validator'
+import { ContestWinnerValidator } from '../lib/validators/contest-winner-validator'
 import { publicProcedure, router } from '../trpc/trpc'
 export const contestRouter = router({
   getContests: publicProcedure.query(async () => {
@@ -16,6 +17,8 @@ export const contestRouter = router({
         tag,
         ticket_price,
         img,
+        contest_status,
+        winner_ticket,
         updatedAt,
         createdAt,
       }) => {
@@ -27,6 +30,8 @@ export const contestRouter = router({
           tag: tag,
           ticket_price: ticket_price,
           img: img,
+          contest_status: contest_status,
+          winner_ticket:winner_ticket,
           updatedAt: updatedAt,
           createdAt: createdAt,
         }
@@ -49,4 +54,21 @@ export const contestRouter = router({
 
       return contestById
     }),
+
+  updateContest: publicProcedure.input(ContestWinnerValidator).mutation(async({input}) => {
+    
+    const {contest_id, contest_status, winner_number } = input
+    
+    const payload = await getPayloadClient();
+
+    await payload.update({
+      collection: 'contest',
+      id: contest_id,
+      data: {
+        contest_status: contest_status,
+        winner_ticket: winner_number
+      },
+    })
+    return {status:"success"}
+  })
 })

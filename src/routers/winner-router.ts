@@ -8,7 +8,7 @@ export const WinnerRouter = router({
             
             const payload = await getPayloadClient()
             
-            await payload.create({
+          const winner=  await payload.create({
               collection: 'winner',
               data: {
                 ticket_number,
@@ -16,7 +16,7 @@ export const WinnerRouter = router({
                 user:{relationTo:'users',value: user_id}
               },
             })
-            return true
+            return { winner: winner }
         }),
     
     getWinners: publicProcedure.query(async() => {

@@ -1,45 +1,59 @@
+import { Contest, Media, User, Winner } from '@/payload-types'
 import Image from 'next/image'
-import mobile_single from '/public/images/mobiles/mobile-single.png'
+import { DateConverter } from '../../utils/date-converter'
+const WinnerCard = ({ winner }:{winner:Winner}) => {
 
-const WinnerCard = ({ winner }: any) => {
-  const {
-    title,
-    draw_at,
-    winning_number,
-    contest_no,
-    winer_img,
-    winning_price_img,
-  } = winner
+  const winning_number = winner?.ticket_number?.match(/.{1,2}/g)
+  
   return (
-    <div className='winner-card mb-30'>
+    <div className='winner-card mb-30 '>
       <div className='winner-card__thumb'>
-        <Image src={mobile_single} alt={title} />
+        <Image
+          src={
+            ((winner?.contest?.value as Contest)?.img as Media)?.url as string
+          }
+          width={200}
+          height={200}
+          alt='2323'
+        />
       </div>
       <div className='winner-card__content'>
         <div className='winner-thumb'>
-          <Image src={winer_img} alt={title} />
+          <Image
+            src={
+              (winner?.user?.value as User)?.image
+                ? (((winner?.user?.value as User)?.image as Media)?.sizes
+                    ?.userProfile?.url as string)
+                : '/images/user/pp.png'
+            }
+            alt=''
+            width={150}
+            height={150}
+          />
         </div>
         <div className='content-top'>
           <div className='left'>
-            <h5>{title}</h5>
+            <h5>{(winner?.contest?.value as Contest)?.title}</h5>
           </div>
           <div className='right'>
             <span>Draw took place on</span>
-            <p>{draw_at}</p>
+            <p>{DateConverter(winner?.createdAt)}</p>
           </div>
         </div>
         <div className='content-bottom'>
           <div className='number-list-wrapper'>
             <p>Winning Numbers:</p>
             <ul className='number-list mt-2'>
-              {winning_number.map((itm: any, i: any) => (
+              {winning_number?.map((itm: any, i: any) => (
                 <li key={i}>{itm}</li>
               ))}
             </ul>
           </div>
           <div className='right'>
             <p>Contest No:</p>
-            <span className='contest-num'>{contest_no}</span>
+            <span className='contest-num'>
+              {(winner?.contest?.value as Contest)?.contest_no}
+            </span>
           </div>
         </div>
       </div>

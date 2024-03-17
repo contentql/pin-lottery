@@ -2,8 +2,9 @@ import { TRPCError } from '@trpc/server'
 import { customAlphabet } from 'nanoid'
 
 import { getPayloadClient } from '../get-payload'
+import { ContestIdValidator } from '../lib/validators/contest-id-validator'
 import { TicketValidator } from '../lib/validators/ticket-validator'
-import { router, userProcedure } from '../trpc/trpc'
+import { publicProcedure, router, userProcedure } from '../trpc/trpc'
 
 export const ticketRouter = router({
   getTickets: userProcedure.query(async ({ ctx }) => {
@@ -55,4 +56,36 @@ export const ticketRouter = router({
         throw new TRPCError({ code: 'BAD_REQUEST' })
       }
     }),
+
+  getTickets: publicProcedure.input(ContestIdValidator).query(async({input}) => {
+    const {id }=input
+    const payload = await getPayloadClient();
+
+   const tickets = await payload.find({
+     collection: 'tickets',
+     where: {
+       'contest_id.value': {
+         equals: id,
+       },
+     },
+   })
+    return tickets?.docs
+  }),
+
+  deleteTickets: publicProcedure.input(ContestIdValidator).mutation(async ({input}) => {
+    
+    const { id } = input
+    
+    const payload = await getPayloadClient()
+    
+    await payload.delete({
+      collection: 'tickets',
+      where: {
+        'contest_id.value': {
+          equals:id
+        }
+      }
+    })
+    return true;
+  })
 })
