@@ -176,6 +176,20 @@ export interface Contest {
   contest_no: string;
   ticket_price: number;
   day_remain: number;
+  zero_sixty?: string | null;
+  top_speed?: string | null;
+  power?: string | null;
+  displacement?: string | null;
+  bhp?: string | null;
+  year?: string | null;
+  processor_cpu?: string | null;
+  ram?: string | null;
+  storage?: string | null;
+  display?: string | null;
+  battery?: string | null;
+  Camera?: string | null;
+  contest_status?: boolean | null;
+  winner_ticket?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -238,7 +252,7 @@ export interface Ticket {
  */
 export interface Winner {
   id: string;
-  ticket_number?: number | null;
+  ticket_number?: string | null;
   user?: {
     relationTo: 'users';
     value: string | User;

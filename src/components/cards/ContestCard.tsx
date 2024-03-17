@@ -30,21 +30,30 @@ const ContestCard = ({ itm }: any) => {
           <p>ticket price</p>
         </div>
       </div>
-      {itm.title !== 'Apple iPhone 15' ? (
-        <div className='contest-card__footer'>
-          <ul className='contest-card__meta'>
-            <li>
-              <i className='las la-clock'></i>
-              <span>{itm.day_remain}d</span>
-            </li>
-            <li>
-              <i className='las la-ticket-alt'></i>
-              <p>tickets available</p>
+      {itm?.contest_status===true ? (
+         <div className='contest-card__footer'>
+          <ul>
+            <li className='footer-card'>
+              <p>Winner is :</p>
+              <p>{itm?.winner_ticket}</p>
             </li>
           </ul>
         </div>
+        // actual fotter
+        // <div className='contest-card__footer'>
+        //   <ul className='contest-card__meta'>
+        //     <li>
+        //       <i className='las la-clock'></i>
+        //       <span>{itm.day_remain}d</span>
+        //     </li>
+        //     <li>
+        //       <i className='las la-ticket-alt'></i>
+        //       <p>tickets available</p>
+        //     </li>
+        //   </ul>
+        // </div>
       ) : (
-        <div className='contest-card__footer'>
+          <div className='contest-card__footer'>
           <ul>
             <li className='footer-card'>
               <i className='las la-ticket-alt'></i>

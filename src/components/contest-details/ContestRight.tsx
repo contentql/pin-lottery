@@ -42,37 +42,44 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
         </span>
         <small>Per ticket</small>
       </div>
-      <div className='d-flex flex-wrap align-items-center mb-30'>
-        <div className='select-quantity'>
-          <span className='caption'>Quantity</span>
-          <div className='quantity'>
-            <input
-              type='number'
-              value={quantity}
-              onChange={() => setQuantity(quantity)}
-            />
-            <div className='quantity-nav'>
-              <div
-                className={`quantity-button`}
-                onClick={() => decrementHandleAndRemoveTicket()}>
-                <i className='las la-minus'></i>
-              </div>
-              <div
-                className={`quantity-button quantity-up`}
-                onClick={() => incrementHandleAndAddTicket()}>
-                <i className='las la-plus'></i>
+      {contestDetails?.contest_status === true ? (
+        <div >
+          <h3 >Winning Ticket Number: </h3>
+          <h2>{ contestDetails?.winner_ticket}</h2>
+        </div>
+      ) : (
+        <div className='d-flex flex-wrap align-items-center mb-30'>
+          <div className='select-quantity'>
+            <span className='caption'>Quantity</span>
+            <div className='quantity'>
+              <input
+                type='number'
+                value={quantity}
+                onChange={() => setQuantity(quantity)}
+              />
+              <div className='quantity-nav'>
+                <div
+                  className={`quantity-button`}
+                  onClick={() => decrementHandleAndRemoveTicket()}>
+                  <i className='las la-minus'></i>
+                </div>
+                <div
+                  className={`quantity-button quantity-up`}
+                  onClick={() => incrementHandleAndAddTicket()}>
+                  <i className='las la-plus'></i>
+                </div>
               </div>
             </div>
           </div>
+          <div className='mt-sm-0 mt-3'>
+            <Link
+              href={`${pathname}/ticket-details`}
+              className='cmn-btn style--three'>
+              buy tickets
+            </Link>
+          </div>
         </div>
-        <div className='mt-sm-0 mt-3'>
-          <Link
-            href={`${pathname}/ticket-details`}
-            className='cmn-btn style--three'>
-            buy tickets
-          </Link>
-        </div>
-      </div>
+      )}
       <ul className='social-links align-items-center'>
         <li>Share :</li>
         <li>

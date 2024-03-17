@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const WinnerDetailsValidator = z.object({
-    ticket_number: z.number(),
+    ticket_number: z.string(),
     user_id: z.string(),
     contest_id: z.string(),
 })
