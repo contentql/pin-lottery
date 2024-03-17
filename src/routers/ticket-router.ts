@@ -57,7 +57,7 @@ export const ticketRouter = router({
       }
     }),
 
-  getTickets: publicProcedure.input(ContestIdValidator).query(async({input}) => {
+  getContestTickets: publicProcedure.input(ContestIdValidator).query(async({input}) => {
     const {id }=input
     const payload = await getPayloadClient();
 

@@ -18,7 +18,7 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
   const { data: contestDetails ,refetch} = trpc.contest.getContestById.useQuery({
     id: contestId,
   })
-    const { data } = trpc.ticket.getTickets.useQuery(
+    const { data } = trpc.ticket.getContestTickets.useQuery(
       {
         id: contestId,
       },
