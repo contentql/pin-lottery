@@ -6,7 +6,7 @@ import { Contest, Media } from '@/payload-types'
 import { isThresholdReached } from '@/utils/is-threshold-reached'
 
 import { AppContext } from '@/context/context'
-import { useContext } from 'react'
+import { MouseEventHandler, useContext } from 'react'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
 
@@ -22,7 +22,13 @@ interface ContestDetails extends Contest {
   description_html: string
 }
 
-const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
+const ContestBody = ({
+  contestDetails,
+  handleDrawTickets,
+}: {
+  contestDetails: Contest
+  handleDrawTickets: MouseEventHandler<HTMLButtonElement>
+}) => {
   const { tickets }: any = useContext(AppContext)
 
   const totalTicketsSold = tickets?.length
@@ -52,6 +58,10 @@ const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
           )}
 
           <div className='col-lg-12'>
+            {contestDetails?.contest_status === false && (
+              <button onClick={handleDrawTickets}>draw tickets now</button>
+            )}
+
             <div className='contest-cart'>
               {/* Context slider for one */}
               <ContestSlider
@@ -62,7 +72,6 @@ const ContestBody = ({ contestDetails }: { contestDetails: Contest }) => {
               <ContestRight contestDetails={contestDetails} />
             </div>
           </div>
-
           <div className='col-lg-10'>
             <div className='contest-description'>
               <VehicleOverview

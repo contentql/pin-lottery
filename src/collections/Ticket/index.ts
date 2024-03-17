@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
+import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
@@ -59,6 +60,9 @@ const Ticket: CollectionConfig = {
       relationTo: ['users'],
       hasMany: false,
       required: true,
+      hooks: {
+        beforeChange: [assignUserId],
+      },
     },
   ],
 }

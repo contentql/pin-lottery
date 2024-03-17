@@ -15,10 +15,12 @@ import TicketCheckCard from '@/components/cards/TicketCheckCard'
 import WinnerCard from '@/components/cards/WinnerCard'
 
 import winnerData from '@/data/winnerData'
+import { Winner } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 const LatestWinner = () => {
   const [winners, setWinners] = useState(winnerData)
-
+  const { data: contestWinners} =trpc.winner.getWinners.useQuery()
   return (
     <section className='latest-winner-section position-relative pt-120 pb-120'>
       <div className='el-1'>
@@ -50,8 +52,7 @@ const LatestWinner = () => {
             <ul
               className='nav nav-tabs winner-tab-nav'
               id='winnerTab'
-              role='tablist'
-            >
+              role='tablist'>
               <li className='nav-item' role='presentation'>
                 <button
                   className='nav-link active'
@@ -60,8 +61,7 @@ const LatestWinner = () => {
                   data-bs-target='#dream'
                   role='tab'
                   aria-controls='dream'
-                  aria-selected='true'
-                >
+                  aria-selected='true'>
                   <span className='icon-thumb'>
                     <Image src={winner_tab_1} alt='image' />
                   </span>
@@ -76,8 +76,7 @@ const LatestWinner = () => {
                   data-bs-target='#bike'
                   role='tab'
                   aria-controls='bike'
-                  aria-selected='false'
-                >
+                  aria-selected='false'>
                   <span className='icon-thumb'>
                     <Image src={winner_tab_2} alt='image' />
                   </span>
@@ -92,8 +91,7 @@ const LatestWinner = () => {
                   data-bs-target='#watch'
                   role='tab'
                   aria-controls='watch'
-                  aria-selected='false'
-                >
+                  aria-selected='false'>
                   <span className='icon-thumb'>
                     <Image src={winner_tab_3} alt='image' />
                   </span>
@@ -108,8 +106,7 @@ const LatestWinner = () => {
                   data-bs-target='#laptop'
                   role='tab'
                   aria-controls='laptop'
-                  aria-selected='false'
-                >
+                  aria-selected='false'>
                   <span className='icon-thumb'>
                     <Image src={winner_tab_4} alt='image' />
                   </span>
@@ -124,8 +121,7 @@ const LatestWinner = () => {
                   data-bs-target='#money'
                   role='tab'
                   aria-controls='money'
-                  aria-selected='false'
-                >
+                  aria-selected='false'>
                   <span className='icon-thumb'>
                     <Image src={winner_tab_5} alt='image' />
                   </span>
@@ -138,8 +134,7 @@ const LatestWinner = () => {
                 className='tab-pane fade show active'
                 id='dream'
                 role='tabpanel'
-                aria-labelledby='dream-tab'
-              >
+                aria-labelledby='dream-tab'>
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}
@@ -148,8 +143,8 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.map(winner => (
-                      <WinnerCard key={winner.id} winner={winner} />
+                    {contestWinners?.map(winner => (
+                      <WinnerCard key={winner.id} winner={winner as Winner} />
                     ))}
 
                     <div className='btn-grp'>
@@ -165,8 +160,7 @@ const LatestWinner = () => {
                 className='tab-pane fade'
                 id='bike'
                 role='tabpanel'
-                aria-labelledby='bike-tab'
-              >
+                aria-labelledby='bike-tab'>
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}
@@ -175,9 +169,9 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.map(winner => (
+                    {/* {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
-                    ))}
+                    ))} */}
 
                     <div className='btn-grp'>
                       <Link href='winner' className='btn-border'>
@@ -192,8 +186,7 @@ const LatestWinner = () => {
                 className='tab-pane fade'
                 id='watch'
                 role='tabpanel'
-                aria-labelledby='watch-tab'
-              >
+                aria-labelledby='watch-tab'>
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}
@@ -202,9 +195,9 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.map(winner => (
+                    {/* {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
-                    ))}
+                    ))} */}
 
                     <div className='btn-grp'>
                       <Link href='/winner' className='btn-border'>
@@ -219,8 +212,7 @@ const LatestWinner = () => {
                 className='tab-pane fade'
                 id='laptop'
                 role='tabpanel'
-                aria-labelledby='laptop-tab'
-              >
+                aria-labelledby='laptop-tab'>
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}
@@ -229,9 +221,9 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.map(winner => (
+                    {/* {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
-                    ))}
+                    ))} */}
 
                     <div className='btn-grp'>
                       <Link href='winner' className='btn-border'>
@@ -246,8 +238,7 @@ const LatestWinner = () => {
                 className='tab-pane fade'
                 id='money'
                 role='tabpanel'
-                aria-labelledby='money-tab'
-              >
+                aria-labelledby='money-tab'>
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}
@@ -255,9 +246,9 @@ const LatestWinner = () => {
                   </div>
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
-                    {winners.map(winner => (
+                    {/* {winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner} />
-                    ))}
+                    ))} */}
 
                     <div className='btn-grp'>
                       <Link href='/winner' className='btn-border'>

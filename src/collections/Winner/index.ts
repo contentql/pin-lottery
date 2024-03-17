@@ -5,7 +5,7 @@ const Winner: CollectionConfig = {
     useAsTitle: 'ticket_number',
   },
   fields: [
-    { name: 'ticket_number', type: 'number', label: 'Ticket Number' },
+    { name: 'ticket_number', type: 'text', label: 'Ticket Number' },
     {
       name: 'user',
       type: 'relationship',
