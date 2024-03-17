@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
+import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Cart: CollectionConfig = {
   slug: 'cart',
@@ -47,6 +48,9 @@ const Cart: CollectionConfig = {
       relationTo: ['users'],
       hasMany: false,
       required: true,
+      hooks: {
+        beforeChange: [assignUserId],
+      },
     },
   ],
 }
