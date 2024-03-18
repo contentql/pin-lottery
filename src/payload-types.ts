@@ -189,7 +189,10 @@ export interface Contest {
   battery?: string | null;
   Camera?: string | null;
   contest_status?: boolean | null;
-  winner_ticket?: string | null;
+  winner_ticket?: {
+    relationTo: 'winner';
+    value: string | Winner;
+  } | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -206,6 +209,24 @@ export interface Tag {
   id: string;
   tag: string;
   img: string | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "winner".
+ */
+export interface Winner {
+  id: string;
+  ticket_number?: string | null;
+  user?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
+  contest?: {
+    relationTo: 'contest';
+    value: string | Contest;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -245,24 +266,6 @@ export interface Ticket {
     relationTo: 'users';
     value: string | User;
   };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "winner".
- */
-export interface Winner {
-  id: string;
-  ticket_number?: string | null;
-  user?: {
-    relationTo: 'users';
-    value: string | User;
-  } | null;
-  contest?: {
-    relationTo: 'contest';
-    value: string | Contest;
-  } | null;
   updatedAt: string;
   createdAt: string;
 }

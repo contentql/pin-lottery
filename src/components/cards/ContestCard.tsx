@@ -1,17 +1,18 @@
+import { Contest, Media, Winner } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaRegHeart } from 'react-icons/fa'
 
-const ContestCard = ({ itm }: any) => {
+const ContestCard = ({ itm }: {itm:Contest}) => {
   return (
     <div className='contest-card'>
       <Link href={`/contest/${itm.id}`} className='item-link'></Link>
       <div className='contest-card__thumb'>
         <Image
-          src={itm.img.url || '/'}
+          src={(itm.img as Media).url || '/'}
           alt={itm.title}
-          width={itm?.img?.width}
-          height={itm?.img?.height}
+          width={(itm?.img as Media)?.width || 100}
+          height={(itm?.img as Media)?.height || 100}
         />
         <a href='#0' className='action-icon'>
           <FaRegHeart />
@@ -35,7 +36,7 @@ const ContestCard = ({ itm }: any) => {
           <ul>
             <li className='footer-card'>
               <p>Winner is :</p>
-              <p>{itm?.winner_ticket}</p>
+              <p>{(itm?.winner_ticket?.value as Winner)?.ticket_number}</p>
             </li>
           </ul>
         </div>
