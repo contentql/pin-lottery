@@ -4,7 +4,6 @@ import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Cart: CollectionConfig = {
   slug: 'cart',
-  labels: { plural: 'carts', singular: 'cart' },
   access: {
     read: isAdminOrSelf,
     update: isAdminOrSelf,
@@ -12,42 +11,44 @@ const Cart: CollectionConfig = {
   },
   fields: [
     {
+      type: 'row',
+      fields: [
+        {
+          name: 'tickets',
+          type: 'number',
+          label: 'Tickets',
+          required: true,
+          admin: { description: 'Total no of tickets' },
+        },
+        {
+          name: 'total_price',
+          type: 'number',
+          label: 'Total Price',
+          required: true,
+          admin: {
+            description: 'Total tickets price',
+          },
+        },
+      ],
+    },
+    {
       name: 'contest_id',
-      type: 'text',
       label: 'Contest Id',
+      type: 'relationship',
+      relationTo: ['contest'],
+      hasMany: false,
       required: true,
+      admin: {
+        position: 'sidebar',
+      },
     },
     {
-      name: 'contest_no',
-      type: 'text',
-      label: 'Contest No',
-      required: true,
-    },
-    {
-      name: 'tickets',
-      type: 'number',
-      label: 'Tickets',
-      required: true,
-    },
-    {
-      name: 'each_ticket_price',
-      type: 'number',
-      label: 'Each Ticket Price',
-      required: true,
-    },
-    {
-      name: 'total_price',
-      type: 'number',
-      label: 'Total Price',
-      required: true,
-    },
-    {
-      name: 'user',
-      label: 'User',
+      name: 'user_id',
+      label: 'User Id',
       type: 'relationship',
       relationTo: ['users'],
       hasMany: false,
-      required: true,
+      admin: { position: 'sidebar' },
       hooks: {
         beforeChange: [assignUserId],
       },

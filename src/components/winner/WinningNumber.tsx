@@ -1,9 +1,12 @@
 import Image from 'next/image'
 
-import contest_1 from '/public/images/contest/1.png'
-import contest_2 from '/public/images/contest/7.png'
+import { Contest, Media, Winner } from '@/payload-types'
+import { DateConverter } from '@/utils/date-converter'
+import { splitTicketNumber } from '@/utils/split-ticket-number'
 
-const WinningNumber = () => {
+const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
+
+  console.log('winner details', contestDetails)
   return (
     <section className='mt-minus-150'>
       <div className='container'>
@@ -11,23 +14,35 @@ const WinningNumber = () => {
           <div className='col-lg-12'>
             <div className='winner-details-wrapper bg_img'>
               <div className='left'>
-                <Image src={contest_1} alt='contest 1' />
+                <Image
+                  src={(contestDetails?.img as Media)?.url || ''}
+                  width={400}
+                  height={400}
+                  alt='contest 1'
+                />
               </div>
               <div className='body'>
-                <p className='contest-number'>Contest No: B2T</p>
+                <p className='contest-number'>
+                  Contest No:{' '}
+                  {
+                    contestDetails?.contest_no
+                  }
+                </p>
                 <p className='contest-date'>
-                  <span>Draw took place on :</span> Saturday May 20, 2020
+                  <span>Draw took place on :</span>{' '}
+                  {DateConverter(
+                    (contestDetails?.winner_ticket?.value as Winner)?.createdAt,
+                  )}
                 </p>
                 <div className='line'></div>
-                <h4 className='title'>Latest bigest Winning Numbers:</h4>
+                <h4 className='title'>The Winning Numbers are:</h4>
                 <ul className='numbers'>
-                  <li>11</li>
-                  <li>88</li>
-                  <li>23</li>
-                  <li>9</li>
-                  <li>19</li>
-                  <li>26</li>
-                  <li>87</li>
+                  {splitTicketNumber(
+                    (contestDetails?.winner_ticket?.value as Winner)
+                      ?.ticket_number!,
+                  ).map((number, index) => (
+                    <li key={index}>{number}</li>
+                  ))}
                 </ul>
                 <div className='btn-grp'>
                   <a href='#0' className='btn-border'>
@@ -39,7 +54,12 @@ const WinningNumber = () => {
                 </div>
               </div>
               <div className='right'>
-                <Image src={contest_2} alt='contest 2' />
+                <Image
+                  src={(contestDetails?.img as Media)?.url || ''}
+                  width={400}
+                  height={400}
+                  alt='contest 2'
+                />
               </div>
             </div>
           </div>

@@ -1,4 +1,3 @@
-import ContestCard from '@/components/cards/ContestCard'
 import contestData from '@/data/contestData'
 
 import UpcomingDraw from './UpcomingDraw'
@@ -13,7 +12,7 @@ const RightSide = () => {
         {contestData.slice(0, 4).map(itm => (
           <div key={itm.id} className='col-xl-6 col-lg-12 col-md-6 mb-30'>
             {/* Contest card */}
-            <ContestCard itm={itm} />
+            {/* <ContestCard itm={itm} /> */}
           </div>
         ))}
       </div>

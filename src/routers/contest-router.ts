@@ -31,7 +31,7 @@ export const contestRouter = router({
           ticket_price: ticket_price,
           img: img,
           contest_status: contest_status,
-          winner_ticket:winner_ticket,
+          winner_ticket: winner_ticket,
           updatedAt: updatedAt,
           createdAt: createdAt,
         }
@@ -50,25 +50,27 @@ export const contestRouter = router({
       const contestById = await payload.findByID({
         collection: 'contest',
         id: id,
+        depth: 1,
       })
 
       return contestById
     }),
 
-  updateContest: publicProcedure.input(ContestWinnerValidator).mutation(async({input}) => {
-    
-    const {contest_id, contest_status, winner_number } = input
-    
-    const payload = await getPayloadClient();
+  updateContest: publicProcedure
+    .input(ContestWinnerValidator)
+    .mutation(async ({ input }) => {
+      const { id,contest_status,winner_id} = input
 
-    await payload.update({
-      collection: 'contest',
-      id: contest_id,
-      data: {
-        contest_status: contest_status,
-        winner_ticket: winner_number
-      },
-    })
-    return {status:"success"}
-  })
+      const payload = await getPayloadClient()
+
+      await payload.update({
+        collection: 'contest',
+        id: id,
+        data: {
+          contest_status,
+          winner_ticket: { relationTo: 'winner', value: winner_id },
+        },
+      })
+      return { status: 'success' }
+    }),
 })

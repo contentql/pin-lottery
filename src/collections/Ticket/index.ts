@@ -4,7 +4,6 @@ import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
-  labels: { plural: 'tickets', singular: 'ticket' },
   access: {
     read: isAdminOrSelf,
     update: isAdminOrSelf,
@@ -12,38 +11,59 @@ const Ticket: CollectionConfig = {
   },
   fields: [
     {
-      name: 'ticket_number',
-      type: 'text',
-      label: 'Ticket Number',
-      unique: true,
-      required: true,
-    },
-    {
-      name: 'ticket_price',
-      type: 'number',
-      label: 'Ticket Price',
-      required: true,
-    },
-    {
-      name: 'draw_status',
-      type: 'checkbox',
-      label: 'Draw Status',
-      defaultValue: false,
-    },
-    {
-      name: 'win_status',
-      type: 'checkbox',
-      label: 'Win Status',
-      defaultValue: false,
-      admin: {
-        condition: data => {
-          if (data.draw_status) {
-            return true
-          }
-
-          return false
+      type: 'row',
+      fields: [
+        {
+          name: 'ticket_number',
+          type: 'text',
+          label: 'Ticket Number',
+          unique: true,
+          required: true,
+          admin: {
+            description: 'Auto-generated unique ticket number',
+          },
         },
-      },
+        {
+          name: 'ticket_price',
+          type: 'number',
+          label: 'Ticket Price',
+          required: true,
+          admin: {
+            description: 'Price of the ticket at the time of purchase',
+          },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'draw_status',
+          type: 'checkbox',
+          label: 'Draw Status',
+          defaultValue: false,
+          admin: {
+            description:
+              'Status indicating whether the draw has been completed for this ticket',
+          },
+        },
+        {
+          name: 'win_status',
+          type: 'checkbox',
+          label: 'Win Status',
+          defaultValue: false,
+          admin: {
+            description: 'Status indicating whether the ticket is a winner',
+            condition: data => {
+              if (data.draw_status) {
+                return true
+              }
+
+              return false
+            },
+          },
+        },
+      ],
     },
     {
       name: 'contest_id',
@@ -52,6 +72,7 @@ const Ticket: CollectionConfig = {
       relationTo: ['contest'],
       hasMany: false,
       required: true,
+      admin: { position: 'sidebar' },
     },
     {
       name: 'purchased_by',
@@ -63,6 +84,7 @@ const Ticket: CollectionConfig = {
       hooks: {
         beforeChange: [assignUserId],
       },
+      admin: { position: 'sidebar' },
     },
   ],
 }

@@ -26,13 +26,7 @@ export const cartRouter = router({
   addTicketsToCart: userProcedure
     .input(CartDetailsValidator)
     .mutation(async ({ input, ctx }) => {
-      const {
-        contest_id,
-        contest_no,
-        tickets,
-        each_ticket_price,
-        total_price,
-      } = input
+      const { contest_id, tickets, total_price } = input
 
       const { user } = ctx
 
@@ -42,12 +36,10 @@ export const cartRouter = router({
         await payload.create({
           collection: 'cart',
           data: {
-            contest_id,
-            contest_no,
             tickets,
-            each_ticket_price,
             total_price,
-            user: { relationTo: 'users', value: user?.id },
+            contest_id: { relationTo: 'contest', value: contest_id },
+            user_id: { relationTo: 'users', value: user?.id },
           },
         })
 
@@ -66,7 +58,7 @@ export const cartRouter = router({
       await payload.delete({
         collection: 'cart',
         where: {
-          'user.value': {
+          'user_id.value': {
             equals: user?.id,
           },
         },

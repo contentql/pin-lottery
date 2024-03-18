@@ -7,6 +7,10 @@
     "nixpacks",
     "payloadcms",
     "tanstack",
-    "trpc"
+    "trpc",
+    "css",
+    "cql",
+    "scss",
+    "fontsource"
   ]
 }

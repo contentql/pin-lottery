@@ -1,6 +1,6 @@
 import { FaTrashAlt } from 'react-icons/fa'
 
-import { Cart } from '@/payload-types'
+import { Cart, Contest } from '@/payload-types'
 
 interface GroupedTickets {
   [contest_no: string]: Cart[]
@@ -30,7 +30,10 @@ const AllTickets = ({ cartData }: { cartData: Cart[] }) => {
           <div key={cart?.id} className='ticket-wrapper__body'>
             <div className='tickets'>
               <div className='single-row'>
-                <h4>Contest Number: {cart?.contest_no}</h4>
+                <h4>
+                  Contest Number:{' '}
+                  {(cart?.contest_id?.value as Contest)?.contest_no}
+                </h4>
               </div>
               <div className='ticket-wrapper__body'>
                 {[...Array(cart?.tickets)].map((_, idx) => {

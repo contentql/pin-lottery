@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import payment from '/public/images/elements/payment.png'
 
-import { Cart } from '@/payload-types'
+import { Cart, Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 import { useRouter } from 'next/navigation'
@@ -19,9 +19,9 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
   )
 
   const arrayOfTicketsWithPrices = cartData?.flatMap(item =>
-    Array.from({ length: item.tickets }, () => ({
-      ticket_price: item.each_ticket_price,
-      contest_id: item.contest_id,
+    Array.from({ length: item?.tickets }, () => ({
+      ticket_price: (item?.contest_id?.value as Contest)?.ticket_price,
+      contest_id: (item?.contest_id.value as Contest)?.id,
     })),
   )
 
@@ -62,10 +62,13 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
             {cartData?.map(cart => (
               <li key={cart?.id}>
                 <div className='left'>
-                  <h4 className='caption'>Ticket Price - {cart?.contest_no}</h4>
+                  <h4 className='caption'>
+                    Ticket Price -{' '}
+                    {(cart?.contest_id?.value as Contest)?.ticket_price}
+                  </h4>
                   <span>
                     ({cart?.tickets} tickets X {currency}
-                    {cart?.each_ticket_price})
+                    {(cart?.contest_id?.value as Contest)?.ticket_price})
                   </span>
                 </div>
                 <div className='right'>

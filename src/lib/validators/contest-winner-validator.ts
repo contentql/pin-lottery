@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const ContestWinnerValidator = z.object({
-    contest_id:z.string(),
-    winner_number: z.string(),
+    id: z.string(),
+    winner_id:z.string(),
     contest_status: z.boolean()
 })
 

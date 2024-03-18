@@ -294,8 +294,9 @@ const Contest: CollectionConfig = {
             },
             {
               name: 'winner_ticket',
-              label: 'Winner Ticket Number',
-              type: 'text',
+              label: 'Winner ',
+              type: 'relationship',
+              relationTo:['winner'],
               admin: {
                 condition: data => data.contest_status === true,
               },
