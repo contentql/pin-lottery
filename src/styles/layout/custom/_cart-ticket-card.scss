@@ -1,6 +1,7 @@
 .cart-lottery-single {
   background-color: #5a4bcc;
   position: relative;
+  margin-bottom: 14px;
   @include border-radius(10px);
 
   &:hover {
@@ -34,11 +35,6 @@
     background-color: #4939c1;
     padding: 20px 20px;
 
-    .titcket-number {
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-
     .top {
       @include d-flex;
       align-items: center;
@@ -52,34 +48,13 @@
         font-weight: 600;
         margin-bottom: 0;
       }
-
-      ul {
-        @include d-flex;
-        align-items: center;
-
-        li {
-          button {
-            background-color: transparent;
-            display: flex;
-            align-items: center;
-
-            span {
-              color: #ffffff;
-            }
-
-            i {
-              font-size: 28px;
-              color: #ffffff;
-            }
-          }
-        }
-      }
     }
   }
 
   &__selected-number {
     @include d-flex;
     margin: -3px;
+    justify-content: space-evenly;
 
     li {
       width: 36px;
@@ -106,62 +81,6 @@
         box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35);
         border: none;
         color: #ffffff;
-      }
-    }
-  }
-
-  &__number {
-    @include d-flex;
-    margin: -3px;
-    justify-content: center;
-
-    li {
-      width: 36px;
-      height: 36px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      @include border-radius(50%);
-      @include d-flex;
-      justify-content: center;
-      align-items: center;
-      color: #ffffff;
-      cursor: pointer;
-      margin: 4px 3px;
-
-      &.active {
-        background-image: linear-gradient(
-          360deg,
-          rgb(236, 3, 139) 0%,
-          rgb(251, 100, 104) 44%,
-          rgb(251, 185, 54) 100%
-        );
-        box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35);
-        border: none;
-      }
-    }
-  }
-
-  &__body {
-    padding: 20px 20px;
-  }
-
-  &__footer {
-    margin-left: 20px;
-    margin-right: 20px;
-    padding: 20px 0 30px 0;
-    border-top: 1px solid #7d73cd;
-  }
-
-  &.style--two {
-    .lottery-single__number {
-      justify-content: flex-start;
-      margin: -4px;
-
-      @media (max-width: 575px) {
-        justify-content: center;
-      }
-
-      li {
-        margin: 4px 4px;
       }
     }
   }

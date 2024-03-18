@@ -5,25 +5,25 @@ interface GroupedTickets {
   [contest_no: string]: Cart[]
 }
 
-const AllTickets = ({ cartData }: { cartData: Cart[] }) => {
-  // const groupedCartData: GroupedTickets = cartData?.reduce(
-  //   (acc: GroupedTickets, ticket) => {
-  //     const { contest_no } = ticket
-  //     if (!acc[contest_no]) {
-  //       acc[contest_no] = []
-  //     }
-  //     acc[contest_no].push(ticket)
-  //     return acc
-  //   },
-  //   {},
-  // )
-
+const AllTickets = ({
+  cartData,
+  updateCartTicketsCountMutation,
+  deleteAllTicketsOfUserFromCart,
+}: {
+  cartData: Cart[]
+  updateCartTicketsCountMutation: Function
+  deleteAllTicketsOfUserFromCart: Function
+}) => {
   return (
     <div className='col-lg-7'>
       <div className='ticket-wrapper'>
         <div className='ticket-wrapper__header'>
           <h3>Your tickets:</h3>
-          <button type='button'>clear all</button>
+          <button
+            type='button'
+            onClick={() => deleteAllTicketsOfUserFromCart()}>
+            clear all
+          </button>
         </div>
         {cartData?.map(cart => (
           <div key={cart?.id} className='ticket-wrapper__body'>
@@ -35,9 +35,16 @@ const AllTickets = ({ cartData }: { cartData: Cart[] }) => {
                 </h4>
               </div>
               <div className='ticket-wrapper__body'>
-                {[...Array(cart?.tickets)].map((cart, idx) => {
+                {[...Array(cart?.tickets)].map((_, idx) => {
                   return (
-                    <CartTicketCard key={idx} cart={cart} ticketId={idx + 1} />
+                    <CartTicketCard
+                      key={idx}
+                      cart={cart}
+                      ticketId={idx + 1}
+                      updateCartTicketsCountMutation={
+                        updateCartTicketsCountMutation
+                      }
+                    />
                   )
                 })}
               </div>

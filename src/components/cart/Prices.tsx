@@ -25,8 +25,8 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     })),
   )
 
-  const { mutate: deleteCartTickets } =
-    trpc.cart.deleteTicketsFromCart.useMutation({
+  const { mutate: deleteAllTicketsOfUserFromCart } =
+    trpc.cart.deleteAllTicketsOfUserFromCart.useMutation({
       onSuccess: async () => {
         router.push('/user')
       },
@@ -37,7 +37,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
 
   const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
     onSuccess: async () => {
-      deleteCartTickets()
+      deleteAllTicketsOfUserFromCart()
       toast.success(
         'Tickets successfully purchased. Draw date will be announced shortly.',
       )

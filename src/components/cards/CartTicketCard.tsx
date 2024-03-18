@@ -1,27 +1,28 @@
 import Image from 'next/image'
-import { useContext } from 'react'
 import { FaTimes } from 'react-icons/fa'
 
-import { AppContext } from '@/context/context'
-import { Cart, Contest } from '@/payload-types'
-
 import circle_border from '/public/images/elements/circle-border.png'
+
+import { Cart, Contest } from '@/payload-types'
 
 const CartTicketCard = ({
   cart,
   ticketId,
+  updateCartTicketsCountMutation,
 }: {
   cart: Cart
   ticketId: number
+  updateCartTicketsCountMutation: Function
 }) => {
-  const { decrementHandleAndRemoveTicket }: any = useContext(AppContext)
+  const handleDeleteTicket = () => {
+    updateCartTicketsCountMutation({ id: cart?.id, tickets: cart?.tickets - 1 })
+  }
 
   return (
     <div className='cart-lottery-single'>
       <button
         className='cart-lottery-single__close'
-        //   onClick={() => decrementHandleAndRemoveTicket(ticket?.id)}
-      >
+        onClick={() => handleDeleteTicket()}>
         <FaTimes />
       </button>
 
@@ -37,7 +38,7 @@ const CartTicketCard = ({
             <div className='circle-divider'>
               <Image src={circle_border} alt='circle border' />
             </div>
-            <ul className='lottery-single__selected-number'>
+            <ul className='cart-lottery-single__selected-number'>
               {[...Array(7)].map((_, i) => (
                 <li key={i} className=''>
                   00
