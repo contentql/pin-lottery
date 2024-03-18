@@ -32,3 +32,12 @@
   display multiple stacked cards for that contest.
 - Each stacked card will have a separate price tag reflecting the total price
   for the tickets added in that instance.
+
+# Developer Config
+
+## Theme Setting
+
+1. Copy the `themes` folder to your `src` folder
+2. Install the `Inter` font. `yarn add @fontsource-variable/inter`
+3. update the `buildConfig.admin` object with the new style key and value
+   `css: path.resolve(__dirname, 'themes/cql/index.scss'),`
