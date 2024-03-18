@@ -7,12 +7,17 @@ import tag from '/public/images/icon/btn/tag.png'
 
 import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
+import { logout } from '@/queries/auth/logout'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const Header = () => {
   const [open, setOpen] = useState('')
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
   const [popupVisible, setPopupVisible] = useState(false)
+  const router = useRouter()
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
@@ -35,6 +40,37 @@ const Header = () => {
       setWindowHeight(height)
     }
   }
+
+    const {
+      isPending: isLogoutPending,
+      variables: logoutVariables,
+      mutate: logoutMutation,
+    } = useMutation({
+      mutationKey: ['/api/users/logout', 'post'],
+      mutationFn: () => logout(),
+      onSuccess: async () => {
+        router.push('/login')
+      },
+      onError: async err => {
+        if (err.message === 'CONFLICT') {
+          toast.error('User not found.', {
+            autoClose: 3000,
+            onClose: () => {
+              toast.info('Redirecting to login page...', {
+                autoClose: 2000,
+                onClose: () => router.push('/login'),
+              })
+            },
+          })
+        }
+
+        console.error('Something went wrong. Please try again.')
+      },
+    })
+
+    const handleLogout = () => {
+      logoutMutation()
+    }
 
   useEffect(() => {
     window.onbeforeunload = function () {
@@ -148,7 +184,9 @@ const Header = () => {
                           <Link href='/user-transaction' className='popup-btn'>
                             Transactions
                           </Link>
-                          <button className='popup-btn'>Logout</button>
+                          <button onClick={handleLogout} className='popup-btn'>
+                            Logout
+                          </button>
                         </div>
                       )}
                     </Link>
