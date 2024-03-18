@@ -215,15 +215,16 @@ export interface Tag {
  */
 export interface Cart {
   id: string;
-  contest_id: string;
-  contest_no: string;
   tickets: number;
-  each_ticket_price: number;
   total_price: number;
-  user: {
+  contest_id: {
+    relationTo: 'contest';
+    value: string | Contest;
+  };
+  user_id?: {
     relationTo: 'users';
     value: string | User;
-  };
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
