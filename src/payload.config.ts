@@ -91,6 +91,7 @@ export default buildConfig({
     seo({
       collections: ['blog', 'contest'],
       uploadsCollection: 'media',
+      tabbedUI: true,
       generateTitle,
       generateDescription,
       generateImage,
