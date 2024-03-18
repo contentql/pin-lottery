@@ -4,7 +4,6 @@ import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
-  labels: { plural: 'tickets', singular: 'ticket' },
   access: {
     read: isAdminOrSelf,
     update: isAdminOrSelf,
