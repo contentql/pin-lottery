@@ -550,7 +550,7 @@
 
 .back-button{
   border: 2px solid #c6cbc8;
-  padding: 10px 20px;
+  padding: 8px 18px;
   border-radius: 30px;
   display: flex;
   gap: 10px;
@@ -678,4 +678,9 @@ strong{
 
 .winner-sample{
   padding: 40px 80px;
+}
+
+.padding-top-nav{
+  margin-top: 20px;
+  margin-bottom: 14px
 }
