@@ -7,6 +7,7 @@ import { isThresholdReached } from '@/utils/is-threshold-reached'
 
 import { AppContext } from '@/context/context'
 import { MouseEventHandler, useContext } from 'react'
+import WinningNumber from '../winner/WinningNumber'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
 
@@ -35,6 +36,9 @@ const ContestBody = ({
 
   return (
     <section className='pb-120 mt-minus-300'>
+      {contestDetails?.contest_status === true && (
+        <WinningNumber contestDetails={contestDetails} />
+      )}
       <div className='container'>
         <div className='row justify-content-center'>
           {isThresholdReached(

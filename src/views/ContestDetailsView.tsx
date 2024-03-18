@@ -28,6 +28,7 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
     )
     const contestTickets = data as any
 
+  console.log('contest ', contestDetails)
     const { mutate: updateContestStatus } =
       trpc.contest.updateContest.useMutation({
         onSuccess: () => {toast.success(`contest updated successfully`), refetch()},
@@ -39,10 +40,10 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
         toast.success('Winner added')
         console.log('data in onsuccess', data)
          updateContestStatus({
-          contest_id: (data?.winner?.contest?.value as Winner)?.id,
-          contest_status: true,
-          winner_number: data.winner.ticket_number as string,
-        })
+           id: (data?.winner?.contest?.value as Winner)?.id,
+           contest_status: true,
+           winner_id:data?.winner?.id
+         })
       },
 
       onError: () => {
@@ -83,7 +84,6 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
           ]}
         />
       </div>
-
       {/* Bdy section here */}
       <ContestBody
         contestDetails={contestDetails as Contest}
