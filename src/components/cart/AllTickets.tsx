@@ -1,5 +1,4 @@
-import { FaTrashAlt } from 'react-icons/fa'
-
+import CartTicketCard from '@/components/cards/CartTicketCard'
 import { Cart, Contest } from '@/payload-types'
 
 interface GroupedTickets {
@@ -36,20 +35,9 @@ const AllTickets = ({ cartData }: { cartData: Cart[] }) => {
                 </h4>
               </div>
               <div className='ticket-wrapper__body'>
-                {[...Array(cart?.tickets)].map((_, idx) => {
+                {[...Array(cart?.tickets)].map((cart, idx) => {
                   return (
-                    <div key={idx} className='single-row'>
-                      <ul className='numbers'>
-                        {[...Array(7)].map((_, i: number) => (
-                          <li key={i}>00</li>
-                        ))}
-                      </ul>
-                      <div className='action-btns'>
-                        <button type='button' className='del-btn'>
-                          <FaTrashAlt className='fs-6' />
-                        </button>
-                      </div>
-                    </div>
+                    <CartTicketCard key={idx} cart={cart} ticketId={idx + 1} />
                   )
                 })}
               </div>
