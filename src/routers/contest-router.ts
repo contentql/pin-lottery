@@ -50,7 +50,7 @@ export const contestRouter = router({
       const contestById = await payload.findByID({
         collection: 'contest',
         id: id,
-        depth: 1,
+        depth: 5,
       })
 
       return contestById

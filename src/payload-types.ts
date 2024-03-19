@@ -222,7 +222,7 @@ export interface Winner {
     relationTo: 'contest';
     value: string | Contest;
   } | null;
-  winner_ticket?: {
+  ticket?: {
     relationTo: 'tickets';
     value: string | Ticket;
   } | null;

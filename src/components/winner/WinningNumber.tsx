@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Contest, Media, Winner } from '@/payload-types'
+import { Contest, Media, Ticket, Winner } from '@/payload-types'
 import { DateConverter } from '@/utils/date-converter'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
 
@@ -38,8 +38,7 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
                 <h4 className='title'>The Winning Numbers are:</h4>
                 <ul className='numbers'>
                   {splitTicketNumber(
-                    (contestDetails?.winner_ticket?.value as Winner)
-                      ?.ticket_number!,
+                    ((contestDetails?.winner_ticket?.value as Winner)?.ticket?.value as Ticket)?.ticket_number
                   ).map((number, index) => (
                     <li key={index}>{number}</li>
                   ))}

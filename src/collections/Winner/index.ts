@@ -11,12 +11,12 @@ const Winner: CollectionConfig = {
       hasMany: false,
     },
     {
-      name: 'winner_ticket',
+      name: 'ticket',
       type: 'relationship',
       relationTo: ['tickets'],
       label: 'Winner Ticket',
       hasMany: false,
-      filterOptions: ({ relationTo, siblingData, data, user }) => {
+      filterOptions: ({ relationTo, data }) => {
         const selectedContestId = data?.contest?.value
         if (relationTo === 'tickets' && selectedContestId) {
           return {
