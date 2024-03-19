@@ -12,7 +12,7 @@ const Contest: CollectionConfig = {
   },
   hooks: {
     beforeRead: [
-      async ({ req, doc }) => {
+      async ({ req, doc, context }) => {
         const { payload } = req
 
         const { totalDocs: tickets_purchased } = await payload.find({
@@ -36,11 +36,16 @@ const Contest: CollectionConfig = {
           reached_threshold: reachedThreshold,
         }
 
-        await payload.update({
-          collection: 'contest',
-          id: doc.id,
-          data: latestData,
-        })
+        if (context.doNotUpdateDoc === false) {
+          await payload.update({
+            collection: 'contest',
+            id: doc.id,
+            data: latestData,
+            context: {
+              doNotUpdateDoc: true,
+            },
+          })
+        }
 
         // This is to show user the data
         return latestData
