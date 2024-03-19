@@ -174,6 +174,7 @@ export interface Contest {
   features_html?: string | null;
   description_html?: string | null;
   contest_no: string;
+  tickets_purchased?: number | null;
   ticket_price: number;
   day_remain: number;
   zero_sixty?: string | null;
@@ -188,6 +189,7 @@ export interface Contest {
   display?: string | null;
   battery?: string | null;
   Camera?: string | null;
+  reached_threshold?: boolean | null;
   contest_status?: boolean | null;
   winner_ticket?: {
     relationTo: 'winner';

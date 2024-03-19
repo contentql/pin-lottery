@@ -10,6 +10,43 @@ const Contest: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
   },
+  hooks: {
+    beforeRead: [
+      async ({ req, doc }) => {
+        const { payload } = req
+
+        const { totalDocs: tickets_purchased } = await payload.find({
+          collection: 'tickets',
+          depth: 0,
+          where: {
+            'contest_id.value': {
+              equals: doc.id,
+            },
+          },
+        })
+
+        const { ticket_price, product_price } = doc
+
+        const reachedThreshold =
+          ticket_price * tickets_purchased >= product_price
+
+        const latestData = {
+          ...doc,
+          tickets_purchased,
+          reached_threshold: reachedThreshold,
+        }
+
+        await payload.update({
+          collection: 'contest',
+          id: doc.id,
+          data: latestData,
+        })
+
+        // This is to show user the data
+        return latestData
+      },
+    ],
+  },
   fields: [
     {
       type: 'tabs',
@@ -99,11 +136,24 @@ const Contest: CollectionConfig = {
           description: 'Please provide contest details.',
           fields: [
             {
-              name: 'contest_no',
-              type: 'text',
-              label: 'Contest Number',
-              required: true,
-              maxLength: 5,
+              type: 'row',
+              fields: [
+                {
+                  name: 'contest_no',
+                  type: 'text',
+                  label: 'Contest Number',
+                  required: true,
+                  maxLength: 5,
+                },
+                {
+                  name: 'tickets_purchased',
+                  type: 'number',
+                  label: 'Tickets Purchased',
+                  admin: {
+                    readOnly: true,
+                  },
+                },
+              ],
             },
             {
               type: 'row',
@@ -286,6 +336,13 @@ const Contest: CollectionConfig = {
           label: 'Contest Status',
           description: 'Contest status for winner announcement',
           fields: [
+            {
+              name: 'reached_threshold',
+              type: 'checkbox',
+              admin: {
+                readOnly: true,
+              },
+            },
             {
               name: 'contest_status',
               label: 'Contest Winner announced',
