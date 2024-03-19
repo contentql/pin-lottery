@@ -550,7 +550,7 @@
 
 .back-button{
   border: 2px solid #c6cbc8;
-  padding: 10px 20px;
+  padding: 8px 18px;
   border-radius: 30px;
   display: flex;
   gap: 10px;
@@ -623,7 +623,13 @@ strong{
 }
 
 .user-profile {
-  position: relative;
+  padding: 5px 20px;
+}
+.divider{
+  border-bottom: 1px solid #5496ff;
+  margin-bottom: 4px;
+  padding-top: 4px;
+
 }
 
 .popup {
@@ -656,12 +662,14 @@ strong{
 .popup-btn{
   width: 100%;
   text-align: left;
+  display: flex;
+  gap: 14px;
   color: white;
   padding-left: 4px;
   background-color: transparent;
 }
 .popup-btn:hover{
-  background-color: #fb6468;
+ background-image: linear-gradient(80deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
   color:white;
   border-radius: 10px;
 }
@@ -678,4 +686,38 @@ strong{
 
 .winner-sample{
   padding: 40px 80px;
+}
+
+.padding-top-nav{
+  margin-top: 20px;
+  margin-bottom: 14px
+}
+
+.nav-user-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+}
+
+.nav-item{
+  padding: 8px 0px;
+}
+.nav-item p{
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+.user-profile-link{
+  display: none;
+  margin-left: 28px;
+
+}
+  @media screen and (max-width: 1198px) {
+  .user-profile-link {
+    display: block;
+  }
+}
+.react-icon-profile{
+  padding-right: 10px;
 }

@@ -218,33 +218,13 @@ export interface Tag {
  */
 export interface Winner {
   id: string;
-  ticket_number?: string | null;
-  user?: {
-    relationTo: 'users';
-    value: string | User;
-  } | null;
   contest?: {
     relationTo: 'contest';
     value: string | Contest;
   } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cart".
- */
-export interface Cart {
-  id: string;
-  tickets: number;
-  total_price: number;
-  contest_id: {
-    relationTo: 'contest';
-    value: string | Contest;
-  };
-  user_id?: {
-    relationTo: 'users';
-    value: string | User;
+  ticket?: {
+    relationTo: 'tickets';
+    value: string | Ticket;
   } | null;
   updatedAt: string;
   createdAt: string;
@@ -267,6 +247,25 @@ export interface Ticket {
     relationTo: 'users';
     value: string | User;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cart".
+ */
+export interface Cart {
+  id: string;
+  tickets: number;
+  total_price: number;
+  contest_id: {
+    relationTo: 'contest';
+    value: string | Contest;
+  };
+  user_id?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }

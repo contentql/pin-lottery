@@ -1,4 +1,4 @@
-import { Contest, Media, Winner } from '@/payload-types'
+import { Contest, Media, Ticket, Winner } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaRegHeart } from 'react-icons/fa'
@@ -36,7 +36,7 @@ const ContestCard = ({ itm }: {itm:Contest}) => {
           <ul>
             <li className='footer-card'>
               <p>Winner is :</p>
-              <p>{(itm?.winner_ticket?.value as Winner)?.ticket_number}</p>
+              <p>{((itm?.winner_ticket?.value as Winner)?.ticket?.value as Ticket)?.ticket_number}</p>
             </li>
           </ul>
         </div>

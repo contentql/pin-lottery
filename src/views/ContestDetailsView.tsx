@@ -60,8 +60,7 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
       } else {
         addWinner({
           contest_id: randomNumber?.contest_id?.value?.id,
-          ticket_number: randomNumber?.ticket_number,
-          user_id: randomNumber?.purchased_by?.value?.id,
+          ticket_id:randomNumber?.id
         })
       }
     }

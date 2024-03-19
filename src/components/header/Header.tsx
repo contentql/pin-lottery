@@ -1,18 +1,29 @@
 import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { GrTransaction } from 'react-icons/gr'
+import { LiaTicketAltSolid } from 'react-icons/lia'
+import { LuUser2 } from 'react-icons/lu'
+import { RxExit } from 'react-icons/rx'
+
 import { useEffect, useState } from 'react'
 
 import tag from '/public/images/icon/btn/tag.png'
 
 import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
+import { logout } from '@/queries/auth/logout'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const Header = () => {
   const [open, setOpen] = useState('')
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
   const [popupVisible, setPopupVisible] = useState(false)
+  const router = useRouter()
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
@@ -35,6 +46,37 @@ const Header = () => {
       setWindowHeight(height)
     }
   }
+
+    const {
+      isPending: isLogoutPending,
+      variables: logoutVariables,
+      mutate: logoutMutation,
+    } = useMutation({
+      mutationKey: ['/api/users/logout', 'post'],
+      mutationFn: () => logout(),
+      onSuccess: async () => {
+        router.push('/login')
+      },
+      onError: async err => {
+        if (err.message === 'CONFLICT') {
+          toast.error('User not found.', {
+            autoClose: 3000,
+            onClose: () => {
+              toast.info('Redirecting to login page...', {
+                autoClose: 2000,
+                onClose: () => router.push('/login'),
+              })
+            },
+          })
+        }
+
+        console.error('Something went wrong. Please try again.')
+      },
+    })
+
+    const handleLogout = () => {
+      logoutMutation()
+    }
 
   useEffect(() => {
     window.onbeforeunload = function () {
@@ -120,38 +162,69 @@ const Header = () => {
                     </div>
                   )}
                   {status === 'loggedIn' ? (
-                    <Link
-                      href=''
-                      className='user__btn d-flex align-items-center justify-content-center'
-                      onClick={togglePopup}
-                      style={{
-                        backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
-                      }}>
-                      {popupVisible && (
-                        <div className='popup'>
-                          <div className='popup-arrow'></div>
-                          {/* <div className='popup-btn user-profile'>
+                    <>
+                      <Link
+                        href=''
+                        className='user__btn'
+                        onClick={togglePopup}
+                        style={{
+                          backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
+                        }}>
+                        {popupVisible && (
+                          <div className='popup'>
+                            <div className='popup-arrow'></div>
+                            <Link
+                              href='/user-info'
+                              className='popup-btn user-profile'>
+                              <button
+                                className='nav-user-profile'
+                                style={{
+                                  backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
+                                }}></button>
+                              <h6>{user?.user_name}</h6>
+                            </Link>
+                            <div className='divider'></div>
+                            <Link
+                              href='/user-info'
+                              className='popup-btn nav-item'>
+                              <span>
+                                <LuUser2 size={24} color='white' />
+                              </span>
+                              <p>Personal Info</p>
+                            </Link>
+                            <Link href='/user' className='popup-btn nav-item'>
+                              <span>
+                                <LiaTicketAltSolid size={24} color='white' />
+                              </span>
+                              <p>My Tickets</p>
+                            </Link>
+                            <Link
+                              href='/user-transaction'
+                              className='popup-btn nav-item'>
+                              <span>
+                                <GrTransaction size={24} color='white' />
+                              </span>
+                              <p>Transactions</p>
+                            </Link>
+                            <div className='divider'></div>
                             <button
-                              className='user__btn d-flex align-items-center justify-content-center'
-                              onClick={togglePopup}
-                              style={{
-                                backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
-                              }}></button>
-                            <p>Text for showing</p>
-                          </div> */}
-                          <Link href='/user-info' className='popup-btn'>
-                            Personal Info
-                          </Link>
-                          <Link href='/user' className='popup-btn'>
-                            My Tickets
-                          </Link>
-                          <Link href='/user-transaction' className='popup-btn'>
-                            Transactions
-                          </Link>
-                          <button className='popup-btn'>Logout</button>
-                        </div>
-                      )}
-                    </Link>
+                              onClick={handleLogout}
+                              className='popup-btn nav-item'>
+                              <RxExit size={24} color='white' />
+                              <p> Logout</p>
+                            </button>
+                          </div>
+                        )}
+                      </Link>
+                      <div className='user-profile-link'>
+                        <Link
+                          href='/user-info'
+                          className='cmn-btn style--three btn--sm'>
+                          <span className="react-icon-profile"><LuUser2 size={18}  color='white'/></span>
+                          Profile Info
+                        </Link>
+                      </div>
+                    </>
                   ) : (
                     <Link href='/login' className='login-btn btn--sm'>
                       Login
