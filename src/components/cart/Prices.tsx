@@ -48,6 +48,10 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
   })
 
   const handlePurchase = () => {
+    if (!arrayOfTicketsWithPrices.length) {
+      toast.warning('Please add tickets to proceed.')
+      return
+    }
     createTicketsMutation(arrayOfTicketsWithPrices)
   }
 
