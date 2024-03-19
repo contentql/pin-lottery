@@ -2,6 +2,7 @@ import { TRPCError } from '@trpc/server'
 
 import { getPayloadClient } from '../get-payload'
 import { CartDetailsValidator } from '../lib/validators/cart-details-validator'
+import { TicketsCountValidator } from '../lib/validators/tickets-count-validator'
 import { router, userProcedure } from '../trpc/trpc'
 
 export const cartRouter = router({
@@ -49,7 +50,29 @@ export const cartRouter = router({
       }
     }),
 
-  deleteTicketsFromCart: userProcedure.mutation(async ({ ctx }) => {
+  updateTicketsOfUserFromCart: userProcedure
+    .input(TicketsCountValidator)
+    .mutation(async ({ input }) => {
+      const { id, tickets } = input
+
+      const payload = await getPayloadClient()
+
+      try {
+        await payload.update({
+          collection: 'cart',
+          id,
+          data: {
+            tickets,
+          },
+        })
+
+        return { success: true }
+      } catch (err) {
+        throw new TRPCError({ code: 'BAD_REQUEST' })
+      }
+    }),
+
+  deleteAllTicketsOfUserFromCart: userProcedure.mutation(async ({ ctx }) => {
     const { user } = ctx
 
     const payload = await getPayloadClient()

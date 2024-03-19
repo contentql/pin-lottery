@@ -64,7 +64,7 @@ const UpcomingDraw = ({ ticketsData }: { ticketsData: Ticket[] }) => {
           <div key={index} className='silgle'>
             <div className='draw-single-ticket'>
               <div className='draw-single-ticket__header'>
-                <div className='left'>Ticket #{index}</div>
+                <div className='left'>Ticket #{index + 1}</div>
                 <div className='right'>
                   Contest No:{' '}
                   {(ticket?.contest_id?.value as Contest)?.contest_no}
