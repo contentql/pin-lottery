@@ -9,6 +9,9 @@ const Ticket: CollectionConfig = {
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
   },
+  admin: {
+    useAsTitle: 'ticket_number',
+  },
   fields: [
     {
       type: 'row',

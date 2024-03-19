@@ -296,7 +296,7 @@ const Contest: CollectionConfig = {
               name: 'winner_ticket',
               label: 'Winner ',
               type: 'relationship',
-              relationTo:['winner'],
+              relationTo: ['winner'],
               admin: {
                 condition: data => data.contest_status === true,
               },
