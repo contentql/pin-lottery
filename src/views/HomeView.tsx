@@ -13,12 +13,12 @@ import Winner from '@/components/home/Winner'
 import { Contest, Tag } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 const HomeView = () => {
-
   // get contests
-  const { data: contestDetails, isLoading } =
-    trpc.contest.getContests.useQuery()
-  
-  const contest = contestDetails?.slice(0, 6)
+  const { data: contestDetails, isLoading } = trpc.contest.getContests.useQuery(
+    { pageNumber: 1, filterByName: 'all' },
+  )
+
+  const contest = contestDetails?.allContests?.slice(0, 6)
   // get tags
   const { data: allTags } = trpc.public.getTags.useQuery()
 

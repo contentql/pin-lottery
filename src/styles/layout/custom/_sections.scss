@@ -2,36 +2,36 @@
 .register-main {
   display: flex;
   justify-content: center;
-  
+
   .register {
     padding: 100px 0px;
     width: 40%;
   }
-   @media screen and (max-width: 440px) {
-  .register {
-    padding-top: 100px;
-    width: 94%;
+  @media screen and (max-width: 440px) {
+    .register {
+      padding-top: 100px;
+      width: 94%;
+    }
   }
-}
- @media screen and (min-width: 441px) and (max-width: 575px) {
-  .register {
-    padding-top: 100px;
-    width: 90%;
+  @media screen and (min-width: 441px) and (max-width: 575px) {
+    .register {
+      padding-top: 100px;
+      width: 90%;
+    }
   }
-}
   @media screen and (min-width: 576px) and (max-width: 767px) {
-  .register {
-     padding-top: 100px;
-    width: 70%;
+    .register {
+      padding-top: 100px;
+      width: 70%;
+    }
   }
-}
 
-@media screen and (min-width: 768px) and (max-width: 1023px) { 
-  .register {
-    padding-top: 100px;
-    width: 60%;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .register {
+      padding-top: 100px;
+      width: 60%;
+    }
   }
-}
 }
 
 .form-errors {
@@ -548,7 +548,7 @@
   justify-content: space-between;
 }
 
-.back-button{
+.back-button {
   border: 2px solid #c6cbc8;
   padding: 8px 18px;
   border-radius: 30px;
@@ -572,12 +572,12 @@
   padding: 10px 20px;
   margin-bottom: 10px;
   margin-right: 20px;
-  color:white;
+  color: white;
   border-radius: 25px;
   border: 1px solid white;
   cursor: pointer;
   background-color: transparent;
-  transition:background-color 0.8s;
+  transition: background-color 0.8s;
 }
 
 .tab-custom:last-child {
@@ -598,7 +598,7 @@ ul.bullet {
   margin-bottom: 5px;
   padding: 10px;
 }
-ul.bullet>li {
+ul.bullet > li {
   list-style: disc;
   margin-bottom: 5px;
   padding: 10px;
@@ -608,28 +608,30 @@ ul.number {
   margin-bottom: 5px;
   padding: 10px;
 }
-body h1,body h2,body h3,body h4,body h5,body h6 {
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
   margin-top: 2%;
 }
-p  br {
+p br {
   display: block;
   margin: 10%;
 }
 
-
-strong{
-  color:rgb(240, 6, 170);
-
+strong {
+  color: rgb(240, 6, 170);
 }
 
 .user-profile {
   padding: 5px 20px;
 }
-.divider{
+.divider {
   border-bottom: 1px solid #5496ff;
   margin-bottom: 4px;
   padding-top: 4px;
-
 }
 
 .popup {
@@ -647,19 +649,19 @@ strong{
 }
 
 .popup-arrow {
-    position: absolute;
-    top: -10px; 
-    left: 92%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #5043b8; 
-    z-index: 1000;
+  position: absolute;
+  top: -10px;
+  left: 92%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #5043b8;
+  z-index: 1000;
 }
 
-.popup-btn{
+.popup-btn {
   width: 100%;
   text-align: left;
   display: flex;
@@ -668,9 +670,13 @@ strong{
   padding-left: 4px;
   background-color: transparent;
 }
-.popup-btn:hover{
- background-image: linear-gradient(80deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
-  color:white;
+.popup-btn:hover {
+  background-image: linear-gradient(
+    80deg,
+    rgb(236, 19, 121) 0%,
+    rgb(108, 0, 146) 100%
+  );
+  color: white;
   border-radius: 10px;
 }
 @media only screen and (min-width: 1199px) {
@@ -678,46 +684,103 @@ strong{
     display: block;
   }
 }
-.border-between{
+.border-between {
   border-bottom: 1px solid black;
   padding-top: 4px;
   padding-bottom: 8px;
 }
 
-.winner-sample{
+.winner-sample {
   padding: 40px 80px;
 }
 
-.padding-top-nav{
+.padding-top-nav {
   margin-top: 20px;
-  margin-bottom: 14px
+  margin-bottom: 14px;
 }
 
 .nav-user-profile {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-
 }
 
-.nav-item{
+.nav-item {
   padding: 8px 0px;
 }
-.nav-item p{
+.nav-item p {
   font-size: 18px;
   font-weight: bold;
   color: white;
 }
-.user-profile-link{
+.user-profile-link {
   display: none;
   margin-left: 28px;
-
 }
-  @media screen and (max-width: 1198px) {
+@media screen and (max-width: 1198px) {
   .user-profile-link {
     display: block;
   }
 }
-.react-icon-profile{
+.react-icon-profile {
   padding-right: 10px;
+}
+
+.mbp_pagination ul {
+  margin: 0;
+  padding: 0;
+}
+.mbp_pagination .page_navigation {
+  margin-bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+.mbp_pagination .page-item {
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 6px;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.mbp_pagination .page-item:hover {
+  background-color: #ededed;
+}
+.mbp_pagination .page-item:first-child,
+.mbp_pagination .page-item:last-child {
+  background-image: linear-gradient(
+    300deg,
+    rgb(84, 150, 255) 0%,
+    rgb(135, 57, 230) 100%
+  );
+  -webkit-box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.07);
+  -o-box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.07);
+  box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.07);
+}
+.mbp_pagination .page-item.active .page-link {
+  background-image: linear-gradient(
+    360deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(251, 185, 54) 100%
+  );
+  color: #ffffff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.mbp_pagination .page-link {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  color: black;
+  font-family: var(--title-font-family);
+  font-weight: 400;
+  font-size: 15px;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  padding: 0;
+  text-align: center;
+  width: 40px;
 }
