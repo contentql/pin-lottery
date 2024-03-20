@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload/types'
+import { Contest } from '../../payload-types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
-import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
@@ -21,14 +21,40 @@ const Ticket: CollectionConfig = {
         // check threshold and update it
 
         if (operation === 'create') {
-          const { totalDocs: tickets_purchased } = await payload.find({
-            collection: 'tickets',
-            depth: 0,
-            where: {
-              'contest_id.value': {
-                equals: doc.id,
+          const { totalDocs: tickets_purchased, docs: tickets } =
+            await payload.find({
+              collection: 'tickets',
+              depth: 1,
+              where: {
+                'contest_id.value': {
+                  equals: req.body.contest_id.value,
+                },
               },
-            },
+            })
+
+          const ticket = tickets.find(ticket => ticket.id == doc.id)
+
+          const product_price = (ticket?.contest_id?.value as Contest)
+            ?.product_price
+
+          const {
+            contest_id: { value: id },
+            ticket_price,
+          } = doc
+
+          const reached_threshold =
+            ticket_price * tickets_purchased >= product_price
+
+          const latestData = {
+            ...doc,
+            tickets_purchased,
+            reached_threshold,
+          }
+
+          await payload.update({
+            collection: 'contest',
+            id,
+            data: latestData,
           })
         }
       },
@@ -114,10 +140,6 @@ const Ticket: CollectionConfig = {
       label: 'Purchased By',
       relationTo: ['users'],
       hasMany: false,
-      required: true,
-      hooks: {
-        beforeChange: [assignUserId],
-      },
       admin: { position: 'sidebar' },
     },
   ],
