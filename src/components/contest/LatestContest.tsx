@@ -1,14 +1,15 @@
-import Image from 'next/image'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
+import FilterByTag from '../filters/FilterByTag'
+import PageLoading from '../loading/PageLoading'
 
 const LatestContest = ({
   contestDetails,
-  allTags,
+  isContestsPending,
   filters,
   setFilters,
 }: any) => {
@@ -129,31 +130,10 @@ const LatestContest = ({
                 <h2 className='contest-wrapper__title' id='myTab'>
                   Latest Contest
                 </h2>
-                <ul className='nav nav-tabs winner-tab-nav' role='tablist'>
-                  {allTags?.map((tag: any) => (
-                    <li key={tag?.id} className='nav-item' role='presentation'>
-                      <button
-                        className={`nav-link ${filters.filterByName === tag.tag ? 'active' : ''}`}
-                        onClick={e => handleSearchTag(tag.tag)} //TODO: active can be added EX: className='nav-link active'
-                        id={tag.tag}
-                        data-bs-toggle='tab'
-                        data-bs-target='#dream'
-                        role='tab'
-                        aria-controls='dream'
-                        aria-selected='true'>
-                        <span className='icon-thumb'>
-                          <Image
-                            src={tag?.img?.url}
-                            alt='winner tab 1'
-                            width={100}
-                            height={100}
-                          />
-                        </span>
-                        <span>{tag?.tag}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                <FilterByTag
+                  filter={filters?.filterByName}
+                  handleSearch={handleSearchTag}
+                />
               </div>
               <div className='contest-wrapper__body'>
                 <div className='row contest-filter-wrapper justify-content-center mt-30 mb-none-30'>
@@ -262,45 +242,43 @@ const LatestContest = ({
                   </div>
                 </div>
 
-                <div className='tab-content mt-50' id='myTabContent'>
-                  <div
-                    className='tab-pane fade show active'
-                    id='dream'
-                    role='tabpanel'
-                    aria-labelledby='dream-tab'>
-                    <div className='row mb-none-30 mt-50'>
-                      {contestDetails?.allContests
-                        ?.filter(handleFilterByName)
-                        ?.filter(handleFilterByTitle)
-                        ?.filter(handleFilterByPrice).length > 0 ? (
-                        contestDetails?.allContests
-                          ?.filter(handleFilterByName)
-                          ?.filter(handleFilterByTitle)
-                          ?.filter(handleFilterByPrice)
-                          ?.sort(handleFilterBySort)
-                          .map((contest: any) => (
+                <div
+                  className='tab-con tent mt-50 contests-body'
+                  id='myTabContent'>
+                  {isContestsPending ? (
+                    <PageLoading />
+                  ) : (
+                    <div
+                      className='tab-pane fade show active '
+                      id='dream'
+                      role='tabpanel'
+                      aria-labelledby='dream-tab'>
+                      <div className='row mb-none-30 mt-50'>
+                        {contestDetails?.allContests.length > 0 ? (
+                          contestDetails?.allContests.map((contest: any) => (
                             <div
                               key={contest.id}
                               className='col-xl-4 col-md-6 mb-30'>
                               <ContestCard itm={contest} />
                             </div>
                           ))
-                      ) : (
-                        <div className='section-header text-center'>
-                          {/* <Image
+                        ) : (
+                          <div className='section-header text-center'>
+                            {/* <Image
                             className='image-empty'
                             src='/images/empty-states/empty-state.png'
                             alt='empty state'
                             width={120}
                             height={120}
                           /> */}
-                          <span className='section-sub-title'>
-                            No contests available
-                          </span>
-                        </div>
-                      )}
+                            <span className='section-sub-title'>
+                              No contests available
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                   {/* <div
                     className='tab-pane fade'
                     id='bike'

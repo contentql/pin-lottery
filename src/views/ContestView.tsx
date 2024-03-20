@@ -23,9 +23,14 @@ const ContestView = () => {
 
   // getting all contests
 
-  const { data: contestDetails, isLoading } = trpc.contest.getContests.useQuery(
-    { pageNumber: filters?.pageNumber, filterByName: filters?.filterByName! },
-  )
+  const {
+    data: contestDetails,
+    isLoading,
+    isPending: isContestsPending,
+  } = trpc.contest.getContests.useQuery({
+    pageNumber: filters?.pageNumber,
+    filterByName: filters?.filterByName!,
+  })
 
   //getting tags details
 
@@ -47,6 +52,7 @@ const ContestView = () => {
       {/* Letest contest here */}
       <LatestContest
         contestDetails={contestDetails}
+        isContestsPending={isContestsPending}
         allTags={allTags}
         filters={filters}
         setFilters={setFilters}

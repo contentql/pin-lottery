@@ -14,9 +14,10 @@ export const contestRouter = router({
         collection: 'contest',
         limit: 9,
         page: pageNumber,
+
         where: {
-          'tag.value': {
-            contains: filterByName === 'all' ? '' : filterByName,
+          product_type: {
+            equals: filterByName === 'all' ? '' : filterByName,
           },
         },
       })
@@ -27,7 +28,6 @@ export const contestRouter = router({
           title,
           contest_no,
           day_remain,
-          tag,
           ticket_price,
           img,
           contest_status,
@@ -40,7 +40,6 @@ export const contestRouter = router({
             title: title,
             contest_no: contest_no,
             day_remain: day_remain,
-            tag: tag,
             ticket_price: ticket_price,
             img: img,
             contest_status: contest_status,
