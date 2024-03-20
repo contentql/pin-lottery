@@ -30,11 +30,11 @@ export const WinnerRouter = router({
         collection: 'winner',
         depth: 5,
         limit: 6,
-        where: {
-          'contest?.value?.product_type': {
-            equals: filterWinnerByTag,
-          },
-        },
+        // where: {
+        //   'contest?.value?.contest_no': {
+        //     equals: '121',
+        //   },
+        // },
       })
 
       return winners?.docs
