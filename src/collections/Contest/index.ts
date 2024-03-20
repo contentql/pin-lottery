@@ -4,7 +4,6 @@ import {
   lexicalHTML,
 } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
-import { updateContestAfterRead } from './hooks/updateContestAfterRead'
 
 const Contest: CollectionConfig = {
   slug: 'contest',
@@ -12,7 +11,7 @@ const Contest: CollectionConfig = {
     useAsTitle: 'title',
   },
   hooks: {
-    beforeRead: [updateContestAfterRead],
+    // beforeRead: [updateContestAfterRead],
   },
   fields: [
     {
@@ -306,8 +305,18 @@ const Contest: CollectionConfig = {
             {
               name: 'reached_threshold',
               type: 'checkbox',
+              label: 'Reached Threshold',
               admin: {
                 readOnly: true,
+              },
+            },
+            {
+              name: 'threshold_reached_date',
+              type: 'date',
+              label: 'Threshold Reached Date',
+              admin: {
+                readOnly: true,
+                condition: data => data.reached_threshold === true,
               },
             },
             {

@@ -190,6 +190,7 @@ export interface Contest {
   battery?: string | null;
   Camera?: string | null;
   reached_threshold?: boolean | null;
+  threshold_reached_date?: string | null;
   contest_status?: boolean | null;
   winner_ticket?: {
     relationTo: 'winner';
@@ -245,10 +246,10 @@ export interface Ticket {
     relationTo: 'contest';
     value: string | Contest;
   };
-  purchased_by: {
+  purchased_by?: {
     relationTo: 'users';
     value: string | User;
-  };
+  } | null;
   updatedAt: string;
   createdAt: string;
 }

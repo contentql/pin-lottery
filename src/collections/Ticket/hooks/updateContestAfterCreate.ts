@@ -31,11 +31,14 @@ export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
     } = doc
 
     const reached_threshold = ticket_price * tickets_purchased >= product_price
+    const date = new Date()
+    console.log('date: ', date)
 
     const latestData = {
       ...doc,
       tickets_purchased,
       reached_threshold,
+      threshold_reached_date: reached_threshold ? date : undefined,
     }
 
     await payload.update({
