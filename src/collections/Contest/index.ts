@@ -25,30 +25,33 @@ const Contest: CollectionConfig = {
           },
         })
 
-        const { ticket_price, product_price } = doc
+        if (
+          !context?.updateDoc &&
+          doc.tickets_purchased !== tickets_purchased
+        ) {
+          const { ticket_price, product_price } = doc
+          const reachedThreshold =
+            ticket_price * tickets_purchased >= product_price
 
-        const reachedThreshold =
-          ticket_price * tickets_purchased >= product_price
+          const latestData = {
+            ...doc,
+            tickets_purchased,
+            reached_threshold: reachedThreshold,
+          }
 
-        const latestData = {
-          ...doc,
-          tickets_purchased,
-          reached_threshold: reachedThreshold,
-        }
-
-        if (context.doNotUpdateDoc === false) {
           await payload.update({
             collection: 'contest',
             id: doc.id,
             data: latestData,
             context: {
-              doNotUpdateDoc: true,
+              updateDoc: true,
             },
           })
-        }
 
-        // This is to show user the data
-        return latestData
+          return latestData
+        } else {
+          return doc
+        }
       },
     ],
   },
