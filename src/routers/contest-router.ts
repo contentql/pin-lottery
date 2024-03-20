@@ -7,18 +7,36 @@ export const contestRouter = router({
   getContests: publicProcedure
     .input(ContestPaginationValidator)
     .query(async ({ input }) => {
-      const { pageNumber, filterByName } = input
+      const { pageNumber, filterByName, filterByPrice, filterByTitle } = input
       const payload = await getPayloadClient()
 
       const contest = await payload.find({
         collection: 'contest',
         limit: 9,
         page: pageNumber,
-
         where: {
-          product_type: {
-            equals: filterByName === 'all' ? '' : filterByName,
-          },
+          ...(filterByName !== 'all' && {
+            product_type: {
+              equals: filterByName,
+            },
+          }),
+          and: [
+            {
+              ...(filterByPrice !== 0 && {
+                ticket_price: {
+                  less_than_equal: filterByPrice,
+                },
+              }),
+            },
+            {
+              ...(filterByTitle !== '' && {
+                title: {
+                  contains: filterByTitle,
+                },
+              }),
+            },
+            {},
+          ],
         },
       })
       const totalContests = contest?.totalDocs

@@ -63,7 +63,7 @@ const LatestContest = ({
   const handleSearchTag = (tag: string) => {
     const search = new URLSearchParams(searchParams)
     search.set('tag', tag.toString())
-    router.push(`${pathname}?${search.toString()}#myTab`)
+    router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByName: tag })
   }
 
@@ -74,7 +74,7 @@ const LatestContest = ({
     } else {
       search.set('title', value)
     }
-    router.push(`${pathname}?${search.toString()}#myTab`)
+    router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByTitle: value })
   }
 
@@ -85,7 +85,7 @@ const LatestContest = ({
     } else {
       search.set('price', value.toString())
     }
-    router.push(`${pathname}?${search.toString()}#myTab`)
+    router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByPrice: value })
     console.log('types', value)
   }
@@ -97,16 +97,16 @@ const LatestContest = ({
     } else {
       search.set('select', value.toString())
     }
-    router.push(`${pathname}${search.toString()}`)
+    router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterBySelect: value })
   }
 
   const updatedTitle = useDebounceCallback(handleSearchTitle, 200)
-  const updatedPrice = useDebounceCallback(handleSearchPrice, 200)
+  const updatedPrice = useDebounceCallback(handleSearchPrice, 500)
 
   const handleClearFilters = () => {
     const params = new URLSearchParams()
-    router.push(`${pathname}?${params.toString()}#myTab`)
+    router.push(`${pathname}?${params.toString()}#contest`)
     setFilters({
       filterByName: 'all',
       filterByTitle: '',
@@ -127,7 +127,7 @@ const LatestContest = ({
           <div className='col-lg-12'>
             <div className='contest-wrapper'>
               <div className='contest-wrapper__header pt-120'>
-                <h2 className='contest-wrapper__title' id='myTab'>
+                <h2 className='contest-wrapper__title' id='contest'>
                   Latest Contest
                 </h2>
                 <FilterByTag
@@ -244,7 +244,7 @@ const LatestContest = ({
 
                 <div
                   className='tab-con tent mt-50 contests-body'
-                  id='myTabContent'>
+                  id='contestContent'>
                   {isContestsPending ? (
                     <PageLoading />
                   ) : (
@@ -255,13 +255,15 @@ const LatestContest = ({
                       aria-labelledby='dream-tab'>
                       <div className='row mb-none-30 mt-50'>
                         {contestDetails?.allContests.length > 0 ? (
-                          contestDetails?.allContests.map((contest: any) => (
-                            <div
-                              key={contest.id}
-                              className='col-xl-4 col-md-6 mb-30'>
-                              <ContestCard itm={contest} />
-                            </div>
-                          ))
+                          contestDetails?.allContests
+                            ?.sort(handleFilterBySort)
+                            ?.map((contest: any) => (
+                              <div
+                                key={contest.id}
+                                className='col-xl-4 col-md-6 mb-30'>
+                                <ContestCard itm={contest} />
+                              </div>
+                            ))
                         ) : (
                           <div className='section-header text-center'>
                             {/* <Image

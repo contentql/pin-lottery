@@ -3,23 +3,31 @@
 import { useSearchParams } from 'next/navigation'
 
 import Banner from '@/components/common/Banner'
-import PaginationTwo from '@/components/common/Pagination'
+import Pagination from '@/components/common/Pagination'
 import Feature from '@/components/contest/Feature'
 import LatestContest from '@/components/contest/LatestContest'
 import { useState } from 'react'
+import { useDebounceValue } from 'usehooks-ts'
 import { trpc } from '../trpc/client'
 const ContestView = () => {
   const searchParams = useSearchParams()
   //filters
-  const [filters, setFilters] = useState({
-    pageNumber: 1,
-    filterByName: searchParams?.get('tag') ? searchParams?.get('tag') : 'all',
-    filterByTitle: searchParams?.get('title') ? searchParams?.get('title') : '',
-    filterByPrice: searchParams?.get('price') ? searchParams?.get('price') : 0,
-    filterBySelect: searchParams?.get('select')
-      ? searchParams?.get('select')
-      : 0,
-  })
+  const [pageNumber, setPageNumber] = useState(1)
+  const [filters, setFilters] = useDebounceValue(
+    {
+      filterByName: searchParams?.get('tag') ? searchParams?.get('tag') : 'all',
+      filterByTitle: searchParams?.get('title')
+        ? searchParams?.get('title')
+        : '',
+      filterByPrice: searchParams?.get('price')
+        ? searchParams?.get('price')
+        : 0,
+      filterBySelect: searchParams?.get('select')
+        ? searchParams?.get('select')
+        : 0,
+    },
+    500,
+  )
 
   // getting all contests
 
@@ -28,8 +36,10 @@ const ContestView = () => {
     isLoading,
     isPending: isContestsPending,
   } = trpc.contest.getContests.useQuery({
-    pageNumber: filters?.pageNumber,
+    pageNumber: pageNumber,
     filterByName: filters?.filterByName!,
+    filterByPrice: Number(filters?.filterByPrice),
+    filterByTitle: filters?.filterByTitle!,
   })
 
   //getting tags details
@@ -60,9 +70,9 @@ const ContestView = () => {
 
       <div>
         <div className='row pagination-bottom'>
-          <PaginationTwo
-            filters={filters}
-            setFilters={setFilters}
+          <Pagination
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
             totalContests={contestDetails?.totalContests}
           />
         </div>

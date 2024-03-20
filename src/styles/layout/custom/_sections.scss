@@ -788,3 +788,16 @@ strong {
 .contests-body {
   min-height: 500px;
 }
+
+.slick-next,
+.slick-prev {
+  background-image: linear-gradient(
+    4deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(251, 185, 54) 100%
+  );
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+}

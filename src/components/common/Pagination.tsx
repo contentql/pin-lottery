@@ -1,30 +1,41 @@
 'use client'
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
+import { useDebounceCallback } from 'usehooks-ts'
 
-const PaginationTwo = ({ filters, setFilters, totalContests }: any) => {
+const Pagination = ({ pageNumber, setPageNumber, totalContests }: any) => {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
   const handlePrevious = () => {
-    if (filters.pageNumber == 1) {
+    if (pageNumber == 1) {
     } else {
-      setFilters({ ...filters, pageNumber: filters.pageNumber - 1 })
+      setPageNumber((prev: number) => prev - 1)
     }
   }
   const handleNext = () => {
-    setFilters({ ...filters, pageNumber: filters.pageNumber + 1 })
+    if (totalContests >= pageNumber * 9) {
+      setPageNumber((next: number) => next + 1)
+    }
   }
+
+  const updatedPrev = useDebounceCallback(handlePrevious, 200)
+  const updatedNext = useDebounceCallback(handleNext, 200)
 
   return (
     <div className='mbp_pagination text-center'>
       <ul className='page_navigation'>
         <li className='page-item'>
-          <span className='page-link arrow' onClick={handlePrevious}>
+          <span className='page-link arrow' onClick={updatedPrev}>
             <span>
               <FaAngleLeft size={24} color='black' />
             </span>
           </span>
         </li>
-        <li className={filters.pageNumber ? 'active page-item' : 'page-item'}>
-          <span className='page-link '>{filters.pageNumber}</span>
+        <li className={pageNumber ? 'active page-item' : 'page-item'}>
+          <span className='page-link '>{pageNumber}</span>
         </li>
 
         {/* <li
@@ -83,7 +94,7 @@ const PaginationTwo = ({ filters, setFilters, totalContests }: any) => {
         )} */}
 
         <li className='page-item'>
-          <span className='page-link' onClick={handleNext}>
+          <span className='page-link' onClick={updatedNext}>
             <span>
               <FaAngleRight size={24} color='black' />
             </span>
@@ -91,14 +102,12 @@ const PaginationTwo = ({ filters, setFilters, totalContests }: any) => {
         </li>
       </ul>
       <p className='mt10 pagination_page_count text-center'>
-        {(filters.pageNumber - 1) * 9 + 1}-
-        {filters.pageNumber * 9 > totalContests
-          ? totalContests
-          : filters.pageNumber * 9}{' '}
-        of {totalContests}+ contests available
+        {(pageNumber - 1) * 9 + 1}-
+        {pageNumber * 9 > totalContests ? totalContests : pageNumber * 9} of{' '}
+        {totalContests} available
       </p>
     </div>
   )
 }
 
-export default PaginationTwo
+export default Pagination
