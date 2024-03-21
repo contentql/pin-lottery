@@ -25,6 +25,7 @@
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.17",
     "@hookform/resolvers": "^3.3.4",
+    "@nouance/payload-better-fields-plugin": "^1.3.6",
     "@payloadcms/bundler-webpack": "^1.0.6",
     "@payloadcms/db-mongodb": "^1.4.2",
     "@payloadcms/plugin-cloud": "^3.0.0",

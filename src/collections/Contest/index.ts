@@ -4,6 +4,11 @@ import {
   lexicalHTML,
 } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
+import { NumberField } from '@nouance/payload-better-fields-plugin'
+import { customAlphabet } from 'nanoid'
+
+const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const nanoid = customAlphabet(alphabet, 3)
 
 const Contest: CollectionConfig = {
   slug: 'contest',
@@ -25,12 +30,23 @@ const Contest: CollectionConfig = {
             {
               type: 'row',
               fields: [
-                {
-                  name: 'product_price',
-                  type: 'number',
-                  label: 'Product Price',
-                  required: true,
-                },
+                ...NumberField(
+                  {
+                    name: 'product_price',
+                    required: true,
+                    label: 'Product Price',
+                    admin: {
+                      description: 'Enter the price in $',
+                      placeholder: '199.99',
+                    },
+                  },
+                  {
+                    prefix: '$ ',
+                    thousandSeparator: ',',
+                    decimalScale: 2,
+                    fixedDecimalScale: true,
+                  },
+                ),
               ],
             },
             {
@@ -102,6 +118,10 @@ const Contest: CollectionConfig = {
                   label: 'Contest Number',
                   required: true,
                   maxLength: 5,
+                  defaultValue: nanoid(),
+                  admin: {
+                    readOnly: true,
+                  },
                 },
                 {
                   name: 'tickets_purchased',
@@ -116,12 +136,23 @@ const Contest: CollectionConfig = {
             {
               type: 'row',
               fields: [
-                {
-                  name: 'ticket_price',
-                  type: 'number',
-                  label: 'Ticket Price',
-                  required: true,
-                },
+                ...NumberField(
+                  {
+                    name: 'ticket_price',
+                    label: 'Ticket Price',
+                    required: true,
+                    admin: {
+                      description: 'Enter the price in dollars',
+                      placeholder: '10.99',
+                    },
+                  },
+                  {
+                    prefix: '$ ',
+                    thousandSeparator: ',',
+                    decimalScale: 2,
+                    fixedDecimalScale: true,
+                  },
+                ),
                 {
                   name: 'day_remain',
                   type: 'text',
