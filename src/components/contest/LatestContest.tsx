@@ -6,14 +6,12 @@ import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
 
-
 const LatestContest = ({
   contestDetails,
   allTags,
   filters,
   setFilters,
 }: any) => {
-
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -27,7 +25,7 @@ const LatestContest = ({
     inputValue: title ? title : '',
     selectValue: select ? select : '',
   })
-  
+
   const getBackgroundSize = () => {
     return {
       backgroundSize: `${(resetValues?.sliderValue * 100) / MAX}% 100%`,
@@ -39,7 +37,7 @@ const LatestContest = ({
     return filters.filterByName?.includes(tag?.tag?.value?.tag)
   }
 
-  const handleFilterByPrice = (contest:any) => {
+  const handleFilterByPrice = (contest: any) => {
     if (filters.filterByPrice === 0) return true
     return contest?.ticket_price <= filters.filterByPrice
   }
@@ -51,19 +49,15 @@ const LatestContest = ({
       ?.includes(filters.filterByTitle?.toLowerCase())
   }
 
-   const handleFilterBySort = (value1:any,value2:any) => {
-     if (filters.filterBySelect === 'priceLowToHigh') {
-       return value1.ticket_price - value2.ticket_price
-     }
-     else if (filters.filterBySelect === "priceHighToLow") {
-       return value2.ticket_price - value1.ticket_price
-     }
-     else if (filters.filterBySelect === 'sortByName') {
-       return value1.title.localeCompare(value2.title)
-     }
-     else 
-       return false
-   }
+  const handleFilterBySort = (value1: any, value2: any) => {
+    if (filters.filterBySelect === 'priceLowToHigh') {
+      return value1.ticket_price - value2.ticket_price
+    } else if (filters.filterBySelect === 'priceHighToLow') {
+      return value2.ticket_price - value1.ticket_price
+    } else if (filters.filterBySelect === 'sortByName') {
+      return value1.title.localeCompare(value2.title)
+    } else return false
+  }
 
   const handleSearchTag = (tag: string) => {
     const search = new URLSearchParams(searchParams)
@@ -95,16 +89,15 @@ const LatestContest = ({
     console.log('types', value)
   }
 
-  const handleSearchSortBy = (value:string) => {
+  const handleSearchSortBy = (value: string) => {
     const search = new URLSearchParams(searchParams)
-    if (value ==='') {
+    if (value === '') {
       search.delete('select')
     } else {
       search.set('select', value.toString())
-    } 
+    }
     router.push(`${pathname}${search.toString()}`)
-    setFilters({ ...filters, filterBySelect:value })
-
+    setFilters({ ...filters, filterBySelect: value })
   }
 
   const updatedTitle = useDebounceCallback(handleSearchTitle, 200)
@@ -121,7 +114,7 @@ const LatestContest = ({
     setResetValues({
       sliderValue: 0,
       inputValue: '',
-      selectValue:'',
+      selectValue: '',
     })
   }
 
@@ -151,8 +144,8 @@ const LatestContest = ({
                           <Image
                             src={tag?.img?.url}
                             alt='winner tab 1'
-                            width={100}
-                            height={100}
+                            width={80}
+                            height={80}
                           />
                         </span>
                         <span>{tag?.tag}</span>
