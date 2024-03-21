@@ -2,14 +2,20 @@ import { Ticket } from '@/payload-types'
 import PastDraws from './PastDraws'
 import UpcomingDraw from './UpcomingDraw'
 
-const RightSide = ({ ticketsData }: { ticketsData: Ticket[] }) => {
+const RightSide = ({
+  upcomingDrawTicketsData,
+  pastDrawsTicketsData,
+}: {
+  upcomingDrawTicketsData: Ticket[]
+  pastDrawsTicketsData: Ticket[]
+}) => {
   return (
     <div className='col-lg-8 mt-lg-0 mt-4'>
       {/* Upcoming Draw */}
-      <UpcomingDraw ticketsData={ticketsData} />
+      <UpcomingDraw upcomingDrawTicketsData={upcomingDrawTicketsData} />
 
       {/* Past Draws */}
-      <PastDraws ticketsData={ticketsData} />
+      <PastDraws pastDrawsTicketsData={pastDrawsTicketsData} />
     </div>
   )
 }

@@ -31,7 +31,11 @@ const PrevBtn = ({ onClick }: any) => {
   )
 }
 
-const UpcomingDraw = ({ ticketsData }: { ticketsData: Ticket[] }) => {
+const UpcomingDraw = ({
+  upcomingDrawTicketsData,
+}: {
+  upcomingDrawTicketsData: Ticket[]
+}) => {
   const settings = {
     slidesToShow: 2,
     slidesToScroll: 1,
@@ -56,11 +60,12 @@ const UpcomingDraw = ({ ticketsData }: { ticketsData: Ticket[] }) => {
       },
     ],
   }
+
   return (
     <div className='upcoming-draw-wrapper'>
-      <h3 className='title'>Upcoming Draw</h3>
+      <h3 className='title'>Upcoming Draws</h3>
       <Slider {...settings} className='draw-ticket-slider'>
-        {ticketsData?.map((ticket, index) => (
+        {upcomingDrawTicketsData?.map((ticket, index) => (
           <div key={index} className='silgle'>
             <div className='draw-single-ticket'>
               <div className='draw-single-ticket__header'>

@@ -3,29 +3,70 @@ import { customAlphabet } from 'nanoid'
 
 import { getPayloadClient } from '../get-payload'
 import { ContestIdValidator } from '../lib/validators/contest-id-validator'
+import { PageNumberValidator } from '../lib/validators/page-number-validator'
 import { TicketValidator } from '../lib/validators/ticket-validator'
 import { publicProcedure, router, userProcedure } from '../trpc/trpc'
 
 export const ticketRouter = router({
-  getTickets: userProcedure.query(async ({ ctx }) => {
-    const { user } = ctx
+  getUpcomingDrawsTickets: userProcedure
+    .input(PageNumberValidator)
+    .query(async ({ ctx, input }) => {
+      const { user } = ctx
+      const { page = 1 } = input
 
-    const payload = await getPayloadClient()
+      const payload = await getPayloadClient()
+      const pageSize = 10
 
-    try {
-      const tickets = await payload.find({
-        collection: 'tickets',
-        user,
-        overrideAccess: false,
-        depth: 1,
-      })
+      try {
+        const tickets = await payload.find({
+          collection: 'tickets',
+          user,
+          overrideAccess: false,
+          page,
+          limit: page * pageSize,
+          // where: {
+          //   'contest_id.value.contest_status': {
+          //     equals: false,
+          //   },
+          // },
+        })
 
-      return tickets.docs
-    } catch (error: any) {
-      console.log('Get tickets: ', error)
-      throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
-    }
-  }),
+        return tickets.docs
+      } catch (error: any) {
+        console.log('Get upcoming draws tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
+    }),
+
+  getPastDrawsTickets: userProcedure
+    .input(PageNumberValidator)
+    .query(async ({ ctx, input }) => {
+      const { user } = ctx
+      const { page = 1 } = input
+
+      const payload = await getPayloadClient()
+      const pageSize = 10
+
+      try {
+        const tickets = await payload.find({
+          collection: 'tickets',
+          user,
+          overrideAccess: false,
+          page,
+          limit: page * pageSize,
+          // where: {
+          //   'contest_id.value.contest_status': {
+          //     equals: true,
+          //   },
+          // },
+        })
+
+        return tickets.docs
+      } catch (error: any) {
+        console.log('Get past draws tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
+    }),
 
   addTickets: userProcedure
     .input(TicketValidator)
@@ -68,6 +109,7 @@ export const ticketRouter = router({
       try {
         const tickets = await payload.find({
           collection: 'tickets',
+          pagination: false,
           where: {
             'contest_id.value': {
               equals: id,

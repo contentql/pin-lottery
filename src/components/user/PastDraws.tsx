@@ -1,9 +1,13 @@
 import { BsChevronDown } from 'react-icons/bs'
 
-import { Contest, Ticket } from '@/payload-types'
+import { Contest, Ticket, Winner } from '@/payload-types'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
 
-const PastDraws = ({ ticketsData }: { ticketsData: Ticket[] }) => {
+const PastDraws = ({
+  pastDrawsTicketsData,
+}: {
+  pastDrawsTicketsData: Ticket[]
+}) => {
   return (
     <div className='past-draw-wrapper'>
       <h3 className='title'>Past Draws</h3>
@@ -18,39 +22,47 @@ const PastDraws = ({ ticketsData }: { ticketsData: Ticket[] }) => {
             </tr>
           </thead>
           <tbody>
-            {ticketsData?.map(ticket => (
-              <tr key={ticket?.id}>
-                <td>
-                  <span className='date'>
-                    {new Date().toISOString().split('T')[0]}
-                  </span>
-                </td>
-                <td>
-                  <span className='contest-no'>
-                    {(ticket?.contest_id?.value as Contest)?.contest_no}
-                  </span>
-                </td>
-                <td>
-                  <ul
-                    className={`number-list ${
-                      ticket?.win_status ? 'win-list' : ''
-                    }`}>
-                    {splitTicketNumber(ticket?.ticket_number).map(
-                      (num: string, idx: number) => (
-                        <li key={idx}>{num}</li>
-                      ),
+            {pastDrawsTicketsData?.map(ticket => {
+              const winningTicket =
+                (
+                  (ticket?.contest_id?.value as Contest)?.winner_ticket
+                    ?.value as Winner
+                )?.ticket?.value === ticket?.id
+
+              return (
+                <tr key={ticket?.id}>
+                  <td>
+                    <span className='date'>
+                      {new Date().toISOString().split('T')[0]}
+                    </span>
+                  </td>
+                  <td>
+                    <span className='contest-no'>
+                      {(ticket?.contest_id?.value as Contest)?.contest_no}
+                    </span>
+                  </td>
+                  <td>
+                    <ul
+                      className={`number-list ${
+                        winningTicket ? 'win-list' : ''
+                      }`}>
+                      {splitTicketNumber(ticket?.ticket_number).map(
+                        (num: string, idx: number) => (
+                          <li key={idx}>{num}</li>
+                        ),
+                      )}
+                    </ul>
+                  </td>
+                  <td>
+                    {winningTicket ? (
+                      <span className='win'>Win</span>
+                    ) : (
+                      <span className='fail'>No Win</span>
                     )}
-                  </ul>
-                </td>
-                <td>
-                  {ticket?.win_status ? (
-                    <span className='win'>Win</span>
-                  ) : (
-                    <span className='fail'>No Win</span>
-                  )}
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
