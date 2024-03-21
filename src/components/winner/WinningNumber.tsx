@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Contest, Media, Ticket, Winner } from '@/payload-types'
+import { Contest, Media, Ticket, User, Winner } from '@/payload-types'
 import { DateConverter } from '@/utils/date-converter'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
 import Confetti from '../common/Confetti'
@@ -12,6 +12,26 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
       <Confetti />
       <section className='mt-minus-150'>
         <div className='container'>
+          <div className='col-lg-12'>
+            <div className='clock-wrapper'>
+              <h2 className='mb-2'>
+                Congratulations!{' '}
+                <span>
+                  <h2>
+                    {
+                      (
+                        (
+                          (contestDetails?.winner_ticket?.value as Winner)
+                            ?.ticket?.value as Ticket
+                        )?.purchased_by?.value as User
+                      )?.user_name
+                    }
+                  </h2>
+                </span>
+              </h2>
+              <div className='clock'></div>
+            </div>
+          </div>
           <div className='row'>
             <div className='col-lg-12'>
               <div className='winner-details-wrapper bg_img'>
@@ -46,13 +66,28 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
                       <li key={index}>{number}</li>
                     ))}
                   </ul>
+                  <h6>The winner details are: </h6>
                   <div className='btn-grp'>
-                    <a href='#0' className='btn-border'>
+                    <p>
+                      {' '}
+                      Email:
+                      <span>
+                        {
+                          (
+                            (
+                              (contestDetails?.winner_ticket?.value as Winner)
+                                ?.ticket?.value as Ticket
+                            )?.purchased_by?.value as User
+                          )?.email
+                        }
+                      </span>
+                    </p>
+                    {/* <a href='#0' className='btn-border'>
                       Alerts
                     </a>
                     <a href='#0' className='btn-border'>
                       How to Claim
-                    </a>
+                    </a> */}
                   </div>
                 </div>
                 <div className='right'>

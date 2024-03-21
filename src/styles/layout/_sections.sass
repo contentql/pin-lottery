@@ -662,7 +662,8 @@
   padding: 50px 20px
   +d-flex 
   align-items: flex-end
-  +border-radius(20px)
+  border-bottom-left-radius:20px
+  border-bottom-right-radius:20px
   position: relative 
   @media (max-width: 575px)
     padding: 30px 20px
@@ -828,6 +829,9 @@
     +d-flex
     align-items: center
     @media (max-width: 767px)
+      border-top-left-radius:15px
+      border-top-right-radius:15px
+      border-bottom-right-radius:15px
       width: 100%
       justify-content: center
   &__content
@@ -1460,6 +1464,7 @@
         font-size: 14px
         text-transform: capitalize
 .contest-cart 
+  border-radius:15px
   background-color: #12023e
   padding: 30px 30px 120px 30px
   position: relative 
