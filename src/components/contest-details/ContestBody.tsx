@@ -29,7 +29,9 @@ const ContestBody = ({
   contestDetails: Contest
   handleDrawTickets: MouseEventHandler<HTMLButtonElement>
 }) => {
-  const milliseconds = sd.parse(contestDetails?.day_remain || '1s') * 1000
+  const milliseconds = contestDetails?.day_remain
+    ? sd.parse(contestDetails?.day_remain) * 1000
+    : 1
 
   return (
     <section className='pb-120 mt-minus-300'>

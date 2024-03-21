@@ -42,50 +42,53 @@ export const ticketRouter = router({
             await payload.create({
               collection: 'tickets',
               data: {
-                ticket_number: nanoid(),
                 ticket_price,
                 contest_id: { relationTo: 'contest', value: contest_id },
-                purchased_by: { relationTo: 'users', value: user?.id },
               },
+              user,
             })
           }),
         )
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'BAD_REQUEST' })
+      } catch (err: any) {
+        console.log('Add Ticket: ', err)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: err?.message })
       }
     }),
 
-  getContestTickets: publicProcedure.input(ContestIdValidator).query(async({input}) => {
-    const {id }=input
-    const payload = await getPayloadClient();
+  getContestTickets: publicProcedure
+    .input(ContestIdValidator)
+    .query(async ({ input }) => {
+      const { id } = input
+      const payload = await getPayloadClient()
 
-   const tickets = await payload.find({
-     collection: 'tickets',
-     where: {
-       'contest_id.value': {
-         equals: id,
-       },
-     },
-   })
-    return tickets?.docs
-  }),
+      const tickets = await payload.find({
+        collection: 'tickets',
+        where: {
+          'contest_id.value': {
+            equals: id,
+          },
+        },
+      })
+      return tickets?.docs
+    }),
 
-  deleteTickets: publicProcedure.input(ContestIdValidator).mutation(async ({input}) => {
-    
-    const { id } = input
-    
-    const payload = await getPayloadClient()
-    
-    await payload.delete({
-      collection: 'tickets',
-      where: {
-        'contest_id.value': {
-          equals:id
-        }
-      }
-    })
-    return true;
-  })
+  deleteTickets: publicProcedure
+    .input(ContestIdValidator)
+    .mutation(async ({ input }) => {
+      const { id } = input
+
+      const payload = await getPayloadClient()
+
+      await payload.delete({
+        collection: 'tickets',
+        where: {
+          'contest_id.value': {
+            equals: id,
+          },
+        },
+      })
+      return true
+    }),
 })

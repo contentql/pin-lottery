@@ -1,11 +1,11 @@
+import { NumberField } from '@nouance/payload-better-fields-plugin'
 import {
   HTMLConverterFeature,
   lexicalEditor,
   lexicalHTML,
 } from '@payloadcms/richtext-lexical'
-import { CollectionConfig } from 'payload/types'
-import { NumberField } from '@nouance/payload-better-fields-plugin'
 import { customAlphabet } from 'nanoid'
+import { CollectionConfig } from 'payload/types'
 
 const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const nanoid = customAlphabet(alphabet, 3)
@@ -156,7 +156,7 @@ const Contest: CollectionConfig = {
                 {
                   name: 'day_remain',
                   type: 'text',
-                  label: 'Days after threshold reached',
+                  label: 'Days After Threshold Reached',
                   defaultValue: '5d 6h 56m 30s',
                   required: true,
                   admin: {

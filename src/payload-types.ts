@@ -232,10 +232,8 @@ export interface Winner {
  */
 export interface Ticket {
   id: string;
-  ticket_number: string;
+  ticket_number?: string | null;
   ticket_price: number;
-  draw_status?: boolean | null;
-  win_status?: boolean | null;
   contest_id: {
     relationTo: 'contest';
     value: string | Contest;
