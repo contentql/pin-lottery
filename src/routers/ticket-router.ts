@@ -109,15 +109,15 @@ export const ticketRouter = router({
 
       try {
         const tickets = await payload.find({
-        collection: 'tickets',
+          collection: 'tickets',
           where: {
             'contest_id.value': {
               equals: id,
             },
           },
         })
-        
-      return tickets?.docs
+
+        return tickets?.docs
       } catch (error: any) {
         console.log('Get tickets by contest: ', error)
         throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
@@ -159,15 +159,21 @@ export const ticketRouter = router({
 
       const payload = await getPayloadClient()
 
-      const ticket = await payload.find({
-        collection: 'tickets',
-        depth: 0,
-        where: {
-          ticket_number: {
-            equals: ticket_no,
+      try {
+        const ticket = await payload.find({
+          collection: 'tickets',
+          depth: 0,
+          where: {
+            ticket_number: {
+              equals: ticket_no,
+            },
           },
-        },
-      })
-      return ticket.docs.at(0)
+        })
+
+        return ticket.docs.at(0)
+      } catch (error: any) {
+        console.log('Get ticket by id: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
     }),
 })
