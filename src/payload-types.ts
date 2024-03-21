@@ -72,6 +72,14 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
+    contestImage?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     userProfile?: {
       url?: string | null;
       width?: number | null;
@@ -170,6 +178,7 @@ export interface Contest {
   features_html?: string | null;
   description_html?: string | null;
   contest_no: string;
+  tickets_purchased?: number | null;
   ticket_price: number;
   day_remain: number;
   product_type?: ('Car' | 'Bike' | 'Mobile' | 'Laptop') | null;
@@ -185,6 +194,8 @@ export interface Contest {
   display?: string | null;
   battery?: string | null;
   Camera?: string | null;
+  reached_threshold?: boolean | null;
+  threshold_reached_date?: string | null;
   contest_status?: boolean | null;
   winner_ticket?: {
     relationTo: 'winner';
@@ -229,10 +240,10 @@ export interface Ticket {
     relationTo: 'contest';
     value: string | Contest;
   };
-  purchased_by: {
+  purchased_by?: {
     relationTo: 'users';
     value: string | User;
-  };
+  } | null;
   updatedAt: string;
   createdAt: string;
 }

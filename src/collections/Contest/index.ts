@@ -10,6 +10,9 @@ const Contest: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
   },
+  hooks: {
+    // beforeRead: [updateContestAfterRead],
+  },
   fields: [
     {
       type: 'tabs',
@@ -91,12 +94,24 @@ const Contest: CollectionConfig = {
           description: 'Please provide contest details.',
           fields: [
             {
-              name: 'contest_no',
-              type: 'text',
-              label: 'Contest Number',
-              required: true,
-              maxLength: 5,
-              index: true,
+              type: 'row',
+              fields: [
+                {
+                  name: 'contest_no',
+                  type: 'text',
+                  label: 'Contest Number',
+                  required: true,
+                  maxLength: 5,
+                },
+                {
+                  name: 'tickets_purchased',
+                  type: 'number',
+                  label: 'Tickets Purchased',
+                  admin: {
+                    readOnly: true,
+                  },
+                },
+              ],
             },
             {
               type: 'row',
@@ -290,6 +305,23 @@ const Contest: CollectionConfig = {
           label: 'Contest Status',
           description: 'Contest status for winner announcement',
           fields: [
+            {
+              name: 'reached_threshold',
+              type: 'checkbox',
+              label: 'Reached Threshold',
+              admin: {
+                readOnly: true,
+              },
+            },
+            {
+              name: 'threshold_reached_date',
+              type: 'date',
+              label: 'Threshold Reached Date',
+              admin: {
+                readOnly: true,
+                condition: data => data.reached_threshold === true,
+              },
+            },
             {
               name: 'contest_status',
               label: 'Contest Winner announced',

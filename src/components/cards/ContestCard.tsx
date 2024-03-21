@@ -3,16 +3,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaRegHeart } from 'react-icons/fa'
 
-const ContestCard = ({ itm }: {itm:Contest}) => {
+const ContestCard = ({ itm }: { itm: Contest }) => {
   return (
     <div className='contest-card'>
       <Link href={`/contest/${itm.id}`} className='item-link'></Link>
       <div className='contest-card__thumb'>
         <Image
-          src={(itm.img as Media).url || '/'}
+          src={(itm.img as Media)?.sizes?.contestImage?.url || '/'}
           alt={itm.title}
-          width={(itm?.img as Media)?.width || 100}
-          height={(itm?.img as Media)?.height || 100}
+          width={(itm?.img as Media)?.sizes?.contestImage?.width || 100}
+          height={(itm?.img as Media)?.sizes?.contestImage?.height || 100}
         />
         <a href='#0' className='action-icon'>
           <FaRegHeart />
@@ -31,15 +31,23 @@ const ContestCard = ({ itm }: {itm:Contest}) => {
           <p>ticket price</p>
         </div>
       </div>
-      {itm?.contest_status===true ? (
-         <div className='contest-card__footer'>
+      {itm?.contest_status === true ? (
+        <div className='contest-card__footer'>
           <ul>
             <li className='footer-card'>
               <p>Winner is :</p>
-              <p>{((itm?.winner_ticket?.value as Winner)?.ticket?.value as Ticket)?.ticket_number}</p>
+              <p>
+                {
+                  (
+                    (itm?.winner_ticket?.value as Winner)?.ticket
+                      ?.value as Ticket
+                  )?.ticket_number
+                }
+              </p>
             </li>
           </ul>
         </div>
+      ) : (
         // actual fotter
         // <div className='contest-card__footer'>
         //   <ul className='contest-card__meta'>
@@ -53,8 +61,7 @@ const ContestCard = ({ itm }: {itm:Contest}) => {
         //     </li>
         //   </ul>
         // </div>
-      ) : (
-          <div className='contest-card__footer'>
+        <div className='contest-card__footer'>
           <ul>
             <li className='footer-card'>
               <i className='las la-ticket-alt'></i>

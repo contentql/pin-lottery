@@ -1,6 +1,8 @@
 import { CollectionConfig } from 'payload/types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
 import { assignUserId } from './field-level-hooks/assignUserId'
+import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
+import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
@@ -11,6 +13,11 @@ const Ticket: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'ticket_number',
+  },
+  // when creating a ticket, ensure the button was disabled
+  hooks: {
+    afterChange: [updateContestAfterCreate],
+    afterOperation: [updateContestAfterDelete],
   },
   fields: [
     {
@@ -83,11 +90,10 @@ const Ticket: CollectionConfig = {
       label: 'Purchased By',
       relationTo: ['users'],
       hasMany: false,
-      required: true,
+      admin: { position: 'sidebar' },
       hooks: {
         beforeChange: [assignUserId],
       },
-      admin: { position: 'sidebar' },
     },
   ],
 }
