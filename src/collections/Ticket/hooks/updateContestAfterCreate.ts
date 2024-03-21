@@ -1,5 +1,4 @@
 import { CollectionAfterChangeHook } from 'payload/types'
-import { Contest } from '../../../payload-types'
 
 export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
   operation,
@@ -11,40 +10,34 @@ export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
   // check threshold and update it
 
   if (operation === 'create') {
-    const { totalDocs: tickets_purchased, docs: tickets } = await payload.find({
+    const { totalDocs: tickets_purchased } = await payload.find({
       collection: 'tickets',
       depth: 1,
       where: {
         'contest_id.value': {
-          equals: req.body.contest_id.value,
+          equals: doc?.contest_id.value.id,
         },
       },
     })
-
-    const ticket = tickets.find(ticket => ticket.id == doc.id)
-
-    const product_price = (ticket?.contest_id?.value as Contest)?.product_price
-
-    const {
-      contest_id: { value: id },
-      ticket_price,
-    } = doc
+    const { id, product_price, ticket_price } = doc?.contest_id.value
 
     const reached_threshold = ticket_price * tickets_purchased >= product_price
-    const date = new Date()
-    console.log('date: ', date)
+    const date = doc?.contest_id.value.threshold_reached_date ?? new Date()
 
     const latestData = {
-      ...doc,
       tickets_purchased,
       reached_threshold,
-      threshold_reached_date: reached_threshold ? date : undefined,
+      threshold_reached_date: reached_threshold ? date.toString() : undefined,
     }
 
-    await payload.update({
-      collection: 'contest',
-      id,
-      data: latestData,
-    })
+    try {
+      await payload.update({
+        collection: 'contest',
+        id,
+        data: latestData,
+      })
+    } catch (error) {
+      console.log('Updating Contest: ', error)
+    }
   }
 }
