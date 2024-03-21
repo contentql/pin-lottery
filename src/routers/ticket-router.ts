@@ -1,6 +1,7 @@
 import { TRPCError } from '@trpc/server'
 import { customAlphabet } from 'nanoid'
 
+import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { ContestIdValidator } from '../lib/validators/contest-id-validator'
 import { TicketValidator } from '../lib/validators/ticket-validator'
@@ -57,35 +58,61 @@ export const ticketRouter = router({
       }
     }),
 
-  getContestTickets: publicProcedure.input(ContestIdValidator).query(async({input}) => {
-    const {id }=input
-    const payload = await getPayloadClient();
+  getContestTickets: publicProcedure
+    .input(ContestIdValidator)
+    .query(async ({ input }) => {
+      const { id } = input
+      const payload = await getPayloadClient()
 
-   const tickets = await payload.find({
-     collection: 'tickets',
-     where: {
-       'contest_id.value': {
-         equals: id,
-       },
-     },
-   })
-    return tickets?.docs
-  }),
+      const tickets = await payload.find({
+        collection: 'tickets',
+        where: {
+          'contest_id.value': {
+            equals: id,
+          },
+        },
+      })
+      return tickets?.docs
+    }),
 
-  deleteTickets: publicProcedure.input(ContestIdValidator).mutation(async ({input}) => {
-    
-    const { id } = input
-    
-    const payload = await getPayloadClient()
-    
-    await payload.delete({
-      collection: 'tickets',
-      where: {
-        'contest_id.value': {
-          equals:id
-        }
-      }
-    })
-    return true;
-  })
+  deleteTickets: publicProcedure
+    .input(ContestIdValidator)
+    .mutation(async ({ input }) => {
+      const { id } = input
+
+      const payload = await getPayloadClient()
+
+      await payload.delete({
+        collection: 'tickets',
+        where: {
+          'contest_id.value': {
+            equals: id,
+          },
+        },
+      })
+      return true
+    }),
+
+  getTicketId: publicProcedure
+    .input(
+      z.object({
+        ticket_no: z.string(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const { ticket_no } = input
+
+      const payload = await getPayloadClient()
+
+      const ticket = await payload.find({
+        collection: 'tickets',
+        depth: 0,
+        where: {
+          ticket_number: {
+            equals: ticket_no,
+          },
+        },
+      })
+      return ticket.docs.at(0)
+    }),
 })

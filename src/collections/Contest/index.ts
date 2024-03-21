@@ -96,6 +96,7 @@ const Contest: CollectionConfig = {
               label: 'Contest Number',
               required: true,
               maxLength: 5,
+              index: true,
             },
             {
               type: 'row',
