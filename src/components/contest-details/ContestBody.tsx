@@ -1,5 +1,6 @@
 import { MouseEventHandler } from 'react'
 import Countdown from 'react-countdown'
+import * as sd from 'simple-duration'
 
 import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
@@ -28,8 +29,7 @@ const ContestBody = ({
   contestDetails: Contest
   handleDrawTickets: MouseEventHandler<HTMLButtonElement>
 }) => {
-  const millisecondsInDay = 24 * 60 * 60 * 1000
-  const milliseconds = contestDetails?.day_remain * millisecondsInDay
+  const milliseconds = sd.parse(contestDetails?.day_remain || '1s') * 1000
 
   return (
     <section className='pb-120 mt-minus-300'>

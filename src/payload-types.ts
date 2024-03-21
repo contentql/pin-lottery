@@ -180,7 +180,7 @@ export interface Contest {
   contest_no: string;
   tickets_purchased?: number | null;
   ticket_price: number;
-  day_remain: number;
+  day_remain: string;
   product_type?: ('Car' | 'Bike' | 'Mobile' | 'Laptop') | null;
   zero_sixty?: string | null;
   top_speed?: string | null;

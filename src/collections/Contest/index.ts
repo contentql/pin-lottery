@@ -124,9 +124,14 @@ const Contest: CollectionConfig = {
                 },
                 {
                   name: 'day_remain',
-                  type: 'number',
+                  type: 'text',
                   label: 'Days after threshold reached',
+                  defaultValue: '5d 6h 56m 30s',
                   required: true,
+                  admin: {
+                    description: 'e.g: 5d 6h 56m 30s',
+                    placeholder: '5d 6h 56m 30s',
+                  },
                 },
               ],
             },
