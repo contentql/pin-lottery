@@ -2,6 +2,7 @@ import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
 import { User } from '../../payload-types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
+import { assignUserId } from './field-level-hooks/assignUserId'
 import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
 
@@ -65,11 +66,13 @@ const Ticket: CollectionConfig = {
       relationTo: ['users'],
       hasMany: false,
       defaultValue: ({ user }: { user: User }) => {
+        if (!user) return undefined
+
         return { relationTo: 'users', value: user?.id }
       },
       admin: { position: 'sidebar' },
       hooks: {
-        // beforeChange: [assignUserId],
+        beforeChange: [assignUserId],
       },
     },
   ],

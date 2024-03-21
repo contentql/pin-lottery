@@ -21,8 +21,9 @@ export const ticketRouter = router({
       })
 
       return tickets.docs
-    } catch (err) {
-      throw new TRPCError({ code: 'BAD_REQUEST' })
+    } catch (error: any) {
+      console.log('Get tickets: ', error)
+      throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
     }
   }),
 
@@ -51,9 +52,9 @@ export const ticketRouter = router({
         )
 
         return { success: true }
-      } catch (err: any) {
-        console.log('Add Ticket: ', err)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: err?.message })
+      } catch (error: any) {
+        console.log('Add tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
       }
     }),
 
@@ -61,17 +62,24 @@ export const ticketRouter = router({
     .input(ContestIdValidator)
     .query(async ({ input }) => {
       const { id } = input
+
       const payload = await getPayloadClient()
 
-      const tickets = await payload.find({
-        collection: 'tickets',
-        where: {
-          'contest_id.value': {
-            equals: id,
+      try {
+        const tickets = await payload.find({
+          collection: 'tickets',
+          where: {
+            'contest_id.value': {
+              equals: id,
+            },
           },
-        },
-      })
-      return tickets?.docs
+        })
+
+        return tickets?.docs
+      } catch (error: any) {
+        console.log('Get tickets by contest: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
     }),
 
   deleteTickets: publicProcedure
@@ -81,14 +89,20 @@ export const ticketRouter = router({
 
       const payload = await getPayloadClient()
 
-      await payload.delete({
-        collection: 'tickets',
-        where: {
-          'contest_id.value': {
-            equals: id,
+      try {
+        await payload.delete({
+          collection: 'tickets',
+          where: {
+            'contest_id.value': {
+              equals: id,
+            },
           },
-        },
-      })
-      return true
+        })
+
+        return { success: true }
+      } catch (error: any) {
+        console.log('Delete Tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
     }),
 })

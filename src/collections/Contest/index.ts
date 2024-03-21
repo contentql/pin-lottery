@@ -8,7 +8,7 @@ import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
 
 const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-const nanoid = customAlphabet(alphabet, 3)
+const nanoid = customAlphabet(alphabet, 4)
 
 const Contest: CollectionConfig = {
   slug: 'contest',
@@ -85,6 +85,8 @@ const Contest: CollectionConfig = {
               name: 'images',
               type: 'array',
               label: 'Product Images',
+              required: true,
+              minRows: 3,
               fields: [
                 {
                   name: 'product_images',

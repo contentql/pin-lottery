@@ -6,10 +6,12 @@ import Prices from './Prices'
 const TotallCart = ({
   cartData,
   updateCartTicketsCountMutation,
+  deleteById,
   deleteAllTicketsOfUserFromCart,
 }: {
   cartData: Cart[]
   updateCartTicketsCountMutation: Function
+  deleteById: Function
   deleteAllTicketsOfUserFromCart: Function
 }) => {
   return (
@@ -26,6 +28,7 @@ const TotallCart = ({
                   updateCartTicketsCountMutation={
                     updateCartTicketsCountMutation
                   }
+                  deleteById={deleteById}
                   deleteAllTicketsOfUserFromCart={
                     deleteAllTicketsOfUserFromCart
                   }
