@@ -4,28 +4,70 @@ import { customAlphabet } from 'nanoid'
 import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { ContestIdValidator } from '../lib/validators/contest-id-validator'
+import { PageNumberValidator } from '../lib/validators/page-number-validator'
 import { TicketValidator } from '../lib/validators/ticket-validator'
 import { publicProcedure, router, userProcedure } from '../trpc/trpc'
 
 export const ticketRouter = router({
-  getTickets: userProcedure.query(async ({ ctx }) => {
-    const { user } = ctx
+  getUpcomingDrawsTickets: userProcedure
+    .input(PageNumberValidator)
+    .query(async ({ ctx, input }) => {
+      const { user } = ctx
+      const { page = 1 } = input
 
-    const payload = await getPayloadClient()
+      const payload = await getPayloadClient()
+      const pageSize = 10
 
-    try {
-      const tickets = await payload.find({
-        collection: 'tickets',
-        user,
-        overrideAccess: false,
-        depth: 1,
-      })
+      try {
+        const tickets = await payload.find({
+          collection: 'tickets',
+          user,
+          overrideAccess: false,
+          page,
+          limit: page * pageSize,
+          // where: {
+          //   'contest_id.value.contest_status': {
+          //     equals: false,
+          //   },
+          // },
+        })
 
-      return tickets.docs
-    } catch (err) {
-      throw new TRPCError({ code: 'BAD_REQUEST' })
-    }
-  }),
+        return tickets.docs
+      } catch (error: any) {
+        console.log('Get upcoming draws tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
+    }),
+
+  getPastDrawsTickets: userProcedure
+    .input(PageNumberValidator)
+    .query(async ({ ctx, input }) => {
+      const { user } = ctx
+      const { page = 1 } = input
+
+      const payload = await getPayloadClient()
+      const pageSize = 10
+
+      try {
+        const tickets = await payload.find({
+          collection: 'tickets',
+          user,
+          overrideAccess: false,
+          page,
+          limit: page * pageSize,
+          // where: {
+          //   'contest_id.value.contest_status': {
+          //     equals: true,
+          //   },
+          // },
+        })
+
+        return tickets.docs
+      } catch (error: any) {
+        console.log('Get past draws tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
+    }),
 
   addTickets: userProcedure
     .input(TicketValidator)
@@ -43,18 +85,18 @@ export const ticketRouter = router({
             await payload.create({
               collection: 'tickets',
               data: {
-                ticket_number: nanoid(),
                 ticket_price,
                 contest_id: { relationTo: 'contest', value: contest_id },
-                purchased_by: { relationTo: 'users', value: user?.id },
               },
+              user,
             })
           }),
         )
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'BAD_REQUEST' })
+      } catch (error: any) {
+        console.log('Add tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
       }
     }),
 
@@ -62,17 +104,24 @@ export const ticketRouter = router({
     .input(ContestIdValidator)
     .query(async ({ input }) => {
       const { id } = input
+
       const payload = await getPayloadClient()
 
-      const tickets = await payload.find({
-        collection: 'tickets',
-        where: {
-          'contest_id.value': {
-            equals: id,
+      try {
+        const tickets = await payload.find({
+          collection: 'tickets',
+          where: {
+            'contest_id.value': {
+              equals: id,
+            },
           },
-        },
-      })
-      return tickets?.docs
+        })
+
+        return tickets?.docs
+      } catch (error: any) {
+        console.log('Get tickets by contest: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
     }),
 
   deleteTickets: publicProcedure
@@ -82,15 +131,21 @@ export const ticketRouter = router({
 
       const payload = await getPayloadClient()
 
-      await payload.delete({
-        collection: 'tickets',
-        where: {
-          'contest_id.value': {
-            equals: id,
+      try {
+        await payload.delete({
+          collection: 'tickets',
+          where: {
+            'contest_id.value': {
+              equals: id,
+            },
           },
-        },
-      })
-      return true
+        })
+
+        return { success: true }
+      } catch (error: any) {
+        console.log('Delete Tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
     }),
 
   getTicketId: publicProcedure
@@ -104,15 +159,21 @@ export const ticketRouter = router({
 
       const payload = await getPayloadClient()
 
-      const ticket = await payload.find({
-        collection: 'tickets',
-        depth: 0,
-        where: {
-          ticket_number: {
-            equals: ticket_no,
+      try {
+        const ticket = await payload.find({
+          collection: 'tickets',
+          depth: 0,
+          where: {
+            ticket_number: {
+              equals: ticket_no,
+            },
           },
-        },
-      })
-      return ticket.docs.at(0)
+        })
+
+        return ticket.docs.at(0)
+      } catch (error: any) {
+        console.log('Get ticket by id: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
     }),
 })

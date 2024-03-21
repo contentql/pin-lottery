@@ -1,16 +1,17 @@
 {
   "cSpell.words": [
     "cmds",
+    "cql",
+    "css",
+    "fontsource",
     "healthcheck",
     "hookform",
     "nextjs",
     "nixpacks",
+    "nouance",
     "payloadcms",
-    "tanstack",
-    "trpc",
-    "css",
-    "cql",
     "scss",
-    "fontsource"
+    "tanstack",
+    "trpc"
   ]
 }

@@ -1,12 +1,11 @@
+import { MouseEventHandler } from 'react'
 import Countdown from 'react-countdown'
+import * as sd from 'simple-duration'
 
 import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
 import { Contest, Media } from '@/payload-types'
-import { isThresholdReached } from '@/utils/is-threshold-reached'
 
-import { AppContext } from '@/context/context'
-import { MouseEventHandler, useContext } from 'react'
 import WinningNumber from '../winner/WinningNumber'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
@@ -30,29 +29,43 @@ const ContestBody = ({
   contestDetails: Contest
   handleDrawTickets: MouseEventHandler<HTMLButtonElement>
 }) => {
-  const { tickets }: any = useContext(AppContext)
-
-  const totalTicketsSold = tickets?.length
+  const milliseconds = contestDetails?.day_remain
+    ? sd.parse(contestDetails?.day_remain) * 1000
+    : 1
 
   return (
     <section className='pb-120 mt-minus-300'>
-      {contestDetails?.contest_status === true && (
+      {contestDetails?.contest_status && (
         <WinningNumber contestDetails={contestDetails} />
       )}
       <div className='container'>
         <div className='row justify-content-center'>
-          {isThresholdReached(
-            contestDetails?.product_price,
-            contestDetails?.ticket_price,
-            totalTicketsSold,
-          ) ? (
+          {contestDetails?.reached_threshold &&
+          contestDetails?.threshold_reached_date &&
+          !contestDetails?.contest_status ? (
             <div className='col-lg-6'>
+              <div className='draw-tickets-btn'>
+                <button
+                  className='cmn-btn style--one btn-sm'
+                  onClick={handleDrawTickets}>
+                  draw tickets now
+                </button>
+              </div>
+
               <div className='clock-wrapper'>
-                <p className='mb-2'>This competition ends in:</p>
+                <p className='mb-2'>This contest ends in:</p>
                 <div className='clock'>
                   <Countdown
-                    date={Date.now() + 1000000000}
-                    renderer={RendererCountdown}
+                    date={
+                      Date.parse(contestDetails?.threshold_reached_date) +
+                      milliseconds
+                    }
+                    renderer={props => (
+                      <RendererCountdown
+                        {...props}
+                        handleDrawTickets={handleDrawTickets}
+                      />
+                    )}
                   />
                 </div>
               </div>
@@ -62,10 +75,6 @@ const ContestBody = ({
           )}
 
           <div className='col-lg-12'>
-            {contestDetails?.contest_status === false && (
-              <button onClick={handleDrawTickets}>draw tickets now</button>
-            )}
-
             <div className='contest-cart'>
               {/* Context slider for one */}
               <ContestSlider

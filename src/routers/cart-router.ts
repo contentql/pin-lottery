@@ -2,6 +2,7 @@ import { TRPCError } from '@trpc/server'
 
 import { getPayloadClient } from '../get-payload'
 import { CartDetailsValidator } from '../lib/validators/cart-details-validator'
+import { IdValidator } from '../lib/validators/id-validator'
 import { TicketsCountValidator } from '../lib/validators/tickets-count-validator'
 import { router, userProcedure } from '../trpc/trpc'
 
@@ -19,8 +20,9 @@ export const cartRouter = router({
       })
 
       return tickets.docs
-    } catch (err) {
-      throw new TRPCError({ code: 'BAD_REQUEST' })
+    } catch (error: any) {
+      console.log('Get cart data: ', error)
+      throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
     }
   }),
 
@@ -40,20 +42,21 @@ export const cartRouter = router({
             tickets,
             total_price,
             contest_id: { relationTo: 'contest', value: contest_id },
-            user_id: { relationTo: 'users', value: user?.id },
           },
+          user,
         })
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'BAD_REQUEST' })
+      } catch (error: any) {
+        console.log('Add tickets to cart: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
       }
     }),
 
   updateTicketsOfUserFromCart: userProcedure
     .input(TicketsCountValidator)
     .mutation(async ({ input }) => {
-      const { id, tickets } = input
+      const { id, tickets, total_price } = input
 
       const payload = await getPayloadClient()
 
@@ -63,12 +66,36 @@ export const cartRouter = router({
           id,
           data: {
             tickets,
+            total_price,
           },
         })
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'BAD_REQUEST' })
+      } catch (error: any) {
+        console.log('Update cart tickets: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      }
+    }),
+
+  deleteById: userProcedure
+    .input(IdValidator)
+    .mutation(async ({ input, ctx }) => {
+      const { user } = ctx
+
+      const { id } = input
+
+      const payload = await getPayloadClient()
+
+      try {
+        await payload.delete({
+          collection: 'cart',
+          id,
+        })
+
+        return { success: true }
+      } catch (error: any) {
+        console.log('Delete cart data by id: ', error)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
       }
     }),
 
@@ -88,8 +115,9 @@ export const cartRouter = router({
       })
 
       return { success: true }
-    } catch (err) {
-      throw new TRPCError({ code: 'BAD_REQUEST' })
+    } catch (error: any) {
+      console.log('Delete cart data by user: ', error)
+      throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
     }
   }),
 })

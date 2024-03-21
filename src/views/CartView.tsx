@@ -24,6 +24,16 @@ const CartView = () => {
       },
     })
 
+  const { mutate: deleteById } = trpc.cart.deleteById.useMutation({
+    onSuccess: async () => {
+      cartDataRefetch()
+      toast.success('Successfully tickets deleted.')
+    },
+    onError: async () => {
+      toast.error('Failed to delete tickets.')
+    },
+  })
+
   const { mutate: deleteAllTicketsOfUserFromCart } =
     trpc.cart.deleteAllTicketsOfUserFromCart.useMutation({
       onSuccess: async () => {
@@ -57,6 +67,7 @@ const CartView = () => {
       <TotallCart
         cartData={cartData as Cart[]}
         updateCartTicketsCountMutation={updateCartTicketsCountMutation}
+        deleteById={deleteById}
         deleteAllTicketsOfUserFromCart={deleteAllTicketsOfUserFromCart}
       />
     </>

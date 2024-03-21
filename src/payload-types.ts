@@ -180,7 +180,7 @@ export interface Contest {
   contest_no: string;
   tickets_purchased?: number | null;
   ticket_price: number;
-  day_remain: number;
+  day_remain: string;
   product_type?: ('Car' | 'Bike' | 'Mobile' | 'Laptop') | null;
   zero_sixty?: string | null;
   top_speed?: string | null;
@@ -232,10 +232,8 @@ export interface Winner {
  */
 export interface Ticket {
   id: string;
-  ticket_number: string;
+  ticket_number?: string | null;
   ticket_price: number;
-  draw_status?: boolean | null;
-  win_status?: boolean | null;
   contest_id: {
     relationTo: 'contest';
     value: string | Contest;

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useState } from 'react'
 
 import payment from '/public/images/elements/payment.png'
 
@@ -10,6 +11,8 @@ import { toast } from 'react-toastify'
 
 const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const router = useRouter()
+
+  const [isPurchasing, setIsPurchasing] = useState(false)
 
   const currency = ticketsMetadata?.currency
 
@@ -45,6 +48,9 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     onError: async () => {
       toast.error('Failed to purchase tickets. Please try again later.')
     },
+    onSettled: async () => {
+      setIsPurchasing(false)
+    },
   })
 
   const handlePurchase = () => {
@@ -52,6 +58,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
       toast.warning('Please add tickets to proceed.')
       return
     }
+    setIsPurchasing(true)
     createTicketsMutation(arrayOfTicketsWithPrices)
   }
 
@@ -99,8 +106,9 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
             <button
               type='button'
               className='cmn-btn'
-              onClick={() => handlePurchase()}>
-              buy tickets
+              onClick={() => handlePurchase()}
+              disabled={isPurchasing}>
+              {isPurchasing ? 'Processing...' : 'Buy Tickets'}
             </button>
           </div>
         </div>

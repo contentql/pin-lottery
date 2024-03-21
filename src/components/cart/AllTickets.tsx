@@ -8,10 +8,12 @@ interface GroupedTickets {
 const AllTickets = ({
   cartData,
   updateCartTicketsCountMutation,
+  deleteById,
   deleteAllTicketsOfUserFromCart,
 }: {
   cartData: Cart[]
   updateCartTicketsCountMutation: Function
+  deleteById: Function
   deleteAllTicketsOfUserFromCart: Function
 }) => {
   return (
@@ -29,10 +31,15 @@ const AllTickets = ({
           <div key={cart?.id} className='ticket-wrapper__body'>
             <div className='tickets'>
               <div className='single-row'>
-                <h4>
+                <h3>
                   Contest Number:{' '}
                   {(cart?.contest_id?.value as Contest)?.contest_no}
-                </h4>
+                </h3>
+                <button
+                  type='button'
+                  onClick={() => deleteById({ id: cart?.id })}>
+                  clear
+                </button>
               </div>
               <div className='ticket-wrapper__body'>
                 {[...Array(cart?.tickets)].map((_, idx) => {
@@ -41,6 +48,7 @@ const AllTickets = ({
                       key={idx}
                       cart={cart}
                       ticketId={idx + 1}
+                      deleteById={deleteById}
                       updateCartTicketsCountMutation={
                         updateCartTicketsCountMutation
                       }
