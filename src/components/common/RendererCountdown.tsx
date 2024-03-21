@@ -4,9 +4,12 @@ const RendererCountdown = ({
   seconds,
   days,
   completed,
+  handleDrawTickets,
 }: any) => {
   if (completed) {
     // Render a completed state
+    handleDrawTickets()
+
     return (
       <>
         <div>

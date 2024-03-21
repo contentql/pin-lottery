@@ -33,14 +33,23 @@ const ContestBody = ({
 
   return (
     <section className='pb-120 mt-minus-300'>
-      {contestDetails?.contest_status === true && (
+      {contestDetails?.contest_status && (
         <WinningNumber contestDetails={contestDetails} />
       )}
       <div className='container'>
         <div className='row justify-content-center'>
           {contestDetails?.reached_threshold &&
-          contestDetails?.threshold_reached_date ? (
+          contestDetails?.threshold_reached_date &&
+          !contestDetails?.contest_status ? (
             <div className='col-lg-6'>
+              <div className='draw-tickets-btn'>
+                <button
+                  className='cmn-btn style--one btn-sm'
+                  onClick={handleDrawTickets}>
+                  draw tickets now
+                </button>
+              </div>
+
               <div className='clock-wrapper'>
                 <p className='mb-2'>This contest ends in:</p>
                 <div className='clock'>
@@ -49,7 +58,12 @@ const ContestBody = ({
                       Date.parse(contestDetails?.threshold_reached_date) +
                       milliseconds
                     }
-                    renderer={RendererCountdown}
+                    renderer={props => (
+                      <RendererCountdown
+                        {...props}
+                        handleDrawTickets={handleDrawTickets}
+                      />
+                    )}
                   />
                 </div>
               </div>
@@ -59,10 +73,6 @@ const ContestBody = ({
           )}
 
           <div className='col-lg-12'>
-            {contestDetails?.contest_status === false && (
-              <button onClick={handleDrawTickets}>draw tickets now</button>
-            )}
-
             <div className='contest-cart'>
               {/* Context slider for one */}
               <ContestSlider

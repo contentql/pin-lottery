@@ -14,56 +14,59 @@ interface PageProps {
 }
 
 const ContestDetailsView = ({ contestId }: PageProps) => {
-
-  const { data: contestDetails ,refetch} = trpc.contest.getContestById.useQuery({
-    id: contestId,
-  })
-    const { data } = trpc.ticket.getContestTickets.useQuery(
-      {
-        id: contestId,
-      },
-      // {
-      //   refetchOnWindowFocus:false
-      // }
-    )
-    const contestTickets = data as any
+  const { data: contestDetails, refetch } =
+    trpc.contest.getContestById.useQuery({
+      id: contestId,
+    })
+  const { data } = trpc.ticket.getContestTickets.useQuery(
+    {
+      id: contestId,
+    },
+    // {
+    //   refetchOnWindowFocus:false
+    // }
+  )
+  const contestTickets = data as any
 
   console.log('contest ', contestDetails)
-    const { mutate: updateContestStatus } =
-      trpc.contest.updateContest.useMutation({
-        onSuccess: () => {toast.success(`contest updated successfully`), refetch()},
-        onError: () => toast.error(`error while updating contest`),
-      })
-
-    const { mutate: addWinner } = trpc.winner.addWinner.useMutation({
-      onSuccess:async (data) => {
-        toast.success('Winner added')
-        console.log('data in onsuccess', data)
-         updateContestStatus({
-           id: (data?.winner?.contest?.value as Winner)?.id,
-           contest_status: true,
-           winner_id:data?.winner?.id
-         })
+  const { mutate: updateContestStatus } =
+    trpc.contest.updateContest.useMutation({
+      onSuccess: () => {
+        toast.success(`contest updated successfully`), refetch()
       },
-
-      onError: () => {
-        toast.success('tickets not available')
-        console.log('failed')
-      },
+      onError: () => toast.error(`error while updating contest`),
     })
 
-    const handleDrawTickets = () => {
-      const randomNumber = RandomTicketPicker(contestTickets)
-      console.log('random number', randomNumber)
-      if (randomNumber === undefined) {
-        toast.error(`ticket not picked`)
-      } else {
-        addWinner({
-          contest_id: randomNumber?.contest_id?.value?.id,
-          ticket_id:randomNumber?.id
-        })
-      }
+  const { mutate: addWinner } = trpc.winner.addWinner.useMutation({
+    onSuccess: async data => {
+      toast.success('Winner added')
+      console.log('data in onsuccess', data)
+      updateContestStatus({
+        id: (data?.winner?.contest?.value as Winner)?.id,
+        contest_status: true,
+        winner_id: data?.winner?.id,
+      })
+    },
+
+    onError: () => {
+      toast.success('tickets not available')
+      console.log('failed')
+    },
+  })
+
+  const handleDrawTickets = () => {
+    const randomNumber = RandomTicketPicker(contestTickets)
+    console.log('random number', randomNumber)
+    if (randomNumber === undefined) {
+      toast.error(`ticket not picked`)
+    } else {
+      if (contestDetails?.contest_status) return
+      addWinner({
+        contest_id: randomNumber?.contest_id?.value?.id,
+        ticket_id: randomNumber?.id,
+      })
     }
+  }
 
   return (
     <>
