@@ -1,12 +1,10 @@
+import { MouseEventHandler } from 'react'
 import Countdown from 'react-countdown'
 
 import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
 import { Contest, Media } from '@/payload-types'
-import { isThresholdReached } from '@/utils/is-threshold-reached'
 
-import { AppContext } from '@/context/context'
-import { MouseEventHandler, useContext } from 'react'
 import WinningNumber from '../winner/WinningNumber'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
@@ -30,9 +28,8 @@ const ContestBody = ({
   contestDetails: Contest
   handleDrawTickets: MouseEventHandler<HTMLButtonElement>
 }) => {
-  const { tickets }: any = useContext(AppContext)
-
-  const totalTicketsSold = tickets?.length
+  const millisecondsInDay = 24 * 60 * 60 * 1000
+  const milliseconds = contestDetails?.day_remain * millisecondsInDay
 
   return (
     <section className='pb-120 mt-minus-300'>
@@ -41,17 +38,17 @@ const ContestBody = ({
       )}
       <div className='container'>
         <div className='row justify-content-center'>
-          {isThresholdReached(
-            contestDetails?.product_price,
-            contestDetails?.ticket_price,
-            totalTicketsSold,
-          ) ? (
+          {contestDetails?.reached_threshold &&
+          contestDetails?.threshold_reached_date ? (
             <div className='col-lg-6'>
               <div className='clock-wrapper'>
-                <p className='mb-2'>This competition ends in:</p>
+                <p className='mb-2'>This contest ends in:</p>
                 <div className='clock'>
                   <Countdown
-                    date={Date.now() + 1000000000}
+                    date={
+                      Date.parse(contestDetails?.threshold_reached_date) +
+                      milliseconds
+                    }
                     renderer={RendererCountdown}
                   />
                 </div>
