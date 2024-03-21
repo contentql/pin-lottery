@@ -1066,3 +1066,23 @@ ul {
   width: 100%;
   height: 100%;
 }
+
+$yellow: #ffd300;
+$blue: #17d3ff;
+$pink: #ff4e91;
+$totalPieces: 200;
+$duration: 1000;
+
+@function randomNum($min, $max) {
+  $rand: random();
+  $randomNum: $min + floor($rand * (($max - $min) + 1));
+
+  @return $randomNum;
+}
+
+.icon {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 32px;
+  position: relative;
+}
