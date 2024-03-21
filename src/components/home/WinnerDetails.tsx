@@ -76,10 +76,10 @@ const Winner = ({ winnerDetails }: { winnerDetails: [Winner] }) => {
                     <div key={i} className='winner-slide-item'>
                       <div className='winner-thumb'>
                         <Image
-                          src={'/image/user/pp.png'}
+                          src={'/images/user/pp.png'}
                           width={100}
                           height={100}
-                          alt='image'
+                          alt='user-image'
                         />
                       </div>
                       <div className='winner-content bg_img'>
