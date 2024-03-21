@@ -805,3 +805,261 @@ strong {
 .contest-features {
   margin-top: 100px;
 }
+
+button {
+  cursor: pointer;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+/* GALLERY STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.gallery-wrapper {
+  position: relative;
+  max-width: 50%;
+  padding: 0 15px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 15px;
+}
+
+@media only screen and (max-width: 990px) {
+  .gallery-wrapper {
+    position: relative;
+    max-width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 15px;
+  }
+}
+
+.gallery-wrapper .thumb-list {
+  display: grid;
+  grid-gap: 15px;
+}
+
+.gallery-wrapper .thumb-list li {
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-wrapper .thumb-list li:not(.is-active):hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--hovered-thumb);
+}
+
+.gallery-wrapper .thumb-list li.is-active {
+  border: 1px solid #e82a7a;
+}
+
+.gallery-wrapper .thumb-list img {
+  display: block;
+}
+
+.gallery-wrapper .featured-list {
+  position: relative;
+  border: 2px solid #e82a7a;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.gallery-wrapper .featured-list li {
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.gallery-wrapper .featured-list li.is-active {
+  opacity: 1;
+}
+
+.gallery-wrapper .featured-list .featured-img {
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1 !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gallery-wrapper .notification,
+.gallery-wrapper .open-lightbox {
+  position: absolute;
+  top: 5px;
+  right: 30px;
+  padding: 8px;
+  border-radius: 20px;
+  color: white;
+  border-radius: 1px solid w;
+  background: transparent;
+  z-index: 1;
+}
+
+.gallery-wrapper .open-lightbox {
+  right: 20px;
+}
+.gallery-wrapper .open-lightbox:hover {
+  color: #19b559;
+}
+
+@media (max-width: 750px) {
+  .gallery-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-wrapper .thumb-list {
+    grid-template-columns: repeat(4, 1fr);
+    order: 1;
+  }
+
+  .gallery-wrapper .featured-list {
+    height: 340px;
+  }
+}
+
+/* LIGHTBOX STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  transition: all 0.25s;
+  background: #0f0232;
+}
+
+.lightbox.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  background: transparent;
+  color: white;
+}
+
+.image-preview {
+  position: relative;
+}
+
+.lightbox-header .close-lightbox {
+  padding: 5px 10px;
+  background-image: linear-gradient(
+    360deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(251, 185, 54) 100%
+  );
+  border-radius: 50%;
+  font-size: 16px;
+}
+.lightbox-preview {
+  margin-top: 100px;
+  overflow: scroll;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.lightbox-preview::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.lightbox-preview {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.lightbox-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f0232;
+}
+
+.lightbox-items {
+  display: grid;
+}
+
+.lightbox-items li {
+  display: flex;
+  grid-column: 1;
+  grid-row: 1;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.lightbox-items li.is-active {
+  opacity: 1;
+}
+
+.lightbox-items img {
+  width: auto;
+  max-height: 100vh;
+}
+
+.lightbox-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 16px 10px;
+  border-radius: 20px;
+  background-image: linear-gradient(
+    360deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(251, 185, 54) 100%
+  );
+}
+
+.lightbox-control-prev {
+  left: 5px;
+}
+
+.lightbox-control-next {
+  right: 5px;
+}
+
+.lightbox-control svg {
+  display: block;
+  fill: white;
+}
+
+.feature-image {
+  width: 100%;
+  height: 100%;
+}
