@@ -138,10 +138,6 @@ export interface Contest {
   id: string;
   title: string;
   product_price: number;
-  tag: {
-    relationTo: 'tags';
-    value: string | Tag;
-  };
   features: {
     root: {
       children: {
@@ -185,6 +181,7 @@ export interface Contest {
   tickets_purchased?: number | null;
   ticket_price: number;
   day_remain: number;
+  product_type?: ('Car' | 'Bike' | 'Mobile' | 'Laptop') | null;
   zero_sixty?: string | null;
   top_speed?: string | null;
   power?: string | null;
@@ -198,6 +195,7 @@ export interface Contest {
   battery?: string | null;
   Camera?: string | null;
   reached_threshold?: boolean | null;
+  threshold_reached_date?: string | null;
   contest_status?: boolean | null;
   winner_ticket?: {
     relationTo: 'winner';
@@ -208,17 +206,6 @@ export interface Contest {
     description?: string | null;
     image?: string | Media | null;
   };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tags".
- */
-export interface Tag {
-  id: string;
-  tag: string;
-  img: string | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -253,10 +240,10 @@ export interface Ticket {
     relationTo: 'contest';
     value: string | Contest;
   };
-  purchased_by: {
+  purchased_by?: {
     relationTo: 'users';
     value: string | User;
-  };
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -338,6 +325,17 @@ export interface Faq {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string;
+  tag: string;
+  img: string | Media;
   updatedAt: string;
   createdAt: string;
 }

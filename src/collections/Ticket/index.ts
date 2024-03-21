@@ -1,6 +1,8 @@
 import { CollectionConfig } from 'payload/types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
 import { assignUserId } from './field-level-hooks/assignUserId'
+import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
+import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
@@ -14,34 +16,8 @@ const Ticket: CollectionConfig = {
   },
   // when creating a ticket, ensure the button was disabled
   hooks: {
-    afterChange: [
-      async ({ operation, doc, req }) => {
-        const { payload } = req
-        // read total tickets and updated in contest
-        // check threshold and update it
-
-        if (operation === 'create') {
-          const { totalDocs: tickets_purchased } = await payload.find({
-            collection: 'tickets',
-            depth: 0,
-            where: {
-              'contest_id.value': {
-                equals: doc.id,
-              },
-            },
-          })
-        }
-      },
-    ],
-    afterOperation: [
-      async ({ result, req, operation }) => {
-        if (operation === 'delete' || operation === 'deleteByID') {
-          const { payload } = req
-          // read total tickets and
-        }
-        return result
-      },
-    ],
+    afterChange: [updateContestAfterCreate],
+    afterOperation: [updateContestAfterDelete],
   },
   fields: [
     {
@@ -114,11 +90,10 @@ const Ticket: CollectionConfig = {
       label: 'Purchased By',
       relationTo: ['users'],
       hasMany: false,
-      required: true,
+      admin: { position: 'sidebar' },
       hooks: {
         beforeChange: [assignUserId],
       },
-      admin: { position: 'sidebar' },
     },
   ],
 }

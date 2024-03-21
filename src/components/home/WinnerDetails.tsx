@@ -4,8 +4,8 @@ import Slider from 'react-slick'
 
 import winner from '/public/images/bg/winner.jpg'
 import car from '/public/images/elements/car.png'
-import mobile_single from '/public/images/mobiles/mobile-single.png'
 
+import { Winner } from '@/payload-types'
 import 'slick-carousel/slick/slick.css'
 
 const NextBtn = ({ onClick }: any) => {
@@ -13,8 +13,7 @@ const NextBtn = ({ onClick }: any) => {
     <button
       type='button'
       className='prev slick-arrow bg-transparent'
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <i>
         <BsArrowLeft />
       </i>
@@ -27,8 +26,7 @@ const PrevBtn = ({ onClick }: any) => {
     <button
       type='button'
       className='next slick-arrow bg-transparent'
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <i>
         <BsArrowRight />
       </i>
@@ -36,7 +34,7 @@ const PrevBtn = ({ onClick }: any) => {
   )
 }
 
-const Winner = () => {
+const Winner = ({ winnerDetails }: { winnerDetails: [Winner] }) => {
   const settings = {
     speed: 700,
     arrows: true,
@@ -74,10 +72,15 @@ const Winner = () => {
               </div>
               <div className='right'>
                 <Slider {...settings} className='winner-slider'>
-                  {[1, 2, 3, 4, 5].map((itm, i) => (
-                    <div key={itm} className='winner-slide-item'>
+                  {winnerDetails?.map((winner, i) => (
+                    <div key={i} className='winner-slide-item'>
                       <div className='winner-thumb'>
-                        <Image src={mobile_single} alt='image' />
+                        <Image
+                          src={'/image/user/pp.png'}
+                          width={100}
+                          height={100}
+                          alt='image'
+                        />
                       </div>
                       <div className='winner-content bg_img'>
                         <h6 className='winner-name'>Breeze Zodiac</h6>

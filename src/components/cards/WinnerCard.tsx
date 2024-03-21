@@ -3,7 +3,7 @@ import { splitTicketNumber } from '@/utils/split-ticket-number'
 import Image from 'next/image'
 import { DateConverter } from '../../utils/date-converter'
 
-const WinnerCard = ({ winner }:{winner:Winner}) => {
+const WinnerCard = ({ winner }: { winner: Winner }) => {
   console.log('winner card', winner)
   return (
     <div className='winner-card mb-30 '>
@@ -49,7 +49,9 @@ const WinnerCard = ({ winner }:{winner:Winner}) => {
           <div className='number-list-wrapper'>
             <p>Winning Numbers:</p>
             <ul className='number-list mt-2'>
-              {splitTicketNumber((winner?.ticket?.value as Ticket)?.ticket_number)?.map((itm: any, i: any) => <li key={i}>{itm}</li>)}
+              {splitTicketNumber(
+                (winner?.ticket?.value as Ticket)?.ticket_number,
+              )?.map((itm: any, i: any) => <li key={i}>{itm}</li>)}
             </ul>
           </div>
           <div className='right'>

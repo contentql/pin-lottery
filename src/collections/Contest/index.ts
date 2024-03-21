@@ -11,49 +11,7 @@ const Contest: CollectionConfig = {
     useAsTitle: 'title',
   },
   hooks: {
-    beforeRead: [
-      async ({ req, doc, context }) => {
-        const { payload } = req
-
-        const { totalDocs: tickets_purchased } = await payload.find({
-          collection: 'tickets',
-          depth: 0,
-          where: {
-            'contest_id.value': {
-              equals: doc.id,
-            },
-          },
-        })
-
-        if (
-          !context?.updateDoc &&
-          doc.tickets_purchased !== tickets_purchased
-        ) {
-          const { ticket_price, product_price } = doc
-          const reachedThreshold =
-            ticket_price * tickets_purchased >= product_price
-
-          const latestData = {
-            ...doc,
-            tickets_purchased,
-            reached_threshold: reachedThreshold,
-          }
-
-          await payload.update({
-            collection: 'contest',
-            id: doc.id,
-            data: latestData,
-            context: {
-              updateDoc: true,
-            },
-          })
-
-          return latestData
-        } else {
-          return doc
-        }
-      },
-    ],
+    // beforeRead: [updateContestAfterRead],
   },
   fields: [
     {
@@ -71,14 +29,6 @@ const Contest: CollectionConfig = {
                   name: 'product_price',
                   type: 'number',
                   label: 'Product Price',
-                  required: true,
-                },
-                {
-                  name: 'tag',
-                  type: 'relationship',
-                  label: 'Tag',
-                  relationTo: ['tags'],
-                  hasMany: false,
                   required: true,
                 },
               ],
@@ -187,6 +137,17 @@ const Contest: CollectionConfig = {
           description: 'Product Specification',
           fields: [
             {
+              name: 'product_type',
+              type: 'select',
+              label: 'Product Type',
+              options: [
+                { label: 'Car', value: 'Car' },
+                { label: 'Bike', value: 'Bike' },
+                { label: 'Mobile', value: 'Mobile' },
+                { label: 'Laptop', value: 'Laptop' },
+              ],
+            },
+            {
               type: 'row',
               fields: [
                 {
@@ -196,8 +157,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65e02c1fee7df6c30ffe0c35' ||
-                      data.tag?.value === '65ec6a8841f52a4527c0aeff',
+                      data?.product_type === 'Car' ||
+                      data?.product_type === 'Bike',
                   },
                 },
                 {
@@ -207,8 +168,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65e02c1fee7df6c30ffe0c35' ||
-                      data.tag?.value === '65ec6a8841f52a4527c0aeff',
+                      data?.product_type === 'Car' ||
+                      data?.product_type === 'Bike',
                   },
                 },
                 {
@@ -218,8 +179,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65e02c1fee7df6c30ffe0c35' ||
-                      data.tag?.value === '65ec6a8841f52a4527c0aeff',
+                      data?.product_type === 'Car' ||
+                      data?.product_type === 'Bike',
                   },
                 },
               ],
@@ -234,8 +195,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65e02c1fee7df6c30ffe0c35' ||
-                      data.tag?.value === '65ec6a8841f52a4527c0aeff',
+                      data?.product_type === 'Car' ||
+                      data?.product_type === 'Bike',
                   },
                 },
                 {
@@ -245,8 +206,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65e02c1fee7df6c30ffe0c35' ||
-                      data.tag?.value === '65ec6a8841f52a4527c0aeff',
+                      data?.product_type === 'Car' ||
+                      data?.product_type === 'Bike',
                   },
                 },
                 {
@@ -256,8 +217,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65e02c1fee7df6c30ffe0c35' ||
-                      data.tag?.value === '65ec6a8841f52a4527c0aeff',
+                      data?.product_type === 'Car' ||
+                      data?.product_type === 'Bike',
                   },
                 },
               ],
@@ -272,8 +233,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65ec6ad941f52a4527c0af27' ||
-                      data.tag?.value === '65e02c30ee7df6c30ffe0c3d',
+                      data?.product_type === 'Mobile' ||
+                      data?.product_type === 'Laptop',
                   },
                 },
                 {
@@ -283,8 +244,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65ec6ad941f52a4527c0af27' ||
-                      data.tag?.value === '65e02c30ee7df6c30ffe0c3d',
+                      data?.product_type === 'Mobile' ||
+                      data?.product_type === 'Laptop',
                   },
                 },
                 {
@@ -294,8 +255,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65ec6ad941f52a4527c0af27' ||
-                      data.tag?.value === '65e02c30ee7df6c30ffe0c3d',
+                      data?.product_type === 'Mobile' ||
+                      data?.product_type === 'Laptop',
                   },
                 },
               ],
@@ -310,8 +271,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65ec6ad941f52a4527c0af27' ||
-                      data.tag?.value === '65e02c30ee7df6c30ffe0c3d',
+                      data?.product_type === 'Mobile' ||
+                      data?.product_type === 'Laptop',
                   },
                 },
                 {
@@ -321,8 +282,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65ec6ad941f52a4527c0af27' ||
-                      data.tag?.value === '65e02c30ee7df6c30ffe0c3d',
+                      data?.product_type === 'Mobile' ||
+                      data?.product_type === 'Laptop',
                   },
                 },
                 {
@@ -332,8 +293,8 @@ const Contest: CollectionConfig = {
                   required: true,
                   admin: {
                     condition: data =>
-                      data.tag?.value === '65ec6ad941f52a4527c0af27' ||
-                      data.tag?.value === '65e02c30ee7df6c30ffe0c3d',
+                      data?.product_type === 'Mobile' ||
+                      data?.product_type === 'Laptop',
                   },
                 },
               ],
@@ -347,8 +308,18 @@ const Contest: CollectionConfig = {
             {
               name: 'reached_threshold',
               type: 'checkbox',
+              label: 'Reached Threshold',
               admin: {
                 readOnly: true,
+              },
+            },
+            {
+              name: 'threshold_reached_date',
+              type: 'date',
+              label: 'Threshold Reached Date',
+              admin: {
+                readOnly: true,
+                condition: data => data.reached_threshold === true,
               },
             },
             {

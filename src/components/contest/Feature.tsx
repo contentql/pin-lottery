@@ -6,7 +6,7 @@ import contest_feature_3 from '/public/images/icon/contest-feature/3.png'
 
 const Feature = () => {
   return (
-    <section className='pb-120'>
+    <section className='pb-120 contest-features'>
       <div className='container'>
         <div className='row mb-none-30 justify-content-center'>
           <div className='col-lg-4 col-sm-6 mb-30'>
