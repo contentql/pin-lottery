@@ -30,9 +30,15 @@ export const Media: CollectionConfig = {
     imageSizes: [
       {
         height: 40,
-        width:undefined,
+        width: undefined,
         crop: 'center',
         name: 'navUserImage',
+      },
+      {
+        height: 200,
+        width: undefined,
+        crop: 'center',
+        name: 'contestImage',
       },
       {
         height: undefined,

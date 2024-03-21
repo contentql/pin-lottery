@@ -4,8 +4,10 @@ import { FaSearch } from 'react-icons/fa'
 import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
+
 import FilterByTag from '../filters/FilterByTag'
 import PageLoading from '../loading/PageLoading'
+
 
 const LatestContest = ({
   contestDetails,
@@ -97,7 +99,9 @@ const LatestContest = ({
     } else {
       search.set('select', value.toString())
     }
+
     router.push(`${pathname}?${search.toString()}#contest`)
+
     setFilters({ ...filters, filterBySelect: value })
   }
 
@@ -130,6 +134,7 @@ const LatestContest = ({
                 <h2 className='contest-wrapper__title' id='contest'>
                   Latest Contest
                 </h2>
+
                 <FilterByTag
                   filter={filters?.filterByName}
                   handleSearch={handleSearchTag}
