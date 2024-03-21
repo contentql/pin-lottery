@@ -5,7 +5,6 @@ import { DateConverter } from '@/utils/date-converter'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
 
 const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
-
   console.log('winner details', contestDetails)
   return (
     <section className='mt-minus-150'>
@@ -23,10 +22,7 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
               </div>
               <div className='body'>
                 <p className='contest-number'>
-                  Contest No:{' '}
-                  {
-                    contestDetails?.contest_no
-                  }
+                  Contest No: {contestDetails?.contest_no}
                 </p>
                 <p className='contest-date'>
                   <span>Draw took place on :</span>{' '}
@@ -38,7 +34,10 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
                 <h4 className='title'>The Winning Numbers are:</h4>
                 <ul className='numbers'>
                   {splitTicketNumber(
-                    ((contestDetails?.winner_ticket?.value as Winner)?.ticket?.value as Ticket)?.ticket_number
+                    (
+                      (contestDetails?.winner_ticket?.value as Winner)?.ticket
+                        ?.value as Ticket
+                    )?.ticket_number,
                   ).map((number, index) => (
                     <li key={index}>{number}</li>
                   ))}
@@ -54,6 +53,7 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
               </div>
               <div className='right'>
                 <Image
+                  className='revert-image'
                   src={(contestDetails?.img as Media)?.url || ''}
                   width={400}
                   height={400}
