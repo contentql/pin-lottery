@@ -1,8 +1,13 @@
+import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
+import { User } from '../../payload-types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
 import { assignUserId } from './field-level-hooks/assignUserId'
 import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
+
+const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const nanoid = customAlphabet(alphabet, 14)
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
@@ -28,9 +33,10 @@ const Ticket: CollectionConfig = {
           type: 'text',
           label: 'Ticket Number',
           unique: true,
-          required: true,
+          defaultValue: nanoid(),
           admin: {
             description: 'Auto-generated unique ticket number',
+            readOnly: true,
           },
         },
         {
@@ -40,37 +46,6 @@ const Ticket: CollectionConfig = {
           required: true,
           admin: {
             description: 'Price of the ticket at the time of purchase',
-          },
-        },
-      ],
-    },
-    {
-      type: 'row',
-      fields: [
-        {
-          name: 'draw_status',
-          type: 'checkbox',
-          label: 'Draw Status',
-          defaultValue: false,
-          admin: {
-            description:
-              'Status indicating whether the draw has been completed for this ticket',
-          },
-        },
-        {
-          name: 'win_status',
-          type: 'checkbox',
-          label: 'Win Status',
-          defaultValue: false,
-          admin: {
-            description: 'Status indicating whether the ticket is a winner',
-            condition: data => {
-              if (data.draw_status) {
-                return true
-              }
-
-              return false
-            },
           },
         },
       ],
@@ -90,6 +65,11 @@ const Ticket: CollectionConfig = {
       label: 'Purchased By',
       relationTo: ['users'],
       hasMany: false,
+      defaultValue: ({ user }: { user: User }) => {
+        if (!user) return undefined
+
+        return { relationTo: 'users', value: user?.id }
+      },
       admin: { position: 'sidebar' },
       hooks: {
         beforeChange: [assignUserId],

@@ -6,7 +6,15 @@ import { Ticket } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 
 const UserView = () => {
-  const { data: ticketsData } = trpc.ticket.getTickets.useQuery()
+  const { data: upcomingDrawTicketsData } =
+    trpc.ticket.getUpcomingDrawsTickets.useQuery({
+      page: 1,
+    })
+
+  const { data: pastDrawsTicketsData } =
+    trpc.ticket.getPastDrawsTickets.useQuery({
+      page: 1,
+    })
 
   return (
     <>
@@ -19,7 +27,10 @@ const UserView = () => {
             <LeftSideMenu />
 
             {/* Right side  */}
-            <RightSide ticketsData={ticketsData as Ticket[]} />
+            <RightSide
+              upcomingDrawTicketsData={upcomingDrawTicketsData as Ticket[]}
+              pastDrawsTicketsData={pastDrawsTicketsData as Ticket[]}
+            />
           </div>
         </div>
       </div>

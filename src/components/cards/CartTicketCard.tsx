@@ -8,14 +8,28 @@ import { Cart, Contest } from '@/payload-types'
 const CartTicketCard = ({
   cart,
   ticketId,
+  deleteById,
   updateCartTicketsCountMutation,
 }: {
   cart: Cart
   ticketId: number
+  deleteById: Function
   updateCartTicketsCountMutation: Function
 }) => {
+  const newTicketsCount = cart?.tickets - 1
+  const newTotalPrice =
+    newTicketsCount * (cart?.contest_id?.value as Contest)?.ticket_price
+
   const handleDeleteTicket = () => {
-    updateCartTicketsCountMutation({ id: cart?.id, tickets: cart?.tickets - 1 })
+    if (newTicketsCount === 0) {
+      deleteById({ id: cart?.id })
+    } else {
+      updateCartTicketsCountMutation({
+        id: cart?.id,
+        tickets: newTicketsCount,
+        total_price: newTotalPrice,
+      })
+    }
   }
 
   return (

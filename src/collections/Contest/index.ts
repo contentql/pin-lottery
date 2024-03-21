@@ -1,9 +1,14 @@
+import { NumberField } from '@nouance/payload-better-fields-plugin'
 import {
   HTMLConverterFeature,
   lexicalEditor,
   lexicalHTML,
 } from '@payloadcms/richtext-lexical'
+import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
+
+const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const nanoid = customAlphabet(alphabet, 4)
 
 const Contest: CollectionConfig = {
   slug: 'contest',
@@ -25,12 +30,23 @@ const Contest: CollectionConfig = {
             {
               type: 'row',
               fields: [
-                {
-                  name: 'product_price',
-                  type: 'number',
-                  label: 'Product Price',
-                  required: true,
-                },
+                ...NumberField(
+                  {
+                    name: 'product_price',
+                    required: true,
+                    label: 'Product Price',
+                    admin: {
+                      description: 'Enter the price in $',
+                      placeholder: '199.99',
+                    },
+                  },
+                  {
+                    prefix: '$ ',
+                    thousandSeparator: ',',
+                    decimalScale: 2,
+                    fixedDecimalScale: true,
+                  },
+                ),
               ],
             },
             {
@@ -69,6 +85,8 @@ const Contest: CollectionConfig = {
               name: 'images',
               type: 'array',
               label: 'Product Images',
+              required: true,
+              minRows: 3,
               fields: [
                 {
                   name: 'product_images',
@@ -102,6 +120,10 @@ const Contest: CollectionConfig = {
                   label: 'Contest Number',
                   required: true,
                   maxLength: 5,
+                  defaultValue: nanoid(),
+                  admin: {
+                    readOnly: true,
+                  },
                 },
                 {
                   name: 'tickets_purchased',
@@ -116,17 +138,33 @@ const Contest: CollectionConfig = {
             {
               type: 'row',
               fields: [
-                {
-                  name: 'ticket_price',
-                  type: 'number',
-                  label: 'Ticket Price',
-                  required: true,
-                },
+                ...NumberField(
+                  {
+                    name: 'ticket_price',
+                    label: 'Ticket Price',
+                    required: true,
+                    admin: {
+                      description: 'Enter the price in dollars',
+                      placeholder: '10.99',
+                    },
+                  },
+                  {
+                    prefix: '$ ',
+                    thousandSeparator: ',',
+                    decimalScale: 2,
+                    fixedDecimalScale: true,
+                  },
+                ),
                 {
                   name: 'day_remain',
-                  type: 'number',
-                  label: 'Days after threshold reached',
+                  type: 'text',
+                  label: 'Days After Threshold Reached',
+                  defaultValue: '5d 6h 56m 30s',
                   required: true,
+                  admin: {
+                    description: 'e.g: 5d 6h 56m 30s',
+                    placeholder: '5d 6h 56m 30s',
+                  },
                 },
               ],
             },
