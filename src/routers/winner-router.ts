@@ -20,23 +20,34 @@ export const WinnerRouter = router({
       return { winner: winner }
     }),
 
-  getWinners: publicProcedure
+  getWinnerByTicketNumber: publicProcedure
     .input(WinnerPaginationValidator)
-    .query(async ({ input }) => {
-      const { filterWinnerByTag } = input
+    .mutation(async ({ input }) => {
+      const { ticketNumber } = input
       const payload = await getPayloadClient()
 
       const winners = await payload.find({
         collection: 'winner',
         depth: 5,
         limit: 6,
-        // where: {
-        //   'contest?.value?.contest_no': {
-        //     equals: '121',
-        //   },
-        // },
+        where: {
+          'ticket.value': {
+            equals: ticketNumber,
+          },
+        },
       })
 
       return winners?.docs
     }),
+
+  getWinners: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    const winners = await payload.find({
+      collection: 'winner',
+      limit: 6,
+      depth: 5,
+    })
+    return winners?.docs
+  }),
 })

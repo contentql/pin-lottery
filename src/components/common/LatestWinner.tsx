@@ -7,30 +7,77 @@ import w_el_2 from '/public/images/elements/w-el-2.png'
 import w_el_3 from '/public/images/elements/w-el-3.png'
 
 import TicketCheckCard from '@/components/cards/TicketCheckCard'
-import WinnerCard from '@/components/cards/WinnerCard'
 import { Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
+import WinnerCard from '../cards/WinnerCard'
+
+interface WinnerFilters {
+  filterWinnerByTag: string
+  ticketNumber: string
+}
 
 const LatestWinner = () => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
 
-  const [winnerFilters, setWinnerFilters] = useState({
+  const [winners, setWinners] = useState<Winner[]>([])
+
+  const [winnerFilters, setWinnerFilters] = useState<WinnerFilters>({
     filterWinnerByTag: 'all',
+    ticketNumber: '',
   })
+
+  const { mutate: contestWinners } =
+    trpc.winner.getWinnerByTicketNumber.useMutation({
+      onSuccess: data => {
+        setWinners(data)
+        toast.success(`congrats winner found`)
+      },
+    })
+
+  console.log('winner', winners)
+
+  // const { data: contestId } = trpc.contest?.getContestIds.useQuery({
+  //   id: winnerFilters?.filterWinnerByTag,
+  // })
+
+  // const temp = contestId?.map(contest => contest?.id)
+
+  const { mutate: getTicketId } = trpc.ticket.getTicketId.useMutation({
+    onSuccess: (data: any) => {
+      contestWinners({ filterWinnerByTag: 'all', ticketNumber: data.id })
+    },
+    onError: () => {
+      toast.error(`invalid ticket number`)
+    },
+  })
+
+  const { data: winnersData } = trpc.winner.getWinners.useQuery()
+
+  const handleCheckWinner = (e: any) => {
+    e.preventDefault()
+    getTicketId({ ticket_no: winnerFilters?.ticketNumber })
+  }
+
+  const handleClearFilters = () => {
+    setWinners([])
+  }
 
   const handleSearchTag = (tag: string) => {
     const search = new URLSearchParams(searchParams)
     search.set('tag', tag.toString())
     router.push(`${pathname}?${search.toString()}#winner_id`)
-    setWinnerFilters({ ...winnerFilters, filterWinnerByTag: tag })
+    setWinnerFilters({
+      ...winnerFilters,
+      filterWinnerByTag: tag,
+    })
   }
 
-  const { data: contestWinners } = trpc.winner.getWinners.useQuery({
-    filterWinnerByTag: winnerFilters.filterWinnerByTag,
-  })
+  console.log('tag filter', winnerFilters?.filterWinnerByTag)
+
   return (
     <section className='latest-winner-section position-relative pt-120 pb-120'>
       <div className='el-1'>
@@ -72,14 +119,29 @@ const LatestWinner = () => {
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}
-                    <TicketCheckCard />
+                    <TicketCheckCard
+                      winnerFilters={winnerFilters}
+                      setWinnerFilters={setWinnerFilters}
+                      handleCheckWinner={handleCheckWinner}
+                      handleClearFilters={handleClearFilters}
+                    />
                   </div>
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {contestWinners?.map(winner => (
-                      <WinnerCard key={winner.id} winner={winner as Winner} />
-                    ))}
+                    {winners.length <= 0
+                      ? winnersData?.map(winner => (
+                          <WinnerCard
+                            key={winner.id}
+                            winner={winner as Winner}
+                          />
+                        ))
+                      : winners?.map(winner => (
+                          <WinnerCard
+                            key={winner.id}
+                            winner={winner as Winner}
+                          />
+                        ))}
                   </div>
                 </div>
               </div>

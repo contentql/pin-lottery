@@ -102,4 +102,22 @@ export const contestRouter = router({
       })
       return { status: 'success' }
     }),
+  getContestIds: publicProcedure
+    .input(ContestIdValidator)
+    .query(async ({ input }) => {
+      const { id } = input
+
+      const payload = await getPayloadClient()
+
+      const contestIds = await payload.find({
+        collection: 'contest',
+        depth: 0,
+        where: {
+          product_type: {
+            equals: id,
+          },
+        },
+      })
+      return contestIds.docs
+    }),
 })

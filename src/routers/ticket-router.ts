@@ -1,6 +1,7 @@
 import { TRPCError } from '@trpc/server'
 import { customAlphabet } from 'nanoid'
 
+import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { ContestIdValidator } from '../lib/validators/contest-id-validator'
 import { PageNumberValidator } from '../lib/validators/page-number-validator'
@@ -108,16 +109,15 @@ export const ticketRouter = router({
 
       try {
         const tickets = await payload.find({
-          collection: 'tickets',
-          pagination: false,
+        collection: 'tickets',
           where: {
             'contest_id.value': {
               equals: id,
             },
           },
         })
-
-        return tickets?.docs
+        
+      return tickets?.docs
       } catch (error: any) {
         console.log('Get tickets by contest: ', error)
         throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
@@ -146,5 +146,28 @@ export const ticketRouter = router({
         console.log('Delete Tickets: ', error)
         throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
       }
+    }),
+
+  getTicketId: publicProcedure
+    .input(
+      z.object({
+        ticket_no: z.string(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const { ticket_no } = input
+
+      const payload = await getPayloadClient()
+
+      const ticket = await payload.find({
+        collection: 'tickets',
+        depth: 0,
+        where: {
+          ticket_number: {
+            equals: ticket_no,
+          },
+        },
+      })
+      return ticket.docs.at(0)
     }),
 })
