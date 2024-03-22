@@ -169,12 +169,10 @@ export interface Contest {
     [k: string]: unknown;
   };
   img: string | Media;
-  images?:
-    | {
-        product_images: string | Media;
-        id?: string | null;
-      }[]
-    | null;
+  images: {
+    product_images: string | Media;
+    id?: string | null;
+  }[];
   features_html?: string | null;
   description_html?: string | null;
   contest_no: string;
@@ -196,6 +194,7 @@ export interface Contest {
   Camera?: string | null;
   reached_threshold?: boolean | null;
   threshold_reached_date?: string | null;
+  contest_timer_status?: boolean | null;
   contest_status?: boolean | null;
   winner_ticket?: {
     relationTo: 'winner';

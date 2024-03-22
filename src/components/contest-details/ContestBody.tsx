@@ -3,30 +3,18 @@ import * as sd from 'simple-duration'
 
 import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
-import { Contest, Media } from '@/payload-types'
+import { Contest } from '@/payload-types'
 
 import WinningNumber from '../winner/WinningNumber'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
 
-interface ContestDetails extends Contest {
-  img: Media
-  images?:
-    | {
-        product_images: Media
-        id?: string | null
-      }[]
-    | null
-  features_html: string
-  description_html: string
-}
-
 const ContestBody = ({
   contestDetails,
-  handleDrawTickets,
+  handleContestTimerUpdate,
 }: {
   contestDetails: Contest
-  handleDrawTickets: Function
+  handleContestTimerUpdate: Function
 }) => {
   const milliseconds = contestDetails?.day_remain
     ? sd.parse(contestDetails?.day_remain) * 1000
@@ -46,7 +34,7 @@ const ContestBody = ({
               <div className='draw-tickets-btn'>
                 <button
                   className='cmn-btn style--one btn-sm'
-                  onClick={() => handleDrawTickets()}>
+                  onClick={() => handleContestTimerUpdate()}>
                   draw tickets now
                 </button>
               </div>
@@ -71,9 +59,7 @@ const ContestBody = ({
           <div className='col-lg-12'>
             <div className='contest-cart'>
               {/* Context slider for one */}
-              <ContestSlider
-                contestDetails={contestDetails as ContestDetails}
-              />
+              <ContestSlider contestDetails={contestDetails} />
 
               {/* Contest right section */}
               <ContestRight contestDetails={contestDetails} />
@@ -81,9 +67,7 @@ const ContestBody = ({
           </div>
           <div className='col-lg-10'>
             <div className='contest-description'>
-              <VehicleOverview
-                contestDetails={contestDetails as ContestDetails}
-              />
+              <VehicleOverview contestDetails={contestDetails} />
             </div>
           </div>
         </div>
