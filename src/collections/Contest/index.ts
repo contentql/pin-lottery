@@ -163,6 +163,21 @@ const Contest: CollectionConfig = {
                   label: 'Days After Threshold Reached',
                   defaultValue: '5d 6h 56m 30s',
                   required: true,
+                  validate: val => {
+                    if (!val) return 'Enter a value (e.g., "5d 6m 60s").'
+
+                    const durationParts = val.split(/\s+/)
+                    const regex =
+                      /^(\d+y)?\s*(\d+d)?\s*(\d+h)?\s*(\d+m)?\s*(\d+s)?$/
+
+                    for (const part of durationParts) {
+                      if (!regex.test(part)) {
+                        return 'Invalid duration format (e.g., "5d 6m 60s").'
+                      }
+                    }
+
+                    return true
+                  },
                   admin: {
                     description: 'e.g: 5d 6h 56m 30s',
                     placeholder: '5d 6h 56m 30s',
