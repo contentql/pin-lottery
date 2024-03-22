@@ -8,43 +8,70 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
   req,
 }) => {
   if (operation === 'update') {
-    if (!previousDoc?.contest_timer_status && doc?.contest_timer_status) {
-      const { payload } = req
+    if (
+      doc?.reached_threshold &&
+      !!doc?.threshold_reached_date &&
+      !previousDoc?.contest_timer_status &&
+      doc?.contest_timer_status &&
+      !doc?.contest_status &&
+      !doc?.winner_ticket
+    ) {
+      try {
+        const { payload } = req
 
-      const { id: contestId } = doc
+        const { id: contestId } = doc
 
-      const { docs: contestTickets } = await payload.find({
-        collection: 'tickets',
-        depth: 0,
-        where: {
-          'contest_id.value': {
-            equals: contestId,
+        const { docs: contestTickets } = await payload.find({
+          collection: 'tickets',
+          depth: 0,
+          where: {
+            'contest_id.value': {
+              equals: contestId,
+            },
           },
-        },
-      })
+        })
 
-      const randomTicket = randomTicketPicker(contestTickets)
+        const randomTicket = randomTicketPicker(contestTickets)
 
-      if (!randomTicket) {
-        console.log('No ticket found for the contest')
-        return
-      }
+        if (!randomTicket) {
+          console.log('No ticket found for the contest')
+          return
+        }
 
-      const { id: ticketId } = randomTicket
+        const { id: ticketId } = randomTicket
 
-      const winner = await payload.create({
-        collection: 'winner',
-        data: {
-          ticket: { relationTo: 'tickets', value: ticketId },
-          contest: { relationTo: 'contest', value: contestId },
-        },
-      })
+        try {
+          const winner = await payload.create({
+            collection: 'winner',
+            data: {
+              ticket: { relationTo: 'tickets', value: ticketId },
+              contest: { relationTo: 'contest', value: contestId },
+            },
+          })
 
-      return {
-        ...doc,
-        contest_timer_status: true,
-        contest_status: true,
-        winner_ticket: { relationTo: 'winner', value: winner?.id },
+          const latestData = {
+            contest_timer_status: true,
+            contest_status: true,
+            winner_ticket: {
+              relationTo: 'winner' as 'winner',
+              value: winner?.id.toString(),
+            },
+          }
+
+          try {
+            await payload.update({
+              collection: 'contest',
+              id: contestId,
+              data: { ...latestData },
+            })
+          } catch (error) {
+            console.error('Error updating contest:', error)
+          }
+        } catch (error) {
+          console.error('Error creating winner:', error)
+        }
+      } catch (error) {
+        console.error('Error fetching contest tickets:', error)
       }
     }
   }

@@ -5,6 +5,7 @@ import ContestBody from '@/components/contest-details/ContestBody'
 import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
 
 interface PageProps {
@@ -15,21 +16,34 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
   const {
     data: contestDetails,
     isPending: pendinContestDetails,
-    refetch,
+    refetch: refetchContestDetails,
   } = trpc.contest.getContestById.useQuery({
     id: contestId,
   })
 
   const { mutate: updateContestTimerStatus } =
-    trpc.contest.updateContestTimerStatus.useMutation({})
+    trpc.contest.updateContestTimerStatus.useMutation({
+      onSuccess: async () => {
+        refetchContestDetails()
+      },
+    })
 
   const handleContestTimerUpdate = () => {
-    if (contestDetails && !contestDetails?.contest_timer_status) {
+    if (
+      contestDetails &&
+      contestDetails?.reached_threshold &&
+      !!contestDetails?.threshold_reached_date &&
+      !contestDetails?.contest_timer_status
+    ) {
       updateContestTimerStatus({
-        id: contestDetails?.id!,
+        id: contestDetails?.id,
         contest_timer_status: true,
       })
+
+      return
     }
+
+    toast.error('Draw has already been completed.')
   }
 
   return (
