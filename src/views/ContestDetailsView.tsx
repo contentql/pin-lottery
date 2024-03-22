@@ -14,19 +14,17 @@ interface PageProps {
 }
 
 const ContestDetailsView = ({ contestId }: PageProps) => {
-  const { data: contestDetails, refetch } =
-    trpc.contest.getContestById.useQuery({
-      id: contestId,
-    })
-  const { data } = trpc.ticket.getContestTickets.useQuery(
-    {
-      id: contestId,
-    },
-    // {
-    //   refetchOnWindowFocus:false
-    // }
-  )
-  const contestTickets = data as any
+  const {
+    data: contestDetails,
+    isPending: pendinContestDetails,
+    refetch,
+  } = trpc.contest.getContestById.useQuery({
+    id: contestId,
+  })
+
+  const { data: contestTickets } = trpc.ticket.getContestTickets.useQuery({
+    id: contestId,
+  })
 
   console.log('contest ', contestDetails)
   const { mutate: updateContestStatus } =
@@ -56,11 +54,20 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
 
   const handleDrawTickets = () => {
     const randomNumber = RandomTicketPicker(contestTickets)
+
     console.log('random number', randomNumber)
     if (randomNumber === undefined) {
       toast.error(`ticket not picked`)
     } else {
-      if (contestDetails?.contest_status) return
+      if (
+        !!contestDetails &&
+        !!contestDetails?.contest_status &&
+        !!contestDetails?.winner_ticket
+      ) {
+        toast.error('Winner already picked')
+        return
+      }
+
       addWinner({
         contest_id: randomNumber?.contest_id?.value?.id,
         ticket_id: randomNumber?.id,

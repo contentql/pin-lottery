@@ -1,4 +1,3 @@
-import { MouseEventHandler } from 'react'
 import Countdown from 'react-countdown'
 import * as sd from 'simple-duration'
 
@@ -27,7 +26,7 @@ const ContestBody = ({
   handleDrawTickets,
 }: {
   contestDetails: Contest
-  handleDrawTickets: MouseEventHandler<HTMLButtonElement>
+  handleDrawTickets: Function
 }) => {
   const milliseconds = contestDetails?.day_remain
     ? sd.parse(contestDetails?.day_remain) * 1000
@@ -40,14 +39,14 @@ const ContestBody = ({
       )}
       <div className='container'>
         <div className='row justify-content-center'>
-          {contestDetails?.reached_threshold &&
-          contestDetails?.threshold_reached_date &&
+          {!!contestDetails?.reached_threshold &&
+          !!contestDetails?.threshold_reached_date &&
           !contestDetails?.contest_status ? (
             <div className='col-lg-6'>
               <div className='draw-tickets-btn'>
                 <button
                   className='cmn-btn style--one btn-sm'
-                  onClick={handleDrawTickets}>
+                  onClick={() => handleDrawTickets()}>
                   draw tickets now
                 </button>
               </div>
@@ -60,12 +59,7 @@ const ContestBody = ({
                       Date.parse(contestDetails?.threshold_reached_date) +
                       milliseconds
                     }
-                    renderer={props => (
-                      <RendererCountdown
-                        {...props}
-                        handleDrawTickets={handleDrawTickets}
-                      />
-                    )}
+                    renderer={props => <RendererCountdown {...props} />}
                   />
                 </div>
               </div>
