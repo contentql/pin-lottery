@@ -1,8 +1,14 @@
 import { CollectionConfig } from 'payload/types'
 import { ResetPassword } from '../../email-templates/resetPassword'
 import { UserAccountVerification } from '../../email-templates/userAccountVerification'
+import { isAdminOrSelf } from './access/isAdminOrSelf'
 const Users: CollectionConfig = {
   slug: 'users',
+  access: {
+    read: isAdminOrSelf,
+    update: isAdminOrSelf,
+    delete: isAdminOrSelf,
+  },
   auth: {
     cookies: {
       secure: true,
@@ -61,7 +67,7 @@ const Users: CollectionConfig = {
       name: 'image',
       type: 'upload',
       label: 'User Image',
-      relationTo:'media'
+      relationTo: 'media',
     },
     {
       name: 'roles',
