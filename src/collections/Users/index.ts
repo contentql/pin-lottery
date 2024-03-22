@@ -4,11 +4,6 @@ import { UserAccountVerification } from '../../email-templates/userAccountVerifi
 import { isAdminOrSelf } from './access/isAdminOrSelf'
 const Users: CollectionConfig = {
   slug: 'users',
-  access: {
-    read: isAdminOrSelf,
-    update: isAdminOrSelf,
-    delete: isAdminOrSelf,
-  },
   auth: {
     cookies: {
       secure: true,
@@ -35,6 +30,11 @@ const Users: CollectionConfig = {
         })
       },
     },
+  },
+  access: {
+    read: isAdminOrSelf,
+    update: isAdminOrSelf,
+    delete: isAdminOrSelf,
   },
   admin: {
     useAsTitle: 'email',

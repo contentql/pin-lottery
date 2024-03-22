@@ -4,8 +4,26 @@ const Tags: CollectionConfig = {
   admin: {
     useAsTitle: 'tag',
   },
-  fields: [{ name: 'tag', type: 'text', label: 'Product Type' ,required:true},
-    {name:'img',type:'upload',label:'icon',relationTo:'media',required:true}
+  fields: [
+    {
+      name: 'tag',
+      type: 'text',
+      label: 'Product Type',
+      required: true,
+      admin: {
+        description: 'The name of the product type tag.',
+      },
+    },
+    {
+      name: 'img',
+      type: 'upload',
+      label: 'icon',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        description: 'The icon associated with the product type tag.',
+      },
+    },
   ],
 }
 

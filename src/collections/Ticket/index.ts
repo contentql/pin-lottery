@@ -35,7 +35,7 @@ const Ticket: CollectionConfig = {
           unique: true,
           defaultValue: nanoid(),
           admin: {
-            description: 'Auto-generated unique ticket number',
+            description: 'Auto-generated unique ticket number.',
             readOnly: true,
           },
         },
@@ -45,7 +45,7 @@ const Ticket: CollectionConfig = {
           label: 'Ticket Price',
           required: true,
           admin: {
-            description: 'Price of the ticket at the time of purchase',
+            description: 'Price of the ticket at the time of purchase.',
           },
         },
       ],
@@ -57,7 +57,10 @@ const Ticket: CollectionConfig = {
       relationTo: ['contest'],
       hasMany: false,
       required: true,
-      admin: { position: 'sidebar' },
+      admin: {
+        description: 'The contest associated with this ticket.',
+        position: 'sidebar',
+      },
     },
     {
       name: 'purchased_by',
@@ -70,7 +73,10 @@ const Ticket: CollectionConfig = {
 
         return { relationTo: 'users', value: user?.id }
       },
-      admin: { position: 'sidebar' },
+      admin: {
+        description: 'The user who purchased this ticket.',
+        position: 'sidebar',
+      },
       hooks: {
         beforeChange: [assignUserId],
       },
