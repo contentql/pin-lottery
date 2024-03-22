@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import Slider from 'react-slick'
 
@@ -36,6 +37,8 @@ const UpcomingDraw = ({
 }: {
   upcomingDrawTicketsData: Ticket[]
 }) => {
+  const router = useRouter()
+
   const settings = {
     slidesToShow: 2,
     slidesToScroll: 1,
@@ -65,29 +68,37 @@ const UpcomingDraw = ({
     <div className='upcoming-draw-wrapper'>
       <h3 className='title'>Upcoming Draws</h3>
       <Slider {...settings} className='draw-ticket-slider'>
-        {upcomingDrawTicketsData?.map((ticket, index) => (
-          <div key={index} className='silgle'>
-            <div className='draw-single-ticket'>
-              <div className='draw-single-ticket__header'>
-                <div className='left'>Ticket #{index + 1}</div>
-                <div className='right'>
-                  Contest No:{' '}
-                  {(ticket?.contest_id?.value as Contest)?.contest_no}
+        {upcomingDrawTicketsData?.map((ticket, index) => {
+          const contestId = (ticket?.contest_id?.value as Contest)?.id
+
+          return (
+            <div key={index} className='silgle'>
+              <div
+                className='draw-single-ticket upcoming-draw-ticket'
+                onClick={() => {
+                  router.push(`/contest/${contestId}`)
+                }}>
+                <div className='draw-single-ticket__header'>
+                  <div className='left'>Ticket #{index + 1}</div>
+                  <div className='right'>
+                    Contest No:{' '}
+                    {(ticket?.contest_id?.value as Contest)?.contest_no}
+                  </div>
                 </div>
+                <div className='circle-divider'>
+                  <Image src={circle_border} alt='circle border' />
+                </div>
+                <ul className='ticket-numbers-list'>
+                  {splitTicketNumber(ticket?.ticket_number).map(
+                    (num: string, idx: number) => (
+                      <li key={idx}>{num}</li>
+                    ),
+                  )}
+                </ul>
               </div>
-              <div className='circle-divider'>
-                <Image src={circle_border} alt='circle border' />
-              </div>
-              <ul className='ticket-numbers-list'>
-                {splitTicketNumber(ticket?.ticket_number).map(
-                  (num: string, idx: number) => (
-                    <li key={idx}>{num}</li>
-                  ),
-                )}
-              </ul>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </Slider>
     </div>
   )

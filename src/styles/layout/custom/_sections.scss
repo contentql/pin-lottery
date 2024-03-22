@@ -1086,3 +1086,17 @@ $duration: 1000;
   letter-spacing: 32px;
   position: relative;
 }
+
+/* upcoming draw ticket*/
+.upcoming-draw-ticket {
+  cursor: pointer;
+  transition:
+    border 0.4s ease,
+    transform 0.4s ease;
+}
+
+.upcoming-draw-ticket:hover {
+  border: 2px solid white;
+  transform: scale(1.01);
+}
+/* upcoming draw ticket*/
