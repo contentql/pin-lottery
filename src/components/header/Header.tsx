@@ -47,36 +47,36 @@ const Header = () => {
     }
   }
 
-    const {
-      isPending: isLogoutPending,
-      variables: logoutVariables,
-      mutate: logoutMutation,
-    } = useMutation({
-      mutationKey: ['/api/users/logout', 'post'],
-      mutationFn: () => logout(),
-      onSuccess: async () => {
-        router.push('/login')
-      },
-      onError: async err => {
-        if (err.message === 'CONFLICT') {
-          toast.error('User not found.', {
-            autoClose: 3000,
-            onClose: () => {
-              toast.info('Redirecting to login page...', {
-                autoClose: 2000,
-                onClose: () => router.push('/login'),
-              })
-            },
-          })
-        }
+  const {
+    isPending: isLogoutPending,
+    variables: logoutVariables,
+    mutate: logoutMutation,
+  } = useMutation({
+    mutationKey: ['/api/users/logout', 'post'],
+    mutationFn: () => logout(),
+    onSuccess: async () => {
+      router.push('/login')
+    },
+    onError: async err => {
+      if (err.message === 'CONFLICT') {
+        toast.error('User not found.', {
+          autoClose: 3000,
+          onClose: () => {
+            toast.info('Redirecting to login page...', {
+              autoClose: 2000,
+              onClose: () => router.push('/login'),
+            })
+          },
+        })
+      }
 
-        console.error('Something went wrong. Please try again.')
-      },
-    })
+      console.error('Something went wrong. Please try again.')
+    },
+  })
 
-    const handleLogout = () => {
-      logoutMutation()
-    }
+  const handleLogout = () => {
+    logoutMutation()
+  }
 
   useEffect(() => {
     window.onbeforeunload = function () {
@@ -186,13 +186,13 @@ const Header = () => {
                             <div className='divider'></div>
                             <Link
                               href='/user-info'
-                              className='popup-btn nav-item'>
+                              className='popup-btn list-nav'>
                               <span>
                                 <LuUser2 size={24} color='white' />
                               </span>
                               <p>Personal Info</p>
                             </Link>
-                            <Link href='/user' className='popup-btn nav-item'>
+                            <Link href='/user' className='popup-btn list-nav'>
                               <span>
                                 <LiaTicketAltSolid size={24} color='white' />
                               </span>
@@ -200,7 +200,7 @@ const Header = () => {
                             </Link>
                             <Link
                               href='/user-transaction'
-                              className='popup-btn nav-item'>
+                              className='popup-btn list-nav'>
                               <span>
                                 <GrTransaction size={24} color='white' />
                               </span>
@@ -209,7 +209,7 @@ const Header = () => {
                             <div className='divider'></div>
                             <button
                               onClick={handleLogout}
-                              className='popup-btn nav-item'>
+                              className='popup-btn list-nav'>
                               <RxExit size={24} color='white' />
                               <p> Logout</p>
                             </button>
@@ -220,7 +220,9 @@ const Header = () => {
                         <Link
                           href='/user-info'
                           className='cmn-btn style--three btn--sm'>
-                          <span className="react-icon-profile"><LuUser2 size={18}  color='white'/></span>
+                          <span className='react-icon-profile'>
+                            <LuUser2 size={18} color='white' />
+                          </span>
                           Profile Info
                         </Link>
                       </div>
