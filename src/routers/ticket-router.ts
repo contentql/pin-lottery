@@ -9,6 +9,27 @@ import { TicketValidator } from '../lib/validators/ticket-validator'
 import { publicProcedure, router, userProcedure } from '../trpc/trpc'
 
 export const ticketRouter = router({
+  getTickets: userProcedure.query(async ({ ctx }) => {
+    const { user } = ctx
+
+    const payload = await getPayloadClient()
+    const pageSize = 10
+
+    try {
+      const tickets = await payload.find({
+        collection: 'tickets',
+        user,
+        overrideAccess: false,
+        pagination: false,
+      })
+
+      return tickets.docs
+    } catch (error: any) {
+      console.log('Get tickets: ', error)
+      throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+    }
+  }),
+
   getUpcomingDrawsTickets: userProcedure
     .input(PageNumberValidator)
     .query(async ({ ctx, input }) => {
@@ -25,11 +46,12 @@ export const ticketRouter = router({
           overrideAccess: false,
           page,
           limit: page * pageSize,
-          // where: {
-          //   'contest_id.value.contest_status': {
-          //     equals: false,
-          //   },
-          // },
+          // where clause is not working for 'contest_id.value.contest_status'
+          where: {
+            'contest_id.value.contest_status': {
+              equals: false,
+            },
+          },
         })
 
         return tickets.docs
@@ -55,11 +77,12 @@ export const ticketRouter = router({
           overrideAccess: false,
           page,
           limit: page * pageSize,
-          // where: {
-          //   'contest_id.value.contest_status': {
-          //     equals: true,
-          //   },
-          // },
+          // where clause is not working for 'contest_id.value.contest_status'
+          where: {
+            'contest_id.value.contest_status': {
+              equals: true,
+            },
+          },
         })
 
         return tickets.docs
