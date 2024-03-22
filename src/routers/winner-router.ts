@@ -17,6 +17,7 @@ export const WinnerRouter = router({
           contest: { relationTo: 'contest', value: contest_id },
         },
       })
+
       return { winner: winner }
     }),
 

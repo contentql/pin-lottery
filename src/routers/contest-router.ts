@@ -85,10 +85,10 @@ export const contestRouter = router({
       return contestById
     }),
 
-  updateContest: publicProcedure
+  updateContestTimerStatus: publicProcedure
     .input(ContestWinnerValidator)
     .mutation(async ({ input }) => {
-      const { id, contest_status, winner_id } = input
+      const { id, contest_timer_status } = input
 
       const payload = await getPayloadClient()
 
@@ -96,12 +96,13 @@ export const contestRouter = router({
         collection: 'contest',
         id: id,
         data: {
-          contest_status,
-          winner_ticket: { relationTo: 'winner', value: winner_id },
+          contest_timer_status,
         },
       })
+
       return { status: 'success' }
     }),
+
   getContestIds: publicProcedure
     .input(ContestIdValidator)
     .query(async ({ input }) => {

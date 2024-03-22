@@ -36,6 +36,9 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
       onError: async () => {
         toast.error('Failed to empty cart.')
       },
+      onSettled: async () => {
+        setIsPurchasing(false)
+      },
     })
 
   const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
@@ -46,10 +49,8 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
       )
     },
     onError: async () => {
-      toast.error('Failed to purchase tickets. Please try again later.')
-    },
-    onSettled: async () => {
       setIsPurchasing(false)
+      toast.error('Failed to purchase tickets. Please try again later.')
     },
   })
 

@@ -6,6 +6,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
+import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
 
 const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const nanoid = customAlphabet(alphabet, 4)
@@ -17,6 +18,7 @@ const Contest: CollectionConfig = {
   },
   hooks: {
     // beforeRead: [updateContestAfterRead],
+    afterChange: [announceWinnerAfterUpdate],
   },
   fields: [
     {
@@ -358,6 +360,17 @@ const Contest: CollectionConfig = {
               admin: {
                 readOnly: true,
                 condition: data => data.reached_threshold === true,
+              },
+            },
+            {
+              name: 'contest_timer_status',
+              type: 'checkbox',
+              label: 'Contest Timer Status',
+              defaultValue: false,
+              admin: {
+                readOnly: true,
+                description:
+                  'Contest winner announcment time status (completed/not completed)',
               },
             },
             {

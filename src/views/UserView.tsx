@@ -2,19 +2,19 @@
 
 import LeftSideMenu from '@/components/common/LeftSideMenu'
 import RightSide from '@/components/user/RightSide'
-import { Ticket } from '@/payload-types'
+import { Contest, Ticket } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 
 const UserView = () => {
-  const { data: upcomingDrawTicketsData } =
-    trpc.ticket.getUpcomingDrawsTickets.useQuery({
-      page: 1,
-    })
+  const { data: ticketsData } = trpc.ticket.getTickets.useQuery()
 
-  const { data: pastDrawsTicketsData } =
-    trpc.ticket.getPastDrawsTickets.useQuery({
-      page: 1,
-    })
+  const upcomingDrawTicketsData = ticketsData?.filter(
+    ticket => !(ticket?.contest_id?.value as Contest)?.contest_status,
+  )
+
+  const pastDrawsTicketsData = ticketsData?.filter(
+    ticket => (ticket?.contest_id?.value as Contest)?.contest_status,
+  )
 
   return (
     <>
