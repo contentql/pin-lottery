@@ -111,6 +111,7 @@ export const contestRouter = router({
 
       const contestIds = await payload.find({
         collection: 'contest',
+        pagination: false,
         depth: 0,
         where: {
           product_type: {

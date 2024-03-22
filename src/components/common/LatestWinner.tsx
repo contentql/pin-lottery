@@ -13,57 +13,58 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 import WinnerCard from '../cards/WinnerCard'
 
-interface WinnerFilters {
-  filterWinnerByTag: string
-  ticketNumber: string
-}
+import Pagination from './Pagination'
 
 const LatestWinner = () => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
 
-  const [winners, setWinners] = useState<Winner[]>([])
+  const winner = searchParams.get('winner') ?? ''
+  const tag = searchParams.get('tag') ?? 'all'
 
-  const [winnerFilters, setWinnerFilters] = useState<WinnerFilters>({
+  const [winnerFilters, setWinnerFilters] = useState({
     filterWinnerByTag: 'all',
     ticketNumber: '',
   })
 
-  const { mutate: contestWinners } =
-    trpc.winner.getWinnerByTicketNumber.useMutation({
-      onSuccess: data => {
-        setWinners(data)
-        toast.success(`congrats winner found`)
-      },
-    })
+  const [pageNumber, setPageNumber] = useState(1)
 
-  console.log('winner', winners)
+  const { data: contestId } = trpc.contest?.getContestIds.useQuery({
+    id: tag!,
+  })
 
-  // const { data: contestId } = trpc.contest?.getContestIds.useQuery({
-  //   id: winnerFilters?.filterWinnerByTag,
-  // })
+  const temp = contestId?.map(contest => contest?.id) ?? []
 
-  // const temp = contestId?.map(contest => contest?.id)
+  const { data: winnersData } = trpc.winner.getWinners.useQuery({
+    pageNumber: pageNumber,
+    ticketNumber: winner!,
+    contestIds: temp!,
+  })
+
+  console.log('contest ids', temp)
+
+  console.log('winners', winnersData)
 
   const { mutate: getTicketId } = trpc.ticket.getTicketId.useMutation({
     onSuccess: (data: any) => {
-      contestWinners({ filterWinnerByTag: 'all', ticketNumber: data.id })
+      toast.success('Thanks for participating searching winner')
+      if (data?.id === undefined) {
+        toast.error('invalid ticket number')
+      } else {
+        const search = new URLSearchParams(searchParams)
+        search.set('winner', data?.id)
+        router.push(`${pathname}?${search.toString()}#winner_id`)
+      }
     },
     onError: () => {
-      toast.error(`invalid ticket number`)
+      toast.error(`incorrect ticket number`)
     },
   })
-
-  const { data: winnersData } = trpc.winner.getWinners.useQuery()
 
   const handleCheckWinner = (e: any) => {
     e.preventDefault()
     getTicketId({ ticket_no: winnerFilters?.ticketNumber })
-  }
-
-  const handleClearFilters = () => {
-    setWinners([])
   }
 
   const handleSearchTag = (tag: string) => {
@@ -76,7 +77,14 @@ const LatestWinner = () => {
     })
   }
 
-  console.log('tag filter', winnerFilters?.filterWinnerByTag)
+  const handleClearFilters = () => {
+    const params = new URLSearchParams()
+    router.push(`${pathname}?${params.toString()}#winner_id`)
+    setWinnerFilters({
+      ...winnerFilters,
+      filterWinnerByTag: 'all',
+    })
+  }
 
   return (
     <section className='latest-winner-section position-relative pt-120 pb-120'>
@@ -129,24 +137,30 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winners.length <= 0
-                      ? winnersData?.map(winner => (
-                          <WinnerCard
-                            key={winner.id}
-                            winner={winner as Winner}
-                          />
-                        ))
-                      : winners?.map(winner => (
-                          <WinnerCard
-                            key={winner.id}
-                            winner={winner as Winner}
-                          />
-                        ))}
+                    {winnersData?.Winners.map(winner => (
+                      <WinnerCard key={winner.id} winner={winner as Winner} />
+                    ))
+                    // : contestWinners?.map(winner => (
+                    //     <WinnerCard
+                    //       key={winner.id}
+                    //       winner={winner as Winner}
+                    //     />
+                    //   ))
+                    }
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
+        <div className='row pagination-bottom'>
+          <Pagination
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+            totalContests={winnersData?.totalDocs}
+          />
         </div>
       </div>
     </section>
