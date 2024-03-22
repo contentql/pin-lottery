@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { DateConverter } from '../../utils/date-converter'
 
 const WinnerCard = ({ winner }: { winner: Winner }) => {
-  console.log('winner card', winner)
   return (
     <div className='winner-card mb-30 '>
       <div className='winner-card__thumb'>

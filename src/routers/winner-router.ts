@@ -20,34 +20,52 @@ export const WinnerRouter = router({
       return { winner: winner }
     }),
 
-  getWinnerByTicketNumber: publicProcedure
+  // getWinnerByTicketNumber: publicProcedure
+  //   .input(TicketNumberValidator)
+  //   .query(async ({ input }) => {
+  //     const { ticketNumber } = input
+  //     const payload = await getPayloadClient()
+
+  //     const winners = await payload.find({
+  //       collection: 'winner',
+  //       depth: 5,
+  //       where: {
+  //         'ticket.value': {
+  //           equals: ticketNumber,
+  //         },
+  //       },
+  //     })
+
+  //     return winners?.docs
+  //   }),
+
+  getWinners: publicProcedure
     .input(WinnerPaginationValidator)
-    .mutation(async ({ input }) => {
-      const { ticketNumber } = input
+    .query(async ({ input }) => {
+      const { pageNumber, ticketNumber, contestIds } = input
+
+      const whereClauses = contestIds.map(contestId => ({
+        'contest.value': {
+          equals: contestId,
+        },
+      }))
       const payload = await getPayloadClient()
 
       const winners = await payload.find({
         collection: 'winner',
+        limit: 9,
         depth: 5,
-        limit: 6,
+        page: pageNumber,
         where: {
-          'ticket.value': {
-            equals: ticketNumber,
-          },
+          ...(ticketNumber !== '' && {
+            'ticket.value': {
+              equals: ticketNumber,
+            },
+          }),
+          or: [...whereClauses],
         },
       })
 
-      return winners?.docs
+      return { Winners: winners?.docs, totalDocs: winners?.totalDocs }
     }),
-
-  getWinners: publicProcedure.query(async () => {
-    const payload = await getPayloadClient()
-
-    const winners = await payload.find({
-      collection: 'winner',
-      limit: 6,
-      depth: 5,
-    })
-    return winners?.docs
-  }),
 })

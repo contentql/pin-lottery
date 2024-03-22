@@ -1,7 +1,8 @@
 import { z } from 'zod'
 export const WinnerPaginationValidator = z.object({
-  filterWinnerByTag: z.string(),
+  pageNumber: z.number(),
   ticketNumber: z.string(),
+  contestIds: z.array(z.string()),
 })
 
 export type TWinnerPaginationValidator = z.infer<
