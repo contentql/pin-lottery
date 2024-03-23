@@ -34,7 +34,7 @@ const PrevBtn = ({ onClick }: any) => {
   )
 }
 
-const Winner = ({ winnerDetails }: { winnerDetails: [Winner] }) => {
+const Winner = ({ winnerDetails }: { winnerDetails: Winner[] }) => {
   const settings = {
     speed: 700,
     arrows: true,

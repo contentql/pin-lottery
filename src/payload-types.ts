@@ -269,10 +269,10 @@ export interface Cart {
  */
 export interface Contact {
   id: string;
-  name?: string | null;
-  email?: string | null;
-  subject?: string | null;
-  message?: string | null;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -299,7 +299,7 @@ export interface Blog {
     };
     [k: string]: unknown;
   };
-  img?: string | Media | null;
+  img: string | Media;
   content_html?: string | null;
   meta?: {
     title?: string | null;
