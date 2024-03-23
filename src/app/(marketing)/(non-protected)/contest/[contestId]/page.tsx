@@ -34,7 +34,8 @@ export const generateMetadata = async ({
 }: {
   params: { contestId: string }
 }): Promise<Metadata> => {
-  let contest: Contest | null = null
+  // let contest: Contest | null = null
+  let contest: any = null
 
   const payload = await getPayloadClient()
 
@@ -44,7 +45,7 @@ export const generateMetadata = async ({
       id: contestId,
     })
 
-    contest = result as Contest
+    contest = result as any
   } catch (error) {
     console.error('Error fetching contest:', error)
   }
