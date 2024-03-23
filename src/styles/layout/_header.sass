@@ -212,6 +212,7 @@
           justify-content: center
           align-items: center
       .user__btn 
+        display: none
         margin-left: 28px
         width: 40px
         height: 40px
@@ -219,14 +220,9 @@
         +border-radius(50%)
         text-align: center
         line-height: 48px
-        @media (max-width: 1199px)
-          width: 30px
-          height: 30px
-          line-height: 36px
-        i 
-          font-size: 24px
-          @media (max-width: 1199px)
-            font-size: 20px
+        @media (min-width: 1199px)
+          display: block
+          
 .navbar-collapse 
   @media (max-width: 1199px)
     padding: 0 20px

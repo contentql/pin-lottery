@@ -1,10 +1,12 @@
-import { toast } from 'react-toastify';
+import { Ticket } from '../payload-types'
 
-export const RandomTicketPicker = (tickets: any) => {
-    if (tickets.length <= 0) {
-        toast.error(`No tickets available for `)
-    }
-    const randomIndex = Math.floor(Math.random() * tickets?.length)
-    const randomNumber = tickets[randomIndex]
-    return randomNumber;
+export const randomTicketPicker = (tickets: Ticket[]): Ticket | undefined => {
+  if (!tickets || tickets.length <= 0) {
+    return undefined
+  }
+
+  const randomIndex: number = Math.floor(Math.random() * tickets.length)
+  const randomTicket: Ticket = tickets[randomIndex]
+
+  return randomTicket
 }

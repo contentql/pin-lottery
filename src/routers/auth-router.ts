@@ -1,5 +1,5 @@
 import { TRPCError } from '@trpc/server'
- 
+
 import { Media } from '@/payload-types'
 import { produce } from 'immer'
 import { z } from 'zod'
@@ -24,31 +24,48 @@ export const authRouter = router({
 
       const payload = await getPayloadClient()
 
-      const { totalDocs: userExisted } = await payload.find({
-        collection: 'users',
-        where: {
-          email: {
-            equals: email,
+      try {
+        const { totalDocs: userExisted } = await payload.find({
+          collection: 'users',
+          where: {
+            email: {
+              equals: email,
+            },
           },
-        },
-      })
+        })
 
-      if (!!userExisted) {
+        if (!!userExisted) {
+          throw new TRPCError({
+            code: 'CONFLICT',
+            message: 'User already exists.',
+          })
+        }
+      } catch (error: any) {
+        console.error('Error checking user existence:', error)
         throw new TRPCError({
-          code: 'CONFLICT',
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message,
         })
       }
 
-      const { id, email: newUserEmail } = await payload.create({
-        collection: 'users',
-        data: {
-          user_name,
-          email,
-          password,
-        },
-      })
+      try {
+        const { id, email: newUserEmail } = await payload.create({
+          collection: 'users',
+          data: {
+            user_name,
+            email,
+            password,
+          },
+        })
 
-      return { succuss: true, sentEmailTo: newUserEmail }
+        return { success: true, sentEmailTo: newUserEmail }
+      } catch (error: any) {
+        console.error('Error creating user:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message,
+        })
+      }
     }),
 
   verifyEmail: publicProcedure
@@ -58,14 +75,27 @@ export const authRouter = router({
 
       const payload = await getPayloadClient()
 
-      const isVerified = await payload.verifyEmail({
-        collection: 'users',
-        token,
-      })
+      try {
+        const isVerified = await payload.verifyEmail({
+          collection: 'users',
+          token,
+        })
 
-      if (!isVerified) throw new TRPCError({ code: 'UNAUTHORIZED' })
+        if (!isVerified) {
+          throw new TRPCError({
+            code: 'UNAUTHORIZED',
+            message: 'Email verification failed.',
+          })
+        }
 
-      return { success: true }
+        return { success: true }
+      } catch (error: any) {
+        console.error('Error verifying email:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message,
+        })
+      }
     }),
 
   signIn: publicProcedure
@@ -87,8 +117,12 @@ export const authRouter = router({
         })
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      } catch (error: any) {
+        console.error('Error signing in:', error)
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: error?.message || 'Unauthorized access.',
+        })
       }
     }),
 
@@ -98,6 +132,7 @@ export const authRouter = router({
       const { password, token } = input
 
       const payload = await getPayloadClient()
+
       try {
         await payload.resetPassword({
           collection: 'users',
@@ -108,8 +143,12 @@ export const authRouter = router({
           overrideAccess: true,
         })
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      } catch (error: any) {
+        console.error('Error resetting password:', error)
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: error?.message || 'Unauthorized access.',
+        })
       }
     }),
 
@@ -121,22 +160,22 @@ export const authRouter = router({
 
       const payload = await getPayloadClient()
 
-      const { totalDocs: emailExisted } = await payload.find({
-        collection: 'users',
-        where: {
-          email: {
-            equals: email,
-          },
-        },
-      })
-
-      if (!!!emailExisted) {
-        throw new TRPCError({
-          code: 'CONFLICT',
-        })
-      }
-
       try {
+        const { totalDocs: emailExisted } = await payload.find({
+          collection: 'users',
+          where: {
+            email: {
+              equals: email,
+            },
+          },
+        })
+
+        if (!!!emailExisted) {
+          throw new TRPCError({
+            code: 'CONFLICT',
+          })
+        }
+
         await payload.forgotPassword({
           collection: 'users',
           data: {
@@ -145,8 +184,12 @@ export const authRouter = router({
         })
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      } catch (error: any) {
+        console.error('Error sending forgot password email:', error)
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: error?.message || 'Unauthorized access.',
+        })
       }
     }),
 
@@ -169,8 +212,12 @@ export const authRouter = router({
             phone_number,
           },
         })
-      } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      } catch (error: any) {
+        console.error('Error updating user personal details:', error)
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: error?.message || 'Unauthorized access.',
+        })
       }
     }),
 
@@ -187,11 +234,19 @@ export const authRouter = router({
         },
       )
 
+      if (!res.ok) {
+        throw new Error('Failed to fetch current user data.')
+      }
+
       const currentUser = await res.json()
 
       return currentUser
-    } catch (err) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    } catch (error: any) {
+      console.error('Error fetching current user:', error)
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: error?.message || 'Unauthorized access.',
+      })
     }
   }),
 
@@ -213,8 +268,12 @@ export const authRouter = router({
         })
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      } catch (error) {
+        console.error('Error changing password:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Failed to change password.',
+        })
       }
     }),
 
@@ -236,37 +295,49 @@ export const authRouter = router({
         })
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      } catch (error: any) {
+        console.error('Error updating email:', error)
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: error?.message || 'Unauthorized access.',
+        })
       }
     }),
+
   updateUserImage: userProcedure
     .input(
       z.object({
         id: z.any(),
       }),
     )
-     .mutation(async ({ input, ctx }) => {
-
+    .mutation(async ({ input, ctx }) => {
       const { id } = input
 
       const payload = await getPayloadClient()
 
-      const updatedData = produce(ctx.user, (draft) => {
-        draft.image = id
-      })
+      try {
+        const updatedData = produce(ctx.user, draft => {
+          draft.image = id
+        })
 
-      const user=await payload.update({
-        collection: 'users',
-        id: ctx.user.id,
-        data: updatedData,
-      })
+        const user = await payload.update({
+          collection: 'users',
+          id: ctx.user.id,
+          data: updatedData,
+        })
 
-      await payload.delete({
-        collection: 'media',
-        id: (ctx.user.image as Media).id,
-      })
+        await payload.delete({
+          collection: 'media',
+          id: (ctx.user.image as Media).id,
+        })
 
-      return { data: user }
+        return { data: user }
+      } catch (error: any) {
+        console.error('Error updating user image:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Internal server error occurred.',
+        })
+      }
     }),
 })

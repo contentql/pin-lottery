@@ -72,6 +72,14 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
+    contestImage?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     userProfile?: {
       url?: string | null;
       width?: number | null;
@@ -130,10 +138,6 @@ export interface Contest {
   id: string;
   title: string;
   product_price: number;
-  tag: {
-    relationTo: 'tags';
-    value: string | Tag;
-  };
   features: {
     root: {
       children: {
@@ -165,17 +169,17 @@ export interface Contest {
     [k: string]: unknown;
   };
   img: string | Media;
-  images?:
-    | {
-        product_images: string | Media;
-        id?: string | null;
-      }[]
-    | null;
+  images: {
+    product_images: string | Media;
+    id?: string | null;
+  }[];
   features_html?: string | null;
   description_html?: string | null;
   contest_no: string;
+  tickets_purchased?: number | null;
   ticket_price: number;
-  day_remain: number;
+  day_remain: string;
+  product_type?: ('Car' | 'Bike' | 'Mobile' | 'Laptop') | null;
   zero_sixty?: string | null;
   top_speed?: string | null;
   power?: string | null;
@@ -188,6 +192,9 @@ export interface Contest {
   display?: string | null;
   battery?: string | null;
   Camera?: string | null;
+  reached_threshold?: boolean | null;
+  threshold_reached_date?: string | null;
+  contest_timer_status?: boolean | null;
   contest_status?: boolean | null;
   winner_ticket?: {
     relationTo: 'winner';
@@ -203,29 +210,36 @@ export interface Contest {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tags".
+ * via the `definition` "winner".
  */
-export interface Tag {
+export interface Winner {
   id: string;
-  tag: string;
-  img: string | Media;
+  contest?: {
+    relationTo: 'contest';
+    value: string | Contest;
+  } | null;
+  ticket?: {
+    relationTo: 'tickets';
+    value: string | Ticket;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "winner".
+ * via the `definition` "tickets".
  */
-export interface Winner {
+export interface Ticket {
   id: string;
   ticket_number?: string | null;
-  user?: {
-    relationTo: 'users';
-    value: string | User;
-  } | null;
-  contest?: {
+  ticket_price: number;
+  contest_id: {
     relationTo: 'contest';
     value: string | Contest;
+  };
+  purchased_by?: {
+    relationTo: 'users';
+    value: string | User;
   } | null;
   updatedAt: string;
   createdAt: string;
@@ -251,35 +265,14 @@ export interface Cart {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tickets".
- */
-export interface Ticket {
-  id: string;
-  ticket_number: string;
-  ticket_price: number;
-  draw_status?: boolean | null;
-  win_status?: boolean | null;
-  contest_id: {
-    relationTo: 'contest';
-    value: string | Contest;
-  };
-  purchased_by: {
-    relationTo: 'users';
-    value: string | User;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact".
  */
 export interface Contact {
   id: string;
-  name?: string | null;
-  email?: string | null;
-  subject?: string | null;
-  message?: string | null;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -306,7 +299,7 @@ export interface Blog {
     };
     [k: string]: unknown;
   };
-  img?: string | Media | null;
+  img: string | Media;
   content_html?: string | null;
   meta?: {
     title?: string | null;
@@ -329,6 +322,17 @@ export interface Faq {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string;
+  tag: string;
+  img: string | Media;
   updatedAt: string;
   createdAt: string;
 }

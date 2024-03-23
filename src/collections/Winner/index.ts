@@ -1,24 +1,33 @@
 import { CollectionConfig } from 'payload/types'
 const Winner: CollectionConfig = {
   slug: 'winner',
-  admin: {
-    useAsTitle: 'ticket_number',
-  },
+
   fields: [
-    { name: 'ticket_number', type: 'text', label: 'Ticket Number' },
-    {
-      name: 'user',
-      type: 'relationship',
-      label:'User',
-      relationTo: ['users'],
-      hasMany: false,
-    },
     {
       name: 'contest',
       type: 'relationship',
-      label:'Contest',
+      label: 'Contest',
       relationTo: ['contest'],
       hasMany: false,
+    },
+    {
+      name: 'ticket',
+      type: 'relationship',
+      relationTo: ['tickets'],
+      label: 'Winner Ticket',
+      hasMany: false,
+      filterOptions: ({ relationTo, data }) => {
+        const selectedContestId = data?.contest?.value
+        if (relationTo === 'tickets' && selectedContestId) {
+          return {
+            'contest_id.value': {
+              equals: selectedContestId,
+            },
+          }
+        } else {
+          return false
+        }
+      },
     },
   ],
 }

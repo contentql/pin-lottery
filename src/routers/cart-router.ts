@@ -2,6 +2,8 @@ import { TRPCError } from '@trpc/server'
 
 import { getPayloadClient } from '../get-payload'
 import { CartDetailsValidator } from '../lib/validators/cart-details-validator'
+import { IdValidator } from '../lib/validators/id-validator'
+import { TicketsCountValidator } from '../lib/validators/tickets-count-validator'
 import { router, userProcedure } from '../trpc/trpc'
 
 export const cartRouter = router({
@@ -18,8 +20,12 @@ export const cartRouter = router({
       })
 
       return tickets.docs
-    } catch (err) {
-      throw new TRPCError({ code: 'BAD_REQUEST' })
+    } catch (error: any) {
+      console.error('Error getting cart data:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to retrieve cart data.',
+      })
     }
   }),
 
@@ -39,17 +45,69 @@ export const cartRouter = router({
             tickets,
             total_price,
             contest_id: { relationTo: 'contest', value: contest_id },
-            user_id: { relationTo: 'users', value: user?.id },
+          },
+          user,
+        })
+
+        return { success: true }
+      } catch (error: any) {
+        console.error('Error adding tickets to cart:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to add tickets to cart.',
+        })
+      }
+    }),
+
+  updateTicketsOfUserFromCart: userProcedure
+    .input(TicketsCountValidator)
+    .mutation(async ({ input }) => {
+      const { id, tickets, total_price } = input
+
+      const payload = await getPayloadClient()
+
+      try {
+        await payload.update({
+          collection: 'cart',
+          id,
+          data: {
+            tickets,
+            total_price,
           },
         })
 
         return { success: true }
-      } catch (err) {
-        throw new TRPCError({ code: 'BAD_REQUEST' })
+      } catch (error: any) {
+        console.error('Error updating cart tickets:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to update cart tickets.',
+        })
       }
     }),
 
-  deleteTicketsFromCart: userProcedure.mutation(async ({ ctx }) => {
+  deleteById: userProcedure.input(IdValidator).mutation(async ({ input }) => {
+    const { id } = input
+
+    const payload = await getPayloadClient()
+
+    try {
+      await payload.delete({
+        collection: 'cart',
+        id,
+      })
+
+      return { success: true }
+    } catch (error: any) {
+      console.error('Error deleting cart data by id:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to delete cart data by id.',
+      })
+    }
+  }),
+
+  deleteAllTicketsOfUserFromCart: userProcedure.mutation(async ({ ctx }) => {
     const { user } = ctx
 
     const payload = await getPayloadClient()
@@ -65,8 +123,12 @@ export const cartRouter = router({
       })
 
       return { success: true }
-    } catch (err) {
-      throw new TRPCError({ code: 'BAD_REQUEST' })
+    } catch (error: any) {
+      console.error('Error deleting cart data by user:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to delete cart data by user.',
+      })
     }
   }),
 })

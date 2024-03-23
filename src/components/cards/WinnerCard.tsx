@@ -1,10 +1,9 @@
-import { Contest, Media, User, Winner } from '@/payload-types'
+import { Contest, Media, Ticket, User, Winner } from '@/payload-types'
+import { splitTicketNumber } from '@/utils/split-ticket-number'
 import Image from 'next/image'
 import { DateConverter } from '../../utils/date-converter'
-const WinnerCard = ({ winner }:{winner:Winner}) => {
 
-  const winning_number = winner?.ticket_number?.match(/.{1,2}/g)
-  
+const WinnerCard = ({ winner }: { winner: Winner }) => {
   return (
     <div className='winner-card mb-30 '>
       <div className='winner-card__thumb'>
@@ -21,9 +20,14 @@ const WinnerCard = ({ winner }:{winner:Winner}) => {
         <div className='winner-thumb'>
           <Image
             src={
-              (winner?.user?.value as User)?.image
-                ? (((winner?.user?.value as User)?.image as Media)?.sizes
-                    ?.userProfile?.url as string)
+              ((winner?.ticket?.value as Ticket)?.purchased_by?.value as User)
+                ?.image
+                ? ((
+                    (
+                      (winner?.ticket?.value as Ticket)?.purchased_by
+                        ?.value as User
+                    )?.image as Media
+                  )?.sizes?.userProfile?.url as string)
                 : '/images/user/pp.png'
             }
             alt=''
@@ -44,9 +48,9 @@ const WinnerCard = ({ winner }:{winner:Winner}) => {
           <div className='number-list-wrapper'>
             <p>Winning Numbers:</p>
             <ul className='number-list mt-2'>
-              {winning_number?.map((itm: any, i: any) => (
-                <li key={i}>{itm}</li>
-              ))}
+              {splitTicketNumber(
+                (winner?.ticket?.value as Ticket)?.ticket_number,
+              )?.map((itm: any, i: any) => <li key={i}>{itm}</li>)}
             </ul>
           </div>
           <div className='right'>

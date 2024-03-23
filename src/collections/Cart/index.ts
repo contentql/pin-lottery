@@ -1,3 +1,4 @@
+import { User } from '@/payload-types'
 import { CollectionConfig } from 'payload/types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
 import { assignUserId } from './field-level-hooks/assignUserId'
@@ -18,16 +19,14 @@ const Cart: CollectionConfig = {
           type: 'number',
           label: 'Tickets',
           required: true,
-          admin: { description: 'Total no of tickets' },
+          admin: { description: 'Total number of tickets in the cart.' },
         },
         {
           name: 'total_price',
           type: 'number',
           label: 'Total Price',
           required: true,
-          admin: {
-            description: 'Total tickets price',
-          },
+          admin: { description: 'Total price of all tickets in the cart.' },
         },
       ],
     },
@@ -40,6 +39,7 @@ const Cart: CollectionConfig = {
       required: true,
       admin: {
         position: 'sidebar',
+        description: 'The contest associated with this cart.',
       },
     },
     {
@@ -48,7 +48,15 @@ const Cart: CollectionConfig = {
       type: 'relationship',
       relationTo: ['users'],
       hasMany: false,
-      admin: { position: 'sidebar' },
+      defaultValue: ({ user }: { user: User }) => {
+        if (!user) return undefined
+
+        return { relationTo: 'users', value: user?.id }
+      },
+      admin: {
+        position: 'sidebar',
+        description: 'The user associated with this cart.',
+      },
       hooks: {
         beforeChange: [assignUserId],
       },

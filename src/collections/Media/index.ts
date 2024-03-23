@@ -30,9 +30,15 @@ export const Media: CollectionConfig = {
     imageSizes: [
       {
         height: 40,
-        width:undefined,
+        width: undefined,
         crop: 'center',
         name: 'navUserImage',
+      },
+      {
+        height: 200,
+        width: undefined,
+        crop: 'center',
+        name: 'contestImage',
       },
       {
         height: undefined,
@@ -83,6 +89,9 @@ export const Media: CollectionConfig = {
       name: 'alt',
       label: 'Alt Text',
       type: 'text',
+      admin: {
+        description: 'The alternative text for the media file.',
+      },
     },
 
     // The following fields should be able to be merged in to default upload fields

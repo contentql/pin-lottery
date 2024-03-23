@@ -1,0 +1,87 @@
+.cart-lottery-single {
+  background-color: #5a4bcc;
+  position: relative;
+  margin-bottom: 14px;
+  @include border-radius(10px);
+
+  &:hover {
+    .cart-lottery-single__close {
+      opacity: 1;
+      visibility: visible;
+      @include transform(scale(1));
+    }
+  }
+
+  &__close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #5a4bcc;
+    color: #ffffff;
+    @include border-radius(50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -15px;
+    right: -15px;
+    opacity: 0;
+    visibility: hidden;
+    @include transform(scale(0.5));
+    @include transition(all 0.3s);
+  }
+
+  &__header {
+    @include border-radius(10px);
+    background-color: #4939c1;
+    padding: 20px 20px;
+
+    .top {
+      @include d-flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #6d62c7;
+
+      .titcket-number {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__selected-number {
+    @include d-flex;
+    margin: -3px;
+    justify-content: space-evenly;
+
+    li {
+      width: 36px;
+      height: 36px;
+      background-image: linear-gradient(
+        338deg,
+        rgb(177, 34, 230) 0%,
+        rgb(255, 99, 222) 100%
+      );
+      @include d-flex;
+      justify-content: center;
+      align-items: center;
+      @include border-radius(50%);
+      margin: 6px;
+      color: rgba(255, 255, 255, 0.4);
+
+      &.active {
+        background-image: linear-gradient(
+          360deg,
+          rgb(236, 3, 139) 0%,
+          rgb(251, 100, 104) 44%,
+          rgb(251, 185, 54) 100%
+        );
+        box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35);
+        border: none;
+        color: #ffffff;
+      }
+    }
+  }
+}

@@ -1,55 +1,58 @@
-import { FaTrashAlt } from 'react-icons/fa'
-
+import CartTicketCard from '@/components/cards/CartTicketCard'
 import { Cart, Contest } from '@/payload-types'
 
 interface GroupedTickets {
   [contest_no: string]: Cart[]
 }
 
-const AllTickets = ({ cartData }: { cartData: Cart[] }) => {
-  // const groupedCartData: GroupedTickets = cartData?.reduce(
-  //   (acc: GroupedTickets, ticket) => {
-  //     const { contest_no } = ticket
-  //     if (!acc[contest_no]) {
-  //       acc[contest_no] = []
-  //     }
-  //     acc[contest_no].push(ticket)
-  //     return acc
-  //   },
-  //   {},
-  // )
-
+const AllTickets = ({
+  cartData,
+  updateCartTicketsCountMutation,
+  deleteById,
+  deleteAllTicketsOfUserFromCart,
+}: {
+  cartData: Cart[]
+  updateCartTicketsCountMutation: Function
+  deleteById: Function
+  deleteAllTicketsOfUserFromCart: Function
+}) => {
   return (
     <div className='col-lg-7'>
       <div className='ticket-wrapper'>
         <div className='ticket-wrapper__header'>
           <h3>Your tickets:</h3>
-          <button type='button'>clear all</button>
+          <button
+            type='button'
+            onClick={() => deleteAllTicketsOfUserFromCart()}>
+            clear all
+          </button>
         </div>
         {cartData?.map(cart => (
           <div key={cart?.id} className='ticket-wrapper__body'>
             <div className='tickets'>
               <div className='single-row'>
-                <h4>
+                <h3>
                   Contest Number:{' '}
                   {(cart?.contest_id?.value as Contest)?.contest_no}
-                </h4>
+                </h3>
+                <button
+                  type='button'
+                  onClick={() => deleteById({ id: cart?.id })}>
+                  clear
+                </button>
               </div>
               <div className='ticket-wrapper__body'>
                 {[...Array(cart?.tickets)].map((_, idx) => {
                   return (
-                    <div key={idx} className='single-row'>
-                      <ul className='numbers'>
-                        {[...Array(7)].map((_, i: number) => (
-                          <li key={i}>00</li>
-                        ))}
-                      </ul>
-                      <div className='action-btns'>
-                        <button type='button' className='del-btn'>
-                          <FaTrashAlt className='fs-6' />
-                        </button>
-                      </div>
-                    </div>
+                    <CartTicketCard
+                      key={idx}
+                      cart={cart}
+                      ticketId={idx + 1}
+                      deleteById={deleteById}
+                      updateCartTicketsCountMutation={
+                        updateCartTicketsCountMutation
+                      }
+                    />
                   )
                 })}
               </div>

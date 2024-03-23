@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useState } from 'react'
 
 import payment from '/public/images/elements/payment.png'
 
@@ -10,6 +11,8 @@ import { toast } from 'react-toastify'
 
 const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const router = useRouter()
+
+  const [isPurchasing, setIsPurchasing] = useState(false)
 
   const currency = ticketsMetadata?.currency
 
@@ -25,29 +28,38 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     })),
   )
 
-  const { mutate: deleteCartTickets } =
-    trpc.cart.deleteTicketsFromCart.useMutation({
+  const { mutate: deleteAllTicketsOfUserFromCart } =
+    trpc.cart.deleteAllTicketsOfUserFromCart.useMutation({
       onSuccess: async () => {
         router.push('/user')
       },
       onError: async () => {
         toast.error('Failed to empty cart.')
       },
+      onSettled: async () => {
+        setIsPurchasing(false)
+      },
     })
 
   const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
     onSuccess: async () => {
-      deleteCartTickets()
+      deleteAllTicketsOfUserFromCart()
       toast.success(
         'Tickets successfully purchased. Draw date will be announced shortly.',
       )
     },
     onError: async () => {
+      setIsPurchasing(false)
       toast.error('Failed to purchase tickets. Please try again later.')
     },
   })
 
   const handlePurchase = () => {
+    if (!arrayOfTicketsWithPrices.length) {
+      toast.warning('Please add tickets to proceed.')
+      return
+    }
+    setIsPurchasing(true)
     createTicketsMutation(arrayOfTicketsWithPrices)
   }
 
@@ -95,8 +107,9 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
             <button
               type='button'
               className='cmn-btn'
-              onClick={() => handlePurchase()}>
-              buy tickets
+              onClick={() => handlePurchase()}
+              disabled={isPurchasing}>
+              {isPurchasing ? 'Processing...' : 'Buy Tickets'}
             </button>
           </div>
         </div>

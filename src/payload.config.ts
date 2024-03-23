@@ -32,6 +32,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
+  defaultDepth: 3,
   collections: [
     Users,
     Media,
@@ -61,6 +62,7 @@ export default buildConfig({
       }
       return config
     },
+
     meta: {
       titleSuffix: '- ContentQL',
       favicon: 'favicon.ico',

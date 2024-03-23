@@ -1,5 +1,5 @@
 import { AppContext } from '@/context/context'
-import { Contest, Winner } from '@/payload-types'
+import { Contest, Ticket, Winner } from '@/payload-types'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -45,7 +45,7 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
       {contestDetails?.contest_status === true ? (
         <div>
           <h3>Winning Ticket Number: </h3>
-          <h4>{(contestDetails?.winner_ticket?.value as Winner)?.ticket_number}</h4>
+          <h4>{((contestDetails?.winner_ticket?.value as Winner)?.ticket?.value as Ticket)?.ticket_number}</h4>
         </div>
       ) : (
         <div className='d-flex flex-wrap align-items-center mb-30'>

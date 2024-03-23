@@ -1,26 +1,87 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
+import FilterByTag from '../filters/FilterByTag'
 import w_el_1 from '/public/images/elements/w-el-1.png'
 import w_el_2 from '/public/images/elements/w-el-2.png'
 import w_el_3 from '/public/images/elements/w-el-3.png'
-import winner_tab_1 from '/public/images/icon/winner-tab/1.png'
-import winner_tab_2 from '/public/images/icon/winner-tab/2.png'
-import winner_tab_3 from '/public/images/icon/winner-tab/3.png'
-import winner_tab_4 from '/public/images/icon/winner-tab/4.png'
-import winner_tab_5 from '/public/images/icon/winner-tab/5.png'
 
 import TicketCheckCard from '@/components/cards/TicketCheckCard'
-import WinnerCard from '@/components/cards/WinnerCard'
-
-import winnerData from '@/data/winnerData'
 import { Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import WinnerCard from '../cards/WinnerCard'
+
+import Pagination from './Pagination'
 
 const LatestWinner = () => {
-  const [winners, setWinners] = useState(winnerData)
-  const { data: contestWinners} =trpc.winner.getWinners.useQuery()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const winner = searchParams.get('winner') ?? ''
+  const tag = searchParams.get('tag') ?? 'all'
+
+  const [winnerFilters, setWinnerFilters] = useState({
+    filterWinnerByTag: 'all',
+    ticketNumber: '',
+  })
+
+  const [pageNumber, setPageNumber] = useState(1)
+
+  const { data: contestId } = trpc.contest?.getContestIds.useQuery({
+    id: tag!,
+  })
+
+  const temp = contestId?.map(contest => contest?.id) ?? []
+
+  const { data: winnersData } = trpc.winner.getWinners.useQuery({
+    pageNumber: pageNumber,
+    ticketNumber: winner!,
+    contestIds: temp!,
+  })
+
+  const { mutate: getTicketId } = trpc.ticket.getTicketId.useMutation({
+    onSuccess: (data: any) => {
+      toast.success('Thanks for participating searching winner')
+      if (data?.id === undefined) {
+        toast.error('invalid ticket number')
+      } else {
+        const search = new URLSearchParams(searchParams)
+        search.set('winner', data?.id)
+        router.push(`${pathname}?${search.toString()}#winner_id`)
+      }
+    },
+    onError: () => {
+      toast.error(`incorrect ticket number`)
+    },
+  })
+
+  const handleCheckWinner = (e: any) => {
+    e.preventDefault()
+    getTicketId({ ticket_no: winnerFilters?.ticketNumber })
+  }
+
+  const handleSearchTag = (tag: string) => {
+    const search = new URLSearchParams(searchParams)
+    search.set('tag', tag.toString())
+    router.push(`${pathname}?${search.toString()}#winner_id`)
+    setWinnerFilters({
+      ...winnerFilters,
+      filterWinnerByTag: tag,
+    })
+  }
+
+  const handleClearFilters = () => {
+    const params = new URLSearchParams()
+    router.push(`${pathname}?${params.toString()}#winner_id`)
+    setWinnerFilters({
+      ...winnerFilters,
+      filterWinnerByTag: 'all',
+    })
+  }
+
   return (
     <section className='latest-winner-section position-relative pt-120 pb-120'>
       <div className='el-1'>
@@ -48,87 +109,11 @@ const LatestWinner = () => {
           </div>
         </div>
         <div className='row'>
-          <div className='col-lg-12'>
-            <ul
-              className='nav nav-tabs winner-tab-nav'
-              id='winnerTab'
-              role='tablist'>
-              <li className='nav-item' role='presentation'>
-                <button
-                  className='nav-link active'
-                  id='dream-tab'
-                  data-bs-toggle='tab'
-                  data-bs-target='#dream'
-                  role='tab'
-                  aria-controls='dream'
-                  aria-selected='true'>
-                  <span className='icon-thumb'>
-                    <Image src={winner_tab_1} alt='image' />
-                  </span>
-                  <span>Dream Car</span>
-                </button>
-              </li>
-              <li className='nav-item' role='presentation'>
-                <button
-                  className='nav-link'
-                  id='bike-tab'
-                  data-bs-toggle='tab'
-                  data-bs-target='#bike'
-                  role='tab'
-                  aria-controls='bike'
-                  aria-selected='false'>
-                  <span className='icon-thumb'>
-                    <Image src={winner_tab_2} alt='image' />
-                  </span>
-                  <span>bike</span>
-                </button>
-              </li>
-              <li className='nav-item' role='presentation'>
-                <button
-                  className='nav-link'
-                  id='watch-tab'
-                  data-bs-toggle='tab'
-                  data-bs-target='#watch'
-                  role='tab'
-                  aria-controls='watch'
-                  aria-selected='false'>
-                  <span className='icon-thumb'>
-                    <Image src={winner_tab_3} alt='image' />
-                  </span>
-                  <span>watch</span>
-                </button>
-              </li>
-              <li className='nav-item' role='presentation'>
-                <button
-                  className='nav-link'
-                  id='laptop-tab'
-                  data-bs-toggle='tab'
-                  data-bs-target='#laptop'
-                  role='tab'
-                  aria-controls='laptop'
-                  aria-selected='false'>
-                  <span className='icon-thumb'>
-                    <Image src={winner_tab_4} alt='image' />
-                  </span>
-                  <span>laptop</span>
-                </button>
-              </li>
-              <li className='nav-item' role='presentation'>
-                <button
-                  className='nav-link'
-                  id='money-tab'
-                  data-bs-toggle='tab'
-                  data-bs-target='#money'
-                  role='tab'
-                  aria-controls='money'
-                  aria-selected='false'>
-                  <span className='icon-thumb'>
-                    <Image src={winner_tab_5} alt='image' />
-                  </span>
-                  <span>Money</span>
-                </button>
-              </li>
-            </ul>
+          <div className='col-lg-12' id='winner_id'>
+            <FilterByTag
+              filter={winnerFilters?.filterWinnerByTag}
+              handleSearch={handleSearchTag}
+            />
             <div className='tab-content mt-50' id='winnerTabContent'>
               <div
                 className='tab-pane fade show active'
@@ -138,128 +123,40 @@ const LatestWinner = () => {
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}
-                    <TicketCheckCard />
+                    <TicketCheckCard
+                      winnerFilters={winnerFilters}
+                      setWinnerFilters={setWinnerFilters}
+                      handleCheckWinner={handleCheckWinner}
+                      handleClearFilters={handleClearFilters}
+                    />
                   </div>
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {contestWinners?.map(winner => (
+                    {winnersData?.Winners.map(winner => (
                       <WinnerCard key={winner.id} winner={winner as Winner} />
-                    ))}
-
-                    <div className='btn-grp'>
-                      <Link href='winner' className='btn-border'>
-                        browse more
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className='tab-pane fade'
-                id='bike'
-                role='tabpanel'
-                aria-labelledby='bike-tab'>
-                <div className='row mb-none-30'>
-                  <div className='col-lg-4 mb-30'>
-                    {/* ticket check card */}
-                    <TicketCheckCard />
-                  </div>
-                  <div className='col-lg-8 mb-30'>
-                    {/* winner card */}
-
-                    {/* {winners.map(winner => (
-                      <WinnerCard key={winner.id} winner={winner} />
-                    ))} */}
-
-                    <div className='btn-grp'>
-                      <Link href='winner' className='btn-border'>
-                        browse more
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className='tab-pane fade'
-                id='watch'
-                role='tabpanel'
-                aria-labelledby='watch-tab'>
-                <div className='row mb-none-30'>
-                  <div className='col-lg-4 mb-30'>
-                    {/* ticket check card */}
-                    <TicketCheckCard />
-                  </div>
-                  <div className='col-lg-8 mb-30'>
-                    {/* winner card */}
-
-                    {/* {winners.map(winner => (
-                      <WinnerCard key={winner.id} winner={winner} />
-                    ))} */}
-
-                    <div className='btn-grp'>
-                      <Link href='/winner' className='btn-border'>
-                        browse more
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className='tab-pane fade'
-                id='laptop'
-                role='tabpanel'
-                aria-labelledby='laptop-tab'>
-                <div className='row mb-none-30'>
-                  <div className='col-lg-4 mb-30'>
-                    {/* ticket check card */}
-                    <TicketCheckCard />
-                  </div>
-                  <div className='col-lg-8 mb-30'>
-                    {/* winner card */}
-
-                    {/* {winners.map(winner => (
-                      <WinnerCard key={winner.id} winner={winner} />
-                    ))} */}
-
-                    <div className='btn-grp'>
-                      <Link href='winner' className='btn-border'>
-                        browse more
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className='tab-pane fade'
-                id='money'
-                role='tabpanel'
-                aria-labelledby='money-tab'>
-                <div className='row mb-none-30'>
-                  <div className='col-lg-4 mb-30'>
-                    {/* ticket check card */}
-                    <TicketCheckCard />
-                  </div>
-                  <div className='col-lg-8 mb-30'>
-                    {/* winner card */}
-                    {/* {winners.map(winner => (
-                      <WinnerCard key={winner.id} winner={winner} />
-                    ))} */}
-
-                    <div className='btn-grp'>
-                      <Link href='/winner' className='btn-border'>
-                        browse more
-                      </Link>
-                    </div>
+                    ))
+                    // : contestWinners?.map(winner => (
+                    //     <WinnerCard
+                    //       key={winner.id}
+                    //       winner={winner as Winner}
+                    //     />
+                    //   ))
+                    }
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
+        <div className='row pagination-bottom'>
+          <Pagination
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+            totalContests={winnersData?.totalDocs}
+          />
         </div>
       </div>
     </section>

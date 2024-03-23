@@ -1,58 +1,65 @@
 import Countdown from 'react-countdown'
+import * as sd from 'simple-duration'
 
 import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
-import { Contest, Media } from '@/payload-types'
-import { isThresholdReached } from '@/utils/is-threshold-reached'
+import { Contest } from '@/payload-types'
 
-import { AppContext } from '@/context/context'
-import { MouseEventHandler, useContext } from 'react'
+import { useState } from 'react'
 import WinningNumber from '../winner/WinningNumber'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
 
-interface ContestDetails extends Contest {
-  img: Media
-  images?:
-    | {
-        product_images: Media
-        id?: string | null
-      }[]
-    | null
-  features_html: string
-  description_html: string
-}
-
 const ContestBody = ({
   contestDetails,
-  handleDrawTickets,
+  handleContestTimerUpdate,
 }: {
   contestDetails: Contest
-  handleDrawTickets: MouseEventHandler<HTMLButtonElement>
+  handleContestTimerUpdate: Function
 }) => {
-  const { tickets }: any = useContext(AppContext)
+  const [countdownCompleted, setCountdownCompleted] = useState(false)
 
-  const totalTicketsSold = tickets?.length
+  const milliseconds = contestDetails?.day_remain
+    ? sd.parse(contestDetails?.day_remain) * 1000
+    : 1
+
+  const onComplete = () => {
+    if (!countdownCompleted) {
+      handleContestTimerUpdate()
+      setCountdownCompleted(true)
+    }
+  }
 
   return (
-    <section className='pb-120 mt-minus-300'>
-      {contestDetails?.contest_status === true && (
+    <section className='pb-120 mt-minus-300 main-page'>
+      {contestDetails?.contest_status && (
         <WinningNumber contestDetails={contestDetails} />
       )}
       <div className='container'>
         <div className='row justify-content-center'>
-          {isThresholdReached(
-            contestDetails?.product_price,
-            contestDetails?.ticket_price,
-            totalTicketsSold,
-          ) ? (
+          {!!contestDetails?.reached_threshold &&
+          !!contestDetails?.threshold_reached_date &&
+          !contestDetails?.contest_status ? (
             <div className='col-lg-6'>
+              <div className='draw-tickets-btn'>
+                <button
+                  className='cmn-btn style--one btn-sm'
+                  onClick={() => handleContestTimerUpdate()}>
+                  draw tickets now
+                </button>
+              </div>
+
               <div className='clock-wrapper'>
-                <p className='mb-2'>This competition ends in:</p>
+                <p className='mb-2'>This contest ends in:</p>
                 <div className='clock'>
                   <Countdown
-                    date={Date.now() + 1000000000}
-                    renderer={RendererCountdown}
+                    key={countdownCompleted ? 'completed' : 'incomplete'}
+                    date={
+                      Date.parse(contestDetails?.threshold_reached_date) +
+                      milliseconds
+                    }
+                    onComplete={onComplete}
+                    renderer={props => <RendererCountdown {...props} />}
                   />
                 </div>
               </div>
@@ -62,15 +69,9 @@ const ContestBody = ({
           )}
 
           <div className='col-lg-12'>
-            {contestDetails?.contest_status === false && (
-              <button onClick={handleDrawTickets}>draw tickets now</button>
-            )}
-
             <div className='contest-cart'>
               {/* Context slider for one */}
-              <ContestSlider
-                contestDetails={contestDetails as ContestDetails}
-              />
+              <ContestSlider contestDetails={contestDetails} />
 
               {/* Contest right section */}
               <ContestRight contestDetails={contestDetails} />
@@ -78,9 +79,7 @@ const ContestBody = ({
           </div>
           <div className='col-lg-10'>
             <div className='contest-description'>
-              <VehicleOverview
-                contestDetails={contestDetails as ContestDetails}
-              />
+              <VehicleOverview contestDetails={contestDetails} />
             </div>
           </div>
         </div>

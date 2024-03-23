@@ -44,7 +44,7 @@ const AuthLayoutView = () => {
       }`}>
       <div className='header__bottom'>
         <div className='container'>
-          <nav className='navbar navbar-expand-xl p-0 align-items-center navbar-center'>
+          <nav className='navbar navbar-expand-xl p-0 align-items-center navbar-center padding-top-nav'>
             <div>
               <Link href='/' className='site-logo site-title'>
                 <Image
