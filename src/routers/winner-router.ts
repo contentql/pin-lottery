@@ -45,23 +45,23 @@ export const WinnerRouter = router({
 
       try {
         const winners = await payload.find({
-        collection: 'winner',
-        limit: 9,
-        depth: 5,
-        page: pageNumber,
-        where: {
-          or: [...whereClauses],
-          and: [
-            {
-              ...(ticketNumber !== '' && {
-                'ticket.value': {
-                  equals: ticketNumber,
-                },
-              }),
-            },
-          ],
-        },
-      })
+          collection: 'winner',
+          limit: 9,
+          depth: 5,
+          page: pageNumber,
+          where: {
+            or: [...whereClauses],
+            and: [
+              {
+                ...(ticketNumber !== '' && {
+                  'ticket.value': {
+                    equals: ticketNumber,
+                  },
+                }),
+              },
+            ],
+          },
+        })
 
         return { Winners: winners?.docs, totalDocs: winners?.totalDocs }
       } catch (error: any) {

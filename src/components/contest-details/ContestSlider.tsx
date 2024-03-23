@@ -73,26 +73,8 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
 
   return (
     <>
-    <div className='contest-cart__left'>
-      <div className='contest-details__slider-area'>
-        <Slider
-          asNavFor={nav2}
-          arrows={false}
-          ref={(slider1: any) => setNav1(slider1)}>
-          {contestDetails?.images?.map(itm => (
-            <div key={itm?.id} className='contest-cart__thumb-slider'>
-              <div key={itm?.id} className='single-slide'>
-                <Image
-                  src={(itm?.product_images as Media)?.url || '/'}
-                  width={1000}
-                  height={100}
-                  alt='contest b2'
-                />
-              </div>
-            </div>
-          ))}
-        </Slider>
-      <div>
+      <div className='contest-cart__left'>
+        <div className='contest-details__slider-area'>
           <Slider
             asNavFor={nav2}
             arrows={false}
@@ -101,79 +83,98 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
               <div key={itm?.id} className='contest-cart__thumb-slider'>
                 <div key={itm?.id} className='single-slide'>
                   <Image
-                    style={{ cursor: 'zoom-in' }}
                     src={(itm?.product_images as Media)?.url || '/'}
                     width={1000}
-                    height={10}
+                    height={100}
                     alt='contest b2'
-                    onClick={() => {
-                      setToggleView(true)
-                    }}
                   />
                 </div>
               </div>
             ))}
           </Slider>
-
           <div>
             <Slider
-              asNavFor={nav1}
-              ref={(slider2: any) => setNav2(slider2)}
-              {...settings}
-              className='contest-cart__nav-slider'>
+              asNavFor={nav2}
+              arrows={false}
+              ref={(slider1: any) => setNav1(slider1)}>
               {contestDetails?.images?.map(itm => (
-                <div key={itm?.id} className='single'>
+                <div key={itm?.id} className='contest-cart__thumb-slider'>
                   <div key={itm?.id} className='single-slide'>
                     <Image
+                      style={{ cursor: 'zoom-in' }}
                       src={(itm?.product_images as Media)?.url || '/'}
                       width={1000}
                       height={10}
-                      alt='contest s1'
+                      alt='contest b2'
+                      onClick={() => {
+                        setToggleView(true)
+                      }}
                     />
                   </div>
                 </div>
               ))}
             </Slider>
+
+            <div>
+              <Slider
+                asNavFor={nav1}
+                ref={(slider2: any) => setNav2(slider2)}
+                {...settings}
+                className='contest-cart__nav-slider'>
+                {contestDetails?.images?.map(itm => (
+                  <div key={itm?.id} className='single'>
+                    <div key={itm?.id} className='single-slide'>
+                      <Image
+                        src={(itm?.product_images as Media)?.url || '/'}
+                        width={1000}
+                        height={10}
+                        alt='contest s1'
+                      />
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
           </div>
         </div>
-      </div>
 
-      {toggleView && (
-        <div className='overlay'>
-          <div className='overlay-content'>
-            <div className='contest-big__center'>
-              <div className='contest-image'>
-                <Slider
-                  asNavFor={nav2}
-                  arrows={true}
-                  ref={(slider1: any) => setNav1(slider1)}>
-                  {contestDetails?.images?.map(itm => (
-                    <div key={itm?.id} className='contest-big__thumb-slider'>
-                      <div key={itm?.id} className='single-slide'>
-                        <Image
-                          src={(itm?.product_images as Media)?.url || '/'}
-                          width={1290}
-                          height={1290}
-                          alt='contest b2'
-                        />
+        {toggleView && (
+          <div className='overlay'>
+            <div className='overlay-content'>
+              <div className='contest-big__center'>
+                <div className='contest-image'>
+                  <Slider
+                    asNavFor={nav2}
+                    arrows={true}
+                    ref={(slider1: any) => setNav1(slider1)}>
+                    {contestDetails?.images?.map(itm => (
+                      <div key={itm?.id} className='contest-big__thumb-slider'>
+                        <div key={itm?.id} className='single-slide'>
+                          <Image
+                            src={(itm?.product_images as Media)?.url || '/'}
+                            width={1290}
+                            height={1290}
+                            alt='contest b2'
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </Slider>
-                <div className='modal-close'>
-                  <span
-                    onClick={() => {
-                      setToggleView(false)
-                    }}
-                    className='close-button-x'>
-                    X
-                  </span>
+                    ))}
+                  </Slider>
+                  <div className='modal-close'>
+                    <span
+                      onClick={() => {
+                        setToggleView(false)
+                      }}
+                      className='close-button-x'>
+                      X
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   )
 }
