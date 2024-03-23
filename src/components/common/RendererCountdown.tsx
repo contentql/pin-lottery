@@ -15,7 +15,7 @@ const RendererCountdown = ({
     return (
       <>
         <div>
-          <span>Contset</span>
+          <span>Contest</span>
         </div>
         <div>
           <span>Ended</span>

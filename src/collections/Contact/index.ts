@@ -9,10 +9,10 @@ const Contact: CollectionConfig = {
     afterChange: [newContactEmail],
   },
   fields: [
-    { name: 'name', type: 'text', label: 'Name' },
-    { name: 'email', type: 'email', label: 'Email' },
-    { name: 'subject', type: 'text', label: 'Subject' },
-    { name: 'message', type: 'textarea', label: 'Message' },
+    { name: 'name', type: 'text', label: 'Name', required: true },
+    { name: 'email', type: 'email', label: 'Email', required: true },
+    { name: 'subject', type: 'text', label: 'Subject', required: true },
+    { name: 'message', type: 'textarea', label: 'Message', required: true },
   ],
 }
 

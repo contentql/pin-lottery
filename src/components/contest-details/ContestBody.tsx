@@ -5,6 +5,7 @@ import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
 import { Contest } from '@/payload-types'
 
+import { useState } from 'react'
 import WinningNumber from '../winner/WinningNumber'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
@@ -16,9 +17,18 @@ const ContestBody = ({
   contestDetails: Contest
   handleContestTimerUpdate: Function
 }) => {
+  const [countdownCompleted, setCountdownCompleted] = useState(false)
+
   const milliseconds = contestDetails?.day_remain
     ? sd.parse(contestDetails?.day_remain) * 1000
     : 1
+
+  const onComplete = () => {
+    if (!countdownCompleted) {
+      handleContestTimerUpdate()
+      setCountdownCompleted(true)
+    }
+  }
 
   return (
     <section className='pb-120 mt-minus-300'>
@@ -43,10 +53,12 @@ const ContestBody = ({
                 <p className='mb-2'>This contest ends in:</p>
                 <div className='clock'>
                   <Countdown
+                    key={countdownCompleted ? 'completed' : 'incomplete'}
                     date={
                       Date.parse(contestDetails?.threshold_reached_date) +
                       milliseconds
                     }
+                    onComplete={onComplete}
                     renderer={props => <RendererCountdown {...props} />}
                   />
                 </div>
