@@ -73,8 +73,26 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
 
   return (
     <>
-      <div className='contest-cart__left'>
-        <div className='contest-details__slider-area'>
+    <div className='contest-cart__left'>
+      <div className='contest-details__slider-area'>
+        <Slider
+          asNavFor={nav2}
+          arrows={false}
+          ref={(slider1: any) => setNav1(slider1)}>
+          {contestDetails?.images?.map(itm => (
+            <div key={itm?.id} className='contest-cart__thumb-slider'>
+              <div key={itm?.id} className='single-slide'>
+                <Image
+                  src={(itm?.product_images as Media)?.url || '/'}
+                  width={1000}
+                  height={100}
+                  alt='contest b2'
+                />
+              </div>
+            </div>
+          ))}
+        </Slider>
+      <div>
           <Slider
             asNavFor={nav2}
             arrows={false}

@@ -1,7 +1,9 @@
+import { TRPCError } from '@trpc/server'
 import { getPayloadClient } from '../get-payload'
 import { WinnerDetailsValidator } from '../lib/validators/winner-details-validator'
 import { WinnerPaginationValidator } from '../lib/validators/winner-pagination-validator'
 import { publicProcedure, router } from '../trpc/trpc'
+
 export const WinnerRouter = router({
   addWinner: publicProcedure
     .input(WinnerDetailsValidator)
@@ -10,35 +12,24 @@ export const WinnerRouter = router({
 
       const payload = await getPayloadClient()
 
-      const winner = await payload.create({
-        collection: 'winner',
-        data: {
-          ticket: { relationTo: 'tickets', value: ticket_id },
-          contest: { relationTo: 'contest', value: contest_id },
-        },
-      })
+      try {
+        const winner = await payload.create({
+          collection: 'winner',
+          data: {
+            ticket: { relationTo: 'tickets', value: ticket_id },
+            contest: { relationTo: 'contest', value: contest_id },
+          },
+        })
 
-      return { winner: winner }
+        return { winner }
+      } catch (error: any) {
+        console.log('Error adding winner:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to add winner.',
+        })
+      }
     }),
-
-  // getWinnerByTicketNumber: publicProcedure
-  //   .input(TicketNumberValidator)
-  //   .query(async ({ input }) => {
-  //     const { ticketNumber } = input
-  //     const payload = await getPayloadClient()
-
-  //     const winners = await payload.find({
-  //       collection: 'winner',
-  //       depth: 5,
-  //       where: {
-  //         'ticket.value': {
-  //           equals: ticketNumber,
-  //         },
-  //       },
-  //     })
-
-  //     return winners?.docs
-  //   }),
 
   getWinners: publicProcedure
     .input(WinnerPaginationValidator)
@@ -52,7 +43,8 @@ export const WinnerRouter = router({
       }))
       const payload = await getPayloadClient()
 
-      const winners = await payload.find({
+      try {
+        const winners = await payload.find({
         collection: 'winner',
         limit: 9,
         depth: 5,
@@ -71,6 +63,13 @@ export const WinnerRouter = router({
         },
       })
 
-      return { Winners: winners?.docs, totalDocs: winners?.totalDocs }
+        return { Winners: winners?.docs, totalDocs: winners?.totalDocs }
+      } catch (error: any) {
+        console.log('Error getting winners:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to get winners.',
+        })
+      }
     }),
 })

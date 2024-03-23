@@ -13,7 +13,6 @@ export const ticketRouter = router({
     const { user } = ctx
 
     const payload = await getPayloadClient()
-    const pageSize = 10
 
     try {
       const tickets = await payload.find({
@@ -25,8 +24,11 @@ export const ticketRouter = router({
 
       return tickets.docs
     } catch (error: any) {
-      console.log('Get tickets: ', error)
-      throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      console.log('Error getting tickets:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get tickets.',
+      })
     }
   }),
 
@@ -56,8 +58,11 @@ export const ticketRouter = router({
 
         return tickets.docs
       } catch (error: any) {
-        console.log('Get upcoming draws tickets: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+        console.log('Error getting upcoming draws tickets:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to get upcoming draws tickets.',
+        })
       }
     }),
 
@@ -87,8 +92,11 @@ export const ticketRouter = router({
 
         return tickets.docs
       } catch (error: any) {
-        console.log('Get past draws tickets: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+        console.log('Error getting past draws tickets:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to get past draws tickets.',
+        })
       }
     }),
 
@@ -118,8 +126,11 @@ export const ticketRouter = router({
 
         return { success: true }
       } catch (error: any) {
-        console.log('Add tickets: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+        console.log('Error adding tickets:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to add tickets.',
+        })
       }
     }),
 
@@ -142,8 +153,11 @@ export const ticketRouter = router({
 
         return tickets?.docs
       } catch (error: any) {
-        console.log('Get tickets by contest: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+        console.log('Error getting tickets by contest:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to get tickets by contest.',
+        })
       }
     }),
 
@@ -166,8 +180,11 @@ export const ticketRouter = router({
 
         return { success: true }
       } catch (error: any) {
-        console.log('Delete Tickets: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+        console.log('Error deleting tickets:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to delete tickets.',
+        })
       }
     }),
 
@@ -195,8 +212,11 @@ export const ticketRouter = router({
 
         return ticket.docs.at(0)
       } catch (error: any) {
-        console.log('Get ticket by id: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+        console.log('Error getting ticket by id:', error)
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: error?.message || 'Failed to get ticket by id.',
+        })
       }
     }),
 })

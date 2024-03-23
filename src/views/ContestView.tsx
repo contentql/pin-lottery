@@ -46,7 +46,6 @@ const ContestView = () => {
 
   const { data: allTags } = trpc.public.getTags.useQuery()
 
-  console.log('tags setting', allTags)
   return (
     <>
       {/* Banner section here */}
