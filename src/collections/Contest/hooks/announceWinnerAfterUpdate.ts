@@ -31,6 +31,11 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
           },
         })
 
+        if (!contestTickets || !contestTickets.length) {
+          console.log('No tickets found for the contest')
+          return
+        }
+
         const randomTicket = randomTicketPicker(contestTickets)
 
         if (!randomTicket) {
@@ -66,12 +71,15 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
             })
           } catch (error) {
             console.error('Error updating contest:', error)
+            throw new Error('Failed to update contest data.')
           }
         } catch (error) {
           console.error('Error creating winner:', error)
+          throw new Error('Failed to create winner entry.')
         }
       } catch (error) {
         console.error('Error fetching contest tickets:', error)
+        throw new Error('Failed to fetch contest tickets.')
       }
     }
   }
