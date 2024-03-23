@@ -8,7 +8,6 @@ import ContestCard from '@/components/cards/ContestCard'
 import FilterByTag from '../filters/FilterByTag'
 import PageLoading from '../loading/PageLoading'
 
-
 const LatestContest = ({
   contestDetails,
   isContestsPending,
@@ -196,7 +195,6 @@ const LatestContest = ({
                               updatedPrice(Number(e.target.value))
                             }}
                             style={getBackgroundSize()}
-                            defaultValue={price}
                             value={resetValues.sliderValue}
                           />
                         </div>
@@ -230,7 +228,6 @@ const LatestContest = ({
                           })
                           updatedTitle(e.target.value)
                         }}
-                        defaultValue={title}
                         value={resetValues.inputValue}
                       />
                       <button>
