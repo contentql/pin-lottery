@@ -42,10 +42,6 @@ const LatestWinner = () => {
     contestIds: temp!,
   })
 
-  console.log('contest ids', temp)
-
-  console.log('winners', winnersData)
-
   const { mutate: getTicketId } = trpc.ticket.getTicketId.useMutation({
     onSuccess: (data: any) => {
       toast.success('Thanks for participating searching winner')

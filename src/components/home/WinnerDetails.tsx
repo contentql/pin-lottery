@@ -34,7 +34,7 @@ const PrevBtn = ({ onClick }: any) => {
   )
 }
 
-const Winner = ({ winnerDetails }: { winnerDetails: Winner[] }) => {
+const WinnerDetails = ({ winnerDetails }: { winnerDetails: Winner[] }) => {
   const settings = {
     speed: 700,
     arrows: true,
@@ -99,4 +99,4 @@ const Winner = ({ winnerDetails }: { winnerDetails: Winner[] }) => {
   )
 }
 
-export default Winner
+export default WinnerDetails

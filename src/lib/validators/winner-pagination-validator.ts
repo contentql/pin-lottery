@@ -1,4 +1,5 @@
 import { z } from 'zod'
+
 export const WinnerPaginationValidator = z.object({
   pageNumber: z.number(),
   ticketNumber: z.string(),

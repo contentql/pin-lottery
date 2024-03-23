@@ -1,5 +1,7 @@
 'use client'
 
+import { trpc } from '@/trpc/client'
+
 import ContestCategories from '@/components/common/ContestCategories'
 import ContestDetailsPage from '@/components/common/ContestDetailsPage'
 import Features from '@/components/common/Features'
@@ -11,7 +13,7 @@ import Testimonial from '@/components/common/Testimonial'
 import Hero from '@/components/home/Hero'
 import WinnerDetails from '@/components/home/WinnerDetails'
 import { Contest, Tag, Winner } from '@/payload-types'
-import { trpc } from '@/trpc/client'
+
 const HomeView = () => {
   // get contests
   const { data: contestDetails, isLoading } = trpc.contest.getContests.useQuery(
@@ -26,16 +28,17 @@ const HomeView = () => {
   // get winners
 
   const { data: winnerDetails } = trpc.winner.getWinners.useQuery({
-    filterWinnerByTag: 'all',
+    contestIds: [],
+    pageNumber: 1,
+    ticketNumber: '',
   })
 
-  console.log('contest home', winnerDetails)
   return (
     <>
       <Hero />
       <ContestCategories allTags={allTags as [Tag]} />
-      <ContestDetailsPage contestDetails={contest as [Contest]} />
-      <WinnerDetails winnerDetails={winnerDetails as [Winner]} />
+      <ContestDetailsPage contestDetails={contest as Contest[]} />
+      <WinnerDetails winnerDetails={winnerDetails?.Winners as Winner[]} />
       <LatestWinner />
       <Overview />
       <Features />

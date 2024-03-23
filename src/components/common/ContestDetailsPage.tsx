@@ -9,7 +9,11 @@ import ContestCard from '@/components/cards/ContestCard'
 import contestData from '@/data/contestData'
 import { Contest } from '@/payload-types'
 
-const ContestDetailsPage = ({ contestDetails }: { contestDetails :[Contest]}) => {
+const ContestDetailsPage = ({
+  contestDetails,
+}: {
+  contestDetails: Contest[]
+}) => {
   const [filterData, setFilterData] = useState([])
   const [filterBy, setFilterBy] = useState('dream_car')
 
