@@ -15,7 +15,7 @@ interface PageProps {
 const ContestDetailsView = ({ contestId }: PageProps) => {
   const {
     data: contestDetails,
-    isPending: pendinContestDetails,
+    isPending: pendingContestDetails,
     refetch: refetchContestDetails,
   } = trpc.contest.getContestById.useQuery({
     id: contestId,
