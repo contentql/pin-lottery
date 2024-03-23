@@ -1463,6 +1463,26 @@
       p 
         font-size: 14px
         text-transform: capitalize
+.contest-big
+  &__center 
+    width: 100%
+    height:100%
+    @media (max-width: 991px)
+      width: 100%
+  &__thumb-slider
+    height: 500px
+    background-color: transparent
+    display: flex !important
+    flex-wrap: wrap
+    justify-content: center
+    align-items: center
+    @media (max-width: 575px)
+      height: 500px
+    .single-slide 
+      text-align: center
+      img
+        width: 100%
+
 .contest-cart 
   border-radius:15px
   background-color: #12023e
