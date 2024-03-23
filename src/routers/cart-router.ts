@@ -21,8 +21,11 @@ export const cartRouter = router({
 
       return tickets.docs
     } catch (error: any) {
-      console.log('Get cart data: ', error)
-      throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      console.error('Error getting cart data:', error)
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: error?.message || 'Failed to retrieve cart data.',
+      })
     }
   }),
 
@@ -48,8 +51,11 @@ export const cartRouter = router({
 
         return { success: true }
       } catch (error: any) {
-        console.log('Add tickets to cart: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+        console.error('Error adding tickets to cart:', error)
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: error?.message || 'Failed to add tickets to cart.',
+        })
       }
     }),
 
@@ -72,32 +78,34 @@ export const cartRouter = router({
 
         return { success: true }
       } catch (error: any) {
-        console.log('Update cart tickets: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
-      }
-    }),
-
-  deleteById: userProcedure
-    .input(IdValidator)
-    .mutation(async ({ input, ctx }) => {
-      const { user } = ctx
-
-      const { id } = input
-
-      const payload = await getPayloadClient()
-
-      try {
-        await payload.delete({
-          collection: 'cart',
-          id,
+        console.error('Error updating cart tickets:', error)
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: error?.message || 'Failed to update cart tickets.',
         })
-
-        return { success: true }
-      } catch (error: any) {
-        console.log('Delete cart data by id: ', error)
-        throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
       }
     }),
+
+  deleteById: userProcedure.input(IdValidator).mutation(async ({ input }) => {
+    const { id } = input
+
+    const payload = await getPayloadClient()
+
+    try {
+      await payload.delete({
+        collection: 'cart',
+        id,
+      })
+
+      return { success: true }
+    } catch (error: any) {
+      console.error('Error deleting cart data by id:', error)
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: error?.message || 'Failed to delete cart data by id.',
+      })
+    }
+  }),
 
   deleteAllTicketsOfUserFromCart: userProcedure.mutation(async ({ ctx }) => {
     const { user } = ctx
@@ -116,8 +124,11 @@ export const cartRouter = router({
 
       return { success: true }
     } catch (error: any) {
-      console.log('Delete cart data by user: ', error)
-      throw new TRPCError({ code: 'BAD_REQUEST', message: error?.message })
+      console.error('Error deleting cart data by user:', error)
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: error?.message || 'Failed to delete cart data by user.',
+      })
     }
   }),
 })
