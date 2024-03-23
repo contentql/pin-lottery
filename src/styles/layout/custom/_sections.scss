@@ -789,19 +789,16 @@ strong {
   min-height: 1300px;
 }
 
-.slick-next,
-.slick-prev {
-  background-image: linear-gradient(
-    4deg,
-    rgb(236, 3, 139) 0%,
-    rgb(251, 100, 104) 44%,
-    rgb(251, 185, 54) 100%
-  );
+.slick-next {
+  position: absolute;
   color: white;
-  padding: 5px 15px;
-  border-radius: 20px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
-
+.slick-prev {
+  display: none;
+}
 .contest-features {
   margin-top: 100px;
 }
@@ -1100,3 +1097,31 @@ $duration: 1000;
   transform: scale(1.01);
 }
 /* upcoming draw ticket*/
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(100px);
+  background-color: #12023e;
+  z-index: 1000;
+}
+.overlay-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+}
+
+.close-button-x {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}

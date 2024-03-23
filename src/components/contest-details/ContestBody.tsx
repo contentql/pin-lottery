@@ -21,7 +21,7 @@ const ContestBody = ({
     : 1
 
   return (
-    <section className='pb-120 mt-minus-300'>
+    <section className='pb-120 mt-minus-300 main-page'>
       {contestDetails?.contest_status && (
         <WinningNumber contestDetails={contestDetails} />
       )}
