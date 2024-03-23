@@ -11,6 +11,7 @@ import { ResetPasswordValidator } from '../lib/validators/auth-router/reset-pass
 import { TokenValidator } from '../lib/validators/auth-router/token-validator'
 import {
   UserEmailValidator,
+  UserPasswordValidator,
   UserPersonalDetailsValidator,
 } from '../lib/validators/auth-router/user-details-validator'
 import { publicProcedure, router, userProcedure } from '../trpc/trpc'
@@ -248,6 +249,33 @@ export const authRouter = router({
       })
     }
   }),
+
+  changePassword: userProcedure
+    .input(UserPasswordValidator)
+    .mutation(async ({ input, ctx }) => {
+      const { password } = input
+      const { user } = ctx
+
+      const payload = await getPayloadClient()
+
+      try {
+        await payload.update({
+          collection: 'users',
+          id: user.id,
+          data: {
+            password,
+          },
+        })
+
+        return { success: true }
+      } catch (error) {
+        console.error('Error changing password:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Failed to change password.',
+        })
+      }
+    }),
 
   changeEmail: userProcedure
     .input(UserEmailValidator)
