@@ -74,7 +74,7 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
   return (
     <>
       <div className='contest-cart__left'>
-        <div className='contest-details__slider-area'>
+        <div>
           <Slider
             asNavFor={nav2}
             arrows={false}
@@ -83,58 +83,39 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
               <div key={itm?.id} className='contest-cart__thumb-slider'>
                 <div key={itm?.id} className='single-slide'>
                   <Image
+                    style={{ cursor: 'zoom-in' }}
                     src={(itm?.product_images as Media)?.url || '/'}
                     width={1000}
-                    height={100}
+                    height={10}
                     alt='contest b2'
+                    onClick={() => {
+                      setToggleView(true)
+                    }}
                   />
                 </div>
               </div>
             ))}
           </Slider>
+
           <div>
             <Slider
-              asNavFor={nav2}
-              arrows={false}
-              ref={(slider1: any) => setNav1(slider1)}>
+              asNavFor={nav1}
+              ref={(slider2: any) => setNav2(slider2)}
+              {...settings}
+              className='contest-cart__nav-slider'>
               {contestDetails?.images?.map(itm => (
-                <div key={itm?.id} className='contest-cart__thumb-slider'>
+                <div key={itm?.id} className='single'>
                   <div key={itm?.id} className='single-slide'>
                     <Image
-                      style={{ cursor: 'zoom-in' }}
                       src={(itm?.product_images as Media)?.url || '/'}
                       width={1000}
                       height={10}
-                      alt='contest b2'
-                      onClick={() => {
-                        setToggleView(true)
-                      }}
+                      alt='contest s1'
                     />
                   </div>
                 </div>
               ))}
             </Slider>
-
-            <div>
-              <Slider
-                asNavFor={nav1}
-                ref={(slider2: any) => setNav2(slider2)}
-                {...settings}
-                className='contest-cart__nav-slider'>
-                {contestDetails?.images?.map(itm => (
-                  <div key={itm?.id} className='single'>
-                    <div key={itm?.id} className='single-slide'>
-                      <Image
-                        src={(itm?.product_images as Media)?.url || '/'}
-                        width={1000}
-                        height={10}
-                        alt='contest s1'
-                      />
-                    </div>
-                  </div>
-                ))}
-              </Slider>
-            </div>
           </div>
         </div>
 
