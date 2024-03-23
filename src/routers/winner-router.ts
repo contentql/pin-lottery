@@ -58,12 +58,16 @@ export const WinnerRouter = router({
         depth: 5,
         page: pageNumber,
         where: {
-          ...(ticketNumber !== '' && {
-            'ticket.value': {
-              equals: ticketNumber,
-            },
-          }),
           or: [...whereClauses],
+          and: [
+            {
+              ...(ticketNumber !== '' && {
+                'ticket.value': {
+                  equals: ticketNumber,
+                },
+              }),
+            },
+          ],
         },
       })
 
