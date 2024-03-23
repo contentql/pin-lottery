@@ -6,9 +6,6 @@ import { assignUserId } from './field-level-hooks/assignUserId'
 import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
 
-const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-const nanoid = customAlphabet(alphabet, 14)
-
 const Ticket: CollectionConfig = {
   slug: 'tickets',
   access: {
@@ -33,7 +30,12 @@ const Ticket: CollectionConfig = {
           type: 'text',
           label: 'Ticket Number',
           unique: true,
-          defaultValue: nanoid(),
+          defaultValue: () => {
+            const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            const nanoid = customAlphabet(alphabet, 14)
+
+            return nanoid()
+          },
           admin: {
             description: 'Auto-generated unique ticket number',
             readOnly: true,

@@ -6,18 +6,6 @@ import Slider from 'react-slick'
 import { Contest, Media } from '@/payload-types'
 import 'slick-carousel/slick/slick.css'
 
-interface ContestDetails extends Contest {
-  img: Media
-  images?:
-    | {
-        product_images: Media
-        id?: string | null
-      }[]
-    | null
-  features_html: string
-  description_html: string
-}
-
 const NextBtn = ({ onClick }: any) => {
   return (
     <button type='button' className='slick-arrow prev' onClick={onClick}>
@@ -34,11 +22,7 @@ const PrevBtn = ({ onClick }: any) => {
   )
 }
 
-const ContestSlider = ({
-  contestDetails,
-}: {
-  contestDetails: ContestDetails
-}) => {
+const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
 
@@ -96,7 +80,7 @@ const ContestSlider = ({
             <div key={itm?.id} className='contest-cart__thumb-slider'>
               <div key={itm?.id} className='single-slide'>
                 <Image
-                  src={itm?.product_images?.url || '/'}
+                  src={(itm?.product_images as Media)?.url || '/'}
                   width={1000}
                   height={100}
                   alt='contest b2'
@@ -116,7 +100,7 @@ const ContestSlider = ({
               <div key={itm?.id} className='single'>
                 <div key={itm?.id} className='single-slide'>
                   <Image
-                    src={itm?.product_images?.url || '/'}
+                    src={(itm?.product_images as Media)?.url || '/'}
                     width={1000}
                     height={10}
                     alt='contest s1'
