@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 import winner from '/public/images/bg/winner.jpg'
 import car from '/public/images/elements/car.png'
 
-import { Winner } from '@/payload-types'
+import { Contest, Media, Winner } from '@/payload-types'
 import 'slick-carousel/slick/slick.css'
 
 const NextBtn = ({ onClick }: any) => {
@@ -76,16 +76,21 @@ const WinnerDetails = ({ winnerDetails }: { winnerDetails: Winner[] }) => {
                     <div key={i} className='winner-slide-item'>
                       <div className='winner-thumb'>
                         <Image
-                          src={'/images/user/pp.png'}
+                          src={
+                            ((winner?.contest?.value as Contest)?.img as Media)
+                              ?.url || ''
+                          }
                           width={100}
                           height={100}
                           alt='user-image'
                         />
                       </div>
                       <div className='winner-content bg_img'>
-                        <h6 className='winner-name'>Breeze Zodiac</h6>
-                        <p>Draw took place on</p>
-                        <span className='draw-date'>19/04/2020</span>
+                        <h6 className='winner-name'>
+                          {(winner?.contest?.value as Contest)?.title}
+                        </h6>
+                        {/* <p>Draw took place on</p>
+                        <span className='draw-date'>{winner?.createdAt}</span> */}
                       </div>
                     </div>
                   ))}
