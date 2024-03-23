@@ -69,8 +69,7 @@ const PastDraws = ({
       <div className='load-more'>
         <button
           type='button'
-          className='d-flex align-items-center justify-content-lg-center gap-1'
-          onClick={() => setPage((prev: number) => prev + 1)}>
+          className='d-flex align-items-center justify-content-lg-center gap-1'>
           Show More Lotteries <BsChevronDown />
         </button>
       </div>

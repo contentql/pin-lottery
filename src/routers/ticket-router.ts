@@ -22,7 +22,7 @@ export const ticketRouter = router({
         pagination: false,
       })
 
-      return tickets.docs
+      return tickets?.docs
     } catch (error: any) {
       console.log('Error getting tickets:', error)
       throw new TRPCError({
@@ -56,7 +56,7 @@ export const ticketRouter = router({
           },
         })
 
-        return tickets.docs
+        return tickets?.docs
       } catch (error: any) {
         console.log('Error getting upcoming draws tickets:', error)
         throw new TRPCError({
@@ -90,7 +90,7 @@ export const ticketRouter = router({
           },
         })
 
-        return tickets.docs
+        return tickets?.docs
       } catch (error: any) {
         console.log('Error getting past draws tickets:', error)
         throw new TRPCError({
@@ -210,7 +210,7 @@ export const ticketRouter = router({
           },
         })
 
-        return ticket.docs.at(0)
+        return ticket?.docs.at(0)
       } catch (error: any) {
         console.log('Error getting ticket by id:', error)
         throw new TRPCError({

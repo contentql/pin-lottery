@@ -37,7 +37,7 @@ export const publicRouter = router({
     try {
       const faqs = await payload.find({ collection: 'faq' })
 
-      return faqs.docs.at(0)?.faqs
+      return faqs?.docs.at(0)?.faqs
     } catch (error: any) {
       console.error('Error getting FAQs:', error)
       throw new TRPCError({
@@ -53,7 +53,7 @@ export const publicRouter = router({
     try {
       const blogs = await payload.find({ collection: 'blog' })
 
-      const blogDetails = blogs.docs.map(
+      const blogDetails = blogs?.docs.map(
         ({ id, title, short_desc, img, updatedAt, createdAt }) => {
           return {
             id: id,
@@ -104,7 +104,7 @@ export const publicRouter = router({
 
     try {
       const tags = await payload.find({ collection: 'tags' })
-      return tags.docs
+      return tags?.docs
     } catch (error: any) {
       console.error('Error getting tags:', error)
       throw new TRPCError({
