@@ -96,7 +96,7 @@ export default buildConfig({
       options: {
         init: {
           debug: true,
-          // environment: 'development',
+          environment: process.env.SENTRY_ENV,
           tracesSampleRate: 1.0,
         },
         requestHandler: {
