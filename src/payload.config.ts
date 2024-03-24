@@ -102,6 +102,9 @@ export default buildConfig({
         requestHandler: {
           serverName: false,
           user: ['email'],
+          include: {
+            user: true,
+          },
         },
         // captureErrors: [400, 403, 404],
       },
