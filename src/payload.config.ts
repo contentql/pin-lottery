@@ -19,6 +19,7 @@ import Winner from './collections/Winner'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import { s3StorageAdapter } from './plugins/s3'
+import { sentry } from '@payloadcms/plugin-sentry'
 import {
   generateDescription,
   generateImage,
@@ -88,6 +89,21 @@ export default buildConfig({
         media: {
           adapter: s3StorageAdapter,
         },
+      },
+    }),
+    sentry({
+      dsn: process.env.SENTRY_DNS!,
+      options: {
+        init: {
+          debug: true,
+          // environment: 'development',
+          tracesSampleRate: 1.0,
+        },
+        requestHandler: {
+          serverName: false,
+          user: ['email'],
+        },
+        // captureErrors: [400, 403, 404],
       },
     }),
     seo({
