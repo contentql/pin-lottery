@@ -9,7 +9,7 @@ const Cart: CollectionConfig = {
     hidden: ({ user }) => {
       const { email, id } = user // only email and id are available here
 
-      if (process.env.NODE_ENV !== 'production') {
+      if (process.env.NODE_ENV === 'production') {
         return true
       }
 
