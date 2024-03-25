@@ -5,6 +5,17 @@ import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Cart: CollectionConfig = {
   slug: 'cart',
+  admin: {
+    hidden: ({ user }) => {
+      const { email, id } = user // only email and id are available here
+
+      if (process.env.NODE_ENV !== 'production') {
+        return true
+      }
+
+      return false
+    },
+  },
   access: {
     read: isAdminOrSelf,
     update: isAdminOrSelf,
