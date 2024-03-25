@@ -35,6 +35,10 @@ const Users: CollectionConfig = {
     read: isAdminOrSelf,
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
+    admin: ({ req: { user } }) => {
+      if (user.roles.includes('admin')) return true
+      return false
+    },
   },
   admin: {
     useAsTitle: 'email',
