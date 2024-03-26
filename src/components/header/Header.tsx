@@ -31,9 +31,11 @@ const Header = () => {
     setPopupVisible(!popupVisible)
   }
 
-  const { data: cartData } = trpc.cart.getCartTickets.useQuery([], {
-    enabled: status === 'loggedIn',
-  })
+  const { data: cartData } = trpc.cart.getCartTickets.useQuery()
+
+  // const { data: cartData } = trpc.cart.getCartTickets.useQuery([], {
+  //   enabled: status === 'loggedIn',
+  // })
 
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
