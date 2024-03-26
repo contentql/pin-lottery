@@ -23,15 +23,18 @@ const Header = () => {
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
   const [popupVisible, setPopupVisible] = useState(false)
+
+  const { status, user } = useAuth()
   const router = useRouter()
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
   }
 
-  const { data: cartData } = trpc.cart.getCartTickets.useQuery()
+  const { data: cartData } = trpc.cart.getCartTickets.useQuery([], {
+    enabled: status === 'loggedIn',
+  })
 
-  const { status, user } = useAuth()
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text)
