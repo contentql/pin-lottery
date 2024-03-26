@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload/types'
 import { ResetPassword } from '../../email-templates/resetPassword'
 import { UserAccountVerification } from '../../email-templates/userAccountVerification'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
+
 const Users: CollectionConfig = {
   slug: 'users',
   auth: {
@@ -21,7 +22,6 @@ const Users: CollectionConfig = {
     },
     verify: {
       generateEmailHTML: ({ token, user }) => {
-        console.log('Verifying user', user)
         return UserAccountVerification({
           actionLabel: 'verify your account',
           buttonText: 'Verify Account',

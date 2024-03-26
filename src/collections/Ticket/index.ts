@@ -1,5 +1,6 @@
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
+import { JWTUser } from '../../custom-payload-types'
 import { User } from '../../payload-types'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
 import { assignUserId } from './field-level-hooks/assignUserId'
@@ -15,6 +16,13 @@ const Ticket: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'ticket_number',
+    hidden: ({ user }: { user: JWTUser }) => {
+      const { roles } = user
+
+      if (roles?.includes('editor')) return true
+
+      return false
+    },
   },
   // when creating a ticket, ensure the button was disabled
   hooks: {

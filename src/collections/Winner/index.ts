@@ -1,7 +1,17 @@
 import { CollectionConfig } from 'payload/types'
+import { JWTUser } from '../../custom-payload-types'
+
 const Winner: CollectionConfig = {
   slug: 'winner',
+  admin: {
+    hidden: ({ user }: { user: JWTUser }) => {
+      const { roles } = user
 
+      if (roles?.includes('editor')) return true
+
+      return false
+    },
+  },
   fields: [
     {
       name: 'contest',

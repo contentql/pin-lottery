@@ -5,9 +5,8 @@ const SUBJECT = 'New contact submission'
 export const newContactEmail: CollectionAfterChangeHook = async ({
   operation,
   doc,
-  req
+  req,
 }) => {
-  console.log('docas',doc)
   if (operation === OPERATION) {
     req.payload.sendEmail({
       to: doc.email,
@@ -19,7 +18,6 @@ export const newContactEmail: CollectionAfterChangeHook = async ({
         subject: doc.subject,
         message: doc.message,
       }),
-
     })
   }
 }

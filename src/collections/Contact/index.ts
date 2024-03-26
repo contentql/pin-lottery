@@ -1,9 +1,18 @@
 import { CollectionConfig } from 'payload/types'
+import { JWTUser } from '../../custom-payload-types'
 import { newContactEmail } from './hooks/newContactEmail'
+
 const Contact: CollectionConfig = {
   slug: 'contact',
   admin: {
     useAsTitle: 'name',
+    hidden: ({ user }: { user: JWTUser }) => {
+      const { roles } = user
+
+      if (roles?.includes('editor')) return true
+
+      return false
+    },
   },
   hooks: {
     afterChange: [newContactEmail],
