@@ -157,7 +157,11 @@ const Header = () => {
                     <div className='product__cart'>
                       <Link href='/cart' className='amount__btn'>
                         <i className='las la-shopping-basket'></i>
-                        <span className='cart__num'>{cartData?.length}</span>
+                        {cartData?.length !== 0 ? (
+                          <span className='cart__num'>{cartData?.length}</span>
+                        ) : (
+                          ''
+                        )}
                       </Link>
                     </div>
                   )}
