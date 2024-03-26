@@ -1,7 +1,8 @@
 .cart-lottery-single {
   background-color: #5a4bcc;
-  position: relative;
-  margin-bottom: 14px;
+  position: absolute;
+  width: 550px;
+  z-index: 2;
   @include border-radius(10px);
 
   &:hover {
@@ -84,4 +85,45 @@
       }
     }
   }
+}
+
+.cart-lottery-single1 {
+  background-color: #5a4bcc;
+  position: relative;
+  margin-bottom: 14px;
+  @include border-radius(10px);
+
+  &__header {
+    @include border-radius(10px);
+    background-color: #4939c1;
+    padding: 20px 20px;
+
+    .top {
+      @include d-flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #6d62c7;
+
+      .titcket-number {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.whole-position {
+  position: relative;
+  margin-top: 80px;
+}
+.card-position {
+  position: relative;
+  margin-top: -130px;
+}
+.card1-position {
+  position: relative;
+  z-index: 1;
 }
