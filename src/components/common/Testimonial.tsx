@@ -13,11 +13,15 @@ const Testimonial = () => {
   const settings = {
     autoplay: true,
     speed: 700,
-    arrows: true,
-    dots: false,
+    arrows: false,
+    infinite: true,
     // arrows: false,
-    vertical: true,
-    verticalSwiping: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    // vertical: true,
+    // verticalSwiping: true,
+    // swipeToSlide: true,
+    // draggable: true,
   }
   return (
     <section className='has-bg--shape pt-120 pb-120'>
