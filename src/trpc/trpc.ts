@@ -50,14 +50,14 @@ const isAuthenticatedWithRoles = (roles: User['roles'], verify: 'or' | 'and') =>
 export const router = t.router
 export const publicProcedure = t.procedure
 export const userProcedure = t.procedure.use(
-  isAuthenticatedWithRoles(['user', 'admin', 'seller'], 'or'),
+  isAuthenticatedWithRoles(['user', 'admin', 'manager', 'editor'], 'or'),
 )
 export const adminProcedure = t.procedure.use(
   isAuthenticatedWithRoles(['admin'], 'or'),
 )
-export const sellerProcedure = t.procedure.use(
-  isAuthenticatedWithRoles(['seller'], 'or'),
+export const managerProcedure = t.procedure.use(
+  isAuthenticatedWithRoles(['manager'], 'or'),
 )
-export const sellersAndAdminsProcedure = t.procedure.use(
-  isAuthenticatedWithRoles(['seller', 'admin'], 'or'),
+export const editorProcedure = t.procedure.use(
+  isAuthenticatedWithRoles(['editor'], 'or'),
 )

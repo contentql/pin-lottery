@@ -78,8 +78,9 @@ const Users: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'Admin', value: 'admin' },
+        { label: 'Manager', value: 'manager' },
+        { label: 'Editor', value: 'editor' },
         { label: 'User', value: 'user' },
-        { label: 'Seller', value: 'seller' },
       ],
       defaultValue: ['user'],
       hasMany: true,
