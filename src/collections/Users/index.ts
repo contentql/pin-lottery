@@ -36,7 +36,13 @@ const Users: CollectionConfig = {
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
     admin: ({ req: { user } }) => {
-      if (user.roles.includes('admin')) return true
+      if (
+        user.roles.includes('admin') ||
+        user.roles.includes('manager') ||
+        user.roles.includes('editor')
+      )
+        return true
+
       return false
     },
   },
