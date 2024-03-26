@@ -1,3 +1,4 @@
+'use client'
 import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -31,11 +32,9 @@ const Header = () => {
     setPopupVisible(!popupVisible)
   }
 
-  const { data: cartData } = trpc.cart.getCartTickets.useQuery()
-
-  // const { data: cartData } = trpc.cart.getCartTickets.useQuery([], {
-  //   enabled: status === 'loggedIn',
-  // })
+  const { data: cartData } = Boolean(status === 'loggedIn')
+    ? trpc.cart.getCartTickets.useQuery()
+    : { data: [] }
 
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
