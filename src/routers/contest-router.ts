@@ -113,13 +113,15 @@ export const contestRouter = router({
       const payload = await getPayloadClient()
 
       try {
-        await payload.update({
-          collection: 'contest',
-          id: id,
-          data: {
-            contest_timer_status,
-          },
-        })
+        if (contest_timer_status) {
+          await payload.update({
+            collection: 'contest',
+            id: id,
+            data: {
+              contest_timer_status,
+            },
+          })
+        }
 
         return { status: 'success' }
       } catch (error: any) {
