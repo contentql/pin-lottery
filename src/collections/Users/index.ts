@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload/types'
 import { ResetPassword } from '../../email-templates/resetPassword'
 import { UserAccountVerification } from '../../email-templates/userAccountVerification'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
+import { isAdmin } from './filed-level-access/isAdmin'
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -92,6 +93,9 @@ const Users: CollectionConfig = {
       defaultValue: ['user'],
       hasMany: true,
       saveToJWT: true,
+      access: {
+        update: isAdmin,
+      },
     },
   ],
 }
