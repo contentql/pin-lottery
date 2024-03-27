@@ -48,17 +48,15 @@ const AllTickets = ({
                   <div className='cart-lottery-single position1'>
                     {[...Array(cart?.tickets)].map((_, idx) => {
                       return (
-                        <div>
-                          <CartTicketCard
-                            key={idx}
-                            cart={cart}
-                            ticketId={idx + 1}
-                            deleteById={deleteById}
-                            updateCartTicketsCountMutation={
-                              updateCartTicketsCountMutation
-                            }
-                          />
-                        </div>
+                        <CartTicketCard
+                          key={idx}
+                          cart={cart}
+                          ticketId={idx + 1}
+                          deleteById={deleteById}
+                          updateCartTicketsCountMutation={
+                            updateCartTicketsCountMutation
+                          }
+                        />
                       )
                     })}
                     <div className='whole-position'>
@@ -121,17 +119,15 @@ const AllTickets = ({
                   <div className='cart-lottery-single'>
                     {[...Array(cart?.tickets)].map((_, idx) => {
                       return (
-                        <div>
-                          <CartTicketCard
-                            key={idx}
-                            cart={cart}
-                            ticketId={idx + 1}
-                            deleteById={deleteById}
-                            updateCartTicketsCountMutation={
-                              updateCartTicketsCountMutation
-                            }
-                          />
-                        </div>
+                        <CartTicketCard
+                          key={idx}
+                          cart={cart}
+                          ticketId={idx + 1}
+                          deleteById={deleteById}
+                          updateCartTicketsCountMutation={
+                            updateCartTicketsCountMutation
+                          }
+                        />
                       )
                     })}
                     <div className='cart-lottery-single1__header card1-position whole-position'>

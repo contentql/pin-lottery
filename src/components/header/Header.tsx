@@ -1,5 +1,3 @@
-'use client'
-import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -18,6 +16,7 @@ import { logout } from '@/queries/auth/logout'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
+import Cart from './Cart'
 
 const Header = () => {
   const [open, setOpen] = useState('')
@@ -31,10 +30,6 @@ const Header = () => {
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
   }
-
-  const { data: cartData } = Boolean(status === 'loggedIn')
-    ? trpc.cart.getCartTickets.useQuery()
-    : { data: [] }
 
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
@@ -157,18 +152,7 @@ const Header = () => {
                 </Link>
 
                 <div className='right'>
-                  {status === 'loggedIn' && (
-                    <div className='product__cart'>
-                      <Link href='/cart' className='amount__btn'>
-                        <i className='las la-shopping-basket'></i>
-                        {cartData?.length !== 0 ? (
-                          <span className='cart__num'>{cartData?.length}</span>
-                        ) : (
-                          ''
-                        )}
-                      </Link>
-                    </div>
-                  )}
+                  {status === 'loggedIn' && <Cart />}
                   {status === 'loggedIn' ? (
                     <>
                       <Link
