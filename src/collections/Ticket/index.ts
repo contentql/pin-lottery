@@ -1,7 +1,8 @@
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
+import { JWTUser } from '../../custom-payload-types'
 import { User } from '../../payload-types'
-import { isAdminOrSelf } from './access/isAdminOrSelf'
+import { isManagerOrAdminOrSelf } from './access/isManagerOrAdminOrSelf'
 import { assignUserId } from './field-level-hooks/assignUserId'
 import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
@@ -9,12 +10,24 @@ import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
 const Ticket: CollectionConfig = {
   slug: 'tickets',
   access: {
-    read: isAdminOrSelf,
-    update: isAdminOrSelf,
-    delete: isAdminOrSelf,
+    create: isManagerOrAdminOrSelf,
+    read: isManagerOrAdminOrSelf,
+    update: isManagerOrAdminOrSelf,
+    delete: isManagerOrAdminOrSelf,
   },
   admin: {
     useAsTitle: 'ticket_number',
+    hidden: ({ user }: { user: JWTUser }) => {
+      if (user) {
+        const { roles } = user
+
+        if (roles?.includes('manager')) return false
+        if (roles?.includes('admin')) return false
+        if (roles?.includes('editor')) return true
+      }
+
+      return true
+    },
   },
   // when creating a ticket, ensure the button was disabled
   hooks: {

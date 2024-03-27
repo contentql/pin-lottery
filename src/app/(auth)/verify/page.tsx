@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 }
 
 const VerifyEmail = ({ searchParams }: PageProps) => {
-  console.log('token in any', searchParams)
   return <EmailVerificationView searchParams={searchParams} />
 }
 

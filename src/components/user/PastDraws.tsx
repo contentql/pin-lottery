@@ -2,6 +2,7 @@ import { BsChevronDown } from 'react-icons/bs'
 
 import { Contest, Ticket, Winner } from '@/payload-types'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
+import Link from 'next/link'
 
 const PastDraws = ({
   pastDrawsTicketsData,
@@ -23,29 +24,35 @@ const PastDraws = ({
           </thead>
           <tbody>
             {pastDrawsTicketsData?.map(ticket => {
-              const winningTicket =
-                (
-                  (ticket?.contest_id?.value as Contest)?.winner_ticket
-                    ?.value as Winner
-                )?.ticket?.value === ticket?.id
+              const winningTicket = (
+                (ticket?.contest_id?.value as Contest)?.winner_ticket
+                  ?.value as Winner
+              )?.ticket?.value as Ticket
+
+              const winStatus =
+                winningTicket?.ticket_number === ticket?.ticket_number
 
               return (
                 <tr key={ticket?.id}>
                   <td>
                     <span className='date'>
-                      {new Date().toISOString().split('T')[0]}
+                      {
+                        new Date(winningTicket?.createdAt)
+                          .toISOString()
+                          .split('T')[0]
+                      }
                     </span>
                   </td>
                   <td>
-                    <span className='contest-no'>
+                    <Link
+                      href={`/contest/${(ticket?.contest_id?.value as Contest)?.id}`}
+                      className='contest-no'>
                       {(ticket?.contest_id?.value as Contest)?.contest_no}
-                    </span>
+                    </Link>
                   </td>
                   <td>
                     <ul
-                      className={`number-list ${
-                        winningTicket ? 'win-list' : ''
-                      }`}>
+                      className={`number-list ${winStatus ? 'win-list' : ''}`}>
                       {splitTicketNumber(ticket?.ticket_number).map(
                         (num: string, idx: number) => (
                           <li key={idx}>{num}</li>
@@ -54,7 +61,7 @@ const PastDraws = ({
                     </ul>
                   </td>
                   <td>
-                    {winningTicket ? (
+                    {winStatus ? (
                       <span className='win'>Win</span>
                     ) : (
                       <span className='fail'>No Win</span>
