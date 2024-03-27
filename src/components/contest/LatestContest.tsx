@@ -6,7 +6,7 @@ import { useDebounceCallback } from 'usehooks-ts'
 import ContestCard from '@/components/cards/ContestCard'
 
 import FilterByTag from '../filters/FilterByTag'
-import PageLoading from '../loading/PageLoading'
+import ContestSkeletons from '../skeletons/ContestSkeletons'
 
 const LatestContest = ({
   contestDetails,
@@ -248,7 +248,19 @@ const LatestContest = ({
                   className='tab-con tent mt-50 contests-body'
                   id='contestContent'>
                   {isContestsPending ? (
-                    <PageLoading />
+                    <div
+                      className='tab-pane fade show active '
+                      id='dream'
+                      role='tabpanel'
+                      aria-labelledby='dream-tab'>
+                      <div className='row mb-none-30 mt-50'>
+                        {[1, 2, 3].map((ele, index) => (
+                          <div key={index} className='col-xl-4 col-md-6 mb-30'>
+                            <ContestSkeletons />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   ) : (
                     <div
                       className='tab-pane fade show active '

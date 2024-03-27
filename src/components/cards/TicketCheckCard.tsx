@@ -1,9 +1,15 @@
+import { useForm } from 'react-hook-form'
+
 const TicketCheckCard = ({
-  winnerFilters,
-  setWinnerFilters,
-  handleCheckWinner,
   handleClearFilters,
+  handleSearchByTicketNumber,
 }: any) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({})
+
   return (
     <div className='number-check-wrapper'>
       <h3 className='title'>Check My Numbers</h3>
@@ -11,27 +17,22 @@ const TicketCheckCard = ({
         Are you holding on to a winning ticket? Here&#39;s an easy way to find
         out.
       </p>
-      <form className='check-number-form'>
-        {/* <input
-          type='tel'
-          className='form-control mt-30 mb-30'
-          name='check-number1'
-          placeholder='Enter Contest No'
-        /> */}
+      <form
+        onSubmit={handleSubmit(handleSearchByTicketNumber)}
+        noValidate
+        className='check-number-form'>
         <div className='number-list-wrapper'>
           <p>Enter Your Lottery Numbers</p>
           <input
             type='text'
             className='form-control mt-30 mb-30'
-            name='check-number2'
+            id='ticketNumber'
             placeholder='Enter Ticket No'
-            onChange={e =>
-              setWinnerFilters({
-                ...winnerFilters,
-                ticketNumber: e.target.value,
-              })
-            }
+            {...register('ticketNumber', {
+              required: true,
+            })}
           />
+          {errors.ticketNumber && <span>Please enter your ticket number</span>}
           {/* <div className='nice-select select'>
             <select className='border-0'>
               <option>Last 7 days</option>
@@ -42,10 +43,7 @@ const TicketCheckCard = ({
             </select>
           </div> */}
           <div className='text-center mt-100'>
-            <button
-              type='submit'
-              className='cmn-btn'
-              onClick={e => handleCheckWinner(e)}>
+            <button type='submit' className='cmn-btn'>
               check my numbers
             </button>
           </div>

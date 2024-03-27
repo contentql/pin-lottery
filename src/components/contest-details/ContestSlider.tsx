@@ -88,9 +88,9 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
                     width={1000}
                     height={10}
                     alt='contest b2'
-                    onClick={() => {
-                      setToggleView(true)
-                    }}
+                    // onClick={() => {
+                    //   setToggleView(true)
+                    // }}
                   />
                 </div>
               </div>
@@ -119,7 +119,7 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
           </div>
         </div>
 
-        {toggleView && (
+        {/* {toggleView && (
           <div className='overlay'>
             <div className='overlay-content'>
               <div className='contest-big__center'>
@@ -154,7 +154,7 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </>
   )
