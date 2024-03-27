@@ -6,15 +6,24 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
+import { JWTUser } from '../../custom-payload-types'
 import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
-
-const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-const nanoid = customAlphabet(alphabet, 4)
 
 const Contest: CollectionConfig = {
   slug: 'contest',
   admin: {
     useAsTitle: 'title',
+    hidden: ({ user }: { user: JWTUser }) => {
+      if (user) {
+        const { roles } = user
+
+        if (roles?.includes('manager')) return false
+        if (roles?.includes('admin')) return false
+        if (roles?.includes('editor')) return true
+      }
+
+      return true
+    },
   },
   hooks: {
     // beforeRead: [updateContestAfterRead],
@@ -135,7 +144,12 @@ const Contest: CollectionConfig = {
                   label: 'Contest Number',
                   required: true,
                   maxLength: 5,
-                  defaultValue: nanoid(),
+                  defaultValue: () => {
+                    const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                    const nanoid = customAlphabet(alphabet, 4)
+
+                    return nanoid()
+                  },
                   admin: {
                     description:
                       'Auto-generated unique identifier for the contest.',

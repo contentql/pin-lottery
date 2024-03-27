@@ -44,8 +44,6 @@ export const generateMetadata = async ({
       id: blogId,
     })
 
-    // const result = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog/${blogId}`).then((res) => res.json()).catch((error) => console.log(error))
-
     blog = result as Blog
   } catch (error) {
     console.error('Error fetching blog:', error)

@@ -1,7 +1,6 @@
 import { TRPCError } from '@trpc/server'
 import { getPayloadClient } from '../get-payload'
 import { WinnerDetailsValidator } from '../lib/validators/winner-details-validator'
-import { WinnerPaginationValidator } from '../lib/validators/winner-pagination-validator'
 import { publicProcedure, router } from '../trpc/trpc'
 
 export const WinnerRouter = router({
@@ -31,45 +30,55 @@ export const WinnerRouter = router({
       }
     }),
 
-  getWinners: publicProcedure
-    .input(WinnerPaginationValidator)
-    .query(async ({ input }) => {
-      const { pageNumber, ticketNumber, contestIds } = input
+  getWinners: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+    const winners = await payload.find({
+      collection: 'winner',
+      pagination: false,
+      depth: 5,
+    })
+    return winners.docs
+  }),
 
-      const whereClauses = contestIds.map(contestId => ({
-        'contest.value': {
-          equals: contestId,
-        },
-      }))
-      const payload = await getPayloadClient()
+  // getWinners: publicProcedure
+  //   .input(WinnerPaginationValidator)
+  //   .query(async ({ input }) => {
+  //     const { pageNumber, ticketNumber, contestIds } = input
 
-      try {
-        const winners = await payload.find({
-          collection: 'winner',
-          limit: 9,
-          depth: 5,
-          page: pageNumber,
-          where: {
-            or: [...whereClauses],
-            and: [
-              {
-                ...(ticketNumber !== '' && {
-                  'ticket.value': {
-                    equals: ticketNumber,
-                  },
-                }),
-              },
-            ],
-          },
-        })
+  //     const whereClauses = contestIds.map(contestId => ({
+  //       'contest.value': {
+  //         equals: contestId,
+  //       },
+  //     }))
+  //     const payload = await getPayloadClient()
 
-        return { Winners: winners?.docs, totalDocs: winners?.totalDocs }
-      } catch (error: any) {
-        console.log('Error getting winners:', error)
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: error?.message || 'Failed to get winners.',
-        })
-      }
-    }),
+  //     try {
+  //       const winners = await payload.find({
+  //         collection: 'winner',
+  //         limit: 9,
+  //         depth: 5,
+  //         page: pageNumber,
+  //         where: {
+  //           or: [...whereClauses],
+  //           and: [
+  //             {
+  //               ...(ticketNumber !== '' && {
+  //                 'ticket.value': {
+  //                   equals: ticketNumber,
+  //                 },
+  //               }),
+  //             },
+  //           ],
+  //         },
+  //       })
+
+  //       return { Winners: winners?.docs, totalDocs: winners?.totalDocs }
+  //     } catch (error: any) {
+  //       console.log('Error getting winners:', error)
+  //       throw new TRPCError({
+  //         code: 'INTERNAL_SERVER_ERROR',
+  //         message: error?.message || 'Failed to get winners.',
+  //       })
+  //     }
+  //   }),
 })

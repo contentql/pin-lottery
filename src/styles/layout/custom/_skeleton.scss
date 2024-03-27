@@ -1,0 +1,250 @@
+/* skeleton for contest*/
+.container-skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.movie--isloading {
+  height: 450px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.movie--isloading .loading-image {
+  height: 250px;
+  background-image: linear-gradient(
+    90deg,
+    #5a4bcc 0px,
+    #4939c1 40px,
+    #5a4bcc 80px
+  );
+  background-size: 250px;
+  -webkit-animation: shine-loading-image 0.2s infinite ease-out;
+  animation: shine-loading-image 1s infinite ease-out;
+}
+
+.movie--isloading .loading-content {
+  background: #4939c1;
+  padding: 15px;
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.movie--isloading .loading-content .loading-text-container {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+}
+
+.movie--isloading .loading-content .loading-main-text {
+  height: 10px;
+  width: 65%;
+  margin-bottom: 10px;
+  background: #ececec;
+  background-image: -webkit-linear-gradient(
+    left,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-image: -o-linear-gradient(
+    left,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-image: linear-gradient(
+    90deg,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-size: 3000px;
+  border-radius: 15px;
+  -webkit-animation: shine-loading-container-items 2s infinite ease-out;
+  animation: shine-loading-container-items 2s infinite ease-out;
+}
+
+.movie--isloading .loading-content .loading-sub-text {
+  height: 10px;
+  width: 50%;
+  background: #ececec;
+  background-image: -webkit-linear-gradient(
+    left,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-image: -o-linear-gradient(
+    left,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-image: linear-gradient(
+    90deg,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-size: 250px;
+  border-radius: 10px;
+  -webkit-animation: shine-loading-container-items 2s infinite ease-out;
+  animation: shine-loading-container-items 2s infinite ease-out;
+}
+
+.movie--isloading .loading-content .loading-btn {
+  width: 60px;
+  height: 30px;
+  border-radius: 20px;
+  background: #ececec;
+  background-image: -webkit-linear-gradient(
+    left,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-image: -o-linear-gradient(
+    left,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-image: linear-gradient(
+    90deg,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-size: 250px;
+  border-radius: 3px;
+  -webkit-animation: shine-loading-container-items 0.5s infinite ease-out;
+  animation: shine-loading-container-items 2s infinite ease-out;
+}
+
+.border-bottom-skeleton {
+  border-bottom: 1px solid white;
+  padding: 20px 0px;
+}
+
+@-webkit-keyframes shine-loading-image {
+  0% {
+    background-position: -32px;
+  }
+  40%,
+  100% {
+    background-position: 208px;
+  }
+}
+
+@keyframes shine-loading-image {
+  0% {
+    background-position: -32px;
+  }
+  40%,
+  100% {
+    background-position: 208px;
+  }
+}
+
+@-webkit-keyframes shine-loading-container-items {
+  0% {
+    background-position: -100px;
+  }
+  40%,
+  100% {
+    background-position: 140px;
+  }
+}
+
+@keyframes shine-loading-container-items {
+  0% {
+    background-position: -100px;
+  }
+  40%,
+  100% {
+    background-position: 140px;
+  }
+}
+/* contest skeleton end*/
+.skeleton-box {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  overflow: hidden;
+  background-color: #dddbdd;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(#fff, 0) 0,
+      rgba(#fff, 0.2) 20%,
+      rgba(#fff, 0.5) 60%,
+      rgba(#fff, 0)
+    );
+    animation: shimmer 5s infinite;
+    content: '';
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.blog-post {
+  &__headline {
+    font-size: 1.25em;
+    font-weight: bold;
+  }
+
+  &__meta {
+    font-size: 0.85em;
+    color: #6b6b6b;
+  }
+}
+
+// OBJECTS
+
+.o-media {
+  display: flex;
+
+  &__body {
+    flex-grow: 1;
+    margin-left: 1em;
+  }
+}
+
+.o-vertical-spacing {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  &--l {
+    > * + * {
+      margin-top: 2em;
+    }
+  }
+}
+
+// MISC
+
+* {
+  box-sizing: border-box;
+}

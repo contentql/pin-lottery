@@ -2,6 +2,8 @@ import { CollectionConfig } from 'payload/types'
 import { ResetPassword } from '../../email-templates/resetPassword'
 import { UserAccountVerification } from '../../email-templates/userAccountVerification'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
+import { isAdmin } from './filed-level-access/isAdmin'
+
 const Users: CollectionConfig = {
   slug: 'users',
   auth: {
@@ -21,7 +23,6 @@ const Users: CollectionConfig = {
     },
     verify: {
       generateEmailHTML: ({ token, user }) => {
-        console.log('Verifying user', user)
         return UserAccountVerification({
           actionLabel: 'verify your account',
           buttonText: 'Verify Account',
@@ -32,11 +33,18 @@ const Users: CollectionConfig = {
     },
   },
   access: {
+    create: isAdmin,
     read: isAdminOrSelf,
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
     admin: ({ req: { user } }) => {
-      if (user.roles.includes('admin')) return true
+      if (
+        user.roles.includes('admin') ||
+        user.roles.includes('manager') ||
+        user.roles.includes('editor')
+      )
+        return true
+
       return false
     },
   },
@@ -78,12 +86,16 @@ const Users: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'Admin', value: 'admin' },
+        { label: 'Manager', value: 'manager' },
+        { label: 'Editor', value: 'editor' },
         { label: 'User', value: 'user' },
-        { label: 'Seller', value: 'seller' },
       ],
       defaultValue: ['user'],
       hasMany: true,
       saveToJWT: true,
+      access: {
+        update: isAdmin,
+      },
     },
   ],
 }

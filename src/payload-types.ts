@@ -34,7 +34,7 @@ export interface User {
   address?: string | null;
   phone_number?: string | null;
   image?: string | Media | null;
-  roles?: ('admin' | 'user' | 'seller')[] | null;
+  roles?: ('admin' | 'manager' | 'editor' | 'user')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;

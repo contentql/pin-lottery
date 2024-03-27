@@ -12,7 +12,7 @@ import Banner from '@/components/common/Banner'
 
 const BlogView = () => {
   const { data: blogData } = trpc.public.getBlogData.useQuery()
-  console.log('blogs data', blogData)
+
   return (
     <>
       <div className='inner-hero-section style--four'>

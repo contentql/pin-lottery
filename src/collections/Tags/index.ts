@@ -1,8 +1,21 @@
 import { CollectionConfig } from 'payload/types'
+import { JWTUser } from '../../custom-payload-types'
+
 const Tags: CollectionConfig = {
   slug: 'tags',
   admin: {
     useAsTitle: 'tag',
+    hidden: ({ user }: { user: JWTUser }) => {
+      if (user) {
+        const { roles } = user
+
+        if (roles?.includes('manager')) return false
+        if (roles?.includes('admin')) return false
+        if (roles?.includes('editor')) return true
+      }
+
+      return true
+    },
   },
   fields: [
     {
