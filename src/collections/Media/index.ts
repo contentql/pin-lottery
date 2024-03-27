@@ -1,5 +1,4 @@
 import type { CollectionConfig, Field } from 'payload/types'
-import { JWTUser } from '../../custom-payload-types'
 
 const urlField: Field = {
   name: 'url',
@@ -9,13 +8,7 @@ const urlField: Field = {
 export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
-    hidden: ({ user }: { user: JWTUser }) => {
-      const { roles } = user
-
-      if (roles?.includes('editor')) return true
-
-      return false
-    },
+    hidden: false,
   },
   access: {
     read: () => true,

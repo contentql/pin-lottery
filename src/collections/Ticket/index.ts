@@ -19,9 +19,11 @@ const Ticket: CollectionConfig = {
     hidden: ({ user }: { user: JWTUser }) => {
       const { roles } = user
 
+      if (roles?.includes('manager')) return false
+      if (roles?.includes('admin')) return false
       if (roles?.includes('editor')) return true
 
-      return false
+      return true
     },
   },
   // when creating a ticket, ensure the button was disabled

@@ -9,9 +9,11 @@ const Contact: CollectionConfig = {
     hidden: ({ user }: { user: JWTUser }) => {
       const { roles } = user
 
-      if (roles?.includes('editor') || roles?.includes('manager')) return true
+      if (roles?.includes('admin')) return false
+      if (roles?.includes('editor')) return true
+      if (roles?.includes('manager')) return true
 
-      return false
+      return true
     },
   },
   hooks: {

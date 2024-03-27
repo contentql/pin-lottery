@@ -6,9 +6,7 @@ import { assignUserId } from './field-level-hooks/assignUserId'
 const Cart: CollectionConfig = {
   slug: 'cart',
   admin: {
-    hidden: () => {
-      return true
-    },
+    hidden: true,
   },
   access: {
     read: isAdminOrSelf,
