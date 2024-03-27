@@ -20,7 +20,7 @@ const LatestWinner = () => {
   const pathname = usePathname()
   const router = useRouter()
 
-  const winner = searchParams.get('winner') ?? ''
+  const ticketNumber = searchParams.get('ticketNumber') ?? ''
   const tag = searchParams.get('tag') ?? 'all'
 
   const [winnerFilters, setWinnerFilters] = useState({
@@ -30,17 +30,33 @@ const LatestWinner = () => {
 
   const [pageNumber, setPageNumber] = useState(1)
 
-  const { data: contestId } = trpc.contest?.getContestIds.useQuery({
-    id: tag!,
+  // const { data: contestId } = trpc.contest?.getContestIds.useQuery({
+  //   id: tag!,
+  // })
+
+  // const temp = contestId?.map(contest => contest?.id) ?? []
+
+  // const { data: winnersData } = trpc.winner.getWinners.useQuery({
+  //   pageNumber: pageNumber,
+  //   ticketNumber: winner!,
+  //   contestIds: temp!,
+  // })
+
+  const onsubmit = (data: any) => {
+    console.log('hook form', data)
+    const {} = data
+    const search = new URLSearchParams(searchParams)
+    search.set('ticketNumber', data?.ticketNumber)
+    router.push(`${pathname}?${search.toString()}#winner_id`)
+  }
+
+  const { data: winnersData } = trpc.winner.getWinnersByAggregations.useQuery({
+    tag: tag,
+    pageNumber: 1,
+    ticketNumber: ticketNumber,
   })
 
-  const temp = contestId?.map(contest => contest?.id) ?? []
-
-  const { data: winnersData } = trpc.winner.getWinners.useQuery({
-    pageNumber: pageNumber,
-    ticketNumber: winner!,
-    contestIds: temp!,
-  })
+  console.log('aggregations', winnersData)
 
   const { mutate: getTicketId } = trpc.ticket.getTicketId.useMutation({
     onSuccess: (data: any) => {
@@ -128,12 +144,13 @@ const LatestWinner = () => {
                       setWinnerFilters={setWinnerFilters}
                       handleCheckWinner={handleCheckWinner}
                       handleClearFilters={handleClearFilters}
+                      onsubmit={onsubmit}
                     />
                   </div>
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winnersData?.Winners.map(winner => (
+                    {winnersData?.winners.map((winner: any) => (
                       <WinnerCard key={winner.id} winner={winner as Winner} />
                     ))
                     // : contestWinners?.map(winner => (
