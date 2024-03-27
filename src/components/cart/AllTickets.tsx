@@ -29,7 +29,8 @@ const AllTickets = ({
         </div>
         {cartData?.map(cart => (
           <div key={cart?.id} className='ticket-wrapper__body'>
-            <div className='tickets'>
+            <div
+              className={`tickets ${cart?.tickets === 1 ? 'tickets-one' : cart?.tickets === 2 ? 'tickets-two' : 'tickets-three'}`}>
               <div className='single-row'>
                 <h3>
                   Contest Number:{' '}
@@ -133,7 +134,7 @@ const AllTickets = ({
                         </div>
                       )
                     })}
-                    <div className='cart-lottery-single1__header whole-position'>
+                    <div className='cart-lottery-single1__header card1-position whole-position'>
                       <div className='silgle'>
                         <div className='draw-single-ticket'>
                           <div className='draw-single-ticket__header'>

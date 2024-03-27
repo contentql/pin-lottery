@@ -35,6 +35,7 @@
     @include border-radius(10px);
     background-color: #4939c1;
     padding: 20px 20px;
+    border: 2px solid rgba(#ffffff, 0.2);
 
     .top {
       @include d-flex;
@@ -97,6 +98,7 @@
     @include border-radius(10px);
     background-color: #4939c1;
     padding: 20px 20px;
+    border: 2px solid rgba(#ffffff, 0.2);
 
     .top {
       @include d-flex;
@@ -117,13 +119,19 @@
 
 .whole-position {
   position: relative;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 .card-position {
   position: relative;
-  margin-top: -130px;
+  margin-top: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
 }
 .card1-position {
   position: relative;
   z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
 }
