@@ -247,7 +247,7 @@ const LatestContest = ({
                 <div
                   className='tab-con tent mt-50 contests-body'
                   id='contestContent'>
-                  {true ? (
+                  {isContestsPending ? (
                     <div
                       className='tab-pane fade show active '
                       id='dream'

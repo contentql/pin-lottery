@@ -1,9 +1,8 @@
 import { useForm } from 'react-hook-form'
 
 const TicketCheckCard = ({
-  handleCheckWinner,
   handleClearFilters,
-  onsubmit,
+  handleSearchByTicketNumber,
 }: any) => {
   const {
     register,
@@ -19,7 +18,7 @@ const TicketCheckCard = ({
         out.
       </p>
       <form
-        onSubmit={handleSubmit(onsubmit)}
+        onSubmit={handleSubmit(handleSearchByTicketNumber)}
         noValidate
         className='check-number-form'>
         <div className='number-list-wrapper'>
@@ -29,9 +28,11 @@ const TicketCheckCard = ({
             className='form-control mt-30 mb-30'
             id='ticketNumber'
             placeholder='Enter Ticket No'
-            {...register('ticketNumber', { required: true })}
+            {...register('ticketNumber', {
+              required: true,
+            })}
           />
-          {errors.ticketNumber && <span>This field is required</span>}
+          {errors.ticketNumber && <span>Please enter your ticket number</span>}
           {/* <div className='nice-select select'>
             <select className='border-0'>
               <option>Last 7 days</option>

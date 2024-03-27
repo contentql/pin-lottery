@@ -1,7 +1,6 @@
 import { TRPCError } from '@trpc/server'
 import { getPayloadClient } from '../get-payload'
 import { WinnerDetailsValidator } from '../lib/validators/winner-details-validator'
-import { WinnerPaginationValidator } from '../lib/validators/winner-pagination-validator'
 import { publicProcedure, router } from '../trpc/trpc'
 
 export const WinnerRouter = router({
@@ -30,6 +29,16 @@ export const WinnerRouter = router({
         })
       }
     }),
+
+  getWinners: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+    const winners = await payload.find({
+      collection: 'winner',
+      pagination: false,
+      depth: 5,
+    })
+    return winners.docs
+  }),
 
   // getWinners: publicProcedure
   //   .input(WinnerPaginationValidator)
@@ -72,91 +81,4 @@ export const WinnerRouter = router({
   //       })
   //     }
   //   }),
-
-  getWinnersByAggregations: publicProcedure
-    .input(WinnerPaginationValidator)
-    .query(async ({ input }) => {
-      const { tag, pageNumber, ticketNumber } = input
-      const payload = await getPayloadClient()
-      const totalDocs = await (payload.db as any).collections[
-        'winner'
-      ].countDocuments()
-      const data = await (payload.db as any).collections['winner'].aggregate([
-        {
-          $addFields: {
-            contest_id: {
-              $toObjectId: '$contest.value',
-            },
-          },
-        },
-        {
-          $addFields: {
-            ticket_id: {
-              $toObjectId: '$ticket.value',
-            },
-          },
-        },
-        {
-          $lookup: {
-            from: 'contests',
-            localField: 'contest_id',
-            foreignField: '_id',
-            as: 'contest_data',
-          },
-        },
-        {
-          $lookup: {
-            from: 'tickets',
-            localField: 'ticket_id',
-            foreignField: '_id',
-            as: 'ticket_data',
-          },
-        },
-        {
-          $addFields: {
-            contest_data: {
-              $arrayElemAt: ['$contest_data', 0],
-            },
-          },
-        },
-        {
-          $addFields: {
-            ticket_data: {
-              $arrayElemAt: ['$ticket_data', 0],
-            },
-          },
-        },
-        {
-          $set: {
-            'contest.details': '$contest_data',
-          },
-        },
-        {
-          $set: {
-            'ticket.details': '$ticket_data',
-          },
-        },
-        {
-          $unset: 'contest_data',
-        },
-        {
-          $unset: 'ticket_data',
-        },
-        {
-          $unset: 'contest_id',
-        },
-        {
-          $unset: 'ticket_id',
-        },
-        {
-          $match: {
-            $and: [
-              { 'contest.details.product_type': { $eq: tag } },
-              { 'ticket.details.ticket_number': { $eq: ticketNumber } },
-            ],
-          },
-        },
-      ])
-      return { winners: data, totalDocs }
-    }),
 })

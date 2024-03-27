@@ -10,7 +10,6 @@ import TicketCheckCard from '@/components/cards/TicketCheckCard'
 import { Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 import WinnerCard from '../cards/WinnerCard'
 
 import Pagination from './Pagination'
@@ -20,63 +19,26 @@ const LatestWinner = () => {
   const pathname = usePathname()
   const router = useRouter()
 
-  const ticketNumber = searchParams.get('ticketNumber') ?? ''
-  const tag = searchParams.get('tag') ?? 'all'
-
   const [winnerFilters, setWinnerFilters] = useState({
-    filterWinnerByTag: 'all',
-    ticketNumber: '',
+    filterWinnerByTag: searchParams?.get('tag')
+      ? searchParams?.get('tag')
+      : 'all',
+    ticketNumber: searchParams?.get('ticketNumber')
+      ? searchParams?.get('ticketNumber')
+      : '',
   })
 
   const [pageNumber, setPageNumber] = useState(1)
 
-  // const { data: contestId } = trpc.contest?.getContestIds.useQuery({
-  //   id: tag!,
-  // })
+  const { data: WinnersData } = trpc.winner.getWinners.useQuery()
+  console.log('winners', WinnersData)
 
-  // const temp = contestId?.map(contest => contest?.id) ?? []
-
-  // const { data: winnersData } = trpc.winner.getWinners.useQuery({
-  //   pageNumber: pageNumber,
-  //   ticketNumber: winner!,
-  //   contestIds: temp!,
-  // })
-
-  const onsubmit = (data: any) => {
+  const handleSearchByTicketNumber = (data: any) => {
     console.log('hook form', data)
-    const {} = data
     const search = new URLSearchParams(searchParams)
     search.set('ticketNumber', data?.ticketNumber)
     router.push(`${pathname}?${search.toString()}#winner_id`)
-  }
-
-  const { data: winnersData } = trpc.winner.getWinnersByAggregations.useQuery({
-    tag: tag,
-    pageNumber: 1,
-    ticketNumber: ticketNumber,
-  })
-
-  console.log('aggregations', winnersData)
-
-  const { mutate: getTicketId } = trpc.ticket.getTicketId.useMutation({
-    onSuccess: (data: any) => {
-      toast.success('Thanks for participating searching winner')
-      if (data?.id === undefined) {
-        toast.error('invalid ticket number')
-      } else {
-        const search = new URLSearchParams(searchParams)
-        search.set('winner', data?.id)
-        router.push(`${pathname}?${search.toString()}#winner_id`)
-      }
-    },
-    onError: () => {
-      toast.error(`incorrect ticket number`)
-    },
-  })
-
-  const handleCheckWinner = (e: any) => {
-    e.preventDefault()
-    getTicketId({ ticket_no: winnerFilters?.ticketNumber })
+    setWinnerFilters({ ...winnerFilters, ticketNumber: data.ticketNumber })
   }
 
   const handleSearchTag = (tag: string) => {
@@ -89,12 +51,25 @@ const LatestWinner = () => {
     })
   }
 
+  const handleFilterByTag = (contest: any) => {
+    if (winnerFilters.filterWinnerByTag === 'all') return true
+    return (
+      contest?.contest?.value.product_type === winnerFilters.filterWinnerByTag
+    )
+  }
+
+  const handleFilterByTicketNumber = (winner: any) => {
+    if (winnerFilters?.ticketNumber === '') return true
+    return winner?.ticket?.value?.ticket_number === winnerFilters.ticketNumber
+  }
+
   const handleClearFilters = () => {
     const params = new URLSearchParams()
     router.push(`${pathname}?${params.toString()}#winner_id`)
     setWinnerFilters({
       ...winnerFilters,
       filterWinnerByTag: 'all',
+      ticketNumber: '',
     })
   }
 
@@ -142,24 +117,18 @@ const LatestWinner = () => {
                     <TicketCheckCard
                       winnerFilters={winnerFilters}
                       setWinnerFilters={setWinnerFilters}
-                      handleCheckWinner={handleCheckWinner}
                       handleClearFilters={handleClearFilters}
-                      onsubmit={onsubmit}
+                      handleSearchByTicketNumber={handleSearchByTicketNumber}
                     />
                   </div>
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {winnersData?.winners.map((winner: any) => (
-                      <WinnerCard key={winner.id} winner={winner as Winner} />
-                    ))
-                    // : contestWinners?.map(winner => (
-                    //     <WinnerCard
-                    //       key={winner.id}
-                    //       winner={winner as Winner}
-                    //     />
-                    //   ))
-                    }
+                    {WinnersData?.filter(handleFilterByTag)
+                      .filter(handleFilterByTicketNumber)
+                      .map((winner: any) => (
+                        <WinnerCard key={winner.id} winner={winner as Winner} />
+                      ))}
                   </div>
                 </div>
               </div>
@@ -172,7 +141,7 @@ const LatestWinner = () => {
           <Pagination
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
-            totalContests={winnersData?.totalDocs}
+            totalContests={WinnersData?.length}
           />
         </div>
       </div>
