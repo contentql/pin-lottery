@@ -1,3 +1,4 @@
+'use client'
 import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -23,15 +24,18 @@ const Header = () => {
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
   const [popupVisible, setPopupVisible] = useState(false)
+
+  const { status, user } = useAuth()
   const router = useRouter()
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
   }
 
-  const { data: cartData } = trpc.cart.getCartTickets.useQuery()
+  const { data: cartData } = Boolean(status === 'loggedIn')
+    ? trpc.cart.getCartTickets.useQuery()
+    : { data: [] }
 
-  const { status, user } = useAuth()
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text)
@@ -157,7 +161,11 @@ const Header = () => {
                     <div className='product__cart'>
                       <Link href='/cart' className='amount__btn'>
                         <i className='las la-shopping-basket'></i>
-                        <span className='cart__num'>{cartData?.length}</span>
+                        {cartData?.length !== 0 ? (
+                          <span className='cart__num'>{cartData?.length}</span>
+                        ) : (
+                          ''
+                        )}
                       </Link>
                     </div>
                   )}
