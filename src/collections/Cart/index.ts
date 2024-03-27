@@ -9,6 +9,7 @@ const Cart: CollectionConfig = {
     hidden: true,
   },
   access: {
+    create: isAdminOrSelf,
     read: isAdminOrSelf,
     update: isAdminOrSelf,
     delete: isAdminOrSelf,

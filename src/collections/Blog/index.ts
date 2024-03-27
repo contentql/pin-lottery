@@ -11,15 +11,17 @@ const Blog: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     hidden: ({ user }: { user: JWTUser }) => {
-      const { roles } = user
+      if (user) {
+        const { roles } = user
 
-      // if (roles?.includes('editor')) return false
-      // if (roles?.includes('admin')) return false
-      // if (roles?.includes('manager')) return true
+        // if (roles?.includes('editor')) return false
+        // if (roles?.includes('admin')) return false
+        // if (roles?.includes('manager')) return true
 
-      if (roles?.includes('editor')) return false
-      if (roles?.includes('admin')) return false
-      if (roles?.includes('manager')) return true
+        if (roles?.includes('editor')) return false
+        if (roles?.includes('admin')) return false
+        if (roles?.includes('manager')) return true
+      }
 
       return true
     },
