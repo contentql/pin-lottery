@@ -33,7 +33,7 @@ const Users: CollectionConfig = {
     },
   },
   access: {
-    create: isAdminOrSelf,
+    create: isAdmin,
     read: isAdminOrSelf,
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
