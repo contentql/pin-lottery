@@ -27,18 +27,14 @@ const HomeView = () => {
 
   // get winners
 
-  const { data: winnerDetails } = trpc.winner.getWinners.useQuery({
-    contestIds: [],
-    pageNumber: 1,
-    ticketNumber: '',
-  })
+  const { data: winnerDetails } = trpc.winner.getWinners.useQuery()
 
   return (
     <>
       <Hero />
       <ContestCategories allTags={allTags as [Tag]} />
       <ContestDetailsPage contestDetails={contest as Contest[]} />
-      <WinnerDetails winnerDetails={winnerDetails?.Winners as Winner[]} />
+      <WinnerDetails winnerDetails={winnerDetails as Winner[]} />
       <LatestWinner />
       <Overview />
       <Features />
