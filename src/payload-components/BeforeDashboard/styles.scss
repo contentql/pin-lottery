@@ -1,0 +1,22 @@
+.info-card {
+  background: var(--theme-elevation-50);
+  width: 200px;
+  height: 150px;
+  border-radius: $style-radius-m;
+  padding: base(1.25) $baseline;
+
+  &__title {
+    @extend %h5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &--has-onclick {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--theme-elevation-100);
+    }
+  }
+}

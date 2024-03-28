@@ -26,6 +26,7 @@ import {
   generateTitle,
   generateURL,
 } from './utils/seo'
+import BeforeDashboard from './payload-components/BeforeDashboard'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -33,7 +34,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL!,
-  defaultDepth: 3,
+  defaultDepth: 10,
   collections: [
     Users,
     Media,
@@ -70,6 +71,7 @@ export default buildConfig({
       ogImage: 'images/client/2.png',
     },
     components: {
+      beforeDashboard: [BeforeDashboard],
       graphics: {
         Logo: Logo,
         Icon: Icon,
