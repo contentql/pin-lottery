@@ -26,7 +26,7 @@ import {
   generateTitle,
   generateURL,
 } from './utils/seo'
-import Test from './collections/custom-components/Test'
+import BeforeDashboard from './payload-components/BeforeDashboard'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -71,7 +71,7 @@ export default buildConfig({
       ogImage: 'images/client/2.png',
     },
     components: {
-      beforeDashboard: [Test],
+      beforeDashboard: [BeforeDashboard],
       graphics: {
         Logo: Logo,
         Icon: Icon,

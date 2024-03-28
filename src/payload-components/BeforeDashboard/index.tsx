@@ -1,8 +1,9 @@
 import React from 'react'
-import TestCard from './TestCard'
-import { useAuth } from 'payload/components/utilities'
 
-const Test = () => {
+import { useAuth } from 'payload/components/utilities'
+import InfoCard from './InfoCard'
+
+const BeforeDashboard = () => {
   const { user } = useAuth()
 
   // @ts-ignore
@@ -13,11 +14,11 @@ const Test = () => {
         <p style={{ color: 'lightgoldenrodyellow' }}>
           This feature is still under process, more cards to come!
         </p>
-        <TestCard title='Total Tickets' />
+        <InfoCard title='Total Tickets' />
       </div>
     )
 
   return null
 }
 
-export default Test
+export default BeforeDashboard

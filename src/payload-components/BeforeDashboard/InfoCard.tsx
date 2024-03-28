@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 
-const TestCard = ({ title }: any) => {
+const InfoCard = ({ title }: any) => {
   const [totalDocs, setTotalDocs] = useState(0)
 
   useEffect(() => {
@@ -20,12 +20,12 @@ const TestCard = ({ title }: any) => {
   }, [])
 
   return (
-    <div className='testcard testcard--has-onclick'>
-      <p className='testcard__title'>
+    <div className='info-card info-card--has-onclick'>
+      <p className='info-card__title'>
         {title}: {totalDocs}
       </p>
     </div>
   )
 }
 
-export default TestCard
+export default InfoCard
