@@ -66,16 +66,17 @@ const ContestView = () => {
         filters={filters}
         setFilters={setFilters}
       />
-
-      <div>
-        <div className='row pagination-bottom'>
-          <Pagination
-            pageNumber={pageNumber}
-            setPageNumber={setPageNumber}
-            totalContests={contestDetails?.totalContests}
-          />
+      {contestDetails?.totalContests && contestDetails?.totalContests > 8 && (
+        <div>
+          <div className='row pagination-bottom'>
+            <Pagination
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
+              totalContests={contestDetails?.totalContests}
+            />
+          </div>
         </div>
-      </div>
+      )}
       {/* Feature section here */}
       <Feature />
     </>
