@@ -5,21 +5,44 @@ import Slider from 'react-slick'
 import round_shape from '/public/images/elements/round-shape.png'
 
 import testimonialData from '@/data/testimonialData'
+import 'slick-carousel/slick/slick.css'
 
 // css
 import 'slick-carousel/slick/slick.css'
 
 const Testimonial = () => {
+  const NextBtn = ({ onClick }: any) => {
+    return (
+      <button
+        type='button'
+        className='next-button-slick next-slick-button-position'
+        onClick={onClick}>
+        <i className='las la-angle-left'></i>
+      </button>
+    )
+  }
+
+  const PrevBtn = ({ onClick }: any) => {
+    return (
+      <button
+        type='button'
+        className='next-button-slick prev-slick-button'
+        onClick={onClick}>
+        <i className='las la-angle-right'></i>
+      </button>
+    )
+  }
   const settings = {
     autoplay: true,
     speed: 700,
-    arrows: false,
     infinite: true,
     // arrows: false,
+    nextArrow: <PrevBtn />,
+    prevArrow: <NextBtn />,
     slidesToShow: 1,
     slidesToScroll: 1,
     // vertical: true,
-    // verticalSwiping: true,
+    //verticalSwiping: true,
     // swipeToSlide: true,
     // draggable: true,
   }

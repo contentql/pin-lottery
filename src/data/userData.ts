@@ -89,7 +89,7 @@ export const allTransactions = [
     date: '16',
     month: 'APR',
     description: 'DEPOSIT',
-    referral: 'Bank account to Rifa Account',
+    referral: 'Bank account to lottery Account',
     pay_method: 'VISA',
     amout: '758',
     transection: 'deposit',

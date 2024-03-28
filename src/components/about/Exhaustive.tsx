@@ -22,11 +22,12 @@ const Exhaustive = () => {
                 An Exhaustive list of amazing features
               </span>
               <h2 className='section-title style--two'>
-                What makes Rifa different?
+                What makes lottery different?
               </h2>
               <p>
                 These are the key drivers that make us different: Safe, Social,
-                Reliable and Fun. Rifa Lotto is dedicated to trust and safety.
+                Reliable and Fun. lottery Lotto is dedicated to trust and
+                safety.
               </p>
             </div>
           </div>

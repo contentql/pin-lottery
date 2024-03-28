@@ -1,4 +1,4 @@
-import AboutRifa from './AboutRifa'
+import AboutLottery from './AboutLottery'
 import Banking from './Banking'
 import ResultsAndAlerts from './ResultsAndAlerts'
 import Tickets from './Tickets'
@@ -22,8 +22,7 @@ const FaqBody = () => {
               <ul
                 className='nav nav-tabs cmn-tabs justify-content-center'
                 id='myTab'
-                role='tablist'
-              >
+                role='tablist'>
                 <li className='nav-item' role='presentation'>
                   <button
                     className='nav-link'
@@ -32,9 +31,8 @@ const FaqBody = () => {
                     data-bs-target='#ticket'
                     role='tab'
                     aria-controls='ticket'
-                    aria-selected='false'
-                  >
-                    rifa tickets
+                    aria-selected='false'>
+                    lottery tickets
                   </button>
                 </li>
                 <li className='nav-item' role='presentation'>
@@ -45,8 +43,7 @@ const FaqBody = () => {
                     data-bs-target='#banking'
                     role='tab'
                     aria-controls='banking'
-                    aria-selected='true'
-                  >
+                    aria-selected='true'>
                     banking
                   </button>
                 </li>
@@ -58,8 +55,7 @@ const FaqBody = () => {
                     data-bs-target='#winning'
                     role='tab'
                     aria-controls='winning'
-                    aria-selected='false'
-                  >
+                    aria-selected='false'>
                     winning
                   </button>
                 </li>
@@ -71,8 +67,7 @@ const FaqBody = () => {
                     data-bs-target='#result'
                     role='tab'
                     aria-controls='result'
-                    aria-selected='false'
-                  >
+                    aria-selected='false'>
                     results & alerts
                   </button>
                 </li>
@@ -84,9 +79,8 @@ const FaqBody = () => {
                     data-bs-target='#about'
                     role='tab'
                     aria-controls='about'
-                    aria-selected='false'
-                  >
-                    about rifa
+                    aria-selected='false'>
+                    about lottery
                   </button>
                 </li>
               </ul>
@@ -101,8 +95,7 @@ const FaqBody = () => {
                   className='tab-pane fade'
                   id='ticket'
                   role='tabpanel'
-                  aria-labelledby='ticket-tab'
-                >
+                  aria-labelledby='ticket-tab'>
                   {/* Tickets here */}
                   <Tickets />
                 </div>
@@ -110,8 +103,7 @@ const FaqBody = () => {
                   className='tab-pane fade show active'
                   id='banking'
                   role='tabpanel'
-                  aria-labelledby='banking-tab'
-                >
+                  aria-labelledby='banking-tab'>
                   {/* Banking here */}
                   <Banking />
                 </div>
@@ -119,8 +111,7 @@ const FaqBody = () => {
                   className='tab-pane fade'
                   id='winning'
                   role='tabpanel'
-                  aria-labelledby='winning-tab'
-                >
+                  aria-labelledby='winning-tab'>
                   {/* Winning here */}
                   <Winning />
                 </div>
@@ -128,8 +119,7 @@ const FaqBody = () => {
                   className='tab-pane fade'
                   id='result'
                   role='tabpanel'
-                  aria-labelledby='result-tab'
-                >
+                  aria-labelledby='result-tab'>
                   {/* Results And Alerts here */}
                   <ResultsAndAlerts />
                 </div>
@@ -137,10 +127,8 @@ const FaqBody = () => {
                   className='tab-pane fade'
                   id='about'
                   role='tabpanel'
-                  aria-labelledby='about-tab'
-                >
-                  {/* About Rifa here */}
-                  <AboutRifa />
+                  aria-labelledby='about-tab'>
+                  <AboutLottery />
                 </div>
               </div>
             </div>

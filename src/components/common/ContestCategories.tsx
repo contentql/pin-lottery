@@ -5,13 +5,13 @@ function ContestCategories({ allTags }: any) {
   return (
     <section className='position-relative z-index-two pt-120 pb-120 overflow-hidden'>
       <div className='container'>
-        <div className='row'>
+        {/* <div className='row'>
           <div className='col-lg-6 text-sm-start text-center'>
             <div className='section-header'>
               <span className='section-sub-title'>Available Products</span>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className='row mb-none-30 justify-content-xl-start justify-content-center'>
           {allTags?.map((tag: any) => (
             <div key={tag?.id} className='col-xl-3 col-lg-4 col-sm-6 mb-30'>
@@ -28,7 +28,7 @@ function ContestCategories({ allTags }: any) {
                   <Link
                     href={{
                       pathname: '/contest',
-                      query: { tag: tag?.tag } 
+                      query: { tag: tag?.tag },
                     }}>
                     {' '}
                     <h3 className='play-card__title'>{tag?.tag}</h3>

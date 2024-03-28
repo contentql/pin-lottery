@@ -9,17 +9,15 @@ const Tickets = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse1'
             aria-expanded='true'
-            aria-controls='collapse1'
-          >
-            How do I deposit funds into my Rifa Lottos account?
+            aria-controls='collapse1'>
+            How do I deposit funds into my lottery Lottos account?
           </button>
         </div>
         <div
           id='collapse1'
           className='collapse show'
           aria-labelledby='h-1'
-          data-bs-parent='#faqAcc-one'
-        >
+          data-bs-parent='#faqAcc-one'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -38,8 +36,7 @@ const Tickets = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse2'
             aria-expanded='false'
-            aria-controls='collapse2'
-          >
+            aria-controls='collapse2'>
             What will the payment reflect as on my credit card statement?
           </button>
         </div>
@@ -47,8 +44,7 @@ const Tickets = () => {
           id='collapse2'
           className='collapse'
           aria-labelledby='h-2'
-          data-bs-parent='#faqAcc-one'
-        >
+          data-bs-parent='#faqAcc-one'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -67,8 +63,7 @@ const Tickets = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse3'
             aria-expanded='false'
-            aria-controls='collapse3'
-          >
+            aria-controls='collapse3'>
             Why am I unable to deposit funds via credit card on your website?
           </button>
         </div>
@@ -76,8 +71,7 @@ const Tickets = () => {
           id='collapse3'
           className='collapse'
           aria-labelledby='h-3'
-          data-bs-parent='#faqAcc-one'
-        >
+          data-bs-parent='#faqAcc-one'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum

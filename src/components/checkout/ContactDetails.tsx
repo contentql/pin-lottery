@@ -3,7 +3,7 @@ const ContactDetails = () => {
     <>
       <div className='top'>
         <div className='left'>
-          <h3 className='mb-2'>Already a Rifa Member?</h3>
+          <h3 className='mb-2'>Already a lottery Member?</h3>
           <p>Sign in to buy lottery more easier!</p>
         </div>
         <div className='right'>
