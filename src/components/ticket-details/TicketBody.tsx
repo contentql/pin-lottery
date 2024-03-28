@@ -20,7 +20,7 @@ const TicketBody = ({ contestDetails }: { contestDetails: Contest }) => {
           </div>
 
           {/* Quick pick */}
-          <QuickPick />
+          <QuickPick contestDetails={contestDetails} />
         </div>
       </div>
     </section>

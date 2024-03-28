@@ -1,7 +1,9 @@
 import { CollectionConfig } from 'payload/types'
+import { JWTUser } from '../../custom-payload-types'
 import { ResetPassword } from '../../email-templates/resetPassword'
 import { UserAccountVerification } from '../../email-templates/userAccountVerification'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
+import { isManagerOrAdminOrSelf } from './access/isManagerOrAdminOrSelf'
 import { isAdmin } from './filed-level-access/isAdmin'
 
 const Users: CollectionConfig = {
@@ -34,7 +36,7 @@ const Users: CollectionConfig = {
   },
   access: {
     create: isAdmin,
-    read: isAdminOrSelf,
+    read: isManagerOrAdminOrSelf,
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
     admin: ({ req: { user } }) => {
@@ -50,6 +52,17 @@ const Users: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'email',
+    hidden: ({ user }: { user: JWTUser }) => {
+      if (user) {
+        const { roles } = user
+
+        if (roles?.includes('admin')) return false
+        if (roles?.includes('manager')) return true
+        if (roles?.includes('editor')) return true
+      }
+
+      return true
+    },
   },
   hooks: {
     // afterChange: [verifyUserEmail],

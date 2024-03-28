@@ -1,13 +1,17 @@
 import { useContext } from 'react'
 
 import SingleTicketCard from '@/components/cards/SingleTicketCard'
-import { AppContext } from '@/context/context'
+import { AppContext, ContextTicket } from '@/context/context'
 
 import { Contest } from '@/payload-types'
 import Actions from './Actions'
 
 const Tickets = ({ contestDetails }: { contestDetails: Contest }) => {
-  const { incrementHandleAndAddTicket, tickets }: any = useContext(AppContext)
+  const { getTickets, addTicket } = useContext(AppContext)
+
+  const contestTickets = getTickets({
+    contest_no: contestDetails?.contest_no,
+  })
 
   return (
     <div className='lottery-wrapper style--two'>
@@ -15,7 +19,7 @@ const Tickets = ({ contestDetails }: { contestDetails: Contest }) => {
       <Actions contestDetails={contestDetails} />
 
       <div className='row mt-50 mb-none-30'>
-        {tickets.map((ticket: any) => (
+        {contestTickets.map((ticket: ContextTicket) => (
           <div key={ticket.id} className='col-lg-4 mb-30'>
             {/* Single lottery  */}
             <SingleTicketCard ticket={ticket} contestDetails={contestDetails} />
@@ -27,7 +31,11 @@ const Tickets = ({ contestDetails }: { contestDetails: Contest }) => {
         <button
           type='button'
           className='btn-border text-white bg-transparent'
-          onClick={incrementHandleAndAddTicket}>
+          onClick={() =>
+            addTicket({
+              contest_no: contestDetails?.contest_no,
+            })
+          }>
           Add Tickets
         </button>
       </div>
