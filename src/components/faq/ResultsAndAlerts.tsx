@@ -9,17 +9,15 @@ const ResultsAndAlerts = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse7'
             aria-expanded='true'
-            aria-controls='collapse7'
-          >
-            How do I deposit funds into my Rifa Lottos account?
+            aria-controls='collapse7'>
+            How do I deposit funds into my lottery Lottos account?
           </button>
         </div>
         <div
           id='collapse7'
           className='collapse show'
           aria-labelledby='h-7'
-          data-bs-parent='#faqAcc-four'
-        >
+          data-bs-parent='#faqAcc-four'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -38,8 +36,7 @@ const ResultsAndAlerts = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse8'
             aria-expanded='false'
-            aria-controls='collapse8'
-          >
+            aria-controls='collapse8'>
             What will the payment reflect as on my credit card statement?
           </button>
         </div>
@@ -47,8 +44,7 @@ const ResultsAndAlerts = () => {
           id='collapse8'
           className='collapse'
           aria-labelledby='h-8'
-          data-bs-parent='#faqAcc-four'
-        >
+          data-bs-parent='#faqAcc-four'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -67,8 +63,7 @@ const ResultsAndAlerts = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse9'
             aria-expanded='false'
-            aria-controls='collapse9'
-          >
+            aria-controls='collapse9'>
             Why am I unable to deposit funds via credit card on your website?
           </button>
         </div>
@@ -76,8 +71,7 @@ const ResultsAndAlerts = () => {
           id='collapse9'
           className='collapse'
           aria-labelledby='h-9'
-          data-bs-parent='#faqAcc-four'
-        >
+          data-bs-parent='#faqAcc-four'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum
