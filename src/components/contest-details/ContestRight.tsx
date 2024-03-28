@@ -7,16 +7,13 @@ import { useContext } from 'react'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 
 const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
-  const {
-    incrementHandleAndAddTicket,
-    decrementHandleAndRemoveTicket,
-    quantity,
-    setQuantity,
-  }: any = useContext(AppContext)
+  const { addTicket, removeTicket, totalTicketsCount } = useContext(AppContext)
 
   const pathname = usePathname()
 
   const currency = ticketsMetadata?.currency
+
+  const quantity = totalTicketsCount({ contest_no: contestDetails?.contest_no })
 
   return (
     <div className='contest-cart__right'>
@@ -45,7 +42,14 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
       {contestDetails?.contest_status === true ? (
         <div>
           <h3>Winning Ticket Number: </h3>
-          <h4>{((contestDetails?.winner_ticket?.value as Winner)?.ticket?.value as Ticket)?.ticket_number}</h4>
+          <h4>
+            {
+              (
+                (contestDetails?.winner_ticket?.value as Winner)?.ticket
+                  ?.value as Ticket
+              )?.ticket_number
+            }
+          </h4>
         </div>
       ) : (
         <div className='d-flex flex-wrap align-items-center mb-30'>
@@ -55,17 +59,23 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
               <input
                 type='number'
                 value={quantity}
-                onChange={() => setQuantity(quantity)}
+                onChange={() =>
+                  addTicket({ contest_no: contestDetails?.contest_no })
+                }
               />
               <div className='quantity-nav'>
                 <div
                   className={`quantity-button`}
-                  onClick={() => decrementHandleAndRemoveTicket()}>
+                  onClick={() =>
+                    removeTicket({ contest_no: contestDetails?.contest_no })
+                  }>
                   <i className='las la-minus'></i>
                 </div>
                 <div
                   className={`quantity-button quantity-up`}
-                  onClick={() => incrementHandleAndAddTicket()}>
+                  onClick={() =>
+                    addTicket({ contest_no: contestDetails?.contest_no })
+                  }>
                   <i className='las la-plus'></i>
                 </div>
               </div>

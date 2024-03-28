@@ -1,81 +1,64 @@
 'use client'
 
-import { createContext } from 'react'
+import { Dispatch, ReactNode, SetStateAction, createContext } from 'react'
 import { toast } from 'react-toastify'
 import { useLocalStorage } from 'usehooks-ts'
 
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 
-const AppContext = createContext({})
+export interface ContextTicket {
+  id: number
+  contest_no: string
+  ticket_number: string
+}
 
-const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  const minTickets = ticketsMetadata?.minTickets
-  const maxTickets = ticketsMetadata?.maxTickets
+interface AppContextValue {
+  tickets: ContextTicket[]
+  setTickets: Dispatch<SetStateAction<ContextTicket[]>>
+  totalTicketsCount: (args: { contest_no: string }) => number
+  getTickets: (args: { contest_no: string }) => ContextTicket[]
+  addTicket: (args: { contest_no: string }) => void
+  addNewTickets: (args: { contest_no: string; numOfTickets: number }) => void
+  addTicketsToExistingTickets: (args: {
+    contest_no: string
+    numTicketsToAdd: number
+  }) => void
+  removeTicket: (args: { contest_no: string }) => void
+  removeAllTickets: (args: { contest_no: string }) => void
+  removeAllTicketsWithToast: (args: { contest_no: string }) => void
+}
 
-  const initialTickets = Array.from({ length: minTickets }, (_, index) => ({
-    id: index + 1,
-    ticket_number: '',
-  }))
+const defaultContextValue: AppContextValue = {
+  tickets: [],
+  setTickets: () => {},
+  totalTicketsCount: ({ contest_no }) => 0,
+  getTickets: ({ contest_no }) => [],
+  addTicket: ({ contest_no }) => {},
+  addNewTickets: ({ contest_no, numOfTickets }) => {},
+  addTicketsToExistingTickets: ({ contest_no, numTicketsToAdd }) => {},
+  removeTicket: ({ contest_no }) => {},
+  removeAllTickets: ({ contest_no }) => {},
+  removeAllTicketsWithToast: ({ contest_no }) => {},
+}
 
-  const [tickets, setTickets] = useLocalStorage('tickets', [...initialTickets])
-  const [quantity, setQuantity] = useLocalStorage('quantity', minTickets)
+const AppContext = createContext<AppContextValue>(defaultContextValue)
 
-  const incrementHandleAndAddTicket = () => {
-    const totalTickets = tickets.length
+const AppProvider = ({ children }: { children: ReactNode }) => {
+  const minTickets = ticketsMetadata?.minTickets ?? 0
+  const maxTickets = ticketsMetadata?.maxTickets ?? Infinity
 
-    if (quantity >= maxTickets && totalTickets >= maxTickets) {
-      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
-        toastId: 'max-tickets-toast',
-      })
+  const [tickets, setTickets] = useLocalStorage<ContextTicket[]>('tickets', [])
 
-      return
-    }
-
-    incrementHandle()
-    addTicket()
+  const getTickets = ({ contest_no }: { contest_no: string }) => {
+    return tickets.filter(ticket => ticket.contest_no === contest_no)
   }
 
-  const decrementHandleAndRemoveTicket = (id?: any) => {
-    const totalTickets = tickets.length
-
-    if (quantity <= minTickets && totalTickets <= minTickets) {
-      toast.info(`Minimum of ${minTickets} tickets required.`, {
-        toastId: 'min-tickets-toast',
-      })
-
-      return
-    }
-
-    decrementHandle()
-    id
-      ? removeTicket(id)
-      : setTickets(prev => prev.slice(0, tickets.length - 1))
+  const totalTicketsCount = ({ contest_no }: { contest_no: string }) => {
+    return tickets.filter(ticket => ticket.contest_no === contest_no).length
   }
 
-  const incrementHandle = () => {
-    if (quantity >= maxTickets) {
-      toast.info(`Maximum ${maxTickets} tickets allowed.`, {
-        toastId: 'max-tickets-toast',
-      })
-      return
-    }
-
-    setQuantity(prev => prev + 1)
-  }
-
-  const decrementHandle = () => {
-    if (quantity <= minTickets) {
-      toast.info(`Minimum of ${minTickets} tickets required.`, {
-        toastId: 'min-tickets-toast',
-      })
-      return
-    }
-
-    setQuantity(prev => prev - 1)
-  }
-
-  const addTicket = () => {
-    const totalTickets = tickets.length
+  const addTicket = ({ contest_no }: { contest_no: string }) => {
+    const totalTickets = totalTicketsCount({ contest_no })
 
     if (totalTickets >= maxTickets) {
       toast.info(`Maximum ${maxTickets} tickets allowed.`, {
@@ -88,24 +71,36 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
       ...prev,
       {
         id: tickets.length + 1,
+        contest_no,
         ticket_number: '',
       },
     ])
   }
 
-  const addTickets = (numTickets: number) => {
-    setQuantity(numTickets)
-
-    const newTickets = Array.from({ length: numTickets }, (_, index) => ({
+  const addNewTickets = ({
+    contest_no,
+    numOfTickets,
+  }: {
+    contest_no: string
+    numOfTickets: number
+  }) => {
+    const newTickets = Array.from({ length: numOfTickets }, (_, index) => ({
       id: index + 1,
+      contest_no,
       ticket_number: '',
     }))
 
-    setTickets(newTickets)
+    setTickets(prev => [...prev, ...newTickets])
   }
 
-  const mergeTickets = (numTicketsToAdd: number) => {
-    const totalTickets = tickets.length
+  const addTicketsToExistingTickets = ({
+    contest_no,
+    numTicketsToAdd,
+  }: {
+    contest_no: string
+    numTicketsToAdd: number
+  }) => {
+    const totalTickets = totalTicketsCount({ contest_no })
 
     if (totalTickets + numTicketsToAdd > maxTickets) {
       toast.info(`Maximum ${maxTickets} tickets allowed.`, {
@@ -116,142 +111,58 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
     const newTickets = Array.from({ length: numTicketsToAdd }, (_, index) => ({
       id: totalTickets + index + 1,
+      contest_no,
       ticket_number: '',
     }))
 
-    setQuantity(prev => prev + numTicketsToAdd)
     setTickets(prevTickets => [...prevTickets, ...newTickets])
   }
 
-  const removeTicket = (id: any) => {
-    const totalTickets = tickets.length
+  const removeTicket = ({ contest_no }: { contest_no: string }) => {
+    const indexToRemove = tickets.findIndex(
+      ticket => ticket.contest_no === contest_no,
+    )
 
-    if (totalTickets <= minTickets) {
-      toast.info(`Minimum of ${minTickets} tickets required.`, {
-        toastId: 'min-tickets-toast',
-      })
-      return
+    if (indexToRemove !== -1) {
+      const updatedTickets = [
+        ...tickets.slice(0, indexToRemove),
+        ...tickets.slice(indexToRemove + 1),
+      ]
+      setTickets(updatedTickets)
     }
+  }
 
-    const data = tickets
-      .filter(ticket => ticket.id !== id)
-      .map((ticket, idx) => ({ ...ticket, id: idx + 1 }))
+  const removeAllTickets = ({ contest_no }: { contest_no: string }) => {
+    const data = tickets.filter(ticket => ticket.contest_no !== contest_no)
     setTickets(data)
   }
 
-  const removeAllTickets = () => {
-    setQuantity(1)
-    setTickets(prev => prev.slice(0, 1))
-  }
-
-  const removeAllTicketsWithToast = () => {
+  const removeAllTicketsWithToast = ({
+    contest_no,
+  }: {
+    contest_no: string
+  }) => {
     toast.info(`Minimum of ${minTickets} tickets required.`, {
       toastId: 'min-tickets-toast',
     })
 
-    setQuantity(1)
-    setTickets(prev => prev.slice(0, 1))
+    const data = tickets.filter(ticket => ticket.contest_no !== contest_no)
+    setTickets(data)
   }
-
-  // const pickNumber = (e: any, id: any) => {
-  //   const data = tickets.map(obj =>
-  //     obj.id === id
-  //       ? {
-  //           ...obj,
-  //           numbers: [...obj.numbers, e.target.innerText],
-  //         }
-  //       : obj,
-  //   )
-
-  //   setTickets(data as any)
-  // }
-
-  // const luckyNumber = (e: any, id: any) => {
-  //   const data = tickets.map(obj =>
-  //     obj.id === id
-  //       ? {
-  //           ...obj,
-  //           numbers: [...obj.numbers, e.target.innerText],
-  //         }
-  //       : obj,
-  //   )
-
-  //   setTickets(data as any)
-  // }
-
-  // const checkActive = (id: any, ele: any, start: any, end: any) => {
-  //   const findActiveItem = tickets.find(item => item.id === id)
-
-  //   return findActiveItem?.numbers
-  //     .slice(start, end)
-  //     ?.some(element => element === ele.toString())
-  // }
-
-  // const addQuickPick = (id: any) => {
-  //   let randomValue: any[] = []
-
-  //   for (let i = 0; i < 5; i++) {
-  //     const random = (Math.floor(Math.random() * (50 - 1)) + 1).toString()
-  //     randomValue = [...randomValue, random]
-  //   }
-
-  //   const data = tickets.map(obj =>
-  //     obj.id === id
-  //       ? {
-  //           ...obj,
-  //           numbers: randomValue,
-  //         }
-  //       : obj,
-  //   )
-
-  //   setTickets(data as any)
-  // }
-
-  // const clearNumbers = (id: any) => {
-  //   const data = tickets.map(obj =>
-  //     obj.id === id
-  //       ? {
-  //           ...obj,
-  //           numbers: [],
-  //         }
-  //       : obj,
-  //   )
-
-  //   setTickets(data)
-  // }
-
-  // const clearAllNumbers = () => {
-  //   const data = tickets.map(obj => ({
-  //     ...obj,
-  //     numbers: [],
-  //   }))
-
-  //   setTickets(data)
-  // }
 
   return (
     <AppContext.Provider
       value={{
-        quantity,
         tickets,
-        setQuantity,
         setTickets,
-        incrementHandleAndAddTicket,
-        decrementHandleAndRemoveTicket,
-        incrementHandle,
-        decrementHandle,
+        totalTicketsCount,
+        getTickets,
         addTicket,
-        addTickets,
-        mergeTickets,
+        addNewTickets,
+        addTicketsToExistingTickets,
         removeTicket,
         removeAllTickets,
         removeAllTicketsWithToast,
-        // pickNumber,
-        // luckyNumber,
-        // checkActive,
-        // addQuickPick,
-        // clearNumbers,
-        // clearAllNumbers,
       }}>
       {children}
     </AppContext.Provider>

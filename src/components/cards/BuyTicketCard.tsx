@@ -10,21 +10,23 @@ import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
 
 const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
-  const { tickets, removeAllTickets }: any = useContext(AppContext)
+  const { removeAllTickets, totalTicketsCount } = useContext(AppContext)
 
   const { status } = useAuth()
 
   const router = useRouter()
 
-  const ticketPrice = contestDetails?.ticket_price
-  const totalTickets = tickets?.length
+  const totalTickets = totalTicketsCount({
+    contest_no: contestDetails?.contest_no,
+  })
 
+  const ticketPrice = contestDetails?.ticket_price
   const totalTicketsPrice = totalTickets * ticketPrice
 
   const { mutate: addTicketsToCart } = trpc.cart.addTicketsToCart.useMutation({
     onSuccess: async () => {
       toast.success('Successfully tickets are added to cart')
-      removeAllTickets()
+      removeAllTickets({ contest_no: contestDetails?.contest_no })
       router.push('/cart')
     },
     onError: async () => {

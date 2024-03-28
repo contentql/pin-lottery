@@ -14,13 +14,17 @@ const SingleTicketCard = ({
   ticket: any
   contestDetails: Contest
 }) => {
-  const { decrementHandleAndRemoveTicket }: any = useContext(AppContext)
+  const { removeTicket } = useContext(AppContext)
 
   return (
     <div className='lottery-single'>
       <button
         className='lottery-single__close'
-        onClick={() => decrementHandleAndRemoveTicket(ticket?.id)}>
+        onClick={() =>
+          removeTicket({
+            contest_no: contestDetails?.contest_no,
+          })
+        }>
         <FaTimes />
       </button>
 
