@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import Countdown from 'react-countdown'
+import * as sd from 'simple-duration'
 
 import { AppContext } from '@/context/context'
 import { Contest } from '@/payload-types'
-import { isThresholdReached } from '@/utils/is-threshold-reached'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 
 const renderer = ({ hours, minutes, seconds, days }: any) => {
@@ -30,14 +30,22 @@ const renderer = ({ hours, minutes, seconds, days }: any) => {
 }
 
 const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
-  const { tickets, removeAllTicketsWithToast, mergeTickets }: any =
-    useContext(AppContext)
+  const {
+    totalTicketsCount,
+    removeAllTicketsWithToast,
+    addTicketsToExistingTickets,
+  } = useContext(AppContext)
 
-  const totalTicketsSold = tickets?.length
-  const totalTickets = tickets?.length
+  const totalTickets = totalTicketsCount({
+    contest_no: contestDetails?.contest_no,
+  })
 
   const quickAdds = ticketsMetadata?.quickAdds
   const minTickets = ticketsMetadata?.minTickets
+
+  const milliseconds = contestDetails?.day_remain
+    ? sd.parse(contestDetails?.day_remain) * 1000
+    : 1
 
   return (
     <div className='action-header'>
@@ -45,7 +53,14 @@ const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
         <ul>
           {quickAdds?.map(quickAdd => (
             <li key={quickAdd?.id}>
-              <a href='#0' onClick={() => mergeTickets(quickAdd?.tickets)}>
+              <a
+                href='#0'
+                onClick={() =>
+                  addTicketsToExistingTickets({
+                    contest_no: contestDetails?.contest_no,
+                    numTicketsToAdd: quickAdd?.tickets,
+                  })
+                }>
                 +{quickAdd?.tickets} Tickets
               </a>
             </li>
@@ -54,15 +69,19 @@ const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
       </div>
       <div className='right'>
         <ul>
-          {isThresholdReached(
-            contestDetails?.product_price,
-            contestDetails?.ticket_price,
-            totalTicketsSold,
-          ) ? (
+          {!!contestDetails?.reached_threshold &&
+          !!contestDetails?.threshold_reached_date &&
+          !contestDetails?.contest_status ? (
             <li>
               <i className='las la-clock'></i>
               <div className='clock2'>
-                <Countdown date={Date.now() + 1000000000} renderer={renderer} />
+                <Countdown
+                  date={
+                    Date.parse(contestDetails?.threshold_reached_date) +
+                    milliseconds
+                  }
+                  renderer={renderer}
+                />
               </div>
             </li>
           ) : (
@@ -71,7 +90,13 @@ const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
 
           {totalTickets > minTickets && (
             <li>
-              <button type='button' onClick={() => removeAllTicketsWithToast()}>
+              <button
+                type='button'
+                onClick={() =>
+                  removeAllTicketsWithToast({
+                    contest_no: contestDetails?.contest_no,
+                  })
+                }>
                 <i className='las la-trash'></i>
                 <span>Erase All</span>
               </button>

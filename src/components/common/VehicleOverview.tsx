@@ -6,6 +6,10 @@ import VehicleSpecifications from './VehicleSpecifications'
 const VehicleOverview = ({ contestDetails }: { contestDetails: Contest }) => {
   const tabs = [
     {
+      title: 'Specifications',
+      content: <VehicleSpecifications contestDetails={contestDetails} />,
+    },
+    {
       title: 'Description',
       content: (
         <ConvertToHtml htmlContent={contestDetails?.description_html!} />
@@ -14,10 +18,6 @@ const VehicleOverview = ({ contestDetails }: { contestDetails: Contest }) => {
     {
       title: 'Features',
       content: <ConvertToHtml htmlContent={contestDetails?.features_html!} />,
-    },
-    {
-      title: 'Specifications',
-      content: <VehicleSpecifications contestDetails={contestDetails} />,
     },
   ]
   return (

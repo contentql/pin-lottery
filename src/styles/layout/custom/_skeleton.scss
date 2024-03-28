@@ -176,75 +176,81 @@
   }
 }
 /* contest skeleton end*/
-.skeleton-box {
-  display: inline-block;
-  height: 1em;
-  position: relative;
-  overflow: hidden;
-  background-color: #dddbdd;
 
-  &::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: translateX(-100%);
+.card-skeleton {
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+  @media screen and (max-width: 991px) {
+    flex-direction: column;
+  }
+}
+
+.card-skeleton.is-loading-skeleton {
+  .image-skeleton,
+  .h2-skeleton,
+  .p-skeleton,
+  .button-skeleton,
+  .h4-skeleton,
+  .h6-skeleton {
     background-image: linear-gradient(
       90deg,
-      rgba(#fff, 0) 0,
-      rgba(#fff, 0.2) 20%,
-      rgba(#fff, 0.5) 60%,
-      rgba(#fff, 0)
+      #5a4bcc 0px,
+      #4939c1 40px,
+      #5a4bcc 80px
     );
-    animation: shimmer 5s infinite;
-    content: '';
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
   }
 
-  @keyframes shimmer {
-    100% {
-      transform: translateX(100%);
-    }
+  .image-skeleton {
+    height: 500px;
+    border-radius: 15px;
+  }
+
+  .button-skeleton-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .button-skeleton {
+    margin-top: 60px;
+    width: 300px;
+    height: 50px;
+    border-radius: 40px;
+  }
+
+  .h2-skeleton {
+    margin-top: 10px;
+    height: 36px;
+  }
+
+  .h4-skeleton {
+    margin-top: 30px;
+    height: 20px;
+    width: 80%;
+  }
+  .h6-skeleton {
+    margin-top: 30px;
+    height: 20px;
+    width: 60%;
+  }
+
+  .p-skeleton {
+    margin-top: 40px;
+    height: 15px;
+    width: 40%;
   }
 }
 
-.blog-post {
-  &__headline {
-    font-size: 1.25em;
-    font-weight: bold;
+@keyframes shine {
+  to {
+    background-position-x: -200%;
   }
-
-  &__meta {
-    font-size: 0.85em;
-    color: #6b6b6b;
-  }
-}
-
-// OBJECTS
-
-.o-media {
-  display: flex;
-
-  &__body {
-    flex-grow: 1;
-    margin-left: 1em;
-  }
-}
-
-.o-vertical-spacing {
-  > * + * {
-    margin-top: 0.75em;
-  }
-
-  &--l {
-    > * + * {
-      margin-top: 2em;
-    }
-  }
-}
-
-// MISC
-
-* {
-  box-sizing: border-box;
 }

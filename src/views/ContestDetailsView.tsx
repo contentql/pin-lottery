@@ -2,6 +2,7 @@
 
 import Banner from '@/components/common/Banner'
 import ContestBody from '@/components/contest-details/ContestBody'
+import IndividualContestSkeletone from '@/components/skeletons/IndividualContestSkeletone'
 import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import Image from 'next/image'
@@ -65,10 +66,14 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
         />
       </div>
       {/* Bdy section here */}
-      <ContestBody
-        contestDetails={contestDetails as Contest}
-        handleContestTimerUpdate={handleContestTimerUpdate}
-      />
+      {pendingContestDetails ? (
+        <IndividualContestSkeletone />
+      ) : (
+        <ContestBody
+          contestDetails={contestDetails as Contest}
+          handleContestTimerUpdate={handleContestTimerUpdate}
+        />
+      )}
     </>
   )
 }

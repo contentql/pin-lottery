@@ -10,7 +10,7 @@ const Faq = () => {
   const { data: faqs } = trpc.public.getFaqs.useQuery()
   console.log('faqs', faqs)
   return (
-    <section className='pb-120 position-relative'>
+    <section className='pb-120 position-relative' id='fqs'>
       <div className='faq-el'>
         <Image src={faq_el} alt='faq_el' />
       </div>

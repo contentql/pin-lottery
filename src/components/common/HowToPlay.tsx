@@ -30,7 +30,7 @@ const HowToPlay = () => {
               </div>
               <div className='play-card__content'>
                 <h3 className='play-card__title'>Choose</h3>
-                <p>Register to RIFA & Choose your contest</p>
+                <p>Register to lottery & Choose your contest</p>
               </div>
             </div>
           </div>

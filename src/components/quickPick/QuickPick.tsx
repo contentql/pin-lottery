@@ -1,9 +1,11 @@
-import { AppContext } from '@/context/context'
-import { ticketsMetadata } from '@/utils/tickets-metadata'
 import { useContext } from 'react'
 
-const QuickPick = () => {
-  const { addTickets }: any = useContext(AppContext)
+import { AppContext } from '@/context/context'
+import { Contest } from '@/payload-types'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
+
+const QuickPick = ({ contestDetails }: { contestDetails: Contest }) => {
+  const { addNewTickets } = useContext(AppContext)
 
   const currency = ticketsMetadata?.currency
   const quickPicks = ticketsMetadata?.quickPicks
@@ -17,7 +19,12 @@ const QuickPick = () => {
             <a
               key={quickPick?.id}
               href='#0'
-              onClick={() => addTickets(quickPick.tickets)}>
+              onClick={() =>
+                addNewTickets({
+                  contest_no: contestDetails?.contest_no,
+                  numOfTickets: quickPick?.tickets,
+                })
+              }>
               {quickPick?.tickets} Quick Picks For {currency}
               {quickPick?.price}
             </a>
