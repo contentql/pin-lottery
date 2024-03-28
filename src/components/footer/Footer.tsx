@@ -40,33 +40,32 @@ const Footer = () => {
             <ul className='app-btn'>
               <li>
                 <Link href='/'>
-              <Image
-                src='/images/client/3.png'
-                alt='footer'
-                width={200}
-                height={200}
-              />
-            </Link>
+                  <Image
+                    src='/images/client/3.png'
+                    alt='footer'
+                    width={200}
+                    height={200}
+                  />
+                </Link>
               </li>
-
             </ul>
           </div>
           <div className='col-lg-8'>
             <ul className='short-links justify-content-lg-end justify-content-center'>
               <li>
-                <Link href='/#'>About</Link>
+                <Link href='/about'>About</Link>
               </li>
               <li>
-                <Link href='/#'>FAQs</Link>
+                <Link href='/blog'>Blogs</Link>
               </li>
               <li>
-                <Link href='/#'>Contact</Link>
+                <Link href='/faqs'>FAQs</Link>
               </li>
               <li>
-                <Link href='/#'>Terms of Services</Link>
+                <Link href='/contact'>Contact</Link>
               </li>
               <li>
-                <Link href='/#'>Privacy</Link>
+                <Link href='/how-work'>How to Use</Link>
               </li>
             </ul>
           </div>
@@ -75,24 +74,24 @@ const Footer = () => {
         <div className='row py-5 align-items-center'>
           <div className='col-lg-6'>
             <p className='copy-right-text text-lg-start text-center mb-lg-0 mb-3'>
-              Copyright © 2024.All Rights Reserved By{' '}
+              Copyright © {new Date().getFullYear()}.All Rights Reserved By{' '}
               <Link href='/'>Lottery</Link>
             </p>
           </div>
           <div className='col-lg-6'>
             <ul className='social-links justify-content-lg-end justify-content-center'>
               <li>
-                <Link href='/#'>
+                <Link href='https://www.facebook.com/' target='_blank'>
                   <FaFacebookF />
                 </Link>
               </li>
               <li>
-                <Link href='/#'>
+                <Link href='https://www.twitter.com/' target='_blank'>
                   <FaTwitter />
                 </Link>
               </li>
               <li>
-                <Link href='/#'>
+                <Link href='https://www.linkedin.com/' target='_blank'>
                   <FaLinkedinIn />
                 </Link>
               </li>
