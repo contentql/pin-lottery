@@ -1,7 +1,5 @@
 'use client'
-
 import React, { useState, useEffect } from 'react'
-import payload from 'payload'
 
 const TestCard = ({ title }: any) => {
   const [totalDocs, setTotalDocs] = useState(0)
@@ -22,16 +20,8 @@ const TestCard = ({ title }: any) => {
   }, [])
 
   return (
-    <div
-      style={{
-        backgroundColor: 'lightblue',
-        color: 'black',
-        width: '200px',
-        height: '150px',
-        borderRadius: '8px',
-        padding: '10px',
-      }}>
-      <p>
+    <div className='testcard testcard--has-onclick'>
+      <p className='testcard__title'>
         {title}: {totalDocs}
       </p>
     </div>

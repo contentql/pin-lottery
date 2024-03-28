@@ -10,6 +10,9 @@ const Test = () => {
     return (
       <div>
         <h2>Overview of Application</h2>
+        <p style={{ color: 'lightgoldenrodyellow' }}>
+          This feature is still under process, more cards to come!
+        </p>
         <TestCard title='Total Tickets' />
       </div>
     )
