@@ -1,6 +1,7 @@
 import { Contest, Media, Ticket, User, Winner } from '@/payload-types'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
 import Image from 'next/image'
+import Link from 'next/link'
 import { DateConverter } from '../../utils/date-converter'
 
 const WinnerCard = ({ winner }: { winner: Winner }) => {
@@ -37,7 +38,9 @@ const WinnerCard = ({ winner }: { winner: Winner }) => {
         </div>
         <div className='content-top'>
           <div className='left'>
-            <h5>{(winner?.contest?.value as Contest)?.title}</h5>
+            <Link href={`/contest/${(winner?.contest?.value as Contest).id}`}>
+              <h5>{(winner?.contest?.value as Contest)?.title}</h5>
+            </Link>
           </div>
           <div className='right'>
             <span>Draw took place on</span>
