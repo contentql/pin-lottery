@@ -1,13 +1,13 @@
+import { useRouter } from 'next/navigation'
 import { useContext } from 'react'
 import { FaCartPlus } from 'react-icons/fa'
 import { MdOutlineShoppingCartCheckout } from 'react-icons/md'
+import { toast } from 'react-toastify'
 
 import { AppContext } from '@/context/context'
 import { Contest } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
-import { useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
 
 const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
   const { tickets, removeAllTickets }: any = useContext(AppContext)

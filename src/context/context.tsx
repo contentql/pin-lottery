@@ -1,7 +1,8 @@
 'use client'
 
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
 import { toast } from 'react-toastify'
+import { useLocalStorage } from 'usehooks-ts'
 
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 
@@ -16,8 +17,8 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     ticket_number: '',
   }))
 
-  const [tickets, setTickets] = useState([...initialTickets])
-  const [quantity, setQuantity] = useState(minTickets)
+  const [tickets, setTickets] = useLocalStorage('tickets', [...initialTickets])
+  const [quantity, setQuantity] = useLocalStorage('quantity', minTickets)
 
   const incrementHandleAndAddTicket = () => {
     const totalTickets = tickets.length
