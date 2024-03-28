@@ -13,7 +13,8 @@ const faqData = [
   },
   {
     id: 3,
-    question: ' Can I enter promotions if I buy my tickets using Rifa lottery?',
+    question:
+      ' Can I enter promotions if I buy my tickets using lottery lottery?',
     answer: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
         maecenas accumsan lacus vel facilisis.`,

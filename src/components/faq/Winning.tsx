@@ -9,17 +9,15 @@ const Winning = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse4'
             aria-expanded='true'
-            aria-controls='collapse4'
-          >
-            How do I deposit funds into my Rifa Lottos account?
+            aria-controls='collapse4'>
+            How do I deposit funds into my lottery Lottos account?
           </button>
         </div>
         <div
           id='collapse4'
           className='collapse show'
           aria-labelledby='h-4'
-          data-bs-parent='#faqAcc-three'
-        >
+          data-bs-parent='#faqAcc-three'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -38,8 +36,7 @@ const Winning = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse5'
             aria-expanded='false'
-            aria-controls='collapse5'
-          >
+            aria-controls='collapse5'>
             What will the payment reflect as on my credit card statement?
           </button>
         </div>
@@ -47,8 +44,7 @@ const Winning = () => {
           id='collapse5'
           className='collapse'
           aria-labelledby='h-5'
-          data-bs-parent='#faqAcc-three'
-        >
+          data-bs-parent='#faqAcc-three'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -67,8 +63,7 @@ const Winning = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse6'
             aria-expanded='false'
-            aria-controls='collapse6'
-          >
+            aria-controls='collapse6'>
             Why am I unable to deposit funds via credit card on your website?
           </button>
         </div>
@@ -76,8 +71,7 @@ const Winning = () => {
           id='collapse6'
           className='collapse'
           aria-labelledby='h-6'
-          data-bs-parent='#faqAcc-three'
-        >
+          data-bs-parent='#faqAcc-three'>
           <div className='card-body'>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum

@@ -4,7 +4,6 @@ import Image from 'next/image'
 
 import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 
-import Banner from '@/components/common/Banner'
 import HowToPlay from '@/components/common/HowToPlay'
 import BuyTicket from '@/components/how-work/BuyTicket'
 import Faq from '@/components/how-work/Faq'
@@ -19,14 +18,14 @@ const HowWorksView = () => {
           <Image src={inner_hero_shape_2} alt='inner hero shape 2' />
         </div>
 
-        <Banner
+        {/* <Banner
           breadcrumb={[
             ['Home', '/'],
             ['Lottery', '/'],
             ['Contest No: B2T', '/'],
             ['Pick your Lottery Number', '/'],
           ]}
-        />
+        /> */}
       </div>
 
       {/* Vedio play here */}

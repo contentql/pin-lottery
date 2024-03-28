@@ -17,7 +17,7 @@ const Partner = () => {
               <span className='section-sub-title'>What you&#39;ll get as</span>
               <h2 className='section-title style--two'> Affiliate Partner</h2>
               <p>
-                Earn Unlimited Commissions with rifa affiliate program. Our
+                Earn Unlimited Commissions with lottery affiliate program. Our
                 partner program can increase your income by receing percentage.
               </p>
             </div>
