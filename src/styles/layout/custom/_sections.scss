@@ -1155,3 +1155,9 @@ $duration: 1000;
   left: -30px;
   top: 50%;
 }
+
+@media screen and (max-width: 767px) {
+  .winner-image-slider {
+    height: 300px;
+  }
+}

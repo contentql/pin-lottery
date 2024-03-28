@@ -3,20 +3,12 @@ import { splitTicketNumber } from '@/utils/split-ticket-number'
 import Image from 'next/image'
 import Link from 'next/link'
 import { DateConverter } from '../../utils/date-converter'
+import WinnerImageSlider from './WinnerImageSlider'
 
 const WinnerCard = ({ winner }: { winner: Winner }) => {
   return (
     <div className='winner-card mb-30 '>
-      <div className='winner-card__thumb'>
-        <Image
-          src={
-            ((winner?.contest?.value as Contest)?.img as Media)?.url as string
-          }
-          width={200}
-          height={200}
-          alt='2323'
-        />
-      </div>
+      <WinnerImageSlider winner={winner} />
       <div className='winner-card__content'>
         <div className='winner-thumb'>
           <Image
