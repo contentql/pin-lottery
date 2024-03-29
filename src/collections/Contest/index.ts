@@ -403,66 +403,64 @@ const Contest: CollectionConfig = {
             },
           ],
         },
-        {
-          label: 'Contest Status',
-          description: 'Contest status for winner announcement',
-          fields: [
-            {
-              name: 'reached_threshold',
-              type: 'checkbox',
-              label: 'Reached Threshold',
-              admin: {
-                description:
-                  'Indicates if the product reached a predefined threshold.',
-                readOnly: true,
-              },
-            },
-            {
-              name: 'threshold_reached_date',
-              type: 'date',
-              label: 'Threshold Reached Date',
-              admin: {
-                description:
-                  'Date when the product reached the predefined threshold.',
-                readOnly: true,
-                condition: data => data.reached_threshold === true,
-              },
-            },
-            {
-              name: 'contest_timer_status',
-              type: 'checkbox',
-              label: 'Contest Timer Status',
-              defaultValue: false,
-              admin: {
-                readOnly: true,
-                description:
-                  'Status of contest winner announcement time (completed/not completed).',
-              },
-              hidden: true,
-            },
-            {
-              name: 'contest_status',
-              label: 'Contest Winner announced',
-              type: 'checkbox',
-              defaultValue: false,
-              admin: {
-                description:
-                  'Indicates if the contest winner has been announced.',
-              },
-            },
-            {
-              name: 'winner_ticket',
-              label: 'Winner ',
-              type: 'relationship',
-              relationTo: ['winner'],
-              admin: {
-                description: 'Select the winner of the contest.',
-                condition: data => data.contest_status === true,
-              },
-            },
-          ],
-        },
       ],
+    },
+
+    //contest status - sidebar
+    {
+      name: 'reached_threshold',
+      type: 'checkbox',
+      label: 'Reached Threshold',
+      admin: {
+        description: 'Indicates if the product reached a predefined threshold.',
+        position: 'sidebar',
+        readOnly: true,
+      },
+    },
+    {
+      name: 'threshold_reached_date',
+      type: 'date',
+      label: 'Threshold Reached Date',
+      admin: {
+        description: 'Date when the product reached the predefined threshold.',
+        position: 'sidebar',
+        readOnly: true,
+        condition: data => data.reached_threshold === true,
+      },
+    },
+    {
+      name: 'contest_timer_status',
+      type: 'checkbox',
+      label: 'Contest Timer Status',
+      defaultValue: false,
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+        description:
+          'Status of contest winner announcement time (completed/not completed).',
+      },
+      hidden: true,
+    },
+    {
+      name: 'contest_status',
+      label: 'Contest Winner announced',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description: 'Indicates if the contest winner has been announced.',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'winner_ticket',
+      label: 'Winner ',
+      type: 'relationship',
+      relationTo: ['winner'],
+      admin: {
+        description: 'Select the winner of the contest.',
+        position: 'sidebar',
+        condition: data => data.contest_status === true,
+      },
     },
   ],
 }
