@@ -1,13 +1,16 @@
 'use client'
 
+import Image from 'next/image'
+import { toast } from 'react-toastify'
+
+import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
+
 import Banner from '@/components/common/Banner'
 import ContestBody from '@/components/contest-details/ContestBody'
 import IndividualContestSkeletone from '@/components/skeletons/IndividualContestSkeletone'
 import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import Image from 'next/image'
-import { toast } from 'react-toastify'
-import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
+import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
 
 interface PageProps {
   contestId: string
@@ -46,6 +49,8 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
 
     toast.error('Draw has already been completed.')
   }
+
+  useMaintainMinimumTickets(contestDetails?.contest_no)
 
   return (
     <>

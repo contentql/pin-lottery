@@ -132,7 +132,7 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
   const removeTicket = ({ contest_no }: { contest_no: string }) => {
     const currentTicketsCount = totalTicketsCount({ contest_no })
 
-    if (currentTicketsCount <= 1) {
+    if (currentTicketsCount <= minTickets) {
       toast.info(`Minimum of ${minTickets} tickets required to continue.`, {
         toastId: 'min-tickets-toast',
       })
