@@ -1,12 +1,61 @@
 import { CollectionAfterOperationHook } from 'payload/types'
+import { Contest } from '../../../payload-types'
 
 export const updateContestAfterDelete: CollectionAfterOperationHook = async ({
   result,
   req,
   operation,
-  args,
 }) => {
-  if (operation === 'delete' || operation === 'deleteByID') {
+  if (operation === 'deleteByID') {
+    const { payload } = req
+
+    try {
+      const { totalDocs: ticketsPurchased } = await payload.find({
+        collection: 'tickets',
+        depth: 1,
+        where: {
+          'contest_id.value': {
+            equals: (result?.contest_id.value as Contest).id,
+          },
+        },
+      })
+
+      const { id, product_price, ticket_price, threshold_reached_date } = result
+        ?.contest_id.value as Contest
+
+      const reachedThreshold = ticket_price * ticketsPurchased >= product_price
+      const date = threshold_reached_date ?? new Date()
+
+      const latestData = {
+        tickets_purchased: ticketsPurchased,
+        reached_threshold: reachedThreshold,
+        threshold_reached_date: reachedThreshold ? date.toString() : undefined,
+      }
+
+      try {
+        await payload.update({
+          collection: 'contest',
+          id,
+          data: latestData,
+        })
+      } catch (error) {
+        console.error(
+          'Error updating contest after creating a ticket  after delete:',
+          error,
+        )
+        throw new Error(
+          'Failed to update contest data after creating a ticket  after delete.',
+        )
+      }
+    } catch (error) {
+      console.error('Error finding relevant tickets after delete:', error)
+      throw new Error(
+        'Failed to find relevant tickets while updating contest data  after delete.',
+      )
+    }
+  }
+
+  if (operation === 'delete') {
     const { payload } = req
 
     try {
@@ -17,16 +66,17 @@ export const updateContestAfterDelete: CollectionAfterOperationHook = async ({
             depth: 1,
             where: {
               'contest_id.value': {
-                equals: doc?.contest_id.value.id,
+                equals: (doc?.contest_id.value as Contest).id,
               },
             },
           })
 
-          const { id, product_price, ticket_price } = doc.contest_id.value
+          const { id, product_price, ticket_price, threshold_reached_date } =
+            doc?.contest_id.value as Contest
 
           const reachedThreshold =
             ticket_price * ticketsPurchased >= product_price
-          const date = doc.contest_id.value.threshold_reached_date ?? new Date()
+          const date = threshold_reached_date ?? new Date()
 
           const latestData = {
             tickets_purchased: ticketsPurchased,
@@ -36,16 +86,28 @@ export const updateContestAfterDelete: CollectionAfterOperationHook = async ({
               : undefined,
           }
 
-          return payload.update({
-            collection: 'contest',
-            id,
-            data: latestData,
-          })
+          try {
+            await payload.update({
+              collection: 'contest',
+              id,
+              data: latestData,
+            })
+          } catch (error) {
+            console.error(
+              'Error updating contest after creating a ticket  after delete:',
+              error,
+            )
+            throw new Error(
+              'Failed to update contest data after creating a ticket  after delete.',
+            )
+          }
         }),
       )
     } catch (error) {
-      console.error('Error updating contest after delete:', error)
-      throw new Error('Failed to update contest data after delete operation.')
+      console.error('Error finding relevant tickets after delete:', error)
+      throw new Error(
+        'Failed to find relevant tickets while updating contest data  after delete.',
+      )
     }
   }
 

@@ -192,6 +192,11 @@ export interface Contest {
   display?: string | null;
   battery?: string | null;
   Camera?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
   reached_threshold?: boolean | null;
   threshold_reached_date?: string | null;
   contest_timer_status?: boolean | null;
@@ -200,11 +205,6 @@ export interface Contest {
     relationTo: 'winner';
     value: string | Winner;
   } | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    image?: string | Media | null;
-  };
   updatedAt: string;
   createdAt: string;
 }
