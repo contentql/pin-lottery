@@ -22,7 +22,7 @@ const Tickets = ({ contestDetails }: { contestDetails: Contest }) => {
         {contestTickets.map((ticket: ContextTicket) => (
           <div key={ticket.id} className='col-lg-4 mb-30'>
             {/* Single lottery  */}
-            <SingleTicketCard ticket={ticket} contestDetails={contestDetails} />
+            <SingleTicketCard ticket={ticket} />
           </div>
         ))}
       </div>
