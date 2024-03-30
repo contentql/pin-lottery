@@ -4,13 +4,15 @@ import Image from 'next/image'
 
 const FilterByTag = ({ filter, handleSearch }: any) => {
   const { data: tags } = trpc.public.getTags.useQuery()
+  console.log('tags', tags)
 
   return (
     <ul className='nav nav-tabs winner-tab-nav' id='winnerTab' role='tablist'>
       {tags?.map((tag: any) => (
         <li key={tag?.id} className='nav-item' role='presentation'>
           <button
-            className={`nav-link ${filter === tag.tag ? 'active' : ''}`}
+            disabled={tag.is_coming_soon}
+            className={`nav-link ${filter === tag.tag ? 'active' : ''} tag-nav`}
             onClick={e => handleSearch(tag.tag)} //TODO: active can be added EX: className='nav-link active'
             id={tag.tag}
             data-bs-toggle='tab'
@@ -27,6 +29,9 @@ const FilterByTag = ({ filter, handleSearch }: any) => {
               />
             </span>
             <span>{tag?.tag}</span>
+            {tag.is_coming_soon && (
+              <p className='badge-coming-soon'>Coming soon</p>
+            )}
           </button>
         </li>
       ))}

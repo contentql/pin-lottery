@@ -37,6 +37,15 @@ const Tags: CollectionConfig = {
         description: 'The icon associated with the product type tag.',
       },
     },
+    {
+      name: 'is_coming_soon',
+      type: 'checkbox',
+      label: 'Tag is Coming soon',
+      defaultValue: true,
+      admin: {
+        description: 'This Tag will available in future.',
+      },
+    },
   ],
 }
 
