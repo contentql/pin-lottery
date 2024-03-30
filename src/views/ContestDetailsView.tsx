@@ -10,7 +10,6 @@ import ContestBody from '@/components/contest-details/ContestBody'
 import IndividualContestSkeletone from '@/components/skeletons/IndividualContestSkeletone'
 import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
 
 interface PageProps {
   contestId: string
@@ -49,8 +48,6 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
 
     toast.error('Draw has already been completed.')
   }
-
-  useMaintainMinimumTickets(contestDetails?.contest_no)
 
   return (
     <>
