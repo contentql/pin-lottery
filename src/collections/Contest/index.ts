@@ -439,7 +439,6 @@ const Contest: CollectionConfig = {
         description:
           'Status of contest winner announcement time (completed/not completed).',
       },
-      hidden: true,
     },
     {
       name: 'contest_status',
