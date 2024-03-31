@@ -43,19 +43,24 @@ export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
           id,
           data: latestData,
         })
-      } catch (updateError) {
+      } catch (error: any) {
         console.error(
           'Error updating contest after creating a ticket  after create:',
-          updateError,
+          error?.message,
         )
         throw new Error(
-          'Failed to update contest data after creating a ticket  after create.',
+          'Failed to update contest data after creating a ticket  after create: ',
+          error?.message,
         )
       }
-    } catch (error) {
-      console.error('Error finding relevant tickets after create:', error)
+    } catch (error: any) {
+      console.error(
+        'Error finding relevant tickets after create:',
+        error?.message,
+      )
       throw new Error(
-        'Failed to find relevant tickets while updating contest data  after create.',
+        'Failed to find relevant tickets while updating contest data  after create: ',
+        error?.message,
       )
     }
   }

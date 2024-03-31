@@ -33,7 +33,7 @@ const Ticket: CollectionConfig = {
   // when creating a ticket, ensure the button was disabled
   hooks: {
     afterChange: [updateContestAfterCreate],
-    afterOperation: [updateContestAfterDelete],
+    afterDelete: [updateContestAfterDelete],
   },
   fields: [
     {
