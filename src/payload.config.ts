@@ -123,7 +123,7 @@ export default buildConfig({
       generateURL,
     }),
     paystack,
-    trashBin,
+    trashBin({}),
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

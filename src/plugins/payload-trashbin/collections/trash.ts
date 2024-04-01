@@ -4,9 +4,6 @@ import { RestoreButton } from '../components/RestoreButton'
 
 export const Trash: CollectionConfig = {
   slug: 'trash',
-  admin: {
-    useAsTitle: 'collectionName',
-  },
   access: {
     create: () => false,
     update: () => false,
