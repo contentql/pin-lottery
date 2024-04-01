@@ -1,8 +1,8 @@
+import Link from 'next/link'
 import { BsChevronDown } from 'react-icons/bs'
 
 import { Contest, Ticket, Winner } from '@/payload-types'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
-import Link from 'next/link'
 
 const PastDraws = ({
   pastDrawsTicketsData,
@@ -36,11 +36,11 @@ const PastDraws = ({
                 <tr key={ticket?.id}>
                   <td>
                     <span className='date'>
-                      {
-                        new Date(winningTicket?.createdAt)
-                          .toISOString()
-                          .split('T')[0]
-                      }
+                      {winningTicket?.createdAt
+                        ? new Date(winningTicket?.createdAt)
+                            .toISOString()
+                            .split('T')[0]
+                        : 'N/A'}
                     </span>
                   </td>
                   <td>
