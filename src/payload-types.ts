@@ -18,6 +18,7 @@ export interface Config {
     blog: Blog;
     faq: Faq;
     tags: Tag;
+    trash: Trash;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -334,6 +335,25 @@ export interface Tag {
   tag: string;
   img: string | Media;
   is_coming_soon?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trash".
+ */
+export interface Trash {
+  id: string;
+  value:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  collectionName?: string | null;
   updatedAt: string;
   createdAt: string;
 }
