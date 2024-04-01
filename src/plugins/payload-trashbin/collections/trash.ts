@@ -8,7 +8,6 @@ export const Trash: CollectionConfig = {
     create: () => false,
     update: () => false,
   },
-
   fields: [
     {
       name: 'value',

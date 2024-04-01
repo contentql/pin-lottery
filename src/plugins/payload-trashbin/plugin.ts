@@ -3,6 +3,7 @@ import Trash from './collections/trash'
 import { AfterDeleteHook } from 'payload/dist/collections/config/types'
 import { PluginTypes } from './types'
 
+
 const addDocumentToTrashCollection: AfterDeleteHook = async ({
   req,
   doc,
