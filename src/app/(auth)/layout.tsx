@@ -1,8 +1,12 @@
+import { getMeUser } from '@/utils/get-me-user'
 import AuthLayoutView from '@/views/AuthLayoutView'
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+
+const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
+  await getMeUser({ validUserRedirect: '/' })
+
   return (
     <div>
-      <AuthLayoutView/>
+      <AuthLayoutView />
       {children}
     </div>
   )
