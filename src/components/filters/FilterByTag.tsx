@@ -30,18 +30,19 @@ const FilterByTag = ({ filter, handleSearch }: any) => {
             </span>
             <span>{tag?.tag}</span>
             {tag.is_coming_soon && (
-              <div className='badge-coming-soon'>
-                <a href='#'>
-                  <div className='badges'>
-                    <br />
-                    <p>
-                      <div className='firstLine'>Coming </div>
-                      <div className='secondLine'>soon </div>
-                      <br />
-                    </p>
-                  </div>
-                </a>
-              </div>
+              <p className='badge-coming-soon'>coming soon</p>
+              // <div className='badge-coming-soon'>
+              //   <a href='#'>
+              //     <div className='badges'>
+              //       <br />
+              //       <p>
+              //         <div className='firstLine'>Coming </div>
+              //         <div className='secondLine'>soon </div>
+              //         <br />
+              //       </p>
+              //     </div>
+              //   </a>
+              // </div>
             )}
           </button>
         </li>

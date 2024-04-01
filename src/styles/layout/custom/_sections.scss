@@ -1163,9 +1163,19 @@ $duration: 1000;
 }
 .badge-coming-soon {
   position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 2px;
+  top: 12px;
+  right: 8px;
+  font-size: 12px;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    4deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(251, 185, 54) 100%
+  );
+  padding: 0px 4px;
+  border-radius: 16px;
+  color: white !important;
 }
 .tag-nav {
   position: relative;
