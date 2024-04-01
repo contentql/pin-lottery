@@ -1,18 +1,27 @@
-import contestData from '@/data/contestData'
-
-import UpcomingDraw from './UpcomingDraw'
+import { trpc } from '@/trpc/client'
+import ContestCard from '../cards/ContestCard'
 
 const RightSide = () => {
+  const { data: wishlistData, refetch: refetchWishlistData } =
+    trpc.wishlist.getWishlistTickets.useQuery()
+
+  console.log('wishlist data', wishlistData)
+
   return (
     <div className='col-lg-8 mt-lg-0 mt-4'>
       {/* Upcoming Draw  */}
-      <UpcomingDraw />
+      {/* <UpcomingDraw /> */}
 
       <div className='row mt-30  mb-none-30'>
-        {contestData.slice(0, 4).map(itm => (
+        {wishlistData?.map((itm: any) => (
           <div key={itm.id} className='col-xl-6 col-lg-12 col-md-6 mb-30'>
             {/* Contest card */}
-            {/* <ContestCard itm={itm} /> */}
+            <ContestCard
+              wishlistId={itm.id}
+              itm={itm?.contest?.value}
+              wishlist={true}
+              refetchWishlistData={refetchWishlistData}
+            />
           </div>
         ))}
       </div>

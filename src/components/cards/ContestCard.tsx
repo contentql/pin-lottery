@@ -6,7 +6,17 @@ import { useRouter } from 'next/navigation'
 import { FaRegHeart } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 
-const ContestCard = ({ itm }: { itm: Contest }) => {
+const ContestCard = ({
+  itm,
+  wishlist,
+  wishlistId,
+  refetchWishlistData,
+}: {
+  itm: Contest
+  wishlist: Boolean
+  wishlistId: string
+  refetchWishlistData: any
+}) => {
   const { status } = useAuth()
 
   const { mutate: addTicketsToCart } =
@@ -19,15 +29,27 @@ const ContestCard = ({ itm }: { itm: Contest }) => {
       },
     })
 
+  const { mutate: deleteById } = trpc.wishlist.deleteById.useMutation({
+    onSuccess: async () => {
+      toast.success('Successfully tickets deleted.')
+      refetchWishlistData()
+    },
+    onError: async () => {
+      toast.error('Failed to delete tickets.')
+    },
+  })
+
   const addToWishlist = () => {
     if (status !== 'loggedIn') {
       toast.error('Login to add tickets to wishlist')
       return
     }
 
-    addTicketsToCart({
-      contest_id: itm?.id,
-    })
+    wishlist
+      ? deleteById({ id: wishlistId })
+      : addTicketsToCart({
+          contest_id: itm?.id,
+        })
   }
   const router = useRouter()
 

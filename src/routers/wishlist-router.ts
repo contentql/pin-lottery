@@ -64,7 +64,7 @@ export const wishlistRouter = router({
     try {
       await payload.delete({
         collection: 'wishlist',
-        id,
+        id: id,
       })
 
       return { success: true }
