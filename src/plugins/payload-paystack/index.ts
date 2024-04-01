@@ -1,1 +1,1 @@
-export { createCustomer } from './createCustomer'
+export { paystack } from './plugin'
