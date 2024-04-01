@@ -28,6 +28,7 @@ import {
   generateURL,
 } from './utils/seo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
+import { trashBin } from './plugins/payload-trashbin'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -122,6 +123,7 @@ export default buildConfig({
       generateURL,
     }),
     paystack,
+    trashBin,
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
