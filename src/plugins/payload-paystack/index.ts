@@ -1,0 +1,1 @@
+export { paystack } from './plugin'

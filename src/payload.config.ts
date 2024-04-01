@@ -20,6 +20,7 @@ import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import { s3StorageAdapter } from './plugins/s3'
 import { sentry } from '@payloadcms/plugin-sentry'
+import { paystack } from './plugins/payload-paystack'
 import {
   generateDescription,
   generateImage,
@@ -120,6 +121,7 @@ export default buildConfig({
       generateImage,
       generateURL,
     }),
+    paystack,
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

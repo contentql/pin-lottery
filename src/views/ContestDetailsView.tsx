@@ -1,13 +1,16 @@
 'use client'
 
+import Image from 'next/image'
+import { toast } from 'react-toastify'
+
+import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
+
 import Banner from '@/components/common/Banner'
 import ContestBody from '@/components/contest-details/ContestBody'
+import SimilarContest from '@/components/contest/SimilarContest'
 import IndividualContestSkeletone from '@/components/skeletons/IndividualContestSkeletone'
 import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import Image from 'next/image'
-import { toast } from 'react-toastify'
-import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
 
 interface PageProps {
   contestId: string
@@ -21,7 +24,13 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
   } = trpc.contest.getContestById.useQuery({
     id: contestId,
   })
-
+  const { data: similarContest } = trpc.contest.getSimilarContests.useQuery(
+    {
+      productType: contestDetails?.product_type!,
+    },
+    { enabled: !!contestDetails?.product_type },
+  )
+  console.log('contest ', similarContest)
   const { mutate: updateContestTimerStatus } =
     trpc.contest.updateContestTimerStatus.useMutation({
       onSuccess: async () => {
@@ -74,6 +83,7 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
           handleContestTimerUpdate={handleContestTimerUpdate}
         />
       )}
+      <SimilarContest contests={similarContest as Contest[]} />
     </>
   )
 }

@@ -1,4 +1,5 @@
 import { TRPCError } from '@trpc/server'
+import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { ContestIdValidator } from '../lib/validators/contest-id-validator'
 import { ContestPaginationValidator } from '../lib/validators/contest-pagination-validator'
@@ -160,5 +161,21 @@ export const contestRouter = router({
           message: error?.message || 'Failed to fetch contest IDs.',
         })
       }
+    }),
+  getSimilarContests: publicProcedure
+    .input(z.object({ productType: z.string() }))
+    .query(async ({ input }) => {
+      const payload = await getPayloadClient()
+      const { productType } = input
+      const similarContests = await payload.find({
+        collection: 'contest',
+        depth: 3,
+        where: {
+          product_type: {
+            equals: productType,
+          },
+        },
+      })
+      return await similarContests.docs
     }),
 })

@@ -1,7 +1,6 @@
 import { TRPCError } from '@trpc/server'
-import { customAlphabet } from 'nanoid'
-
 import { z } from 'zod'
+
 import { getPayloadClient } from '../get-payload'
 import { ContestIdValidator } from '../lib/validators/contest-id-validator'
 import { PageNumberValidator } from '../lib/validators/page-number-validator'
@@ -106,9 +105,6 @@ export const ticketRouter = router({
       const payload = await getPayloadClient()
 
       const { user } = ctx
-
-      const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-      const nanoid = customAlphabet(alphabet, 14)
 
       try {
         await Promise.all(
