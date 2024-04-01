@@ -123,7 +123,9 @@ export default buildConfig({
       generateURL,
     }),
     paystack,
-    trashBin,
+    trashBin({
+      displayToRoles: ['admin'],
+    }),
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
