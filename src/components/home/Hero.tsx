@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { FaPlay } from 'react-icons/fa'
 
 import car_light from '/public/images/elements/car-light.png'
 import car_ray from '/public/images/elements/car-ray.png'
@@ -12,9 +11,45 @@ import hero_shape from '/public/images/elements/hero-shape.jpg.png'
 import main_mobile from '/public/images/mobiles/main-mobile.png'
 
 import VedioModal from '@/components/vedioModal/VedioModal'
-
-const Hero = () => {
+import { Contest, Media } from '@/payload-types'
+import Slider from 'react-slick'
+const Hero = ({ HeroContests }: { HeroContests: Contest[] }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const NextBtn = ({ onClick }: any) => {
+    return (
+      <button
+        type='button'
+        className='next-button-slick next-slick-button-position'
+        onClick={onClick}>
+        <i className='las la-angle-left'></i>
+      </button>
+    )
+  }
+
+  const PrevBtn = ({ onClick }: any) => {
+    return (
+      <button
+        type='button'
+        className='next-button-slick prev-slick-button'
+        onClick={onClick}>
+        <i className='las la-angle-right'></i>
+      </button>
+    )
+  }
+  const settings = {
+    autoplay: true,
+    speed: 700,
+    infinite: true,
+    // arrows: false,
+    nextArrow: <PrevBtn />,
+    prevArrow: <NextBtn />,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    // vertical: true,
+    //verticalSwiping: true,
+    // swipeToSlide: true,
+    // draggable: true,
+  }
   return (
     <>
       <VedioModal
@@ -23,49 +58,73 @@ const Hero = () => {
         setIsOpen={setIsOpen}
       />
 
-      <section className='hero'>
-        <div className='hero__shape'>
-          <Image src={hero_shape} alt='image' />
-        </div>
-        <div className='hero__element'>
-          <Image src={hero_building} alt='image' />
-        </div>
-        <div className='hero__car wow bounceIn'>
-          <Image src={car_shadow} alt='image' className='car-shadow' />
-          <Image src={car_ray} alt='image' className='car-ray' />
-          <Image src={car_light} alt='image' className='car-light' />
-          <Image src={main_mobile} alt='image' className='hero-car' />
-          <Image src={car_star} alt='image' className='car-star' />
-        </div>
-        <div className='container'>
-          <div className='row justify-content-center justify-content-lg-start'>
-            <div className='col-lg-6 col-md-8'>
-              <div className='hero__content'>
-                <div className='hero__subtitle'>Contest FOR YOUR CHANCE to</div>
-                <h2 className='hero__title'>big win</h2>
-                <p>
-                  Now&#39;s your chance to win a car! Check out the prestige
-                  cars you can win in our car prize draws. Will you be our next
-                  lucky winner?
-                </p>
-                <div className='hero__btn'>
-                  <Link href='/contest' className='cmn-btn'>
-                    Participate Now
-                  </Link>
-                  <button className='video-btn' onClick={() => setIsOpen(true)}>
-                    <FaPlay />
-                  </button>
+      <Slider {...settings}>
+        {HeroContests?.map((contest, i) => (
+          <section key={contest?.id} className='hero'>
+            <div className='hero__shape'>
+              <Image src={hero_shape} alt='image' />
+            </div>
+            <div className='hero__element'>
+              <Image src={hero_building} alt='image' />
+            </div>
+            <div className='hero__car wow bounceIn'>
+              <Image src={car_shadow} alt='image' className='car-shadow' />
+              <Image src={car_ray} alt='image' className='car-ray' />
+              <Image src={car_light} alt='image' className='car-light' />
+              <Image
+                src={(contest?.img as Media)?.url || ''}
+                width={500}
+                height={200}
+                alt='image'
+                className='hero-car'
+              />
+              <Image src={car_star} alt='image' className='car-star' />
+            </div>
+            <div className='container'>
+              <div className='row justify-content-center justify-content-lg-start'>
+                <div className='col-lg-6 col-md-8'>
+                  <div className='hero__content'>
+                    {/* <div className='hero__subtitle'>
+                      Contest FOR YOUR CHANCE to Win
+                    </div> */}
+                    <h1>{contest?.title}</h1>
+                    <p className='line-clamp'>{contest?.hero_description}</p>
+                    {/* <div className='hero__btn'>
+                      <p>
+                        <span className='strong'>Contest Number: </span>
+                        <span>{contest?.contest_no}</span>
+                      </p>
+                      <p>
+                        <span className='strong'>Ticket Price: </span>
+                        <span>{contest?.ticket_price}</span>
+                      </p>
+                    </div> */}
+
+                    <div className='hero__btn'>
+                      <Link
+                        className='cmn-btn'
+                        href={`/contest/${contest?.id}`}>
+                        {' '}
+                        Buy Now
+                      </Link>
+                      {/* <button
+                        className='video-btn'
+                        onClick={() => setIsOpen(true)}>
+                        <FaPlay />
+                      </button> */}
+                    </div>
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='hero__thumb'>
+                    <Image src={main_mobile} alt='' />
+                  </div>
                 </div>
               </div>
             </div>
-            <div className='col-lg-6'>
-              <div className='hero__thumb'>
-                <Image src={main_mobile} alt='' />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        ))}
+      </Slider>
     </>
   )
 }
