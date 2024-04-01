@@ -53,10 +53,10 @@ export const trashBin =
                     roles.includes(role),
                   )
                 )
-                  return false
+                  return true
               }
 
-              return true
+              return false
             },
           },
         },
