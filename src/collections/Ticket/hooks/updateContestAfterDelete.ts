@@ -37,24 +37,19 @@ export const updateContestAfterDelete: CollectionAfterDeleteHook = async ({
         id,
         data: latestData,
       })
-    } catch (error: any) {
+    } catch (error) {
       console.error(
-        'Error updating contest after creating a ticket  after delete:',
-        error?.message,
+        'Error updating contest after creating a ticket  after delete: ',
+        error,
       )
       throw new Error(
-        'Failed to update contest data after creating a ticket  after delete: ',
-        error?.message,
+        'Failed to update contest data after creating a ticket  after delete.',
       )
     }
   } catch (error: any) {
-    console.error(
-      'Error finding relevant tickets after delete:',
-      error?.message,
-    )
+    console.error('Error finding relevant tickets after delete.', error)
     throw new Error(
-      'Failed to find relevant tickets while updating contest data  after delete: ',
-      error?.message,
+      'Failed to find relevant tickets while updating contest data  after delete.',
     )
   }
 
