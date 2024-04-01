@@ -16,11 +16,7 @@ import { Contest, Tag, Winner } from '@/payload-types'
 
 const HomeView = () => {
   // get contests
-  const { data: contestDetails, isLoading } = trpc.contest.getContests.useQuery(
-    { pageNumber: 1, filterByName: 'all', filterByPrice: 0, filterByTitle: '' },
-  )
-
-  const contest = contestDetails?.allContests?.slice(0, 6)
+  const { data: contestDetails } = trpc.contest.getOngoingContests.useQuery()
 
   // get tags
   const { data: allTags } = trpc.public.getTags.useQuery()
@@ -33,7 +29,7 @@ const HomeView = () => {
     <>
       <Hero />
       <ContestCategories allTags={allTags as Tag[]} />
-      <ContestDetailsPage contestDetails={contest as Contest[]} />
+      <ContestDetailsPage contestDetails={contestDetails as Contest[]} />
       <WinnerDetails winnerDetails={winnerDetails as Winner[]} />
       <LatestWinner />
       <Overview />
