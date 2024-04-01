@@ -26,9 +26,9 @@ export const deleteWinnerAfterUpdate: CollectionAfterChangeHook = async ({
             id: doc?.id,
             data: { ...latestData },
           })
-        } catch (error: any) {
-          console.error('Error updating contest:', error.message)
-          throw new Error('Failed to update contest: ', error.message)
+        } catch (error) {
+          console.error('Error updating contest: ', error)
+          throw new Error('Failed to update contest.')
         }
 
         return
@@ -42,8 +42,8 @@ export const deleteWinnerAfterUpdate: CollectionAfterChangeHook = async ({
           id: winner_ticket?.value.id || winner_ticket?.value,
         })
       } catch (error: any) {
-        console.error('Error deleting winner document: ', error.message)
-        throw new Error('Failed to delete winner document: ', error.message)
+        console.error('Error deleting winner document: ', error)
+        throw new Error('Failed to delete winner document.')
       }
     }
   }

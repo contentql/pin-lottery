@@ -7,8 +7,8 @@ export const deleteRelatedDocsAfterDelete: AfterDeleteHook = async ({
 }) => {
   const { payload } = req
 
+  //Todo: Initiate refund if applicable
   try {
-    console.log('Deleting related documents from "tickets" collection...')
     await payload.delete({
       collection: 'tickets',
       where: {
@@ -23,12 +23,11 @@ export const deleteRelatedDocsAfterDelete: AfterDeleteHook = async ({
       error,
     )
     throw new Error(
-      'Failed to delete related documents from "tickets" collection',
+      'Failed to delete related documents from "tickets" collection.',
     )
   }
 
   try {
-    console.log('Deleting related documents from "winner" collection...')
     await payload.delete({
       collection: 'winner',
       where: {
@@ -43,7 +42,7 @@ export const deleteRelatedDocsAfterDelete: AfterDeleteHook = async ({
       error,
     )
     throw new Error(
-      'Failed to delete related documents from "winner" collection',
+      'Failed to delete related documents from "winner" collection.',
     )
   }
 }

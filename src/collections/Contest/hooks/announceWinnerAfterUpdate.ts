@@ -82,16 +82,16 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
               data: { ...latestData },
             })
           } catch (error: any) {
-            console.error('Error updating contest:', error?.message)
-            throw new Error('Failed to update contest data: ' + error?.message)
+            console.error('Error updating contest: ', error)
+            throw new Error('Failed to update contest data.')
           }
         } catch (error: any) {
-          console.error('Error creating winner:', error?.message)
-          throw new Error('Failed to create winner entry: ' + error?.message)
+          console.error('Error creating winner: ', error)
+          throw new Error('Failed to create winner entry.')
         }
-      } catch (error: any) {
-        console.error('Error fetching contest tickets: ', error?.message)
-        throw new Error('Failed to fetch contest tickets: ' + error?.message)
+      } catch (error) {
+        console.error('Error fetching contest tickets: ', error)
+        throw new Error('Failed to fetch contest tickets')
       }
     }
   }
