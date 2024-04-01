@@ -333,6 +333,7 @@ export interface Tag {
   id: string;
   tag: string;
   img: string | Media;
+  is_coming_soon?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }

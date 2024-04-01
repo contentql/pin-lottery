@@ -32,7 +32,7 @@ const HomeView = () => {
   return (
     <>
       <Hero />
-      <ContestCategories allTags={allTags as [Tag]} />
+      <ContestCategories allTags={allTags as Tag[]} />
       <ContestDetailsPage contestDetails={contest as Contest[]} />
       <WinnerDetails winnerDetails={winnerDetails as Winner[]} />
       <LatestWinner />

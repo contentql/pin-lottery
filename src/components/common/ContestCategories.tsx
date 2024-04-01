@@ -1,7 +1,8 @@
+import { Media, Tag } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 
-function ContestCategories({ allTags }: any) {
+function ContestCategories({ allTags }: { allTags: Tag[] }) {
   return (
     <section className='position-relative z-index-two pt-120 pb-120 overflow-hidden'>
       <div className='container'>
@@ -13,26 +14,33 @@ function ContestCategories({ allTags }: any) {
           </div>
         </div> */}
         <div className='row mb-none-30 justify-content-xl-start justify-content-center'>
-          {allTags?.map((tag: any) => (
+          {allTags?.map(tag => (
             <div key={tag?.id} className='col-xl-3 col-lg-4 col-sm-6 mb-30'>
               <div className='play-card play-card--one'>
                 <div className='play-card__icon'>
                   <Image
-                    src={tag?.img?.url}
+                    src={(tag?.img as Media)?.url || ''}
                     width={100}
                     height={100}
                     alt='image-icon'
                   />
                 </div>
                 <div className='play-card__content'>
-                  <Link
-                    href={{
-                      pathname: '/contest',
-                      query: { tag: tag?.tag },
-                    }}>
-                    {' '}
-                    <h3 className='play-card__title'>{tag?.tag}</h3>
-                  </Link>
+                  {tag?.is_coming_soon ? (
+                    <span>
+                      {' '}
+                      <h3 className='play-card__title'>{tag?.tag}</h3>
+                    </span>
+                  ) : (
+                    <Link
+                      href={{
+                        pathname: '/contest',
+                        query: { tag: tag?.tag },
+                      }}>
+                      {' '}
+                      <h3 className='play-card__title'>{tag?.tag}</h3>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
