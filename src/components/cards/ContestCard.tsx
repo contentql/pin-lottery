@@ -1,22 +1,53 @@
 import { Contest, Media, Ticket, Winner } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
+import { trpc } from '@/trpc/client'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { FaRegHeart } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 const ContestCard = ({ itm }: { itm: Contest }) => {
+  const { status } = useAuth()
+
+  const { mutate: addTicketsToCart } =
+    trpc.wishlist.addTicketsToWishlist.useMutation({
+      onSuccess: async () => {
+        toast.success('Successfully tickets are added to wishlist')
+      },
+      onError: async () => {
+        toast.error('Unable to add tickets to cart')
+      },
+    })
+
+  const addToWishlist = () => {
+    if (status !== 'loggedIn') {
+      toast.error('Login to add tickets to wishlist')
+      return
+    }
+
+    addTicketsToCart({
+      contest_id: itm?.id,
+    })
+  }
+  const router = useRouter()
+
   return (
     <div className='contest-card'>
-      <Link href={`/contest/${itm.id}`} className='item-link'></Link>
       <div className='contest-card__thumb'>
         <Image
           src={(itm.img as Media)?.sizes?.contestImage?.url || '/'}
           alt={itm.title}
           width={(itm?.img as Media)?.sizes?.contestImage?.width || 100}
           height={(itm?.img as Media)?.sizes?.contestImage?.height || 100}
+          onClick={() => router.push(`/contest/${itm.id}`)}
+          style={{ cursor: 'pointer' }}
         />
-        <a href='#0' className='action-icon'>
-          <FaRegHeart />
-        </a>
+        <div
+          className='action-icon'
+          style={{ cursor: 'pointer' }}
+          onClick={addToWishlist}>
+          <FaRegHeart style={{ color: 'white' }} />
+        </div>
         <div className='contest-num'>
           <span>contest no:</span>
           <h4 className='number'>{itm.contest_no}</h4>

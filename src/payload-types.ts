@@ -18,6 +18,7 @@ export interface Config {
     blog: Blog;
     faq: Faq;
     tags: Tag;
+    wishlist: Wishlist;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -333,6 +334,23 @@ export interface Tag {
   id: string;
   tag: string;
   img: string | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wishlist".
+ */
+export interface Wishlist {
+  id: string;
+  contest: {
+    relationTo: 'contest';
+    value: string | Contest;
+  };
+  user?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
