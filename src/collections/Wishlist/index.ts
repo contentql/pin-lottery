@@ -5,9 +5,9 @@ import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Wishlist: CollectionConfig = {
   slug: 'wishlist',
-  // admin: {
-  //   hidden: true,
-  // },
+  admin: {
+    hidden: true,
+  },
   access: {
     create: isAdminOrSelf,
     read: isAdminOrSelf,
