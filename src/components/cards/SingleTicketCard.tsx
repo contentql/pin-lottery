@@ -3,17 +3,10 @@ import { useContext } from 'react'
 import { FaTimes } from 'react-icons/fa'
 
 import { AppContext } from '@/context/context'
-import { Contest } from '@/payload-types'
 
 import circle_border from '/public/images/elements/circle-border.png'
 
-const SingleTicketCard = ({
-  ticket,
-  contestDetails,
-}: {
-  ticket: any
-  contestDetails: Contest
-}) => {
+const SingleTicketCard = ({ ticket }: { ticket: any }) => {
   const { removeTicket } = useContext(AppContext)
 
   return (
@@ -22,7 +15,7 @@ const SingleTicketCard = ({
         className='lottery-single__close'
         onClick={() =>
           removeTicket({
-            contest_no: contestDetails?.contest_no,
+            contest_no: ticket?.contest_no,
           })
         }>
         <FaTimes />
@@ -33,9 +26,7 @@ const SingleTicketCard = ({
           <div className='draw-single-ticket'>
             <div className='draw-single-ticket__header'>
               <div className='left'>Ticket #{ticket?.id}</div>
-              <div className='right'>
-                Contest No: {contestDetails?.contest_no}
-              </div>
+              <div className='right'>Contest No: {ticket?.contest_no}</div>
             </div>
             <div className='circle-divider'>
               <Image src={circle_border} alt='circle border' />

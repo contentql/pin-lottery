@@ -23,12 +23,16 @@ import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
 import { createCustomer } from './plugins/payload-paystack'
 import { s3StorageAdapter } from './plugins/s3'
+import { sentry } from '@payloadcms/plugin-sentry'
+import { paystack } from './plugins/payload-paystack'
 import {
   generateDescription,
   generateImage,
   generateTitle,
   generateURL,
 } from './utils/seo'
+import BeforeDashboard from './payload-components/BeforeDashboard'
+import { trashBin } from './plugins/payload-trashbin'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -123,7 +127,11 @@ export default buildConfig({
       generateImage,
       generateURL,
     }),
-    createCustomer,
+    paystack,
+    trashBin({
+      // displayToRoles: ['all'] // default value
+      // displayToRoles: ['admin'] // visible only to admins
+    }),
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

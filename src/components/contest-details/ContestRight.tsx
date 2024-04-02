@@ -1,6 +1,7 @@
 import { AppContext } from '@/context/context'
 import { Contest, Ticket, Winner } from '@/payload-types'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
+import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
@@ -14,6 +15,8 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
   const currency = ticketsMetadata?.currency
 
   const quantity = totalTicketsCount({ contest_no: contestDetails?.contest_no })
+
+  useMaintainMinimumTickets(contestDetails?.contest_no)
 
   return (
     <div className='contest-cart__right'>

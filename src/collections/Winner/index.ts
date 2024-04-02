@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types'
 import { JWTUser } from '../../custom-payload-types'
+import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
 
 const Winner: CollectionConfig = {
   slug: 'winner',
@@ -15,6 +16,9 @@ const Winner: CollectionConfig = {
 
       return true
     },
+  },
+  hooks: {
+    afterDelete: [updateContestAfterDelete],
   },
   fields: [
     {

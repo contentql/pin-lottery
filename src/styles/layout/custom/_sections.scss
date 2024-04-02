@@ -1167,3 +1167,127 @@ $duration: 1000;
     height: 300px;
   }
 }
+.badge-coming-soon {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  font-size: 12px;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    4deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(251, 185, 54) 100%
+  );
+  padding: 0px 4px;
+  border-radius: 16px;
+  color: white !important;
+}
+.tag-nav {
+  position: relative;
+  font-size: 2px;
+}
+
+.firstLine {
+  margin-top: 10px;
+  line-height: 10px;
+  font-size: 16px;
+  font-weight: bolder;
+}
+.secondLine {
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: bolder;
+}
+.badges {
+  position: relative;
+  margin: 40px auto;
+  width: 60px;
+  height: 60px;
+  background-image: linear-gradient(
+    4deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(251, 185, 54) 100%
+  );
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 5px;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-animation: 3s ease-in-out 0s normal none infinite running swing;
+  -moz-animation: 3s ease-in-out 0s normal none infinite running swing;
+  -o-animation: 3s ease-in-out 0s normal none infinite running swing;
+  animation: 3s ease-in-out 0s normal none infinite running swing;
+  -webkit-transform-origin: 30px -22px;
+  -moz-transform-origin: 30px -22px;
+  -o-transform-origin: 30px -22px;
+  transform-origin: 30px -22px;
+}
+
+.badges:before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.badges:after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 30px;
+  width: 1px;
+  height: 16px;
+  border-radius: 0%;
+  background: #ffffff;
+}
+
+@-webkit-keyframes swing {
+  0% {
+    -webkit-transform: rotate(5deg);
+  }
+  50% {
+    -webkit-transform: rotate(-5deg);
+  }
+  100% {
+    -webkit-transform: rotate(5deg);
+  }
+}
+@-moz-keyframes swing {
+  0% {
+    -moz-transform: rotate(5deg);
+  }
+  50% {
+    -moz-transform: rotate(-5deg);
+  }
+  100% {
+    -moz-transform: rotate(5deg);
+  }
+}
+@-o-keyframes swing {
+  0% {
+    -o-transform: rotate(5deg);
+  }
+  50% {
+    -o-transform: rotate(-5deg);
+  }
+  100% {
+    -o-transform: rotate(5deg);
+  }
+}
+@keyframes swing {
+  0% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}

@@ -2,8 +2,9 @@ import { useContext } from 'react'
 
 import SingleTicketCard from '@/components/cards/SingleTicketCard'
 import { AppContext, ContextTicket } from '@/context/context'
-
 import { Contest } from '@/payload-types'
+import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
+
 import Actions from './Actions'
 
 const Tickets = ({ contestDetails }: { contestDetails: Contest }) => {
@@ -12,6 +13,8 @@ const Tickets = ({ contestDetails }: { contestDetails: Contest }) => {
   const contestTickets = getTickets({
     contest_no: contestDetails?.contest_no,
   })
+
+  useMaintainMinimumTickets(contestDetails?.contest_no)
 
   return (
     <div className='lottery-wrapper style--two'>
@@ -22,7 +25,7 @@ const Tickets = ({ contestDetails }: { contestDetails: Contest }) => {
         {contestTickets.map((ticket: ContextTicket) => (
           <div key={ticket.id} className='col-lg-4 mb-30'>
             {/* Single lottery  */}
-            <SingleTicketCard ticket={ticket} contestDetails={contestDetails} />
+            <SingleTicketCard ticket={ticket} />
           </div>
         ))}
       </div>

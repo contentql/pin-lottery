@@ -1,3 +1,4 @@
+import { NumberField } from '@nouance/payload-better-fields-plugin'
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
 import { JWTUser } from '../../custom-payload-types'
@@ -32,7 +33,7 @@ const Ticket: CollectionConfig = {
   // when creating a ticket, ensure the button was disabled
   hooks: {
     afterChange: [updateContestAfterCreate],
-    afterOperation: [updateContestAfterDelete],
+    afterDelete: [updateContestAfterDelete],
   },
   fields: [
     {
@@ -54,15 +55,23 @@ const Ticket: CollectionConfig = {
             readOnly: true,
           },
         },
-        {
-          name: 'ticket_price',
-          type: 'number',
-          label: 'Ticket Price',
-          required: true,
-          admin: {
-            description: 'Price of the ticket at the time of purchase.',
+        ...NumberField(
+          {
+            name: 'ticket_price',
+            label: 'Ticket Price',
+            required: true,
+            admin: {
+              description: 'Enter the price in dollars',
+              placeholder: '199.99',
+            },
           },
-        },
+          {
+            prefix: '$ ',
+            thousandSeparator: ',',
+            decimalScale: 2,
+            fixedDecimalScale: true,
+          },
+        ),
       ],
     },
     {

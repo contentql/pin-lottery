@@ -15,7 +15,7 @@ const createPaystackCustomer: CollectionAfterOperationHook = async ({
   return result
 }
 
-export const createCustomer: Plugin = (incomingConfig: Config): Config => {
+export const paystack: Plugin = (incomingConfig: Config): Config => {
   // find the user collection
   // once you find the user collection add a new hook to it
   // example would be create a console.log() of the existing data

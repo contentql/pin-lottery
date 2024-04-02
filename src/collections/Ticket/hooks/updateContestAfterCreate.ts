@@ -1,5 +1,5 @@
-import { Contest } from '@/payload-types'
 import { CollectionAfterChangeHook } from 'payload/types'
+import { Contest } from '../../../payload-types'
 
 export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
   operation,
@@ -43,19 +43,19 @@ export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
           id,
           data: latestData,
         })
-      } catch (updateError) {
+      } catch (error: any) {
         console.error(
-          'Error updating contest after creating a ticket:',
-          updateError,
+          'Error updating contest after creating a ticket  after create: ',
+          error?.message,
         )
         throw new Error(
-          'Failed to update contest data after creating a ticket.',
+          'Failed to update contest data after creating a ticket  after create.',
         )
       }
-    } catch (findError) {
-      console.error('Error finding relevant tickets:', findError)
+    } catch (error) {
+      console.error('Error finding relevant tickets after create: ', error)
       throw new Error(
-        'Failed to find relevant tickets while updating contest data.',
+        'Failed to find relevant tickets while updating contest data  after create.',
       )
     }
   }
