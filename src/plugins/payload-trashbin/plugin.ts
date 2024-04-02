@@ -46,17 +46,25 @@ export const trashBin =
           admin: {
             // @ts-ignore (JWT User issues, it is mandatory to save the roles in JWT here)
             hidden: ({ user }) => {
+              if (!pluginOptions.displayToRoles?.length) {
+                return false
+              }
+
+              if (pluginOptions.displayToRoles?.includes('all')) {
+                return false
+              }
+
               if (user) {
                 const { roles } = user
                 if (
-                  !pluginOptions.displayToRoles?.some(role =>
+                  pluginOptions.displayToRoles?.some(role =>
                     roles.includes(role),
                   )
                 )
-                  return true
+                  return false
               }
 
-              return false
+              return true
             },
           },
         },

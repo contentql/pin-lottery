@@ -124,7 +124,8 @@ export default buildConfig({
     }),
     paystack,
     trashBin({
-      // displayToRoles: ['admin'],
+      // displayToRoles: ['all'] // default value
+      // displayToRoles: ['admin'] // visible only to admins
     }),
   ],
   typescript: {
