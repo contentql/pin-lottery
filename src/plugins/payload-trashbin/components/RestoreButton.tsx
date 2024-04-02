@@ -5,16 +5,23 @@ import { Field } from 'payload/types'
 export const RestoreButton: React.FC = props => {
   const { id } = useDocumentInfo()
   return (
-    <button
-      onClick={async () => {
-        await fetch(`/api/trash/restore/${id}`, {
-          method: 'GET',
-        })
-
-        window.location.href = `/admin`
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row-reverse',
       }}>
-      Restore
-    </button>
+      <button
+        className='btn btn--style-primary btn--size-medium'
+        onClick={async () => {
+          await fetch(`/api/trash/restore/${id}`, {
+            method: 'GET',
+          })
+
+          window.location.href = `/admin`
+        }}>
+        Restore
+      </button>
+    </div>
   )
 }
 
