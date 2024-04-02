@@ -72,9 +72,14 @@ export const Trash: CollectionConfig = {
         // })
 
         // This is to have the previous document id of the collection to ensure proper relations
-        await payload.db.collections[collectionName].create(
-          convertObject(restData),
-        )
+        // await payload.db.collections[collectionName].create(
+        //   convertObject(restData),
+        // )
+
+        await payload.create({
+          collection: collectionName,
+          data: { ...convertObject(restData) },
+        })
 
         // @ts-ignore (just in case user was not generating types after adding plugin)
         await payload.delete({ collection: 'trash', id: restoreDocId })

@@ -167,15 +167,68 @@ export const contestRouter = router({
     .query(async ({ input }) => {
       const payload = await getPayloadClient()
       const { productType } = input
-      const similarContests = await payload.find({
+      try {
+        const similarContests = await payload.find({
+          collection: 'contest',
+          depth: 3,
+          limit: 3,
+          where: {
+            product_type: {
+              equals: productType,
+            },
+          },
+        })
+        return similarContests.docs
+      } catch (error: any) {
+        console.error('Error fetching contests:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to fetch contests.',
+        })
+      }
+    }),
+  getOngoingContests: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+    try {
+      const ongoingContests = await payload.find({
         collection: 'contest',
         depth: 3,
+        limit: 6,
         where: {
-          product_type: {
-            equals: productType,
+          contest_status: {
+            equals: false,
           },
         },
       })
-      return await similarContests.docs
-    }),
+      return ongoingContests.docs
+    } catch (error: any) {
+      console.error('Error fetching contests:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to fetch contests.',
+      })
+    }
+  }),
+  getHeroContests: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+    try {
+      const heroContests = await payload.find({
+        collection: 'contest',
+        depth: 6,
+        pagination: false,
+        where: {
+          show_in_hero: {
+            equals: true,
+          },
+        },
+      })
+      return heroContests.docs
+    } catch (error: any) {
+      console.error('Error fetching contests:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to fetch contests.',
+      })
+    }
+  }),
 })

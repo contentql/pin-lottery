@@ -170,6 +170,7 @@ export interface Contest {
     };
     [k: string]: unknown;
   };
+  hero_description?: string | null;
   img: string | Media;
   images: {
     product_images: string | Media;
@@ -207,6 +208,7 @@ export interface Contest {
     relationTo: 'winner';
     value: string | Winner;
   } | null;
+  show_in_hero?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
