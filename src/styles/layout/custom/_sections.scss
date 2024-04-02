@@ -2,6 +2,12 @@ body {
   overflow-x: hidden;
 }
 
+//hide bg
+.hide-bg {
+  mix-blend-mode: multiply;
+  filter: contrast(1);
+}
+
 /* login and signup css start */
 .register-main {
   display: flex;

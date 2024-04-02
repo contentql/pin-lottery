@@ -1,22 +1,84 @@
 import { Contest, Media, Ticket, Winner } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
+import { trpc } from '@/trpc/client'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { FaRegHeart } from 'react-icons/fa'
+import { FaHeart } from 'react-icons/fa6'
+import { toast } from 'react-toastify'
 
-const ContestCard = ({ itm }: { itm: Contest }) => {
+const ContestCard = ({
+  itm,
+  wishlist,
+  wishlistId,
+  refetchWishlistData,
+  wishlistIds,
+}: {
+  itm: Contest
+  wishlist: Boolean
+  wishlistId: string
+  refetchWishlistData: any
+  wishlistIds: any
+}) => {
+  const { status } = useAuth()
+
+  const { mutate: addTicketsToCart } =
+    trpc.wishlist.addTicketsToWishlist.useMutation({
+      onSuccess: async () => {
+        refetchWishlistData()
+        toast.success('Successfully added to wishlist')
+      },
+      onError: async () => {
+        toast.error('Unable to add to wishlist')
+      },
+    })
+
+  const { mutate: deleteById } = trpc.wishlist.deleteById.useMutation({
+    onSuccess: async () => {
+      toast.success('Successfully remove from wishlist.')
+      refetchWishlistData()
+    },
+    onError: async () => {
+      toast.error('Failed to remove from wishlist.')
+    },
+  })
+
+  const addToWishlist = () => {
+    if (status !== 'loggedIn') {
+      toast.error('Login to add tickets to wishlist')
+      return
+    }
+
+    addTicketsToCart({
+      contest_id: itm?.id,
+    })
+  }
+
+  const router = useRouter()
+
   return (
     <div className='contest-card'>
-      <Link href={`/contest/${itm.id}`} className='item-link'></Link>
       <div className='contest-card__thumb'>
         <Image
           src={(itm.img as Media)?.sizes?.contestImage?.url || '/'}
           alt={itm.title}
           width={(itm?.img as Media)?.sizes?.contestImage?.width || 100}
           height={(itm?.img as Media)?.sizes?.contestImage?.height || 100}
+          onClick={() => router.push(`/contest/${itm.id}`)}
+          style={{ cursor: 'pointer' }}
         />
-        <a href='#0' className='action-icon'>
-          <FaRegHeart />
-        </a>
+        <div className='action-icon1' style={{ cursor: 'pointer' }}>
+          {wishlist || wishlistIds?.includes(itm?.id) ? (
+            <FaHeart
+              onClick={() => {
+                deleteById({ id: wishlistId })
+              }}
+              fill='red'
+            />
+          ) : (
+            <FaRegHeart onClick={addToWishlist} style={{ color: 'white' }} />
+          )}
+        </div>
         <div className='contest-num'>
           <span>contest no:</span>
           <h4 className='number'>{itm.contest_no}</h4>

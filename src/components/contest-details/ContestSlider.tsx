@@ -84,10 +84,13 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
                 <div key={itm?.id} className='single-slide'>
                   <Image
                     style={{ cursor: 'zoom-in' }}
-                    src={(itm?.product_images as Media)?.url || '/'}
+                    src={
+                      (itm?.product_images as Media)?.sizes?.tablet?.url || '/'
+                    }
                     width={1000}
                     height={10}
                     alt='contest b2'
+                    // className='hide-bg'
                     // onClick={() => {
                     //   setToggleView(true)
                     // }}
