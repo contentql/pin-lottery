@@ -10,6 +10,14 @@ const addDocumentToTrashCollection: AfterDeleteHook = async ({
 }) => {
   const { payload } = req
 
+  // This piece of code ensures that when the document is saved in trash will only contains the id of the relationship
+
+  // Object.keys(doc).forEach(key => {
+  //   if (Object.hasOwn(doc[key], 'relationTo')) {
+  //     doc[key].value = doc[key].value.id
+  //   }
+  // })
+
   const trashDoc = {
     collectionName: collection.slug, // should be same as slug
     value: doc,
@@ -32,7 +40,10 @@ export const trashBin =
         ...collection,
         hooks: {
           ...collection.hooks,
-          afterDelete: [addDocumentToTrashCollection],
+          afterDelete: [
+            ...(collection.hooks?.afterDelete || []),
+            addDocumentToTrashCollection,
+          ],
         },
       }
     })
