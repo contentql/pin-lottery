@@ -176,6 +176,13 @@ export const contestRouter = router({
             product_type: {
               equals: productType,
             },
+            and: [
+              {
+                contest_status: {
+                  equals: false,
+                },
+              },
+            ],
           },
         })
         return similarContests.docs
