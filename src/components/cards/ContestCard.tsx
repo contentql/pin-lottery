@@ -70,13 +70,18 @@ const ContestCard = ({
         <div className='action-icon1' style={{ cursor: 'pointer' }}>
           {wishlist || wishlistIds?.includes(itm?.id) ? (
             <FaHeart
+              className='zoomin'
               onClick={() => {
                 deleteById({ id: wishlistId })
               }}
               fill='red'
             />
           ) : (
-            <FaRegHeart onClick={addToWishlist} style={{ color: 'white' }} />
+            <FaRegHeart
+              className='zoomin'
+              onClick={addToWishlist}
+              style={{ color: 'white' }}
+            />
           )}
         </div>
         <div className='contest-num'>
