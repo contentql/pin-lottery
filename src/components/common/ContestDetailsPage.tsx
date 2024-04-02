@@ -118,6 +118,7 @@ const ContestDetailsPage = ({
                   ))}
                 </div>
               </div>
+
               {/* <div
                 className='tab-pane fade'
                 id='profile-tab-pane'
