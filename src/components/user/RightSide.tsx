@@ -3,9 +3,11 @@ import Tabs from '../common/Tabs'
 import PastDraws from './PastDraws'
 import UpcomingDraws from './UpcomingDraw'
 const RightSide = ({
+  isTicketsPending,
   upcomingDrawTicketsData,
   pastDrawsTicketsData,
 }: {
+  isTicketsPending: boolean
   upcomingDrawTicketsData: Ticket[]
   pastDrawsTicketsData: Ticket[]
 }) => {
@@ -23,7 +25,7 @@ const RightSide = ({
   ]
   return (
     <div className='col-lg-8 mt-lg-0 mt-4'>
-      <Tabs tabs={tabs} />
+      <Tabs tabs={tabs} isTicketsPending={isTicketsPending} />
     </div>
   )
 }

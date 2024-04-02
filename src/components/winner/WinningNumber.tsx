@@ -6,7 +6,6 @@ import { splitTicketNumber } from '@/utils/split-ticket-number'
 import Confetti from '../common/Confetti'
 
 const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
-  console.log('winner details', contestDetails)
   return (
     <>
       <Confetti />

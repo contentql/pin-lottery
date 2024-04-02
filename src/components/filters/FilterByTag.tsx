@@ -4,8 +4,6 @@ import Image from 'next/image'
 
 const FilterByTag = ({ filter, handleSearch }: any) => {
   const { data: tags } = trpc.public.getTags.useQuery()
-  console.log('tags', tags)
-
   return (
     <ul className='nav nav-tabs winner-tab-nav' id='winnerTab' role='tablist'>
       {tags?.map((tag: any) => (

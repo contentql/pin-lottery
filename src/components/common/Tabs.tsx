@@ -1,9 +1,17 @@
 'use client'
 import { useState } from 'react'
-const Tabs = ({ tabs }:{tabs:any}) => {
+import TicketsSkeleton from '../skeletons/TicketsSkeleton'
+
+const Tabs = ({
+  tabs,
+  isTicketsPending,
+}: {
+  tabs: any
+  isTicketsPending: boolean
+}) => {
   const [activeTab, setActiveTab] = useState(0)
 
-  const handleClick = (index:any) => {
+  const handleClick = (index: any) => {
     setActiveTab(index)
   }
 
@@ -19,7 +27,11 @@ const Tabs = ({ tabs }:{tabs:any}) => {
           </div>
         ))}
       </div>
-      <div className='tab-content-custom'>{tabs[activeTab].content}</div>
+      {isTicketsPending ? (
+        <TicketsSkeleton />
+      ) : (
+        <div className='tab-content-custom'>{tabs[activeTab].content}</div>
+      )}
     </div>
   )
 }
