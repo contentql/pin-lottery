@@ -5,6 +5,8 @@ import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
 
+import { Contest } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 import FilterByTag from '../filters/FilterByTag'
 import ContestSkeletons from '../skeletons/ContestSkeletons'
 
@@ -13,7 +15,11 @@ const LatestContest = ({
   isContestsPending,
   filters,
   setFilters,
+  setPageNumber,
 }: any) => {
+  const { data: wishlistData, refetch: refetchWishlistData } =
+    trpc.wishlist.getWishlistTickets.useQuery()
+
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -21,6 +27,10 @@ const LatestContest = ({
   const price = searchParams.get('price') ?? 0
   const select = searchParams.get('select') ?? ''
   const MAX = 1000
+
+  const wishlistIds = wishlistData?.map((ele: any) => ele?.contest?.value?.id)
+
+  console.log('wishlistIds', wishlistIds)
 
   const [resetValues, setResetValues] = useState({
     sliderValue: price ? Number(price) : 0,
@@ -66,6 +76,7 @@ const LatestContest = ({
     search.set('tag', tag.toString())
     router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByName: tag })
+    setPageNumber(1)
   }
 
   const handleSearchTitle = (value: string) => {
@@ -77,6 +88,7 @@ const LatestContest = ({
     }
     router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByTitle: value })
+    setPageNumber(1)
   }
 
   const handleSearchPrice = (value: number) => {
@@ -88,7 +100,7 @@ const LatestContest = ({
     }
     router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByPrice: value })
-    console.log('types', value)
+    setPageNumber(1)
   }
 
   const handleSearchSortBy = (value: string) => {
@@ -122,6 +134,11 @@ const LatestContest = ({
       selectValue: '',
     })
   }
+
+  const getWishlistId = (id: string) =>
+    wishlistData
+      ?.filter(ele => (ele?.contest?.value as Contest)?.id === id)
+      ?.at(0)?.id
 
   return (
     <section className='pb-120 mt-minus-100'>
@@ -275,7 +292,15 @@ const LatestContest = ({
                               <div
                                 key={contest.id}
                                 className='col-xl-4 col-md-6 mb-30'>
-                                <ContestCard itm={contest} />
+                                <ContestCard
+                                  wishlistIds={wishlistIds}
+                                  itm={contest}
+                                  wishlist={false}
+                                  wishlistId={
+                                    getWishlistId(contest?.id) as string
+                                  }
+                                  refetchWishlistData={refetchWishlistData}
+                                />
                               </div>
                             ))
                         ) : (

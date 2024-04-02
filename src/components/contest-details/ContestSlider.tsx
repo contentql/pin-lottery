@@ -26,6 +26,8 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
 
+  console.log('contestDetails', contestDetails)
+
   const [toggleView, setToggleView] = useState(false)
 
   const settings = {
@@ -83,11 +85,16 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
               <div key={itm?.id} className='contest-cart__thumb-slider'>
                 <div key={itm?.id} className='single-slide'>
                   <Image
-                    style={{ cursor: 'zoom-in' }}
+                    style={{
+                      cursor: 'zoom-in',
+                      alignSelf: 'center',
+                      objectFit: 'cover',
+                    }}
                     src={(itm?.product_images as Media)?.url || '/'}
-                    width={1000}
-                    height={10}
+                    width={(itm?.product_images as Media)?.width as number}
+                    height={(itm?.product_images as Media)?.height as number}
                     alt='contest b2'
+                    // className='hide-bg'
                     // onClick={() => {
                     //   setToggleView(true)
                     // }}
@@ -107,9 +114,13 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
                 <div key={itm?.id} className='single'>
                   <div key={itm?.id} className='single-slide'>
                     <Image
+                      style={{
+                        alignSelf: 'center',
+                        objectFit: 'contain',
+                      }}
                       src={(itm?.product_images as Media)?.url || '/'}
-                      width={1000}
-                      height={10}
+                      width={100}
+                      height={20}
                       alt='contest s1'
                     />
                   </div>

@@ -1,0 +1,1 @@
+export { trashBin } from './plugin'

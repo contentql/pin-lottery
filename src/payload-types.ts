@@ -18,6 +18,8 @@ export interface Config {
     blog: Blog;
     faq: Faq;
     tags: Tag;
+    wishlist: Wishlist;
+    trash: Trash;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -168,6 +170,7 @@ export interface Contest {
     };
     [k: string]: unknown;
   };
+  hero_description?: string | null;
   img: string | Media;
   images: {
     product_images: string | Media;
@@ -205,6 +208,7 @@ export interface Contest {
     relationTo: 'winner';
     value: string | Winner;
   } | null;
+  show_in_hero?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -334,6 +338,42 @@ export interface Tag {
   tag: string;
   img: string | Media;
   is_coming_soon?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wishlist".
+ */
+export interface Wishlist {
+  id: string;
+  contest: {
+    relationTo: 'contest';
+    value: string | Contest;
+  };
+  user?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trash".
+ */
+export interface Trash {
+  id: string;
+  value:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  collectionName?: string | null;
   updatedAt: string;
   createdAt: string;
 }

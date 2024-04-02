@@ -1,6 +1,7 @@
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { sentry } from '@payloadcms/plugin-sentry'
 import seo from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import dotenv from 'dotenv'
@@ -16,18 +17,19 @@ import Tags from './collections/Tags'
 import Ticket from './collections/Ticket'
 import Users from './collections/Users'
 import Winner from './collections/Winner'
+import Wishlist from './collections/Wishlist'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
-import { s3StorageAdapter } from './plugins/s3'
-import { sentry } from '@payloadcms/plugin-sentry'
+import BeforeDashboard from './payload-components/BeforeDashboard'
 import { paystack } from './plugins/payload-paystack'
+import { trashBin } from './plugins/payload-trashbin'
+import { s3StorageAdapter } from './plugins/s3'
 import {
   generateDescription,
   generateImage,
   generateTitle,
   generateURL,
 } from './utils/seo'
-import BeforeDashboard from './payload-components/BeforeDashboard'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -47,6 +49,7 @@ export default buildConfig({
     Blog,
     Faq,
     Tags,
+    Wishlist,
   ],
   routes: {
     admin: '/admin',
@@ -122,6 +125,10 @@ export default buildConfig({
       generateURL,
     }),
     paystack,
+    trashBin({
+      // displayToRoles: ['all'] // default value
+      // displayToRoles: ['admin'] // visible only to admins
+    }),
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

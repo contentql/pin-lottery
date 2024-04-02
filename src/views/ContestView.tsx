@@ -65,6 +65,7 @@ const ContestView = () => {
         allTags={allTags}
         filters={filters}
         setFilters={setFilters}
+        setPageNumber={setPageNumber}
       />
       {contestDetails?.totalContests && contestDetails?.totalContests > 8 && (
         <div>

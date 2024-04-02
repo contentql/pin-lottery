@@ -24,12 +24,13 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
   } = trpc.contest.getContestById.useQuery({
     id: contestId,
   })
-  const { data: similarContest } = trpc.contest.getSimilarContests.useQuery(
-    {
-      productType: contestDetails?.product_type!,
-    },
-    { enabled: !!contestDetails?.product_type },
-  )
+  const { data: similarContest, isPending: isSimilarContestsPending } =
+    trpc.contest.getSimilarContests.useQuery(
+      {
+        productType: contestDetails?.product_type!,
+      },
+      { enabled: !!contestDetails?.product_type },
+    )
   console.log('contest ', similarContest)
   const { mutate: updateContestTimerStatus } =
     trpc.contest.updateContestTimerStatus.useMutation({
@@ -83,7 +84,10 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
           handleContestTimerUpdate={handleContestTimerUpdate}
         />
       )}
-      <SimilarContest contests={similarContest as Contest[]} />
+      <SimilarContest
+        contests={similarContest as Contest[]}
+        isSimilarContestsPending={isSimilarContestsPending as boolean}
+      />
     </>
   )
 }

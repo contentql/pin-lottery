@@ -93,6 +93,15 @@ const Contest: CollectionConfig = {
                 description: 'A detailed description of the product.',
               },
             },
+            {
+              name: 'hero_description',
+              type: 'textarea',
+              label: 'Hero description',
+              admin: {
+                description:
+                  'This text will only displayed in hero section of home page.',
+              },
+            },
 
             {
               name: 'img',
@@ -461,6 +470,16 @@ const Contest: CollectionConfig = {
         description: 'Select the winner of the contest.',
         position: 'sidebar',
         condition: data => data.contest_status === true,
+      },
+    },
+    {
+      name: 'show_in_hero',
+      label: 'Display contest in hero section',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description: 'Check to display this contest in hero section.',
+        position: 'sidebar',
       },
     },
   ],
