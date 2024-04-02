@@ -8,6 +8,7 @@ import ContestCard from '@/components/cards/ContestCard'
 
 import contestData from '@/data/contestData'
 import { Contest } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 const ContestDetailsPage = ({
   contestDetails,
@@ -16,6 +17,16 @@ const ContestDetailsPage = ({
 }) => {
   const [filterData, setFilterData] = useState([])
   const [filterBy, setFilterBy] = useState('dream_car')
+
+  const { data: wishlistData, refetch: refetchWishlistData } =
+    trpc.wishlist.getWishlistTickets.useQuery()
+
+  const getWishlistId = (id: string) =>
+    wishlistData
+      ?.filter(ele => (ele?.contest?.value as Contest)?.id === id)
+      ?.at(0)?.id
+
+  const wishlistIds = wishlistData?.map((ele: any) => ele?.contest?.value?.id)
 
   useEffect(() => {
     const data = contestData.filter(itm =>
@@ -99,14 +110,15 @@ const ContestDetailsPage = ({
                       <ContestCard
                         itm={itm}
                         wishlist={false}
-                        wishlistId={''}
-                        refetchWishlistData={undefined}
-                        wishlistIds={undefined}
+                        wishlistId={getWishlistId(itm?.id) as string}
+                        refetchWishlistData={refetchWishlistData}
+                        wishlistIds={wishlistIds}
                       />
                     </div>
                   ))}
                 </div>
               </div>
+
               {/* <div
                 className='tab-pane fade'
                 id='profile-tab-pane'
