@@ -1,7 +1,8 @@
 import { Contest, Ticket } from '@/payload-types'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
 import Link from 'next/link'
-import { BsChevronDown } from 'react-icons/bs'
+import { useState } from 'react'
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs'
 import * as sd from 'simple-duration'
 
 const UpcomingDraws = ({
@@ -9,7 +10,17 @@ const UpcomingDraws = ({
 }: {
   upcomingDrawTicketsData: Ticket[]
 }) => {
-  console.log('data', upcomingDrawTicketsData)
+  const [currentPage, setCurrentPage] = useState(1)
+  const ticketsToShow = 10
+
+  const indexOfLastTicket = currentPage * ticketsToShow
+  const currentTickets = upcomingDrawTicketsData?.slice(0, indexOfLastTicket)
+  const handleShowMore = () => {
+    setCurrentPage((next: number) => next + 1)
+  }
+  const handleShowLess = () => {
+    setCurrentPage(1)
+  }
   return (
     <div className='past-draw-wrapper'>
       <h3 className='title'>Upcoming Draws</h3>
@@ -24,7 +35,7 @@ const UpcomingDraws = ({
             </tr>
           </thead>
           <tbody>
-            {upcomingDrawTicketsData?.map(ticket => {
+            {currentTickets?.map(ticket => {
               const date = new Date(
                 (ticket?.contest_id?.value as Contest).threshold_reached_date ||
                   '1',
@@ -49,7 +60,7 @@ const UpcomingDraws = ({
                       {(ticket?.contest_id?.value as Contest)
                         ?.threshold_reached_date
                         ? winnerAnnoucingDate
-                        : 'N/A'}
+                        : 'Coming soon'}
                     </span>
                   </td>
                   <td>
@@ -80,11 +91,21 @@ const UpcomingDraws = ({
         </table>
       </div>
       <div className='load-more'>
-        <button
-          type='button'
-          className='d-flex align-items-center justify-content-lg-center gap-1'>
-          Show More Lotteries <BsChevronDown />
-        </button>
+        {indexOfLastTicket >= upcomingDrawTicketsData?.length ? (
+          <button
+            onClick={handleShowLess}
+            type='button'
+            className='d-flex align-items-center justify-content-lg-center gap-1'>
+            Show Less Lotteries <BsChevronUp />
+          </button>
+        ) : (
+          <button
+            onClick={handleShowMore}
+            type='button'
+            className='d-flex align-items-center justify-content-lg-center gap-1'>
+            Show More Lotteries <BsChevronDown />
+          </button>
+        )}
       </div>
     </div>
   )
