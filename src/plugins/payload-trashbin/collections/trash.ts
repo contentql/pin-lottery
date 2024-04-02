@@ -2,6 +2,23 @@ import type { CollectionConfig } from 'payload/types'
 
 import { RestoreButton } from '../components/RestoreButton'
 
+// This is a object converter that converts any  expanded relation including nested to plain relation (where the value of the relation is just the id)
+function convertObject(obj: any) {
+  Object.keys(obj).forEach(key => {
+    if (Object.hasOwn(obj[key], 'relationTo')) {
+      obj[key].value = obj[key].value.id
+    }
+  })
+
+  for (let key in obj) {
+    if (typeof obj[key] === 'object') {
+      convertObject(obj[key])
+    }
+  }
+
+  return obj
+}
+
 export const Trash: CollectionConfig = {
   slug: 'trash',
   access: {
@@ -43,12 +60,14 @@ export const Trash: CollectionConfig = {
         const middleData = { ...newValue, _id: newValue.id }
         const { id, ...restData } = middleData
 
-        await payload.db.collections[collectionName].create(restData)
+        await payload.db.collections[collectionName].create(
+          convertObject(restData),
+        )
 
         // @ts-ignore (just in case user was not generating types after adding plugin)
         await payload.delete({ collection: 'trash', id: restoreDocId })
 
-        res.status(200).json({ success: true })
+        res.status(200).json({ status: true })
       },
     },
   ],
