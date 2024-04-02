@@ -15,6 +15,7 @@ const LatestContest = ({
   isContestsPending,
   filters,
   setFilters,
+  setPageNumber,
 }: any) => {
   const { data: wishlistData, refetch: refetchWishlistData } =
     trpc.wishlist.getWishlistTickets.useQuery()
@@ -75,6 +76,7 @@ const LatestContest = ({
     search.set('tag', tag.toString())
     router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByName: tag })
+    setPageNumber(1)
   }
 
   const handleSearchTitle = (value: string) => {
@@ -86,6 +88,7 @@ const LatestContest = ({
     }
     router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByTitle: value })
+    setPageNumber(1)
   }
 
   const handleSearchPrice = (value: number) => {
@@ -97,7 +100,7 @@ const LatestContest = ({
     }
     router.push(`${pathname}?${search.toString()}#contest`)
     setFilters({ ...filters, filterByPrice: value })
-    console.log('types', value)
+    setPageNumber(1)
   }
 
   const handleSearchSortBy = (value: string) => {

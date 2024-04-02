@@ -1141,6 +1141,7 @@ $duration: 1000;
   padding: 2px 6px;
   border: 1px solid white;
   border-radius: 50%;
+  z-index: 1000;
 }
 .next-button-slick:hover {
   background-image: linear-gradient(
@@ -1154,11 +1155,12 @@ $duration: 1000;
 .prev-slick-button {
   position: absolute;
   top: 50%;
-  right: -30px;
+  right: 0;
+  z-index: 1000;
 }
 .next-slick-button-position {
   position: absolute;
-  left: -30px;
+  left: 0;
   top: 50%;
 }
 
@@ -1290,4 +1292,43 @@ $duration: 1000;
   100% {
     transform: rotate(5deg);
   }
+}
+.hero-slider {
+  position: relative;
+}
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+}
+
+.next-button-slick-hero {
+  color: white;
+  padding: 2px 6px;
+  border: 1px solid white;
+  border-radius: 50%;
+  z-index: 1000;
+}
+.next-button-slick-hero:hover {
+  background-image: linear-gradient(
+    360deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(251, 185, 54) 100%
+  );
+  border: none;
+}
+.prev-slick-button-hero {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+.next-slick-button-position-hero {
+  position: absolute;
+  left: 30px;
+
+  top: 50%;
 }
