@@ -85,6 +85,17 @@ const Ticket: CollectionConfig = {
         description: 'The contest associated with this ticket.',
         position: 'sidebar',
       },
+      filterOptions: ({ relationTo, data, id }) => {
+        if (relationTo === 'contest') {
+          return {
+            contest_status: {
+              equals: false,
+            },
+          }
+        }
+
+        return false
+      },
     },
     {
       name: 'purchased_by',
