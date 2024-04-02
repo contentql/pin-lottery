@@ -341,6 +341,23 @@ export interface Tag {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wishlist".
+ */
+export interface Wishlist {
+  id: string;
+  contest: {
+    relationTo: 'contest';
+    value: string | Contest;
+  };
+  user?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "trash".
  */
 export interface Trash {
@@ -355,23 +372,6 @@ export interface Trash {
     | boolean
     | null;
   collectionName?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "wishlist".
- */
-export interface Wishlist {
-  id: string;
-  contest: {
-    relationTo: 'contest';
-    value: string | Contest;
-  };
-  user?: {
-    relationTo: 'users';
-    value: string | User;
-  } | null;
   updatedAt: string;
   createdAt: string;
 }
