@@ -21,18 +21,15 @@ import Wishlist from './collections/Wishlist'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
-import { createCustomer } from './plugins/payload-paystack'
-import { s3StorageAdapter } from './plugins/s3'
-import { sentry } from '@payloadcms/plugin-sentry'
 import { paystack } from './plugins/payload-paystack'
+import { trashBin } from './plugins/payload-trashbin'
+import { s3StorageAdapter } from './plugins/s3'
 import {
   generateDescription,
   generateImage,
   generateTitle,
   generateURL,
 } from './utils/seo'
-import BeforeDashboard from './payload-components/BeforeDashboard'
-import { trashBin } from './plugins/payload-trashbin'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
