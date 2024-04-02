@@ -8,6 +8,7 @@ import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
 import { JWTUser } from '../../custom-payload-types'
 import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
+import { deleteRelatedDocsAfterDelete } from './hooks/deleteRelatedDocsAfterDelete'
 import { deleteWinnerAfterUpdate } from './hooks/deleteWinnerAfterUpdate'
 
 const Contest: CollectionConfig = {
@@ -27,8 +28,8 @@ const Contest: CollectionConfig = {
     },
   },
   hooks: {
-    // beforeRead: [updateContestAfterRead],
     afterChange: [announceWinnerAfterUpdate, deleteWinnerAfterUpdate],
+    afterDelete: [deleteRelatedDocsAfterDelete],
   },
   fields: [
     {

@@ -3,7 +3,8 @@
     "server.ts",
     "src/collections/**/*.ts",
     "src/trpc/**/*.ts",
-    "src/routers/**/*.ts"
+    "src/routers/**/*.ts",
+    "src/plugins/**/*.ts"
   ],
   "exec": "ts-node --project tsconfig.server.json src/server.ts -- -I",
   "ext": "js ts",

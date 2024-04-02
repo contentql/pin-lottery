@@ -10,7 +10,7 @@ const SimilarContest = ({
   isSimilarContestsPending: boolean
 }) => {
   return (
-    <section className='pb-120 mt-minus-100'>
+   <section className='pb-120 mt-minus-100'>
       <div className='container'>
         <div className='section-header text-center'>
           <h2 className=''>Similar Contests</h2>

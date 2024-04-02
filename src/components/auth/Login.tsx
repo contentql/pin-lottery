@@ -41,7 +41,7 @@ const Login = () => {
     onSuccess: () => {
       setValue('email', '')
       setValue('password', '')
-      router.push('/user')
+      router.back()
     },
   })
 
