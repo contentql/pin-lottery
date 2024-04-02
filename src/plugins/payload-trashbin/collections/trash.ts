@@ -60,6 +60,18 @@ export const Trash: CollectionConfig = {
         const middleData = { ...newValue, _id: newValue.id }
         const { id, ...restData } = middleData
 
+        // // This is to ensure all createAfter hooks of the respective collection get triggers
+        // const newlyRestoredDataWithWrongId = await payload.create({
+        //   collection: collectionName,
+        //   data: convertObject(newValue),
+        // })
+
+        // // This is to ensure we remove the duplicated data, which we created just to trigger the afterCreate Hook
+        // await payload.db.collections[collectionName].deleteOne({
+        //   _id: newlyRestoredDataWithWrongId.id,
+        // })
+
+        // This is to have the previous document id of the collection to ensure proper relations
         await payload.db.collections[collectionName].create(
           convertObject(restData),
         )
