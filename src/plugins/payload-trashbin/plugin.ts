@@ -3,7 +3,6 @@ import Trash from './collections/trash'
 import { AfterDeleteHook } from 'payload/dist/collections/config/types'
 import { PluginTypes } from './types'
 
-
 const addDocumentToTrashCollection: AfterDeleteHook = async ({
   req,
   doc,
@@ -50,7 +49,7 @@ export const trashBin =
               if (user) {
                 const { roles } = user
                 if (
-                  pluginOptions.displayToRoles?.some(role =>
+                  !pluginOptions.displayToRoles?.some(role =>
                     roles.includes(role),
                   )
                 )
