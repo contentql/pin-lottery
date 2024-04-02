@@ -16,7 +16,8 @@ import { Contest, Tag, Winner } from '@/payload-types'
 
 const HomeView = () => {
   // get hero contests
-  const { data: HeroContests } = trpc.contest.getHeroContests.useQuery()
+  const { data: HeroContests, refetch: refetchHeroContests } =
+    trpc.contest.getHeroContests.useQuery()
   // get ongoing contests
   const { data: contestDetails } = trpc.contest.getOngoingContests.useQuery()
 
@@ -29,7 +30,10 @@ const HomeView = () => {
 
   return (
     <>
-      <Hero HeroContests={HeroContests as Contest[]} />
+      <Hero
+        HeroContests={HeroContests as Contest[]}
+        refetchHeroContests={refetchHeroContests}
+      />
       <ContestCategories allTags={allTags as Tag[]} />
       <ContestDetailsPage contestDetails={contestDetails as Contest[]} />
       <WinnerDetails winnerDetails={winnerDetails as Winner[]} />

@@ -35,6 +35,9 @@ export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
         tickets_purchased: ticketsPurchased,
         reached_threshold: reachedThreshold,
         threshold_reached_date: reachedThreshold ? date.toString() : undefined,
+        show_in_hero: reachedThreshold
+          ? true
+          : (purchasedTicket?.contest_id.value as Contest).show_in_hero,
       }
 
       try {
