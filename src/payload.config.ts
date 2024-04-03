@@ -21,6 +21,7 @@ import Wishlist from './collections/Wishlist'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
+import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
 import { paystack } from './plugins/payload-paystack'
 import { trashBin } from './plugins/payload-trashbin'
 import { s3StorageAdapter } from './plugins/s3'
@@ -128,6 +129,41 @@ export default buildConfig({
     trashBin({
       // displayToRoles: ['all'] // default value
       // displayToRoles: ['admin'] // visible only to admins
+    }),
+
+    // This will override existing hidden settings if they exist
+    // Assuming the user collection has a 'roles' field with multiple select options and it is saved to JWT
+    roleBasedCollectionVisibility({
+      // List of roles to include in the hidden configuration, ordered by priority from high to low
+      // If a role is not mentioned here, by default, all collections will be hidden for that role (only if the user has a single role)
+      // If a role is mentioned here but not specified in the hidden object, the specific role will have access to all collections
+      roles: ['admin', 'manager', 'editor'],
+
+      // Hidden options for each role
+      // Collection names should match with the slug in the specific collection
+      hidden: {
+        manager: [
+          'cart',
+          'wishlist',
+          'contact',
+          'users',
+          'trash',
+          'blog',
+          'faq',
+        ],
+        editor: [
+          'cart',
+          'wishlist',
+          'contact',
+          'users',
+          'trash',
+          'contest',
+          'tags',
+          'tickets',
+          'winner',
+          'media',
+        ],
+      },
     }),
   ],
   typescript: {
