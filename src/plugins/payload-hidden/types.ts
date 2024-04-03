@@ -3,4 +3,5 @@ export interface PluginTypes {
     [role: string]: string[]
   }
   hideAllCollectionsForRole: string[]
+  hideCollectionsForAllRoles: string[]
 }

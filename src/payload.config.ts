@@ -126,39 +126,26 @@ export default buildConfig({
       generateURL,
     }),
     paystack,
-
-    // This will override existing hidden settings if they exist
-    // Assuming the user collection has a 'roles' field with multiple select options and it is saved to JWT
     roleBasedCollectionVisibility({
-      // List of roles to include in the hidden configuration, ordered by priority from high to low
-      // If a role is not mentioned here, by default, all collections will be hidden for that role (only if the user has a single role)
-      // If a role is mentioned here but not specified in the hidden object, the specific role will have access to all collections
-      // roles: ['admin', 'manager', 'editor'],
-
-      // Hidden options for each role
-      // Collection names should match with the slug in the specific collection
       hideCollectionsForRole: {
         admin: [],
-        manager: ['cart', 'wishlist', 'contact', 'users', 'blog', 'faq'],
-        editor: [
-          'cart',
-          'wishlist',
-          'contact',
-          'users',
-          'contest',
-          'tags',
-          'tickets',
-          'winner',
-          'media',
-        ],
+        manager: ['contact', 'users', 'blog', 'faq'],
+        editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
       },
       hideAllCollectionsForRole: ['user'],
+      hideCollectionsForAllRoles: ['cart', 'wishlist'],
     }),
 
     trashBin({
       // displayToRoles: ['all'] // default value
       displayToRoles: ['admin'], // visible only to admins
     }),
+    /* 
+    Both for trashbin and roleBasedCollectionVisibility
+
+    This will override existing hidden settings if they exist
+    Assuming the user collection has a 'roles' field with multiple select options and it is saved to JWT
+    */
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
