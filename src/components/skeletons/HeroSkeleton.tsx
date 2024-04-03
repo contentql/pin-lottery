@@ -41,7 +41,7 @@ const HeroSkeleton = () => {
             <div className='col-lg-6 col-md-8'>
               <div className='hero-isloading'>
                 <h2 className='loading-h2'></h2>
-                <h2 className='loading-h1'></h2>
+                <p className='loading-p'></p>
                 <p className='loading-p'></p>
                 <p className='loading-p'></p>
                 <p className='loading-p'></p>
