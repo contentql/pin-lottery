@@ -20,4 +20,5 @@ export interface PluginTypes {
     },
    */
   displayToRoles?: string[]
+  doNotEnableTrash?: string[]
 }

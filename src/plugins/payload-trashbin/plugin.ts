@@ -1,6 +1,6 @@
 import type { Config, Plugin } from 'payload/config'
-import Trash from './collections/trash'
 import { AfterDeleteHook } from 'payload/dist/collections/config/types'
+import Trash from './collections/trash'
 import { PluginTypes } from './types'
 
 const addDocumentToTrashCollection: AfterDeleteHook = async ({
@@ -9,14 +9,6 @@ const addDocumentToTrashCollection: AfterDeleteHook = async ({
   collection,
 }) => {
   const { payload } = req
-
-  // This piece of code ensures that when the document is saved in trash will only contains the id of the relationship
-
-  // Object.keys(doc).forEach(key => {
-  //   if (Object.hasOwn(doc[key], 'relationTo')) {
-  //     doc[key].value = doc[key].value.id
-  //   }
-  // })
 
   const trashDoc = {
     collectionName: collection.slug, // should be same as slug
@@ -33,9 +25,15 @@ const addDocumentToTrashCollection: AfterDeleteHook = async ({
 export const trashBin =
   (pluginOptions: PluginTypes): Plugin =>
   (incomingConfig: Config): Config => {
+    const { displayToRoles, doNotEnableTrash } = pluginOptions
+
     const updatedCollectionWithAfterDelete = (
       incomingConfig.collections || []
     ).map(collection => {
+      if (doNotEnableTrash?.includes(collection.slug)) {
+        return collection
+      }
+
       return {
         ...collection,
         hooks: {
@@ -61,21 +59,17 @@ export const trashBin =
           admin: {
             // @ts-ignore (JWT User issues, it is mandatory to save the roles in JWT here)
             hidden: ({ user }) => {
-              if (!pluginOptions.displayToRoles?.length) {
+              if (!displayToRoles?.length) {
                 return false
               }
 
-              if (pluginOptions.displayToRoles?.includes('all')) {
+              if (displayToRoles?.includes('all')) {
                 return false
               }
 
               if (user) {
                 const { roles } = user
-                if (
-                  pluginOptions.displayToRoles?.some(role =>
-                    roles.includes(role),
-                  )
-                )
+                if (displayToRoles?.some(role => roles.includes(role)))
                   return false
               }
 
