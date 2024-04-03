@@ -65,7 +65,6 @@ const LatestWinner = () => {
     if (winnerFilters?.ticketNumber === '') return true
     return winner?.ticket?.value?.ticket_number === winnerFilters.ticketNumber
   }
-
   const handleClearFilters = () => {
     const params = new URLSearchParams()
     router.push(`${pathname}?${params.toString()}#winner_id`)
