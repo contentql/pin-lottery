@@ -331,3 +331,17 @@
   border-radius: 10px;
   animation: 1.5s shine linear infinite;
 }
+.user-isloading .loading-field {
+  width: 40%;
+  height: 20px;
+  background-image: -webkit-linear-gradient(
+    left,
+    rgb(190, 184, 184) 0px,
+    white 40px,
+    rgb(190, 184, 184) 80px
+  );
+  margin: 10px 20px;
+  background-size: 200% 100%;
+  border-radius: 30px;
+  animation: 1.5s shine linear infinite;
+}

@@ -1,6 +1,7 @@
 'use client'
 
 import LeftSideMenu from '@/components/common/LeftSideMenu'
+import UserDetailsSkeleton from '@/components/skeletons/UserDetailsSkeleton'
 import Info from '@/components/user-info/Info'
 import { currentUser } from '@/queries/auth/currentUser'
 import { useQuery } from '@tanstack/react-query'
@@ -23,7 +24,11 @@ const UserInfoView = () => {
             <LeftSideMenu />
 
             {/* Personal details */}
-            <Info userData={userData} />
+            {isUserDataPending ? (
+              <UserDetailsSkeleton />
+            ) : (
+              <Info userData={userData} />
+            )}
           </div>
         </div>
       </div>
