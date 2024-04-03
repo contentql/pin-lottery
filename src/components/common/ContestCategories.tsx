@@ -38,7 +38,19 @@ function ContestCategories({ allTags }: { allTags: Tag[] }) {
                   </div>
                 </div>
                 {tag?.is_coming_soon && (
-                  <p className='badge-coming-soon'>Coming soon</p>
+                  // <p className='badge-coming-soon'>Coming soon</p>
+                  <div className='badge-coming-soon-category'>
+                    <a href='#'>
+                      <div className='badges'>
+                        <br />
+                        <p>
+                          <p className='firstLine'>Coming </p>
+                          <p className='secondLine'>soon </p>
+                          <br />
+                        </p>
+                      </div>
+                    </a>
+                  </div>
                 )}
               </div>
             </div>
