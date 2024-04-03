@@ -1,6 +1,5 @@
 export interface PluginTypes {
-  roles: string[]
-  hidden: {
+  hideCollectionsForRole: {
     [role: string]: string[]
   }
 }
