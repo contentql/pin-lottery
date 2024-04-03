@@ -6,7 +6,6 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
-import { JWTUser } from '../../custom-payload-types'
 import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
 import { deleteRelatedDocsAfterDelete } from './hooks/deleteRelatedDocsAfterDelete'
 import { deleteWinnerAfterUpdate } from './hooks/deleteWinnerAfterUpdate'
@@ -15,17 +14,6 @@ const Contest: CollectionConfig = {
   slug: 'contest',
   admin: {
     useAsTitle: 'title',
-    hidden: ({ user }: { user: JWTUser }) => {
-      if (user) {
-        const { roles } = user
-
-        if (roles?.includes('manager')) return false
-        if (roles?.includes('admin')) return false
-        if (roles?.includes('editor')) return true
-      }
-
-      return true
-    },
   },
   hooks: {
     afterChange: [announceWinnerAfterUpdate, deleteWinnerAfterUpdate],
