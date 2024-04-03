@@ -1,7 +1,6 @@
 import { NumberField } from '@nouance/payload-better-fields-plugin'
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
-import { JWTUser } from '../../custom-payload-types'
 import { User } from '../../payload-types'
 import { isManagerOrAdminOrSelf } from './access/isManagerOrAdminOrSelf'
 import { assignUserId } from './field-level-hooks/assignUserId'
@@ -18,17 +17,6 @@ const Ticket: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'ticket_number',
-    hidden: ({ user }: { user: JWTUser }) => {
-      if (user) {
-        const { roles } = user
-
-        if (roles?.includes('manager')) return false
-        if (roles?.includes('admin')) return false
-        if (roles?.includes('editor')) return true
-      }
-
-      return true
-    },
   },
   // when creating a ticket, ensure the button was disabled
   hooks: {

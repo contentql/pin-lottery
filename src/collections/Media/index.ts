@@ -7,9 +7,6 @@ const urlField: Field = {
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  admin: {
-    hidden: false,
-  },
   access: {
     read: () => true,
     delete: () => true,

@@ -21,6 +21,7 @@ import Wishlist from './collections/Wishlist'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
+import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
 import { paystack } from './plugins/payload-paystack'
 import { trashBin } from './plugins/payload-trashbin'
 import { s3StorageAdapter } from './plugins/s3'
@@ -125,10 +126,26 @@ export default buildConfig({
       generateURL,
     }),
     paystack,
+    roleBasedCollectionVisibility({
+      hideCollectionsForRole: {
+        // admin: [],
+        manager: ['contact', 'users', 'blog', 'faq'],
+        editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
+      },
+      hideAllCollectionsForRole: ['user'],
+      hideCollectionsForAllRoles: ['cart', 'wishlist'],
+    }),
+
     trashBin({
       // displayToRoles: ['all'] // default value
-      // displayToRoles: ['admin'] // visible only to admins
+      displayToRoles: ['admin'], // visible only to admins
     }),
+    /* 
+    Both for trashbin and roleBasedCollectionVisibility
+
+    This will override existing hidden settings if they exist
+    Assuming the user collection has a 'roles' field with multiple select options and it is saved to JWT
+    */
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
