@@ -19,7 +19,7 @@ export const roleBasedCollectionVisibility =
     Object.entries(hideCollectionsForRole).forEach(
       ([role, hiddenCollections]) => {
         showCollectionsForRole[role] = allCollections?.filter(
-          collection => !hiddenCollections.includes(collection),
+          collection => !hiddenCollections?.includes(collection),
         )
       },
     )
@@ -30,16 +30,26 @@ export const roleBasedCollectionVisibility =
 
     const updatedCollections = incomingConfig.collections?.map(collection => {
       const hideBasedOnRole = ({ user }: any) => {
+        if (hideCollectionsForAllRoles.includes(collection.slug)) return true
+
         const { roles: userRoles } = user
 
         const combiningCollectionsBasedOnRole: string[] = []
-        userRoles.forEach((userRole: string) => {
-          combiningCollectionsBasedOnRole.push(
-            ...showCollectionsForRole[userRole],
-          )
-        })
 
-        if (hideCollectionsForAllRoles.includes(collection.slug)) return true
+        userRoles.forEach((userRole: string) => {
+          if (showCollectionsForRole[userRole]) {
+            combiningCollectionsBasedOnRole.push(
+              ...showCollectionsForRole[userRole],
+            )
+          } else {
+            combiningCollectionsBasedOnRole.push(
+              ...allCollections!.filter(
+                (collection: string) =>
+                  !hideCollectionsForAllRoles.includes(collection),
+              ),
+            )
+          }
+        })
 
         const uniqueCollectionsToShow = [
           ...new Set(combiningCollectionsBasedOnRole),
@@ -60,41 +70,6 @@ export const roleBasedCollectionVisibility =
         },
       }
     })
-
-    // const updatedCollections = incomingConfig.collections?.map(collection => {
-    //   const hiddenRoles = ({ user }: { user: any }) => {
-    //     // Check if user object and user roles exist
-    //     if (user && user.roles) {
-    //       // Iterate over each role specified in the plugin options
-    //       for (const role of roles) {
-    //         // Check if the user has the current role being iterated
-    //         if (user.roles.includes(role)) {
-    //           // If the collection is not in the hidden list for the role, show the collection
-    //           if (!hideCollectionsForRole[role]?.includes(collection.slug)) {
-    //             return false // Return false to show the collection
-    //           }
-    //           // If the collection is in the hidden list for the role, hide the collection
-    //           else if (
-    //             hideCollectionsForRole[role]?.includes(collection.slug)
-    //           ) {
-    //             return true // Return true to hide the collection
-    //           }
-    //         }
-    //       }
-    //     }
-
-    //     // Default to true (hide collection) if user or user.roles is not defined, or if role is not found in hidden object
-    //     return true
-    //   }
-
-    //   return {
-    //     ...collection,
-    //     admin: {
-    //       ...collection.admin,
-    //       hidden: hiddenRoles,
-    //     },
-    //   }
-    // })
 
     return {
       ...incomingConfig,

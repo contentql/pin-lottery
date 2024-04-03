@@ -21,6 +21,7 @@ import Wishlist from './collections/Wishlist'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
+import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
 import { paystack } from './plugins/payload-paystack'
 import { trashBin } from './plugins/payload-trashbin'
 import { s3StorageAdapter } from './plugins/s3'
@@ -30,7 +31,6 @@ import {
   generateTitle,
   generateURL,
 } from './utils/seo'
-import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -128,7 +128,7 @@ export default buildConfig({
     paystack,
     roleBasedCollectionVisibility({
       hideCollectionsForRole: {
-        admin: [],
+        // admin: [],
         manager: ['contact', 'users', 'blog', 'faq'],
         editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
       },
