@@ -18,12 +18,18 @@ function ContestCategories({ allTags }: { allTags: Tag[] }) {
             <div key={tag?.id} className='col-xl-3 col-lg-4 col-sm-6 mb-30'>
               <div className='play-card play-card--one'>
                 <div className='play-card__icon'>
-                  <Image
-                    src={(tag?.img as Media)?.url || ''}
-                    width={100}
-                    height={100}
-                    alt='image-icon'
-                  />
+                  <Link
+                    href={{
+                      pathname: '/contest',
+                      query: { tag: tag?.tag },
+                    }}>
+                    <Image
+                      src={(tag?.img as Media)?.url || ''}
+                      width={100}
+                      height={100}
+                      alt='image-icon'
+                    />
+                  </Link>
                 </div>
                 <div className='play-card__content'>
                   {tag?.is_coming_soon ? (
@@ -32,14 +38,7 @@ function ContestCategories({ allTags }: { allTags: Tag[] }) {
                       <h3 className='play-card__title'>{tag?.tag}</h3>
                     </span>
                   ) : (
-                    <Link
-                      href={{
-                        pathname: '/contest',
-                        query: { tag: tag?.tag },
-                      }}>
-                      {' '}
-                      <h3 className='play-card__title'>{tag?.tag}</h3>
-                    </Link>
+                    <h3 className='play-card__title'>{tag?.tag}</h3>
                   )}
                 </div>
               </div>
