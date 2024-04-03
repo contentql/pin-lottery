@@ -1327,17 +1327,20 @@ $duration: 1000;
 }
 .prev-slick-button-hero {
   position: absolute;
-  top: 50%;
+  top: 40%;
   right: 30px;
-  transform: translateX(-50%);
   z-index: 1;
 }
 .next-slick-button-position-hero {
   position: absolute;
   left: 30px;
-
-  top: 50%;
+  top: 40%;
 }
 .relative-pos {
   position: relative;
+}
+.hero-span-data {
+  color: #17d3ff;
+  font-size: 25px;
+  font-weight: bolder;
 }
