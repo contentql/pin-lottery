@@ -5,7 +5,7 @@ import { RestoreButton } from '../components/RestoreButton'
 // This is a object converter that converts any  expanded relation including nested to plain relation (where the value of the relation is just the id)
 function convertObject(obj: any) {
   Object.keys(obj).forEach(key => {
-    if (Object.hasOwn(obj[key], 'relationTo')) {
+    if (Object.prototype.hasOwnProperty.call(obj[key], 'relationTo')) {
       obj[key].value = obj[key].value.id
     }
   })
