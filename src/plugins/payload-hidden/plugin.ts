@@ -28,51 +28,53 @@ export const roleBasedCollectionVisibility =
       showCollectionsForRole[role] = []
     })
 
-    const updatedCollections = incomingConfig.collections?.map(collection => {
-      const hideBasedOnRole = ({ user }: any) => {
-        if (hideCollectionsForAllRoles.includes(collection.slug)) return true
+    const updatedCollections = (incomingConfig.collections || [])?.map(
+      collection => {
+        const hideBasedOnRole = ({ user }: any) => {
+          if (hideCollectionsForAllRoles.includes(collection.slug)) return true
 
-        const { roles: userRoles } = user
+          const { roles: userRoles } = user
 
-        const combiningCollectionsBasedOnRole: string[] = []
+          const combiningCollectionsBasedOnRole: string[] = []
 
-        userRoles.forEach((userRole: string) => {
-          if (showCollectionsForRole[userRole]) {
-            combiningCollectionsBasedOnRole.push(
-              ...showCollectionsForRole[userRole],
-            )
-          } else {
-            combiningCollectionsBasedOnRole.push(
-              ...allCollections!.filter(
-                (collection: string) =>
-                  !hideCollectionsForAllRoles.includes(collection),
-              ),
-            )
+          userRoles.forEach((userRole: string) => {
+            if (showCollectionsForRole[userRole]) {
+              combiningCollectionsBasedOnRole.push(
+                ...showCollectionsForRole[userRole],
+              )
+            } else {
+              combiningCollectionsBasedOnRole.push(
+                ...allCollections!.filter(
+                  (collection: string) =>
+                    !hideCollectionsForAllRoles.includes(collection),
+                ),
+              )
+            }
+          })
+
+          const uniqueCollectionsToShow = [
+            ...new Set(combiningCollectionsBasedOnRole),
+          ]
+
+          if (uniqueCollectionsToShow.includes(collection.slug)) {
+            return false
           }
-        })
 
-        const uniqueCollectionsToShow = [
-          ...new Set(combiningCollectionsBasedOnRole),
-        ]
-
-        if (uniqueCollectionsToShow.includes(collection.slug)) {
-          return false
+          return true
         }
 
-        return true
-      }
-
-      return {
-        ...collection,
-        admin: {
-          ...collection.admin,
-          hidden: hideBasedOnRole,
-        },
-      }
-    })
+        return {
+          ...collection,
+          admin: {
+            ...collection.admin,
+            hidden: hideBasedOnRole,
+          },
+        }
+      },
+    )
 
     return {
       ...incomingConfig,
-      collections: updatedCollections,
+      collections: [...updatedCollections],
     }
   }
