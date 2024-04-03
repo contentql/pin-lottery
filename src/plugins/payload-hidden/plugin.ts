@@ -4,9 +4,7 @@ import { PluginTypes } from './types'
 export const roleBasedCollectionVisibility =
   (pluginOptions: PluginTypes): Plugin =>
   (incomingConfig: Config): Config => {
-    const { hideCollectionsForRole } = pluginOptions
-
-    const roles = Object.keys(hideCollectionsForRole)
+    const { hideCollectionsForRole, hideAllCollectionsForRole } = pluginOptions
 
     const allCollections = incomingConfig.collections?.map(
       collection => collection.slug,
@@ -22,11 +20,30 @@ export const roleBasedCollectionVisibility =
       },
     )
 
+    hideAllCollectionsForRole.forEach(role => {
+      showCollectionsForRole[role] = []
+    })
+
     const updatedCollections = incomingConfig.collections?.map(collection => {
       const hideBasedOnRole = ({ user }: any) => {
         const { roles: userRoles } = user
 
-        return false
+        const combiningCollectionsBasedOnRole: string[] = []
+        userRoles.forEach((userRole: string) => {
+          combiningCollectionsBasedOnRole.push(
+            ...showCollectionsForRole[userRole],
+          )
+        })
+
+        const uniqueCollectionsToShow = [
+          ...new Set(combiningCollectionsBasedOnRole),
+        ]
+
+        if (uniqueCollectionsToShow.includes(collection.slug)) {
+          return false
+        }
+
+        return true
       }
 
       return {

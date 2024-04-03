@@ -30,6 +30,7 @@ import {
   generateTitle,
   generateURL,
 } from './utils/seo'
+import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -128,30 +129,31 @@ export default buildConfig({
 
     // This will override existing hidden settings if they exist
     // Assuming the user collection has a 'roles' field with multiple select options and it is saved to JWT
-    // roleBasedCollectionVisibility({
-    //   // List of roles to include in the hidden configuration, ordered by priority from high to low
-    //   // If a role is not mentioned here, by default, all collections will be hidden for that role (only if the user has a single role)
-    //   // If a role is mentioned here but not specified in the hidden object, the specific role will have access to all collections
-    //   // roles: ['admin', 'manager', 'editor'],
+    roleBasedCollectionVisibility({
+      // List of roles to include in the hidden configuration, ordered by priority from high to low
+      // If a role is not mentioned here, by default, all collections will be hidden for that role (only if the user has a single role)
+      // If a role is mentioned here but not specified in the hidden object, the specific role will have access to all collections
+      // roles: ['admin', 'manager', 'editor'],
 
-    //   // Hidden options for each role
-    //   // Collection names should match with the slug in the specific collection
-    //   hideCollectionsForRole: {
-    //     admin: [],
-    //     manager: ['cart', 'wishlist', 'contact', 'users', 'blog', 'faq'],
-    //     editor: [
-    //       'cart',
-    //       'wishlist',
-    //       'contact',
-    //       'users',
-    //       'contest',
-    //       'tags',
-    //       'tickets',
-    //       'winner',
-    //       'media',
-    //     ],
-    //   },
-    // }),
+      // Hidden options for each role
+      // Collection names should match with the slug in the specific collection
+      hideCollectionsForRole: {
+        admin: [],
+        manager: ['cart', 'wishlist', 'contact', 'users', 'blog', 'faq'],
+        editor: [
+          'cart',
+          'wishlist',
+          'contact',
+          'users',
+          'contest',
+          'tags',
+          'tickets',
+          'winner',
+          'media',
+        ],
+      },
+      hideAllCollectionsForRole: ['user'],
+    }),
 
     trashBin({
       // displayToRoles: ['all'] // default value
