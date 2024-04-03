@@ -60,11 +60,16 @@
   padding: var(--pagination-padding-y, 0.375rem)
     var(--pagination-padding-x, 0.75rem);
   font-size: var(--pagination-font-size, 1rem);
-  color: var(--pagination-color, #0d6efd);
+  color: var(--pagination-color, rgb(251, 100, 104) 44%);
+  background: linear-gradient(
+    360deg,
+    rgb(193, 101, 221) 0%,
+    rgb(92, 39, 254) 100%
+  );
+
   text-decoration: none;
   background-color: var(--pagination-bg, #fff);
-  border: var(--pagination-border-width, 1px) solid
-    var(--pagination-border-color, #dee2e6);
+  border: none;
   border-radius: var(--pagination-border-radius, 0.375rem);
   margin: 0 var(--pagination-item-margin-x, 0.2rem);
   transition:
@@ -80,7 +85,10 @@
 }
 .pagination .page-link:hover {
   z-index: 2;
-  color: var(--pagination-hover-color, #0a58ca);
+  color: var(
+    --pagination-hover-color,
+    linear-gradient(110deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%)
+  );
   background-color: var(--pagination-hover-bg, #e9ecef);
   border-color: var(
     --pagination-hover-border-color,
@@ -92,10 +100,19 @@
 }
 .pagination .active > .page-link {
   z-index: 3;
+  border: none;
 
-  background-color: var(
+  background-image: var(
     --pagination-active-bg,
-    var(--pagination-color, #0d6efd)
+    var(
+      --pagination-color,
+      linear-gradient(
+        4deg,
+        rgb(236, 3, 139) 0%,
+        rgb(251, 100, 104) 44%,
+        rgb(251, 185, 54) 100%
+      )
+    )
   );
   border-color: var(
     --pagination-active-border-color,
