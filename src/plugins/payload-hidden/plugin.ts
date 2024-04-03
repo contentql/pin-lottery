@@ -39,7 +39,7 @@ export const roleBasedCollectionVisibility =
           )
         })
 
-        // if (hideCollectionsForAllRoles.includes(collection.slug)) return true
+        if (hideCollectionsForAllRoles.includes(collection.slug)) return true
 
         const uniqueCollectionsToShow = [
           ...new Set(combiningCollectionsBasedOnRole),
