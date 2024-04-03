@@ -13,7 +13,6 @@ function VehicleSpecifications({
 }: {
   contestDetails: Contest
 }) {
-  console.log('details', contestDetails)
   return (
     <div className='content-block'>
       <h3 className='title'>Specifications</h3>
