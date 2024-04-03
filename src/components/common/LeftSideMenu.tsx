@@ -106,63 +106,65 @@ const LeftSideMenu = () => {
 
   return (
     <div className='col-lg-4'>
-      <div className='user-card'>
-        <div className='avatar-upload'>
-          <div className='obj-el'>
-            <Image src={team_obj} alt='team obj' />
+      <div className='card-sticky-pos'>
+        <div className='user-card'>
+          <div className='avatar-upload'>
+            <div className='obj-el'>
+              <Image src={team_obj} alt='team obj' />
+            </div>
+            <div className='avatar-edit'>
+              <input type='file' id='imageUpload' onChange={handleUpload} />
+              <label htmlFor='imageUpload'></label>
+            </div>
+            <div
+              className='avatar-preview'
+              style={{
+                backgroundImage: `url(${uploadedImage ? uploadedImage : userData?.image !== undefined ? userData?.image?.sizes?.userProfile?.url : '/images/user/pp.png'})`,
+              }}>
+              <div id='imagePreview'></div>
+            </div>
           </div>
-          <div className='avatar-edit'>
-            <input type='file' id='imageUpload' onChange={handleUpload} />
-            <label htmlFor='imageUpload'></label>
-          </div>
-          <div
-            className='avatar-preview'
-            style={{
-              backgroundImage: `url(${uploadedImage ? uploadedImage : userData?.image !== undefined ? userData?.image?.sizes?.userProfile?.url : '/images/user/pp.png'})`,
-            }}>
-            <div id='imagePreview'></div>
-          </div>
+          {userImage && (
+            <button
+              className='cmn-btn style--two d-flex align-items-center update-profile-image'
+              type='button'
+              disabled={isUserImagePending}
+              onClick={() => handleUpdateUserProfile()}>
+              Update Image
+            </button>
+          )}
+          <h3 className='user-card__name'>{userData?.user_name}</h3>
+          <p className='user-card__id'>ID : {userData?.id}</p>
+          <Link href='/user-info' className='complete-profile-button'>
+            Complete Your Profile
+            <FaArrowRightLong className='material-icons' />
+          </Link>
         </div>
-        {userImage && (
-          <button
-            className='cmn-btn style--two d-flex align-items-center update-profile-image'
-            type='button'
-            disabled={isUserImagePending}
-            onClick={() => handleUpdateUserProfile()}>
-            Update Image
-          </button>
-        )}
-        <h3 className='user-card__name'>{userData?.user_name}</h3>
-        <p className='user-card__id'>ID : {userData?.id}</p>
-        <Link href='/user-info' className='complete-profile-button'>
-          Complete Your Profile
-          <FaArrowRightLong className='material-icons' />
-        </Link>
-      </div>
 
-      <div className='user-action-card'>
-        <ul className='user-action-list'>
-          {[
-            ['My Tickets', '/user'],
-            ['Personal Information', '/user-info'],
-            ['Transactions', '/user-transaction'],
-            ['Referral Program', '/user-referral'],
-            ['Favorite Lotteries', '/user-lottery'],
-            ['Help Center', '/contact'],
-          ].map(([item, url], i) => (
-            <li key={item} className={`${pathname === url && 'active'} `}>
-              <Link href={url}>
-                {item}
-                {/* {i === 0 ? <span className='badge'>04</span> : ''} */}
-              </Link>
+        <div className='user-action-card'>
+          <ul className='user-action-list'>
+            {[
+              ['My Tickets', '/user'],
+              ['Personal Information', '/user-info'],
+              ['Transactions', '/user-transaction'],
+              ['Referral Program', '/user-referral'],
+              ['Favorite Lotteries', '/user-lottery'],
+              ['Help Center', '/contact'],
+            ].map(([item, url], i) => (
+              <li key={item} className={`${pathname === url && 'active'} `}>
+                <Link href={url}>
+                  {item}
+                  {/* {i === 0 ? <span className='badge'>04</span> : ''} */}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <a href='#' onClick={handleLogout}>
+                Log Out
+              </a>
             </li>
-          ))}
-          <li>
-            <a href='#' onClick={handleLogout}>
-              Log Out
-            </a>
-          </li>
-        </ul>
+          </ul>
+        </div>
       </div>
     </div>
   )

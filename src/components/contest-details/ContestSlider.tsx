@@ -26,8 +26,6 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
 
-  console.log('contestDetails', contestDetails)
-
   const [toggleView, setToggleView] = useState(false)
 
   const settings = {

@@ -1185,27 +1185,34 @@ $duration: 1000;
   border-radius: 16px;
   color: white !important;
 }
+.badge-coming-soon-category {
+  position: absolute;
+  top: 0px;
+  right: 4px;
+}
 .tag-nav {
   position: relative;
   font-size: 2px;
 }
 
 .firstLine {
-  margin-top: 10px;
+  margin-top: 15px;
   line-height: 10px;
-  font-size: 16px;
+  font-size: 12px;
+  color: white !important;
   font-weight: bolder;
 }
 .secondLine {
   line-height: 20px;
-  font-size: 16px;
+  font-size: 12px;
+  color: white !important;
   font-weight: bolder;
 }
 .badges {
   position: relative;
   margin: 40px auto;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   background-image: linear-gradient(
     4deg,
     rgb(236, 3, 139) 0%,
@@ -1213,7 +1220,6 @@ $duration: 1000;
     rgb(251, 185, 54) 100%
   );
   border-radius: 50%;
-  color: white;
   text-align: center;
   text-transform: capitalize;
   font-size: 5px;
@@ -1231,8 +1237,8 @@ $duration: 1000;
 .badges:before {
   content: '';
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 40px;
+  left: 40px;
   width: 5px;
   height: 5px;
   border-radius: 50%;
@@ -1308,7 +1314,7 @@ $duration: 1000;
   padding: 2px 6px;
   border: 1px solid white;
   border-radius: 50%;
-  z-index: 1000;
+  z-index: 1;
 }
 .next-button-slick-hero:hover {
   background-image: linear-gradient(
@@ -1321,17 +1327,20 @@ $duration: 1000;
 }
 .prev-slick-button-hero {
   position: absolute;
-  top: 50%;
+  top: 40%;
   right: 30px;
-  transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 1;
 }
 .next-slick-button-position-hero {
   position: absolute;
   left: 30px;
-
-  top: 50%;
+  top: 40%;
 }
 .relative-pos {
   position: relative;
+}
+.hero-span-data {
+  color: #17d3ff;
+  font-size: 25px;
+  font-weight: bolder;
 }

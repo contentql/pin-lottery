@@ -3,14 +3,17 @@
 import { useSearchParams } from 'next/navigation'
 
 import Banner from '@/components/common/Banner'
-import Pagination from '@/components/common/Pagination'
 import Feature from '@/components/contest/Feature'
 import LatestContest from '@/components/contest/LatestContest'
 import { useState } from 'react'
+import ResponsivePagination from 'react-responsive-pagination'
 import { useDebounceValue } from 'usehooks-ts'
+import '../../src/styles/layout/custom/_pagination.scss'
 import { trpc } from '../trpc/client'
 const ContestView = () => {
   const searchParams = useSearchParams()
+  const templatesPerPage = 9
+
   //filters
   const [pageNumber, setPageNumber] = useState(1)
   const [filters, setFilters] = useDebounceValue(
@@ -46,6 +49,8 @@ const ContestView = () => {
 
   const { data: allTags } = trpc.public.getTags.useQuery()
 
+  console.log('total', contestDetails?.totalContests)
+
   return (
     <>
       {/* Banner section here */}
@@ -70,10 +75,17 @@ const ContestView = () => {
       {contestDetails?.totalContests && contestDetails?.totalContests > 8 && (
         <div>
           <div className='row pagination-bottom'>
-            <Pagination
+            {/* <Pagination
               pageNumber={pageNumber}
               setPageNumber={setPageNumber}
-              totalContests={contestDetails?.totalContests}
+              totalContests={}
+            /> */}
+            <ResponsivePagination
+              current={pageNumber}
+              total={Math.ceil(
+                (contestDetails?.totalContests as number) / templatesPerPage,
+              )}
+              onPageChange={setPageNumber}
             />
           </div>
         </div>

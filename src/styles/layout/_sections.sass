@@ -834,19 +834,20 @@
     @media (max-width: 767px)
       width: 100%
     .content-bottom
-      padding: 30px 30px 30px 50px
+      padding: 10px 20px
       +d-flex
       @media (max-width: 767px)
         text-align: center
-        padding: 20px
+        padding: 2px
       .number-list-wrapper 
-        width: 75%
+        width: 98%
+        text-align: center
         @media (max-width: 767px)
           width: 100%
       .number-list
         +d-flex
         justify-content: space-between
-        padding-right: 30px
+        padding-right: 10px
         @media (max-width: 1199px)
           padding-right: 0
         @media (max-width: 767px)
@@ -3218,7 +3219,11 @@
 /* login css end */
 
 /* user section css start */
+.card-sticky-pos
+  position: sticky 
+  top:100px
 .user-card 
+  
   padding: 50px 30px
   background-image: linear-gradient( 320deg, rgb(123,25,203) 0%, rgb(59,38,219) 99%)
   background-image: -moz-linear-gradient( 120deg, rgb(123,25,203) 0%, rgb(59,38,219) 99%)

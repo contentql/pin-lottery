@@ -26,6 +26,7 @@ const Hero = ({
   HeroContests: Contest[]
   refetchHeroContests: Function
 }) => {
+  console.log('hero details', HeroContests)
   const [isOpen, setIsOpen] = useState(false)
   const [countdownCompleted, setCountdownCompleted] = useState(false)
 
@@ -75,7 +76,7 @@ const Hero = ({
   }
   const settings = {
     autoplay: true,
-    speed: 700,
+    speed: 1000,
     infinite: true,
     // arrows: false,
     nextArrow: <PrevBtn />,
@@ -182,6 +183,7 @@ const Hero = ({
                     <div className='col-lg-6 col-md-8'>
                       <div className='hero__content'>
                         {contest?.threshold_reached_date &&
+                          !contest?.contest_status &&
                           !contest?.winner_ticket && (
                             <div className='clock-wrapper-hero'>
                               <p className='mb-2'>This competition ends in:</p>
@@ -205,25 +207,50 @@ const Hero = ({
                               </div>
                             </div>
                           )}
-                        {contest?.winner_ticket && (
-                          <div className='winner-card__hero'>
-                            <div className='content-bottom'>
-                              <div className='number-list-wrapper'>
-                                <p>Winning Numbers:</p>
-                                <ul className='number-list mt-2'>
-                                  {splitTicketNumber(
-                                    (
-                                      (contest?.winner_ticket?.value as Winner)
-                                        ?.ticket?.value as Ticket
-                                    )?.ticket_number,
-                                  )?.map((itm: any, i: any) => (
-                                    <li key={i}>{itm}</li>
-                                  ))}
-                                </ul>
+                        {contest?.contest_status &&
+                          contest?.winner_ticket &&
+                          contest?.reached_threshold &&
+                          contest?.threshold_reached_date && (
+                            <div className='clock-wrapper-hero'>
+                              <p className='mb-2'>Winning number:</p>
+                              <div className='winner-card__hero'>
+                                <div className='content-bottom'>
+                                  <div className='number-list-wrapper'>
+                                    <ul className='number-list mt-2'>
+                                      {splitTicketNumber(
+                                        (
+                                          (
+                                            contest?.winner_ticket
+                                              ?.value as Winner
+                                          )?.ticket?.value as Ticket
+                                        )?.ticket_number,
+                                      )?.map((itm: any, i: any) => (
+                                        <li key={i}>{itm}</li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        )}
+                          )}
+                        {!contest?.winner_ticket &&
+                          !contest?.reached_threshold &&
+                          !contest?.threshold_reached_date && (
+                            <div className='clock-wrapper-hero'>
+                              <p className='mb-3'>
+                                Ticket price :
+                                <span className='hero-span-data'>
+                                  ${contest?.ticket_price}
+                                </span>
+                              </p>
+                              <p className='mb-3'>
+                                Contest number:{' '}
+                                <span className='hero-span-data'>
+                                  {contest?.contest_no}
+                                </span>
+                              </p>
+                            </div>
+                          )}
                         <h1>{contest?.title}</h1>
                         <p className='line-clamp'>
                           {contest?.hero_description}
@@ -240,12 +267,20 @@ const Hero = ({
                     </div> */}
 
                         <div className='hero__btn'>
-                          {!contest?.winner_ticket && (
+                          {!contest?.contest_status &&
+                          !contest?.winner_ticket ? (
                             <Link
                               className='cmn-btn'
                               href={`/contest/${contest?.id}`}>
                               {' '}
                               Buy Now
+                            </Link>
+                          ) : (
+                            <Link
+                              className='cmn-btn'
+                              href={`/contest/${contest?.id}`}>
+                              {' '}
+                              View more details
                             </Link>
                           )}
                           {/* <button

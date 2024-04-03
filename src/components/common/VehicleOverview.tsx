@@ -22,7 +22,7 @@ const VehicleOverview = ({ contestDetails }: { contestDetails: Contest }) => {
   ]
   return (
     <div>
-      <Tabs tabs={tabs} />
+      <Tabs tabs={tabs} isTicketsPending={false} />
     </div>
   )
 }

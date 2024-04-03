@@ -15,6 +15,7 @@ import { useAuth } from '@/providers/Auth'
 import { logout } from '@/queries/auth/logout'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
+import { FaRegHeart } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import Cart from './Cart'
 
@@ -197,6 +198,14 @@ const Header = () => {
                                 <GrTransaction size={24} color='white' />
                               </span>
                               <p>Transactions</p>
+                            </Link>
+                            <Link
+                              href='/user-lottery'
+                              className='popup-btn list-nav'>
+                              <span>
+                                <FaRegHeart size={24} color='white' />
+                              </span>
+                              <p>Wishlist</p>
                             </Link>
                             <div className='divider'></div>
                             <button

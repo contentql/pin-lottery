@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDocumentInfo } from 'payload/components/utilities'
 import { Field } from 'payload/types'
+import { Button } from 'payload/components/elements'
 
 export const RestoreButton: React.FC = props => {
   const { id } = useDocumentInfo()
@@ -10,8 +11,7 @@ export const RestoreButton: React.FC = props => {
         display: 'flex',
         flexDirection: 'row-reverse',
       }}>
-      <button
-        className='btn btn--style-primary btn--size-medium'
+      <Button
         onClick={async () => {
           await fetch(`/api/trash/restore/${id}`, {
             method: 'GET',
@@ -20,7 +20,7 @@ export const RestoreButton: React.FC = props => {
           window.location.href = `/admin`
         }}>
         Restore
-      </button>
+      </Button>
     </div>
   )
 }

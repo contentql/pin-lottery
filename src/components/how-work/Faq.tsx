@@ -8,7 +8,6 @@ import { trpc } from '@/trpc/client'
 
 const Faq = () => {
   const { data: faqs } = trpc.public.getFaqs.useQuery()
-  console.log('faqs', faqs)
   return (
     <section className='pb-120 position-relative' id='fqs'>
       <div className='faq-el'>

@@ -12,7 +12,7 @@ const RightSide = () => {
       {/* Upcoming Draw  */}
       {/* <UpcomingDraw /> */}
 
-      <div className='row mt-30  mb-none-30'>
+      <div className='row mb-none-30'>
         {wishlistData?.map((itm: any) => (
           <div key={itm.id} className='col-xl-6 col-lg-12 col-md-6 mb-30'>
             {/* Contest card */}

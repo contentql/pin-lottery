@@ -21,6 +21,7 @@ import Wishlist from './collections/Wishlist'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
+import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
 import { paystack } from './plugins/payload-paystack'
 import { trashBin } from './plugins/payload-trashbin'
 import { s3StorageAdapter } from './plugins/s3'
@@ -125,10 +126,30 @@ export default buildConfig({
       generateURL,
     }),
     paystack,
+    /* 
+    Both for trashbin and roleBasedCollectionVisibility
+
+    This will override existing hidden settings if they exist
+    Assuming the user collection has a 'roles' field with multiple select options and it is saved to JWT
+    */
+    roleBasedCollectionVisibility({
+      hideCollectionsForRole: {
+        // admin: [],
+        manager: ['contact', 'users', 'blog', 'faq'],
+        editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
+      },
+      hideAllCollectionsForRole: ['user'],
+      hideCollectionsForAllRoles: ['cart', 'wishlist'],
+    }),
     trashBin({
       // displayToRoles: ['all'] // default value
-      // displayToRoles: ['admin'] // visible only to admins
+      displayToRoles: ['admin'], // visible only to admins
     }),
+    // Retrieve URL from environment variables or configuration settings.
+    // mediaCloudflareURLHandler({
+    //   pubR2URL:
+    //     'https://pub-4569e4e5d557441e896fc4fbf32626f3.r2.dev/cql-storage-r2',
+    // }),
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

@@ -1,14 +1,27 @@
 import Link from 'next/link'
-import { BsChevronDown } from 'react-icons/bs'
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs'
 
 import { Contest, Ticket, Winner } from '@/payload-types'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
+import { useState } from 'react'
 
 const PastDraws = ({
   pastDrawsTicketsData,
 }: {
   pastDrawsTicketsData: Ticket[]
 }) => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const ticketsToShow = 10
+
+  const indexOfLastTicket = currentPage * ticketsToShow
+  const currentTickets = pastDrawsTicketsData?.slice(0, indexOfLastTicket)
+
+  const handleShowMore = () => {
+    setCurrentPage((next: number) => next + 1)
+  }
+  const handleShowLess = () => {
+    setCurrentPage(1)
+  }
   return (
     <div className='past-draw-wrapper'>
       <h3 className='title'>Past Draws</h3>
@@ -23,7 +36,7 @@ const PastDraws = ({
             </tr>
           </thead>
           <tbody>
-            {pastDrawsTicketsData?.map(ticket => {
+            {currentTickets?.map(ticket => {
               const winningTicket = (
                 (ticket?.contest_id?.value as Contest)?.winner_ticket
                   ?.value as Winner
@@ -74,11 +87,21 @@ const PastDraws = ({
         </table>
       </div>
       <div className='load-more'>
-        <button
-          type='button'
-          className='d-flex align-items-center justify-content-lg-center gap-1'>
-          Show More Lotteries <BsChevronDown />
-        </button>
+        {indexOfLastTicket >= pastDrawsTicketsData?.length ? (
+          <button
+            onClick={handleShowLess}
+            type='button'
+            className='d-flex align-items-center justify-content-lg-center gap-1'>
+            Show Less Lotteries <BsChevronUp />
+          </button>
+        ) : (
+          <button
+            onClick={handleShowMore}
+            type='button'
+            className='d-flex align-items-center justify-content-lg-center gap-1'>
+            Show More Lotteries <BsChevronDown />
+          </button>
+        )}
       </div>
     </div>
   )

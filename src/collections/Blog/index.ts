@@ -4,27 +4,11 @@ import {
   lexicalHTML,
 } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
-import { JWTUser } from '../../custom-payload-types'
 
 const Blog: CollectionConfig = {
   slug: 'blog',
   admin: {
     useAsTitle: 'title',
-    hidden: ({ user }: { user: JWTUser }) => {
-      if (user) {
-        const { roles } = user
-
-        // if (roles?.includes('editor')) return false
-        // if (roles?.includes('admin')) return false
-        // if (roles?.includes('manager')) return true
-
-        if (roles?.includes('editor')) return false
-        if (roles?.includes('admin')) return false
-        if (roles?.includes('manager')) return true
-      }
-
-      return true
-    },
   },
   fields: [
     {

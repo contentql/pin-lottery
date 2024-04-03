@@ -10,9 +10,11 @@ import TicketCheckCard from '@/components/cards/TicketCheckCard'
 import { Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { useState } from 'react'
-import WinnerCard from '../cards/WinnerCard'
 
-import Pagination from './Pagination'
+import ResponsivePagination from 'react-responsive-pagination'
+import '../../../src/styles/layout/custom/_pagination.scss'
+
+import WinnerCard from '../cards/WinnerCard'
 
 const LatestWinner = () => {
   const searchParams = useSearchParams()
@@ -29,6 +31,7 @@ const LatestWinner = () => {
   })
 
   const [pageNumber, setPageNumber] = useState(1)
+  const templatesPerPage = 5
 
   const { data: WinnersData } = trpc.winner.getWinners.useQuery()
   console.log('winners', WinnersData)
@@ -39,6 +42,7 @@ const LatestWinner = () => {
     search.set('ticketNumber', data?.ticketNumber)
     router.push(`${pathname}?${search.toString()}#winner_id`)
     setWinnerFilters({ ...winnerFilters, ticketNumber: data.ticketNumber })
+    setPageNumber(1)
   }
 
   const handleSearchTag = (tag: string) => {
@@ -49,6 +53,7 @@ const LatestWinner = () => {
       ...winnerFilters,
       filterWinnerByTag: tag,
     })
+    setPageNumber(1)
   }
 
   const handleFilterByTag = (contest: any) => {
@@ -62,7 +67,6 @@ const LatestWinner = () => {
     if (winnerFilters?.ticketNumber === '') return true
     return winner?.ticket?.value?.ticket_number === winnerFilters.ticketNumber
   }
-
   const handleClearFilters = () => {
     const params = new URLSearchParams()
     router.push(`${pathname}?${params.toString()}#winner_id`)
@@ -71,7 +75,18 @@ const LatestWinner = () => {
       filterWinnerByTag: 'all',
       ticketNumber: '',
     })
+    setPageNumber(1)
   }
+
+  const contestsLength = WinnersData?.filter(handleFilterByTag).filter(
+    handleFilterByTicketNumber,
+  ).length
+
+  const indexOfLastTemplate = pageNumber * templatesPerPage
+  const indexOfFirstTemplate = indexOfLastTemplate - templatesPerPage
+  const currentTemplates = WinnersData?.filter(handleFilterByTag)
+    .filter(handleFilterByTicketNumber)
+    .slice(indexOfFirstTemplate, indexOfLastTemplate)
 
   return (
     <section className='latest-winner-section position-relative pt-120 pb-120'>
@@ -124,11 +139,9 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {WinnersData?.filter(handleFilterByTag)
-                      .filter(handleFilterByTicketNumber)
-                      .map((winner: any) => (
-                        <WinnerCard key={winner.id} winner={winner as Winner} />
-                      ))}
+                    {currentTemplates?.map((winner: any) => (
+                      <WinnerCard key={winner.id} winner={winner as Winner} />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -138,10 +151,15 @@ const LatestWinner = () => {
       </div>
       <div>
         <div className='row pagination-bottom'>
-          <Pagination
+          {/* <WinnerPagination
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
-            totalContests={WinnersData?.length}
+            totalContests={contestsLength}
+          /> */}
+          <ResponsivePagination
+            current={pageNumber}
+            total={Math.ceil((contestsLength as number) / templatesPerPage)}
+            onPageChange={setPageNumber}
           />
         </div>
       </div>

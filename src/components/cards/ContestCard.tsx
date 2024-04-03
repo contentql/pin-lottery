@@ -74,11 +74,13 @@ const ContestCard = ({
               onClick={() => {
                 deleteById({ id: wishlistId })
               }}
+              size={25}
               fill='red'
             />
           ) : (
             <FaRegHeart
               className='zoomin'
+              size={25}
               onClick={addToWishlist}
               style={{ color: 'white' }}
             />

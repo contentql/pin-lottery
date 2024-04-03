@@ -1,0 +1,1 @@
+export { mediaCloudflareURLHandler } from './plugin'

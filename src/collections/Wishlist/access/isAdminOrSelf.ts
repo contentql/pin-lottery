@@ -7,7 +7,7 @@ export const isAdminOrSelf: Access = ({ req: { user } }) => {
     }
 
     return {
-      'user_id.value': {
+      'user.value': {
         equals: user.id,
       },
     }
