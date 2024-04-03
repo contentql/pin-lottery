@@ -147,7 +147,10 @@ export default buildConfig({
       displayToRoles: ['admin'], // visible only to admins
     }),
     // Retrieve URL from environment variables or configuration settings.
-    mediaCloudflareURLHandler({}),
+    mediaCloudflareURLHandler({
+      pubR2URL:
+        'https://pub-4569e4e5d557441e896fc4fbf32626f3.r2.dev/cql-storage-r2',
+    }),
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
