@@ -1,5 +1,4 @@
 import { CollectionConfig } from 'payload/types'
-import { JWTUser } from '../../custom-payload-types'
 import { ResetPassword } from '../../email-templates/resetPassword'
 import { UserAccountVerification } from '../../email-templates/userAccountVerification'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
@@ -52,17 +51,6 @@ const Users: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'email',
-    hidden: ({ user }: { user: JWTUser }) => {
-      if (user) {
-        const { roles } = user
-
-        if (roles?.includes('admin')) return false
-        if (roles?.includes('manager')) return true
-        if (roles?.includes('editor')) return true
-      }
-
-      return true
-    },
   },
   hooks: {
     // afterChange: [verifyUserEmail],

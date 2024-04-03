@@ -1,0 +1,1 @@
+export { roleBasedCollectionVisibility } from './plugin'
