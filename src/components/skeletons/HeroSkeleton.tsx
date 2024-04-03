@@ -44,7 +44,6 @@ const HeroSkeleton = () => {
                 <p className='loading-p'></p>
                 <p className='loading-p'></p>
                 <p className='loading-p'></p>
-                <p className='loading-p'></p>
                 <div className='hero__btn'>
                   <Link href='/contest' className='loading-btn'></Link>
                 </div>
