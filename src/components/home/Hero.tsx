@@ -238,9 +238,9 @@ const Hero = ({
                           !contest?.threshold_reached_date && (
                             <div className='clock-wrapper-hero'>
                               <p className='mb-3'>
-                                Ticket price:{' '}
+                                Ticket price :
                                 <span className='hero-span-data'>
-                                  {contest?.ticket_price}
+                                  ${contest?.ticket_price}
                                 </span>
                               </p>
                               <p className='mb-3'>
