@@ -8686,6 +8686,13 @@ react-popper@^2.3.0:
     react-fast-compare "^3.0.1"
     warning "^4.0.2"
 
+react-responsive-pagination@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/react-responsive-pagination/-/react-responsive-pagination-2.4.2.tgz#cbeb7582673fd6fff5efd1bd803109e5066686cc"
+  integrity sha512-71KXx3trdlEeC7QRuWCY0NQ75owcWKjOLfJtToU8erE984i51sTmKlWrOdfk4osHUAzdaMwrdu5G4z5N2kD6+w==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-router-dom@5.3.4:
   version "5.3.4"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.3.4.tgz#2ed62ffd88cae6db134445f4a0c0ae8b91d2e5e6"

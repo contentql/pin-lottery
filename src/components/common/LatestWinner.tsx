@@ -10,9 +10,11 @@ import TicketCheckCard from '@/components/cards/TicketCheckCard'
 import { Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { useState } from 'react'
-import WinnerCard from '../cards/WinnerCard'
 
-import WinnerPagination from './WinnerPagination'
+import ResponsivePagination from 'react-responsive-pagination'
+import '../../../src/styles/layout/custom/_pagination.scss'
+
+import WinnerCard from '../cards/WinnerCard'
 
 const LatestWinner = () => {
   const searchParams = useSearchParams()
@@ -149,10 +151,15 @@ const LatestWinner = () => {
       </div>
       <div>
         <div className='row pagination-bottom'>
-          <WinnerPagination
+          {/* <WinnerPagination
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
             totalContests={contestsLength}
+          /> */}
+          <ResponsivePagination
+            current={pageNumber}
+            total={Math.ceil((contestsLength as number) / templatesPerPage)}
+            onPageChange={setPageNumber}
           />
         </div>
       </div>
