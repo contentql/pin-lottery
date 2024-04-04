@@ -213,7 +213,7 @@ const LatestContest = ({
                         className='border-0 rounded-pill'>
                         <option value={''}>SHOW ONLY</option>
                         <option value={'thresholdReached'}>
-                          Contests -- Threshold Reached
+                          Contests -- Date Announced
                         </option>
                         <option value={'ongoingContests'}>
                           Contests -- Ongoing Contests
@@ -324,18 +324,6 @@ const LatestContest = ({
                               </div>
                             ))
                         ) : (
-                          // <div className='section-header text-center'>
-                          //   {/* <Image
-                          //   className='image-empty'
-                          //   src='/images/empty-states/empty-state.png'
-                          //   alt='empty state'
-                          //   width={120}
-                          //   height={120}
-                          // /> */}
-                          //   <span className='section-sub-title'>
-                          //     No contests available
-                          //   </span>
-                          // </div>
                           <div className='wishlist-button-center'>
                             <Image
                               src='/images/empty-states/empty-wishlist.png'
