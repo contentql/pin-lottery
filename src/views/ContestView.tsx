@@ -46,7 +46,7 @@ const ContestView = () => {
     filterByName: filters?.filterByName!,
     filterByPrice: Number(filters?.filterByPrice),
     filterByTitle: filters?.filterByTitle!,
-    filterByContestStatus: filters?.filterByContestStatus,
+    filterByContestStatus: filters?.filterByContestStatus!,
   })
 
   //getting tags details
