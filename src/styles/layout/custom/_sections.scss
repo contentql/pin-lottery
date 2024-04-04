@@ -1405,3 +1405,9 @@ $duration: 1000;
   top: 30px;
   transform: rotate(45deg);
 }
+.wishlist-button-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
