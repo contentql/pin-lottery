@@ -1,19 +1,13 @@
-import React from 'react';
-import { Props } from 'payload/components/views/Cell';
-import './styles.scss';
+import { Props } from 'payload/components/views/Cell'
+import React from 'react'
+import './styles.scss'
 
-const Cell: React.FC<Props> = (props) => {
-  const { cellData } = props;
+const Cell: React.FC<Props> = props => {
+  const { cellData, rowData } = props
 
-  if (!cellData) return null;
+  if (!cellData) return null
 
-  return (
-    <div
-      className={`chip`}
-      style={{ backgroundColor: cellData as string }}
-    >
-    </div>
-  )
+  return <button onClick={() => console.log(rowData.id)}>x</button>
 }
 
-export default Cell;
+export default Cell

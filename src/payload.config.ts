@@ -15,6 +15,7 @@ import Faq from './collections/Faq'
 import { Media } from './collections/Media'
 import Tags from './collections/Tags'
 import Ticket from './collections/Ticket'
+import Todos from './collections/TodoLists'
 import Users from './collections/Users'
 import Winner from './collections/Winner'
 import Wishlist from './collections/Wishlist'
@@ -51,6 +52,7 @@ export default buildConfig({
     Faq,
     Tags,
     Wishlist,
+    Todos,
   ],
   routes: {
     admin: '/admin',

@@ -19,6 +19,7 @@ export interface Config {
     faq: Faq;
     tags: Tag;
     wishlist: Wishlist;
+    todos: Todo;
     trash: Trash;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -355,6 +356,24 @@ export interface Wishlist {
     relationTo: 'users';
     value: string | User;
   } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "todos".
+ */
+export interface Todo {
+  id: string;
+  listName?: string | null;
+  color: string;
+  tasks?:
+    | {
+        name?: string | null;
+        complete?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }

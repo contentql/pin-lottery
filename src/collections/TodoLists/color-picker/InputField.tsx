@@ -12,13 +12,10 @@ import { Button } from 'payload/components'
 // we'll re-use the built in Label component directly from Payload
 import { Label } from 'payload/components/forms'
 
-import Error from 'payload/dist/admin/components/forms/Error/index'
+// import Error from 'payload/dist/admin/components/forms/Error/index'
 
 // we can use existing Payload types easily
 import { Props } from 'payload/components/fields/Text'
-
-// we'll import and reuse our existing validator function on the frontend, too
-import { validateHexColor } from './config'
 
 // Import the SCSS stylesheet
 import './styles.scss'
@@ -40,14 +37,17 @@ const preferenceKey = 'color-picker-colors'
 const InputField: React.FC<Props> = props => {
   const { path, label, required, validate } = props
 
+  console.log(path)
+
   const {
     value = '',
     setValue,
     errorMessage,
     showError,
   } = useFieldType({
-    path,
-    validate,
+    // path: path || '',
+    path: 'listName',
+    // validate,
   })
   const classes = ['field-type', 'text', baseClass, showError && 'error']
     .filter(Boolean)
@@ -87,7 +87,7 @@ const InputField: React.FC<Props> = props => {
   return (
     <div className={classes}>
       <Label htmlFor={path} label={label} required={required} />
-      <Error showError={showError} message={errorMessage!} />
+      {/* <Error showError={showError} message={errorMessage!} /> */}
       {isAdding && (
         <div>
           <input
@@ -103,8 +103,7 @@ const InputField: React.FC<Props> = props => {
             iconPosition='left'
             iconStyle='with-border'
             size='small'
-            onClick={handleAddColor}
-            disabled={validateHexColor(colorToAdd) !== true}>
+            onClick={handleAddColor}>
             Add
           </Button>
           <Button

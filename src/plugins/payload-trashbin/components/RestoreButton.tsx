@@ -1,7 +1,7 @@
-import React from 'react'
+import { Button } from 'payload/components/elements'
 import { useDocumentInfo } from 'payload/components/utilities'
 import { Field } from 'payload/types'
-import { Button } from 'payload/components/elements'
+import React from 'react'
 
 export const RestoreButton: React.FC = props => {
   const { id } = useDocumentInfo()

@@ -22,7 +22,7 @@ function convertObject(obj: any) {
 export const Trash: CollectionConfig = {
   slug: 'trash',
   access: {
-    create: () => false,
+    create: () => true,
     update: () => false,
   },
   fields: [
