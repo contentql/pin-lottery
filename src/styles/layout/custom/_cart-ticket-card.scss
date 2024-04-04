@@ -1,7 +1,9 @@
 .cart-lottery-single {
   background-color: #5a4bcc;
   position: absolute;
-  width: 550px;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
   @include border-radius(10px);
 
@@ -126,12 +128,12 @@
   margin-top: -160px;
   left: 50%;
   transform: translateX(-50%);
-  width: 450px;
+  width: 80%;
 }
 .card1-position {
   position: relative;
   z-index: 1;
   left: 50%;
   transform: translateX(-50%);
-  width: 500px;
+  width: 85%;
 }

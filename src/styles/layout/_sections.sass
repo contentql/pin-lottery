@@ -2248,6 +2248,7 @@
 
 /* cart section css start */
 .cart-wrapper 
+  border-radius:15px
   padding: 120px 30px 60px 30px
   background-color: #12023e
   @media (max-width: 991px)
@@ -2265,11 +2266,14 @@
       font-size: 48px
     @media (max-width: 767px)
       font-size: 36px
-.ticket-wrapper 
+.ticket-wrapper
+  position: relative
   &__header 
     +d-flex
     justify-content: space-between
     background-color: #4939c1 
+    border-top-left-radius:15px
+    border-top-right-radius:15px
     padding: 30px 20px
     button 
       font-size: 14px 
@@ -2278,7 +2282,7 @@
       color: #ffffff
   &__body 
     background-color: #5a4bcc
-    padding: 20px 40px
+    padding: 20px 20px
     button 
       font-size: 14px 
       text-transform: uppercase
@@ -2362,13 +2366,19 @@
           background-image: -webkit-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(209,15,126) 100%)
           background-image: -ms-linear-gradient( -45deg, rgb(193,101,221) 0%, rgb(209,15,126) 100%)
           box-shadow: 0px 7px 7px 0px rgba(209, 15, 126, 0.35)
+.checkout-payment
+  position: sticky
 .checkout-wrapper 
   position: sticky
   top: 110px
   &__header
+    border-top-left-radius:15px
+    border-top-right-radius:15px
     padding: 30px 20px 30px 20px
     background-color: #4939c1
   &__body 
+    border-bottom-left-radius:15px
+    border-bottom-right-radius:15px
     padding: 20px
     background-color: #5a4bcc
     .price 
