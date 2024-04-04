@@ -24,6 +24,7 @@ export const Trash: CollectionConfig = {
   slug: 'trash',
   admin: {
     useAsTitle: 'collectionName',
+    defaultColumns: ['id', 'collectionName', 'actions'],
   },
   access: {
     create: () => false,
