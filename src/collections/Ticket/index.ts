@@ -3,6 +3,7 @@ import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
 import { User } from '../../payload-types'
 import { isManagerOrAdminOrSelf } from './access/isManagerOrAdminOrSelf'
+import { customContestRelationshipField } from './custom/custom-contest-relationship-field/field'
 import { assignUserId } from './field-level-hooks/assignUserId'
 import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
@@ -62,29 +63,7 @@ const Ticket: CollectionConfig = {
         ),
       ],
     },
-    {
-      name: 'contest_id',
-      type: 'relationship',
-      label: 'Contest Id',
-      relationTo: ['contest'],
-      hasMany: false,
-      required: true,
-      admin: {
-        description: 'The contest associated with this ticket.',
-        position: 'sidebar',
-      },
-      filterOptions: ({ relationTo, data, id }) => {
-        if (relationTo === 'contest') {
-          return {
-            contest_status: {
-              equals: false,
-            },
-          }
-        }
-
-        return false
-      },
-    },
+    { ...customContestRelationshipField },
     {
       name: 'purchased_by',
       type: 'relationship',
