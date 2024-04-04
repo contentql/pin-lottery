@@ -1,11 +1,14 @@
 import { AppContext } from '@/context/context'
-import { Contest, Ticket, Winner } from '@/payload-types'
+import { Contest, Ticket, User, Winner } from '@/payload-types'
+import { splitTicketNumber } from '@/utils/split-ticket-number'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import circle_border from '/public/images/elements/circle-border.png'
 
 const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
   const { addTicket, removeTicket, totalTicketsCount } = useContext(AppContext)
@@ -23,75 +26,98 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
       <h4 className='subtitle'>Enter now for a chance to win</h4>
       <h3 className='contest-name'>{contestDetails?.title}</h3>
       {/* <p>This competition has a maximum of 29994 entries.</p> */}
-      <div className='contest-num'>
-        Contest no: <span>{contestDetails?.contest_no}</span>
-      </div>
-      {/* <h4>Tickets Sold</h4>
-      <div className='ticket-amount'>
-        <span className='left'>0</span>
-        <span className='right'>29994</span>
-        <div className='progressbar' data-perc='70%'>
-          <div className='bar'></div>
-        </div>
-        <p>Only 12045 remaining!</p>
-      </div> */}
-      <div className='ticket-price'>
-        <span className='amount'>
-          {currency}
-          {contestDetails?.ticket_price}
-        </span>
-        <small>Per ticket</small>
-      </div>
+
       {contestDetails?.contest_status === true ? (
-        <div>
-          <h3>Winning Ticket Number: </h3>
-          <h4>
-            {
-              (
-                (contestDetails?.winner_ticket?.value as Winner)?.ticket
-                  ?.value as Ticket
-              )?.ticket_number
-            }
-          </h4>
-        </div>
-      ) : (
-        <div className='d-flex flex-wrap align-items-center mb-30'>
-          <div className='select-quantity'>
-            <span className='caption'>Quantity</span>
-            <div className='quantity'>
-              <input
-                type='number'
-                value={quantity}
-                onChange={() =>
-                  addTicket({ contest_no: contestDetails?.contest_no })
-                }
-              />
-              <div className='quantity-nav'>
-                <div
-                  className={`quantity-button`}
-                  onClick={() =>
-                    removeTicket({ contest_no: contestDetails?.contest_no })
-                  }>
-                  <i className='las la-minus'></i>
+        <div className='mb-4'>
+          <h3 className='contest-name'>Winner Ticket is: </h3>
+          <div className='lottery-single__header'>
+            <div className='silgle'>
+              <div className='draw-single-ticket'>
+                <div className='draw-single-ticket__header'>
+                  <div className='left'>
+                    User Name:{' '}
+                    {
+                      (
+                        (
+                          (contestDetails?.winner_ticket?.value as Winner)
+                            ?.ticket?.value as Ticket
+                        )?.purchased_by?.value as User
+                      )?.user_name
+                    }
+                  </div>
+                  <div className='right'>
+                    Contest No: {contestDetails?.contest_no}
+                  </div>
                 </div>
-                <div
-                  className={`quantity-button quantity-up`}
-                  onClick={() =>
-                    addTicket({ contest_no: contestDetails?.contest_no })
-                  }>
-                  <i className='las la-plus'></i>
+                <div className='circle-divider'>
+                  <Image src={circle_border} alt='circle border' />
                 </div>
+                <ul className='lottery-single__selected-number '>
+                  {splitTicketNumber(
+                    (
+                      (contestDetails?.winner_ticket?.value as Winner)?.ticket
+                        ?.value as Ticket
+                    )?.ticket_number,
+                  )?.map((itm: any, i: any) => (
+                    <li className='active' key={i}>
+                      {itm}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
-          <div className='mt-sm-0 mt-3'>
-            <Link
-              href={`${pathname}/ticket-details`}
-              className='cmn-btn style--three'>
-              buy tickets
-            </Link>
-          </div>
         </div>
+      ) : (
+        <>
+          <div className='contest-num'>
+            Contest no: <span>{contestDetails?.contest_no}</span>
+          </div>
+          <div className='ticket-price'>
+            <span className='amount'>
+              {currency}
+              {contestDetails?.ticket_price}
+            </span>
+            <small>Per ticket</small>
+          </div>
+          <div className='d-flex flex-wrap align-items-center mb-30'>
+            <div className='select-quantity'>
+              <span className='caption'>Quantity</span>
+              <div className='quantity'>
+                <input
+                  type='number'
+                  value={quantity}
+                  onChange={() =>
+                    addTicket({ contest_no: contestDetails?.contest_no })
+                  }
+                />
+                <div className='quantity-nav'>
+                  <div
+                    className={`quantity-button`}
+                    onClick={() =>
+                      removeTicket({ contest_no: contestDetails?.contest_no })
+                    }>
+                    <i className='las la-minus'></i>
+                  </div>
+                  <div
+                    className={`quantity-button quantity-up`}
+                    onClick={() =>
+                      addTicket({ contest_no: contestDetails?.contest_no })
+                    }>
+                    <i className='las la-plus'></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='mt-sm-0 mt-3'>
+              <Link
+                href={`${pathname}/ticket-details`}
+                className='cmn-btn style--three'>
+                buy tickets
+              </Link>
+            </div>
+          </div>
+        </>
       )}
       <ul className='social-links align-items-center'>
         <li>Share :</li>
