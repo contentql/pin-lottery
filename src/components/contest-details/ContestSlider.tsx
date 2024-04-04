@@ -74,6 +74,11 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
   return (
     <>
       <div className='contest-cart__left'>
+        {contestDetails?.winner_ticket && contestDetails.contest_status && (
+          <div className='badge badge-top-right'>
+            <span>Ended</span>
+          </div>
+        )}
         <div>
           <Slider
             asNavFor={nav2}
