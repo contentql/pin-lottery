@@ -87,23 +87,26 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
       )}
       {isSimilarContestsPending ? (
         <>
-          {' '}
-          <div className='section-header text-center'>
-            <h2 className=''>Similar Contests</h2>
-          </div>
-          <div
-            className='tab-pane fade show active '
-            id='dream'
-            role='tabpanel'
-            aria-labelledby='dream-tab'>
-            <div className='row mb-none-30 mt-50'>
-              {[1, 2, 3].map((ele, index) => (
-                <div key={index} className='col-xl-4 col-md-6 mb-30'>
-                  <ContestSkeletons />
+          <section className='pb-120 mt-minus-100'>
+            <div className='container'>
+              <div className='section-header text-center'>
+                <h2 className=''>Similar Contests</h2>
+              </div>
+              <div
+                className='tab-pane fade show active '
+                id='dream'
+                role='tabpanel'
+                aria-labelledby='dream-tab'>
+                <div className='row mb-none-30 mt-50'>
+                  {[1, 2, 3].map((ele, index) => (
+                    <div key={index} className='col-xl-4 col-md-6 mb-30'>
+                      <ContestSkeletons />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
+          </section>
         </>
       ) : (
         similarContest?.length! > 0 && (
