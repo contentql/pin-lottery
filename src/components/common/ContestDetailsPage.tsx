@@ -8,6 +8,7 @@ import ContestCard from '@/components/cards/ContestCard'
 
 import contestData from '@/data/contestData'
 import { Contest } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
 
 const ContestDetailsPage = ({
@@ -18,8 +19,13 @@ const ContestDetailsPage = ({
   const [filterData, setFilterData] = useState([])
   const [filterBy, setFilterBy] = useState('dream_car')
 
+  const { status } = useAuth()
+
   const { data: wishlistData, refetch: refetchWishlistData } =
-    trpc.wishlist.getWishlistTickets.useQuery()
+    trpc.wishlist.getWishlistTickets.useQuery(
+      { id: '' },
+      { enabled: status === 'loggedIn' },
+    )
 
   const getWishlistId = (id: string) =>
     wishlistData

@@ -19,6 +19,7 @@ const ContestCard = ({
   itm: Contest
   wishlist: Boolean
   wishlistId: string
+
   refetchWishlistData: any
   wishlistIds: any
 }) => {
@@ -59,18 +60,11 @@ const ContestCard = ({
           )
         }
         // else {
-        //   console.log('before mutateed', wishlistData)
-        //   const temp = wishlistData?.filter(
-        //     (wishlist: Wishlist) => wishlist?.id !== wishlistId,
-        //   )
-        //   setQueryData(
-        //     ["[['wishlist', 'getWishlistTickets'], { type: 'query' }]"],
-        //     (prevData: Wishlist[]) =>
-        //       prevData.filter(
-        //         (wishlist: Wishlist) => wishlist?.id !== wishlistId,
-        //       ),
-        //   )
-        //   console.log('after mutateed', wishlistData)
+        //   console.log('before mutateed', data)
+
+        //   setData(data?.filter((ele: Wishlist) => ele?.id !== wishlistId))
+
+        //   console.log('after mutateed', data)
         // }
       },
     })
