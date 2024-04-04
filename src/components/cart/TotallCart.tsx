@@ -1,4 +1,7 @@
 import { Cart } from '@/payload-types'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FaAngleLeft } from 'react-icons/fa'
 
 import AllTickets from './AllTickets'
 import Prices from './Prices'
@@ -23,19 +26,41 @@ const TotallCart = ({
               <h2 className='cart-wrapper__title'>My Cart</h2>
               <div className='row justify-content-lg-between'>
                 {/* All tickets section here */}
-                <AllTickets
-                  cartData={cartData}
-                  updateCartTicketsCountMutation={
-                    updateCartTicketsCountMutation
-                  }
-                  deleteById={deleteById}
-                  deleteAllTicketsOfUserFromCart={
-                    deleteAllTicketsOfUserFromCart
-                  }
-                />
-
-                {/* Prices section here */}
-                <Prices cartData={cartData} />
+                {cartData?.length <= 0 ? (
+                  <div className='wishlist-button-center'>
+                    <Image
+                      src='/images/empty-states/empty-cart.png'
+                      alt='empty wishlist'
+                      width={600}
+                      height={500}
+                    />
+                    <Link className='cmn-btn text-capitalize ' href='/contest'>
+                      <span>
+                        <FaAngleLeft
+                          size={18}
+                          color='white'
+                          style={{ marginRight: '20px' }}
+                        />
+                      </span>
+                      go to Contests
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <AllTickets
+                      cartData={cartData}
+                      updateCartTicketsCountMutation={
+                        updateCartTicketsCountMutation
+                      }
+                      deleteById={deleteById}
+                      deleteAllTicketsOfUserFromCart={
+                        deleteAllTicketsOfUserFromCart
+                      }
+                    />
+                    {/* Prices section here */}
+                    <Prices cartData={cartData} />
+                  </>
+                )}
               </div>
             </div>
           </div>
