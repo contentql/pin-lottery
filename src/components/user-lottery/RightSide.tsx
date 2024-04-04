@@ -5,10 +5,7 @@ import ContestCard from '../cards/ContestCard'
 const RightSide = () => {
   const { status } = useAuth()
   const { data: wishlistData, refetch: refetchWishlistData } =
-    trpc.wishlist.getWishlistTickets.useQuery(
-      { id: '' },
-      { enabled: status === 'loggedIn' },
-    )
+    trpc.wishlist.getWishlistTickets.useQuery({ id: '' })
 
   console.log('wishlist data', wishlistData)
 
