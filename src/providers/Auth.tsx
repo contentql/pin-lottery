@@ -32,6 +32,7 @@ type Logout = () => Promise<void>
 type AuthContext = {
   user?: User | null
   setUser: (user: User | null) => void // eslint-disable-line no-unused-vars
+  fetchMe: () => void
   logout: Logout
   login: Login
   create: Create
@@ -136,33 +137,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [])
 
-  useEffect(() => {
-    const fetchMe = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
-          {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+  const fetchMe = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        )
+        },
+      )
 
-        if (res.ok) {
-          const { user: meUser } = await res.json()
-          setUser(meUser || null)
-          setStatus(meUser ? 'loggedIn' : undefined)
-        } else {
-          throw new Error('An error occurred while fetching your account.')
-        }
-      } catch (e) {
-        setUser(null)
+      if (res.ok) {
+        const { user: meUser } = await res.json()
+        setUser(meUser || null)
+        setStatus(meUser ? 'loggedIn' : undefined)
+      } else {
         throw new Error('An error occurred while fetching your account.')
       }
+    } catch (e) {
+      setUser(null)
+      throw new Error('An error occurred while fetching your account.')
     }
+  }
 
+  useEffect(() => {
     fetchMe()
   }, [setUser])
 
@@ -230,14 +231,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         user,
         setUser,
+        fetchMe,
         login,
         logout,
         create,
         resetPassword,
         forgotPassword,
         status,
-      }}
-    >
+      }}>
       {children}
     </Context.Provider>
   )

@@ -25,20 +25,20 @@ const Header = () => {
   const [show, setShow] = useState(false)
   const [popupVisible, setPopupVisible] = useState(false)
 
-  const { status, user } = useAuth()
+  const { status, user, fetchMe } = useAuth()
   const router = useRouter()
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
   }
 
-  const handleOpen = (e: any) => {
-    if (open !== e.target.text) {
-      setOpen(e.target.text)
-    } else {
-      setOpen('')
-    }
-  }
+  // const handleOpen = (e: any) => {
+  //   if (open !== e.target.text) {
+  //     setOpen(e.target.text)
+  //   } else {
+  //     setOpen('')
+  //   }
+  // }
 
   const navBarTop = () => {
     if (window !== undefined) {
@@ -55,6 +55,7 @@ const Header = () => {
     mutationKey: ['/api/users/logout', 'post'],
     mutationFn: () => logout(),
     onSuccess: async () => {
+      fetchMe()
       router.push('/login')
     },
     onError: async err => {
