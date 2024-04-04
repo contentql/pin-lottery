@@ -182,7 +182,7 @@ export interface Contest {
   tickets_purchased?: number | null;
   ticket_price: number;
   day_remain: string;
-  product_type?: ('Car' | 'Bike' | 'Mobile' | 'Laptop') | null;
+  product_type?: ('Car' | 'Bike' | 'Mobile' | 'Laptop' | 'Test') | null;
   zero_sixty?: string | null;
   top_speed?: string | null;
   power?: string | null;
