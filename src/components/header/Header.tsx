@@ -138,13 +138,23 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link href='/about' onClick={() => setShow(false)}>
+                    About us
+                  </Link>
+                </li>
+                <li>
                   <Link href='/contact' onClick={() => setShow(false)}>
-                    contact
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/blog' onClick={() => setShow(false)}>
+                    Blog
                   </Link>
                 </li>
                 <li>
                   <Link href='/how-work' onClick={() => setShow(false)}>
-                    how to use
+                    How to use
                   </Link>
                 </li>
               </ul>
