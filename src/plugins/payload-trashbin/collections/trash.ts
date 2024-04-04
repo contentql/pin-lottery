@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 
 import { RestoreButton } from '../components/RestoreButton'
+import RestoreButtonInCell from '../components/RestoreButtonInCell'
 
 // This is a object converter that converts any  expanded relation including nested to plain relation (where the value of the relation is just the id)
 function convertObject(obj: any) {
@@ -21,6 +22,9 @@ function convertObject(obj: any) {
 
 export const Trash: CollectionConfig = {
   slug: 'trash',
+  admin: {
+    useAsTitle: 'collectionName',
+  },
   access: {
     create: () => false,
     update: () => false,
@@ -29,6 +33,7 @@ export const Trash: CollectionConfig = {
     {
       name: 'value',
       type: 'json',
+      label: 'Deleted Document',
       required: true,
       admin: {
         readOnly: true,
@@ -37,9 +42,21 @@ export const Trash: CollectionConfig = {
     {
       name: 'collectionName',
       type: 'text',
+      label: 'Collection Name',
       admin: {
         components: {
           afterInput: [RestoreButton],
+        },
+      },
+    },
+    {
+      name: 'actions',
+      type: 'text',
+      label: 'Actions',
+      admin: {
+        hidden: true,
+        components: {
+          Cell: RestoreButtonInCell,
         },
       },
     },
