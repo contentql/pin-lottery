@@ -13,6 +13,7 @@ import { useState } from 'react'
 
 import ResponsivePagination from 'react-responsive-pagination'
 import '../../../src/styles/layout/custom/_pagination.scss'
+import WinnerCardSkeleton from '../skeletons/WinnerCardSkeleton'
 
 import WinnerCard from '../cards/WinnerCard'
 
@@ -36,7 +37,8 @@ const LatestWinner = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const templatesPerPage = 5
 
-  const { data: WinnersData } = trpc.winner.getWinners.useQuery()
+  const { data: WinnersData, isPending: isWinnerDataPending } =
+    trpc.winner.getWinners.useQuery()
 
   const handleSearchByTicketNumber = (data: any) => {
     console.log('hook form', data)
@@ -154,7 +156,13 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {currentTemplates?.length! <= 0 ? (
+                    {isWinnerDataPending ? (
+                      <WinnerCardSkeleton />
+                    ) : currentTemplates?.length! > 0 ? (
+                      currentTemplates?.map((winner: any) => (
+                        <WinnerCard key={winner.id} winner={winner as Winner} />
+                      ))
+                    ) : (
                       <div className='wishlist-button-center'>
                         <Image
                           src='/images/empty-states/empty-wishlist.png'
@@ -163,10 +171,6 @@ const LatestWinner = () => {
                           height={400}
                         />
                       </div>
-                    ) : (
-                      currentTemplates?.map((winner: any) => (
-                        <WinnerCard key={winner.id} winner={winner as Winner} />
-                      ))
                     )}
                   </div>
                 </div>

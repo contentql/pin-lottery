@@ -48,11 +48,11 @@ const TicketCheckCard = ({
               required: true,
             })}
           />
-          {errors.ticketNumber && (
-            <span className='winner-error-message'>
-              Please enter your ticket number
-            </span>
-          )}
+          <div className='winner-error-message'>
+            {errors.ticketNumber && (
+              <span>Please enter your ticket number</span>
+            )}
+          </div>
         </div>
         <div className='text-center mt-80'>
           <button type='submit' className='cmn-btn'>
