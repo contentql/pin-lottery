@@ -1,8 +1,10 @@
 import { Contest, Media, Ticket, Winner } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
@@ -21,27 +23,57 @@ const ContestCard = ({
   wishlistIds: any
 }) => {
   const { status } = useAuth()
+  const [updateWishlistIds, setupdateWishlistIds] = useState<any>(wishlistIds)
 
-  const { mutate: addTicketsToCart } =
+  const { setQueryData } = useQueryClient()
+
+  const { mutate: addTicketsToCart, isPending: isWishlistUpdated } =
     trpc.wishlist.addTicketsToWishlist.useMutation({
       onSuccess: async () => {
-        refetchWishlistData()
         toast.success('Successfully added to wishlist')
+        refetchWishlistData()
       },
       onError: async () => {
         toast.error('Unable to add to wishlist')
+        refetchWishlistData()
+      },
+      onMutate: async () => {
+        setupdateWishlistIds([...updateWishlistIds, itm?.id])
       },
     })
 
-  const { mutate: deleteById } = trpc.wishlist.deleteById.useMutation({
-    onSuccess: async () => {
-      toast.success('Successfully remove from wishlist.')
-      refetchWishlistData()
-    },
-    onError: async () => {
-      toast.error('Failed to remove from wishlist.')
-    },
-  })
+  const { mutate: deleteById, isPending: isWishlistDeleted } =
+    trpc.wishlist.deleteById.useMutation({
+      onSuccess: async () => {
+        toast.success('Successfully remove from wishlist.')
+        refetchWishlistData()
+      },
+      onError: async () => {
+        toast.error('Failed to remove from wishlist.')
+        refetchWishlistData()
+      },
+      onMutate: async () => {
+        if (!wishlist) {
+          setupdateWishlistIds(
+            updateWishlistIds.filter((id: string) => id !== itm?.id),
+          )
+        }
+        // else {
+        //   console.log('before mutateed', wishlistData)
+        //   const temp = wishlistData?.filter(
+        //     (wishlist: Wishlist) => wishlist?.id !== wishlistId,
+        //   )
+        //   setQueryData(
+        //     ["[['wishlist', 'getWishlistTickets'], { type: 'query' }]"],
+        //     (prevData: Wishlist[]) =>
+        //       prevData.filter(
+        //         (wishlist: Wishlist) => wishlist?.id !== wishlistId,
+        //       ),
+        //   )
+        //   console.log('after mutateed', wishlistData)
+        // }
+      },
+    })
 
   const addToWishlist = () => {
     if (status !== 'loggedIn') {
@@ -68,11 +100,12 @@ const ContestCard = ({
           style={{ cursor: 'pointer' }}
         />
         <div className='action-icon1' style={{ cursor: 'pointer' }}>
-          {wishlist || wishlistIds?.includes(itm?.id) ? (
+          {wishlist || updateWishlistIds?.includes(itm?.id) ? (
             <FaHeart
               className='zoomin'
               onClick={() => {
-                deleteById({ id: wishlistId })
+                !(isWishlistDeleted || isWishlistUpdated) &&
+                  deleteById({ id: wishlistId })
               }}
               size={25}
               fill='red'
@@ -81,7 +114,9 @@ const ContestCard = ({
             <FaRegHeart
               className='zoomin'
               size={25}
-              onClick={addToWishlist}
+              onClick={() => {
+                !(isWishlistDeleted || isWishlistUpdated) && addToWishlist()
+              }}
               style={{ color: 'white' }}
             />
           )}
