@@ -8,6 +8,7 @@ import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
 import Banner from '@/components/common/Banner'
 import ContestBody from '@/components/contest-details/ContestBody'
 import SimilarContest from '@/components/contest/SimilarContest'
+import ContestSkeletons from '@/components/skeletons/ContestSkeletons'
 import IndividualContestSkeletone from '@/components/skeletons/IndividualContestSkeletone'
 import { Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
@@ -84,10 +85,31 @@ const ContestDetailsView = ({ contestId }: PageProps) => {
           handleContestTimerUpdate={handleContestTimerUpdate}
         />
       )}
-      <SimilarContest
-        contests={similarContest as Contest[]}
-        isSimilarContestsPending={isSimilarContestsPending as boolean}
-      />
+      {isSimilarContestsPending ? (
+        <>
+          {' '}
+          <div className='section-header text-center'>
+            <h2 className=''>Similar Contests</h2>
+          </div>
+          <div
+            className='tab-pane fade show active '
+            id='dream'
+            role='tabpanel'
+            aria-labelledby='dream-tab'>
+            <div className='row mb-none-30 mt-50'>
+              {[1, 2, 3].map((ele, index) => (
+                <div key={index} className='col-xl-4 col-md-6 mb-30'>
+                  <ContestSkeletons />
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        similarContest?.length! > 0 && (
+          <SimilarContest contests={similarContest as Contest[]} />
+        )
+      )}
     </>
   )
 }
