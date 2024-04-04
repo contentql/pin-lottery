@@ -23,13 +23,19 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
 
   return (
     <div className='contest-cart__right'>
-      <h4 className='subtitle'>Enter now for a chance to win</h4>
-      <h3 className='contest-name'>{contestDetails?.title}</h3>
+      {contestDetails?.contest_status ? (
+        <h4 className='subtitle'>
+          Contest has ended and the winner has been chosen
+        </h4>
+      ) : (
+        <h4 className='subtitle'>Enter now for a chance to win</h4>
+      )}
+      <h4 className='contest-name'>{contestDetails?.title}</h4>
       {/* <p>This competition has a maximum of 29994 entries.</p> */}
 
       {contestDetails?.contest_status === true ? (
         <div className='mb-4'>
-          <h3 className='contest-name'>Winner Ticket is: </h3>
+          <h4 className='contest-name'>Winner Ticket is: </h4>
           <div className='lottery-single__header'>
             <div className='silgle'>
               <div className='draw-single-ticket'>
