@@ -115,13 +115,7 @@ const ContestDetailsPage = ({
                 <div className='row mb-none-30'>
                   {contestDetails?.map((itm: any) => (
                     <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
-                      <ContestCard
-                        itm={itm}
-                        wishlist={false}
-                        wishlistId={getWishlistId(itm?.id) as string}
-                        refetchWishlistData={refetchWishlistData}
-                        wishlistIds={wishlistIds as string[]}
-                      />
+                      <ContestCard itm={itm} />
                     </div>
                   ))}
                 </div>

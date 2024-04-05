@@ -10,6 +10,8 @@ import {
 } from '@/lib/validators/auth-router/login-validator'
 import { useAuth } from '@/providers/Auth'
 import { useMutation } from '@tanstack/react-query'
+import { useState } from 'react'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
   const {
@@ -24,6 +26,8 @@ const Login = () => {
   const router = useRouter()
 
   const { login } = useAuth()
+
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const { mutate: loginUser } = useMutation({
     mutationFn: (args: { email: string; password: string }) => login(args),
@@ -76,12 +80,19 @@ const Login = () => {
                   password <sup>*</sup>
                 </label>
                 <input
-                  type='password'
+                  type={showPassword ? 'text' : 'password'}
                   id='signin-password'
                   placeholder='password'
                   required
                   {...register('password')}
                 />
+                <button
+                  type='button'
+                  onClick={() => {
+                    setShowPassword(!showPassword)
+                  }}>
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
               </div>
 
               <div className='d-flex flex-wrap justify-content-between mt-2'>
