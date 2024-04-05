@@ -35,6 +35,7 @@ const PrevBtn = ({ onClick }: any) => {
 }
 
 const WinnerDetails = ({ winnerDetails }: { winnerDetails: Winner[] }) => {
+  const imageStr = ''
   const settings = {
     speed: 700,
     arrows: true,
