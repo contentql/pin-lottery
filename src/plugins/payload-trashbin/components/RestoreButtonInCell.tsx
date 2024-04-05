@@ -1,7 +1,7 @@
 import { Props } from 'payload/components/views/Cell'
 import React, { useState } from 'react'
 import { MdRestore } from 'react-icons/md'
-import { Id, ToastContainer, toast } from 'react-toastify'
+import { Id, toast } from 'react-toastify'
 
 const RestoreButtonInCell: React.FC<Props> = ({ rowData }) => {
   const [restored, setRestored] = useState(false)
@@ -18,8 +18,6 @@ const RestoreButtonInCell: React.FC<Props> = ({ rowData }) => {
         position: 'bottom-center',
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
         toastId: rowData.id as Id,
       },
     )
@@ -41,14 +39,14 @@ const RestoreButtonInCell: React.FC<Props> = ({ rowData }) => {
           }
         `}
       </style>
-      <ToastContainer />
+      {/* <ToastContainer containerId={'trash'} limit={2} /> */}
       <button
         style={{
           background: 'none',
           border: 'none',
           padding: 0,
           cursor: restored || loading ? 'not-allowed' : 'pointer',
-          color: restored ? '#fdffb6' : loading ? '#ff8c91' : '#c1ffde',
+          color: restored ? '#656565' : loading ? '#cc595e' : '#8eccab',
         }}
         onClick={() => {
           setLoading(true)

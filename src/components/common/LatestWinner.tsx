@@ -13,6 +13,7 @@ import { useState } from 'react'
 
 import ResponsivePagination from 'react-responsive-pagination'
 import '../../../src/styles/layout/custom/_pagination.scss'
+import WinnerCardSkeleton from '../skeletons/WinnerCardSkeleton'
 
 import WinnerCard from '../cards/WinnerCard'
 
@@ -28,20 +29,28 @@ const LatestWinner = () => {
     ticketNumber: searchParams?.get('ticketNumber')
       ? searchParams?.get('ticketNumber')
       : '',
+    contestNumber: searchParams?.get('contestNumber')
+      ? searchParams?.get('contestNumber')
+      : '',
   })
 
   const [pageNumber, setPageNumber] = useState(1)
   const templatesPerPage = 5
 
-  const { data: WinnersData } = trpc.winner.getWinners.useQuery()
-  console.log('winners', WinnersData)
+  const { data: WinnersData, isPending: isWinnerDataPending } =
+    trpc.winner.getWinners.useQuery()
 
   const handleSearchByTicketNumber = (data: any) => {
     console.log('hook form', data)
     const search = new URLSearchParams(searchParams)
     search.set('ticketNumber', data?.ticketNumber)
+    search.set('contestNumber', data?.contestNumber)
     router.push(`${pathname}?${search.toString()}#winner_id`)
-    setWinnerFilters({ ...winnerFilters, ticketNumber: data.ticketNumber })
+    setWinnerFilters({
+      ...winnerFilters,
+      ticketNumber: data.ticketNumber,
+      contestNumber: data.contestNumber,
+    })
     setPageNumber(1)
   }
 
@@ -64,8 +73,15 @@ const LatestWinner = () => {
   }
 
   const handleFilterByTicketNumber = (winner: any) => {
-    if (winnerFilters?.ticketNumber === '') return true
-    return winner?.ticket?.value?.ticket_number === winnerFilters.ticketNumber
+    if (
+      winnerFilters?.ticketNumber === '' ||
+      winnerFilters?.contestNumber === ''
+    )
+      return true
+    return (
+      winner?.ticket?.value?.ticket_number === winnerFilters.ticketNumber &&
+      winner?.contest?.value?.contest_no === winnerFilters.contestNumber
+    )
   }
   const handleClearFilters = () => {
     const params = new URLSearchParams()
@@ -74,6 +90,7 @@ const LatestWinner = () => {
       ...winnerFilters,
       filterWinnerByTag: 'all',
       ticketNumber: '',
+      contestNumber: '',
     })
     setPageNumber(1)
   }
@@ -139,9 +156,22 @@ const LatestWinner = () => {
                   <div className='col-lg-8 mb-30'>
                     {/* winner card */}
 
-                    {currentTemplates?.map((winner: any) => (
-                      <WinnerCard key={winner.id} winner={winner as Winner} />
-                    ))}
+                    {isWinnerDataPending ? (
+                      <WinnerCardSkeleton />
+                    ) : currentTemplates?.length! > 0 ? (
+                      currentTemplates?.map((winner: any) => (
+                        <WinnerCard key={winner.id} winner={winner as Winner} />
+                      ))
+                    ) : (
+                      <div className='wishlist-button-center'>
+                        <Image
+                          src='/images/empty-states/empty-wishlist.png'
+                          alt='empty wishlist'
+                          width={600}
+                          height={400}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

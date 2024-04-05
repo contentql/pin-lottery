@@ -345,3 +345,47 @@
   border-radius: 30px;
   animation: 1.5s shine linear infinite;
 }
+.winner-isloading .user-image,
+.ticket-number {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    90deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(243, 76, 173) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 50%;
+  animation: 1.5s shine linear infinite;
+}
+.winner-isloading .title,
+.draw-date {
+  width: 100%;
+  height: 30px;
+  background-image: linear-gradient(
+    90deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    rgb(243, 76, 173) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 20px;
+  animation: 1.5s shine linear infinite;
+}
+.winner-isloading.contest-no {
+  width: 40px;
+  height: 40px;
+  background-image: linear-gradient(
+    90deg,
+    rgb(236, 3, 139) 0%,
+    rgb(251, 100, 104) 44%,
+    #c4a1f8 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 50%;
+  animation: 1.5s shine linear infinite;
+}
+.contest-cart-image {
+  min-height: 150px;
+}

@@ -1,13 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
 import contest_bg from '/public/images/elements/contest-bg.png'
 
 import ContestCard from '@/components/cards/ContestCard'
 
-import contestData from '@/data/contestData'
 import { Contest } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
 
 const ContestDetailsPage = ({
@@ -15,26 +14,10 @@ const ContestDetailsPage = ({
 }: {
   contestDetails: Contest[]
 }) => {
-  const [filterData, setFilterData] = useState([])
-  const [filterBy, setFilterBy] = useState('dream_car')
+  const { status } = useAuth()
 
   const { data: wishlistData, refetch: refetchWishlistData } =
-    trpc.wishlist.getWishlistTickets.useQuery()
-
-  const getWishlistId = (id: string) =>
-    wishlistData
-      ?.filter(ele => (ele?.contest?.value as Contest)?.id === id)
-      ?.at(0)?.id
-
-  const wishlistIds = wishlistData?.map((ele: any) => ele?.contest?.value?.id)
-
-  useEffect(() => {
-    const data = contestData.filter(itm =>
-      itm.tags?.find(itme => itme === filterBy),
-    ) as []
-
-    setFilterData(data)
-  }, [filterBy])
+    trpc.wishlist.getWishlistTickets.useQuery({ id: '' })
 
   return (
     <section className='position-relative pt-120 pb-120'>
@@ -107,13 +90,7 @@ const ContestDetailsPage = ({
                 <div className='row mb-none-30'>
                   {contestDetails?.map((itm: any) => (
                     <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
-                      <ContestCard
-                        itm={itm}
-                        wishlist={false}
-                        wishlistId={getWishlistId(itm?.id) as string}
-                        refetchWishlistData={refetchWishlistData}
-                        wishlistIds={wishlistIds}
-                      />
+                      <ContestCard itm={itm} />
                     </div>
                   ))}
                 </div>

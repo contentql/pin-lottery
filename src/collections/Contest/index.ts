@@ -9,6 +9,7 @@ import { CollectionConfig } from 'payload/types'
 import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
 import { deleteRelatedDocsAfterDelete } from './hooks/deleteRelatedDocsAfterDelete'
 import { deleteWinnerAfterUpdate } from './hooks/deleteWinnerAfterUpdate'
+import { updateTagAfterChange } from './hooks/updateTagAfterChange'
 
 const Contest: CollectionConfig = {
   slug: 'contest',
@@ -230,9 +231,13 @@ const Contest: CollectionConfig = {
                 { label: 'Bike', value: 'Bike' },
                 { label: 'Mobile', value: 'Mobile' },
                 { label: 'Laptop', value: 'Laptop' },
+                { label: 'Test', value: 'Test' },
               ],
               admin: {
                 description: 'Select the type of product from the list.',
+              },
+              hooks: {
+                afterChange: [updateTagAfterChange],
               },
             },
             {

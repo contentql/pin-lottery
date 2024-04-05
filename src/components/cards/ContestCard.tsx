@@ -1,55 +1,87 @@
 import { Contest, Media, Ticket, Winner } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
 
-const ContestCard = ({
-  itm,
-  wishlist,
-  wishlistId,
-  refetchWishlistData,
-  wishlistIds,
-}: {
-  itm: Contest
-  wishlist: Boolean
-  wishlistId: string
-  refetchWishlistData: any
-  wishlistIds: any
-}) => {
+const ContestCard = ({ itm }: { itm: Contest }) => {
   const { status } = useAuth()
 
-  const { mutate: addTicketsToCart } =
-    trpc.wishlist.addTicketsToWishlist.useMutation({
+  const queryClient = useQueryClient()
+
+  const { data: wishlistData } = trpc.wishlist.getWishListByContestId.useQuery(
+    {
+      id: itm.id,
+    },
+    {
+      initialData: { id: undefined, isWishlist: false },
+    },
+  )
+
+  const { isWishlist, id: wishlistId } = wishlistData
+
+  const queryKey = [
+    ['wishlist', 'getWishListByContestId'],
+    {
+      input: {
+        id: itm.id,
+      },
+      type: 'query',
+    },
+  ]
+
+  const { mutate: addToWishlist, isPending: isWishlistUpdated } =
+    trpc.wishlist.addToWishlist.useMutation({
+      onMutate: () => {
+        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+          ...prev,
+          isWishlist: true,
+        }))
+      },
       onSuccess: async () => {
-        refetchWishlistData()
         toast.success('Successfully added to wishlist')
       },
       onError: async () => {
+        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+          ...prev,
+          isWishlist: false,
+        }))
         toast.error('Unable to add to wishlist')
       },
     })
 
-  const { mutate: deleteById } = trpc.wishlist.deleteById.useMutation({
-    onSuccess: async () => {
-      toast.success('Successfully remove from wishlist.')
-      refetchWishlistData()
-    },
-    onError: async () => {
-      toast.error('Failed to remove from wishlist.')
-    },
-  })
+  const { mutate: removeFromWishlist, isPending: isWishlistDeleted } =
+    trpc.wishlist.removeWishlistById.useMutation({
+      onMutate: async () => {
+        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+          ...prev,
+          isWishlist: false,
+        }))
+      },
+      onSuccess: async () => {
+        toast.success('Successfully remove from wishlist.')
+      },
+      onError: async () => {
+        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+          ...prev,
+          isWishlist: true,
+        }))
+        toast.error('Failed to remove from wishlist.')
+      },
+    })
 
-  const addToWishlist = () => {
-    if (status !== 'loggedIn') {
-      toast.error('Login to add tickets to wishlist')
-      return
-    }
+  const wishlistClickHandler = (e: any) => {
+    e.stopPropagation()
+    // if (status !== 'loggedIn') {
+    //   toast.error('Login to add tickets to wishlist')
+    //   return
+    // }
 
-    addTicketsToCart({
+    addToWishlist({
       contest_id: itm?.id,
     })
   }
@@ -57,32 +89,44 @@ const ContestCard = ({
   const router = useRouter()
 
   return (
-    <div className='contest-card'>
+    <div
+      className='contest-card'
+      onClick={() => router.push(`/contest/${itm.id}`)}>
       <div className='contest-card__thumb'>
         <Image
           src={(itm.img as Media)?.sizes?.contestImage?.url || '/'}
           alt={itm.title}
           width={(itm?.img as Media)?.sizes?.contestImage?.width || 100}
           height={(itm?.img as Media)?.sizes?.contestImage?.height || 100}
-          onClick={() => router.push(`/contest/${itm.id}`)}
           style={{ cursor: 'pointer' }}
         />
         <div className='action-icon1' style={{ cursor: 'pointer' }}>
-          {wishlist || wishlistIds?.includes(itm?.id) ? (
+          {isWishlist ? (
             <FaHeart
               className='zoomin'
-              onClick={() => {
-                deleteById({ id: wishlistId })
+              onClick={e => {
+                e.stopPropagation()
+
+                removeFromWishlist({ id: wishlistId! })
               }}
               size={25}
               fill='red'
+              //  cursor={
+              //    isWishlistDeleted || isWishlistUpdated
+              //      ? 'not-allowed'
+              //      : 'pointer'
+              //  }
             />
           ) : (
             <FaRegHeart
               className='zoomin'
               size={25}
-              onClick={addToWishlist}
+              onClick={e => wishlistClickHandler(e)}
               style={{ color: 'white' }}
+              // cursor={
+              //   isWishlistDeleted || isWishlistUpdated
+              //     ? 'not-allowed'
+              //     : 'pointer'
             />
           )}
         </div>

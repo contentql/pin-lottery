@@ -10,7 +10,6 @@ import hero_building from '/public/images/elements/hero-building.png'
 import hero_shape from '/public/images/elements/hero-shape.jpg.png'
 import main_mobile from '/public/images/mobiles/main-mobile.png'
 
-import VedioModal from '@/components/vedioModal/VedioModal'
 import { Contest, Media, Ticket, Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
@@ -90,11 +89,11 @@ const Hero = ({
   }
   return (
     <>
-      <VedioModal
+      {/* <VedioModal
         link='https://www.youtube.com/embed/d6xn5uflUjg'
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-      />
+      /> */}
       {HeroContests?.length <= 1 ? (
         <section className='hero'>
           <div className='hero__shape'>

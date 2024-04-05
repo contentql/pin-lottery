@@ -578,6 +578,12 @@ body {
   flex-wrap: wrap;
 }
 
+.tabs-custom-tickets {
+  display: flex;
+  align-items: start;
+  margin-left: 10px;
+}
+
 .tab-custom {
   padding: 10px 20px;
   margin-bottom: 10px;
@@ -602,7 +608,17 @@ body {
 .tab-content-custom {
   padding: 20px;
 }
-
+.button-wrapper {
+  background-color: rgba(#ffffff, 0.2);
+  padding: 10px 30px;
+  border-radius: 15px 15px 0 0;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+.button-wrapper.active {
+  background-color: #5a4bcc;
+}
 ul.bullet {
   list-style: disc;
   margin-bottom: 5px;
@@ -1404,4 +1420,31 @@ $duration: 1000;
   left: -25px;
   top: 30px;
   transform: rotate(45deg);
+}
+.wishlist-button-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.winner-error-message {
+  color: red;
+  font-weight: 200;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+.wishlist-empty-image {
+  margin-top: 200px;
+  margin-bottom: 80px;
+}
+@media screen and (max-width: 991px) {
+  .wishlist-empty-image {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+.cart-empty-image {
+  margin-top: -80px;
 }
