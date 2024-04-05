@@ -25,13 +25,14 @@ const RightSide = () => {
         </div>
       ) : wishlistData?.length! <= 0 ? (
         <div className='wishlist-button-center'>
-          <Image
-            src='/images/empty-states/empty-wishlist.png'
-            alt='empty wishlist'
-            width={500}
-            height={500}
-            style={{ marginTop: '220px', marginBottom: '80px' }}
-          />
+          <div className='wishlist-empty-image'>
+            <Image
+              src='/images/empty-states/empty-wishlist.png'
+              alt='empty wishlist'
+              width={500}
+              height={500}
+            />
+          </div>
           <Link className='cmn-btn text-capitalize ' href='/contest'>
             <span>
               <FaAngleLeft

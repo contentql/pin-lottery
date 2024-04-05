@@ -28,12 +28,14 @@ const TotallCart = ({
                 {/* All tickets section here */}
                 {cartData?.length <= 0 ? (
                   <div className='wishlist-button-center'>
-                    <Image
-                      src='/images/empty-states/empty-cart.png'
-                      alt='empty wishlist'
-                      width={600}
-                      height={500}
-                    />
+                    <div className='cart-empty-image'>
+                      <Image
+                        src='/images/empty-states/empty-cart.png'
+                        alt='empty wishlist'
+                        width={500}
+                        height={500}
+                      />
+                    </div>
                     <Link className='cmn-btn text-capitalize ' href='/contest'>
                       <span>
                         <FaAngleLeft

@@ -1417,3 +1417,17 @@ $duration: 1000;
   font-size: 18px;
   padding-bottom: 10px;
 }
+
+.wishlist-empty-image {
+  margin-top: 200px;
+  margin-bottom: 80px;
+}
+@media screen and (max-width: 991px) {
+  .wishlist-empty-image {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+.cart-empty-image {
+  margin-top: -80px;
+}
