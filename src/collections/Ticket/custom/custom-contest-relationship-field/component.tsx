@@ -9,30 +9,6 @@ import { useFormFields } from 'payload/components/forms'
 import { Fields } from 'payload/types'
 
 export const CustomContestRelationshipComponent: React.FC<Props> = props => {
-  const {
-    relationTo,
-    path,
-    name,
-    required,
-    label,
-    hasMany,
-    filterOptions,
-    access,
-    custom,
-    defaultValue,
-    hidden,
-    hooks,
-    index,
-    localized,
-    maxDepth,
-    maxRows,
-    minRows,
-    saveToJWT,
-    unique,
-    validate,
-    admin,
-  } = props
-
   // Field values can be accessed and updated using the commented `useField` function as well.
 
   // const { value: relationship, setValue: setRelationShip } =
@@ -81,27 +57,7 @@ export const CustomContestRelationshipComponent: React.FC<Props> = props => {
     // Render the RelationshipComponent with provided props
     <RelationshipComponent
       key={'custom-relation-component-for-contest'}
-      name={name}
-      relationTo={relationTo}
-      label={label}
-      filterOptions={filterOptions}
-      required={required}
-      access={access}
-      admin={admin}
-      custom={custom}
-      defaultValue={defaultValue}
-      hasMany={hasMany}
-      hidden={hidden}
-      hooks={hooks}
-      index={index}
-      localized={localized}
-      maxDepth={maxDepth}
-      maxRows={maxRows}
-      minRows={minRows}
-      path={path}
-      saveToJWT={saveToJWT}
-      unique={unique}
-      validate={validate}
+      {...props}
     />
   )
 }

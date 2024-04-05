@@ -28,61 +28,63 @@ const Ticket: CollectionConfig = {
     {
       type: 'row',
       fields: [
+        { ...customContestRelationshipField },
         {
-          name: 'ticket_number',
-          type: 'text',
-          label: 'Ticket Number',
-          unique: true,
-          defaultValue: () => {
-            const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-            const nanoid = customAlphabet(alphabet, 14)
+          name: 'purchased_by',
+          type: 'relationship',
+          label: 'Purchased By',
+          relationTo: ['users'],
+          hasMany: false,
+          defaultValue: ({ user }: { user: User }) => {
+            if (!user) return undefined
 
-            return nanoid()
+            return { relationTo: 'users', value: user?.id }
           },
           admin: {
-            description: 'Auto-generated unique ticket number.',
-            readOnly: true,
+            description: 'The user who purchased this ticket.',
+          },
+          hooks: {
+            beforeChange: [assignUserId],
           },
         },
-        ...NumberField(
-          {
-            name: 'ticket_price',
-            label: 'Ticket Price',
-            required: true,
-            admin: {
-              description: 'Enter the price in dollars',
-              placeholder: '199.99',
-            },
-          },
-          {
-            prefix: '$ ',
-            thousandSeparator: ',',
-            decimalScale: 2,
-            fixedDecimalScale: true,
-          },
-        ),
       ],
     },
-    { ...customContestRelationshipField },
     {
-      name: 'purchased_by',
-      type: 'relationship',
-      label: 'Purchased By',
-      relationTo: ['users'],
-      hasMany: false,
-      defaultValue: ({ user }: { user: User }) => {
-        if (!user) return undefined
+      name: 'ticket_number',
+      type: 'text',
+      label: 'Ticket Number',
+      unique: true,
+      defaultValue: () => {
+        const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        const nanoid = customAlphabet(alphabet, 14)
 
-        return { relationTo: 'users', value: user?.id }
+        return nanoid()
       },
       admin: {
-        description: 'The user who purchased this ticket.',
+        description: 'Auto-generated unique ticket number.',
         position: 'sidebar',
-      },
-      hooks: {
-        beforeChange: [assignUserId],
+        readOnly: true,
       },
     },
+    ...NumberField(
+      {
+        name: 'ticket_price',
+        label: 'Ticket Price',
+        required: true,
+        admin: {
+          description: 'Enter the price in dollars',
+          placeholder: '199.99',
+          position: 'sidebar',
+          readOnly: true,
+        },
+      },
+      {
+        prefix: '$ ',
+        thousandSeparator: ',',
+        decimalScale: 2,
+        fixedDecimalScale: true,
+      },
+    ),
   ],
 }
 

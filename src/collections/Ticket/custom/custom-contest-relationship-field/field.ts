@@ -10,7 +10,6 @@ export const customContestRelationshipField: Field = {
   required: true,
   admin: {
     description: 'The contest associated with this ticket.',
-    position: 'sidebar',
     components: {
       Field: CustomContestRelationshipComponent,
     },
