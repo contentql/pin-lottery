@@ -1,5 +1,5 @@
 import { Ticket } from '@/payload-types'
-import Tabs from '../common/Tabs'
+import TicketTabs from '../common/TicketTabs'
 import PastDraws from './PastDraws'
 import UpcomingDraws from './UpcomingDraw'
 const RightSide = ({
@@ -25,7 +25,7 @@ const RightSide = ({
   ]
   return (
     <div className='col-lg-8 mt-lg-0 mt-4'>
-      <Tabs tabs={tabs} isTicketsPending={isTicketsPending} />
+      <TicketTabs tabs={tabs} isTicketsPending={isTicketsPending} />
     </div>
   )
 }
