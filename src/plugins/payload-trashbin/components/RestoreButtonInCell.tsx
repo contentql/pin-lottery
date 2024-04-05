@@ -48,7 +48,7 @@ const RestoreButtonInCell: React.FC<Props> = ({ rowData }) => {
           border: 'none',
           padding: 0,
           cursor: restored || loading ? 'not-allowed' : 'pointer',
-          color: restored ? '#fdffb6' : loading ? '#ff8c91' : '#c1ffde',
+          color: restored ? '#656565' : loading ? '#cc595e' : '#8eccab',
         }}
         onClick={() => {
           setLoading(true)
