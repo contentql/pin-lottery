@@ -81,6 +81,7 @@ const LeftSideMenu = () => {
     mutationKey: ['/api/users/logout', 'post'],
     mutationFn: () => logout(),
     onSuccess: async () => {
+      queryClient.clear()
       router.push('/login')
     },
     onError: async err => {

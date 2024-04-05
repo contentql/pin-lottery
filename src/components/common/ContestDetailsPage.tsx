@@ -7,7 +7,7 @@ import contest_bg from '/public/images/elements/contest-bg.png'
 import ContestCard from '@/components/cards/ContestCard'
 
 import contestData from '@/data/contestData'
-import { Contest } from '@/payload-types'
+import { Contest, Wishlist } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
 
@@ -24,7 +24,7 @@ const ContestDetailsPage = ({
   const { data: wishlistData, refetch: refetchWishlistData } =
     trpc.wishlist.getWishlistTickets.useQuery(
       { id: '' },
-      { enabled: status === 'loggedIn' },
+      { enabled: Boolean(status === 'loggedIn') },
     )
 
   const getWishlistId = (id: string) =>
@@ -32,7 +32,9 @@ const ContestDetailsPage = ({
       ?.filter(ele => (ele?.contest?.value as Contest)?.id === id)
       ?.at(0)?.id
 
-  const wishlistIds = wishlistData?.map((ele: any) => ele?.contest?.value?.id)
+  const wishlistIds = wishlistData?.map(
+    (ele: Wishlist) => (ele?.contest?.value as Contest)?.id,
+  )
 
   useEffect(() => {
     const data = contestData.filter(itm =>
@@ -118,7 +120,7 @@ const ContestDetailsPage = ({
                         wishlist={false}
                         wishlistId={getWishlistId(itm?.id) as string}
                         refetchWishlistData={refetchWishlistData}
-                        wishlistIds={wishlistIds}
+                        wishlistIds={wishlistIds as string[]}
                       />
                     </div>
                   ))}

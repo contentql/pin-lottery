@@ -23,7 +23,7 @@ const RightSide = () => {
               itm={itm?.contest?.value}
               wishlist={true}
               refetchWishlistData={refetchWishlistData}
-              wishlistIds={undefined}
+              wishlistIds={['']}
             />
           </div>
         ))}

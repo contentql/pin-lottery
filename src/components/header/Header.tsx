@@ -13,7 +13,7 @@ import tag from '/public/images/icon/btn/tag.png'
 import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { logout } from '@/queries/auth/logout'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { FaRegHeart } from 'react-icons/fa'
 import { toast } from 'react-toastify'
@@ -27,6 +27,7 @@ const Header = () => {
 
   const { status, user, fetchMe } = useAuth()
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
@@ -56,6 +57,7 @@ const Header = () => {
     mutationFn: () => logout(),
     onSuccess: async () => {
       fetchMe()
+      queryClient.clear()
       router.push('/login')
     },
     onError: async err => {

@@ -19,16 +19,15 @@ const ContestCard = ({
   itm: Contest
   wishlist: Boolean
   wishlistId: string
-
   refetchWishlistData: any
-  wishlistIds: any
+  wishlistIds: string[]
 }) => {
   const { status } = useAuth()
   const [updateWishlistIds, setupdateWishlistIds] = useState<any>(wishlistIds)
 
   const { setQueryData } = useQueryClient()
 
-  const { mutate: addTicketsToCart, isPending: isWishlistUpdated } =
+  const { mutate: addTicketsToWishlist, isPending: isWishlistUpdated } =
     trpc.wishlist.addTicketsToWishlist.useMutation({
       onSuccess: async () => {
         toast.success('Successfully added to wishlist')
@@ -51,6 +50,7 @@ const ContestCard = ({
       },
       onError: async () => {
         toast.error('Failed to remove from wishlist.')
+        setupdateWishlistIds([...updateWishlistIds, itm?.id])
         refetchWishlistData()
       },
       onMutate: async () => {
@@ -75,7 +75,7 @@ const ContestCard = ({
       return
     }
 
-    addTicketsToCart({
+    addTicketsToWishlist({
       contest_id: itm?.id,
     })
   }
@@ -103,6 +103,11 @@ const ContestCard = ({
               }}
               size={25}
               fill='red'
+              cursor={
+                isWishlistDeleted || isWishlistUpdated
+                  ? 'not-allowed'
+                  : 'pointer'
+              }
             />
           ) : (
             <FaRegHeart
@@ -112,6 +117,11 @@ const ContestCard = ({
                 !(isWishlistDeleted || isWishlistUpdated) && addToWishlist()
               }}
               style={{ color: 'white' }}
+              cursor={
+                isWishlistDeleted || isWishlistUpdated
+                  ? 'not-allowed'
+                  : 'pointer'
+              }
             />
           )}
         </div>
