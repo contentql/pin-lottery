@@ -1,8 +1,10 @@
 import { Contest, Media, Ticket, Winner } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
@@ -18,30 +20,54 @@ const ContestCard = ({
   wishlist: Boolean
   wishlistId: string
   refetchWishlistData: any
-  wishlistIds: any
+  wishlistIds: string[]
 }) => {
   const { status } = useAuth()
+  const [updateWishlistIds, setupdateWishlistIds] = useState<any>(wishlistIds)
 
-  const { mutate: addTicketsToCart } =
+  const { setQueryData } = useQueryClient()
+
+  const { mutate: addTicketsToWishlist, isPending: isWishlistUpdated } =
     trpc.wishlist.addTicketsToWishlist.useMutation({
       onSuccess: async () => {
-        refetchWishlistData()
         toast.success('Successfully added to wishlist')
+        refetchWishlistData()
       },
       onError: async () => {
         toast.error('Unable to add to wishlist')
+        refetchWishlistData()
+      },
+      onMutate: async () => {
+        setupdateWishlistIds([...updateWishlistIds, itm?.id])
       },
     })
 
-  const { mutate: deleteById } = trpc.wishlist.deleteById.useMutation({
-    onSuccess: async () => {
-      toast.success('Successfully remove from wishlist.')
-      refetchWishlistData()
-    },
-    onError: async () => {
-      toast.error('Failed to remove from wishlist.')
-    },
-  })
+  const { mutate: deleteById, isPending: isWishlistDeleted } =
+    trpc.wishlist.deleteById.useMutation({
+      onSuccess: async () => {
+        toast.success('Successfully remove from wishlist.')
+        refetchWishlistData()
+      },
+      onError: async () => {
+        toast.error('Failed to remove from wishlist.')
+        setupdateWishlistIds([...updateWishlistIds, itm?.id])
+        refetchWishlistData()
+      },
+      onMutate: async () => {
+        if (!wishlist) {
+          setupdateWishlistIds(
+            updateWishlistIds.filter((id: string) => id !== itm?.id),
+          )
+        }
+        // else {
+        //   console.log('before mutateed', data)
+
+        //   setData(data?.filter((ele: Wishlist) => ele?.id !== wishlistId))
+
+        //   console.log('after mutateed', data)
+        // }
+      },
+    })
 
   const addToWishlist = () => {
     if (status !== 'loggedIn') {
@@ -49,7 +75,7 @@ const ContestCard = ({
       return
     }
 
-    addTicketsToCart({
+    addTicketsToWishlist({
       contest_id: itm?.id,
     })
   }
@@ -69,25 +95,39 @@ const ContestCard = ({
           style={{ cursor: 'pointer' }}
         />
         <div className='action-icon1' style={{ cursor: 'pointer' }}>
-          {wishlist || wishlistIds?.includes(itm?.id) ? (
+          {wishlist || updateWishlistIds?.includes(itm?.id) ? (
             <FaHeart
               className='zoomin'
-              onClick={e => {
-                e.stopPropagation()
-                deleteById({ id: wishlistId })
+              onClick={(e) => {
+                 e.stopPropagation()
+                !(isWishlistDeleted || isWishlistUpdated) &&
+                  deleteById({ id: wishlistId })
+                
+
               }}
               size={25}
               fill='red'
+              cursor={
+                isWishlistDeleted || isWishlistUpdated
+                  ? 'not-allowed'
+                  : 'pointer'
+              }
             />
           ) : (
             <FaRegHeart
               className='zoomin'
               size={25}
-              onClick={e => {
+              onClick={() => {       
                 e.stopPropagation()
-                addToWishlist()
+                !(isWishlistDeleted || isWishlistUpdated) && addToWishlist()
+
               }}
               style={{ color: 'white' }}
+              cursor={
+                isWishlistDeleted || isWishlistUpdated
+                  ? 'not-allowed'
+                  : 'pointer'
+              }
             />
           )}
         </div>
