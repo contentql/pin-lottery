@@ -21,11 +21,11 @@ const ContestDetailsPage = ({
 
   const { status } = useAuth()
 
-  const { data: wishlistData, refetch: refetchWishlistData } =
-    trpc.wishlist.getWishlistTickets.useQuery(
-      { id: '' },
-      { enabled: Boolean(status === 'loggedIn') },
-    )
+  const { data: wishlistData, refetch: refetchWishlistData } = Boolean(
+    status === 'loggedIn',
+  )
+    ? trpc.wishlist.getWishlistTickets.useQuery({ id: '' })
+    : { data: [], refetch: () => null }
 
   const getWishlistId = (id: string) =>
     wishlistData
@@ -38,7 +38,7 @@ const ContestDetailsPage = ({
 
   useEffect(() => {
     const data = contestData.filter(itm =>
-      itm.tags?.find(itme => itme === filterBy),
+      itm.tags?.find(item => item === filterBy),
     ) as []
 
     setFilterData(data)
