@@ -22,6 +22,9 @@ function convertObject(obj: any) {
 
 export const Trash: CollectionConfig = {
   slug: 'trash',
+  labels: {
+    plural: 'Trash Bin',
+  },
   admin: {
     useAsTitle: 'collectionName',
     defaultColumns: ['id', 'collectionName', 'actions'],

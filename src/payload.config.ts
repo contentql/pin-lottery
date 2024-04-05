@@ -139,7 +139,7 @@ export default buildConfig({
         editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
       },
       hideAllCollectionsForRole: ['user'],
-      hideCollectionsForAllRoles: ['cart'],
+      hideCollectionsForAllRoles: ['cart', 'wishlist'],
     }),
     trashBin({
       // displayToRoles: ['all'] // default value
