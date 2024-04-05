@@ -1,7 +1,7 @@
 import { Props } from 'payload/components/views/Cell'
 import React, { useState } from 'react'
 import { MdRestore } from 'react-icons/md'
-import { Id, ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const RestoreButtonInCell: React.FC<Props> = ({ rowData }) => {
   const [restored, setRestored] = useState(false)
@@ -16,11 +16,11 @@ const RestoreButtonInCell: React.FC<Props> = ({ rowData }) => {
       'Successfully Restored! Refresh the Trash to see the updated Trash',
       {
         position: 'bottom-center',
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        toastId: rowData.id as Id,
+        // toastId: rowData.id as Id,
+        containerId: 'trash',
+        delay: 100,
       },
     )
     setRestored(true)
@@ -41,7 +41,7 @@ const RestoreButtonInCell: React.FC<Props> = ({ rowData }) => {
           }
         `}
       </style>
-      <ToastContainer />
+      {/* <ToastContainer containerId={'trash'} limit={2} /> */}
       <button
         style={{
           background: 'none',
