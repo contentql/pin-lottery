@@ -4,26 +4,11 @@ import { trpc } from '@/trpc/client'
 import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { FaRegHeart } from 'react-icons/fa'
-import { FaHeart } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
 
-const ContestCard = ({
-  itm,
-  wishlist,
-  wishlistId,
-  refetchWishlistData,
-  wishlistIds,
-}: {
-  itm: Contest
-  wishlist: Boolean
-  wishlistId: string
-  refetchWishlistData: any
-  wishlistIds: string[]
-}) => {
+const ContestCard = ({ itm }: { itm: Contest }) => {
   const { status } = useAuth()
-  const [updateWishlistIds, setupdateWishlistIds] = useState<any>(wishlistIds)
 
   const { setQueryData } = useQueryClient()
 
@@ -31,14 +16,9 @@ const ContestCard = ({
     trpc.wishlist.addTicketsToWishlist.useMutation({
       onSuccess: async () => {
         toast.success('Successfully added to wishlist')
-        refetchWishlistData()
       },
       onError: async () => {
         toast.error('Unable to add to wishlist')
-        refetchWishlistData()
-      },
-      onMutate: async () => {
-        setupdateWishlistIds([...updateWishlistIds, itm?.id])
       },
     })
 
@@ -46,26 +26,9 @@ const ContestCard = ({
     trpc.wishlist.deleteById.useMutation({
       onSuccess: async () => {
         toast.success('Successfully remove from wishlist.')
-        refetchWishlistData()
       },
       onError: async () => {
         toast.error('Failed to remove from wishlist.')
-        setupdateWishlistIds([...updateWishlistIds, itm?.id])
-        refetchWishlistData()
-      },
-      onMutate: async () => {
-        if (!wishlist) {
-          setupdateWishlistIds(
-            updateWishlistIds.filter((id: string) => id !== itm?.id),
-          )
-        }
-        // else {
-        //   console.log('before mutateed', data)
-
-        //   setData(data?.filter((ele: Wishlist) => ele?.id !== wishlistId))
-
-        //   console.log('after mutateed', data)
-        // }
       },
     })
 
@@ -95,38 +58,35 @@ const ContestCard = ({
           style={{ cursor: 'pointer' }}
         />
         <div className='action-icon1' style={{ cursor: 'pointer' }}>
-          {wishlist || updateWishlistIds?.includes(itm?.id) ? (
-            <FaHeart
-              className='zoomin'
-              onClick={e => {
-                e.stopPropagation()
-                !(isWishlistDeleted || isWishlistUpdated) &&
-                  deleteById({ id: wishlistId })
-              }}
-              size={25}
-              fill='red'
-              cursor={
-                isWishlistDeleted || isWishlistUpdated
-                  ? 'not-allowed'
-                  : 'pointer'
-              }
-            />
-          ) : (
-            <FaRegHeart
-              className='zoomin'
-              size={25}
-              onClick={e => {
-                e.stopPropagation()
-                !(isWishlistDeleted || isWishlistUpdated) && addToWishlist()
-              }}
-              style={{ color: 'white' }}
-              cursor={
-                isWishlistDeleted || isWishlistUpdated
-                  ? 'not-allowed'
-                  : 'pointer'
-              }
-            />
-          )}
+          {/* <FaHeart
+               className='zoomin'
+               onClick={e => {
+                 e.stopPropagation()
+                 !(isWishlistDeleted || isWishlistUpdated) &&
+                   deleteById({ id: wishlistId })
+               }}
+               size={25}
+               fill='red'
+               cursor={
+                 isWishlistDeleted || isWishlistUpdated
+                   ? 'not-allowed'
+                   : 'pointer'
+               }
+             /> */}
+
+          <FaRegHeart
+            className='zoomin'
+            size={25}
+            onClick={e => {
+              e.stopPropagation()
+              !(isWishlistDeleted || isWishlistUpdated) && addToWishlist()
+            }}
+            style={{ color: 'white' }}
+            // cursor={
+            //   isWishlistDeleted || isWishlistUpdated
+            //     ? 'not-allowed'
+            //     : 'pointer'
+          />
         </div>
         <div className='contest-num'>
           <span>contest no:</span>
