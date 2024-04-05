@@ -11,7 +11,7 @@ const BeforeDashboard = () => {
     return (
       <div>
         <h2>Overview of Application</h2>
-        <p style={{ color: 'lightgoldenrodyellow' }}>
+        <p>
           This feature is still under process, more cards to come!
         </p>
         <InfoCard title='Total Tickets' />

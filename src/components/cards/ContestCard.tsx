@@ -83,23 +83,27 @@ const ContestCard = ({
   const router = useRouter()
 
   return (
-    <div className='contest-card'>
+    <div
+      className='contest-card'
+      onClick={() => router.push(`/contest/${itm.id}`)}>
       <div className='contest-card__thumb'>
         <Image
           src={(itm.img as Media)?.sizes?.contestImage?.url || '/'}
           alt={itm.title}
           width={(itm?.img as Media)?.sizes?.contestImage?.width || 100}
           height={(itm?.img as Media)?.sizes?.contestImage?.height || 100}
-          onClick={() => router.push(`/contest/${itm.id}`)}
           style={{ cursor: 'pointer' }}
         />
         <div className='action-icon1' style={{ cursor: 'pointer' }}>
           {wishlist || updateWishlistIds?.includes(itm?.id) ? (
             <FaHeart
               className='zoomin'
-              onClick={() => {
+              onClick={(e) => {
+                 e.stopPropagation()
                 !(isWishlistDeleted || isWishlistUpdated) &&
                   deleteById({ id: wishlistId })
+                
+
               }}
               size={25}
               fill='red'
@@ -113,8 +117,10 @@ const ContestCard = ({
             <FaRegHeart
               className='zoomin'
               size={25}
-              onClick={() => {
+              onClick={() => {       
+                e.stopPropagation()
                 !(isWishlistDeleted || isWishlistUpdated) && addToWishlist()
+
               }}
               style={{ color: 'white' }}
               cursor={

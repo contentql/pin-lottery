@@ -9,7 +9,7 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
   return (
     <>
       <Confetti />
-      <section className='mt-minus-150'>
+      <section className='mt-minus-150 mb-4'>
         <div className='container'>
           <div className='col-lg-12'>
             <div className='clock-wrapper'>

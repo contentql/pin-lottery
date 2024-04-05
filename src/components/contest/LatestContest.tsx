@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
@@ -26,6 +27,7 @@ const LatestContest = ({
   const title = searchParams.get('title') ?? ''
   const price = searchParams.get('price') ?? 0
   const select = searchParams.get('select') ?? ''
+  const contest = searchParams.get('contest') ?? ''
   const MAX = 1000
 
   const wishlistIds = wishlistData?.map((ele: any) => ele?.contest?.value?.id)
@@ -36,6 +38,7 @@ const LatestContest = ({
     sliderValue: price ? Number(price) : 0,
     inputValue: title ? title : '',
     selectValue: select ? select : '',
+    contestStatus: contest ? contest : '',
   })
 
   const getBackgroundSize = () => {
@@ -116,6 +119,19 @@ const LatestContest = ({
     setFilters({ ...filters, filterBySelect: value })
   }
 
+  const handleSearchContestStatus = (value: string) => {
+    const search = new URLSearchParams(searchParams)
+    if (value === '') {
+      search.delete('contest')
+    } else {
+      search.set('contest', value.toString())
+    }
+
+    router.push(`${pathname}?${search.toString()}#contest`)
+
+    setFilters({ ...filters, filterBySelect: value })
+  }
+
   const updatedTitle = useDebounceCallback(handleSearchTitle, 200)
   const updatedPrice = useDebounceCallback(handleSearchPrice, 500)
 
@@ -127,11 +143,13 @@ const LatestContest = ({
       filterByTitle: '',
       filterByPrice: 0,
       pageNumber: 1,
+      filterByContestStatus: '',
     })
     setResetValues({
       sliderValue: 0,
       inputValue: '',
       selectValue: '',
+      contestStatus: '',
     })
   }
 
@@ -158,7 +176,7 @@ const LatestContest = ({
               </div>
               <div className='contest-wrapper__body'>
                 <div className='row contest-filter-wrapper justify-content-center mt-30 mb-none-30'>
-                  <div className='col-lg-3 mb-30'>
+                  <div className='col-lg-2 mb-30'>
                     <div className='select border border-dark rounded-pill'>
                       <select
                         value={resetValues.selectValue}
@@ -181,19 +199,31 @@ const LatestContest = ({
                       </select>
                     </div>
                   </div>
-                  {/* <div className='col-lg-2 col-sm-6 mb-30'>
-                    <div className='select border border-dark rounded-pill pe-2'>
-                      <select className='border-0 rounded-pill'>
-                        <option>ALL MAKES</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
-                        <option>Filter option</option>
+                  <div className='col-lg-2 mb-30'>
+                    <div className='select border border-dark rounded-pill'>
+                      <select
+                        value={resetValues.contestStatus}
+                        onChange={e => {
+                          setResetValues({
+                            ...resetValues,
+                            contestStatus: e.target.value,
+                          })
+                          handleSearchContestStatus(e.target.value)
+                        }}
+                        className='border-0 rounded-pill'>
+                        <option value={''}>SHOW ONLY</option>
+                        <option value={'thresholdReached'}>
+                          Contests -- Date Announced
+                        </option>
+                        <option value={'ongoingContests'}>
+                          Contests -- Ongoing Contests
+                        </option>
+                        <option value={'winnerAnnounced'}>
+                          Contests -- Winner announced
+                        </option>
                       </select>
                     </div>
-                  </div> */}
+                  </div>
                   <div className='col-lg-3 mb-30'>
                     <div className='rang-slider'>
                       <span className='caption'>Ticket Price</span>
@@ -222,16 +252,6 @@ const LatestContest = ({
                       </div>
                     </div>
                   </div>
-                  {/* <div className='col-lg-2 col-sm-4 mb-30'>
-                    <div className='action-btn-wrapper'>
-                      <button type='button' className='action-btn'>
-                        <FaRegHeart />
-                      </button>
-                      <button type='button' className='action-btn'>
-                        <FaRedo />
-                      </button>
-                    </div>
-                  </div> */}
                   <div className='col-lg-3 mb-30'>
                     <form className='contest-search-form'>
                       <input
@@ -252,7 +272,7 @@ const LatestContest = ({
                       </button>
                     </form>
                   </div>
-                  <div className='col-lg-3 mb-30'>
+                  <div className='col-lg-2 mb-30'>
                     <button
                       className='cmn-btn active'
                       onClick={handleClearFilters}>
@@ -304,17 +324,13 @@ const LatestContest = ({
                               </div>
                             ))
                         ) : (
-                          <div className='section-header text-center'>
-                            {/* <Image
-                            className='image-empty'
-                            src='/images/empty-states/empty-state.png'
-                            alt='empty state'
-                            width={120}
-                            height={120}
-                          /> */}
-                            <span className='section-sub-title'>
-                              No contests available
-                            </span>
+                          <div className='wishlist-button-center'>
+                            <Image
+                              src='/images/empty-states/empty-wishlist.png'
+                              alt='empty wishlist'
+                              width={600}
+                              height={400}
+                            />
                           </div>
                         )}
                       </div>

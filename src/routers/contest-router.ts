@@ -10,7 +10,13 @@ export const contestRouter = router({
   getContests: publicProcedure
     .input(ContestPaginationValidator)
     .query(async ({ input }) => {
-      const { pageNumber, filterByName, filterByPrice, filterByTitle } = input
+      const {
+        pageNumber,
+        filterByName,
+        filterByPrice,
+        filterByTitle,
+        filterByContestStatus,
+      } = input
 
       const payload = await getPayloadClient()
 
@@ -26,6 +32,34 @@ export const contestRouter = router({
               },
             }),
             and: [
+              {
+                ...(filterByContestStatus === 'ongoingContests' && {
+                  reached_threshold: {
+                    equals: false,
+                  },
+                }),
+              },
+              {
+                ...(filterByContestStatus === 'thresholdReached' && {
+                  reached_threshold: {
+                    equals: true,
+                  },
+                  and: [
+                    {
+                      contest_status: {
+                        equals: false,
+                      },
+                    },
+                  ],
+                }),
+              },
+              {
+                ...(filterByContestStatus === 'winnerAnnounced' && {
+                  contest_status: {
+                    equals: true,
+                  },
+                }),
+              },
               {
                 ...(filterByPrice !== 0 && {
                   ticket_price: {

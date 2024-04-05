@@ -113,9 +113,9 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
             </button>
           </div>
         </div>
-      </div>
-      <div className='mt-30'>
-        <Image src={payment} alt='payment' />
+        <div className='mt-30'>
+          <Image src={payment} alt='payment' />
+        </div>
       </div>
     </div>
   )

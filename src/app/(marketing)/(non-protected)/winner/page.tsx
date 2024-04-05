@@ -1,5 +1,8 @@
 import { Metadata } from 'next'
 
+import { Suspense } from 'react'
+
+import Loading from '@/components/loading/PageLoading'
 import WinnerView from '@/views/WinnerView'
 
 export const metadata: Metadata = {
@@ -8,7 +11,11 @@ export const metadata: Metadata = {
 }
 
 const Winner = async () => {
-  return <WinnerView />
+  return (
+    <Suspense fallback={<Loading />}>
+      <WinnerView />
+    </Suspense>
+  )
 }
 
 export default Winner

@@ -28,6 +28,9 @@ const ContestView = () => {
       filterBySelect: searchParams?.get('select')
         ? searchParams?.get('select')
         : 0,
+      filterByContestStatus: searchParams?.get('contest')
+        ? searchParams?.get('contest')
+        : '',
     },
     500,
   )
@@ -43,6 +46,7 @@ const ContestView = () => {
     filterByName: filters?.filterByName!,
     filterByPrice: Number(filters?.filterByPrice),
     filterByTitle: filters?.filterByTitle!,
+    filterByContestStatus: filters?.filterByContestStatus!,
   })
 
   //getting tags details
