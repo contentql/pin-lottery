@@ -28,8 +28,9 @@ const RightSide = () => {
           <Image
             src='/images/empty-states/empty-wishlist.png'
             alt='empty wishlist'
-            width={1000}
+            width={500}
             height={500}
+            style={{ marginTop: '220px', marginBottom: '80px' }}
           />
           <Link className='cmn-btn text-capitalize ' href='/contest'>
             <span>
