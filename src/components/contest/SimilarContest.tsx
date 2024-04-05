@@ -2,7 +2,6 @@ import { Contest, Wishlist } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import ContestCard from '../cards/ContestCard'
 
-
 const SimilarContest = ({ contests }: { contests: Contest[] }) => {
   const { data: wishlistData, refetch: refetchWishlistData } =
     trpc.wishlist.getWishlistTickets.useQuery({
@@ -14,11 +13,9 @@ const SimilarContest = ({ contests }: { contests: Contest[] }) => {
       ?.filter(ele => (ele?.contest?.value as Contest)?.id === id)
       ?.at(0)?.id
 
-
   const wishlistIds = wishlistData?.map(
     (ele: Wishlist) => (ele?.contest?.value as Contest)?.id,
   )
-
 
   return (
     <section className='pb-120 mt-minus-100'>
@@ -35,16 +32,9 @@ const SimilarContest = ({ contests }: { contests: Contest[] }) => {
           <div className='row mb-none-30 mt-50'>
             {contests?.map(contest => (
               <div key={contest.id} className='col-xl-4 col-md-6 mb-30'>
-                 <ContestCard
-                    itm={contest}
-                    wishlist={false}
-                    wishlistId={getWishlistId(contest?.id) as string}
-                    refetchWishlistData={refetchWishlistData}
-                    wishlistIds={wishlistIds as string[]}
-                  />
+                <ContestCard itm={contest} />
               </div>
             ))}
-
           </div>
         </div>
       </div>

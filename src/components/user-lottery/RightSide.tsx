@@ -6,14 +6,12 @@ import { FaAngleLeft } from 'react-icons/fa6'
 import ContestCard from '../cards/ContestCard'
 import ContestSkeletons from '../skeletons/ContestSkeletons'
 const RightSide = () => {
-
   const { status } = useAuth()
   const {
     data: wishlistData,
     refetch: refetchWishlistData,
     isPending: isWishlistPending,
   } = trpc.wishlist.getWishlistTickets.useQuery({ id: '' })
-
 
   return (
     <div className='col-lg-8 mt-lg-0 mt-4'>
@@ -54,13 +52,7 @@ const RightSide = () => {
           {wishlistData?.map((itm: any) => (
             <div key={itm.id} className='col-xl-6 col-lg-12 col-md-6 mb-30'>
               {/* Contest card */}
-              <ContestCard
-              wishlistId={itm.id}
-              itm={itm?.contest?.value}
-              wishlist={true}
-              refetchWishlistData={refetchWishlistData}
-              wishlistIds={['']}
-            />
+              <ContestCard itm={itm?.contest?.value} />
             </div>
           ))}
         </div>
