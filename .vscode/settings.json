@@ -13,7 +13,8 @@
     "paystack",
     "scss",
     "tanstack",
-    "trpc"
+    "trpc",
+    "zoomin"
   ],
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
