@@ -118,12 +118,14 @@ const UpcomingDraws = ({
           </div>
           <div className='load-more'>
             {indexOfLastTicket >= upcomingDrawTicketsData?.length ? (
-              <button
-                onClick={handleShowLess}
-                type='button'
-                className='d-flex align-items-center justify-content-lg-center gap-1'>
-                Show Less Lotteries <BsChevronUp />
-              </button>
+              upcomingDrawTicketsData.length > ticketsToShow && (
+                <button
+                  onClick={handleShowLess}
+                  type='button'
+                  className='d-flex align-items-center justify-content-lg-center gap-1'>
+                  Show Less Lotteries <BsChevronUp />
+                </button>
+              )
             ) : (
               <button
                 onClick={handleShowMore}

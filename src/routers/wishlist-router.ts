@@ -1,32 +1,34 @@
 import { TRPCError } from '@trpc/server'
 
+import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { IdValidator } from '../lib/validators/id-validator'
 import { WishlistDetailsValidator } from '../lib/validators/wishlist-details-validator'
 import { router, userProcedure } from '../trpc/trpc'
-
 export const wishlistRouter = router({
-  getWishlistTickets: userProcedure.query(async ({ ctx }) => {
-    const { user } = ctx
+  getWishlistTickets: userProcedure
+    .input(z.object({ id: z.any() }))
+    .query(async ({ ctx }) => {
+      const { user } = ctx
 
-    const payload = await getPayloadClient()
+      const payload = await getPayloadClient()
 
-    try {
-      const tickets = await payload.find({
-        collection: 'wishlist',
-        user,
-        overrideAccess: false,
-      })
+      try {
+        const tickets = await payload.find({
+          collection: 'wishlist',
+          user,
+          overrideAccess: false,
+        })
 
-      return tickets.docs
-    } catch (error: any) {
-      console.error('Error getting wishlist data:', error)
-      throw new TRPCError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: error?.message || 'Failed to retrieve wishlist data.',
-      })
-    }
-  }),
+        return tickets.docs
+      } catch (error: any) {
+        console.error('Error getting wishlist data:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to retrieve wishlist data.',
+        })
+      }
+    }),
 
   addTicketsToWishlist: userProcedure
     .input(WishlistDetailsValidator)

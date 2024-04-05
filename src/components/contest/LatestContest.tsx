@@ -6,7 +6,7 @@ import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
 
-import { Contest } from '@/payload-types'
+import { Contest, Wishlist } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import FilterByTag from '../filters/FilterByTag'
 import ContestSkeletons from '../skeletons/ContestSkeletons'
@@ -19,7 +19,7 @@ const LatestContest = ({
   setPageNumber,
 }: any) => {
   const { data: wishlistData, refetch: refetchWishlistData } =
-    trpc.wishlist.getWishlistTickets.useQuery()
+    trpc.wishlist.getWishlistTickets.useQuery({ id: '' })
 
   const router = useRouter()
   const pathname = usePathname()
@@ -30,7 +30,9 @@ const LatestContest = ({
   const contest = searchParams.get('contest') ?? ''
   const MAX = 1000
 
-  const wishlistIds = wishlistData?.map((ele: any) => ele?.contest?.value?.id)
+  const wishlistIds = wishlistData?.map(
+    (ele: Wishlist) => (ele?.contest?.value as Contest)?.id,
+  )
 
   console.log('wishlistIds', wishlistIds)
 
@@ -313,7 +315,7 @@ const LatestContest = ({
                                 key={contest.id}
                                 className='col-xl-4 col-md-6 mb-30'>
                                 <ContestCard
-                                  wishlistIds={wishlistIds}
+                                  wishlistIds={wishlistIds as string[]}
                                   itm={contest}
                                   wishlist={false}
                                   wishlistId={
