@@ -98,12 +98,10 @@ const ContestCard = ({
           {wishlist || updateWishlistIds?.includes(itm?.id) ? (
             <FaHeart
               className='zoomin'
-              onClick={(e) => {
-                 e.stopPropagation()
+              onClick={e => {
+                e.stopPropagation()
                 !(isWishlistDeleted || isWishlistUpdated) &&
                   deleteById({ id: wishlistId })
-                
-
               }}
               size={25}
               fill='red'
@@ -117,10 +115,9 @@ const ContestCard = ({
             <FaRegHeart
               className='zoomin'
               size={25}
-              onClick={() => {       
+              onClick={e => {
                 e.stopPropagation()
                 !(isWishlistDeleted || isWishlistUpdated) && addToWishlist()
-
               }}
               style={{ color: 'white' }}
               cursor={

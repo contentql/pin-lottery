@@ -25,7 +25,7 @@ const ContestDetailsPage = ({
     status === 'loggedIn',
   )
     ? trpc.wishlist.getWishlistTickets.useQuery({ id: '' })
-    : { data: [], refetch: () => null }
+    : { data: [], refetch: () => '' }
 
   const getWishlistId = (id: string) =>
     wishlistData
