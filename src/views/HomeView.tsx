@@ -44,7 +44,7 @@ const HomeView = () => {
       )}
       <ContestCategories allTags={allTags as Tag[]} />
       <ContestDetailsPage contestDetails={contestDetails as Contest[]} />
-      <WinnerDetails winnerDetails={winnerDetails as Winner[]} />
+      <WinnerDetails winnerDetails={winnerDetails?.slice(0, 10) as Winner[]} />
       <LatestWinner />
       <Overview />
       <Features />
