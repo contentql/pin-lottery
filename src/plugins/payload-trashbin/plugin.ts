@@ -2,6 +2,7 @@ import type { Config, Plugin } from 'payload/config'
 import { AfterDeleteHook } from 'payload/dist/collections/config/types'
 import Trash from './collections/trash'
 import { PluginTypes } from './types'
+import DefaultListView from './views/DefaultListView'
 
 const addDocumentToTrashCollection: AfterDeleteHook = async ({
   req,
@@ -50,6 +51,7 @@ export const trashBin =
       ...incomingConfig,
       collections: [
         ...updatedCollectionWithAfterDelete,
+
         {
           ...Trash,
           hooks: {
@@ -75,6 +77,8 @@ export const trashBin =
 
               return true
             },
+
+            components: { views: { List: DefaultListView } },
           },
         },
       ],
