@@ -50,12 +50,9 @@ export const trashBin =
       ...incomingConfig,
       collections: [
         ...updatedCollectionWithAfterDelete,
+
         {
           ...Trash,
-          hooks: {
-            ...Trash.hooks,
-            afterDelete: [...(Trash.hooks?.afterDelete || [])],
-          },
           admin: {
             // @ts-ignore (JWT User issues, it is mandatory to save the roles in JWT here)
             hidden: ({ user }) => {

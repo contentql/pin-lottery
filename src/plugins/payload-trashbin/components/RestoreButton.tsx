@@ -1,7 +1,8 @@
-import React from 'react'
+import { Button } from 'payload/components/elements'
 import { useDocumentInfo } from 'payload/components/utilities'
 import { Field } from 'payload/types'
-import { Button } from 'payload/components/elements'
+import React from 'react'
+import { toast } from 'react-toastify'
 
 export const RestoreButton: React.FC = props => {
   const { id } = useDocumentInfo()
@@ -13,11 +14,16 @@ export const RestoreButton: React.FC = props => {
       }}>
       <Button
         onClick={async () => {
-          await fetch(`/api/trash/restore/${id}`, {
+          fetch(`/api/trash/restore/where[id][in][0]=${id}`, {
             method: 'GET',
           })
-
-          window.location.href = `/admin`
+            .then(() => {
+              window.location.href = `/admin/collections/trash`
+            })
+            .catch(error => {
+              console.log(error)
+              toast.error(error.message)
+            })
         }}>
         Restore
       </Button>
