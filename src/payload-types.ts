@@ -106,14 +106,6 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
     card?: {
       url?: string | null;
       width?: number | null;
@@ -123,6 +115,14 @@ export interface Media {
       filename?: string | null;
     };
     tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    thumbnail?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -235,8 +235,6 @@ export interface Winner {
  */
 export interface Ticket {
   id: string;
-  ticket_number?: string | null;
-  ticket_price: number;
   contest_id: {
     relationTo: 'contest';
     value: string | Contest;
@@ -245,6 +243,8 @@ export interface Ticket {
     relationTo: 'users';
     value: string | User;
   } | null;
+  ticket_number?: string | null;
+  ticket_price: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -374,6 +374,7 @@ export interface Trash {
     | boolean
     | null;
   collectionName?: string | null;
+  actions?: string | null;
   updatedAt: string;
   createdAt: string;
 }

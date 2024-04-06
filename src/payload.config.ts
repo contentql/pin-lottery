@@ -22,6 +22,7 @@ import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
 import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
+import { mediaGridView } from './plugins/payload-media-grid-view'
 import { paystack } from './plugins/payload-paystack'
 import { trashBin } from './plugins/payload-trashbin'
 import { s3StorageAdapter } from './plugins/s3'
@@ -91,6 +92,7 @@ export default buildConfig({
     url: process.env.MONGODB_URL!,
   }),
   plugins: [
+    mediaGridView,
     cloudStorage({
       collections: {
         media: {
