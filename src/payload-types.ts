@@ -374,7 +374,6 @@ export interface Trash {
     | boolean
     | null;
   collectionName?: string | null;
-  actions?: string | null;
   updatedAt: string;
   createdAt: string;
 }
