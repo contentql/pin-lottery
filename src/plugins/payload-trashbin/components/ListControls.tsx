@@ -21,7 +21,7 @@ import Chevron from 'payload/dist/admin/components/icons/Chevron'
 import { useSearchParams } from 'payload/dist/admin/components/utilities/SearchParams'
 import { fieldAffectsData } from 'payload/dist/fields/config/types'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
-import RestoreMany from './ResoreMany'
+import RestoreMany from './RestoreMany'
 
 const baseClass = 'list-controls'
 
