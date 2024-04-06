@@ -1,4 +1,5 @@
 import type { CollectionConfig, Field } from 'payload/types'
+import { UploadsGridView } from './UploadsGridView'
 
 const urlField: Field = {
   name: 'url',
@@ -11,7 +12,12 @@ export const Media: CollectionConfig = {
     read: () => true,
     delete: () => true,
   },
+  admin: {
+    components: { views: { List: UploadsGridView } },
+    pagination: { defaultLimit: 12, limits: [12, 24, 48] },
+  },
   upload: {
+    adminThumbnail: 'thumbnail',
     imageSizes: [
       {
         height: 40,
