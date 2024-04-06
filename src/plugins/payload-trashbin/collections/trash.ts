@@ -28,7 +28,6 @@ export const Trash: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'collectionName',
-    defaultColumns: ['id', 'collectionName', 'actions'],
     components: { views: { List: DefaultListView } },
   },
   access: {
