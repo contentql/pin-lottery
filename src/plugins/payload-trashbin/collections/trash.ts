@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload/types'
 import qs from 'qs'
 
 import { RestoreButton } from '../components/RestoreButton'
-import RestoreButtonInCell from '../components/RestoreButtonInCell'
+import DefaultListView from '../views/DefaultListView'
 
 // This is a object converter that converts any  expanded relation including nested to plain relation (where the value of the relation is just the id)
 function convertObject(obj: any) {
@@ -29,6 +29,7 @@ export const Trash: CollectionConfig = {
   admin: {
     useAsTitle: 'collectionName',
     defaultColumns: ['id', 'collectionName', 'actions'],
+    components: { views: { List: DefaultListView } },
   },
   access: {
     create: () => false,
@@ -54,17 +55,17 @@ export const Trash: CollectionConfig = {
         },
       },
     },
-    {
-      name: 'actions',
-      type: 'text',
-      label: 'Actions',
-      admin: {
-        hidden: true,
-        components: {
-          Cell: RestoreButtonInCell,
-        },
-      },
-    },
+    // {
+    //   name: 'actions',
+    //   type: 'text',
+    //   label: 'Actions',
+    //   admin: {
+    //     hidden: true,
+    //     components: {
+    //       Cell: RestoreButtonInCell,
+    //     },
+    //   },
+    // },
   ],
   endpoints: [
     {
@@ -75,10 +76,14 @@ export const Trash: CollectionConfig = {
 
         const queryString = req.params.id
 
+        console.log({ queryString })
+
         const arrayOfIds = (qs.parse(queryString) as any).where?.id?.in
 
-        Promise.all(
-          arrayOfIds.forEach(async (restoreDocId: string) => {
+        console.log({ arrayOfIds })
+
+        await Promise.all(
+          arrayOfIds.map(async (restoreDocId: string) => {
             // eslint-disable-next-line dot-notation
             const { value: newValue, collectionName } =
               await payload.db.collections['trash'].findById(restoreDocId)

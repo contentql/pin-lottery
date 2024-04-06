@@ -2,7 +2,6 @@ import type { Config, Plugin } from 'payload/config'
 import { AfterDeleteHook } from 'payload/dist/collections/config/types'
 import Trash from './collections/trash'
 import { PluginTypes } from './types'
-import DefaultListView from './views/DefaultListView'
 
 const addDocumentToTrashCollection: AfterDeleteHook = async ({
   req,
@@ -54,10 +53,6 @@ export const trashBin =
 
         {
           ...Trash,
-          hooks: {
-            ...Trash.hooks,
-            afterDelete: [...(Trash.hooks?.afterDelete || [])],
-          },
           admin: {
             // @ts-ignore (JWT User issues, it is mandatory to save the roles in JWT here)
             hidden: ({ user }) => {
@@ -77,8 +72,6 @@ export const trashBin =
 
               return true
             },
-
-            components: { views: { List: DefaultListView } },
           },
         },
       ],

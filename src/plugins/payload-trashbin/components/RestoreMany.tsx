@@ -41,42 +41,45 @@ const RestoreMany: React.FC<Props> = props => {
   const handleRestore = useCallback(async () => {
     setRestoring(true)
 
-    await fetch(`/api/trash/restore/${getQueryParams().substring(1)}`, {
+    fetch(`/api/trash/restore/${getQueryParams().substring(1)}`, {
       method: 'GET',
+    }).then(async res => {
+      try {
+        const json = await res.json()
+        toggleModal(modalSlug)
+        if (res.status < 400) {
+          toast.success(
+            json.message ||
+              `Restored ${count} ${count > 1 ? 'documents' : 'document'} successfully!`,
+            {
+              autoClose: 3000,
+            },
+          )
+          toggleAll()
+          resetParams({ page: selectAll ? 1 : undefined })
+          return null
+        }
+
+        if (json.errors) {
+          toast.error(json.message)
+        } else {
+          addDefaultError()
+        }
+        return false
+      } catch (e) {
+        return addDefaultError()
+      }
     })
-
-    toggleAll()
-    // requests
-    //   .delete(`${serverURL}${api}/${slug}${getQueryParams()}`, {
-    //     headers: {
-    //       'Accept-Language': i18n.language,
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    //   .then(async res => {
-    //     try {
-    //       const json = await res.json()
-    //       toggleModal(modalSlug)
-    //       if (res.status < 400) {
-    //         toast.success(json.message || t('restoredSuccessfully'), {
-    //           autoClose: 3000,
-    //         })
-    //         toggleAll()
-    //         resetParams({ page: selectAll ? 1 : undefined })
-    //         return null
-    //       }
-
-    //       if (json.errors) {
-    //         toast.error(json.message)
-    //       } else {
-    //         addDefaultError()
-    //       }
-    //       return false
-    //     } catch (e) {
-    //       return addDefaultError()
-    //     }
-    //   })
-  }, [getQueryParams, toggleAll])
+  }, [
+    addDefaultError,
+    count,
+    getQueryParams,
+    modalSlug,
+    resetParams,
+    selectAll,
+    toggleAll,
+    toggleModal,
+  ])
 
   if (selectAll === SelectAllStatus.None || !hasRestorePermission) {
     return null
@@ -95,7 +98,7 @@ const RestoreMany: React.FC<Props> = props => {
       <Modal className={baseClass} slug={modalSlug}>
         <MinimalTemplate className={`${baseClass}__template`}>
           <h1>Confirm Restoration</h1>
-          <p>{`You are about to restore ${count} ${plural}`}</p>
+          <p>{`You are about to Restore ${count} ${count > 1 ? 'documents' : 'document'} from ${plural}`}</p>
           <Button
             buttonStyle='secondary'
             id='confirm-cancel'
