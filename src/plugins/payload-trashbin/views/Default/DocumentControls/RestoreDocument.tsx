@@ -1,6 +1,6 @@
 import { Modal, useModal } from '@faceless-ui/modal'
 import React, { useCallback, useState } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -19,7 +19,7 @@ import 'payload/dist/admin/components/elements/DeleteDocument/index.scss'
 
 const baseClass = 'delete-document'
 
-const DeleteDocument: React.FC<Props> = props => {
+const RestoreDocument: React.FC<Props> = props => {
   const {
     id,
     buttonId,
@@ -36,22 +36,22 @@ const DeleteDocument: React.FC<Props> = props => {
   } = useConfig()
 
   const { setModified } = useForm()
-  const [deleting, setDeleting] = useState(false)
+  const [restoring, setRestoring] = useState(false)
   const { toggleModal } = useModal()
   const history = useHistory()
   const { i18n, t } = useTranslation('general')
   const title = useTitle({ collection })
   const titleToRender = titleFromProps || title || id
 
-  const modalSlug = `delete-${id}`
+  const modalSlug = `restore-${id}`
 
   const addDefaultError = useCallback(() => {
-    setDeleting(false)
+    setRestoring(false)
     toast.error(t('error:deletingTitle', { title }))
   }, [t, title])
 
-  const handleDelete = useCallback(async () => {
-    setDeleting(true)
+  const handleRestore = useCallback(async () => {
+    setRestoring(true)
     setModified(false)
     try {
       await requests
@@ -65,7 +65,7 @@ const DeleteDocument: React.FC<Props> = props => {
           try {
             const json = await res.json()
             if (res.status < 400) {
-              setDeleting(false)
+              setRestoring(false)
               toggleModal(modalSlug)
               toast.success(
                 json.message ||
@@ -115,38 +115,30 @@ const DeleteDocument: React.FC<Props> = props => {
         <PopupList.Button
           id={buttonId}
           onClick={() => {
-            setDeleting(false)
+            setRestoring(false)
             toggleModal(modalSlug)
           }}>
-          {t('delete')}
+          Restore
         </PopupList.Button>
         <Modal className={baseClass} slug={modalSlug}>
           <MinimalTemplate className={`${baseClass}__template`}>
-            <h1>{t('confirmDeletion')}</h1>
+            <h1>Confirm restoration</h1>
             <p>
-              <Trans
-                i18nKey='aboutToDelete'
-                t={t}
-                values={{
-                  label: getTranslation(singular, i18n),
-                  title: titleToRender,
-                }}>
-                aboutToDelete
-                <strong>{titleToRender}</strong>
-              </Trans>
+              You are about to restore the <strong>{titleToRender}</strong>. Are
+              you sure ?
             </p>
             <div className={`${baseClass}__actions`}>
               <Button
                 buttonStyle='secondary'
                 id='confirm-cancel'
-                onClick={deleting ? undefined : () => toggleModal(modalSlug)}
+                onClick={restoring ? undefined : () => toggleModal(modalSlug)}
                 type='button'>
                 {t('cancel')}
               </Button>
               <Button
-                id='confirm-delete'
-                onClick={deleting ? undefined : handleDelete}>
-                {deleting ? t('deleting') : t('confirm')}
+                id='confirm-restore'
+                onClick={restoring ? undefined : handleRestore}>
+                {restoring ? 'Restoring...' : t('confirm')}
               </Button>
             </div>
           </MinimalTemplate>
@@ -158,4 +150,4 @@ const DeleteDocument: React.FC<Props> = props => {
   return null
 }
 
-export default DeleteDocument
+export default RestoreDocument

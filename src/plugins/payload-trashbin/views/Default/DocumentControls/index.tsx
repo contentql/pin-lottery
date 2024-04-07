@@ -20,6 +20,7 @@ import Status from 'payload/dist/admin/components/elements/Status'
 import { useConfig } from 'payload/dist/admin/components/utilities/Config'
 import { useDocumentInfo } from 'payload/dist/admin/components/utilities/DocumentInfo'
 import { formatDate } from 'payload/dist/admin/utilities/formatDate'
+import RestoreDocument from './RestoreDocument'
 
 const baseClass = 'doc-controls'
 
@@ -60,6 +61,7 @@ export const DocumentControls: React.FC<{
     'create' in permissions! && permissions.create?.permission
   const hasDeletePermission =
     'delete' in permissions! && permissions.delete?.permission
+  const hasRestorePermission = true
 
   const showDotMenu = Boolean(
     collection &&
@@ -251,6 +253,13 @@ export const DocumentControls: React.FC<{
                 {hasDeletePermission && (
                   <DeleteDocument
                     buttonId='action-delete'
+                    collection={collection}
+                    id={id}
+                  />
+                )}
+                {hasRestorePermission && (
+                  <RestoreDocument
+                    buttonId='action-restore'
                     collection={collection}
                     id={id}
                   />
