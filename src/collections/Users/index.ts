@@ -98,6 +98,14 @@ const Users: CollectionConfig = {
         update: isAdmin,
       },
     },
+    {
+      name: 'amount',
+      type: 'number',
+      label: 'Amount',
+      admin: {
+        readOnly: true,
+      },
+    },
   ],
 }
 

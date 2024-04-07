@@ -19,6 +19,7 @@ export interface Config {
     faq: Faq;
     tags: Tag;
     wishlist: Wishlist;
+    transaction: Transaction;
     trash: Trash;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -37,6 +38,7 @@ export interface User {
   phone_number?: string | null;
   image?: string | Media | null;
   roles?: ('admin' | 'manager' | 'editor' | 'user')[] | null;
+  amount?: number | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -355,6 +357,24 @@ export interface Wishlist {
     relationTo: 'users';
     value: string | User;
   } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "transaction".
+ */
+export interface Transaction {
+  id: string;
+  value:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }

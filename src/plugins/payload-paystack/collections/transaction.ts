@@ -25,6 +25,38 @@ export const Transaction: CollectionConfig = {
 
         console.log('body', body)
 
+        try {
+          await payload.create({
+            collection: 'transaction',
+            data: {
+              value: { body },
+            },
+          })
+        } catch (error) {
+          console.log('Error while creating a tranction: ', error)
+        }
+
+        if (
+          body.data.status === 'success' &&
+          body.data.authorization.authorization_code
+        ) {
+          try {
+            await payload.update({
+              collection: 'users',
+              data: {
+                amount: body.data.amount,
+              },
+              where: {
+                email: {
+                  equals: body.data.customer.email,
+                },
+              },
+            })
+          } catch (error) {
+            console.log('Error while update user amount: ', error)
+          }
+        }
+
         res.status(200).json({ status: true })
       },
     },
