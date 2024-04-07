@@ -4,9 +4,7 @@ import Transaction from './collections/transaction'
 
 import { Paystack } from 'paystack-sdk'
 
-const paystackSdk = new Paystack(
-  'sk_test_6c2e7ca16d0d713386973b3039bfcecae37275e3',
-)
+const paystackSdk = new Paystack(process.env.PAYSTACK_SECRET_KEY || '')
 
 const createPaystackCustomer: CollectionAfterOperationHook = async ({
   operation,
