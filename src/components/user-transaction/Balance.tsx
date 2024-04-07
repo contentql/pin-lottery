@@ -1,20 +1,19 @@
 import Image from 'next/image'
-import {
-  createPaystackCheckoutUrl,
-  validatePaystackPaymentStatus,
-} from '../../plugins/payload-paystack'
+import { createPaystackCheckoutUrl } from '../../plugins/payload-paystack'
 
+import { useAuth } from '@/providers/Auth'
+import { useRouter, useSearchParams } from 'next/navigation'
 import transaction_1 from '/public/images/icon/transaction/1.png'
 import transaction_2 from '/public/images/icon/transaction/2.png'
-import { useRouter } from 'next/navigation'
-import { useSearchParams } from 'next/navigation'
 
 const Balance = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
 
+  const { user } = useAuth()
+
   const handleAdd = async () => {
-    const url = await createPaystackCheckoutUrl()
+    const url = await createPaystackCheckoutUrl(user?.email)
     console.log('url', url)
 
     await router.push(url?.data?.authorization_url || '/user-transaction')

@@ -37,11 +37,13 @@ const createPaystackCustomer: CollectionAfterOperationHook = async ({
   return result
 }
 
-export const createPaystackCheckoutUrl = async () => {
+export const createPaystackCheckoutUrl = async (
+  userEmail: string | undefined,
+) => {
   try {
     const checkout = await paystackSdk.transaction.initialize({
       amount: '2000',
-      email: 'manojkarajada.mk@gmail.com',
+      email: userEmail!,
     })
     console.log('checkout', checkout)
     return checkout
