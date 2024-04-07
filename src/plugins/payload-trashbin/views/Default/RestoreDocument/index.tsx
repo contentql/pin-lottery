@@ -45,15 +45,17 @@ const RestoreDocument: React.FC<Props> = props => {
 
   const addDefaultError = useCallback(() => {
     setRestoring(false)
-    toast.error(t('error:deletingTitle', { title }))
-  }, [t, title])
+    toast.error(
+      `There was an error while restoring ${title}. Please check your connection and try again.`,
+    )
+  }, [title])
 
   const handleRestore = useCallback(async () => {
     setRestoring(true)
     setModified(false)
 
     try {
-      await fetch(`/api/trash/restore/where[id][in][0]=${id}`, {
+      await fetch(`/api/trash/restore/where[id][in][0]=${id}sacasjdjl`, {
         method: 'GET',
       }).then(async res => {
         try {
@@ -61,7 +63,7 @@ const RestoreDocument: React.FC<Props> = props => {
           if (res.status < 400) {
             setRestoring(false)
             toggleModal(modalSlug)
-            toast.success(json.message || `${singular} successfully restored.`)
+            toast.success(json.message || `"${title}" successfully restored.`)
             return history.push(`${admin}/collections/${slug}`)
           }
 
@@ -87,8 +89,8 @@ const RestoreDocument: React.FC<Props> = props => {
     id,
     modalSlug,
     setModified,
-    singular,
     slug,
+    title,
     toggleModal,
   ])
 
@@ -108,7 +110,7 @@ const RestoreDocument: React.FC<Props> = props => {
             <h1>Confirm restoration</h1>
             <p>
               You are about to restore the <strong>{titleToRender}</strong>. Are
-              you sure ?
+              you sure?
             </p>
             <div className={`${baseClass}__actions`}>
               <Button
