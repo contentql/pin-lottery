@@ -55,7 +55,7 @@ const RestoreDocument: React.FC<Props> = props => {
     setModified(false)
 
     try {
-      await fetch(`/api/trash/restore/where[id][in][0]=${id}sacasjdjl`, {
+      await fetch(`/api/trash/restore/where[id][in][0]=${id}`, {
         method: 'GET',
       }).then(async res => {
         try {

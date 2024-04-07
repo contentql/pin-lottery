@@ -1,7 +1,6 @@
 import type { CollectionConfig } from 'payload/types'
 import qs from 'qs'
 
-import { RestoreButton } from '../components/RestoreButton'
 import { DefaultCollectionEdit } from '../views/Default'
 import DefaultListView from '../views/DefaultListView'
 
@@ -56,11 +55,11 @@ export const Trash: CollectionConfig = {
       name: 'collectionName',
       type: 'text',
       label: 'Collection Name',
-      admin: {
-        components: {
-          afterInput: [RestoreButton],
-        },
-      },
+      // admin: {
+      //   components: {
+      //     afterInput: [RestoreButton],
+      //   },
+      // },
     },
     // {
     //   name: 'actions',
