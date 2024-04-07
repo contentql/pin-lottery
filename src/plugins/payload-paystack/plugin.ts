@@ -66,6 +66,28 @@ export const validatePaystackPaymentStatus = async ({
   }
 }
 
+//Transfer
+
+export const initializeTransfer = async () => {
+  try {
+    const validateAccount = await paystackSdk.verification.resolveAccount({
+      account_number: '0001234567',
+      bank_code: '058',
+    })
+
+    console.log('validateAccount', validateAccount)
+
+    // const createTransferRecipient = await paystackSdk.recipient.create({
+    //   account_number: '0001234567',
+    //   bank_code: '058',
+    //   name:'',
+    //   currency:"NGN",
+    //   description:"",
+    //   type:"nuban"
+    // })
+  } catch (error) {}
+}
+
 export const paystack: Plugin = (incomingConfig: Config): Config => {
   // find the user collection
   // once you find the user collection add a new hook to it
