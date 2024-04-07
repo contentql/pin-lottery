@@ -5,40 +5,83 @@ import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FaRegHeart } from 'react-icons/fa'
+import { FaHeart } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
 
 const ContestCard = ({ itm }: { itm: Contest }) => {
   const { status } = useAuth()
 
-  const { setQueryData } = useQueryClient()
+  const queryClient = useQueryClient()
 
-  const { mutate: addTicketsToWishlist, isPending: isWishlistUpdated } =
-    trpc.wishlist.addTicketsToWishlist.useMutation({
+  const { data: wishlistData } = trpc.wishlist.getWishListByContestId.useQuery(
+    {
+      id: itm.id,
+    },
+    {
+      initialData: { id: undefined, isWishlist: false },
+    },
+  )
+
+  const { isWishlist, id: wishlistId } = wishlistData
+
+  const queryKey = [
+    ['wishlist', 'getWishListByContestId'],
+    {
+      input: {
+        id: itm.id,
+      },
+      type: 'query',
+    },
+  ]
+
+  const { mutate: addToWishlist, isPending: isWishlistUpdated } =
+    trpc.wishlist.addToWishlist.useMutation({
+      onMutate: () => {
+        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+          ...prev,
+          isWishlist: true,
+        }))
+      },
       onSuccess: async () => {
         toast.success('Successfully added to wishlist')
       },
       onError: async () => {
+        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+          ...prev,
+          isWishlist: false,
+        }))
         toast.error('Unable to add to wishlist')
       },
     })
 
-  const { mutate: deleteById, isPending: isWishlistDeleted } =
-    trpc.wishlist.deleteById.useMutation({
+  const { mutate: removeFromWishlist, isPending: isWishlistDeleted } =
+    trpc.wishlist.removeWishlistById.useMutation({
+      onMutate: async () => {
+        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+          ...prev,
+          isWishlist: false,
+        }))
+      },
       onSuccess: async () => {
         toast.success('Successfully remove from wishlist.')
       },
       onError: async () => {
+        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+          ...prev,
+          isWishlist: true,
+        }))
         toast.error('Failed to remove from wishlist.')
       },
     })
 
-  const addToWishlist = () => {
-    if (status !== 'loggedIn') {
-      toast.error('Login to add tickets to wishlist')
-      return
-    }
+  const wishlistClickHandler = (e: any) => {
+    e.stopPropagation()
+    // if (status !== 'loggedIn') {
+    //   toast.error('Login to add tickets to wishlist')
+    //   return
+    // }
 
-    addTicketsToWishlist({
+    addToWishlist({
       contest_id: itm?.id,
     })
   }
@@ -58,35 +101,34 @@ const ContestCard = ({ itm }: { itm: Contest }) => {
           style={{ cursor: 'pointer' }}
         />
         <div className='action-icon1' style={{ cursor: 'pointer' }}>
-          {/* <FaHeart
-               className='zoomin'
-               onClick={e => {
-                 e.stopPropagation()
-                 !(isWishlistDeleted || isWishlistUpdated) &&
-                   deleteById({ id: wishlistId })
-               }}
-               size={25}
-               fill='red'
-               cursor={
-                 isWishlistDeleted || isWishlistUpdated
-                   ? 'not-allowed'
-                   : 'pointer'
-               }
-             /> */}
+          {isWishlist ? (
+            <FaHeart
+              className='zoomin'
+              onClick={e => {
+                e.stopPropagation()
 
-          <FaRegHeart
-            className='zoomin'
-            size={25}
-            onClick={e => {
-              e.stopPropagation()
-              !(isWishlistDeleted || isWishlistUpdated) && addToWishlist()
-            }}
-            style={{ color: 'white' }}
-            // cursor={
-            //   isWishlistDeleted || isWishlistUpdated
-            //     ? 'not-allowed'
-            //     : 'pointer'
-          />
+                removeFromWishlist({ id: wishlistId! })
+              }}
+              size={25}
+              fill='red'
+              //  cursor={
+              //    isWishlistDeleted || isWishlistUpdated
+              //      ? 'not-allowed'
+              //      : 'pointer'
+              //  }
+            />
+          ) : (
+            <FaRegHeart
+              className='zoomin'
+              size={25}
+              onClick={e => wishlistClickHandler(e)}
+              style={{ color: 'white' }}
+              // cursor={
+              //   isWishlistDeleted || isWishlistUpdated
+              //     ? 'not-allowed'
+              //     : 'pointer'
+            />
+          )}
         </div>
         <div className='contest-num'>
           <span>contest no:</span>

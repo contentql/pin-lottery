@@ -1,15 +1,15 @@
 import { User } from '@/payload-types'
 import { CollectionConfig } from 'payload/types'
-import { isAdminOrSelf } from './access/isAdminOrSelf'
+import { self } from './access/self'
 import { assignUserId } from './field-level-hooks/assignUserId'
 
 const Cart: CollectionConfig = {
   slug: 'cart',
   access: {
-    create: isAdminOrSelf,
-    read: isAdminOrSelf,
-    update: isAdminOrSelf,
-    delete: isAdminOrSelf,
+    create: self,
+    read: self,
+    update: self,
+    delete: self,
   },
   fields: [
     {

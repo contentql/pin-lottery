@@ -314,15 +314,7 @@ const LatestContest = ({
                               <div
                                 key={contest.id}
                                 className='col-xl-4 col-md-6 mb-30'>
-                                <ContestCard
-                                  wishlistIds={wishlistIds as string[]}
-                                  itm={contest}
-                                  wishlist={false}
-                                  wishlistId={
-                                    getWishlistId(contest?.id) as string
-                                  }
-                                  refetchWishlistData={refetchWishlistData}
-                                />
+                                <ContestCard itm={contest} />
                               </div>
                             ))
                         ) : (

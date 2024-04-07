@@ -12,6 +12,7 @@ export const Media: CollectionConfig = {
     delete: () => true,
   },
   upload: {
+    // adminThumbnail: 'thumbnail',
     imageSizes: [
       {
         height: 40,
@@ -43,12 +44,12 @@ export const Media: CollectionConfig = {
         crop: 'center',
         name: 'sixteenByNineMedium',
       },
-      {
-        name: 'thumbnail',
-        width: 400,
-        height: 300,
-        position: 'centre',
-      },
+      // {
+      //   name: 'thumbnail',
+      //   width: 400,
+      //   height: 300,
+      //   position: 'centre',
+      // },
       {
         name: 'card',
         width: 768,

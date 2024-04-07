@@ -14,8 +14,13 @@ import Hero from '@/components/home/Hero'
 import WinnerDetails from '@/components/home/WinnerDetails'
 import HeroSkeleton from '@/components/skeletons/HeroSkeleton'
 import { Contest, Tag, Winner } from '@/payload-types'
+import { useSearchParams } from 'next/navigation'
+import { validatePaystackPaymentStatus } from '@/plugins/payload-paystack'
 
 const HomeView = () => {
+  const searchParams = useSearchParams()
+  // const router =
+
   // get hero contests
   const {
     data: HeroContests,
@@ -31,6 +36,19 @@ const HomeView = () => {
   // get winners
 
   const { data: winnerDetails } = trpc.winner.getWinners.useQuery()
+  const reference = searchParams.get('reference')
+  console.log('reference', reference)
+
+  if (reference) {
+    const testFunction = async () => {
+      const paymentStatus = await validatePaystackPaymentStatus({
+        reference,
+      })
+      console.log('paymentStatus', paymentStatus)
+      // router.push
+    }
+    testFunction()
+  }
 
   return (
     <>

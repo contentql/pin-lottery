@@ -1,4 +1,6 @@
-import { Bounce, ToastContainer, ToastContainerProps } from 'react-toastify'
+'use client'
+
+import { Slide, ToastContainer, ToastContainerProps } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 interface ToastContainerConfigProps extends ToastContainerProps {}
@@ -15,10 +17,9 @@ const ToastConfig: React.FC<ToastContainerConfigProps> = props => {
     hideProgressBar: false,
     closeOnClick: false,
     pauseOnHover: true,
-    draggable: 'touch',
     closeButton: true,
     limit: 5,
-    transition: Bounce,
+    transition: Slide,
     theme: 'colored',
     ...additionalProps,
   }
