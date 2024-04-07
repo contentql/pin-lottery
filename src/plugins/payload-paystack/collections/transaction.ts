@@ -19,7 +19,7 @@ export const Transaction: CollectionConfig = {
   endpoints: [
     {
       path: '/paystack/webhook',
-      method: 'get',
+      method: 'post',
       handler: async (req, res) => {
         const { payload, body } = req
 
