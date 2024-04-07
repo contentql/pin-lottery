@@ -6,14 +6,12 @@ import { toast } from 'react-toastify'
 
 import type { Props } from 'payload/dist/admin/components/elements/DeleteDocument/types'
 
-import { requests } from 'payload/dist/admin/api'
 import Button from 'payload/dist/admin/components/elements/Button'
 import * as PopupList from 'payload/dist/admin/components/elements/Popup/PopupButtonList'
 import { useForm } from 'payload/dist/admin/components/forms/Form/context'
 import MinimalTemplate from 'payload/dist/admin/components/templates/Minimal'
 import { useConfig } from 'payload/dist/admin/components/utilities/Config'
 import useTitle from 'payload/dist/admin/hooks/useTitle'
-import { getTranslation } from 'payload/dist/utilities/getTranslation'
 
 import 'payload/dist/admin/components/elements/DeleteDocument/index.scss'
 
@@ -53,60 +51,45 @@ const RestoreDocument: React.FC<Props> = props => {
   const handleRestore = useCallback(async () => {
     setRestoring(true)
     setModified(false)
+
     try {
-      await requests
-        .delete(`${serverURL}${api}/${slug}/${id}`, {
-          headers: {
-            'Accept-Language': i18n.language,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(async res => {
-          try {
-            const json = await res.json()
-            if (res.status < 400) {
-              setRestoring(false)
-              toggleModal(modalSlug)
-              toast.success(
-                json.message ||
-                  t('titleDeleted', {
-                    label: getTranslation(singular, i18n),
-                    title,
-                  }),
-              )
-              return history.push(`${admin}/collections/${slug}`)
-            }
-
+      await fetch(`/api/trash/restore/where[id][in][0]=${id}`, {
+        method: 'GET',
+      }).then(async res => {
+        try {
+          const json = await res.json()
+          if (res.status < 400) {
+            setRestoring(false)
             toggleModal(modalSlug)
-
-            if (json.errors) {
-              json.errors.forEach((error: any) => toast.error(error.message))
-            } else {
-              addDefaultError()
-            }
-            return false
-          } catch (e) {
-            return addDefaultError()
+            toast.success(json.message || `${singular} successfully restored.`)
+            return history.push(`${admin}/collections/${slug}`)
           }
-        })
+
+          toggleModal(modalSlug)
+
+          if (json.errors) {
+            json.errors.forEach((error: any) => toast.error(error.message))
+          } else {
+            addDefaultError()
+          }
+          return false
+        } catch (e) {
+          return addDefaultError()
+        }
+      })
     } catch (e) {
       addDefaultError()
     }
   }, [
-    setModified,
-    serverURL,
-    api,
-    slug,
-    id,
-    toggleModal,
-    modalSlug,
-    t,
-    singular,
-    i18n,
-    title,
-    history,
-    admin,
     addDefaultError,
+    admin,
+    history,
+    id,
+    modalSlug,
+    setModified,
+    singular,
+    slug,
+    toggleModal,
   ])
 
   if (id) {
