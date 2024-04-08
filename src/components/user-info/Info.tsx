@@ -337,30 +337,34 @@ const Info = ({ userData }: { userData: User }) => {
                   onClick={() => handleEmailCancel()}>
                   Cancel
                 </button>{' '}
-                <button type='submit' className='save-button'>
-                  Save
+                <button
+                  type='submit'
+                  className='save-button'
+                  disabled={isEmailChanged}>
+                  {isEmailChanged ? (
+                    <ImSpinner
+                      size={22}
+                      style={{
+                        animation: 'rotateAnimation 2s linear infinite',
+                      }}
+                    />
+                  ) : (
+                    'Save'
+                  )}
                 </button>{' '}
               </div>
             ) : (
               <button
                 type='button'
                 className='d-flex align-items-start gap-1 transparent-button'
-                disabled={isEmailChanged}
                 onClick={() => handleEmailEdit()}>
-                {isEmailChanged ? (
-                  <ImSpinner
-                    size={22}
-                    style={{
-                      animation: 'rotateAnimation 2s linear infinite',
-                    }}
-                  />
-                ) : (
+                {
                   <>
                     {' '}
                     <FaRegEdit className='fs-4' />
                     Edit
                   </>
-                )}
+                }
               </button>
             )}
           </div>
