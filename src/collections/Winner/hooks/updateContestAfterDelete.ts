@@ -23,14 +23,14 @@ export const updateContestAfterDelete: CollectionAfterDeleteHook = async ({
         },
       },
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error(
       'Error updating contest after deletion of winner document:',
-      error.message,
+      error,
     )
-    throw new Error(
-      'Failed to update contest after deletion of winner document: ' +
-        error.message,
-    )
+    // throw new Error(
+    //   'Failed to update contest after deletion of winner document: ' +
+    //     error.message,
+    // )
   }
 }

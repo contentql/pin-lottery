@@ -28,7 +28,7 @@ export const deleteWinnerAfterUpdate: CollectionAfterChangeHook = async ({
           })
         } catch (error) {
           console.error('Error updating contest: ', error)
-          throw new Error('Failed to update contest.')
+          // throw new Error('Failed to update contest.')
         }
 
         return
@@ -43,7 +43,7 @@ export const deleteWinnerAfterUpdate: CollectionAfterChangeHook = async ({
         })
       } catch (error: any) {
         console.error('Error deleting winner document: ', error)
-        throw new Error('Failed to delete winner document.')
+        // throw new Error('Failed to delete winner document.')
       }
     }
   }
