@@ -1,8 +1,6 @@
 import Image from 'next/image'
 
 import { Feature, Media } from '@/payload-types'
-import feature_2 from '/public/images/icon/feature/2.png'
-import feature_4 from '/public/images/icon/feature/4.png'
 
 const Features = ({ featuresDetails }: { featuresDetails: Feature }) => {
   return (
@@ -66,28 +64,46 @@ const Features = ({ featuresDetails }: { featuresDetails: Feature }) => {
                   <div className='col-lg-12 col-md-6 mb-30'>
                     <div className='feature-card hover--effect-1'>
                       <div className='feature-card__icon'>
-                        <Image src={feature_2} alt='image' />
+                        <Image
+                          src={
+                            (
+                              featuresDetails?.features?.at(2)
+                                ?.feature_image as Media
+                            )?.url || ''
+                          }
+                          width={80}
+                          height={60}
+                          alt='image'
+                        />
                       </div>
                       <div className='feature-card__content'>
-                        <h3 className='feature-title'>Security</h3>
-                        <p>
-                          Nulla ultricies in nulla ac efficitur. In vel neque
-                          arcu. Donec quis
-                        </p>
+                        <h3 className='feature-title'>
+                          {featuresDetails?.features?.at(2)?.name}
+                        </h3>
+                        <p>{featuresDetails?.features?.at(2)?.description}</p>
                       </div>
                     </div>
                   </div>
                   <div className='col-lg-12 col-md-6 mb-30'>
                     <div className='feature-card hover--effect-1'>
                       <div className='feature-card__icon'>
-                        <Image src={feature_4} alt='image' />
+                        <Image
+                          src={
+                            (
+                              featuresDetails?.features?.at(3)
+                                ?.feature_image as Media
+                            )?.url || ''
+                          }
+                          width={80}
+                          height={60}
+                          alt='image'
+                        />
                       </div>
                       <div className='feature-card__content'>
-                        <h3 className='feature-title'>Support</h3>
-                        <p>
-                          Nulla ultricies in nulla ac efficitur. In vel neque
-                          arcu. Donec quis
-                        </p>
+                        <h3 className='feature-title'>
+                          {featuresDetails?.features?.at(3)?.name}
+                        </h3>
+                        <p>{featuresDetails?.features?.at(3)?.description}</p>
                       </div>
                     </div>
                   </div>

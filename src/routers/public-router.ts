@@ -117,8 +117,10 @@ export const publicRouter = router({
     const payload = await getPayloadClient()
 
     try {
-      const testimonials = await payload.find({ collection: 'testimonial' })
-      return testimonials?.docs.at(0)
+      const testimonials = await payload.findGlobal({
+        slug: 'testimonial',
+      })
+      return testimonials
     } catch (error: any) {
       console.error('Error getting testimonials:', error)
       throw new TRPCError({
@@ -131,8 +133,8 @@ export const publicRouter = router({
     const payload = await getPayloadClient()
 
     try {
-      const team = await payload.find({ collection: 'team' })
-      return team?.docs.at(0)
+      const team = await payload.findGlobal({ slug: 'team' })
+      return team
     } catch (error: any) {
       console.error('Error getting team:', error)
       throw new TRPCError({
@@ -145,8 +147,8 @@ export const publicRouter = router({
     const payload = await getPayloadClient()
 
     try {
-      const features = await payload.find({ collection: 'features' })
-      return features?.docs.at(0)
+      const features = await payload.findGlobal({ slug: 'features' })
+      return features
     } catch (error: any) {
       console.error('Error getting features:', error)
       throw new TRPCError({
@@ -159,8 +161,8 @@ export const publicRouter = router({
     const payload = await getPayloadClient()
 
     try {
-      const about = await payload.find({ collection: 'about' })
-      return about?.docs.at(0)
+      const about = await payload.findGlobal({ slug: 'about' })
+      return about
     } catch (error: any) {
       console.error('Error getting features:', error)
       throw new TRPCError({
