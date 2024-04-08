@@ -113,4 +113,34 @@ export const publicRouter = router({
       })
     }
   }),
+
+  getHowToPlayInfo: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const howToPlayInfo = await payload.findGlobal({ slug: 'howToPlayInfo' })
+      return howToPlayInfo
+    } catch (error: any) {
+      console.error('Error getting howToPlayInfo:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get howToPlayInfo.',
+      })
+    }
+  }),
+
+  getSupportInfo: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const support = await payload.findGlobal({ slug: 'supportInfo' })
+      return support
+    } catch (error: any) {
+      console.error('Error getting support:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get support.',
+      })
+    }
+  }),
 })
