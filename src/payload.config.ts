@@ -23,7 +23,6 @@ import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
 import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
 import { mediaGridView } from './plugins/payload-media-grid-view'
-import { paystack } from './plugins/payload-paystack'
 import { trashBin } from './plugins/payload-trashbin'
 import { s3StorageAdapter } from './plugins/s3'
 import {
@@ -127,7 +126,7 @@ export default buildConfig({
       generateImage,
       generateURL,
     }),
-    paystack,
+    // paystack,
     /* 
     Both for trashbin and roleBasedCollectionVisibility
 
