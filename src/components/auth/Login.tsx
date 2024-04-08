@@ -83,11 +83,13 @@ const Login = () => {
                   type={showPassword ? 'text' : 'password'}
                   id='signin-password'
                   placeholder='password'
+                  className='password-input-container'
                   required
                   {...register('password')}
                 />
                 <button
                   type='button'
+                  className='password-toggle-button'
                   onClick={() => {
                     setShowPassword(!showPassword)
                   }}>
