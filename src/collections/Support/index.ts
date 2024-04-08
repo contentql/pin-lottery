@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload/types'
+import { GlobalConfig } from 'payload/types'
 
-export const Support: CollectionConfig = {
+export const Support: GlobalConfig = {
   slug: 'supportInfo',
   fields: [
     {

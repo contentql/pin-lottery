@@ -118,8 +118,8 @@ export const publicRouter = router({
     const payload = await getPayloadClient()
 
     try {
-      const howToPlayInfo = await payload.find({ collection: 'howToPlayInfo' })
-      return howToPlayInfo?.docs?.at(0)
+      const howToPlayInfo = await payload.findGlobal({ slug: 'howToPlayInfo' })
+      return howToPlayInfo
     } catch (error: any) {
       console.error('Error getting howToPlayInfo:', error)
       throw new TRPCError({
@@ -133,8 +133,8 @@ export const publicRouter = router({
     const payload = await getPayloadClient()
 
     try {
-      const support = await payload.find({ collection: 'supportInfo' })
-      return support?.docs?.at(0)
+      const support = await payload.findGlobal({ slug: 'supportInfo' })
+      return support
     } catch (error: any) {
       console.error('Error getting support:', error)
       throw new TRPCError({

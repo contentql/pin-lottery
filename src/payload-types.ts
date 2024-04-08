@@ -19,13 +19,14 @@ export interface Config {
     faq: Faq;
     tags: Tag;
     wishlist: Wishlist;
-    howToPlayInfo: HowToPlayInfo;
-    supportInfo: SupportInfo;
     trash: Trash;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  globals: {};
+  globals: {
+    supportInfo: SupportInfo;
+    howToPlayInfo: HowToPlayInfo;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -363,45 +364,6 @@ export interface Wishlist {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "howToPlayInfo".
- */
-export interface HowToPlayInfo {
-  id: string;
-  caption: string;
-  title: string;
-  sub_title: string;
-  step?:
-    | {
-        icon: string | Media;
-        step_number: number;
-        title: string;
-        sub_title: string;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "supportInfo".
- */
-export interface SupportInfo {
-  id: string;
-  caption: string;
-  title: string;
-  sub_title: string;
-  support_img: string | Media;
-  heading1: string;
-  description1: string;
-  guide_img: string | Media;
-  heading2: string;
-  description2: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "trash".
  */
 export interface Trash {
@@ -452,6 +414,45 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportInfo".
+ */
+export interface SupportInfo {
+  id: string;
+  caption: string;
+  title: string;
+  sub_title: string;
+  support_img: string | Media;
+  heading1: string;
+  description1: string;
+  guide_img: string | Media;
+  heading2: string;
+  description2: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "howToPlayInfo".
+ */
+export interface HowToPlayInfo {
+  id: string;
+  caption: string;
+  title: string;
+  sub_title: string;
+  step?:
+    | {
+        icon: string | Media;
+        step_number: number;
+        title: string;
+        sub_title: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 
 

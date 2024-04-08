@@ -53,9 +53,8 @@ export default buildConfig({
     Faq,
     Tags,
     Wishlist,
-    HowToPlayInfo,
-    Support,
   ],
+  globals: [Support, HowToPlayInfo],
   routes: {
     admin: '/admin',
   },

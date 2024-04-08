@@ -1,10 +1,7 @@
-import { CollectionConfig } from 'payload/types'
+import { GlobalConfig } from 'payload/types'
 
-export const HowToPlayInfo: CollectionConfig = {
+export const HowToPlayInfo: GlobalConfig = {
   slug: 'howToPlayInfo',
-  admin: {
-    useAsTitle: 'caption',
-  },
   fields: [
     {
       name: 'caption',
