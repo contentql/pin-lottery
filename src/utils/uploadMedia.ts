@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 async function uploadMedia(files: FileList | null): Promise<Media | undefined> {
   const formData = new FormData()
   if (!files) {
-   toast.error(`please select a file to upload`)
+    toast.info(`please select a file to upload`)
     return undefined
   }
   formData.append('file', files[0])
