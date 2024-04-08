@@ -36,6 +36,18 @@
             );
           }
         }
+
+        .file {
+          &__filename {
+            position: absolute;
+            z-index: 999;
+            margin: 0;
+            left: 0;
+            bottom: 0;
+            padding: 3px;
+            background-color: var(--theme-elevation-200);
+          }
+        }
       }
 
       > .grid__cells__cell__selector {

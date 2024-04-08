@@ -1,10 +1,8 @@
 import { useTableColumns } from 'payload/dist/admin/components/elements/TableColumns'
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
 
 import 'payload/dist/admin/components/elements/Table/index.scss'
 import { Column } from 'payload/dist/admin/components/elements/Table/types'
-import Thumbnail from 'payload/dist/admin/components/elements/Thumbnail'
 import { SanitizedCollectionConfig } from 'payload/types'
 import './grid.scss'
 
@@ -67,11 +65,12 @@ export const Grid: React.FC<Props> = ({ data, collection }) => {
           data.map((gridCell, cellIndex) => (
             <div key={cellIndex} className={`${baseClass}__cells__cell`}>
               {filenameField && (
-                <Link
-                  className={`${baseClass}__cells__cell__filename`}
-                  to={`${collection.slug}/${gridCell.id}`}>
-                  <Thumbnail collection={collection} doc={gridCell} />
-                </Link>
+                <div className={`${baseClass}__cells__cell__filename`}>
+                  {filenameField.components.renderCell(
+                    gridCell,
+                    gridCell[filenameField.accessor],
+                  )}
+                </div>
               )}
               {selectorField && (
                 <div className={`${baseClass}__cells__cell__selector`}>
@@ -82,13 +81,13 @@ export const Grid: React.FC<Props> = ({ data, collection }) => {
                 </div>
               )}
               <div className={`${baseClass}__cells__cell__info`}>
-                {filenameField && (
+                {/* {filenameField && (
                   <Link
                     className={`${baseClass}__cells__cell__title`}
                     to={`${collection.slug}/${gridCell.id}`}>
                     {String(gridCell[filenameField.accessor])}
                   </Link>
-                )}
+                )} */}
                 {otherFields.length > 0 && (
                   <div className={`${baseClass}__cells__cell__others`}>
                     {otherFields.map((col, colIndex) => (
