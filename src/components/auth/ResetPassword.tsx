@@ -9,6 +9,7 @@ import {
   TResetPasswordValidator,
 } from '@/lib/validators/auth-router/reset-password-validator'
 import { trpc } from '@/trpc/client'
+import { ImSpinner } from 'react-icons/im'
 
 interface PageProps {
   searchParams: {
@@ -30,21 +31,22 @@ const ResetPassword = ({ searchParams }: PageProps) => {
     resolver: zodResolver(ResetPasswordValidator),
   })
 
-  const { mutate: resetPassword } = trpc.auth.resetPassword.useMutation({
-    onSuccess: () => {
-      toast.success(`Success! Your password has been reset`)
-      router.push('/user')
-    },
-    onError: (err: any) => {
-      if (err.data?.code === 'UNAUTHORIZED') {
-        toast.error(`Invalid token, please recheck your email.`)
-      }
-      if (err instanceof ZodError) {
-        toast.error(`Please provide correct information.`)
-        return
-      }
-    },
-  })
+  const { mutate: resetPassword, isPending: isResetPasswordPending } =
+    trpc.auth.resetPassword.useMutation({
+      onSuccess: () => {
+        toast.success(`Success! Your password has been reset`)
+        router.push('/user')
+      },
+      onError: (err: any) => {
+        if (err.data?.code === 'UNAUTHORIZED') {
+          toast.error(`Invalid token, please recheck your email.`)
+        }
+        if (err instanceof ZodError) {
+          toast.error(`Please provide correct information.`)
+          return
+        }
+      },
+    })
 
   const onSubmit = ({
     password,
@@ -100,8 +102,20 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                 )}
               </div>
               <div className='form-group text-center mt-5'>
-                <button className='cmn-btn' type='submit'>
-                  reset
+                <button
+                  className='cmn-btn'
+                  type='submit'
+                  disabled={isResetPasswordPending}>
+                  {isResetPasswordPending ? (
+                    <ImSpinner
+                      size={22}
+                      style={{
+                        animation: 'rotateAnimation 2s linear infinite',
+                      }}
+                    />
+                  ) : (
+                    'reset'
+                  )}
                 </button>
               </div>
             </form>

@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 import { ZodError } from 'zod'
 
@@ -10,7 +11,7 @@ import {
 } from '@/lib/validators/auth-router/login-validator'
 import { useAuth } from '@/providers/Auth'
 import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
@@ -29,7 +30,7 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
-  const { mutate: loginUser } = useMutation({
+  const { mutate: loginUser, isPending: isLoginPending } = useMutation({
     mutationFn: (args: { email: string; password: string }) => login(args),
     onError: (err: Error) => {
       if (err.message === 'Invalid login') {
@@ -52,6 +53,10 @@ const Login = () => {
   const onSubmit = ({ email, password }: TLoginValidator) => {
     loginUser({ email, password })
   }
+
+  useEffect(() => {
+    console.log('loading', isLoginPending)
+  }, [isLoginPending])
 
   return (
     <div className='register-main'>
@@ -116,8 +121,20 @@ const Login = () => {
               </div>
 
               <div className='form-group text-center mt-5'>
-                <button className='cmn-btn' type='submit'>
-                  login
+                <button
+                  disabled={isLoginPending}
+                  className='cmn-btn'
+                  type='submit'>
+                  {isLoginPending ? (
+                    <ImSpinner
+                      size={22}
+                      style={{
+                        animation: 'rotateAnimation 2s linear infinite',
+                      }}
+                    />
+                  ) : (
+                    'login'
+                  )}
                 </button>
               </div>
             </form>

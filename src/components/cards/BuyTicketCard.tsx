@@ -8,6 +8,7 @@ import { AppContext } from '@/context/context'
 import { Contest } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
+import { ImSpinner } from 'react-icons/im'
 
 const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
   const { removeAllTickets, totalTicketsCount } = useContext(AppContext)
@@ -23,16 +24,17 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
   const ticketPrice = contestDetails?.ticket_price
   const totalTicketsPrice = totalTickets * ticketPrice
 
-  const { mutate: addTicketsToCart } = trpc.cart.addTicketsToCart.useMutation({
-    onSuccess: async () => {
-      toast.success('Successfully tickets are added to cart')
-      removeAllTickets({ contest_no: contestDetails?.contest_no })
-      router.push('/cart')
-    },
-    onError: async () => {
-      toast.error('Unable to add tickets to cart')
-    },
-  })
+  const { mutate: addTicketsToCart, isPending: isTicketAdded } =
+    trpc.cart.addTicketsToCart.useMutation({
+      onSuccess: async () => {
+        toast.success('Successfully tickets are added to cart')
+        removeAllTickets({ contest_no: contestDetails?.contest_no })
+        router.push('/cart')
+      },
+      onError: async () => {
+        toast.error('Unable to add tickets to cart')
+      },
+    })
 
   const handleAddToCart = () => {
     if (status !== 'loggedIn') {
@@ -72,9 +74,21 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
           <button
             type='button'
             className='btn-border text-capitalize btn-transparent'
+            disabled={isTicketAdded}
             onClick={() => handleAddToCart()}>
-            <FaCartPlus />
-            Add to cart
+            {isTicketAdded ? (
+              <ImSpinner
+                size={22}
+                style={{
+                  animation: 'rotateAnimation 2s linear infinite',
+                }}
+              />
+            ) : (
+              <>
+                <FaCartPlus />
+                Add to cart
+              </>
+            )}
           </button>
           <button type='button' className='cmn-btn text-capitalize'>
             <MdOutlineShoppingCartCheckout />
