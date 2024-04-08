@@ -113,4 +113,19 @@ export const publicRouter = router({
       })
     }
   }),
+
+  getHowToPlayInfo: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const howToPlayInfo = await payload.find({ collection: 'howToPlayInfo' })
+      return howToPlayInfo?.docs?.at(0)
+    } catch (error: any) {
+      console.error('Error getting howToPlayInfo:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get howToPlayInfo.',
+      })
+    }
+  }),
 })

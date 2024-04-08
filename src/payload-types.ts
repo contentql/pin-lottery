@@ -19,7 +19,7 @@ export interface Config {
     faq: Faq;
     tags: Tag;
     wishlist: Wishlist;
-    transaction: Transaction;
+    howToPlayInfo: HowToPlayInfo;
     trash: Trash;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -362,18 +362,21 @@ export interface Wishlist {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "transaction".
+ * via the `definition` "howToPlayInfo".
  */
-export interface Transaction {
+export interface HowToPlayInfo {
   id: string;
-  value:
+  caption: string;
+  title: string;
+  sub_title: string;
+  step?:
     | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
+        icon: string | Media;
+        step_number: number;
+        title: string;
+        sub_title: string;
+        id?: string | null;
+      }[]
     | null;
   updatedAt: string;
   createdAt: string;

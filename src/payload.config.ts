@@ -12,6 +12,7 @@ import Cart from './collections/Cart'
 import Contact from './collections/Contact'
 import Contest from './collections/Contest'
 import Faq from './collections/Faq'
+import { HowToPlayInfo } from './collections/HowToPlay'
 import { Media } from './collections/Media'
 import Tags from './collections/Tags'
 import Ticket from './collections/Ticket'
@@ -51,6 +52,7 @@ export default buildConfig({
     Faq,
     Tags,
     Wishlist,
+    HowToPlayInfo,
   ],
   routes: {
     admin: '/admin',
