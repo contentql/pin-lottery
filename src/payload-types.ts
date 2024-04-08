@@ -442,25 +442,11 @@ export interface About {
     [k: string]: unknown;
   };
   description_html?: string | null;
- * via the `definition` "supportInfo".
- */
-export interface SupportInfo {
-  id: string;
-  caption: string;
-  title: string;
-  sub_title: string;
-  support_img: string | Media;
-  heading1: string;
-  description1: string;
-  guide_img: string | Media;
-  heading2: string;
-  description2: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
-
  * via the `definition` "team".
  */
 export interface Team {
@@ -511,6 +497,32 @@ export interface Feature {
         feature_image: string | Media;
         name: string;
         description: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportInfo".
+ */
+export interface SupportInfo {
+  id: string;
+  caption: string;
+  title: string;
+  sub_title: string;
+  support_img: string | Media;
+  heading1: string;
+  description1: string;
+  guide_img: string | Media;
+  heading2: string;
+  description2: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "howToPlayInfo".
  */
 export interface HowToPlayInfo {
