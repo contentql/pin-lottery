@@ -20,6 +20,7 @@ export interface Config {
     tags: Tag;
     wishlist: Wishlist;
     howToPlayInfo: HowToPlayInfo;
+    supportInfo: SupportInfo;
     trash: Trash;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -378,6 +379,24 @@ export interface HowToPlayInfo {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportInfo".
+ */
+export interface SupportInfo {
+  id: string;
+  caption: string;
+  title: string;
+  sub_title: string;
+  support_img: string | Media;
+  heading1: string;
+  description1: string;
+  guide_img: string | Media;
+  heading2: string;
+  description2: string;
   updatedAt: string;
   createdAt: string;
 }

@@ -14,6 +14,7 @@ import Contest from './collections/Contest'
 import Faq from './collections/Faq'
 import { HowToPlayInfo } from './collections/HowToPlay'
 import { Media } from './collections/Media'
+import { Support } from './collections/Support'
 import Tags from './collections/Tags'
 import Ticket from './collections/Ticket'
 import Users from './collections/Users'
@@ -53,6 +54,7 @@ export default buildConfig({
     Tags,
     Wishlist,
     HowToPlayInfo,
+    Support,
   ],
   routes: {
     admin: '/admin',

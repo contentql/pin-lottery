@@ -2,23 +2,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaPhoneAlt, FaRegEnvelope } from 'react-icons/fa'
 
-import support_1 from '/public/images/icon/support/1.png'
-import support_2 from '/public/images/icon/support/2.png'
+import { Media, SupportInfo } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 const Support = () => {
+  const { data: supportData }: { data: SupportInfo | undefined } =
+    trpc.public.getSupportInfo.useQuery()
+
   return (
     <section className='pb-120'>
       <div className='container'>
         <div className='row justify-content-center'>
           <div className='col-lg-8'>
             <div className='section-header text-center'>
-              <span className='section-sub-title'>
-                Get in touch with our friendly support
-              </span>
-              <h2 className='section-title'>Customer Support</h2>
-              <p>
-                Have a question or need help? Contact our friendly support team.
-              </p>
+              <span className='section-sub-title'>{supportData?.caption}</span>
+              <h2 className='section-title'>{supportData?.title}</h2>
+              <p>{supportData?.sub_title}</p>
             </div>
           </div>
         </div>
@@ -26,16 +25,16 @@ const Support = () => {
           <div className='col-lg-6 mb-30'>
             <div className='support-card'>
               <div className='support-card__thumb'>
-                <Image src={support_1} alt='image' />
+                <Image
+                  src={(supportData?.support_img as Media)?.url || ''}
+                  alt={(supportData?.support_img as Media)?.alt || ''}
+                  height={150}
+                  width={150}
+                />
               </div>
               <div className='support-card__content'>
-                <h3 className='support-card__title'>
-                  Talk to our support team
-                </h3>
-                <p>
-                  Got a question about Lotteries? Get in touch with our friendly
-                  staff.
-                </p>
+                <h3 className='support-card__title'>{supportData?.heading1}</h3>
+                <p>{supportData?.description1}</p>
                 <div className='btn-grp justify-content-xl-start mt-3'>
                   <a
                     href='tel:6564545'
@@ -55,11 +54,16 @@ const Support = () => {
           <div className='col-lg-6 mb-30'>
             <div className='support-card'>
               <div className='support-card__thumb'>
-                <Image src={support_2} alt='image' />
+                <Image
+                  src={(supportData?.guide_img as Media)?.url || ''}
+                  alt={(supportData?.guide_img as Media)?.alt || ''}
+                  height={150}
+                  width={150}
+                />
               </div>
               <div className='support-card__content'>
-                <h3 className='support-card__title'>Our Guide to lottery</h3>
-                <p>Check out our FAQs to see if we can help you out. </p>
+                <h3 className='support-card__title'>{supportData?.heading2}</h3>
+                <p>{supportData?.description2} </p>
                 <div className='btn-grp justify-content-xl-start mt-3'>
                   <Link
                     href='/faq'

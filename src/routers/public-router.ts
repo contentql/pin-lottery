@@ -128,4 +128,19 @@ export const publicRouter = router({
       })
     }
   }),
+
+  getSupportInfo: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const support = await payload.find({ collection: 'supportInfo' })
+      return support?.docs?.at(0)
+    } catch (error: any) {
+      console.error('Error getting support:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get support.',
+      })
+    }
+  }),
 })
