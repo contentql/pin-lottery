@@ -27,10 +27,18 @@ export const trashBin =
   (incomingConfig: Config): Config => {
     const { displayToRoles, doNotEnableTrash } = pluginOptions
 
+    const mediaEnabledCollections = (incomingConfig.collections || [])
+      .filter(collection => collection.upload)
+      .map(collection => collection.slug)
+
     const updatedCollectionWithAfterDelete = (
       incomingConfig.collections || []
     ).map(collection => {
-      if (doNotEnableTrash?.includes(collection.slug)) {
+      if (
+        [...(doNotEnableTrash || []), ...mediaEnabledCollections]?.includes(
+          collection.slug,
+        )
+      ) {
         return collection
       }
 
