@@ -55,11 +55,8 @@ export default buildConfig({
     Faq,
     Tags,
     Wishlist,
-    About,
-    Team,
-    Testimonial,
-    Features,
   ],
+  globals: [About, Team, Testimonial, Features],
   routes: {
     admin: '/admin',
   },

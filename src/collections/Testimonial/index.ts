@@ -1,10 +1,7 @@
-import { CollectionConfig } from 'payload/types'
+import { GlobalConfig } from 'payload/types'
 
-const Testimonial: CollectionConfig = {
+const Testimonial: GlobalConfig = {
   slug: 'testimonial',
-  admin: {
-    useAsTitle: 'title',
-  },
   fields: [
     {
       name: 'title',

@@ -1,10 +1,7 @@
-import { CollectionConfig } from 'payload/types'
+import { GlobalConfig } from 'payload/types'
 
-const Team: CollectionConfig = {
+const Team: GlobalConfig = {
   slug: 'team',
-  admin: {
-    useAsTitle: 'title',
-  },
   fields: [
     {
       name: 'title',

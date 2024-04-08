@@ -11,7 +11,7 @@ const Exhaustive = () => {
       <div className='feature-car'>
         <Image src={feature_car} alt='feature car' />
       </div>
-      <div className='container'>
+      <div className='container' id='features'>
         <div className='row justify-content-center'>
           <div className='col-lg-10'>
             <div className='section-header text-center'>

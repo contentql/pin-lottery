@@ -3,13 +3,10 @@ import {
   lexicalEditor,
   lexicalHTML,
 } from '@payloadcms/richtext-lexical'
-import { CollectionConfig } from 'payload/types'
+import { GlobalConfig } from 'payload/types'
 
-const About: CollectionConfig = {
+const About: GlobalConfig = {
   slug: 'about',
-  admin: {
-    useAsTitle: 'title',
-  },
   fields: [
     {
       name: 'title',
