@@ -35,13 +35,15 @@ export const trashBin =
       .filter(collection => collection.upload)
       .map(collection => collection.slug)
 
+    const doNotEnableTrashFromPluginConfigWithMedia = [
+      ...new Set([...(doNotEnableTrash || []), ...mediaEnabledCollections]),
+    ]
+
     const updatedCollectionWithAfterDelete = (
       incomingConfig.collections || []
     ).map(collection => {
       if (
-        [...(doNotEnableTrash || []), ...mediaEnabledCollections]?.includes(
-          collection.slug,
-        )
+        doNotEnableTrashFromPluginConfigWithMedia?.includes(collection.slug)
       ) {
         return collection
       }

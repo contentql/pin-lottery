@@ -1,5 +1,5 @@
 import { useTableColumns } from 'payload/dist/admin/components/elements/TableColumns'
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import 'payload/dist/admin/components/elements/Table/index.scss'
 import { Column } from 'payload/dist/admin/components/elements/Table/types'
@@ -80,14 +80,12 @@ export const Grid: React.FC<Props> = ({ data, collection }) => {
                   )}
                 </div>
               )}
-              <div className={`${baseClass}__cells__cell__info`}>
-                {/* {filenameField && (
-                  <Link
-                    className={`${baseClass}__cells__cell__title`}
-                    to={`${collection.slug}/${gridCell.id}`}>
+              {/* <div className={`${baseClass}__cells__cell__info`}>
+                {filenameField && (
+                  <div className={`${baseClass}__cells__cell__title`}>
                     {String(gridCell[filenameField.accessor])}
-                  </Link>
-                )} */}
+                  </div>
+                )}
                 {otherFields.length > 0 && (
                   <div className={`${baseClass}__cells__cell__others`}>
                     {otherFields.map((col, colIndex) => (
@@ -100,7 +98,7 @@ export const Grid: React.FC<Props> = ({ data, collection }) => {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           ))}
       </div>
