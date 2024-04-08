@@ -1,12 +1,18 @@
 import Image from 'next/image'
 
 import { Contest } from '@/payload-types'
-import specification_1 from '/public/images/icon/specification/1.png'
-import specification_2 from '/public/images/icon/specification/2.png'
-import specification_3 from '/public/images/icon/specification/3.png'
-import specification_4 from '/public/images/icon/specification/4.png'
-import specification_5 from '/public/images/icon/specification/5.png'
-import specification_6 from '/public/images/icon/specification/6.png'
+import specification_10 from '/public/images/icon/specification/10.png'
+import specification_11 from '/public/images/icon/specification/11.png'
+import specification_12 from '/public/images/icon/specification/12.png'
+import specification_13 from '/public/images/icon/specification/13.png'
+import specification_14 from '/public/images/icon/specification/14.png'
+import specification_15 from '/public/images/icon/specification/15.png'
+import specification_16 from '/public/images/icon/specification/16.png'
+import specification_17 from '/public/images/icon/specification/17.png'
+import specification_18 from '/public/images/icon/specification/18.png'
+import specification_7 from '/public/images/icon/specification/7.png'
+import specification_8 from '/public/images/icon/specification/8.png'
+import specification_9 from '/public/images/icon/specification/9.png'
 
 function VehicleSpecifications({
   contestDetails,
@@ -22,7 +28,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_1} alt='specification_1' />
+                <Image src={specification_13} alt='specification_13' />
               </div>
               <div className='icon-item__content'>
                 <p>Zero to Sixty</p>
@@ -33,7 +39,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_2} alt='specification_2' />
+                <Image src={specification_14} alt='specification_14' />
               </div>
               <div className='icon-item__content'>
                 <p>Top Speed</p>
@@ -44,7 +50,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_3} alt='specification_3' />
+                <Image src={specification_15} alt='specification_15' />
               </div>
               <div className='icon-item__content'>
                 <p>Power</p>
@@ -55,7 +61,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_4} alt='specification_4' />
+                <Image src={specification_16} alt='specification_16' />
               </div>
               <div className='icon-item__content'>
                 <p>Displacement</p>
@@ -66,7 +72,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_5} alt='specification_5' />
+                <Image src={specification_17} alt='specification_17' />
               </div>
               <div className='icon-item__content'>
                 <p>Break Horsepower</p>
@@ -77,7 +83,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_6} alt='specification_6' />
+                <Image src={specification_18} alt='specification_18' />
               </div>
               <div className='icon-item__content'>
                 <p>Year</p>
@@ -91,7 +97,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_1} alt='specification_1' />
+                <Image src={specification_7} alt='specification_7' />
               </div>
               <div className='icon-item__content'>
                 <p>Processor/CPU</p>
@@ -102,7 +108,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_2} alt='specification_2' />
+                <Image src={specification_8} alt='specification_8' />
               </div>
               <div className='icon-item__content'>
                 <p>RAM </p>
@@ -113,7 +119,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_3} alt='specification_3' />
+                <Image src={specification_9} alt='specification_9' />
               </div>
               <div className='icon-item__content'>
                 <p>Storage</p>
@@ -124,7 +130,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_4} alt='specification_4' />
+                <Image src={specification_10} alt='specification_10' />
               </div>
               <div className='icon-item__content'>
                 <p>Camera</p>
@@ -135,7 +141,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_5} alt='specification_5' />
+                <Image src={specification_11} alt='specification_11' />
               </div>
               <div className='icon-item__content'>
                 <p>Battery</p>
@@ -146,7 +152,7 @@ function VehicleSpecifications({
           <div className='col-lg-6 col-sm-6 mb-30'>
             <div className='icon-item'>
               <div className='icon-item__thumb'>
-                <Image src={specification_6} alt='specification_6' />
+                <Image src={specification_12} alt='specification_12' />
               </div>
               <div className='icon-item__content'>
                 <p>Display</p>

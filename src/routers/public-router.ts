@@ -113,4 +113,92 @@ export const publicRouter = router({
       })
     }
   }),
+  getTestimonials: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const testimonials = await payload.findGlobal({
+        slug: 'testimonial',
+      })
+      return testimonials
+    } catch (error: any) {
+      console.error('Error getting testimonials:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get testimonials.',
+      })
+    }
+  }),
+  getTeam: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const team = await payload.findGlobal({ slug: 'team' })
+      return team
+    } catch (error: any) {
+      console.error('Error getting team:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get team.',
+      })
+    }
+  }),
+  getFeatures: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const features = await payload.findGlobal({ slug: 'features' })
+      return features
+    } catch (error: any) {
+      console.error('Error getting features:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get features.',
+      })
+    }
+  }),
+  getAbout: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const about = await payload.findGlobal({ slug: 'about' })
+      return about
+    } catch (error: any) {
+      console.error('Error getting features:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get features.',
+      })
+    }
+  }),
+
+  getHowToPlayInfo: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const howToPlayInfo = await payload.findGlobal({ slug: 'howToPlayInfo' })
+      return howToPlayInfo
+    } catch (error: any) {
+      console.error('Error getting howToPlayInfo:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get howToPlayInfo.',
+      })
+    }
+  }),
+
+  getSupportInfo: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const support = await payload.findGlobal({ slug: 'supportInfo' })
+      return support
+    } catch (error: any) {
+      console.error('Error getting support:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get support.',
+      })
+    }
+  }),
 })

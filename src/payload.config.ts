@@ -7,13 +7,19 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
+import About from './collections/About'
 import Blog from './collections/Blog'
 import Cart from './collections/Cart'
 import Contact from './collections/Contact'
 import Contest from './collections/Contest'
 import Faq from './collections/Faq'
+import Features from './collections/Features'
+import { HowToPlayInfo } from './collections/HowToPlay'
 import { Media } from './collections/Media'
+import { Support } from './collections/Support'
 import Tags from './collections/Tags'
+import Team from './collections/Team'
+import Testimonial from './collections/Testimonial'
 import Ticket from './collections/Ticket'
 import Users from './collections/Users'
 import Winner from './collections/Winner'
@@ -23,6 +29,7 @@ import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
 import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
 import { mediaGridView } from './plugins/payload-media-grid-view'
+import { paystack } from './plugins/payload-paystack'
 import { trashBin } from './plugins/payload-trashbin'
 import { s3StorageAdapter } from './plugins/s3'
 import {
@@ -52,6 +59,7 @@ export default buildConfig({
     Tags,
     Wishlist,
   ],
+  globals: [About, Team, Testimonial, Features, Support, HowToPlayInfo],
   routes: {
     admin: '/admin',
   },
@@ -126,7 +134,7 @@ export default buildConfig({
       generateImage,
       generateURL,
     }),
-    // paystack,
+    paystack,
     /* 
     Both for trashbin and roleBasedCollectionVisibility
 

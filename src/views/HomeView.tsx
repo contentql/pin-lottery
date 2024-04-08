@@ -13,9 +13,9 @@ import Testimonial from '@/components/common/Testimonial'
 import Hero from '@/components/home/Hero'
 import WinnerDetails from '@/components/home/WinnerDetails'
 import HeroSkeleton from '@/components/skeletons/HeroSkeleton'
-import { Contest, Tag, Winner } from '@/payload-types'
-import { useSearchParams } from 'next/navigation'
+import { Contest, Feature, Tag, Winner } from '@/payload-types'
 import { validatePaystackPaymentStatus } from '@/plugins/payload-paystack'
+import { useSearchParams } from 'next/navigation'
 
 const HomeView = () => {
   const searchParams = useSearchParams()
@@ -29,6 +29,10 @@ const HomeView = () => {
   } = trpc.contest.getHeroContests.useQuery()
   // get ongoing contests
   const { data: contestDetails } = trpc.contest.getOngoingContests.useQuery()
+
+  // features
+
+  const { data: featuresDetails } = trpc.public.getFeatures.useQuery()
 
   // get tags
   const { data: allTags } = trpc.public.getTags.useQuery()
@@ -65,7 +69,7 @@ const HomeView = () => {
       <WinnerDetails winnerDetails={winnerDetails?.slice(0, 10) as Winner[]} />
       <LatestWinner />
       <Overview />
-      <Features />
+      <Features featuresDetails={featuresDetails as Feature} />
       <HowToPlay />
       <Testimonial />
       <Support />

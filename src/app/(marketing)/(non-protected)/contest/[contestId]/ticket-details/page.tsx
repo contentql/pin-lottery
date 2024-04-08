@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   description: 'This is a ticket details page',
 }
 
-const LotteryDetails = ({ params }: PageProps) => {
-  return <TicketDetailsView contestId={params.contestId} />
+const LotteryDetails = async ({ params: { contestId } }: PageProps) => {
+  return <TicketDetailsView contestId={contestId} />
 }
 
 export default LotteryDetails

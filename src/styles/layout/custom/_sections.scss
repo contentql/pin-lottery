@@ -2,6 +2,31 @@ body {
   overflow-x: hidden;
 }
 
+//toggle show password
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle-button {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust the position as needed */
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+//spinner animation
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 //hide bg
 .hide-bg {
   mix-blend-mode: multiply;
@@ -1447,4 +1472,9 @@ $duration: 1000;
 }
 .cart-empty-image {
   margin-top: -80px;
+}
+.team-image {
+  width: 167px;
+  height: 167px;
+  object-fit: cover;
 }

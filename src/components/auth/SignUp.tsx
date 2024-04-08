@@ -10,6 +10,7 @@ import {
   TAuthCredentialsValidator,
 } from '@/lib/validators/auth-router/account-credentials-validator'
 import { trpc } from '@/trpc/client'
+import { ImSpinner } from 'react-icons/im'
 
 const SignUp = () => {
   const [isEmailSent, setIsEmailSent] = useState(false)
@@ -26,40 +27,41 @@ const SignUp = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   })
 
-  const { mutate: addUser } = trpc.auth.createUser.useMutation({
-    onError: err => {
-      if (err.data?.code === 'CONFLICT') {
-        toast.error(`This email already exists. Please sign in instead.`, {
-          autoClose: 3000,
-          onClose: () => {
-            toast.info('Redirecting to login page...', {
-              autoClose: 2000,
-              onClose: () => router.push('/login'),
-            })
-          },
-        })
+  const { mutate: addUser, isPending: isRegisterPending } =
+    trpc.auth.createUser.useMutation({
+      onError: (err: any) => {
+        if (err.data?.code === 'CONFLICT') {
+          toast.error(`This email already exists. Please sign in instead.`, {
+            autoClose: 3000,
+            onClose: () => {
+              toast.info('Redirecting to login page...', {
+                autoClose: 2000,
+                onClose: () => router.push('/login'),
+              })
+            },
+          })
 
-        return
-      }
+          return
+        }
 
-      if (err instanceof ZodError) {
-        toast.error(err.issues[0].message)
+        if (err instanceof ZodError) {
+          toast.error(err.issues[0].message)
 
-        return
-      }
+          return
+        }
 
-      console.error('Something went wrong. Please try again.')
-    },
-    onSuccess: ({ sentEmailTo }) => {
-      setValue('user_name', '')
-      setValue('email', '')
-      setValue('password', '')
-      setValue('confirm_password', '')
+        console.error('Something went wrong. Please try again.')
+      },
+      onSuccess: ({ sentEmailTo }: any) => {
+        setValue('user_name', '')
+        setValue('email', '')
+        setValue('password', '')
+        setValue('confirm_password', '')
 
-      setIsEmailSent(true)
-      setSentEmail(sentEmailTo)
-    },
-  })
+        setIsEmailSent(true)
+        setSentEmail(sentEmailTo)
+      },
+    })
 
   const onSubmit = ({
     user_name,
@@ -171,7 +173,18 @@ const SignUp = () => {
               </div>
 
               <div className='form-group text-center mt-5'>
-                <button className='cmn-btn'>sign up</button>
+                <button className='cmn-btn' disabled={isRegisterPending}>
+                  {isRegisterPending ? (
+                    <ImSpinner
+                      size={22}
+                      style={{
+                        animation: 'rotateAnimation 2s linear infinite',
+                      }}
+                    />
+                  ) : (
+                    'sign up'
+                  )}
+                </button>
               </div>
             </form>
 
