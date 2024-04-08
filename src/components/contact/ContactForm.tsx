@@ -5,6 +5,7 @@ import {
 import { trpc } from '@/trpc/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 const ContactForm = () => {
   const {
@@ -16,16 +17,17 @@ const ContactForm = () => {
     resolver: zodResolver(ContactFormValidator),
   })
 
-  const { mutate: addNewContact } = trpc.public.newContact.useMutation({
-    onSuccess: () => {
-      setValue('name', '')
-      setValue('email', '')
-      setValue('subject', '')
-      setValue('message', '')
-      toast.success(`Thank you for contacting us`)
-    },
-    onError: error => toast.error(`error while submitting`),
-  })
+  const { mutate: addNewContact, isPending: isContactCompleted } =
+    trpc.public.newContact.useMutation({
+      onSuccess: () => {
+        setValue('name', '')
+        setValue('email', '')
+        setValue('subject', '')
+        setValue('message', '')
+        toast.success(`Thank you for contacting us`)
+      },
+      onError: error => toast.error(`error while submitting`),
+    })
   const onSubmit = ({
     name,
     email,
@@ -42,8 +44,7 @@ const ContactForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
         className='contact-form'
-        action='/'
-      >
+        action='/'>
         <div className='form-group'>
           <label>
             Name <sup>*</sup>
@@ -95,16 +96,24 @@ const ContactForm = () => {
             name='message'
             id='message'
             placeholder='Write Your Message'
-            required
-          ></textarea>
+            required></textarea>
           {errors?.message && <p>{errors?.message.message}</p>}
         </div>
         <div className='form-group'>
           <button
             type='submit'
             className='cmn-btn justify-content-center w-100'
-          >
-            send message
+            disabled={isContactCompleted}>
+            {isContactCompleted ? (
+              <ImSpinner
+                size={22}
+                style={{
+                  animation: 'rotateAnimation 2s linear infinite',
+                }}
+              />
+            ) : (
+              'send message'
+            )}
           </button>
         </div>
       </form>

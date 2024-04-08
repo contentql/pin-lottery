@@ -16,6 +16,7 @@ import { User } from '@/payload-types'
 import { refreshToken } from '@/queries/auth/refreshToken'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
+import { ImSpinner } from 'react-icons/im'
 import { ZodError } from 'zod'
 
 const Info = ({ userData }: { userData: User }) => {
@@ -43,7 +44,7 @@ const Info = ({ userData }: { userData: User }) => {
     resolver: zodResolver(UserPersonalDetailsValidator),
   })
 
-  const { mutate: userUpdate } =
+  const { mutate: userUpdate, isPending: isPersonalDetailsUpdated } =
     trpc.auth.updateUserPersonalDetails.useMutation({
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
@@ -82,29 +83,30 @@ const Info = ({ userData }: { userData: User }) => {
     resolver: zodResolver(UserEmailValidator),
   })
 
-  const { mutate: changeEmail } = trpc.auth.changeEmail.useMutation({
-    onSuccess: () => {
-      refetchRefreshToken()
-      queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
+  const { mutate: changeEmail, isPending: isEmailChanged } =
+    trpc.auth.changeEmail.useMutation({
+      onSuccess: () => {
+        refetchRefreshToken()
+        queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
 
-      handlePasswordCancel()
-      toast.success(`Email updated successfully`)
-    },
-    onError: err => {
-      if (err.data?.code === 'UNAUTHORIZED') {
-        toast.error(`User not found`)
-        return
-      }
+        handlePasswordCancel()
+        toast.success(`Email updated successfully`)
+      },
+      onError: err => {
+        if (err.data?.code === 'UNAUTHORIZED') {
+          toast.error(`User not found`)
+          return
+        }
 
-      if (err instanceof ZodError) {
-        console.error(err.issues[0].message)
+        if (err instanceof ZodError) {
+          console.error(err.issues[0].message)
 
-        return
-      }
+          return
+        }
 
-      console.error('Something went wrong. Please try again.')
-    },
-  })
+        console.error('Something went wrong. Please try again.')
+      },
+    })
 
   const handleEmailCancel = () => {
     setIsEditMode(prev => ({ ...prev, email: false }))
@@ -124,29 +126,30 @@ const Info = ({ userData }: { userData: User }) => {
     resolver: zodResolver(UserPasswordValidator),
   })
 
-  const { mutate: changePassword } = trpc.auth.changePassword.useMutation({
-    onSuccess: () => {
-      refetchRefreshToken()
-      queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
+  const { mutate: changePassword, isPending: isPasswordChanged } =
+    trpc.auth.changePassword.useMutation({
+      onSuccess: () => {
+        refetchRefreshToken()
+        queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
 
-      handlePasswordCancel()
-      toast.success(`Password updated successfully`)
-    },
-    onError: err => {
-      if (err.data?.code === 'UNAUTHORIZED') {
-        toast.error(`User not found`)
-        return
-      }
+        handlePasswordCancel()
+        toast.success(`Password updated successfully`)
+      },
+      onError: err => {
+        if (err.data?.code === 'UNAUTHORIZED') {
+          toast.error(`User not found`)
+          return
+        }
 
-      if (err instanceof ZodError) {
-        console.error(err.issues[0].message)
+        if (err instanceof ZodError) {
+          console.error(err.issues[0].message)
 
-        return
-      }
+          return
+        }
 
-      console.error('Something went wrong. Please try again.')
-    },
-  })
+        console.error('Something went wrong. Please try again.')
+      },
+    })
 
   const handlePasswordCancel = () => {
     setIsEditMode(prev => ({ ...prev, password: false }))
@@ -196,8 +199,20 @@ const Info = ({ userData }: { userData: User }) => {
                   onClick={() => handlePersonalDetailsCancel()}>
                   Cancel
                 </button>{' '}
-                <button type='submit' className='save-button'>
-                  Save
+                <button
+                  type='submit'
+                  disabled={isPersonalDetailsUpdated}
+                  className='save-button'>
+                  {isPersonalDetailsUpdated ? (
+                    <ImSpinner
+                      size={22}
+                      style={{
+                        animation: 'rotateAnimation 2s linear infinite',
+                      }}
+                    />
+                  ) : (
+                    'Save'
+                  )}
                 </button>{' '}
               </div>
             ) : (
@@ -330,9 +345,22 @@ const Info = ({ userData }: { userData: User }) => {
               <button
                 type='button'
                 className='d-flex align-items-start gap-1 transparent-button'
+                disabled={isEmailChanged}
                 onClick={() => handleEmailEdit()}>
-                <FaRegEdit className='fs-4' />
-                Edit
+                {isEmailChanged ? (
+                  <ImSpinner
+                    size={22}
+                    style={{
+                      animation: 'rotateAnimation 2s linear infinite',
+                    }}
+                  />
+                ) : (
+                  <>
+                    {' '}
+                    <FaRegEdit className='fs-4' />
+                    Edit
+                  </>
+                )}
               </button>
             )}
           </div>
@@ -376,8 +404,20 @@ const Info = ({ userData }: { userData: User }) => {
                   onClick={() => handlePasswordCancel()}>
                   Cancel
                 </button>{' '}
-                <button type='submit' className='save-button'>
-                  Save
+                <button
+                  disabled={isPasswordChanged}
+                  type='submit'
+                  className='save-button'>
+                  {isPasswordChanged ? (
+                    <ImSpinner
+                      size={22}
+                      style={{
+                        animation: 'rotateAnimation 2s linear infinite',
+                      }}
+                    />
+                  ) : (
+                    'Save'
+                  )}
                 </button>{' '}
               </div>
             ) : (
