@@ -7,7 +7,6 @@ import play_el from '/public/images/elements/play-el.png'
 const HowToPlay = () => {
   const { data: howToPlayInfoData }: { data: HowToPlayInfo | undefined } =
     trpc.public.getHowToPlayInfo.useQuery()
-  console.log('HowToPlayData', howToPlayInfoData)
 
   return (
     <section className='position-relative z-index-two pt-120 pb-120 overflow-hidden'>
