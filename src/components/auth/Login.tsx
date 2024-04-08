@@ -79,22 +79,23 @@ const Login = () => {
                 <label>
                   password <sup>*</sup>
                 </label>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id='signin-password'
-                  placeholder='password'
-                  className='password-input-container'
-                  required
-                  {...register('password')}
-                />
-                <button
-                  type='button'
-                  className='password-toggle-button'
-                  onClick={() => {
-                    setShowPassword(!showPassword)
-                  }}>
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
+                <div className='password-input-container'>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    id='signin-password'
+                    placeholder='password'
+                    required
+                    {...register('password')}
+                  />
+                  <button
+                    type='button'
+                    className='password-toggle-button'
+                    onClick={() => {
+                      setShowPassword(!showPassword)
+                    }}>
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
               </div>
 
               <div className='d-flex flex-wrap justify-content-between mt-2'>
