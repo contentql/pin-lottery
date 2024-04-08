@@ -11,6 +11,7 @@ import { currentUser } from '@/queries/auth/currentUser'
 
 import { trpc } from '@/trpc/client'
 import uploadMedia from '@/utils/uploadMedia'
+import { ImSpinner } from 'react-icons/im'
 import team_obj from '/public/images/elements/team-obj.png'
 
 const LeftSideMenu = () => {
@@ -131,7 +132,16 @@ const LeftSideMenu = () => {
               type='button'
               disabled={isUserImagePending}
               onClick={() => handleUpdateUserProfile()}>
-              Update Image
+              {isUserImagePending ? (
+                <ImSpinner
+                  size={22}
+                  style={{
+                    animation: 'rotateAnimation 2s linear infinite',
+                  }}
+                />
+              ) : (
+                'Update Image'
+              )}
             </button>
           )}
           <h3 className='user-card__name'>{userData?.user_name}</h3>

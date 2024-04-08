@@ -7,6 +7,7 @@ import { Cart, Contest } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 import { useRouter } from 'next/navigation'
+import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 
 const Prices = ({ cartData }: { cartData: Cart[] }) => {
@@ -41,18 +42,19 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
       },
     })
 
-  const { mutate: createTicketsMutation } = trpc.ticket.addTickets.useMutation({
-    onSuccess: async () => {
-      deleteAllTicketsOfUserFromCart()
-      toast.success(
-        'Tickets successfully purchased. Draw date will be announced shortly.',
-      )
-    },
-    onError: async () => {
-      setIsPurchasing(false)
-      toast.error('Failed to purchase tickets. Please try again later.')
-    },
-  })
+  const { mutate: createTicketsMutation, isPending: isTicketPurchased } =
+    trpc.ticket.addTickets.useMutation({
+      onSuccess: async () => {
+        deleteAllTicketsOfUserFromCart()
+        toast.success(
+          'Tickets successfully purchased. Draw date will be announced shortly.',
+        )
+      },
+      onError: async () => {
+        setIsPurchasing(false)
+        toast.error('Failed to purchase tickets. Please try again later.')
+      },
+    })
 
   const handlePurchase = () => {
     if (!arrayOfTicketsWithPrices.length) {
@@ -109,7 +111,16 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
               className='cmn-btn'
               onClick={() => handlePurchase()}
               disabled={isPurchasing}>
-              {isPurchasing ? 'Processing...' : 'Buy Tickets'}
+              {isPurchasing ? (
+                <ImSpinner
+                  size={22}
+                  style={{
+                    animation: 'rotateAnimation 2s linear infinite',
+                  }}
+                />
+              ) : (
+                'Buy Tickets'
+              )}
             </button>
           </div>
         </div>

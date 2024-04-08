@@ -14,7 +14,9 @@ import Contact from './collections/Contact'
 import Contest from './collections/Contest'
 import Faq from './collections/Faq'
 import Features from './collections/Features'
+import { HowToPlayInfo } from './collections/HowToPlay'
 import { Media } from './collections/Media'
+import { Support } from './collections/Support'
 import Tags from './collections/Tags'
 import Team from './collections/Team'
 import Testimonial from './collections/Testimonial'
@@ -56,7 +58,7 @@ export default buildConfig({
     Tags,
     Wishlist,
   ],
-  globals: [About, Team, Testimonial, Features],
+  globals: [About, Team, Testimonial, Features,Support, HowToPlayInfo],
   routes: {
     admin: '/admin',
   },
