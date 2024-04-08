@@ -7,13 +7,26 @@ import DefaultListView from '../views/DefaultListView'
 // This is a object converter that converts any  expanded relation including nested to plain relation (where the value of the relation is just the id)
 function convertObject(obj: any) {
   Object.keys(obj).forEach(key => {
-    if (Object.prototype.hasOwnProperty.call(obj[key], 'relationTo')) {
-      obj[key].value = obj[key].value.id
+    // To convert relations
+    if (
+      obj[key] &&
+      Object.prototype.hasOwnProperty.call(obj[key], 'relationTo')
+    ) {
+      obj[key].value = obj[key].value.id || obj[key].value
+    }
+
+    // To convert images
+    if (
+      obj[key] &&
+      Object.prototype.hasOwnProperty.call(obj[key], 'mimeType')
+    ) {
+      obj[key] = obj[key].id || obj[key]
     }
   })
 
   for (let key in obj) {
-    if (typeof obj[key] === 'object') {
+    // typeOf null is an object
+    if (obj[key] && typeof obj[key] === 'object') {
       convertObject(obj[key])
     }
   }
@@ -82,11 +95,7 @@ export const Trash: CollectionConfig = {
 
         const queryString = req.params.id
 
-        console.log({ queryString })
-
         const arrayOfIds = (qs.parse(queryString) as any).where?.id?.in
-
-        console.log({ arrayOfIds })
 
         await Promise.all(
           arrayOfIds.map(async (restoreDocId: string) => {
