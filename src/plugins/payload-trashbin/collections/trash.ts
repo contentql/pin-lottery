@@ -106,13 +106,27 @@ export const Trash: CollectionConfig = {
             const middleData = { ...newValue, _id: newValue.id }
             const { id, ...restData } = middleData
 
-            await payload.create({
-              collection: collectionName,
-              data: { ...convertObject(restData) },
-            })
+            try {
+              await payload.create({
+                collection: collectionName,
+                data: { ...convertObject(restData) },
+              })
+            } catch (error) {
+              console.log(
+                `Error while creating a entry in ${collectionName} to restore: `,
+                error,
+              )
+            }
 
             // @ts-ignore (just in case user was not generating types after adding plugin)
-            await payload.delete({ collection: 'trash', id: restoreDocId })
+            try {
+              await payload.delete({ collection: 'trash', id: restoreDocId })
+            } catch (error) {
+              console.log(
+                `Error while deleting ${collectionName} from trash to restore: `,
+                error,
+              )
+            }
           }),
         )
 

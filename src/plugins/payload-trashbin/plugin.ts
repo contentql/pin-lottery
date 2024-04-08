@@ -16,10 +16,14 @@ const addDocumentToTrashCollection: AfterDeleteHook = async ({
   }
 
   // @ts-ignore (just in case user was not generating types after adding plugin)
-  await payload.create({
-    collection: 'trash',
-    data: trashDoc,
-  })
+  try {
+    await payload.create({
+      collection: 'trash',
+      data: trashDoc,
+    })
+  } catch (error) {
+    console.log(`Error while adding ${collection.slug} to trash: `, error)
+  }
 }
 
 export const trashBin =
