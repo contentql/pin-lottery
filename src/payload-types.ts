@@ -19,7 +19,10 @@ export interface Config {
     faq: Faq;
     tags: Tag;
     wishlist: Wishlist;
-    transaction: Transaction;
+    about: About;
+    team: Team;
+    testimonial: Testimonial;
+    features: Feature;
     trash: Trash;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -362,18 +365,84 @@ export interface Wishlist {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "transaction".
+ * via the `definition` "about".
  */
-export interface Transaction {
+export interface About {
   id: string;
-  value:
-    | {
+  title: string;
+  description: {
+    root: {
+      children: {
+        type: string;
+        version: number;
         [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  description_html?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team".
+ */
+export interface Team {
+  id: string;
+  title: string;
+  description: string;
+  team?:
+    | {
+        user_image: string | Media;
+        name: string;
+        designation: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial".
+ */
+export interface Testimonial {
+  id: string;
+  title: string;
+  description: string;
+  reviews?:
+    | {
+        user?: (string | null) | User;
+        contest?: (string | null) | Contest;
+        review?: string | null;
+        rating?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "features".
+ */
+export interface Feature {
+  id: string;
+  title: string;
+  description: string;
+  features?:
+    | {
+        feature_image: string | Media;
+        name: string;
+        description: string;
+        id?: string | null;
+      }[]
     | null;
   updatedAt: string;
   createdAt: string;

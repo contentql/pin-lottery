@@ -113,4 +113,60 @@ export const publicRouter = router({
       })
     }
   }),
+  getTestimonials: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const testimonials = await payload.find({ collection: 'testimonial' })
+      return testimonials?.docs.at(0)
+    } catch (error: any) {
+      console.error('Error getting testimonials:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get testimonials.',
+      })
+    }
+  }),
+  getTeam: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const team = await payload.find({ collection: 'team' })
+      return team?.docs.at(0)
+    } catch (error: any) {
+      console.error('Error getting team:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get team.',
+      })
+    }
+  }),
+  getFeatures: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const features = await payload.find({ collection: 'features' })
+      return features?.docs.at(0)
+    } catch (error: any) {
+      console.error('Error getting features:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get features.',
+      })
+    }
+  }),
+  getAbout: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const about = await payload.find({ collection: 'about' })
+      return about?.docs.at(0)
+    } catch (error: any) {
+      console.error('Error getting features:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get features.',
+      })
+    }
+  }),
 })

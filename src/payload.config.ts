@@ -7,13 +7,17 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
+import About from './collections/About'
 import Blog from './collections/Blog'
 import Cart from './collections/Cart'
 import Contact from './collections/Contact'
 import Contest from './collections/Contest'
 import Faq from './collections/Faq'
+import Features from './collections/Features'
 import { Media } from './collections/Media'
 import Tags from './collections/Tags'
+import Team from './collections/Team'
+import Testimonial from './collections/Testimonial'
 import Ticket from './collections/Ticket'
 import Users from './collections/Users'
 import Winner from './collections/Winner'
@@ -51,6 +55,10 @@ export default buildConfig({
     Faq,
     Tags,
     Wishlist,
+    About,
+    Team,
+    Testimonial,
+    Features,
   ],
   routes: {
     admin: '/admin',
