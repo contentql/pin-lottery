@@ -153,7 +153,7 @@ export default buildConfig({
     trashBin({
       // displayToRoles: ['all'] // default value
       displayToRoles: ['admin'], // visible only to admins
-      doNotEnableTrash: ['cart', 'wishlist', 'media'],
+      doNotEnableTrash: ['cart', 'wishlist'],
     }),
     // Retrieve URL from environment variables or configuration settings.
     // mediaCloudflareURLHandler({

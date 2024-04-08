@@ -16,10 +16,14 @@ const addDocumentToTrashCollection: AfterDeleteHook = async ({
   }
 
   // @ts-ignore (just in case user was not generating types after adding plugin)
-  await payload.create({
-    collection: 'trash',
-    data: trashDoc,
-  })
+  try {
+    await payload.create({
+      collection: 'trash',
+      data: trashDoc,
+    })
+  } catch (error) {
+    console.log(`Error while adding ${collection.slug} to trash: `, error)
+  }
 }
 
 export const trashBin =
@@ -27,10 +31,20 @@ export const trashBin =
   (incomingConfig: Config): Config => {
     const { displayToRoles, doNotEnableTrash } = pluginOptions
 
+    const mediaEnabledCollections = (incomingConfig.collections || [])
+      .filter(collection => collection.upload)
+      .map(collection => collection.slug)
+
+    const doNotEnableTrashFromPluginConfigWithMedia = [
+      ...new Set([...(doNotEnableTrash || []), ...mediaEnabledCollections]),
+    ]
+
     const updatedCollectionWithAfterDelete = (
       incomingConfig.collections || []
     ).map(collection => {
-      if (doNotEnableTrash?.includes(collection.slug)) {
+      if (
+        doNotEnableTrashFromPluginConfigWithMedia?.includes(collection.slug)
+      ) {
         return collection
       }
 

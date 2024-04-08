@@ -7,6 +7,7 @@ export const deleteRelatedDocsAfterDelete: AfterDeleteHook = async ({
 }) => {
   const { payload } = req
 
+  // Deleting related tickets data
   //Todo: Initiate refund if applicable
   try {
     await payload.delete({
@@ -22,11 +23,12 @@ export const deleteRelatedDocsAfterDelete: AfterDeleteHook = async ({
       'Error deleting related documents from "tickets" collection:',
       error,
     )
-    throw new Error(
-      'Failed to delete related documents from "tickets" collection.',
-    )
+    // throw new Error(
+    //   'Failed to delete related documents from "tickets" collection.',
+    // )
   }
 
+  // Deleting related winners data
   try {
     await payload.delete({
       collection: 'winner',
@@ -41,8 +43,28 @@ export const deleteRelatedDocsAfterDelete: AfterDeleteHook = async ({
       'Error deleting related documents from "winner" collection:',
       error,
     )
-    throw new Error(
-      'Failed to delete related documents from "winner" collection.',
+    // throw new Error(
+    //   'Failed to delete related documents from "winner" collection.',
+    // )
+  }
+
+  // Deleting related carts data
+  try {
+    await payload.delete({
+      collection: 'cart',
+      where: {
+        'contest_id.value': {
+          equals: id,
+        },
+      },
+    })
+  } catch (error) {
+    console.error(
+      'Error deleting related documents from "cart" collection:',
+      error,
     )
+    // throw new Error(
+    //   'Failed to delete related documents from "cart" collection.',
+    // )
   }
 }
