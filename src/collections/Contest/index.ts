@@ -7,6 +7,8 @@ import {
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
 import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
+
+import { deleteCartAfterUpdate } from './hooks/deleteCartAfterUpdate'
 import { deleteRelatedDocsAfterDelete } from './hooks/deleteRelatedDocsAfterDelete'
 import { deleteWinnerAfterUpdate } from './hooks/deleteWinnerAfterUpdate'
 import { updateTagAfterChange } from './hooks/updateTagAfterChange'
@@ -16,8 +18,15 @@ const Contest: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
   },
+  access: {
+    read: () => true,
+  },
   hooks: {
-    afterChange: [announceWinnerAfterUpdate, deleteWinnerAfterUpdate],
+    afterChange: [
+      announceWinnerAfterUpdate,
+      deleteWinnerAfterUpdate,
+      deleteCartAfterUpdate,
+    ],
     afterDelete: [deleteRelatedDocsAfterDelete],
   },
   fields: [
