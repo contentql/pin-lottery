@@ -16,8 +16,8 @@ export const updateTagAfterChange: FieldHook = async ({
         },
       },
     })
-  } catch (err) {
-    console.log('Error while updating tags', err)
-    throw new Error('Error while updating tags after product type changes')
+  } catch (error) {
+    console.log('Error while updating tags: ', error)
+    // throw new Error('Error while updating tags after product type changes')
   }
 }
