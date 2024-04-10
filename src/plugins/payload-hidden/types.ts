@@ -1,7 +1,18 @@
 export interface PluginTypes {
-  hideCollectionsForRole: {
-    [role: string]: string[]
+  hideForRole?: {
+    collections?: {
+      [role: string]: string[] | undefined
+    }
+    globals?: {
+      [role: string]: string[] | undefined
+    }
   }
-  hideAllCollectionsForRole: string[]
-  hideCollectionsForAllRoles: string[]
+  hideAllForRole?: {
+    collections?: string[] | undefined
+    globals?: string[] | undefined
+  }
+  hideForAllRoles?: {
+    collections?: string[] | undefined
+    globals?: string[] | undefined
+  }
 }

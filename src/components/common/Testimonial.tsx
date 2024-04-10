@@ -1,16 +1,21 @@
 import Image from 'next/image'
+import { CiStar } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa'
 import Slider from 'react-slick'
 
 import round_shape from '/public/images/elements/round-shape.png'
 
-import testimonialData from '@/data/testimonialData'
 import 'slick-carousel/slick/slick.css'
 
 // css
+import { Media, User } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 import 'slick-carousel/slick/slick.css'
 
 const Testimonial = () => {
+  const { data: testimonials } = trpc.public.getTestimonials.useQuery()
+  console.log('testimonials', testimonials)
+
   const NextBtn = ({ onClick }: any) => {
     return (
       <button
@@ -64,14 +69,8 @@ const Testimonial = () => {
           <div className='col-xl-8 col-lg-9'>
             <div className='section-header text-center'>
               <span className='section-sub-title'>Testimonial</span>
-              <h2 className='section-title'>
-                our Happy Customers All Around the World
-              </h2>
-              <p>
-                With over 12 years of experience as the world’s leading online
-                lottery service provider. Find out what our members have to say
-                about us!
-              </p>
+              <h2 className='section-title'>{testimonials?.title}</h2>
+              <p>{testimonials?.description}</p>
             </div>
           </div>
         </div>
@@ -79,18 +78,30 @@ const Testimonial = () => {
           <div className='col-lg-8'>
             <div className='testimonial-area bg_img'>
               <Slider {...settings} className='testimonial-slider'>
-                {testimonialData.map((itm, i) => (
+                {testimonials?.reviews?.map((itm, i) => (
                   <div key={itm.id} className='testimonial-single'>
                     <div className='testimonial-single__thumb'>
-                      <Image src={itm.img} alt='image' />
+                      <Image
+                        src={((itm?.user as User).image as Media)?.url || ''}
+                        alt='image'
+                        width={100}
+                        height={100}
+                      />
                     </div>
                     <div className='testimonial-single__content'>
-                      <h4 className='client-name'>{itm.name}</h4>
-                      <p>{itm.comment}</p>
+                      <h4 className='client-name'>
+                        {(itm.user as User).user_name}
+                      </h4>
+                      <p>{itm.review}</p>
                       <div className='ratings'>
-                        {[...Array(5)].map((_, i) => (
+                        {[...Array(itm?.rating)].map((_, i) => (
                           <i key={i}>
-                            <FaStar />
+                            <FaStar fill='orange' />
+                          </i>
+                        ))}
+                        {[...Array(5 - itm?.rating!)].map((_, i) => (
+                          <i key={i}>
+                            <CiStar fill='white' />
                           </i>
                         ))}
                       </div>
