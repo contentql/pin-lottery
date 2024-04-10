@@ -14,16 +14,17 @@ import Hero from '@/components/home/Hero'
 import WinnerDetails from '@/components/home/WinnerDetails'
 import HeroSkeleton from '@/components/skeletons/HeroSkeleton'
 import { Contest, Tag, Winner } from '@/payload-types'
-import { useSearchParams } from 'next/navigation'
 import { validatePaystackPaymentStatus } from '@/plugins/payload-paystack'
+import { useSearchParams } from 'next/navigation'
 
-const HomeView = () => {
+const HomeView = ({ contest }: { contest: any }) => {
+  console.log('Contestssss', contest)
   const searchParams = useSearchParams()
   // const router =
 
   // get hero contests
   const {
-    data: HeroContests,
+    data: HeroContests = contest,
     refetch: refetchHeroContests,
     isPending: heroContestsPending,
   } = trpc.contest.getHeroContests.useQuery()

@@ -10,8 +10,21 @@ interface PageProps {
   }
 }
 
-const ContestDetails = ({ params }: PageProps) => {
-  return <ContestDetailsView contestId={params.contestId} />
+const ContestDetails = async ({ params }: PageProps) => {
+  const payload = await getPayloadClient()
+
+  try {
+    const contest = await payload.findByID({
+      collection: 'contest',
+      id: params.contestId,
+    })
+
+    return <ContestDetailsView contestId={params.contestId} contest={contest} />
+  } catch (error) {
+    console.log('Error: ' + error)
+  }
+
+  return
 }
 
 export async function generateStaticParams() {
