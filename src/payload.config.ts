@@ -27,7 +27,7 @@ import Wishlist from './collections/Wishlist'
 import Icon from './components/payload-icons/Icon'
 import Logo from './components/payload-icons/Logo'
 import BeforeDashboard from './payload-components/BeforeDashboard'
-import { roleBasedCollectionVisibility } from './plugins/payload-hidden'
+import { roleBasedVisibility } from './plugins/payload-hidden'
 import { mediaGridView } from './plugins/payload-media-grid-view'
 import { paystack } from './plugins/payload-paystack'
 import { trashBin } from './plugins/payload-trashbin'
@@ -141,16 +141,22 @@ export default buildConfig({
     This will override existing hidden settings if they exist
     Assuming the user collection has a 'roles' field with multiple select options and it is saved to JWT
     */
-    roleBasedCollectionVisibility({
-      hideCollectionsForRole: {
-        // admin: [],
-        manager: ['contact', 'users', 'blog', 'faq'],
-        editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
+    roleBasedVisibility({
+      hideForRole: {
+        collections: {
+          manager: ['contact', 'users', 'blog', 'faq'],
+          editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
+        },
       },
-      hideAllCollectionsForRole: ['user'],
-      hideCollectionsForAllRoles: ['cart', 'wishlist'],
+      hideAllForRole: {
+        collections: ['users'],
+      },
+      hideForAllRoles: {
+        collections: ['cart', 'wishlist'],
+      },
     }),
     trashBin({
+      // By default it doesn't track the media collections
       // displayToRoles: ['all'] // default value
       displayToRoles: ['admin'], // visible only to admins
       doNotEnableTrash: ['cart', 'wishlist'],
