@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { trpc } from '@/trpc/client'
+import { getPayloadClient } from '@/get-payload'
 import HomeView from '@/views/HomeView'
 
 export const metadata: Metadata = {
@@ -9,20 +9,43 @@ export const metadata: Metadata = {
 }
 
 export async function generateStaticParams(): Promise<any[]> {
-  // Call an external API endpoint to get posts
-  let contest: any | null = null
+  const payload = await getPayloadClient()
   try {
-    const result = trpc.contest.getOngoingContests.useQuery()
-    contest = result as any
-  } catch (error) {
-    console.log('error')
+    const heroContests = await payload.find({
+      collection: 'contest',
+      depth: 6,
+      pagination: false,
+      where: {
+        show_in_hero: {
+          equals: true,
+        },
+      },
+    })
+    return [{ id: '/' }]
+  } catch (error: any) {
+    console.error('Error fetching contests:', error)
   }
-
-  return contest
+  return [{ id: '/' }]
 }
 
-const Home = ({ params }: { params: any[] }) => {
-  return <HomeView contest={params} />
+const Home = async () => {
+  const payload = await getPayloadClient()
+  try {
+    const { docs: heroContests } = await payload.find({
+      collection: 'contest',
+      depth: 6,
+      pagination: false,
+      where: {
+        show_in_hero: {
+          equals: true,
+        },
+      },
+    })
+
+    return <HomeView heroData={heroContests} />
+  } catch (error) {
+    console.error('Error: ' + error)
+  }
 }
 
 export default Home

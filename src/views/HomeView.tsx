@@ -17,17 +17,19 @@ import { Contest, Tag, Winner } from '@/payload-types'
 import { validatePaystackPaymentStatus } from '@/plugins/payload-paystack'
 import { useSearchParams } from 'next/navigation'
 
-const HomeView = ({ contest }: { contest: any }) => {
-  console.log('Contestssss', contest)
+const HomeView = ({ heroData }: { heroData: Contest[] }) => {
   const searchParams = useSearchParams()
   // const router =
 
   // get hero contests
   const {
-    data: HeroContests = contest,
+    data: HeroContests,
     refetch: refetchHeroContests,
     isPending: heroContestsPending,
-  } = trpc.contest.getHeroContests.useQuery()
+  } = trpc.contest.getHeroContests.useQuery(
+    { id: '' },
+    { initialData: heroData },
+  )
   // get ongoing contests
   const { data: contestDetails } = trpc.contest.getOngoingContests.useQuery()
 
