@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import { toast } from 'react-toastify'
 
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
 
@@ -29,6 +28,7 @@ const ContestDetailsView = ({ contestId, contest }: PageProps) => {
     },
     { initialData: contest },
   )
+
   const { data: similarContest, isPending: isSimilarContestsPending } =
     trpc.contest.getSimilarContests.useQuery(
       {
@@ -36,31 +36,6 @@ const ContestDetailsView = ({ contestId, contest }: PageProps) => {
       },
       { enabled: !!contestDetails?.product_type },
     )
-  console.log('contest ', similarContest)
-  const { mutate: updateContestTimerStatus } =
-    trpc.contest.updateContestTimerStatus.useMutation({
-      onSuccess: async () => {
-        refetchContestDetails()
-      },
-    })
-
-  const handleContestTimerUpdate = () => {
-    if (
-      contestDetails &&
-      contestDetails?.reached_threshold &&
-      !!contestDetails?.threshold_reached_date &&
-      !contestDetails?.contest_timer_status
-    ) {
-      updateContestTimerStatus({
-        id: contestDetails?.id,
-        contest_timer_status: true,
-      })
-
-      return
-    }
-
-    toast.error('Draw has already been completed.')
-  }
 
   return (
     <>
@@ -86,7 +61,7 @@ const ContestDetailsView = ({ contestId, contest }: PageProps) => {
       ) : (
         <ContestBody
           contestDetails={contestDetails as Contest}
-          handleContestTimerUpdate={handleContestTimerUpdate}
+          refetchContestDetails={refetchContestDetails}
         />
       )}
       {isSimilarContestsPending ? (
