@@ -76,10 +76,10 @@ const ContestCard = ({ itm }: { itm: Contest }) => {
 
   const wishlistClickHandler = (e: any) => {
     e.stopPropagation()
-    // if (status !== 'loggedIn') {
-    //   toast.error('Login to add tickets to wishlist')
-    //   return
-    // }
+    if (status !== 'loggedIn') {
+      toast.error('Login to add tickets to wishlist')
+      return
+    }
 
     addToWishlist({
       contest_id: itm?.id,

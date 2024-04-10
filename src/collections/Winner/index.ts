@@ -3,6 +3,9 @@ import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
 
 const Winner: CollectionConfig = {
   slug: 'winner',
+  access: {
+    update: () => false,
+  },
   hooks: {
     afterDelete: [updateContestAfterDelete],
   },

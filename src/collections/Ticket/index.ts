@@ -13,7 +13,8 @@ const Ticket: CollectionConfig = {
   access: {
     create: isManagerOrAdminOrSelf,
     read: isManagerOrAdminOrSelf,
-    update: isManagerOrAdminOrSelf,
+    // update: isManagerOrAdminOrSelf,
+    update: () => false,
     delete: isManagerOrAdminOrSelf,
   },
   admin: {
@@ -72,7 +73,7 @@ const Ticket: CollectionConfig = {
         label: 'Ticket Price',
         required: true,
         admin: {
-          description: 'Enter the price in dollars',
+          description: 'The ticket price in dollars (auto-select)',
           placeholder: '199.99',
           position: 'sidebar',
           readOnly: true,
