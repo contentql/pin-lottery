@@ -250,26 +250,28 @@ export const contestRouter = router({
       })
     }
   }),
-  getHeroContests: publicProcedure.query(async () => {
-    const payload = await getPayloadClient()
-    try {
-      const heroContests = await payload.find({
-        collection: 'contest',
-        depth: 6,
-        pagination: false,
-        where: {
-          show_in_hero: {
-            equals: true,
+  getHeroContests: publicProcedure
+    .input(z.object({ id: z.any() }))
+    .query(async () => {
+      const payload = await getPayloadClient()
+      try {
+        const heroContests = await payload.find({
+          collection: 'contest',
+          depth: 6,
+          pagination: false,
+          where: {
+            show_in_hero: {
+              equals: true,
+            },
           },
-        },
-      })
-      return heroContests.docs
-    } catch (error: any) {
-      console.error('Error fetching contests:', error)
-      throw new TRPCError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: error?.message || 'Failed to fetch contests.',
-      })
-    }
-  }),
+        })
+        return heroContests.docs
+      } catch (error: any) {
+        console.error('Error fetching contests:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to fetch contests.',
+        })
+      }
+    }),
 })

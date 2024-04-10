@@ -14,16 +14,20 @@ import { trpc } from '@/trpc/client'
 
 interface PageProps {
   contestId: string
+  contest: Contest
 }
 
-const ContestDetailsView = ({ contestId }: PageProps) => {
+const ContestDetailsView = ({ contestId, contest }: PageProps) => {
   const {
     data: contestDetails,
     isPending: pendingContestDetails,
     refetch: refetchContestDetails,
-  } = trpc.contest.getContestById.useQuery({
-    id: contestId,
-  })
+  } = trpc.contest.getContestById.useQuery(
+    {
+      id: contestId,
+    },
+    { initialData: contest },
+  )
 
   const { data: similarContest, isPending: isSimilarContestsPending } =
     trpc.contest.getSimilarContests.useQuery(
