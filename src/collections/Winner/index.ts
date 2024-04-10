@@ -22,6 +22,7 @@ const Winner: CollectionConfig = {
       type: 'relationship',
       relationTo: ['tickets'],
       label: 'Winner Ticket',
+      unique: true,
       hasMany: false,
       filterOptions: ({ relationTo, data }) => {
         const selectedContestId = data?.contest?.value
