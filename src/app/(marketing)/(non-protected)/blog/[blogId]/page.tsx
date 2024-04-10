@@ -10,10 +10,20 @@ interface PageProps {
   }
 }
 
-const BlogDetails = ({ params }: PageProps) => {
+const BlogDetails = async ({ params }: PageProps) => {
   const { blogId } = params
+  const payload = await getPayloadClient()
+  try {
+    const blog = await payload.findByID({
+      collection: 'blog',
+      id: blogId,
+    })
+    return <BlogDetailsView blogId={blogId} blog={blog} />
+  } catch (error) {
+    console.error('Error: ' + error)
+  }
 
-  return <BlogDetailsView blogId={blogId} />
+  return
 }
 
 export async function generateStaticParams() {

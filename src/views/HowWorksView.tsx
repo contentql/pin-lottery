@@ -7,7 +7,6 @@ import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 import HowToPlay from '@/components/common/HowToPlay'
 import BuyTicket from '@/components/how-work/BuyTicket'
 import Faq from '@/components/how-work/Faq'
-import Vedio from '@/components/how-work/Vedio'
 
 const HowWorksView = () => {
   return (
@@ -29,7 +28,7 @@ const HowWorksView = () => {
       </div>
 
       {/* Vedio play here */}
-      <Vedio />
+      {/* <Vedio /> */}
 
       {/* how to play */}
       <HowToPlay />

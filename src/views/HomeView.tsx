@@ -13,11 +13,13 @@ import Testimonial from '@/components/common/Testimonial'
 import Hero from '@/components/home/Hero'
 import WinnerDetails from '@/components/home/WinnerDetails'
 import HeroSkeleton from '@/components/skeletons/HeroSkeleton'
+
 import { Contest, Feature, Tag, Winner } from '@/payload-types'
+
 import { validatePaystackPaymentStatus } from '@/plugins/payload-paystack'
 import { useSearchParams } from 'next/navigation'
 
-const HomeView = () => {
+const HomeView = ({ heroData }: { heroData: Contest[] }) => {
   const searchParams = useSearchParams()
   // const router =
 
@@ -26,7 +28,10 @@ const HomeView = () => {
     data: HeroContests,
     refetch: refetchHeroContests,
     isPending: heroContestsPending,
-  } = trpc.contest.getHeroContests.useQuery()
+  } = trpc.contest.getHeroContests.useQuery(
+    { id: '' },
+    { initialData: heroData },
+  )
   // get ongoing contests
   const { data: contestDetails } = trpc.contest.getOngoingContests.useQuery()
 
