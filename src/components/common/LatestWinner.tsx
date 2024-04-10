@@ -15,6 +15,7 @@ import ResponsivePagination from 'react-responsive-pagination'
 import '../../../src/styles/layout/custom/_pagination.scss'
 import WinnerCardSkeleton from '../skeletons/WinnerCardSkeleton'
 
+import Link from 'next/link'
 import WinnerCard from '../cards/WinnerCard'
 
 const LatestWinner = () => {
@@ -132,7 +133,7 @@ const LatestWinner = () => {
           </div>
         </div>
         <div className='row'>
-          <div className='col-lg-12' id='winner_id'>
+          <Link className='col-lg-12' href='winner_id'>
             <FilterByTag
               filter={winnerFilters?.filterWinnerByTag}
               handleSearch={handleSearchTag}
@@ -176,7 +177,7 @@ const LatestWinner = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
       <div>
