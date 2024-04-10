@@ -18,7 +18,8 @@ export const roleBasedVisibility =
     const showForRole: any = {}
 
     Object.entries(hideForRole).forEach(([category, roles]) => {
-      showForRole[category] = {}
+      if (!showForRole[category]) showForRole[category] = {}
+
       Object.entries(roles).forEach(([role, itemsToHide]) => {
         if (!Array.isArray(itemsToHide)) return
         showForRole[category][role] =
@@ -32,6 +33,9 @@ export const roleBasedVisibility =
 
     Object.entries(hideAllForRole).forEach(([category, roles]) => {
       if (!Array.isArray(roles)) return
+
+      if (!showForRole[category]) showForRole[category] = {}
+
       roles.forEach(role => {
         showForRole[category][role] = []
       })
