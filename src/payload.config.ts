@@ -147,9 +147,13 @@ export default buildConfig({
           manager: ['contact', 'users', 'blog', 'faq'],
           editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
         },
+        globals: {
+          admin: ['about'],
+        },
       },
       hideAllForRole: {
-        collections: ['users'],
+        collections: ['user'],
+        globals: ['user'],
       },
       hideForAllRoles: {
         collections: ['cart', 'wishlist'],

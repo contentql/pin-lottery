@@ -1,52 +1,62 @@
 import type { Config, Plugin } from 'payload/config'
 import { PluginTypes } from './types'
 
-export const roleBasedCollectionVisibility =
+export const roleBasedVisibility =
   (pluginOptions: PluginTypes): Plugin =>
   (incomingConfig: Config): Config => {
     const {
-      hideCollectionsForRole,
-      hideAllCollectionsForRole,
-      hideCollectionsForAllRoles,
+      hideForRole = {},
+      hideAllForRole = {},
+      hideForAllRoles = {},
     } = pluginOptions
 
-    const allCollections = incomingConfig.collections?.map(
-      collection => collection.slug,
-    )
+    const allCollections =
+      incomingConfig.collections?.map(collection => collection.slug) || []
 
-    const showCollectionsForRole: any = {}
+    const allGlobals = incomingConfig.globals?.map(global => global.slug) || []
 
-    Object.entries(hideCollectionsForRole).forEach(
-      ([role, hiddenCollections]) => {
-        showCollectionsForRole[role] = allCollections?.filter(
-          collection => !hiddenCollections?.includes(collection),
-        )
-      },
-    )
+    const showForRole: any = {}
 
-    hideAllCollectionsForRole.forEach(role => {
-      showCollectionsForRole[role] = []
+    Object.entries(hideForRole).forEach(([category, roles]) => {
+      showForRole[category] = {}
+      Object.entries(roles).forEach(([role, itemsToHide]) => {
+        if (!Array.isArray(itemsToHide)) return
+        showForRole[category][role] =
+          category === 'collections'
+            ? allCollections.filter(
+                collection => !itemsToHide.includes(collection),
+              )
+            : allGlobals.filter(global => !itemsToHide.includes(global))
+      })
     })
 
-    const updatedCollections = (incomingConfig.collections || [])?.map(
+    Object.entries(hideAllForRole).forEach(([category, roles]) => {
+      if (!Array.isArray(roles)) return
+      roles.forEach(role => {
+        showForRole[category][role] = []
+      })
+    })
+
+    const updatedCollections = (incomingConfig.collections || []).map(
       collection => {
         const hideBasedOnRole = ({ user }: any) => {
-          if (hideCollectionsForAllRoles.includes(collection.slug)) return true
+          if (hideForAllRoles.collections?.includes(collection.slug))
+            return true
 
           const { roles: userRoles } = user
 
           const combiningCollectionsBasedOnRole: string[] = []
 
           userRoles.forEach((userRole: string) => {
-            if (showCollectionsForRole[userRole]) {
+            if (showForRole.collections?.[userRole]) {
               combiningCollectionsBasedOnRole.push(
-                ...showCollectionsForRole[userRole],
+                ...showForRole.collections[userRole],
               )
             } else {
               combiningCollectionsBasedOnRole.push(
-                ...allCollections!.filter(
-                  (collection: string) =>
-                    !hideCollectionsForAllRoles.includes(collection),
+                ...allCollections.filter(
+                  collection =>
+                    !hideForAllRoles.collections?.includes(collection),
                 ),
               )
             }
@@ -56,11 +66,7 @@ export const roleBasedCollectionVisibility =
             ...new Set(combiningCollectionsBasedOnRole),
           ]
 
-          if (uniqueCollectionsToShow.includes(collection.slug)) {
-            return false
-          }
-
-          return true
+          return !uniqueCollectionsToShow.includes(collection.slug)
         }
 
         return {
@@ -73,8 +79,43 @@ export const roleBasedCollectionVisibility =
       },
     )
 
+    const updatedGlobals = (incomingConfig.globals || []).map(global => {
+      const hideBasedOnRole = ({ user }: any) => {
+        if (hideForAllRoles.globals?.includes(global.slug)) return true
+
+        const { roles: userRoles } = user
+
+        const combiningGlobalsBasedOnRole: string[] = []
+
+        userRoles.forEach((userRole: string) => {
+          if (showForRole.globals?.[userRole]) {
+            combiningGlobalsBasedOnRole.push(...showForRole.globals[userRole])
+          } else {
+            combiningGlobalsBasedOnRole.push(
+              ...allGlobals.filter(
+                global => !hideForAllRoles.globals?.includes(global),
+              ),
+            )
+          }
+        })
+
+        const uniqueGlobalsToShow = [...new Set(combiningGlobalsBasedOnRole)]
+
+        return !uniqueGlobalsToShow.includes(global.slug)
+      }
+
+      return {
+        ...global,
+        admin: {
+          ...global.admin,
+          hidden: hideBasedOnRole,
+        },
+      }
+    })
+
     return {
       ...incomingConfig,
       collections: [...updatedCollections],
+      globals: [...updatedGlobals],
     }
   }
