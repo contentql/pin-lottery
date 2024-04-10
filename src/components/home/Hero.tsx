@@ -242,7 +242,7 @@ const Hero = ({
                                   ${contest?.ticket_price}
                                 </span>
                               </p>
-                              <p className='mt-2'>
+                              <p className='mt-3'>
                                 Contest number:{' '}
                                 <span className='hero-span-data'>
                                   {contest?.contest_no}
