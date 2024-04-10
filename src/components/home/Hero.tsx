@@ -185,7 +185,7 @@ const Hero = ({
                           !contest?.contest_status &&
                           !contest?.winner_ticket && (
                             <div className='clock-wrapper-hero'>
-                              <p className='mb-2'>This competition ends in:</p>
+                              <p>This competition ends in:</p>
                               <div className='clock'>
                                 <Countdown
                                   key={
@@ -211,11 +211,11 @@ const Hero = ({
                           contest?.reached_threshold &&
                           contest?.threshold_reached_date && (
                             <div className='clock-wrapper-hero'>
-                              <p className='mb-2'>Winning number:</p>
+                              <p>Winning number:</p>
                               <div className='winner-card__hero'>
                                 <div className='content-bottom'>
                                   <div className='number-list-wrapper'>
-                                    <ul className='number-list mt-2'>
+                                    <ul className='number-list'>
                                       {splitTicketNumber(
                                         (
                                           (
@@ -236,13 +236,13 @@ const Hero = ({
                           !contest?.reached_threshold &&
                           !contest?.threshold_reached_date && (
                             <div className='clock-wrapper-hero'>
-                              <p className='mb-3'>
+                              <p>
                                 Ticket price :
                                 <span className='hero-span-data'>
                                   ${contest?.ticket_price}
                                 </span>
                               </p>
-                              <p className='mb-3'>
+                              <p className='mt-2'>
                                 Contest number:{' '}
                                 <span className='hero-span-data'>
                                   {contest?.contest_no}
