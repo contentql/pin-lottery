@@ -1,33 +1,50 @@
 import Countdown from 'react-countdown'
+import { toast } from 'react-toastify'
 import * as sd from 'simple-duration'
 
 import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
 import { Contest } from '@/payload-types'
 
-import { useState } from 'react'
+import { trpc } from '@/trpc/client'
 import WinningNumber from '../winner/WinningNumber'
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
 
 const ContestBody = ({
   contestDetails,
-  handleContestTimerUpdate,
+  refetchContestDetails,
 }: {
   contestDetails: Contest
-  handleContestTimerUpdate: Function
+  refetchContestDetails: () => void
 }) => {
-  const [countdownCompleted, setCountdownCompleted] = useState(false)
-
   const milliseconds = contestDetails?.day_remain
     ? sd.parse(contestDetails?.day_remain) * 1000
     : 1
 
-  const onComplete = () => {
-    if (!countdownCompleted) {
-      handleContestTimerUpdate()
-      setCountdownCompleted(true)
+  const { mutate: updateContestTimerStatus } =
+    trpc.contest.updateContestTimerStatus.useMutation({
+      onSuccess: async () => {
+        refetchContestDetails()
+      },
+    })
+
+  const handleContestTimerUpdate = () => {
+    if (
+      contestDetails &&
+      contestDetails?.reached_threshold &&
+      !!contestDetails?.threshold_reached_date &&
+      !contestDetails?.contest_timer_status
+    ) {
+      updateContestTimerStatus({
+        id: contestDetails?.id,
+        contest_timer_status: true,
+      })
+
+      return
     }
+
+    toast.error('Draw has already been completed.')
   }
 
   return (
@@ -53,12 +70,12 @@ const ContestBody = ({
                 <p className='mb-2'>This contest ends in:</p>
                 <div className='clock'>
                   <Countdown
-                    key={countdownCompleted ? 'completed' : 'incomplete'}
+                    // key={countdownCompleted ? 'completed' : 'incomplete'}
                     date={
                       Date.parse(contestDetails?.threshold_reached_date) +
                       milliseconds
                     }
-                    onComplete={onComplete}
+                    onComplete={() => handleContestTimerUpdate()}
                     renderer={props => <RendererCountdown {...props} />}
                   />
                 </div>
