@@ -144,8 +144,16 @@ export default buildConfig({
     roleBasedVisibility({
       hideForRole: {
         collections: {
-          manager: ['contact', 'users', 'blog', 'faq'],
-          editor: ['contact', 'users', 'contest', 'tags', 'tickets', 'winner'],
+          manager: ['contact', 'users', 'blog', 'faq', 'transaction'],
+          editor: [
+            'contact',
+            'users',
+            'contest',
+            'tags',
+            'tickets',
+            'winner',
+            'transaction',
+          ],
         },
       },
       hideAllForRole: {
