@@ -133,7 +133,7 @@ const LatestWinner = () => {
           </div>
         </div>
         <div className='row'>
-          <Link className='col-lg-12' href='winner_id'>
+          <Link className='col-lg-12' href='winner_id' scroll={false}>
             <FilterByTag
               filter={winnerFilters?.filterWinnerByTag}
               handleSearch={handleSearchTag}
