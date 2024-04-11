@@ -1,24 +1,42 @@
-import { CollectionConfig } from 'payload/types'
+import { GlobalConfig } from 'payload/types'
 
-const Faq: CollectionConfig = {
+const Faq: GlobalConfig = {
   slug: 'faq',
-  admin: {
-    useAsTitle: 'question',
-  },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      label: 'Title',
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      label: 'Description',
+    },
     {
       name: 'faqs',
       type: 'array',
       fields: [
         {
-          name: 'question',
+          name: 'faq_type',
           type: 'text',
-          required: true,
+          label: 'Faq Type',
         },
         {
-          name: 'answer',
-          type: 'text',
-          required: true,
+          name: 'faq',
+          type: 'array',
+          fields: [
+            {
+              name: 'question',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'answer',
+              type: 'text',
+              required: true,
+            },
+          ],
         },
       ],
     },
