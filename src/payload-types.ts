@@ -16,7 +16,6 @@ export interface Config {
     winner: Winner;
     contact: Contact;
     blog: Blog;
-    faq: Faq;
     tags: Tag;
     wishlist: Wishlist;
     transaction: Transaction;
@@ -30,6 +29,7 @@ export interface Config {
     testimonial: Testimonial;
     features: Feature;
     supportInfo: SupportInfo;
+    faq: Faq;
     howToPlayInfo: HowToPlayInfo;
   };
 }
@@ -324,22 +324,6 @@ export interface Blog {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq".
- */
-export interface Faq {
-  id: string;
-  faqs?:
-    | {
-        question: string;
-        answer: string;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tags".
  */
 export interface Tag {
@@ -537,6 +521,30 @@ export interface SupportInfo {
   guide_img: string | Media;
   heading2: string;
   description2: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: string;
+  title?: string | null;
+  description?: string | null;
+  faqs?:
+    | {
+        faq_type?: string | null;
+        faq?:
+          | {
+              question: string;
+              answer: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
