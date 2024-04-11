@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { Suspense } from 'react'
 
 import Loading from '@/components/loading/PageLoading'
+import { getPayloadClient } from '@/get-payload'
 import ContestView from '@/views/ContestView'
 
 export const metadata: Metadata = {
@@ -18,12 +19,38 @@ export const metadata: Metadata = {
   },
 }
 
-const Contest = () => {
+export async function generateStaticParams(): Promise<any> {
+  const payload = await getPayloadClient()
+  try {
+    const contests = await payload.find({
+      collection: 'contest',
+      depth: 6,
+      limit: 9,
+    })
+    return contests as any
+  } catch (error: any) {
+    console.error('Error fetching about:', error)
+  }
+}
+
+const ContestPage = async () => {
+  let contestsData = null
+  const payload = await getPayloadClient()
+  try {
+    const { docs, totalDocs } = await payload.find({
+      collection: 'contest',
+      depth: 6,
+      limit: 9,
+    })
+    contestsData = { allContests: docs, totalContests: totalDocs } as any
+  } catch (error: any) {
+    console.error('Error fetching about:', error)
+  }
   return (
     <Suspense fallback={<Loading />}>
-      <ContestView />
+      <ContestView contestsData={contestsData as any} />
     </Suspense>
   )
 }
 
-export default Contest
+export default ContestPage

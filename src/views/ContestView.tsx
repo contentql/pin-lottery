@@ -10,7 +10,7 @@ import ResponsivePagination from 'react-responsive-pagination'
 import { useDebounceValue } from 'usehooks-ts'
 import '../../src/styles/layout/custom/_pagination.scss'
 import { trpc } from '../trpc/client'
-const ContestView = () => {
+const ContestView = ({ contestsData }: { contestsData: any }) => {
   const searchParams = useSearchParams()
   const templatesPerPage = 9
 
@@ -41,13 +41,16 @@ const ContestView = () => {
     data: contestDetails,
     isLoading,
     isPending: isContestsPending,
-  } = trpc.contest.getContests.useQuery({
-    pageNumber: pageNumber,
-    filterByName: filters?.filterByName!,
-    filterByPrice: Number(filters?.filterByPrice),
-    filterByTitle: filters?.filterByTitle!,
-    filterByContestStatus: filters?.filterByContestStatus!,
-  })
+  } = trpc.contest.getContests.useQuery(
+    {
+      pageNumber: pageNumber,
+      filterByName: filters?.filterByName!,
+      filterByPrice: Number(filters?.filterByPrice),
+      filterByTitle: filters?.filterByTitle!,
+      filterByContestStatus: filters?.filterByContestStatus!,
+    },
+    { initialData: contestsData },
+  )
 
   //getting tags details
 
