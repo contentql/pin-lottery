@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 import qs from 'qs'
 
-import { DefaultCollectionEdit } from '../views/Default'
+import { DefaultCollectionEdit } from '../views/Edit/Default'
 import DefaultListView from '../views/List/DefaultListView'
 
 // This is a object converter that converts any  expanded relation including nested to plain relation (where the value of the relation is just the id)

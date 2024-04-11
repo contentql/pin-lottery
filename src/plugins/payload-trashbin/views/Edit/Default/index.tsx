@@ -10,7 +10,7 @@ import { SetStepNav } from 'payload/dist/admin/components/views/collections/Edit
 import { Upload } from 'payload/dist/admin/components/views/collections/Edit/Upload'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
 
-import { DocumentControls } from './DocumentControls'
+import { DocumentControls } from '../../../components/DocumentControls'
 
 const baseClass = 'collection-default-edit'
 

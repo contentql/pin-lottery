@@ -20,7 +20,7 @@ import Status from 'payload/dist/admin/components/elements/Status'
 import { useConfig } from 'payload/dist/admin/components/utilities/Config'
 import { useDocumentInfo } from 'payload/dist/admin/components/utilities/DocumentInfo'
 import { formatDate } from 'payload/dist/admin/utilities/formatDate'
-import RestoreDocument from '../RestoreDocument'
+import RestoreDocument from './RestoreDocument'
 
 const baseClass = 'doc-controls'
 
