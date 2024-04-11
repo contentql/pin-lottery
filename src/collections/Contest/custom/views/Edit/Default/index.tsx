@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { DocumentControls } from 'payload/dist/admin/components/elements/DocumentControls'
 import { DocumentFields } from 'payload/dist/admin/components/elements/DocumentFields'
 import { LeaveWithoutSaving } from 'payload/dist/admin/components/modals/LeaveWithoutSaving'
 import Meta from 'payload/dist/admin/components/utilities/Meta'
@@ -10,9 +11,6 @@ import { Upload } from 'payload/dist/admin/components/views/collections/Edit/Upl
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
 
 import 'payload/dist/admin/components/views/collections/Edit/Default/index.scss'
-
-// custom
-import { DocumentControls } from '../../../components/DocumentControls'
 
 const baseClass = 'collection-default-edit'
 
