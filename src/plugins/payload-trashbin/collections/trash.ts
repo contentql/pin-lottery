@@ -97,40 +97,48 @@ export const Trash: CollectionConfig = {
 
         const arrayOfIds = (qs.parse(queryString) as any).where?.id?.in
 
-        await Promise.all(
-          arrayOfIds.map(async (restoreDocId: string) => {
-            // eslint-disable-next-line dot-notation
-            const { value: newValue, collectionName } =
-              await payload.db.collections['trash'].findById(restoreDocId)
+        try {
+          await Promise.all(
+            arrayOfIds.map(async (restoreDocId: string) => {
+              // eslint-disable-next-line dot-notation
+              const { value: newValue, collectionName } =
+                await payload.db.collections['trash'].findById(restoreDocId)
 
-            const middleData = { ...newValue, _id: newValue.id }
-            const { id, ...restData } = middleData
+              const middleData = { ...newValue, _id: newValue.id }
+              const { id, ...restData } = middleData
 
-            try {
-              await payload.create({
-                collection: collectionName,
-                data: { ...convertObject(restData) },
-              })
-            } catch (error) {
-              console.log(
-                `Error while creating a entry in ${collectionName} to restore: `,
-                error,
-              )
-            }
+              try {
+                await payload.create({
+                  req,
+                  collection: collectionName,
+                  data: { ...convertObject(restData) },
+                })
 
-            // @ts-ignore (just in case user was not generating types after adding plugin)
-            try {
-              await payload.delete({ collection: 'trash', id: restoreDocId })
-            } catch (error) {
-              console.log(
-                `Error while deleting ${collectionName} from trash to restore: `,
-                error,
-              )
-            }
-          }),
-        )
+                // Delete the document from the trash only if creation succeeds
+                await payload.delete({
+                  req,
+                  collection: 'trash',
+                  id: restoreDocId,
+                })
+              } catch (error: any) {
+                console.log(`Error while restoring ${collectionName}: `, error)
+                if (error.data.at(0).message) {
+                  res.status(500).json({
+                    error: error.data.at(0).message,
+                  })
+                } else {
+                  res.status(500).json({
+                    error: `An error occurred while restoring ${collectionName}: ${error}`,
+                  })
+                }
+              }
+            }),
+          )
 
-        res.status(200).json({ status: true })
+          res.status(200).json({ status: true })
+        } catch (error) {
+          console.log('Error while restoring: ', error)
+        }
       },
     },
   ],
