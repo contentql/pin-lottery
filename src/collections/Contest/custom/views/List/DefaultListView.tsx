@@ -26,7 +26,7 @@ import { getTranslation } from 'payload/dist/utilities/getTranslation'
 import 'payload/dist/admin/components/views/collections/List/index.scss'
 
 // custom
-import { ListControls } from '../components/ListControls'
+import { ListControls } from '../../components/ListControls'
 
 const baseClass = 'collection-list'
 

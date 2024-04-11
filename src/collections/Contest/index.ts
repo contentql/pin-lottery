@@ -7,7 +7,7 @@ import {
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
 
-import DefaultListView from './custom/views/DefaultListView'
+import DefaultListView from './custom/views/List/DefaultListView'
 import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
 import { deleteCartAfterUpdate } from './hooks/deleteCartAfterUpdate'
 import { deleteRelatedDocsAfterDelete } from './hooks/deleteRelatedDocsAfterDelete'
@@ -20,7 +20,7 @@ const Contest: CollectionConfig = {
     useAsTitle: 'title',
     components: {
       views: {
-        List: DefaultListView,
+        List: { Component: DefaultListView },
       },
     },
   },
