@@ -1,8 +1,8 @@
 import { trpc } from '@/trpc/client'
 import ConvertToHtml from '@/utils/convertToHtml'
 
-const AboutUs = () => {
-  const { data: aboutData } = trpc.public.getAbout.useQuery()
+const AboutUs = ({ aboutInfo }: any) => {
+  const { data: aboutData = aboutInfo } = trpc.public.getAbout.useQuery()
   return (
     <section className='mt-minus-150'>
       <div className='container'>

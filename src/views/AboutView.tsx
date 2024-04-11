@@ -8,8 +8,9 @@ import AboutUs from '@/components/about/AboutUs'
 import Exhaustive from '@/components/about/Exhaustive'
 import Testimonial from '@/components/common/Testimonial'
 import Team from '@/components/team/Team'
+import { About } from '@/payload-types'
 
-const AboutView = () => {
+const AboutView = ({ aboutInfo }: any) => {
   return (
     <>
       {/* Banner section here */}
@@ -18,7 +19,7 @@ const AboutView = () => {
           <Image src={inner_hero_shape_2} alt='inner hero shape 2' />
         </div>
       </div>
-      <AboutUs />
+      <AboutUs aboutInfo={aboutInfo as About} />
       <Exhaustive />
       <Testimonial />
       <Team />
