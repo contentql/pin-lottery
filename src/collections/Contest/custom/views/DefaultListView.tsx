@@ -8,7 +8,6 @@ import Button from 'payload/dist/admin/components/elements/Button'
 import DeleteMany from 'payload/dist/admin/components/elements/DeleteMany'
 import EditMany from 'payload/dist/admin/components/elements/EditMany'
 import { Gutter } from 'payload/dist/admin/components/elements/Gutter'
-import { ListControls } from 'payload/dist/admin/components/elements/ListControls'
 import ListSelection from 'payload/dist/admin/components/elements/ListSelection'
 import Paginator from 'payload/dist/admin/components/elements/Paginator'
 import PerPage from 'payload/dist/admin/components/elements/PerPage'
@@ -25,6 +24,9 @@ import formatFilesize from 'payload/dist/uploads/formatFilesize'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
 
 import 'payload/dist/admin/components/views/collections/List/index.scss'
+
+// custom
+import { ListControls } from '../components/ListControls'
 
 const baseClass = 'collection-list'
 
