@@ -1,8 +1,24 @@
 import { CollectionConfig } from 'payload/types'
+import { DefaultCollectionEdit } from './custom/views/Edit/Default'
+import DefaultListView from './custom/views/List/DefaultListView'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
 
 const Winner: CollectionConfig = {
   slug: 'winner',
+  admin: {
+    components: {
+      views: {
+        List: {
+          Component: DefaultListView,
+        },
+        Edit: {
+          Default: {
+            Component: DefaultCollectionEdit,
+          },
+        },
+      },
+    },
+  },
   access: {
     update: () => false,
   },

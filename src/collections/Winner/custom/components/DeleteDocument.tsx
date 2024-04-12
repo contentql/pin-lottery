@@ -149,8 +149,9 @@ const DeleteDocument: React.FC<Props> = props => {
                 size={16}
                 style={{ marginRight: 6, marginBottom: 4 }}
               />
-              Deleting <b>&ldquo;{titleToRender}&ldquo;</b> will also delete
-              related documents (e.g., tickets, winners, etc.).
+              Deleting <b>&ldquo;{titleToRender}&ldquo;</b> will trigger update
+              to related contest by removing any winner relations and associated
+              fields, if such contest exist.
             </p>
             <div className={`${baseClass}__actions`}>
               <Button
