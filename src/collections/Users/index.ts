@@ -102,6 +102,7 @@ const Users: CollectionConfig = {
       name: 'amount',
       type: 'number',
       label: 'Amount',
+      defaultValue: 0,
       admin: {
         readOnly: true,
       },
