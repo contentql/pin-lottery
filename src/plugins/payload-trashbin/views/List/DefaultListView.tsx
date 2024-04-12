@@ -20,7 +20,7 @@ import formatFilesize from 'payload/dist/uploads/formatFilesize'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ListControls } from '../components/ListControls'
+import { ListControls } from '../../components/ListControls'
 
 const baseClass = 'collection-list'
 

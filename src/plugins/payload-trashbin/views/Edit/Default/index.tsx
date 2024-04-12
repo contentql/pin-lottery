@@ -5,12 +5,14 @@ import { DocumentFields } from 'payload/dist/admin/components/elements/DocumentF
 import { LeaveWithoutSaving } from 'payload/dist/admin/components/modals/LeaveWithoutSaving'
 import Meta from 'payload/dist/admin/components/utilities/Meta'
 import Auth from 'payload/dist/admin/components/views/collections/Edit/Auth'
-import 'payload/dist/admin/components/views/collections/Edit/Default/index.scss'
 import { SetStepNav } from 'payload/dist/admin/components/views/collections/Edit/SetStepNav'
 import { Upload } from 'payload/dist/admin/components/views/collections/Edit/Upload'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
 
-import { DocumentControls } from './DocumentControls'
+import 'payload/dist/admin/components/views/collections/Edit/Default/index.scss'
+
+// custom
+import { DocumentControls } from '../../../components/DocumentControls'
 
 const baseClass = 'collection-default-edit'
 

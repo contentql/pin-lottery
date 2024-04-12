@@ -6,8 +6,6 @@ import type { SanitizedCollectionConfig } from 'payload/dist/collections/config/
 import type { SanitizedGlobalConfig } from 'payload/dist/globals/config/types'
 
 import Autosave from 'payload/dist/admin/components/elements/Autosave'
-import DeleteDocument from 'payload/dist/admin/components/elements/DeleteDocument'
-import 'payload/dist/admin/components/elements/DocumentControls/index.scss'
 import DuplicateDocument from 'payload/dist/admin/components/elements/DuplicateDocument'
 import { Gutter } from 'payload/dist/admin/components/elements/Gutter'
 import Popup from 'payload/dist/admin/components/elements/Popup'
@@ -20,7 +18,11 @@ import Status from 'payload/dist/admin/components/elements/Status'
 import { useConfig } from 'payload/dist/admin/components/utilities/Config'
 import { useDocumentInfo } from 'payload/dist/admin/components/utilities/DocumentInfo'
 import { formatDate } from 'payload/dist/admin/utilities/formatDate'
-import RestoreDocument from '../RestoreDocument'
+
+import 'payload/dist/admin/components/elements/DocumentControls/index.scss'
+
+// custom
+import DeleteDocument from './DeleteDocument'
 
 const baseClass = 'doc-controls'
 
@@ -61,7 +63,6 @@ export const DocumentControls: React.FC<{
     'create' in permissions! && permissions.create?.permission
   const hasDeletePermission =
     'delete' in permissions! && permissions.delete?.permission
-  const hasRestorePermission = true
 
   const showDotMenu = Boolean(
     collection &&
@@ -253,13 +254,6 @@ export const DocumentControls: React.FC<{
                 {hasDeletePermission && (
                   <DeleteDocument
                     buttonId='action-delete'
-                    collection={collection}
-                    id={id}
-                  />
-                )}
-                {hasRestorePermission && (
-                  <RestoreDocument
-                    buttonId='action-restore'
                     collection={collection}
                     id={id}
                   />

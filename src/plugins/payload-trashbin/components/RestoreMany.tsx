@@ -60,8 +60,8 @@ const RestoreMany: React.FC<Props> = props => {
           return null
         }
 
-        if (json.errors) {
-          toast.error(json.message)
+        if (json.error) {
+          toast.error(json.error)
         } else {
           addDefaultError()
         }

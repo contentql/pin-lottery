@@ -1,8 +1,8 @@
 import type { CollectionConfig } from 'payload/types'
 import qs from 'qs'
 
-import { DefaultCollectionEdit } from '../views/Default'
-import DefaultListView from '../views/DefaultListView'
+import { DefaultCollectionEdit } from '../views/Edit/Default'
+import DefaultListView from '../views/List/DefaultListView'
 
 // This is a object converter that converts any  expanded relation including nested to plain relation (where the value of the relation is just the id)
 function convertObject(obj: any) {
@@ -43,7 +43,7 @@ export const Trash: CollectionConfig = {
     useAsTitle: 'collectionName',
     components: {
       views: {
-        List: DefaultListView,
+        List: { Component: DefaultListView },
         Edit: {
           Default: { Component: DefaultCollectionEdit },
         },
@@ -97,40 +97,51 @@ export const Trash: CollectionConfig = {
 
         const arrayOfIds = (qs.parse(queryString) as any).where?.id?.in
 
-        await Promise.all(
-          arrayOfIds.map(async (restoreDocId: string) => {
-            // eslint-disable-next-line dot-notation
-            const { value: newValue, collectionName } =
-              await payload.db.collections['trash'].findById(restoreDocId)
+        const convertArrayOfIds =
+          typeof arrayOfIds === 'object' && !Array.isArray(arrayOfIds)
+            ? Object.values(arrayOfIds || {})
+            : [...arrayOfIds]
 
-            const middleData = { ...newValue, _id: newValue.id }
-            const { id, ...restData } = middleData
+        try {
+          await Promise.all(
+            convertArrayOfIds?.map(async (restoreDocId: string) => {
+              // eslint-disable-next-line dot-notation
+              const { value: newValue, collectionName } =
+                await payload.db.collections['trash'].findById(restoreDocId)
 
-            try {
-              await payload.create({
-                collection: collectionName,
-                data: { ...convertObject(restData) },
-              })
-            } catch (error) {
-              console.log(
-                `Error while creating a entry in ${collectionName} to restore: `,
-                error,
-              )
-            }
+              const middleData = { ...newValue, _id: newValue.id }
+              const { id, ...restData } = middleData
 
-            // @ts-ignore (just in case user was not generating types after adding plugin)
-            try {
-              await payload.delete({ collection: 'trash', id: restoreDocId })
-            } catch (error) {
-              console.log(
-                `Error while deleting ${collectionName} from trash to restore: `,
-                error,
-              )
-            }
-          }),
-        )
+              try {
+                await payload.create({
+                  collection: collectionName,
+                  data: { ...convertObject(restData) },
+                })
 
-        res.status(200).json({ status: true })
+                // Delete the document from the trash only if creation succeeds
+                await payload.delete({
+                  collection: 'trash',
+                  id: restoreDocId,
+                })
+              } catch (error: any) {
+                console.log(`Error while restoring ${collectionName}: `, error)
+                if (error.data.at(0).message) {
+                  res.status(500).json({
+                    error: error.data.at(0).message,
+                  })
+                } else {
+                  res.status(500).json({
+                    error: `An error occurred while restoring ${collectionName}: ${error}`,
+                  })
+                }
+              }
+            }),
+          )
+
+          res.status(200).json({ status: true })
+        } catch (error) {
+          console.log('Error while restoring: ', error)
+        }
       },
     },
   ],
