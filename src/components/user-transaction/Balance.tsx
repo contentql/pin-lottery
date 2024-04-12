@@ -1,4 +1,5 @@
 import { useAuth } from '@/providers/Auth'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 import DepositAmount from './DepositAmount'
 import WithdrawAmount from './WithdrawAmount'
 
@@ -8,7 +9,9 @@ const Balance = () => {
     <div className='transaction-balance-wrapper'>
       <div className='left'>
         <div className='transaction-balance'>
-          <h4 className='balance'>{user?.amount}</h4>
+          <h4 className='balance'>
+            {ticketsMetadata.currency} {user?.amount}
+          </h4>
           <span>Available Balance</span>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { AppContext } from '@/context/context'
 import { Contest } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 import { ImSpinner } from 'react-icons/im'
 
 const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
@@ -61,7 +62,8 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
         </div> */}
         <div className='total-price'>
           <p>
-            Ticket Price ({totalTickets} tickets X ${ticketPrice})
+            Ticket Price ({totalTickets} tickets X {ticketsMetadata.currency}
+            {ticketPrice})
           </p>
           <span>${totalTicketsPrice}</span>
         </div>

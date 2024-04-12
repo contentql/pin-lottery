@@ -1,6 +1,7 @@
 import { Contest, Media, Ticket, Winner, Wishlist } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -160,7 +161,9 @@ const ContestCard = ({
           <h5 className='contest-card__name'>{itm.title}</h5>
         </div>
         <div className='right'>
-          <span className='contest-card__price'>${itm.ticket_price}</span>
+          <span className='contest-card__price'>
+            {ticketsMetadata.currency} {itm.ticket_price}
+          </span>
           <p>ticket price</p>
         </div>
       </div>

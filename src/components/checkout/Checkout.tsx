@@ -1,3 +1,5 @@
+import { ticketsMetadata } from '@/utils/tickets-metadata'
+
 const Checkout = () => {
   return (
     <div className='checkout-wrapper__body'>
@@ -5,10 +7,10 @@ const Checkout = () => {
         <li>
           <div className='left'>
             <h4 className='caption'>Ticket Price</h4>
-            <span>(8 tickets X $ 4.99)</span>
+            <span>(8 tickets X {ticketsMetadata.currency} 4.99)</span>
           </div>
           <div className='right'>
-            <span className='price'>$39.92</span>
+            <span className='price'>{ticketsMetadata.currency}39.92</span>
           </div>
         </li>
         <li>
@@ -16,7 +18,7 @@ const Checkout = () => {
             <h4 className='caption'>Total</h4>
           </div>
           <div className='right'>
-            <span className='price'>$39.92</span>
+            <span className='price'>{ticketsMetadata.currency}39.92</span>
           </div>
         </li>
       </ul>
