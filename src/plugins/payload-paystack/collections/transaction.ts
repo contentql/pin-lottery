@@ -8,6 +8,14 @@ export const Transaction: CollectionConfig = {
   //   },
   fields: [
     {
+      name: 'email',
+      type: 'email',
+      admin: {
+        readOnly: true,
+      },
+      label: 'User Email',
+    },
+    {
       name: 'amount',
       type: 'text',
       admin: {
@@ -46,6 +54,7 @@ export const Transaction: CollectionConfig = {
       admin: {
         readOnly: true,
       },
+      label: 'Meta Data',
     },
   ],
   endpoints: [
@@ -65,6 +74,8 @@ export const Transaction: CollectionConfig = {
               amount: body.data.amount,
               status: body?.data.status,
               payment_method: body.data.authorization.brand,
+              date: body.data.paid_at,
+              email: body.data.customer.email,
             },
           })
         } catch (error) {
