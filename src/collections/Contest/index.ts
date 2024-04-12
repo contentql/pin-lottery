@@ -6,8 +6,10 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
-import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
 
+import { DefaultCollectionEdit } from './custom/views/Edit/Default'
+import DefaultListView from './custom/views/List/DefaultListView'
+import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
 import { deleteCartAfterUpdate } from './hooks/deleteCartAfterUpdate'
 import { deleteRelatedDocsAfterDelete } from './hooks/deleteRelatedDocsAfterDelete'
 import { deleteWinnerAfterUpdate } from './hooks/deleteWinnerAfterUpdate'
@@ -17,6 +19,16 @@ const Contest: CollectionConfig = {
   slug: 'contest',
   admin: {
     useAsTitle: 'title',
+    components: {
+      views: {
+        List: { Component: DefaultListView },
+        Edit: {
+          Default: {
+            Component: DefaultCollectionEdit,
+          },
+        },
+      },
+    },
   },
   access: {
     read: () => true,

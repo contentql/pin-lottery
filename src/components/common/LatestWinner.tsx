@@ -41,7 +41,6 @@ const LatestWinner = () => {
     trpc.winner.getWinners.useQuery()
 
   const handleSearchByTicketNumber = (data: any) => {
-    console.log('hook form', data)
     const search = new URLSearchParams(searchParams)
     search.set('ticketNumber', data?.ticketNumber)
     search.set('contestNumber', data?.contestNumber)

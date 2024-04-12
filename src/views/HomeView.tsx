@@ -46,14 +46,12 @@ const HomeView = ({ heroData }: { heroData: Contest[] }) => {
 
   const { data: winnerDetails } = trpc.winner.getWinners.useQuery()
   const reference = searchParams.get('reference')
-  console.log('reference', reference)
 
   if (reference) {
     const testFunction = async () => {
       const paymentStatus = await validatePaystackPaymentStatus({
         reference,
       })
-      console.log('paymentStatus', paymentStatus)
       // router.push
     }
     testFunction()

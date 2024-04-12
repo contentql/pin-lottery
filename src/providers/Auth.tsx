@@ -105,11 +105,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setUser(user)
         setStatus('loggedIn')
         return user
+      } else {
+        const { errors } = await res.json()
+        throw errors[0].message
       }
-
-      throw new Error('Invalid login')
     } catch (e) {
-      throw new Error('An error occurred while attempting to login.')
+      throw new Error(e as any)
     }
   }, [])
 

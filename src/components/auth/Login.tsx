@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
-import { ZodError } from 'zod'
 
 import {
   LoginValidator,
@@ -11,7 +10,7 @@ import {
 } from '@/lib/validators/auth-router/login-validator'
 import { useAuth } from '@/providers/Auth'
 import { useMutation } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
@@ -33,14 +32,7 @@ const Login = () => {
   const { mutate: loginUser, isPending: isLoginPending } = useMutation({
     mutationFn: (args: { email: string; password: string }) => login(args),
     onError: (err: Error) => {
-      if (err.message === 'Invalid login') {
-        toast.error(`Invalid email or password.`)
-      }
-
-      if (err instanceof ZodError) {
-        toast.error(`Please provide correct information.`)
-        return
-      }
+      toast.error(err.message)
       console.error(err)
     },
     onSuccess: () => {
@@ -53,10 +45,6 @@ const Login = () => {
   const onSubmit = ({ email, password }: TLoginValidator) => {
     loginUser({ email, password })
   }
-
-  useEffect(() => {
-    console.log('loading', isLoginPending)
-  }, [isLoginPending])
 
   return (
     <div className='register-main'>
