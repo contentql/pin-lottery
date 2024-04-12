@@ -1,5 +1,8 @@
 import Image from 'next/image'
-import { createPaystackCheckoutUrl } from '../../plugins/payload-paystack'
+import {
+  createPaystackCheckoutUrl,
+  initializeTransfer,
+} from '../../plugins/payload-paystack'
 
 import { useAuth } from '@/providers/Auth'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -28,6 +31,11 @@ const Balance = () => {
     // }
   }
 
+  const handleWithdraw = async () => {
+    const data = await initializeTransfer()
+    console.log('data', data)
+  }
+
   return (
     <div className='transaction-balance-wrapper'>
       <div className='left'>
@@ -47,6 +55,7 @@ const Balance = () => {
           <Image src={transaction_2} alt='transaction 2' />
 
           <span>Withdraw</span>
+          <button onClick={() => handleWithdraw()}>Add</button>
         </a>
       </div>
     </div>

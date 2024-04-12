@@ -41,10 +41,21 @@ export const Transaction: CollectionConfig = {
           body.data.authorization.authorization_code
         ) {
           try {
+            const { docs } = await payload.find({
+              collection: 'users',
+              where: {
+                email: {
+                  equals: body.data.customer.email,
+                },
+              },
+            })
+
+            const userAmount = docs.at(0)?.amount + body.data.amount
+            console.log('userAmount', docs.at(0)?.amount)
             await payload.update({
               collection: 'users',
               data: {
-                amount: body.data.amount,
+                amount: userAmount,
               },
               where: {
                 email: {

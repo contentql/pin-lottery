@@ -35,9 +35,9 @@ export const publicRouter = router({
     const payload = await getPayloadClient()
 
     try {
-      const faqs = await payload.find({ collection: 'faq' })
+      const faqs = await payload.findGlobal({ slug: 'faq' })
 
-      return faqs?.docs.at(0)?.faqs
+      return faqs
     } catch (error: any) {
       console.error('Error getting FAQs:', error)
       throw new TRPCError({

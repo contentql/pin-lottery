@@ -55,11 +55,10 @@ export default buildConfig({
     Winner,
     Contact,
     Blog,
-    Faq,
     Tags,
     Wishlist,
   ],
-  globals: [About, Team, Testimonial, Features, Support, HowToPlayInfo],
+  globals: [About, Team, Testimonial, Features, Support, Faq, HowToPlayInfo],
   routes: {
     admin: '/admin',
   },
@@ -144,7 +143,7 @@ export default buildConfig({
     roleBasedVisibility({
       hideForRole: {
         collections: {
-          manager: ['contact', 'users', 'blog', 'faq', 'transaction'],
+          manager: ['contact', 'users', 'blog', 'transaction'],
           editor: [
             'contact',
             'users',

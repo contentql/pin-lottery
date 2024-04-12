@@ -4,10 +4,13 @@ import Image from 'next/image'
 
 import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 
-import Banner from '@/components/common/Banner'
 import FaqBody from '@/components/faq/FaqBody'
+import { Faq } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 const FaqView = () => {
+  const { data: faqsData } = trpc.public.getFaqs.useQuery()
+  console.log('faq', faqsData)
   return (
     <>
       {/* Banner section */}
@@ -15,18 +18,10 @@ const FaqView = () => {
         <div className='bg-shape'>
           <Image src={inner_hero_shape_2} alt='inner hero shape 2' />
         </div>
-
-        <Banner
-          breadcrumb={[
-            ['Home', '/'],
-            ['Pages', '/'],
-            ['Faq', '/'],
-          ]}
-        />
       </div>
 
       {/* Faq boday here */}
-      <FaqBody />
+      <FaqBody faqsData={faqsData as Faq} />
     </>
   )
 }
