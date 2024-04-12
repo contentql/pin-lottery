@@ -90,7 +90,7 @@ const ContestDetailsPage = ({
                 <div className='row mb-none-30'>
                   {contestDetails?.map((itm: any) => (
                     <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>
-                      <ContestCard itm={itm} />
+                      <ContestCard itm={itm} wishlist={false} />
                     </div>
                   ))}
                 </div>

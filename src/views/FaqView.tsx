@@ -10,7 +10,7 @@ import { trpc } from '@/trpc/client'
 
 const FaqView = () => {
   const { data: faqsData } = trpc.public.getFaqs.useQuery()
-  console.log('faq', faqsData)
+
   return (
     <>
       {/* Banner section */}

@@ -53,8 +53,6 @@ const ContestView = () => {
 
   const { data: allTags } = trpc.public.getTags.useQuery()
 
-  console.log('total', contestDetails?.totalContests)
-
   return (
     <>
       {/* Banner section here */}

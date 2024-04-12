@@ -28,17 +28,14 @@ function WithdrawAmount() {
   const { user } = useAuth()
 
   const onsubmit = async (data: any) => {
-    console.log('withdraw data', data)
     // const url = await createPaystackCheckoutUrl(
     //   user?.email,
     //   data?.depositAmount,
     // )
     // console.log('url', url)
-
     // await router.push(url?.data?.authorization_url || '/user-transaction')
     // const reference = searchParams.get('reference')
     // console.log('reference', reference)
-
     // if (reference) {
     //   const paymentStatus = await validatePaystackPaymentStatus({
     //     reference,
@@ -51,7 +48,6 @@ function WithdrawAmount() {
       `https://api.paystack.co/bank?currency=${country}`,
     )
     const result = await details.json()
-    console.log('bank details', result.data)
     setBanks(result.data)
     return result.data
   }

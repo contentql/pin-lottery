@@ -14,6 +14,7 @@ const Winner: CollectionConfig = {
       name: 'contest',
       type: 'relationship',
       label: 'Contest',
+      unique: true,
       relationTo: ['contest'],
       hasMany: false,
     },

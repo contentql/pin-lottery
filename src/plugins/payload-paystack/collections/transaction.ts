@@ -64,8 +64,6 @@ export const Transaction: CollectionConfig = {
       handler: async (req, res) => {
         const { payload, body } = req
 
-        console.log('body', body)
-
         try {
           await payload.create({
             collection: 'transaction',
@@ -97,7 +95,7 @@ export const Transaction: CollectionConfig = {
             })
 
             const userAmount = docs.at(0)?.amount + body.data.amount
-            console.log('userAmount', docs.at(0)?.amount)
+
             await payload.update({
               collection: 'users',
               data: {

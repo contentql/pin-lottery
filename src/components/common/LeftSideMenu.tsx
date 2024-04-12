@@ -1,3 +1,5 @@
+'use client'
+
 import { useAuth } from '@/providers/Auth'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
@@ -51,7 +53,7 @@ const LeftSideMenu = () => {
         setUserImage(null)
         setUser(data?.data)
         setUploadedImage(null)
-        console.log('data in use auth', data?.data)
+
         queryClient.invalidateQueries({ queryKey: ['/api/users/me', 'get'] })
       },
       onError: () => {

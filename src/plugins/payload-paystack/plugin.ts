@@ -16,8 +16,6 @@ const createPaystackCustomer: CollectionAfterOperationHook = async ({
   result: any
 }) => {
   if (operation === 'create') {
-    console.log('adding user to paystack')
-    console.log('result', result)
     try {
       const customer = await paystackSdk.customer.create({
         email: result.email,
@@ -25,15 +23,14 @@ const createPaystackCustomer: CollectionAfterOperationHook = async ({
         last_name: 'sum',
         phone: result.phone_number,
       })
-      console.log(customer)
     } catch (error) {
       console.log('Error creating customer', error)
     }
   }
 
-  if (operation === 'delete') {
-    console.log('removing user from paystack')
-  }
+  // if (operation === 'delete') {
+  //   console.log('removing user from paystack')
+  // }
   return result
 }
 
@@ -46,7 +43,7 @@ export const createPaystackCheckoutUrl = async (
       amount: depositAmount,
       email: userEmail!,
     })
-    console.log('checkout', checkout)
+
     return checkout
   } catch (error) {
     console.log('Error creating paystack checkout url', error)
@@ -60,7 +57,7 @@ export const validatePaystackPaymentStatus = async ({
 }) => {
   try {
     const paymentStatus = await paystackSdk.transaction.verify(reference)
-    console.log('payment', paymentStatus)
+
     return paymentStatus
   } catch (error) {
     console.log('Error validating paystack payment status', error)
@@ -76,8 +73,6 @@ export const initializeTransfer = async () => {
       bank_code: '058',
     })
 
-    console.log('validateAccount', validateAccount)
-
     if (validateAccount?.status && validateAccount.data?.account_name) {
       const createTransferRecipient = await paystackSdk.recipient.create({
         account_number: '0001234567',
@@ -89,7 +84,6 @@ export const initializeTransfer = async () => {
       })
 
       const { status, data, message } = createTransferRecipient
-      console.log('createTransferRecipient', { status, data, message })
 
       if (status && createTransferRecipient?.data?.recipient_code) {
         const createTransfer = await paystackSdk.transfer.initiate({
@@ -98,7 +92,6 @@ export const initializeTransfer = async () => {
           recipient: createTransferRecipient?.data?.recipient_code,
         })
 
-        console.log('createTransfer', createTransfer)
         return createTransfer
       }
     }
