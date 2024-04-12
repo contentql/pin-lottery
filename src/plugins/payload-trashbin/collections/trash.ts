@@ -102,8 +102,6 @@ export const Trash: CollectionConfig = {
             ? Object.values(arrayOfIds || {})
             : [...arrayOfIds]
 
-        console.log('arrayOfIds: ', convertArrayOfIds)
-
         try {
           await Promise.all(
             convertArrayOfIds?.map(async (restoreDocId: string) => {

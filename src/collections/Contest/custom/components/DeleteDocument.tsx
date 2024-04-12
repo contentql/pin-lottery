@@ -144,6 +144,11 @@ const DeleteDocument: React.FC<Props> = props => {
               </Trans>
             </p>
             <p>
+              <IoIosWarning
+                color='orange'
+                size={16}
+                style={{ marginRight: 6, marginBottom: 4 }}
+              />
               Deleting <b>&ldquo;{titleToRender}&ldquo;</b> will also delete
               related documents (e.g., tickets, winners, etc.).
             </p>
