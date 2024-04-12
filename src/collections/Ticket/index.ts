@@ -7,6 +7,7 @@ import { customContestRelationshipField } from './custom/custom-contest-relation
 import { assignUserId } from './field-level-hooks/assignUserId'
 import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
+import { updateUserAfterCreate } from './hooks/updateUserAfterCreate'
 
 const Ticket: CollectionConfig = {
   slug: 'tickets',
@@ -22,7 +23,7 @@ const Ticket: CollectionConfig = {
   },
   // when creating a ticket, ensure the button was disabled
   hooks: {
-    afterChange: [updateContestAfterCreate],
+    afterChange: [updateContestAfterCreate, updateUserAfterCreate],
     afterDelete: [updateContestAfterDelete],
   },
   fields: [
