@@ -1,3 +1,5 @@
+'use client'
+
 import { useAuth } from '@/providers/Auth'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
