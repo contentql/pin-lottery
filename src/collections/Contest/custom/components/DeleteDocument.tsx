@@ -17,6 +17,9 @@ import { getTranslation } from 'payload/dist/utilities/getTranslation'
 
 import 'payload/dist/admin/components/elements/DeleteDocument/index.scss'
 
+// custom
+import { IoIosWarning } from 'react-icons/io'
+
 const baseClass = 'delete-document'
 
 const DeleteDocument: React.FC<Props> = props => {
@@ -119,6 +122,11 @@ const DeleteDocument: React.FC<Props> = props => {
             toggleModal(modalSlug)
           }}>
           {t('delete')}
+          <IoIosWarning
+            color='orange'
+            size={20}
+            style={{ margin: 'auto', marginBottom: '3', width: '100%' }}
+          />
         </PopupList.Button>
         <Modal className={baseClass} slug={modalSlug}>
           <MinimalTemplate className={`${baseClass}__template`}>

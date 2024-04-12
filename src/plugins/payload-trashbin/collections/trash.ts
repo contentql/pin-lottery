@@ -97,9 +97,16 @@ export const Trash: CollectionConfig = {
 
         const arrayOfIds = (qs.parse(queryString) as any).where?.id?.in
 
+        const convertArrayOfIds =
+          typeof arrayOfIds === 'object' && !Array.isArray(arrayOfIds)
+            ? Object.values(arrayOfIds || {})
+            : [...arrayOfIds]
+
+        console.log('arrayOfIds: ', convertArrayOfIds)
+
         try {
           await Promise.all(
-            arrayOfIds.map(async (restoreDocId: string) => {
+            convertArrayOfIds?.map(async (restoreDocId: string) => {
               // eslint-disable-next-line dot-notation
               const { value: newValue, collectionName } =
                 await payload.db.collections['trash'].findById(restoreDocId)
@@ -109,14 +116,12 @@ export const Trash: CollectionConfig = {
 
               try {
                 await payload.create({
-                  req,
                   collection: collectionName,
                   data: { ...convertObject(restData) },
                 })
 
                 // Delete the document from the trash only if creation succeeds
                 await payload.delete({
-                  req,
                   collection: 'trash',
                   id: restoreDocId,
                 })

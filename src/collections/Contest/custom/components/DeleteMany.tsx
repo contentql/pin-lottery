@@ -18,6 +18,9 @@ import {
 } from 'payload/dist/admin/components/views/collections/List/SelectionProvider'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
 
+// custom
+import { IoIosWarning } from 'react-icons/io'
+
 const baseClass = 'delete-documents'
 
 const DeleteMany: React.FC<Props> = props => {
@@ -104,6 +107,7 @@ const DeleteMany: React.FC<Props> = props => {
           toggleModal(modalSlug)
         }}>
         {t('delete')}
+        <IoIosWarning color='orange' size={16} style={{ marginLeft: 3 }} />
       </Pill>
       <Modal className={baseClass} slug={modalSlug}>
         <MinimalTemplate className={`${baseClass}__template`}>
