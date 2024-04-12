@@ -52,7 +52,7 @@ const RightSide = () => {
           {wishlistData?.map((itm: any) => (
             <div key={itm.id} className='col-xl-6 col-lg-12 col-md-6 mb-30'>
               {/* Contest card */}
-              <ContestCard itm={itm?.contest?.value} />
+              <ContestCard wishlist={true} itm={itm?.contest?.value} />
             </div>
           ))}
         </div>
