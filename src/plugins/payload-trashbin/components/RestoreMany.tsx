@@ -1,6 +1,7 @@
 import { Modal, useModal } from '@faceless-ui/modal'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { IoIosWarning } from 'react-icons/io'
 import { toast } from 'react-toastify'
 
 import type { Props } from 'payload/dist/admin/components/elements/DeleteMany/types'
@@ -99,6 +100,16 @@ const RestoreMany: React.FC<Props> = props => {
         <MinimalTemplate className={`${baseClass}__template`}>
           <h1>Confirm Restoration</h1>
           <p>{`You are about to Restore ${count} ${count > 1 ? 'documents' : 'document'} from ${plural}`}</p>
+          <p>
+            <IoIosWarning
+              color='orange'
+              size={16}
+              style={{ marginRight: 6, marginBottom: 4 }}
+            />
+            {count > 1 ? 'These documents' : 'This document'} will not be
+            restored if {count > 1 ? 'they are' : 'it is'} related to other
+            deleted documents.
+          </p>
           <Button
             buttonStyle='secondary'
             id='confirm-cancel'

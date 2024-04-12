@@ -1,6 +1,7 @@
 import { Modal, useModal } from '@faceless-ui/modal'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { IoIosWarning } from 'react-icons/io'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -111,6 +112,15 @@ const RestoreDocument: React.FC<Props> = props => {
             <p>
               You are about to restore the <strong>{titleToRender}</strong>. Are
               you sure?
+            </p>
+            <p>
+              <IoIosWarning
+                color='orange'
+                size={16}
+                style={{ marginRight: 6, marginBottom: 4 }}
+              />
+              <strong>&ldquo;{titleToRender}&rdquo;</strong> will not be
+              restored if it is related to another deleted documents.
             </p>
             <div className={`${baseClass}__actions`}>
               <Button
