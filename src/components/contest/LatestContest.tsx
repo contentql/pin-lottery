@@ -314,7 +314,7 @@ const LatestContest = ({
                               <div
                                 key={contest.id}
                                 className='col-xl-4 col-md-6 mb-30'>
-                                <ContestCard itm={contest} />
+                                <ContestCard itm={contest} wishlist={false} />
                               </div>
                             ))
                         ) : (
