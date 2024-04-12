@@ -10,7 +10,7 @@ import {
 } from '@/lib/validators/auth-router/login-validator'
 import { useAuth } from '@/providers/Auth'
 import { useMutation } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
@@ -45,10 +45,6 @@ const Login = () => {
   const onSubmit = ({ email, password }: TLoginValidator) => {
     loginUser({ email, password })
   }
-
-  useEffect(() => {
-    console.log('loading', isLoginPending)
-  }, [isLoginPending])
 
   return (
     <div className='register-main'>

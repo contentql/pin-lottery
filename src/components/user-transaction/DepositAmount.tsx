@@ -28,11 +28,9 @@ function DepositAmount() {
       user?.email,
       data?.depositAmount,
     )
-    console.log('url', url)
 
     await router.push(url?.data?.authorization_url || '/user-transaction')
     const reference = searchParams.get('reference')
-    console.log('reference', reference)
 
     // if (reference) {
     //   const paymentStatus = await validatePaystackPaymentStatus({

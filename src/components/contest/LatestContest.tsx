@@ -34,8 +34,6 @@ const LatestContest = ({
     (ele: Wishlist) => (ele?.contest?.value as Contest)?.id,
   )
 
-  console.log('wishlistIds', wishlistIds)
-
   const [resetValues, setResetValues] = useState({
     sliderValue: price ? Number(price) : 0,
     inputValue: title ? title : '',

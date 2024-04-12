@@ -22,7 +22,7 @@ async function uploadMedia(files: FileList | null): Promise<Media | undefined> {
     }
 
     const { doc }: { doc: Media } = await response.json()
-    console.log('Upload successful', doc)
+
     return doc
   } catch (error) {
     if (error instanceof Error) {

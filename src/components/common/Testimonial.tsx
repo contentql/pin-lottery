@@ -14,7 +14,6 @@ import 'slick-carousel/slick/slick.css'
 
 const Testimonial = () => {
   const { data: testimonials } = trpc.public.getTestimonials.useQuery()
-  console.log('testimonials', testimonials)
 
   const NextBtn = ({ onClick }: any) => {
     return (

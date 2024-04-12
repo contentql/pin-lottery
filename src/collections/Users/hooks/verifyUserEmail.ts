@@ -13,8 +13,6 @@ export const verifyUserEmail: CollectionAfterChangeHook = async ({
   previousDoc,
 }) => {
   if (operation === OPERATION && previousDoc.email !== doc.email) {
-    console.log('previousDoc: ', previousDoc)
-    console.log('doc: ', doc)
     req.payload.sendEmail({
       to: doc.email,
       from: process.env.RESEND_SENDER_EMAIL,

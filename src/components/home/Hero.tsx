@@ -25,7 +25,6 @@ const Hero = ({
   HeroContests: Contest[]
   refetchHeroContests: Function
 }) => {
-  console.log('hero details', HeroContests)
   const [isOpen, setIsOpen] = useState(false)
   const [countdownCompleted, setCountdownCompleted] = useState(false)
 
