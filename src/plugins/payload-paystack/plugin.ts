@@ -66,12 +66,47 @@ export const validatePaystackPaymentStatus = async ({
   }
 }
 
-export const paystack: Plugin = (incomingConfig: Config): Config => {
-  // find the user collection
-  // once you find the user collection add a new hook to it
-  // example would be create a console.log() of the existing data
-  // once it is clear, ensure you trigger paystack api to create new customer
+//Widhdraw Payment
 
+export const initializeTransfer = async () => {
+  try {
+    const validateAccount = await paystackSdk.verification.resolveAccount({
+      account_number: '0001234567',
+      bank_code: '058',
+    })
+
+    console.log('validateAccount', validateAccount)
+
+    if (validateAccount?.status && validateAccount.data?.account_name) {
+      const createTransferRecipient = await paystackSdk.recipient.create({
+        account_number: '0001234567',
+        bank_code: '058',
+        name: `${validateAccount?.data.account_name}`,
+        currency: 'NGN',
+        description: 'withdraw',
+        type: 'nuban',
+      })
+
+      const { status, data, message } = createTransferRecipient
+      console.log('createTransferRecipient', { status, data, message })
+
+      if (status && createTransferRecipient?.data?.recipient_code) {
+        const createTransfer = await paystackSdk.transfer.initiate({
+          amount: 2000,
+          source: 'balance',
+          recipient: createTransferRecipient?.data?.recipient_code,
+        })
+
+        console.log('createTransfer', createTransfer)
+        return createTransfer
+      }
+    }
+  } catch (error) {
+    console.log('error', error)
+  }
+}
+
+export const paystack: Plugin = (incomingConfig: Config): Config => {
   // @ts-ignore
   const updatedCollection = incomingConfig.collections.map(collection => {
     if (collection.slug === 'users') {
