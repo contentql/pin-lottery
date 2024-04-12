@@ -1,4 +1,4 @@
-import { Contest, Media, Ticket, Winner } from '@/payload-types'
+import { Contest, Media, Ticket, Winner, Wishlist } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
 import { useQueryClient } from '@tanstack/react-query'
@@ -8,7 +8,13 @@ import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
 
-const ContestCard = ({ itm }: { itm: Contest }) => {
+const ContestCard = ({
+  itm,
+  wishlist,
+}: {
+  itm: Contest
+  wishlist: Boolean
+}) => {
   const { status } = useAuth()
 
   const queryClient = useQueryClient()
@@ -57,6 +63,20 @@ const ContestCard = ({ itm }: { itm: Contest }) => {
   const { mutate: removeFromWishlist, isPending: isWishlistDeleted } =
     trpc.wishlist.removeWishlistById.useMutation({
       onMutate: async () => {
+        if (isWishlist) {
+          queryClient.setQueryData(
+            [
+              ['wishlist', 'getWishlistTickets'],
+              { input: { id: '' }, type: 'query' },
+            ],
+            (prev: Wishlist[]) => {
+              return prev.filter(
+                (wishlist: Wishlist) =>
+                  (wishlist?.contest?.value as Contest)?.id !== itm?.id,
+              )
+            },
+          )
+        }
         queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
           ...prev,
           isWishlist: false,
