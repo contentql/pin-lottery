@@ -30,19 +30,15 @@ const SignUp = () => {
   const { mutate: addUser, isPending: isRegisterPending } =
     trpc.auth.createUser.useMutation({
       onError: (err: any) => {
-        if (err.data?.code === 'CONFLICT') {
-          toast.error(`This email already exists. Please sign in instead.`, {
-            autoClose: 3000,
-            onClose: () => {
-              toast.info('Redirecting to login page...', {
-                autoClose: 2000,
-                onClose: () => router.push('/login'),
-              })
-            },
-          })
-
-          return
-        }
+        toast.error(err.message, {
+          // autoClose: 3000,
+          // onClose: () => {
+          //   toast.info('Redirecting to login page...', {
+          //     autoClose: 2000,
+          //     onClose: () => router.push('/login'),
+          //   })
+          // },
+        })
 
         if (err instanceof ZodError) {
           toast.error(err.issues[0].message)

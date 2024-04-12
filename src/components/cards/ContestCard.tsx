@@ -63,7 +63,7 @@ const ContestCard = ({
   const { mutate: removeFromWishlist, isPending: isWishlistDeleted } =
     trpc.wishlist.removeWishlistById.useMutation({
       onMutate: async () => {
-        if (isWishlist) {
+        if (wishlist) {
           queryClient.setQueryData(
             [
               ['wishlist', 'getWishlistTickets'],
@@ -76,11 +76,11 @@ const ContestCard = ({
               )
             },
           )
-        }
-        queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
-          ...prev,
-          isWishlist: false,
-        }))
+        } else
+          queryClient.setQueryData(queryKey, (prev: typeof wishlistData) => ({
+            ...prev,
+            isWishlist: false,
+          }))
       },
       onSuccess: async () => {
         toast.success('Successfully remove from wishlist.')
