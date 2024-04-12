@@ -4,8 +4,10 @@ import { useState } from 'react'
 import payment from '/public/images/elements/payment.png'
 
 import { Cart, Contest } from '@/payload-types'
+import { currentUser } from '@/queries/auth/currentUser'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
+import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
@@ -21,6 +23,12 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     (acc, cart) => acc + cart?.total_price,
     0,
   )
+
+  const { data: userData, isPending: isUserDataPending } = useQuery({
+    queryKey: ['/api/users/me', 'get'],
+    queryFn: async () => currentUser(),
+    select: data => data.user,
+  })
 
   const arrayOfTicketsWithPrices = cartData?.flatMap(item =>
     Array.from({ length: item?.tickets }, () => ({
@@ -59,6 +67,13 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const handlePurchase = () => {
     if (!arrayOfTicketsWithPrices.length) {
       toast.warning('Please add tickets to proceed.')
+      return
+    }
+    if (
+      !!arrayOfTicketsWithPrices.length &&
+      (!userData?.amount || userData.amount < total_price_of_cart)
+    ) {
+      toast.error('Insufficient balance. Please add amount to continue.')
       return
     }
     setIsPurchasing(true)
