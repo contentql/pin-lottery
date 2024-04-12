@@ -81,7 +81,7 @@ const Ticket: CollectionConfig = {
         },
       },
       {
-        prefix: '$ ',
+        prefix: '₦ ',
         thousandSeparator: ',',
         decimalScale: 2,
         fixedDecimalScale: true,

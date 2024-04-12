@@ -77,7 +77,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
               <li key={cart?.id}>
                 <div className='left'>
                   <h4 className='caption'>
-                    Ticket Price -{' '}
+                    Ticket Price - {ticketsMetadata.currency}
                     {(cart?.contest_id?.value as Contest)?.ticket_price}
                   </h4>
                   <span>

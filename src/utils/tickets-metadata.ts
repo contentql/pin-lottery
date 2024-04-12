@@ -1,5 +1,6 @@
 export const ticketsMetadata = {
-  currency: '$',
+  currency: '₦',
+  currencyCode: 'NGN',
   minTickets: 1,
   maxTickets: 16,
   quickAdds: [

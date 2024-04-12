@@ -64,7 +64,7 @@ const Contest: CollectionConfig = {
                     },
                   },
                   {
-                    prefix: '$ ',
+                    prefix: '₦ ',
                     thousandSeparator: ',',
                     decimalScale: 2,
                     fixedDecimalScale: true,
@@ -203,7 +203,7 @@ const Contest: CollectionConfig = {
                     },
                   },
                   {
-                    prefix: '$ ',
+                    prefix: '₦ ',
                     thousandSeparator: ',',
                     decimalScale: 2,
                     fixedDecimalScale: true,
