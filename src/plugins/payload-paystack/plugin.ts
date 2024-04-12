@@ -39,10 +39,11 @@ const createPaystackCustomer: CollectionAfterOperationHook = async ({
 
 export const createPaystackCheckoutUrl = async (
   userEmail: string | undefined,
+  depositAmount: string,
 ) => {
   try {
     const checkout = await paystackSdk.transaction.initialize({
-      amount: '2000',
+      amount: depositAmount,
       email: userEmail!,
     })
     console.log('checkout', checkout)
