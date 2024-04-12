@@ -8,12 +8,53 @@ export const Transaction: CollectionConfig = {
   //   },
   fields: [
     {
+      name: 'email',
+      type: 'email',
+      admin: {
+        readOnly: true,
+      },
+      label: 'User Email',
+    },
+    {
+      name: 'amount',
+      type: 'text',
+      admin: {
+        readOnly: true,
+      },
+      label: 'Amount',
+    },
+    {
+      name: 'date',
+      type: 'date',
+      admin: {
+        readOnly: true,
+      },
+      label: 'Transaction Data',
+    },
+    {
+      name: 'status',
+      type: 'text',
+      admin: {
+        readOnly: true,
+      },
+      label: 'Payment Status',
+    },
+    {
+      name: 'payment_method',
+      type: 'text',
+      admin: {
+        readOnly: true,
+      },
+      label: 'Payment Method',
+    },
+    {
       name: 'value',
       type: 'json',
       required: true,
       admin: {
         readOnly: true,
       },
+      label: 'Meta Data',
     },
   ],
   endpoints: [
@@ -30,6 +71,11 @@ export const Transaction: CollectionConfig = {
             collection: 'transaction',
             data: {
               value: { body },
+              amount: body.data.amount,
+              status: body?.data.status,
+              payment_method: body.data.authorization.brand,
+              date: body.data.paid_at,
+              email: body.data.customer.email,
             },
           })
         } catch (error) {
