@@ -357,6 +357,10 @@ export interface Wishlist {
  */
 export interface Transaction {
   id: string;
+  amount?: string | null;
+  date?: string | null;
+  status?: string | null;
+  payment_method?: string | null;
   value:
     | {
         [k: string]: unknown;
