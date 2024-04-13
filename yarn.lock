@@ -1741,12 +1741,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nouance/payload-better-fields-plugin@^1.3.6":
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/@nouance/payload-better-fields-plugin/-/payload-better-fields-plugin-1.3.6.tgz#68990d13a6ce0f5362b5aa827cf21c6fe33f792b"
-  integrity sha512-oOSff5vWP6fJPogMyAD6ZxLCSvbmkAx/rR5ZlL29RQpqMTLA8TgegMX6Ssd1vgZIH1dvwxpq5iT64YLkQ81rfg==
+"@nouance/payload-better-fields-plugin@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@nouance/payload-better-fields-plugin/-/payload-better-fields-plugin-1.4.1.tgz#4edd583a1774625cc3ef1c43294c32b90ba86892"
+  integrity sha512-EZXXFnNocd46t9WXcgJjVR4LYVAzzuSyfrwKmFCo4t1xSlyfrK2EacqagvLWhOEpFOiF1fx0rPMh9VGI2seshg==
   dependencies:
     colord "^2.9.3"
+    date-fns-tz "^2.0.1"
     react-colorful "^5.6.1"
     react-number-format "^5.3.1"
     react-phone-number-input "^3.3.7"
@@ -1789,7 +1790,7 @@
     webpack-dev-middleware "6.0.1"
     webpack-hot-middleware "^2.25.3"
 
-"@payloadcms/db-mongodb@^1.4.2":
+"@payloadcms/db-mongodb@^1.4.4":
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/@payloadcms/db-mongodb/-/db-mongodb-1.4.4.tgz#f11223c936273b092aaa2279109d563ad7c6fb49"
   integrity sha512-DfDAMuQHdZ2v3eaxWqI1uwZ11iQl+UrNO/4hldk0gYs2FU2MXZzL1S/IMSjdO6RDZ9gNqNBCrCIeNruicOr2GA==
@@ -1833,15 +1834,15 @@
     "@sentry/types" "^7.54.0"
     express "^4.18.2"
 
-"@payloadcms/plugin-seo@^2.2.1":
+"@payloadcms/plugin-seo@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-2.3.0.tgz#1146a4c448e78434c730af8f62e6a65710b6559a"
   integrity sha512-fPSbDOE2/XJZcbxorLaicFr4Yd5uQmr2sNSOtuWlsZo4e4TaoNbLa3tgoEIjjPRNhZWiW0FuVypuNg24GUvgjQ==
 
-"@payloadcms/richtext-lexical@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/richtext-lexical/-/richtext-lexical-0.7.0.tgz#b37c0c7a1ef27efaa7a17c6614b0f8053d7eb016"
-  integrity sha512-3ZrX+vsNdPYi6QYDMlssfR+ikmwdXSVXdcfC+iiEd8kg3++NErLeOFwaJY8i9YSuxES/WnDuLU934sUZfcniyQ==
+"@payloadcms/richtext-lexical@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/richtext-lexical/-/richtext-lexical-0.8.0.tgz#1407a71d5f672a0eeb2167ccf29752aae59355ec"
+  integrity sha512-9Vc6ynQOqpicYgKXqQdaoo+YSvkZyGdEe77cuAay8HceEX9AKQuh2+qhul4P1XhsZHuD3X7mWu37CMG1qEQYog==
   dependencies:
     "@faceless-ui/modal" "2.0.1"
     "@lexical/headless" "0.13.1"
@@ -1866,7 +1867,7 @@
     react-i18next "11.18.6"
     ts-essentials "7.0.3"
 
-"@payloadcms/richtext-slate@^1.4.0":
+"@payloadcms/richtext-slate@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/richtext-slate/-/richtext-slate-1.5.0.tgz#b49fe566b3a658b5352ebb17c9ce64de2305be82"
   integrity sha512-vyCx/r41NduoXd8hQ0EG2H6WtPNfXm5NWP3qkPaq5u5W/FF/tRpsTBMR/lGg0Bl1NEg2dxEc8j615p/qxMZa3g==
@@ -1938,10 +1939,10 @@
   resolved "https://registry.yarnpkg.com/@react-email/column/-/column-0.0.9.tgz#3107f50216c0cfed0a42b0386e3ccfdac0ec12e6"
   integrity sha512-1ekqNBgmbS6m97/sUFOnVvQtLYljUWamw8Y44VId95v6SjiJ4ca+hMcdOteHWBH67xkRofEOWTvqDRea5SBV8w==
 
-"@react-email/components@0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@react-email/components/-/components-0.0.15.tgz#40157e541b057d96111b92adf505dbd636aa511e"
-  integrity sha512-jXfKiuyi94JBYfPVptEUwF57nRCvhEZIfyl2LqbL53fKsMrGlcjlN921iNnx1z41GAJOqZ8LPogeix3Iid23zw==
+"@react-email/components@0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@react-email/components/-/components-0.0.16.tgz#469838a488a4c1fca5b34c5354ba6eabc771cb0f"
+  integrity sha512-1WATpMSH03cRvhfNjGl/Up3seZJOzN9KLzlk3Q9g/cqNhZEJ7HYxoZM4AQKAI0V3ttXzzxKv8Oj+AZQLHDiICA==
   dependencies:
     "@react-email/body" "0.0.7"
     "@react-email/button" "0.0.14"
@@ -1956,12 +1957,12 @@
     "@react-email/html" "0.0.7"
     "@react-email/img" "0.0.7"
     "@react-email/link" "0.0.7"
-    "@react-email/markdown" "0.0.8"
+    "@react-email/markdown" "0.0.9"
     "@react-email/preview" "0.0.8"
     "@react-email/render" "0.0.12"
     "@react-email/row" "0.0.7"
     "@react-email/section" "0.0.11"
-    "@react-email/tailwind" "0.0.14"
+    "@react-email/tailwind" "0.0.15"
     "@react-email/text" "0.0.7"
 
 "@react-email/container@0.0.11":
@@ -2006,12 +2007,12 @@
   resolved "https://registry.yarnpkg.com/@react-email/link/-/link-0.0.7.tgz#7670b5be4430f173a467423a5c79c2d0e261b70b"
   integrity sha512-hXPChT3ZMyKnUSA60BLEMD2maEgyB2A37yg5bASbLMrXmsExHi6/IS1h2XiUPLDK4KqH5KFaFxi2cdNo1JOKwA==
 
-"@react-email/markdown@0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@react-email/markdown/-/markdown-0.0.8.tgz#4dc912c6213555dcf995ae135abe3975a7e59c31"
-  integrity sha512-x/2iTWskE0XoM13Rx80ckwbWaWdS6koYvxW6PHkOJ/k88NPnDIm+TaYvvg2DYSFJAUI0gK/LmIwenbebgNDS+w==
+"@react-email/markdown@0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@react-email/markdown/-/markdown-0.0.9.tgz#a98c3a0a6c5252942c477bbe71f5e585fe887417"
+  integrity sha512-t//19Zz+W5svKqrSrqoOLpf6dq70jbwYxX8Z+NEMi4LqylklccOaYAyKrkYyulfZwhW7KDH9d2wjVk5jfUABxQ==
   dependencies:
-    md-to-react-email "4.1.0"
+    md-to-react-email "5.0.2"
 
 "@react-email/preview@0.0.8":
   version "0.0.8"
@@ -2038,10 +2039,10 @@
   resolved "https://registry.yarnpkg.com/@react-email/section/-/section-0.0.11.tgz#a20b8f8176eeed8cc455aed65e3a49fceb9a6f2f"
   integrity sha512-3bZ/DuvX1julATI7oqYza6pOtWZgLJDBaa62LFFEvYjisyN+k6lrP2KOucPsDKu2DOkUzlQgK0FOm6VQJX+C0w==
 
-"@react-email/tailwind@0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@react-email/tailwind/-/tailwind-0.0.14.tgz#e4cccbf898c388970b6affe37e44a70be3d06f5e"
-  integrity sha512-SRRcm08zxrAR5XozaW0X+GAJlTJITakZe0UXBiFZDlSDBLwFMxjaGuQwccqNF0LxDnxmduxYB71mzEAqecgTZg==
+"@react-email/tailwind@0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@react-email/tailwind/-/tailwind-0.0.15.tgz#c99825e9a2a525dd6e935a19fd10d79919937438"
+  integrity sha512-TE3NQ7VKhhvv3Zv0Z1NtoV6AF7aOWiG4juVezMZw1hZCG0mkN6iXC63u23vPQi12y6xCp20ZUHfg67kQeDSP/g==
   dependencies:
     react "18.2.0"
 
@@ -2695,17 +2696,17 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-devtools/-/query-devtools-5.28.10.tgz#33e9a42dd2199fca12f0dd2d891570ecdbfd3c7b"
   integrity sha512-5UN629fKa5/1K/2Pd26gaU7epxRrYiT1gy+V+pW5K6hnf1DeUKK3pANSb2eHKlecjIKIhTwyF7k9XdyE2gREvQ==
 
-"@tanstack/react-query-devtools@^5.24.0":
-  version "5.29.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-5.29.0.tgz#fde50304cc777c9bc8ad3f2f8afcd62412636984"
-  integrity sha512-WLuaU6yM4KdvBimEP1Km5lM4/p1J40cMp5I5z0Mc6a8QbBUYLK8qJcGIKelfLfDp7KmEcr59tzbRTmdH/GWvzQ==
+"@tanstack/react-query-devtools@^5.29.2":
+  version "5.29.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-5.29.2.tgz#ff9e6a113a4828d4b62f4861e0fb2c05b79b37dc"
+  integrity sha512-EmsaLNa8iFtReAW+5ftom0/TW78fIosVor517ak/+JFaoTBw8Yub3ao937JFE6AM3K/HXhteqvObetgt1ndLcw==
   dependencies:
     "@tanstack/query-devtools" "5.28.10"
 
-"@tanstack/react-query@^5.22.2":
-  version "5.29.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.29.0.tgz#42b3a2de4ed1d63666f0af04392a34b5e70d49c0"
-  integrity sha512-yxlhHB73jaBla6h5B6zPaGmQjokkzAhMHN4veotkPNiQ3Ac/mCxgABRZPsJJrgCTvhpcncBZcDBFxaR2B37vug==
+"@tanstack/react-query@^5.29.2":
+  version "5.29.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.29.2.tgz#c55ffbfaf9d8cf34212428db2b6c61ca6b545188"
+  integrity sha512-nyuWILR4u7H5moLGSiifLh8kIqQDLNOHGuSz0rcp+J75fNc8aQLyr5+I2JCHU3n+nJrTTW1ssgAD8HiKD7IFBQ==
   dependencies:
     "@tanstack/query-core" "5.29.0"
 
@@ -4422,6 +4423,11 @@ dataloader@2.2.2:
   resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.2.2.tgz#216dc509b5abe39d43a9b9d97e6e5e473dfbe3e0"
   integrity sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==
 
+date-fns-tz@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/date-fns-tz/-/date-fns-tz-2.0.1.tgz#0a9b2099031c0d74120b45de9fd23192e48ea495"
+  integrity sha512-fJCG3Pwx8HUoLhkepdsP7Z5RsucUi+ZBOxyM5d0ZZ6c4SdYustq0VMmOu6Wf7bli+yS/Jwp91TOCqn9jMcVrUA==
+
 date-fns@2.30.0, date-fns@^2.30.0:
   version "2.30.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.30.0.tgz#f367e644839ff57894ec6ac480de40cae4b0f4d0"
@@ -5368,7 +5374,7 @@ express@4.18.2:
     utils-merge "1.0.1"
     vary "~1.1.2"
 
-express@^4.18.2:
+express@^4.18.2, express@^4.19.2:
   version "4.19.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.19.2.tgz#e25437827a3aa7f2a827bc8171bbbb664a356465"
   integrity sha512-5T6nhjsT+EOMzuck8JjBHARTHfMht0POzlA60WV2pMD3gyXw2LZnZ+ueGdNxG+0calOJcWKbpFcuzLZ91YWq9Q==
@@ -7026,10 +7032,10 @@ marked@7.0.4:
   resolved "https://registry.yarnpkg.com/marked/-/marked-7.0.4.tgz#e2558ee2d535b9df6a27c6e282dc603a18388a6d"
   integrity sha512-t8eP0dXRJMtMvBojtkcsA7n48BkauktUKzfkPSCq85ZMTJ0v76Rke4DYz01omYpPTUh4p/f7HePgRo3ebG8+QQ==
 
-md-to-react-email@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/md-to-react-email/-/md-to-react-email-4.1.0.tgz#173b6ddac14ceac8f1674272d881f3f4c59d8ea3"
-  integrity sha512-aQvj4dCuy0wmBVvSB377qTErlpjN5Pl61+5v+B8Z76KoxOgKhbzvK3qnO94eOsuGSWwI+9n4zb3xD3/MypxM4w==
+md-to-react-email@5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/md-to-react-email/-/md-to-react-email-5.0.2.tgz#2ee848a7248d4df6e6a95466a269ca6b6697a704"
+  integrity sha512-x6kkpdzIzUhecda/yahltfEl53mH26QdWu4abUF9+S0Jgam8P//Ciro8cdhyMHnT5MQUJYrIbO6ORM2UxPiNNA==
   dependencies:
     marked "7.0.4"
 
@@ -7415,12 +7421,12 @@ nodemailer@6.9.8:
   resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.9.8.tgz#29601e80440f2af7aa62b32758fdac7c6b784143"
   integrity sha512-cfrYUk16e67Ks051i4CntM9kshRYei1/o/Gi8K1d+R34OIs21xdFnW7Pt7EucmVKA0LKtqUGNcjMZ7ehjl49mQ==
 
-nodemailer@^6.9.9:
+nodemailer@^6.9.13:
   version "6.9.13"
   resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.9.13.tgz#5b292bf1e92645f4852ca872c56a6ba6c4a3d3d6"
   integrity sha512-7o38Yogx6krdoBf3jCAqnIN4oSQFx+fMa0I7dK1D+me9kBxx12D+/33wSb+fhOCtIxvYJ+4x4IMEhmhCKfAiOA==
 
-nodemon@^3.0.3:
+nodemon@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-3.1.0.tgz#ff7394f2450eb6a5e96fe4180acd5176b29799c9"
   integrity sha512-xqlktYlDMCepBJd43ZQhjWwMw2obW/JRvkrLxq5RCNcuDDX1DbcPT+qT1IlIIdf+DhnWs90JpTMe+Y5KxOchvA==
@@ -7802,7 +7808,7 @@ pause@0.0.1:
   resolved "https://registry.yarnpkg.com/pause/-/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
   integrity sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==
 
-payload@^2.11.1:
+payload@^2.12.1:
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/payload/-/payload-2.12.1.tgz#5d02981ff8ae0631114cb5b2dc29b92ee65ac0a0"
   integrity sha512-7RaOfCMM56coFMZW6DsN7bWdB7VdekphzMMmiyFvOEs5GWxvzES3rFjAYqP0udRTA2w1Vmh6vYsI8nfLgn8DAQ==
@@ -10283,7 +10289,7 @@ use-isomorphic-layout-effect@^1.1.2:
   resolved "https://registry.yarnpkg.com/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz#497cefb13d863d687b08477d9e5a164ad8c1a6fb"
   integrity sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==
 
-usehooks-ts@^3.0.1:
+usehooks-ts@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/usehooks-ts/-/usehooks-ts-3.1.0.tgz#156119f36efc85f1b1952616c02580f140950eca"
   integrity sha512-bBIa7yUyPhE1BCc0GmR96VU/15l/9gP1Ch5mYdLcFBaFGQsdmXkvjV0TtOqW1yUd6VjIwDunm+flSciCQXujiw==
