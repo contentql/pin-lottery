@@ -124,21 +124,24 @@ export const Trash: CollectionConfig = {
                 })
               } catch (error: any) {
                 console.log(`Error while restoring ${collectionName}: `, error)
-                if (error.data.at(0).message) {
-                  res.status(500).json({
-                    error: error.data.at(0).message,
-                  })
-                } else {
-                  res.status(500).json({
-                    error: `An error occurred while restoring ${collectionName}: ${error}`,
-                  })
-                }
+                // if (error.data.at(0).message) {
+                //   res.status(500).json({
+                //     error: error.data.at(0).message,
+                //   })
+                // } else {
+                //   res.status(500).json({
+                //     error: `An error occurred while restoring ${collectionName}: ${error}`,
+                //   })
+                // }
               }
             }),
           )
 
           res.status(200).json({ status: true })
         } catch (error) {
+          res.status(500).json({
+            error: 'Error While Restoring',
+          })
           console.log('Error while restoring: ', error)
         }
       },

@@ -115,6 +115,9 @@ export const ticketRouter = router({
                 contest_id: { relationTo: 'contest', value: contest_id },
               },
               user,
+              context: {
+                chargeAmount: true,
+              },
             })
           }),
         )
