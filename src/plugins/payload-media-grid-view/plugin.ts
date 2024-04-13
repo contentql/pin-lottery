@@ -1,4 +1,5 @@
 import type { Config, Plugin } from 'payload/config'
+
 import { UploadsGridView } from './UploadsGridView'
 
 export const mediaGridView: Plugin = (incomingConfig: Config): Config => {

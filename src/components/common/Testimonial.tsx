@@ -1,16 +1,14 @@
+import round_shape from '/public/images/elements/round-shape.png'
 import Image from 'next/image'
 import { CiStar } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa'
 import Slider from 'react-slick'
-
-import round_shape from '/public/images/elements/round-shape.png'
-
+import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick.css'
 
 // css
 import { Media, User } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import 'slick-carousel/slick/slick.css'
 
 const Testimonial = () => {
   const { data: testimonials } = trpc.public.getTestimonials.useQuery()
@@ -20,7 +18,8 @@ const Testimonial = () => {
       <button
         type='button'
         className='next-button-slick next-slick-button-position'
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <i className='las la-angle-left'></i>
       </button>
     )
@@ -31,7 +30,8 @@ const Testimonial = () => {
       <button
         type='button'
         className='next-button-slick prev-slick-button'
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <i className='las la-angle-right'></i>
       </button>
     )

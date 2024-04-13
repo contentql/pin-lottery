@@ -1,4 +1,5 @@
 import type { Config, Plugin } from 'payload/config'
+
 import { PluginTypes } from './types'
 
 export const roleBasedVisibility =

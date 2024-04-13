@@ -1,8 +1,10 @@
-import { Contest, Media, Ticket, User, Winner } from '@/payload-types'
-import { splitTicketNumber } from '@/utils/split-ticket-number'
+import { DateConverter } from '../../utils/date-converter'
 import Image from 'next/image'
 import Link from 'next/link'
-import { DateConverter } from '../../utils/date-converter'
+
+import { Contest, Media, Ticket, User, Winner } from '@/payload-types'
+import { splitTicketNumber } from '@/utils/split-ticket-number'
+
 import WinnerImageSlider from './WinnerImageSlider'
 
 const WinnerCard = ({ winner }: { winner: Winner }) => {

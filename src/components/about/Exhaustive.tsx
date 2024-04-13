@@ -1,8 +1,8 @@
+import feature_car from '/public/images/elements/feature-car.png'
 import Image from 'next/image'
 
 import { Media } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import feature_car from '/public/images/elements/feature-car.png'
 
 const Exhaustive = () => {
   const { data: features } = trpc.public.getFeatures.useQuery()

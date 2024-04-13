@@ -1,8 +1,9 @@
+import { Metadata } from 'next'
+
 import { getPayloadClient } from '@/get-payload'
 import { Contest } from '@/payload-types'
 import { generateMeta } from '@/utils/generate-meta'
 import ContestDetailsView from '@/views/ContestDetailsView'
-import { Metadata } from 'next'
 
 interface PageProps {
   params: {

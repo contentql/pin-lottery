@@ -1,7 +1,8 @@
 'use client'
 
-import { trpc } from '@/trpc/client'
 import Link from 'next/link'
+
+import { trpc } from '@/trpc/client'
 
 const Cart = () => {
   const { data: cartData, isPending } = trpc.cart.getCartTickets.useQuery()

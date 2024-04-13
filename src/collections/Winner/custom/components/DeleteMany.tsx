@@ -1,13 +1,8 @@
 import { Modal, useModal } from '@faceless-ui/modal'
-import React, { useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
-
-import type { Props } from 'payload/dist/admin/components/elements/DeleteMany/types'
-
 import { requests } from 'payload/dist/admin/api'
 import Button from 'payload/dist/admin/components/elements/Button'
 import 'payload/dist/admin/components/elements/DeleteMany/index.scss'
+import type { Props } from 'payload/dist/admin/components/elements/DeleteMany/types'
 import Pill from 'payload/dist/admin/components/elements/Pill'
 import MinimalTemplate from 'payload/dist/admin/components/templates/Minimal'
 import { useAuth } from 'payload/dist/admin/components/utilities/Auth'
@@ -17,9 +12,11 @@ import {
   useSelection,
 } from 'payload/dist/admin/components/views/collections/List/SelectionProvider'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
-
+import React, { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 // custom
 import { IoIosWarning } from 'react-icons/io'
+import { toast } from 'react-toastify'
 
 const baseClass = 'delete-documents'
 
@@ -105,7 +102,8 @@ const DeleteMany: React.FC<Props> = props => {
         onClick={() => {
           setDeleting(false)
           toggleModal(modalSlug)
-        }}>
+        }}
+      >
         {t('delete')}
         <IoIosWarning color='orange' size={16} style={{ marginLeft: 3 }} />
       </Pill>
@@ -124,20 +122,22 @@ const DeleteMany: React.FC<Props> = props => {
               size={16}
               style={{ marginRight: 6, marginBottom: 4 }}
             />
-            Deleting {count > 1 ? 'these winners' : 'this winner'} will
-            trigger update to related contests by removing any winner relations
-            and associated fields, if such contests exist.
+            Deleting {count > 1 ? 'these winners' : 'this winner'} will trigger
+            update to related contests by removing any winner relations and
+            associated fields, if such contests exist.
           </p>
           <Button
             buttonStyle='secondary'
             id='confirm-cancel'
             onClick={deleting ? undefined : () => toggleModal(modalSlug)}
-            type='button'>
+            type='button'
+          >
             {t('cancel')}
           </Button>
           <Button
             id='confirm-delete'
-            onClick={deleting ? undefined : handleDelete}>
+            onClick={deleting ? undefined : handleDelete}
+          >
             {deleting ? t('deleting') : t('confirm')}
           </Button>
         </MinimalTemplate>

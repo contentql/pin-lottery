@@ -1,6 +1,6 @@
+import type { Blog, Contest } from '../payload-types'
 import type { Metadata } from 'next'
 
-import type { Blog, Contest } from '../payload-types'
 import { mergeOpenGraph } from './merge-open-graph'
 
 export const generateMeta = async (args: {

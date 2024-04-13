@@ -1,9 +1,8 @@
+import SingleFaq from '../singleFaq/SingleFaq'
+import faq_el from '/public/images/elements/faq-el.png'
 import Image from 'next/image'
 
-import faq_el from '/public/images/elements/faq-el.png'
-
 import { trpc } from '@/trpc/client'
-import SingleFaq from '../singleFaq/SingleFaq'
 
 const Faq = () => {
   const { data: faqs } = trpc.public.getFaqs.useQuery()

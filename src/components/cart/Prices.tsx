@@ -1,16 +1,15 @@
-import Image from 'next/image'
-import { useState } from 'react'
-
 import payment from '/public/images/elements/payment.png'
+import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { ImSpinner } from 'react-icons/im'
+import { toast } from 'react-toastify'
 
 import { Cart, Contest } from '@/payload-types'
 import { currentUser } from '@/queries/auth/currentUser'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
-import { useQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
-import { ImSpinner } from 'react-icons/im'
-import { toast } from 'react-toastify'
 
 const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const router = useRouter()
@@ -125,7 +124,8 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
               type='button'
               className='cmn-btn'
               onClick={() => handlePurchase()}
-              disabled={isPurchasing}>
+              disabled={isPurchasing}
+            >
               {isPurchasing ? (
                 <ImSpinner
                   size={22}

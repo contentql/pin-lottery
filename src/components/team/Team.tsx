@@ -1,6 +1,5 @@
-import Image from 'next/image'
-
 import team_obj from '/public/images/elements/team-obj.png'
+import Image from 'next/image'
 
 import { Media } from '@/payload-types'
 import { trpc } from '@/trpc/client'

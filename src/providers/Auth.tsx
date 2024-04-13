@@ -1,5 +1,6 @@
 'use client'
 
+import { User } from '../payload-types'
 import React, {
   createContext,
   useCallback,
@@ -7,8 +8,6 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-
-import { User } from '../payload-types'
 
 // eslint-disable-next-line no-unused-vars
 type ResetPassword = (args: {
@@ -239,7 +238,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         resetPassword,
         forgotPassword,
         status,
-      }}>
+      }}
+    >
       {children}
     </Context.Provider>
   )

@@ -1,4 +1,5 @@
 import { Field } from 'payload/types'
+
 import { CustomContestRelationshipComponent } from './component'
 
 export const customContestRelationshipField: Field = {

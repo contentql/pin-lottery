@@ -1,8 +1,7 @@
 'use client'
 
-import Image from 'next/image'
-
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
+import Image from 'next/image'
 
 import Banner from '@/components/common/Banner'
 import ContestBody from '@/components/contest-details/ContestBody'
@@ -75,7 +74,8 @@ const ContestDetailsView = ({ contestId, contest }: PageProps) => {
                 className='tab-pane fade show active '
                 id='dream'
                 role='tabpanel'
-                aria-labelledby='dream-tab'>
+                aria-labelledby='dream-tab'
+              >
                 <div className='row mb-none-30 mt-50'>
                   {[1, 2, 3].map((ele, index) => (
                     <div key={index} className='col-xl-4 col-md-6 mb-30'>

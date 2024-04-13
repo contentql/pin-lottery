@@ -1,7 +1,8 @@
+import { User } from '../../payload-types'
 import { NumberField } from '@nouance/payload-better-fields-plugin'
 import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
-import { User } from '../../payload-types'
+
 import { isManagerOrAdminOrSelf } from './access/isManagerOrAdminOrSelf'
 import { customContestRelationshipField } from './custom/custom-contest-relationship-field/field'
 import { assignUserId } from './field-level-hooks/assignUserId'

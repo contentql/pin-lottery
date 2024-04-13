@@ -1,8 +1,7 @@
+import round_shape_2 from '/public/images/elements/round-shape-2.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
-
-import round_shape_2 from '/public/images/elements/round-shape-2.png'
 
 const Footer = () => {
   return (

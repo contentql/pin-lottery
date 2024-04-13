@@ -1,7 +1,4 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
-import * as sd from 'simple-duration'
+import RendererCountdown from '../common/RendererCountdown'
 import car_light from '/public/images/elements/car-light.png'
 import car_ray from '/public/images/elements/car-ray.png'
 import car_shadow from '/public/images/elements/car-shadow.png'
@@ -9,14 +6,17 @@ import car_star from '/public/images/elements/car-star.png'
 import hero_building from '/public/images/elements/hero-building.png'
 import hero_shape from '/public/images/elements/hero-shape.jpg.png'
 import main_mobile from '/public/images/mobiles/main-mobile.png'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import Countdown from 'react-countdown'
+import { FaPlay } from 'react-icons/fa'
+import Slider from 'react-slick'
+import * as sd from 'simple-duration'
 
 import { Contest, Media, Ticket, Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
-import Countdown from 'react-countdown'
-import { FaPlay } from 'react-icons/fa'
-import Slider from 'react-slick'
-import RendererCountdown from '../common/RendererCountdown'
 
 const Hero = ({
   HeroContests,
@@ -56,7 +56,8 @@ const Hero = ({
       <button
         type='button'
         className='next-button-slick-hero next-slick-button-position-hero'
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <i className='las la-angle-left'></i>
       </button>
     )
@@ -67,7 +68,8 @@ const Hero = ({
       <button
         type='button'
         className='next-button-slick-hero prev-slick-button-hero'
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <i className='las la-angle-right'></i>
       </button>
     )
@@ -127,7 +129,8 @@ const Hero = ({
                     </Link>
                     <button
                       className='video-btn'
-                      onClick={() => setIsOpen(true)}>
+                      onClick={() => setIsOpen(true)}
+                    >
                       <FaPlay />
                     </button>
                   </div>
@@ -269,14 +272,16 @@ const Hero = ({
                           !contest?.winner_ticket ? (
                             <Link
                               className='cmn-btn'
-                              href={`/contest/${contest?.id}`}>
+                              href={`/contest/${contest?.id}`}
+                            >
                               {' '}
                               Buy Now
                             </Link>
                           ) : (
                             <Link
                               className='cmn-btn'
-                              href={`/contest/${contest?.id}`}>
+                              href={`/contest/${contest?.id}`}
+                            >
                               {' '}
                               View more details
                             </Link>

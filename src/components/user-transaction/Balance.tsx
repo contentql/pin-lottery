@@ -1,5 +1,6 @@
 import { useAuth } from '@/providers/Auth'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
+
 import DepositAmount from './DepositAmount'
 import WithdrawAmount from './WithdrawAmount'
 

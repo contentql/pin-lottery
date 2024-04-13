@@ -85,7 +85,8 @@ a.btn {
 
   &--style-secondary {
     $base-box-shadow: inset 0 0 0 $style-stroke-width var(--theme-elevation-800);
-    $hover-box-shadow: inset 0 0 0 $style-stroke-width var(--theme-elevation-700);
+    $hover-box-shadow: inset 0 0 0 $style-stroke-width
+      var(--theme-elevation-700);
 
     box-shadow: none;
     color: var(--theme-elevation-800);

@@ -1,9 +1,10 @@
 'use client'
 
+import { useQuery } from '@tanstack/react-query'
+
 import UserDetailsSkeleton from '@/components/skeletons/UserDetailsSkeleton'
 import Info from '@/components/user-info/Info'
 import { currentUser } from '@/queries/auth/currentUser'
-import { useQuery } from '@tanstack/react-query'
 
 const UserInfoView = () => {
   const { data: userData, isPending: isUserDataPending } = useQuery({

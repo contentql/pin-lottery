@@ -1,7 +1,6 @@
-import Image from 'next/image'
-
 import referral_1 from '/public/images/icon/referral/1.png'
 import referral_2 from '/public/images/icon/referral/2.png'
+import Image from 'next/image'
 
 const Overview = () => {
   return (

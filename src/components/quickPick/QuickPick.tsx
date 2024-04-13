@@ -24,7 +24,8 @@ const QuickPick = ({ contestDetails }: { contestDetails: Contest }) => {
                   contest_no: contestDetails?.contest_no,
                   numOfTickets: quickPick?.tickets,
                 })
-              }>
+              }
+            >
               {quickPick?.tickets} Quick Picks For {currency}
               {quickPick?.price}
             </a>

@@ -1,5 +1,5 @@
-import { CollectionAfterChangeHook } from 'payload/types'
 import { UserAccountVerification } from '../../../email-templates/userAccountVerification'
+import { CollectionAfterChangeHook } from 'payload/types'
 
 const OPERATION = 'update'
 const SUBJECT = 'Email Verification'

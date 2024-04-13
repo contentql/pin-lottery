@@ -1,7 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
-
 import car_light from '/public/images/elements/car-light.png'
 import car_ray from '/public/images/elements/car-ray.png'
 import car_shadow from '/public/images/elements/car-shadow.png'
@@ -9,6 +5,9 @@ import car_star from '/public/images/elements/car-star.png'
 import hero_building from '/public/images/elements/hero-building.png'
 import hero_shape from '/public/images/elements/hero-shape.jpg.png'
 import main_mobile from '/public/images/mobiles/main-mobile.png'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
 
 import VedioModal from '@/components/vedioModal/VedioModal'
 

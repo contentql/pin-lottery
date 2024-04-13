@@ -1,5 +1,5 @@
-import { CollectionAfterChangeHook } from 'payload/types'
 import { randomTicketPicker } from '../../../utils/random-ticket-picker'
+import { CollectionAfterChangeHook } from 'payload/types'
 
 export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
   operation,

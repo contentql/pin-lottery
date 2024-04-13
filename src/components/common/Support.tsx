@@ -38,13 +38,15 @@ const Support = () => {
                 <div className='btn-grp justify-content-xl-start mt-3'>
                   <a
                     href='tel:6564545'
-                    className='btn-border btn-sm text-capitalize'>
+                    className='btn-border btn-sm text-capitalize'
+                  >
                     Call us
                     <FaPhoneAlt />
                   </a>
                   <a
                     href='mailto:dhdj@gmail.com'
-                    className='cmn-btn btn-sm text-capitalize'>
+                    className='cmn-btn btn-sm text-capitalize'
+                  >
                     Email us <FaRegEnvelope />
                   </a>
                 </div>
@@ -67,7 +69,8 @@ const Support = () => {
                 <div className='btn-grp justify-content-xl-start mt-3'>
                   <Link
                     href='/faq'
-                    className='btn-border btn-sm text-capitalize'>
+                    className='btn-border btn-sm text-capitalize'
+                  >
                     FAQs & Help
                   </Link>
                 </div>

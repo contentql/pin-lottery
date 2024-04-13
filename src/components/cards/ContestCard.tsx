@@ -1,13 +1,14 @@
-import { Contest, Media, Ticket, Winner, Wishlist } from '@/payload-types'
-import { useAuth } from '@/providers/Auth'
-import { trpc } from '@/trpc/client'
-import { ticketsMetadata } from '@/utils/tickets-metadata'
 import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
+
+import { Contest, Media, Ticket, Winner, Wishlist } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
+import { trpc } from '@/trpc/client'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 
 const ContestCard = ({
   itm,
@@ -112,7 +113,8 @@ const ContestCard = ({
   return (
     <div
       className='contest-card'
-      onClick={() => router.push(`/contest/${itm.id}`)}>
+      onClick={() => router.push(`/contest/${itm.id}`)}
+    >
       <div className='contest-card__thumb'>
         <Image
           src={(itm.img as Media)?.sizes?.contestImage?.url || '/'}

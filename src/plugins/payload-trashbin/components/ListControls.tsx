@@ -1,15 +1,10 @@
 import { useWindowInfo } from '@faceless-ui/window-info'
-import React, { useState } from 'react'
-import AnimateHeight from 'react-animate-height'
-import { useTranslation } from 'react-i18next'
-
-import type { Props } from 'payload/dist/admin/components/elements/ListControls/types'
-
 import ColumnSelector from 'payload/dist/admin/components/elements/ColumnSelector'
 import DeleteMany from 'payload/dist/admin/components/elements/DeleteMany'
 import EditMany from 'payload/dist/admin/components/elements/EditMany'
 import { getTextFieldsToBeSearched } from 'payload/dist/admin/components/elements/ListControls/getTextFieldsToBeSearched'
 import 'payload/dist/admin/components/elements/ListControls/index.scss'
+import type { Props } from 'payload/dist/admin/components/elements/ListControls/types'
 import Pill from 'payload/dist/admin/components/elements/Pill'
 import PublishMany from 'payload/dist/admin/components/elements/PublishMany'
 import SearchFilter from 'payload/dist/admin/components/elements/SearchFilter'
@@ -21,6 +16,10 @@ import Chevron from 'payload/dist/admin/components/icons/Chevron'
 import { useSearchParams } from 'payload/dist/admin/components/utilities/SearchParams'
 import { fieldAffectsData } from 'payload/dist/fields/config/types'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
+import React, { useState } from 'react'
+import AnimateHeight from 'react-animate-height'
+import { useTranslation } from 'react-i18next'
+
 import RestoreMany from './RestoreMany'
 
 const baseClass = 'list-controls'
@@ -129,7 +128,8 @@ export const ListControls: React.FC<Props> = props => {
                     visibleDrawer !== 'columns' ? 'columns' : undefined,
                   )
                 }
-                pillStyle='light'>
+                pillStyle='light'
+              >
                 {t('columns')}
               </Pill>
             )}
@@ -145,7 +145,8 @@ export const ListControls: React.FC<Props> = props => {
                   visibleDrawer !== 'where' ? 'where' : undefined,
                 )
               }
-              pillStyle='light'>
+              pillStyle='light'
+            >
               {t('filters')}
             </Pill>
             {enableSort && (
@@ -159,7 +160,8 @@ export const ListControls: React.FC<Props> = props => {
                     visibleDrawer !== 'sort' ? 'sort' : undefined,
                   )
                 }
-                pillStyle='light'>
+                pillStyle='light'
+              >
                 {t('sort')}
               </Pill>
             )}
@@ -170,14 +172,16 @@ export const ListControls: React.FC<Props> = props => {
         <AnimateHeight
           className={`${baseClass}__columns`}
           height={visibleDrawer === 'columns' ? 'auto' : 0}
-          id={`${baseClass}-columns`}>
+          id={`${baseClass}-columns`}
+        >
           <ColumnSelector collection={collection} />
         </AnimateHeight>
       )}
       <AnimateHeight
         className={`${baseClass}__where`}
         height={visibleDrawer === 'where' ? 'auto' : 0}
-        id={`${baseClass}-where`}>
+        id={`${baseClass}-where`}
+      >
         <WhereBuilder
           collection={collection}
           handleChange={handleWhereChange}
@@ -188,7 +192,8 @@ export const ListControls: React.FC<Props> = props => {
         <AnimateHeight
           className={`${baseClass}__sort`}
           height={visibleDrawer === 'sort' ? 'auto' : 0}
-          id={`${baseClass}-sort`}>
+          id={`${baseClass}-sort`}
+        >
           <SortComplex
             collection={collection}
             handleChange={handleSortChange}

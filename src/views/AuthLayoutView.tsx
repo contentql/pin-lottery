@@ -3,14 +3,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-
 import { BsChevronLeft } from 'react-icons/bs'
 
 const AuthLayoutView = () => {
   const [open, setOpen] = useState('')
   const [windowHeight, setWindowHeight] = useState(0)
-    const [show, setShow] = useState(false)
-    
+  const [show, setShow] = useState(false)
+
   const handleOpen = (e: any) => {
     if (open !== e.target.text) {
       setOpen(e.target.text)
@@ -41,7 +40,8 @@ const AuthLayoutView = () => {
       id='gotoTop'
       className={`header ${
         windowHeight > 50 && 'menu-fixed animated fadeInDown'
-      }`}>
+      }`}
+    >
       <div className='header__bottom'>
         <div className='container'>
           <nav className='navbar navbar-expand-xl p-0 align-items-center navbar-center padding-top-nav'>
@@ -62,7 +62,7 @@ const AuthLayoutView = () => {
             <div>
               <Link href='/' className='back-button'>
                 <span>
-                 <BsChevronLeft className='icon' fontSize={20} />
+                  <BsChevronLeft className='icon' fontSize={20} />
                 </span>
                 <span>Back to home</span>
               </Link>

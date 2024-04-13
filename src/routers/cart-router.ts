@@ -1,10 +1,9 @@
-import { TRPCError } from '@trpc/server'
-
 import { getPayloadClient } from '../get-payload'
 import { CartDetailsValidator } from '../lib/validators/cart-details-validator'
 import { IdValidator } from '../lib/validators/id-validator'
 import { TicketsCountValidator } from '../lib/validators/tickets-count-validator'
 import { router, userProcedure } from '../trpc/trpc'
+import { TRPCError } from '@trpc/server'
 
 export const cartRouter = router({
   getCartTickets: userProcedure.query(async ({ ctx }) => {

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import * as React from 'react'
+
 function Icon() {
   return (
     <div className='logo'>

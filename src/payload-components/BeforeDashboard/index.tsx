@@ -1,6 +1,6 @@
+import { useAuth } from 'payload/components/utilities'
 import React from 'react'
 
-import { useAuth } from 'payload/components/utilities'
 import InfoCard from './InfoCard'
 
 const BeforeDashboard = () => {

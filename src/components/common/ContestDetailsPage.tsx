@@ -1,10 +1,8 @@
+import contest_bg from '/public/images/elements/contest-bg.png'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import contest_bg from '/public/images/elements/contest-bg.png'
-
 import ContestCard from '@/components/cards/ContestCard'
-
 import { Contest } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
@@ -86,7 +84,8 @@ const ContestDetailsPage = ({
                 className='tab-pane fade show active'
                 id='home-tab-pane'
                 role='tabpanel'
-                aria-labelledby='home-tab'>
+                aria-labelledby='home-tab'
+              >
                 <div className='row mb-none-30'>
                   {contestDetails?.map((itm: any) => (
                     <div key={itm.id} className='col-xl-4 col-md-6 mb-30'>

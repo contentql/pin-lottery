@@ -1,7 +1,7 @@
-import { TRPCError } from '@trpc/server'
 import { getPayloadClient } from '../get-payload'
 import { WinnerDetailsValidator } from '../lib/validators/winner-details-validator'
 import { publicProcedure, router } from '../trpc/trpc'
+import { TRPCError } from '@trpc/server'
 
 export const WinnerRouter = router({
   addWinner: publicProcedure

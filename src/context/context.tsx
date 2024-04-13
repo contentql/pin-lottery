@@ -185,7 +185,8 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
         removeTicket,
         removeAllTickets,
         removeAllTicketsWithToast,
-      }}>
+      }}
+    >
       {children}
     </AppContext.Provider>
   )

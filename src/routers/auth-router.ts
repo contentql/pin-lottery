@@ -1,8 +1,3 @@
-import { TRPCError } from '@trpc/server'
-
-import { Media } from '@/payload-types'
-import { produce } from 'immer'
-import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { AuthCredentialsValidator } from '../lib/validators/auth-router/account-credentials-validator'
 import { ForgotPasswordValidator } from '../lib/validators/auth-router/forgot-password-validator'
@@ -15,6 +10,11 @@ import {
   UserPersonalDetailsValidator,
 } from '../lib/validators/auth-router/user-details-validator'
 import { publicProcedure, router, userProcedure } from '../trpc/trpc'
+import { TRPCError } from '@trpc/server'
+import { produce } from 'immer'
+import { z } from 'zod'
+
+import { Media } from '@/payload-types'
 
 export const authRouter = router({
   createUser: publicProcedure

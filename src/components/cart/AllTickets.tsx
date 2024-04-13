@@ -23,14 +23,16 @@ const AllTickets = ({
           <h3>Your tickets:</h3>
           <button
             type='button'
-            onClick={() => deleteAllTicketsOfUserFromCart()}>
+            onClick={() => deleteAllTicketsOfUserFromCart()}
+          >
             clear all
           </button>
         </div>
         {cartData?.map(cart => (
           <div key={cart?.id} className='ticket-wrapper__body'>
             <div
-              className={`tickets ${cart?.tickets === 1 ? 'tickets-one' : cart?.tickets === 2 ? 'tickets-two' : 'tickets-three'}`}>
+              className={`tickets ${cart?.tickets === 1 ? 'tickets-one' : cart?.tickets === 2 ? 'tickets-two' : 'tickets-three'}`}
+            >
               <div className='single-row'>
                 <h3>
                   Contest Number:{' '}
@@ -38,7 +40,8 @@ const AllTickets = ({
                 </h3>
                 <button
                   type='button'
-                  onClick={() => deleteById({ id: cart?.id })}>
+                  onClick={() => deleteById({ id: cart?.id })}
+                >
                   clear
                 </button>
               </div>
