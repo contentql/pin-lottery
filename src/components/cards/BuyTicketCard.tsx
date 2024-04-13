@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { useContext } from 'react'
 import { FaCartPlus } from 'react-icons/fa'
+import { ImSpinner } from 'react-icons/im'
 import { MdOutlineShoppingCartCheckout } from 'react-icons/md'
 import { toast } from 'react-toastify'
 
@@ -9,7 +10,6 @@ import { Contest } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
-import { ImSpinner } from 'react-icons/im'
 
 const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
   const { removeAllTickets, totalTicketsCount } = useContext(AppContext)
@@ -77,7 +77,8 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
             type='button'
             className='btn-border text-capitalize btn-transparent'
             disabled={isTicketAdded}
-            onClick={() => handleAddToCart()}>
+            onClick={() => handleAddToCart()}
+          >
             {isTicketAdded ? (
               <ImSpinner
                 size={22}

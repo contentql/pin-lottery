@@ -1,7 +1,10 @@
-import { Ticket } from '@/payload-types'
 import TicketTabs from '../common/TicketTabs'
+
+import { Ticket } from '@/payload-types'
+
 import PastDraws from './PastDraws'
 import UpcomingDraws from './UpcomingDraw'
+
 const RightSide = ({
   isTicketsPending,
   upcomingDrawTicketsData,

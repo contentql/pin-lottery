@@ -8,7 +8,6 @@ import {
 } from 'react-icons/fa'
 
 import Social from '@/components/social/Social'
-
 import { blogData } from '@/data/blogData'
 
 import Categories from './Categories'

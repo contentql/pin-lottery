@@ -1,15 +1,16 @@
 'use client'
 
+import '../../src/styles/layout/custom/_pagination.scss'
+import { trpc } from '../trpc/client'
 import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
+import ResponsivePagination from 'react-responsive-pagination'
+import { useDebounceValue } from 'usehooks-ts'
 
 import Banner from '@/components/common/Banner'
 import Feature from '@/components/contest/Feature'
 import LatestContest from '@/components/contest/LatestContest'
-import { useState } from 'react'
-import ResponsivePagination from 'react-responsive-pagination'
-import { useDebounceValue } from 'usehooks-ts'
-import '../../src/styles/layout/custom/_pagination.scss'
-import { trpc } from '../trpc/client'
+
 const ContestView = () => {
   const searchParams = useSearchParams()
   const templatesPerPage = 9

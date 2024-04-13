@@ -9,7 +9,8 @@ const UserDetailsSkeleton = () => {
             <h3 className='user-info-card__title'>Personal Details</h3>
             <button
               type='button'
-              className='d-flex align-items-start gap-1 transparent-button'>
+              className='d-flex align-items-start gap-1 transparent-button'
+            >
               <FaRegEdit className='fs-4' />
               Edit
             </button>
@@ -41,7 +42,8 @@ const UserDetailsSkeleton = () => {
 
             <button
               type='button'
-              className='d-flex align-items-start gap-1 transparent-button'>
+              className='d-flex align-items-start gap-1 transparent-button'
+            >
               <FaRegEdit className='fs-4' />
               Edit
             </button>
@@ -60,7 +62,8 @@ const UserDetailsSkeleton = () => {
             <h3 className='user-info-card__title'>Security</h3>
             <button
               type='button'
-              className='d-flex align-items-start gap-1 transparent-button'>
+              className='d-flex align-items-start gap-1 transparent-button'
+            >
               <FaRegEdit className='fs-4' />
               Edit
             </button>

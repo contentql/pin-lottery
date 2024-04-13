@@ -17,7 +17,8 @@ const SingleFaq = ({ singleFaq }: { singleFaq: any }) => {
           type='button'
           onClick={handleToggleCollapse}
           aria-expanded={!isCollapsed}
-          aria-controls={`collapse${id}`}>
+          aria-controls={`collapse${id}`}
+        >
           {question}
         </button>
       </div>
@@ -25,7 +26,8 @@ const SingleFaq = ({ singleFaq }: { singleFaq: any }) => {
         id={`collapse${id}`}
         className={`collapse ${isCollapsed ? '' : 'show'}`}
         aria-labelledby={`heading${id}`}
-        data-bs-parent='#accordionExample'>
+        data-bs-parent='#accordionExample'
+      >
         <div className='card-body'>
           <p>{answer}</p>
         </div>

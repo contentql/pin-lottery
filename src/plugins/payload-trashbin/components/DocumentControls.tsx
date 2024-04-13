@@ -1,10 +1,3 @@
-import React, { Fragment } from 'react'
-import { useTranslation } from 'react-i18next'
-
-import type { CollectionPermission, GlobalPermission } from 'payload/dist/auth'
-import type { SanitizedCollectionConfig } from 'payload/dist/collections/config/types'
-import type { SanitizedGlobalConfig } from 'payload/dist/globals/config/types'
-
 import Autosave from 'payload/dist/admin/components/elements/Autosave'
 import DeleteDocument from 'payload/dist/admin/components/elements/DeleteDocument'
 import 'payload/dist/admin/components/elements/DocumentControls/index.scss'
@@ -20,6 +13,12 @@ import Status from 'payload/dist/admin/components/elements/Status'
 import { useConfig } from 'payload/dist/admin/components/utilities/Config'
 import { useDocumentInfo } from 'payload/dist/admin/components/utilities/DocumentInfo'
 import { formatDate } from 'payload/dist/admin/utilities/formatDate'
+import type { CollectionPermission, GlobalPermission } from 'payload/dist/auth'
+import type { SanitizedCollectionConfig } from 'payload/dist/collections/config/types'
+import type { SanitizedGlobalConfig } from 'payload/dist/globals/config/types'
+import React, { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import RestoreDocument from './RestoreDocument'
 
 const baseClass = 'doc-controls'
@@ -96,7 +95,8 @@ export const DocumentControls: React.FC<{
                       `${baseClass}__list-item`,
                     ]
                       .filter(Boolean)
-                      .join(' ')}>
+                      .join(' ')}
+                  >
                     <Status />
                   </li>
                 )}
@@ -131,7 +131,8 @@ export const DocumentControls: React.FC<{
                     data?.updatedAt
                       ? formatDate(data?.updatedAt, dateFormat, i18n?.language)
                       : ''
-                  }>
+                  }
+                >
                   <p className={`${baseClass}__label`}>
                     {t('lastModified')}:&nbsp;
                   </p>
@@ -156,7 +157,8 @@ export const DocumentControls: React.FC<{
                           i18n?.language,
                         )
                       : ''
-                  }>
+                  }
+                >
                   <p className={`${baseClass}__label`}>{t('created')}:&nbsp;</p>
                   {(publishedDoc?.createdAt || data?.createdAt) && (
                     <p className={`${baseClass}__value`}>
@@ -231,13 +233,15 @@ export const DocumentControls: React.FC<{
               className={`${baseClass}__popup`}
               horizontalAlign='right'
               size='large'
-              verticalAlign='bottom'>
+              verticalAlign='bottom'
+            >
               <PopupList.ButtonGroup>
                 {hasCreatePermission && (
                   <React.Fragment>
                     <PopupList.Button
                       id='action-create'
-                      to={`${adminRoute}/collections/${collection?.slug}/create`}>
+                      to={`${adminRoute}/collections/${collection?.slug}/create`}
+                    >
                       {t('createNew')}
                     </PopupList.Button>
 

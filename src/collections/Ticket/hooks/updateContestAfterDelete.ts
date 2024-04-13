@@ -1,5 +1,5 @@
-import { CollectionAfterDeleteHook } from 'payload/types'
 import { Contest } from '../../../payload-types'
+import { CollectionAfterDeleteHook } from 'payload/types'
 
 export const updateContestAfterDelete: CollectionAfterDeleteHook = async ({
   req, // full express request

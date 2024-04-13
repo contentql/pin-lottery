@@ -1,8 +1,7 @@
+import affiliate_bg from '/public/images/elements/affiliate-bg.jpg'
 import Image from 'next/image'
 
 import { affiliate_partner } from '@/data/affiliate'
-
-import affiliate_bg from '/public/images/elements/affiliate-bg.jpg'
 
 const Partner = () => {
   return (

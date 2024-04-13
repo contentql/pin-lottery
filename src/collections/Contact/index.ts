@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types'
+
 import { newContactEmail } from './hooks/newContactEmail'
 
 const Contact: CollectionConfig = {

@@ -1,10 +1,12 @@
 'use client'
 
-import { trpc } from '@/trpc/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { httpBatchLink } from '@trpc/client'
 import { PropsWithChildren, useState } from 'react'
+
+import { trpc } from '@/trpc/client'
+
 import { AuthProvider } from './Auth'
 
 const Providers = ({ children }: PropsWithChildren) => {

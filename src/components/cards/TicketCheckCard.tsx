@@ -20,7 +20,8 @@ const TicketCheckCard = ({
       <form
         onSubmit={handleSubmit(handleSearchByTicketNumber)}
         noValidate
-        className='check-number-form'>
+        className='check-number-form'
+      >
         <div className='number-list-wrapper'>
           <input
             type='text'

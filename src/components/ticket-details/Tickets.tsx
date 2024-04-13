@@ -38,7 +38,8 @@ const Tickets = ({ contestDetails }: { contestDetails: Contest }) => {
             addTicket({
               contest_no: contestDetails?.contest_no,
             })
-          }>
+          }
+        >
           Add Tickets
         </button>
       </div>

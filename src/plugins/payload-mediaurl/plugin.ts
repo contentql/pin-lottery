@@ -1,5 +1,6 @@
 import type { Config, Plugin } from 'payload/config'
 import { CollectionAfterReadHook } from 'payload/types'
+
 import { PluginTypes } from './types'
 
 export const mediaCloudflareURLHandler =

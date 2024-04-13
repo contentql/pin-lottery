@@ -1,8 +1,8 @@
-import { TRPCError } from '@trpc/server'
 import { getPayloadClient } from '../get-payload'
 import { BlogIdValidator } from '../lib/validators/blog-id-validator'
 import { ContactFormValidator } from '../lib/validators/contact-form-validator'
 import { publicProcedure, router } from '../trpc/trpc'
+import { TRPCError } from '@trpc/server'
 
 export const publicRouter = router({
   newContact: publicProcedure

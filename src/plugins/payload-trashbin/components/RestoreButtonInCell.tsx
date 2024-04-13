@@ -59,7 +59,8 @@ const RestoreButtonInCell: React.FC<Props> = ({ rowData }) => {
               ? 'Restoring...'
               : 'Click To Restore'
         }
-        disabled={restored || loading}>
+        disabled={restored || loading}
+      >
         <MdRestore
           size={24}
           style={{

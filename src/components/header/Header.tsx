@@ -1,22 +1,20 @@
+import tag from '/public/images/icon/btn/tag.png'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { FaRegHeart } from 'react-icons/fa'
 import { GrTransaction } from 'react-icons/gr'
 import { LiaTicketAltSolid } from 'react-icons/lia'
 import { LuUser2 } from 'react-icons/lu'
 import { RxExit } from 'react-icons/rx'
-
-import { useEffect, useState } from 'react'
-
-import tag from '/public/images/icon/btn/tag.png'
+import { toast } from 'react-toastify'
 
 import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { logout } from '@/queries/auth/logout'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
-import { FaRegHeart } from 'react-icons/fa'
-import { toast } from 'react-toastify'
+
 import Cart from './Cart'
 
 const Header = () => {
@@ -96,7 +94,8 @@ const Header = () => {
       id='gotoTop'
       className={`header ${
         windowHeight > 50 && 'menu-fixed animated fadeInDown'
-      }`}>
+      }`}
+    >
       <div className='header__bottom'>
         <div className='container'>
           <nav className='navbar navbar-expand-xl p-0 align-items-center'>
@@ -175,24 +174,28 @@ const Header = () => {
                         onClick={togglePopup}
                         style={{
                           backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
-                        }}>
+                        }}
+                      >
                         {popupVisible && (
                           <div className='popup'>
                             <div className='popup-arrow'></div>
                             <Link
                               href='/user-info'
-                              className='popup-btn user-profile'>
+                              className='popup-btn user-profile'
+                            >
                               <button
                                 className='nav-user-profile'
                                 style={{
                                   backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
-                                }}></button>
+                                }}
+                              ></button>
                               <h6>{user?.user_name}</h6>
                             </Link>
                             <div className='divider'></div>
                             <Link
                               href='/user-info'
-                              className='popup-btn list-nav'>
+                              className='popup-btn list-nav'
+                            >
                               <span>
                                 <LuUser2 size={24} color='white' />
                               </span>
@@ -206,7 +209,8 @@ const Header = () => {
                             </Link>
                             <Link
                               href='/user-transaction'
-                              className='popup-btn list-nav'>
+                              className='popup-btn list-nav'
+                            >
                               <span>
                                 <GrTransaction size={24} color='white' />
                               </span>
@@ -214,7 +218,8 @@ const Header = () => {
                             </Link>
                             <Link
                               href='/user-lottery'
-                              className='popup-btn list-nav'>
+                              className='popup-btn list-nav'
+                            >
                               <span>
                                 <FaRegHeart size={24} color='white' />
                               </span>
@@ -223,7 +228,8 @@ const Header = () => {
                             <div className='divider'></div>
                             <button
                               onClick={handleLogout}
-                              className='popup-btn list-nav'>
+                              className='popup-btn list-nav'
+                            >
                               <RxExit size={24} color='white' />
                               <p> Logout</p>
                             </button>
@@ -233,7 +239,8 @@ const Header = () => {
                       <div className='user-profile-link'>
                         <Link
                           href='/user-info'
-                          className='cmn-btn style--three btn--sm'>
+                          className='cmn-btn style--three btn--sm'
+                        >
                           <span className='react-icon-profile'>
                             <LuUser2 size={18} color='white' />
                           </span>

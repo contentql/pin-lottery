@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import { FaRegComments, FaRegEye } from 'react-icons/fa'
 import Slider from 'react-slick'
-
 import 'slick-carousel/slick/slick.css'
 
 const NextBtn = ({ onClick }: any) => {

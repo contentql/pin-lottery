@@ -1,14 +1,12 @@
 'use client'
 
-import { trpc } from '@/trpc/client'
-
-import Image from 'next/image'
-
 import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
+import Image from 'next/image'
 
 import Banner from '@/components/common/Banner'
 import Details from '@/components/single-blog/Details'
 import { Blog } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 
 interface PageProps {
   blogId: string

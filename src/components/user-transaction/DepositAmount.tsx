@@ -1,10 +1,12 @@
-import { useAuth } from '@/providers/Auth'
+import { createPaystackCheckoutUrl } from '../../plugins/payload-paystack'
+import transaction_1 from '/public/images/icon/transaction/1.png'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { createPaystackCheckoutUrl } from '../../plugins/payload-paystack'
-import transaction_1 from '/public/images/icon/transaction/1.png'
+
+import { useAuth } from '@/providers/Auth'
+
 function DepositAmount() {
   const [depositAmount, setDepositAmount] = useState('0')
   const {
@@ -55,7 +57,8 @@ function DepositAmount() {
               width='14'
               height='14'
               viewBox='0 0 14 14'
-              fill='none'>
+              fill='none'
+            >
               <path
                 fill-rule='evenodd'
                 clip-rule='evenodd'

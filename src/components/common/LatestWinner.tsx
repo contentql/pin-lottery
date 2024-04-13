@@ -1,21 +1,18 @@
-import Image from 'next/image'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-
+import '../../../src/styles/layout/custom/_pagination.scss'
+import WinnerCard from '../cards/WinnerCard'
 import FilterByTag from '../filters/FilterByTag'
+import WinnerCardSkeleton from '../skeletons/WinnerCardSkeleton'
 import w_el_1 from '/public/images/elements/w-el-1.png'
 import w_el_2 from '/public/images/elements/w-el-2.png'
 import w_el_3 from '/public/images/elements/w-el-3.png'
+import Image from 'next/image'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
+import ResponsivePagination from 'react-responsive-pagination'
 
 import TicketCheckCard from '@/components/cards/TicketCheckCard'
 import { Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import { useState } from 'react'
-
-import ResponsivePagination from 'react-responsive-pagination'
-import '../../../src/styles/layout/custom/_pagination.scss'
-import WinnerCardSkeleton from '../skeletons/WinnerCardSkeleton'
-
-import WinnerCard from '../cards/WinnerCard'
 
 const LatestWinner = () => {
   const searchParams = useSearchParams()
@@ -141,7 +138,8 @@ const LatestWinner = () => {
                 className='tab-pane fade show active'
                 id='dream'
                 role='tabpanel'
-                aria-labelledby='dream-tab'>
+                aria-labelledby='dream-tab'
+              >
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}

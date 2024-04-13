@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-
 import { Suspense } from 'react'
 
 import Loading from '@/components/loading/PageLoading'

@@ -1,6 +1,7 @@
-import { Contest, Media, Winner } from '@/payload-types'
 import Image from 'next/image'
 import Slider from 'react-slick'
+
+import { Contest, Media, Winner } from '@/payload-types'
 
 const WinnerImageSlider = ({ winner }: { winner: Winner }) => {
   const settings = {

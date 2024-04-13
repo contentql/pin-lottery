@@ -1,3 +1,7 @@
+import {
+  ForgotPasswordValidator,
+  TForgotPasswordValidator,
+} from '../../lib/validators/auth-router/forgot-password-validator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -5,10 +9,6 @@ import { toast } from 'react-toastify'
 import { ZodError } from 'zod'
 
 import { trpc } from '@/trpc/client'
-import {
-  ForgotPasswordValidator,
-  TForgotPasswordValidator,
-} from '../../lib/validators/auth-router/forgot-password-validator'
 
 const ForgotPassword = () => {
   const [sentEmail, setSentEmail] = useState('')

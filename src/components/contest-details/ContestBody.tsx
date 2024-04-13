@@ -1,3 +1,4 @@
+import WinningNumber from '../winner/WinningNumber'
 import Countdown from 'react-countdown'
 import { toast } from 'react-toastify'
 import * as sd from 'simple-duration'
@@ -5,9 +6,8 @@ import * as sd from 'simple-duration'
 import RendererCountdown from '@/components/common/RendererCountdown'
 import VehicleOverview from '@/components/common/VehicleOverview'
 import { Contest } from '@/payload-types'
-
 import { trpc } from '@/trpc/client'
-import WinningNumber from '../winner/WinningNumber'
+
 import ContestRight from './ContestRight'
 import ContestSlider from './ContestSlider'
 
@@ -61,7 +61,8 @@ const ContestBody = ({
               <div className='draw-tickets-btn'>
                 <button
                   className='cmn-btn style--one btn-sm'
-                  onClick={() => handleContestTimerUpdate()}>
+                  onClick={() => handleContestTimerUpdate()}
+                >
                   draw tickets now
                 </button>
               </div>

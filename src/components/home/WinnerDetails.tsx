@@ -1,19 +1,19 @@
+import winner from '/public/images/bg/winner.jpg'
+import car from '/public/images/elements/car.png'
 import Image from 'next/image'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import Slider from 'react-slick'
-
-import winner from '/public/images/bg/winner.jpg'
-import car from '/public/images/elements/car.png'
+import 'slick-carousel/slick/slick.css'
 
 import { Contest, Media, Winner } from '@/payload-types'
-import 'slick-carousel/slick/slick.css'
 
 const NextBtn = ({ onClick }: any) => {
   return (
     <button
       type='button'
       className='prev slick-arrow bg-transparent'
-      onClick={onClick}>
+      onClick={onClick}
+    >
       <i>
         <BsArrowLeft />
       </i>
@@ -26,7 +26,8 @@ const PrevBtn = ({ onClick }: any) => {
     <button
       type='button'
       className='next slick-arrow bg-transparent'
-      onClick={onClick}>
+      onClick={onClick}
+    >
       <i>
         <BsArrowRight />
       </i>

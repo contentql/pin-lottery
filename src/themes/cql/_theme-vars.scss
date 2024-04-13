@@ -8,8 +8,16 @@
   * Color Mix
   */
   --dr--primary: var(--dr-project-color);
-  --dr--primary-background: color-mix(in srgb, var(--theme-elevation-0), var(--dr--primary) 10%);
-  --dr--primary-subdued: color-mix(in srgb, var(--theme-elevation-0), var(--dr--primary) 50%);
+  --dr--primary-background: color-mix(
+    in srgb,
+    var(--theme-elevation-0),
+    var(--dr--primary) 10%
+  );
+  --dr--primary-subdued: color-mix(
+    in srgb,
+    var(--theme-elevation-0),
+    var(--dr--primary) 50%
+  );
   --dr--primary-accent: color-mix(in srgb, var(--dr--primary), #16151a 25%);
 
   /**

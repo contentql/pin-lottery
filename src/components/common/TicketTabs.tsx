@@ -1,6 +1,7 @@
 'use client'
-import { useState } from 'react'
+
 import TicketsSkeleton from '../skeletons/TicketsSkeleton'
+import { useState } from 'react'
 
 const TicketTabs = ({
   tabs,
@@ -22,7 +23,8 @@ const TicketTabs = ({
           <div
             key={index}
             className={`button-wrapper ${index === activeTab ? 'active' : ''}`}
-            onClick={() => handleClick(index)}>
+            onClick={() => handleClick(index)}
+          >
             {tab.title}
           </div>
         ))}

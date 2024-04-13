@@ -1,6 +1,7 @@
-import { Faq } from '@/payload-types'
-import { useState } from 'react'
 import SingleFaq from '../singleFaq/SingleFaq'
+import { useState } from 'react'
+
+import { Faq } from '@/payload-types'
 
 const FaqBody = ({ faqsData }: { faqsData: Faq }) => {
   const [faqData, setFaqData] = useState({
@@ -29,7 +30,8 @@ const FaqBody = ({ faqsData }: { faqsData: Faq }) => {
               <ul
                 className='nav nav-tabs cmn-tabs justify-content-center'
                 id='myTab'
-                role='tablist'>
+                role='tablist'
+              >
                 {faqsData?.faqs?.map((faqsType, index) => (
                   <li key={index} className='nav-item' role='presentation'>
                     <button
@@ -40,7 +42,8 @@ const FaqBody = ({ faqsData }: { faqsData: Faq }) => {
                       role='tab'
                       aria-controls='ticket'
                       aria-selected='false'
-                      onClick={() => handleFaqType(faqsType?.faq_type!, index)}>
+                      onClick={() => handleFaqType(faqsType?.faq_type!, index)}
+                    >
                       {faqsType?.faq_type}
                     </button>
                   </li>
@@ -57,7 +60,8 @@ const FaqBody = ({ faqsData }: { faqsData: Faq }) => {
                   className='tab-pane fade show active'
                   id='ticket'
                   role='tabpanel'
-                  aria-labelledby='ticket-tab'>
+                  aria-labelledby='ticket-tab'
+                >
                   {/* Tickets here */}
                   <div className='accordion cmn-accordion' id='faqAcc-one'>
                     {faqsData?.faqs

@@ -11,7 +11,8 @@ export const RestoreButton: React.FC = props => {
       style={{
         display: 'flex',
         flexDirection: 'row-reverse',
-      }}>
+      }}
+    >
       <Button
         onClick={async () => {
           fetch(`/api/trash/restore/where[id][in][0]=${id}`, {
@@ -24,7 +25,8 @@ export const RestoreButton: React.FC = props => {
               console.log(error)
               toast.error(error.message)
             })
-        }}>
+        }}
+      >
         Restore
       </Button>
     </div>

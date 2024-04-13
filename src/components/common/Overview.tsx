@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import map from '/public/images/elements/map.png'
 import overview_obj_1 from '/public/images/elements/overview-obj-1.png'
 import overview_obj_2 from '/public/images/elements/overview-obj-2.png'
@@ -8,6 +6,7 @@ import overview_obj_4 from '/public/images/elements/overview-obj-4.png'
 import overview_1 from '/public/images/icon/overview/1.png'
 import overview_2 from '/public/images/icon/overview/2.png'
 import overview_3 from '/public/images/icon/overview/3.png'
+import Image from 'next/image'
 
 const Overview = () => {
   return (

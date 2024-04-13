@@ -1,6 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 
@@ -9,9 +12,6 @@ import {
   TLoginValidator,
 } from '@/lib/validators/auth-router/login-validator'
 import { useAuth } from '@/providers/Auth'
-import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
-import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
   const {
@@ -85,7 +85,8 @@ const Login = () => {
                     className='password-toggle-button'
                     onClick={() => {
                       setShowPassword(!showPassword)
-                    }}>
+                    }}
+                  >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
@@ -112,7 +113,8 @@ const Login = () => {
                 <button
                   disabled={isLoginPending}
                   className='cmn-btn'
-                  type='submit'>
+                  type='submit'
+                >
                   {isLoginPending ? (
                     <ImSpinner
                       size={22}

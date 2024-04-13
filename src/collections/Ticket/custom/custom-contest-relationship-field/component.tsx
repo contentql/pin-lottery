@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import {
   Props,
   RelationshipComponent,
@@ -7,6 +5,7 @@ import {
 } from 'payload/components/fields/Relationship'
 import { useFormFields } from 'payload/components/forms'
 import { Fields } from 'payload/types'
+import * as React from 'react'
 
 export const CustomContestRelationshipComponent: React.FC<Props> = props => {
   // Field values can be accessed and updated using the commented `useField` function as well.

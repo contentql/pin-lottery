@@ -1,4 +1,5 @@
 import { GlobalConfig } from 'payload/types'
+
 const Features: GlobalConfig = {
   slug: 'features',
   fields: [

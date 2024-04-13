@@ -1,9 +1,6 @@
+// custom
+import { ListControls } from '../../components/ListControls'
 import { useWindowInfo } from '@faceless-ui/window-info'
-import React, { Fragment } from 'react'
-import { useTranslation } from 'react-i18next'
-
-import { Props } from 'payload/dist/admin/components/views/collections/List/types'
-
 import Button from 'payload/dist/admin/components/elements/Button'
 import DeleteMany from 'payload/dist/admin/components/elements/DeleteMany'
 import EditMany from 'payload/dist/admin/components/elements/EditMany'
@@ -20,13 +17,12 @@ import ViewDescription from 'payload/dist/admin/components/elements/ViewDescript
 import Meta from 'payload/dist/admin/components/utilities/Meta'
 import { RelationshipProvider } from 'payload/dist/admin/components/views/collections/List/RelationshipProvider'
 import { SelectionProvider } from 'payload/dist/admin/components/views/collections/List/SelectionProvider'
+import 'payload/dist/admin/components/views/collections/List/index.scss'
+import { Props } from 'payload/dist/admin/components/views/collections/List/types'
 import formatFilesize from 'payload/dist/uploads/formatFilesize'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
-
-import 'payload/dist/admin/components/views/collections/List/index.scss'
-
-// custom
-import { ListControls } from '../../components/ListControls'
+import React, { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const baseClass = 'collection-list'
 
@@ -93,7 +89,8 @@ const DefaultListView: React.FC<Props> = props => {
                     aria-label={t('createNewLabel', {
                       label: getTranslation(singularLabel, i18n),
                     })}
-                    to={newDocumentURL}>
+                    to={newDocumentURL}
+                  >
                     {t('createNew')}
                   </Pill>
                 )}

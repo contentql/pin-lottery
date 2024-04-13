@@ -1,7 +1,8 @@
-import { Cart } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaAngleLeft } from 'react-icons/fa'
+
+import { Cart } from '@/payload-types'
 
 import AllTickets from './AllTickets'
 import Prices from './Prices'

@@ -1,10 +1,12 @@
-import { useAuth } from '@/providers/Auth'
-import { trpc } from '@/trpc/client'
+import ContestCard from '../cards/ContestCard'
+import ContestSkeletons from '../skeletons/ContestSkeletons'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaAngleLeft } from 'react-icons/fa6'
-import ContestCard from '../cards/ContestCard'
-import ContestSkeletons from '../skeletons/ContestSkeletons'
+
+import { useAuth } from '@/providers/Auth'
+import { trpc } from '@/trpc/client'
+
 const RightSide = () => {
   const { status } = useAuth()
   const {

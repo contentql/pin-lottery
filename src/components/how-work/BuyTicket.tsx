@@ -1,8 +1,7 @@
-import Image from 'next/image'
-import Link from 'next/link'
-
 import arrow from '/public/images/elements/arrow.png'
 import winner_obj from '/public/images/elements/winner-obj.png'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const BuyTicket = () => {
   return (

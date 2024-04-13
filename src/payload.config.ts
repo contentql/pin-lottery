@@ -7,6 +7,7 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
+
 import About from './collections/About'
 import Blog from './collections/Blog'
 import Cart from './collections/Cart'

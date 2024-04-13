@@ -1,9 +1,7 @@
+import circle_border from '/public/images/elements/circle-border.png'
 import Image from 'next/image'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import Slider from 'react-slick'
-
-import circle_border from '/public/images/elements/circle-border.png'
-
 // css
 import 'slick-carousel/slick/slick.css'
 

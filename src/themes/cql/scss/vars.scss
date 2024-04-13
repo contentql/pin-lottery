@@ -66,19 +66,27 @@ $focus-box-shadow: 0 0 0 $style-stroke-width-m var(--theme-success-500);
 //////////////////////////////
 
 @mixin shadow-sm {
-  box-shadow: 0 2px 3px 0 rgba(0, 2, 4, 0.05), 0 10px 4px -8px rgba(0, 2, 4, 0.02);
+  box-shadow:
+    0 2px 3px 0 rgba(0, 2, 4, 0.05),
+    0 10px 4px -8px rgba(0, 2, 4, 0.02);
 }
 
 @mixin shadow-m {
-  box-shadow: 0 0 30px 0 rgb(0 2 4 / 12%), 0 30px 25px -8px rgb(0 2 4 / 10%);
+  box-shadow:
+    0 0 30px 0 rgb(0 2 4 / 12%),
+    0 30px 25px -8px rgb(0 2 4 / 10%);
 }
 
 @mixin shadow-lg {
-  box-shadow: 0 20px 35px -10px rgba(0, 2, 4, 0.2), 0 6px 4px -4px rgba(0, 2, 4, 0.02);
+  box-shadow:
+    0 20px 35px -10px rgba(0, 2, 4, 0.2),
+    0 6px 4px -4px rgba(0, 2, 4, 0.02);
 }
 
 @mixin shadow-lg-top {
-  box-shadow: 0 -20px 35px -10px rgba(0, 2, 4, 0.2), 0 -6px 4px -4px rgba(0, 2, 4, 0.02);
+  box-shadow:
+    0 -20px 35px -10px rgba(0, 2, 4, 0.2),
+    0 -6px 4px -4px rgba(0, 2, 4, 0.02);
 }
 
 @mixin shadow {
@@ -90,7 +98,9 @@ $focus-box-shadow: 0 0 0 $style-stroke-width-m var(--theme-success-500);
 }
 
 @mixin inputShadowActive {
-  box-shadow: 0 2px 3px 0 rgba(0, 2, 4, 0.16), 0 6px 4px -4px rgba(0, 2, 4, 0.13);
+  box-shadow:
+    0 2px 3px 0 rgba(0, 2, 4, 0.16),
+    0 6px 4px -4px rgba(0, 2, 4, 0.13);
 }
 
 @mixin inputShadow {

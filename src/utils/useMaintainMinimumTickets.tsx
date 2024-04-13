@@ -1,5 +1,6 @@
-import { AppContext } from '@/context/context'
 import { useContext, useEffect } from 'react'
+
+import { AppContext } from '@/context/context'
 
 const useMaintainMinimumTickets = (contestNo: string | undefined) => {
   const { maintainMinimumTickets } = useContext(AppContext)

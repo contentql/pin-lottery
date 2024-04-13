@@ -1,10 +1,11 @@
 'use client'
+
 import Image from 'next/image'
 import { useState } from 'react'
 import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
 
 import { Contest, Media } from '@/payload-types'
-import 'slick-carousel/slick/slick.css'
 
 const NextBtn = ({ onClick }: any) => {
   return (
@@ -83,7 +84,8 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
           <Slider
             asNavFor={nav2}
             arrows={false}
-            ref={(slider1: any) => setNav1(slider1)}>
+            ref={(slider1: any) => setNav1(slider1)}
+          >
             {contestDetails?.images?.map(itm => (
               <div key={itm?.id} className='contest-cart__thumb-slider'>
                 <div key={itm?.id} className='single-slide'>
@@ -112,7 +114,8 @@ const ContestSlider = ({ contestDetails }: { contestDetails: Contest }) => {
               asNavFor={nav1}
               ref={(slider2: any) => setNav2(slider2)}
               {...settings}
-              className='contest-cart__nav-slider'>
+              className='contest-cart__nav-slider'
+            >
               {contestDetails?.images?.map(itm => (
                 <div key={itm?.id} className='single'>
                   <div key={itm?.id} className='single-slide'>

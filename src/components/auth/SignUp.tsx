@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 import { ZodError } from 'zod'
 
@@ -10,7 +11,6 @@ import {
   TAuthCredentialsValidator,
 } from '@/lib/validators/auth-router/account-credentials-validator'
 import { trpc } from '@/trpc/client'
-import { ImSpinner } from 'react-icons/im'
 
 const SignUp = () => {
   const [isEmailSent, setIsEmailSent] = useState(false)

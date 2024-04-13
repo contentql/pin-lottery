@@ -1,8 +1,8 @@
 import type { Config, Plugin } from 'payload/config'
 import { CollectionAfterOperationHook } from 'payload/types'
-import Transaction from './collections/transaction'
-
 import { Paystack } from 'paystack-sdk'
+
+import Transaction from './collections/transaction'
 
 const paystackSdk = new Paystack(
   'sk_test_6c2e7ca16d0d713386973b3039bfcecae37275e3',

@@ -1,3 +1,5 @@
+import FilterByTag from '../filters/FilterByTag'
+import ContestSkeletons from '../skeletons/ContestSkeletons'
 import Image from 'next/image'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
@@ -5,11 +7,8 @@ import { FaSearch } from 'react-icons/fa'
 import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
-
 import { Contest, Wishlist } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import FilterByTag from '../filters/FilterByTag'
-import ContestSkeletons from '../skeletons/ContestSkeletons'
 
 const LatestContest = ({
   contestDetails,
@@ -187,7 +186,8 @@ const LatestContest = ({
                           })
                           handleSearchSortBy(e.target.value)
                         }}
-                        className='border-0 rounded-pill'>
+                        className='border-0 rounded-pill'
+                      >
                         <option value={''}>SORT BY</option>
                         <option value={'priceLowToHigh'}>
                           Price -- Low to High
@@ -210,7 +210,8 @@ const LatestContest = ({
                           })
                           handleSearchContestStatus(e.target.value)
                         }}
-                        className='border-0 rounded-pill'>
+                        className='border-0 rounded-pill'
+                      >
                         <option value={''}>SHOW ONLY</option>
                         <option value={'thresholdReached'}>
                           Contests -- Date Announced
@@ -275,7 +276,8 @@ const LatestContest = ({
                   <div className='col-lg-2 mb-30'>
                     <button
                       className='cmn-btn active'
-                      onClick={handleClearFilters}>
+                      onClick={handleClearFilters}
+                    >
                       Clear filters
                     </button>
                   </div>
@@ -283,13 +285,15 @@ const LatestContest = ({
 
                 <div
                   className='tab-con tent mt-50 contests-body'
-                  id='contestContent'>
+                  id='contestContent'
+                >
                   {isContestsPending ? (
                     <div
                       className='tab-pane fade show active '
                       id='dream'
                       role='tabpanel'
-                      aria-labelledby='dream-tab'>
+                      aria-labelledby='dream-tab'
+                    >
                       <div className='row mb-none-30 mt-50'>
                         {[1, 2, 3].map((ele, index) => (
                           <div key={index} className='col-xl-4 col-md-6 mb-30'>
@@ -303,7 +307,8 @@ const LatestContest = ({
                       className='tab-pane fade show active '
                       id='dream'
                       role='tabpanel'
-                      aria-labelledby='dream-tab'>
+                      aria-labelledby='dream-tab'
+                    >
                       <div className='row mb-none-30 mt-50'>
                         {contestDetails?.allContests.length > 0 ? (
                           contestDetails?.allContests
@@ -311,7 +316,8 @@ const LatestContest = ({
                             ?.map((contest: any) => (
                               <div
                                 key={contest.id}
-                                className='col-xl-4 col-md-6 mb-30'>
+                                className='col-xl-4 col-md-6 mb-30'
+                              >
                                 <ContestCard itm={contest} wishlist={false} />
                               </div>
                             ))
