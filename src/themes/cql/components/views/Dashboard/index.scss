@@ -29,7 +29,9 @@
     flex-wrap: wrap;
 
     li {
-      width: calc(100% / var(--cols) - var(--gap) / var(--cols) * (var(--cols) - 1));
+      width: calc(
+        100% / var(--cols) - var(--gap) / var(--cols) * (var(--cols) - 1)
+      );
     }
 
     .card {

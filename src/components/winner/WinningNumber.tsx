@@ -1,9 +1,9 @@
+import Confetti from '../common/Confetti'
 import Image from 'next/image'
 
 import { Contest, Media, Ticket, User, Winner } from '@/payload-types'
 import { DateConverter } from '@/utils/date-converter'
 import { splitTicketNumber } from '@/utils/split-ticket-number'
-import Confetti from '../common/Confetti'
 
 const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
   return (

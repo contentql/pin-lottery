@@ -60,7 +60,8 @@ const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
                     contest_no: contestDetails?.contest_no,
                     numTicketsToAdd: quickAdd?.tickets,
                   })
-                }>
+                }
+              >
                 +{quickAdd?.tickets} Tickets
               </a>
             </li>
@@ -96,7 +97,8 @@ const Actions = ({ contestDetails }: { contestDetails: Contest }) => {
                   removeAllTicketsWithToast({
                     contest_no: contestDetails?.contest_no,
                   })
-                }>
+                }
+              >
                 <i className='las la-trash'></i>
                 <span>Erase All</span>
               </button>

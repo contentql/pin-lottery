@@ -1,6 +1,8 @@
 'use client'
-import { trpc } from '@/trpc/client'
+
 import Image from 'next/image'
+
+import { trpc } from '@/trpc/client'
 
 const FilterByTag = ({ filter, handleSearch }: any) => {
   const { data: tags } = trpc.public.getTags.useQuery()
@@ -17,7 +19,8 @@ const FilterByTag = ({ filter, handleSearch }: any) => {
             data-bs-target='#dream'
             role='tab'
             aria-controls='dream'
-            aria-selected='true'>
+            aria-selected='true'
+          >
             <span className='icon-thumb'>
               <Image
                 src={tag?.img?.url}

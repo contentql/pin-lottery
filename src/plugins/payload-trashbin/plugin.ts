@@ -1,5 +1,6 @@
 import type { Config, Plugin } from 'payload/config'
 import { AfterDeleteHook } from 'payload/dist/collections/config/types'
+
 import Trash from './collections/trash'
 import { PluginTypes } from './types'
 

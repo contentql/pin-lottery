@@ -1,6 +1,7 @@
+import ContestCard from '../cards/ContestCard'
+
 import { Contest, Wishlist } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import ContestCard from '../cards/ContestCard'
 
 const SimilarContest = ({ contests }: { contests: Contest[] }) => {
   const { data: wishlistData, refetch: refetchWishlistData } =
@@ -28,7 +29,8 @@ const SimilarContest = ({ contests }: { contests: Contest[] }) => {
           className='tab-pane fade show active '
           id='dream'
           role='tabpanel'
-          aria-labelledby='dream-tab'>
+          aria-labelledby='dream-tab'
+        >
           <div className='row mb-none-30 mt-50'>
             {contests?.map(contest => (
               <div key={contest.id} className='col-xl-4 col-md-6 mb-30'>

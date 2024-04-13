@@ -1,10 +1,9 @@
+import circle_border from '/public/images/elements/circle-border.png'
 import Image from 'next/image'
 import { useContext } from 'react'
 import { FaTimes } from 'react-icons/fa'
 
 import { AppContext } from '@/context/context'
-
-import circle_border from '/public/images/elements/circle-border.png'
 
 const SingleTicketCard = ({ ticket }: { ticket: any }) => {
   const { removeTicket } = useContext(AppContext)
@@ -17,7 +16,8 @@ const SingleTicketCard = ({ ticket }: { ticket: any }) => {
           removeTicket({
             contest_no: ticket?.contest_no,
           })
-        }>
+        }
+      >
         <FaTimes />
       </button>
 

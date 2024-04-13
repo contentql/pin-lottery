@@ -1,19 +1,17 @@
 import { Modal, useModal } from '@faceless-ui/modal'
-import React, { useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
-import { toast } from 'react-toastify'
-
-import type { Props } from 'payload/dist/admin/components/elements/DeleteDocument/types'
-
 import Button from 'payload/dist/admin/components/elements/Button'
+import 'payload/dist/admin/components/elements/DeleteDocument/index.scss'
+import type { Props } from 'payload/dist/admin/components/elements/DeleteDocument/types'
 import * as PopupList from 'payload/dist/admin/components/elements/Popup/PopupButtonList'
 import { useForm } from 'payload/dist/admin/components/forms/Form/context'
 import MinimalTemplate from 'payload/dist/admin/components/templates/Minimal'
 import { useConfig } from 'payload/dist/admin/components/utilities/Config'
 import useTitle from 'payload/dist/admin/hooks/useTitle'
-
-import 'payload/dist/admin/components/elements/DeleteDocument/index.scss'
+import React, { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { IoIosWarning } from 'react-icons/io'
+import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const baseClass = 'delete-document'
 
@@ -102,7 +100,8 @@ const RestoreDocument: React.FC<Props> = props => {
           onClick={() => {
             setRestoring(false)
             toggleModal(modalSlug)
-          }}>
+          }}
+        >
           Restore
         </PopupList.Button>
         <Modal className={baseClass} slug={modalSlug}>
@@ -112,17 +111,28 @@ const RestoreDocument: React.FC<Props> = props => {
               You are about to restore the <strong>{titleToRender}</strong>. Are
               you sure?
             </p>
+            <p>
+              <IoIosWarning
+                color='orange'
+                size={16}
+                style={{ marginRight: 6, marginBottom: 4 }}
+              />
+              <strong>&ldquo;{titleToRender}&rdquo;</strong> will not be
+              restored if it is related to another deleted documents.
+            </p>
             <div className={`${baseClass}__actions`}>
               <Button
                 buttonStyle='secondary'
                 id='confirm-cancel'
                 onClick={restoring ? undefined : () => toggleModal(modalSlug)}
-                type='button'>
+                type='button'
+              >
                 {t('cancel')}
               </Button>
               <Button
                 id='confirm-restore'
-                onClick={restoring ? undefined : handleRestore}>
+                onClick={restoring ? undefined : handleRestore}
+              >
                 {restoring ? 'Restoring...' : t('confirm')}
               </Button>
             </div>

@@ -1,8 +1,11 @@
-import { trpc } from '@/trpc/client'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaRegEdit } from 'react-icons/fa'
+import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
+import { ZodError } from 'zod'
 
 import {
   TUserEmailValidator,
@@ -14,10 +17,7 @@ import {
 } from '@/lib/validators/auth-router/user-details-validator'
 import { User } from '@/payload-types'
 import { refreshToken } from '@/queries/auth/refreshToken'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
-import { ImSpinner } from 'react-icons/im'
-import { ZodError } from 'zod'
+import { trpc } from '@/trpc/client'
 
 const Info = ({ userData }: { userData: User }) => {
   const [isEditMode, setIsEditMode] = useState({
@@ -188,7 +188,8 @@ const Info = ({ userData }: { userData: User }) => {
       <div className='user-info-card'>
         <form
           onSubmit={handlePersonalDetailsSubmit(onPersonalDetailsSubmit)}
-          noValidate>
+          noValidate
+        >
           <div className='user-info-card__header'>
             <h3 className='user-info-card__title'>Personal Details</h3>
             {isEditMode.personalDetails ? (
@@ -196,13 +197,15 @@ const Info = ({ userData }: { userData: User }) => {
                 <button
                   type='button'
                   className='cancel-button'
-                  onClick={() => handlePersonalDetailsCancel()}>
+                  onClick={() => handlePersonalDetailsCancel()}
+                >
                   Cancel
                 </button>{' '}
                 <button
                   type='submit'
                   disabled={isPersonalDetailsUpdated}
-                  className='save-button'>
+                  className='save-button'
+                >
                   {isPersonalDetailsUpdated ? (
                     <ImSpinner
                       size={22}
@@ -219,7 +222,8 @@ const Info = ({ userData }: { userData: User }) => {
               <button
                 type='button'
                 className='d-flex align-items-start gap-1 transparent-button'
-                onClick={() => handlePersonalDetailsEdit()}>
+                onClick={() => handlePersonalDetailsEdit()}
+              >
                 <FaRegEdit className='fs-4' />
                 Edit
               </button>
@@ -334,13 +338,15 @@ const Info = ({ userData }: { userData: User }) => {
                 <button
                   type='button'
                   className='cancel-button'
-                  onClick={() => handleEmailCancel()}>
+                  onClick={() => handleEmailCancel()}
+                >
                   Cancel
                 </button>{' '}
                 <button
                   type='submit'
                   className='save-button'
-                  disabled={isEmailChanged}>
+                  disabled={isEmailChanged}
+                >
                   {isEmailChanged ? (
                     <ImSpinner
                       size={22}
@@ -357,7 +363,8 @@ const Info = ({ userData }: { userData: User }) => {
               <button
                 type='button'
                 className='d-flex align-items-start gap-1 transparent-button'
-                onClick={() => handleEmailEdit()}>
+                onClick={() => handleEmailEdit()}
+              >
                 {
                   <>
                     {' '}
@@ -405,13 +412,15 @@ const Info = ({ userData }: { userData: User }) => {
                 <button
                   type='button'
                   className='cancel-button'
-                  onClick={() => handlePasswordCancel()}>
+                  onClick={() => handlePasswordCancel()}
+                >
                   Cancel
                 </button>{' '}
                 <button
                   disabled={isPasswordChanged}
                   type='submit'
-                  className='save-button'>
+                  className='save-button'
+                >
                   {isPasswordChanged ? (
                     <ImSpinner
                       size={22}
@@ -433,7 +442,8 @@ const Info = ({ userData }: { userData: User }) => {
                     ...prev,
                     password: true,
                   }))
-                }>
+                }
+              >
                 <FaRegEdit className='fs-4' />
                 Edit
               </button>

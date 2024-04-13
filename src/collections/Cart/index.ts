@@ -1,5 +1,7 @@
-import { User } from '@/payload-types'
 import { CollectionConfig } from 'payload/types'
+
+import { User } from '@/payload-types'
+
 import { self } from './access/self'
 import { assignUserId } from './field-level-hooks/assignUserId'
 

@@ -1,3 +1,4 @@
+import { ListControls } from '../../components/ListControls'
 import { useWindowInfo } from '@faceless-ui/window-info'
 import Button from 'payload/dist/admin/components/elements/Button'
 import DeleteMany from 'payload/dist/admin/components/elements/DeleteMany'
@@ -20,7 +21,6 @@ import formatFilesize from 'payload/dist/uploads/formatFilesize'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ListControls } from '../../components/ListControls'
 
 const baseClass = 'collection-list'
 
@@ -87,7 +87,8 @@ const DefaultList: React.FC<Props> = props => {
                     aria-label={t('createNewLabel', {
                       label: getTranslation(singularLabel, i18n),
                     })}
-                    to={newDocumentURL}>
+                    to={newDocumentURL}
+                  >
                     {t('createNew')}
                   </Pill>
                 )}

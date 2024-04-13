@@ -1,12 +1,7 @@
 import { Modal, useModal } from '@faceless-ui/modal'
-import React, { useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
-
-import type { Props } from 'payload/dist/admin/components/elements/DeleteMany/types'
-
 import Button from 'payload/dist/admin/components/elements/Button'
 import 'payload/dist/admin/components/elements/DeleteMany/index.scss'
+import type { Props } from 'payload/dist/admin/components/elements/DeleteMany/types'
 import Pill from 'payload/dist/admin/components/elements/Pill'
 import MinimalTemplate from 'payload/dist/admin/components/templates/Minimal'
 import { useConfig } from 'payload/dist/admin/components/utilities/Config'
@@ -14,6 +9,10 @@ import {
   SelectAllStatus,
   useSelection,
 } from 'payload/dist/admin/components/views/collections/List/SelectionProvider'
+import React, { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { IoIosWarning } from 'react-icons/io'
+import { toast } from 'react-toastify'
 
 const baseClass = 'delete-documents'
 
@@ -92,23 +91,36 @@ const RestoreMany: React.FC<Props> = props => {
         onClick={() => {
           setRestoring(false)
           toggleModal(modalSlug)
-        }}>
+        }}
+      >
         Restore
       </Pill>
       <Modal className={baseClass} slug={modalSlug}>
         <MinimalTemplate className={`${baseClass}__template`}>
           <h1>Confirm Restoration</h1>
           <p>{`You are about to Restore ${count} ${count > 1 ? 'documents' : 'document'} from ${plural}`}</p>
+          <p>
+            <IoIosWarning
+              color='orange'
+              size={16}
+              style={{ marginRight: 6, marginBottom: 4 }}
+            />
+            {count > 1 ? 'These documents' : 'This document'} will not be
+            restored if {count > 1 ? 'they are' : 'it is'} related to other
+            deleted documents.
+          </p>
           <Button
             buttonStyle='secondary'
             id='confirm-cancel'
             onClick={restoring ? undefined : () => toggleModal(modalSlug)}
-            type='button'>
+            type='button'
+          >
             {t('cancel')}
           </Button>
           <Button
             id='confirm-restore'
-            onClick={restoring ? undefined : handleRestore}>
+            onClick={restoring ? undefined : handleRestore}
+          >
             {restoring ? 'Restoring...' : t('confirm')}
           </Button>
         </MinimalTemplate>

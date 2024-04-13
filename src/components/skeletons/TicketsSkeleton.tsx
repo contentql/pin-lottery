@@ -36,7 +36,8 @@ function TicketsSkeleton() {
       <div className='load-more'>
         <button
           type='button'
-          className='d-flex align-items-center justify-content-lg-center gap-1'>
+          className='d-flex align-items-center justify-content-lg-center gap-1'
+        >
           <span className='loading-btn'></span>
         </button>
       </div>

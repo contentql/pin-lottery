@@ -1,6 +1,7 @@
+import { Metadata } from 'next'
+
 import { getPayloadClient } from '@/get-payload'
 import AboutView from '@/views/AboutView'
-import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'About',

@@ -1,6 +1,7 @@
-import { Media, Tag } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { Media, Tag } from '@/payload-types'
 
 function ContestCategories({ allTags }: { allTags: Tag[] }) {
   return (
@@ -24,7 +25,8 @@ function ContestCategories({ allTags }: { allTags: Tag[] }) {
                         href={{
                           pathname: '/contest',
                           query: { tag: tag?.tag },
-                        }}>
+                        }}
+                      >
                         <Image
                           src={(tag?.img as Media)?.url || ''}
                           width={100}

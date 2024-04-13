@@ -1,5 +1,5 @@
-import { CollectionAfterChangeHook } from 'payload/types'
 import { Contest } from '../../../payload-types'
+import { CollectionAfterChangeHook } from 'payload/types'
 
 export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
   operation,

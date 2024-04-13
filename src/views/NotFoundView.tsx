@@ -1,9 +1,8 @@
 'use client'
 
+import error from '/public/images/elements/error.png'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import error from '/public/images/elements/error.png'
 
 const NotFoundView = () => {
   return (

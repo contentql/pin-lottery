@@ -1,14 +1,15 @@
-import { AppContext } from '@/context/context'
-import { Contest, Ticket, User, Winner } from '@/payload-types'
-import { splitTicketNumber } from '@/utils/split-ticket-number'
-import { ticketsMetadata } from '@/utils/tickets-metadata'
-import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
+import circle_border from '/public/images/elements/circle-border.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
-import circle_border from '/public/images/elements/circle-border.png'
+
+import { AppContext } from '@/context/context'
+import { Contest, Ticket, User, Winner } from '@/payload-types'
+import { splitTicketNumber } from '@/utils/split-ticket-number'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
+import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
 
 const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
   const { addTicket, removeTicket, totalTicketsCount } = useContext(AppContext)
@@ -102,14 +103,16 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
                     className={`quantity-button`}
                     onClick={() =>
                       removeTicket({ contest_no: contestDetails?.contest_no })
-                    }>
+                    }
+                  >
                     <i className='las la-minus'></i>
                   </div>
                   <div
                     className={`quantity-button quantity-up`}
                     onClick={() =>
                       addTicket({ contest_no: contestDetails?.contest_no })
-                    }>
+                    }
+                  >
                     <i className='las la-plus'></i>
                   </div>
                 </div>
@@ -118,7 +121,8 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
             <div className='mt-sm-0 mt-3'>
               <Link
                 href={`${pathname}/ticket-details`}
-                className='cmn-btn style--three'>
+                className='cmn-btn style--three'
+              >
                 buy tickets
               </Link>
             </div>

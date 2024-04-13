@@ -1,20 +1,19 @@
 'use client'
 
-import { useAuth } from '@/providers/Auth'
+import team_obj from '/public/images/elements/team-obj.png'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FaArrowRightLong } from 'react-icons/fa6'
+import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 
+import { useAuth } from '@/providers/Auth'
 import { currentUser } from '@/queries/auth/currentUser'
-
 import { trpc } from '@/trpc/client'
 import uploadMedia from '@/utils/uploadMedia'
-import { ImSpinner } from 'react-icons/im'
-import team_obj from '/public/images/elements/team-obj.png'
 
 const LeftSideMenu = () => {
   const [uploadedImage, setUploadedImage] = useState(null)
@@ -124,7 +123,8 @@ const LeftSideMenu = () => {
               className='avatar-preview'
               style={{
                 backgroundImage: `url(${uploadedImage ? uploadedImage : userData?.image !== undefined ? userData?.image?.sizes?.userProfile?.url : '/images/user/pp.png'})`,
-              }}>
+              }}
+            >
               <div id='imagePreview'></div>
             </div>
           </div>
@@ -133,7 +133,8 @@ const LeftSideMenu = () => {
               className='cmn-btn style--two d-flex align-items-center update-profile-image'
               type='button'
               disabled={isUserImagePending}
-              onClick={() => handleUpdateUserProfile()}>
+              onClick={() => handleUpdateUserProfile()}
+            >
               {isUserImagePending ? (
                 <ImSpinner
                   size={22}

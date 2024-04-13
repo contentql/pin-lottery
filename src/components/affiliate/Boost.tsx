@@ -1,7 +1,6 @@
+import affiliate_obj from '/public/images/elements/affiliate-obj.png'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import affiliate_obj from '/public/images/elements/affiliate-obj.png'
 
 const Boost = () => {
   return (

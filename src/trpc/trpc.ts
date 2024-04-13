@@ -1,7 +1,8 @@
-import { User } from '@/payload-types'
-import { ExpressContext } from '@/server'
 import { TRPCError, initTRPC } from '@trpc/server'
 import { PayloadRequest } from 'payload/dist/types'
+
+import { User } from '@/payload-types'
+import { ExpressContext } from '@/server'
 
 const t = initTRPC.context<ExpressContext>().create()
 const middleware = t.middleware

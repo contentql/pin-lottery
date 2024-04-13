@@ -1,5 +1,6 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+
+import React, { useEffect, useState } from 'react'
 
 const InfoCard = ({ title }: any) => {
   const [totalDocs, setTotalDocs] = useState(0)

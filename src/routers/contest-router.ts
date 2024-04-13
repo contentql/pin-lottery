@@ -1,10 +1,10 @@
-import { TRPCError } from '@trpc/server'
-import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { ContestIdValidator } from '../lib/validators/contest-id-validator'
 import { ContestPaginationValidator } from '../lib/validators/contest-pagination-validator'
 import { ContestWinnerValidator } from '../lib/validators/contest-winner-validator'
 import { publicProcedure, router } from '../trpc/trpc'
+import { TRPCError } from '@trpc/server'
+import { z } from 'zod'
 
 export const contestRouter = router({
   getContests: publicProcedure

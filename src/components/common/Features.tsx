@@ -118,7 +118,8 @@ const Features = ({ featuresDetails }: { featuresDetails: Feature }) => {
               <p>{featuresDetails?.description}</p>
               <a
                 href='/about#features'
-                className='d-flex align-items-center mt-3 justify-content-lg-start justify-content-center'>
+                className='d-flex align-items-center mt-3 justify-content-lg-start justify-content-center'
+              >
                 Show all features
                 <i className='las la-angle-double-right text-danger'></i>
               </a>

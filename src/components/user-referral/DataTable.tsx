@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import DatePicker from 'react-datepicker'
-import { BsChevronDown } from 'react-icons/bs'
-import { FaRegCalendarAlt } from 'react-icons/fa'
-
 //css
 import 'react-datepicker/dist/react-datepicker.css'
+import { BsChevronDown } from 'react-icons/bs'
+import { FaRegCalendarAlt } from 'react-icons/fa'
 
 const DataTable = () => {
   const [dateRange, setDateRange] = useState([null, null])

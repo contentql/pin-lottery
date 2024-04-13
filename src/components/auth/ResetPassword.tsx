@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 import { ZodError } from 'zod'
 
@@ -9,7 +10,6 @@ import {
   TResetPasswordValidator,
 } from '@/lib/validators/auth-router/reset-password-validator'
 import { trpc } from '@/trpc/client'
-import { ImSpinner } from 'react-icons/im'
 
 interface PageProps {
   searchParams: {
@@ -105,7 +105,8 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                 <button
                   className='cmn-btn'
                   type='submit'
-                  disabled={isResetPasswordPending}>
+                  disabled={isResetPasswordPending}
+                >
                   {isResetPasswordPending ? (
                     <ImSpinner
                       size={22}

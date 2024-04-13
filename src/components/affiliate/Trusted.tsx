@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
 
 import { clients } from '@/data/affiliate'
-
-import 'slick-carousel/slick/slick.css'
 
 const Trusted = () => {
   const settings = {

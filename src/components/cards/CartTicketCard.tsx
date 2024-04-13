@@ -1,7 +1,6 @@
+import circle_border from '/public/images/elements/circle-border.png'
 import Image from 'next/image'
 import { FaTimes } from 'react-icons/fa'
-
-import circle_border from '/public/images/elements/circle-border.png'
 
 import { Cart, Contest } from '@/payload-types'
 
@@ -36,7 +35,8 @@ const CartTicketCard = ({
     <div className='cart-lottery-single'>
       <button
         className='cart-lottery-single__close'
-        onClick={() => handleDeleteTicket()}>
+        onClick={() => handleDeleteTicket()}
+      >
         <FaTimes />
       </button>
 

@@ -1,8 +1,7 @@
 'use client'
 
-import Image from 'next/image'
-
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
+import Image from 'next/image'
 
 import Details from '@/components/checkout/Details'
 import Banner from '@/components/common/Banner'

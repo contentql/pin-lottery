@@ -1,11 +1,12 @@
-import { Contest, Ticket } from '@/payload-types'
-import { splitTicketNumber } from '@/utils/split-ticket-number'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs'
 import { FaAngleLeft } from 'react-icons/fa'
 import * as sd from 'simple-duration'
+
+import { Contest, Ticket } from '@/payload-types'
+import { splitTicketNumber } from '@/utils/split-ticket-number'
 
 const UpcomingDraws = ({
   upcomingDrawTicketsData,
@@ -92,7 +93,8 @@ const UpcomingDraws = ({
                       <td>
                         <Link
                           href={`/contest/${(ticket?.contest_id?.value as Contest)?.id}`}
-                          className='contest-no'>
+                          className='contest-no'
+                        >
                           {(ticket?.contest_id?.value as Contest)?.contest_no}
                         </Link>
                       </td>
@@ -122,7 +124,8 @@ const UpcomingDraws = ({
                 <button
                   onClick={handleShowLess}
                   type='button'
-                  className='d-flex align-items-center justify-content-lg-center gap-1'>
+                  className='d-flex align-items-center justify-content-lg-center gap-1'
+                >
                   Show Less Lotteries <BsChevronUp />
                 </button>
               )
@@ -130,7 +133,8 @@ const UpcomingDraws = ({
               <button
                 onClick={handleShowMore}
                 type='button'
-                className='d-flex align-items-center justify-content-lg-center gap-1'>
+                className='d-flex align-items-center justify-content-lg-center gap-1'
+              >
                 Show More Lotteries <BsChevronDown />
               </button>
             )}

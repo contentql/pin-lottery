@@ -1,9 +1,9 @@
-import { useTableColumns } from 'payload/dist/admin/components/elements/TableColumns'
-import React from 'react'
-
 import 'payload/dist/admin/components/elements/Table/index.scss'
 import { Column } from 'payload/dist/admin/components/elements/Table/types'
+import { useTableColumns } from 'payload/dist/admin/components/elements/TableColumns'
 import { SanitizedCollectionConfig } from 'payload/types'
+import React from 'react'
+
 import './grid.scss'
 
 const baseClass = 'grid'

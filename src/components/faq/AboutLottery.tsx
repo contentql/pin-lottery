@@ -9,7 +9,8 @@ const AboutLottery = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse10'
             aria-expanded='true'
-            aria-controls='collapse10'>
+            aria-controls='collapse10'
+          >
             How do I deposit funds into my lottery Lottos account?
           </button>
         </div>
@@ -17,7 +18,8 @@ const AboutLottery = () => {
           id='collapse10'
           className='collapse show'
           aria-labelledby='h-10'
-          data-bs-parent='#faqAcc-five'>
+          data-bs-parent='#faqAcc-five'
+        >
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -36,7 +38,8 @@ const AboutLottery = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse11'
             aria-expanded='false'
-            aria-controls='collapse11'>
+            aria-controls='collapse11'
+          >
             What will the payment reflect as on my credit card statement?
           </button>
         </div>
@@ -44,7 +47,8 @@ const AboutLottery = () => {
           id='collapse11'
           className='collapse'
           aria-labelledby='h-11'
-          data-bs-parent='#faqAcc-five'>
+          data-bs-parent='#faqAcc-five'
+        >
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -63,7 +67,8 @@ const AboutLottery = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapse12'
             aria-expanded='false'
-            aria-controls='collapse12'>
+            aria-controls='collapse12'
+          >
             Why am I unable to deposit funds via credit card on your website?
           </button>
         </div>
@@ -71,7 +76,8 @@ const AboutLottery = () => {
           id='collapse12'
           className='collapse'
           aria-labelledby='h-12'
-          data-bs-parent='#faqAcc-five'>
+          data-bs-parent='#faqAcc-five'
+        >
           <div className='card-body'>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum

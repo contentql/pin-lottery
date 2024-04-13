@@ -9,7 +9,8 @@ const Banking = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapseOne'
             aria-expanded='true'
-            aria-controls='collapseOne'>
+            aria-controls='collapseOne'
+          >
             How do I deposit funds into my lottery Lottos account?
           </button>
         </div>
@@ -17,7 +18,8 @@ const Banking = () => {
           id='collapseOne'
           className='collapse show'
           aria-labelledby='headingOne'
-          data-bs-parent='#faqAcc-two'>
+          data-bs-parent='#faqAcc-two'
+        >
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -36,7 +38,8 @@ const Banking = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapseTwo'
             aria-expanded='false'
-            aria-controls='collapseTwo'>
+            aria-controls='collapseTwo'
+          >
             What will the payment reflect as on my credit card statement?
           </button>
         </div>
@@ -44,7 +47,8 @@ const Banking = () => {
           id='collapseTwo'
           className='collapse'
           aria-labelledby='headingTwo'
-          data-bs-parent='#faqAcc-two'>
+          data-bs-parent='#faqAcc-two'
+        >
           <div className='card-body'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -63,7 +67,8 @@ const Banking = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapseThree'
             aria-expanded='false'
-            aria-controls='collapseThree'>
+            aria-controls='collapseThree'
+          >
             Why am I unable to deposit funds via credit card on your website?
           </button>
         </div>
@@ -71,7 +76,8 @@ const Banking = () => {
           id='collapseThree'
           className='collapse'
           aria-labelledby='headingThree'
-          data-bs-parent='#faqAcc-two'>
+          data-bs-parent='#faqAcc-two'
+        >
           <div className='card-body'>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum
@@ -90,7 +96,8 @@ const Banking = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapseFour'
             aria-expanded='false'
-            aria-controls='collapseFour'>
+            aria-controls='collapseFour'
+          >
             Am I allowed to withdraw my deposit?
           </button>
         </div>
@@ -98,7 +105,8 @@ const Banking = () => {
           id='collapseFour'
           className='collapse'
           aria-labelledby='headingFour'
-          data-bs-parent='#faqAcc-two'>
+          data-bs-parent='#faqAcc-two'
+        >
           <div className='card-body'>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum
@@ -117,7 +125,8 @@ const Banking = () => {
             data-bs-toggle='collapse'
             data-bs-target='#collapseFive'
             aria-expanded='false'
-            aria-controls='collapseFive'>
+            aria-controls='collapseFive'
+          >
             Which payment methods are accepted by lottery Lottos?
           </button>
         </div>
@@ -125,7 +134,8 @@ const Banking = () => {
           id='collapseFive'
           className='collapse'
           aria-labelledby='headingFive'
-          data-bs-parent='#faqAcc-two'>
+          data-bs-parent='#faqAcc-two'
+        >
           <div className='card-body'>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum

@@ -1,8 +1,8 @@
+import play_el from '/public/images/elements/play-el.png'
 import Image from 'next/image'
 
 import { HowToPlayInfo, Media } from '@/payload-types'
 import { trpc } from '@/trpc/client'
-import play_el from '/public/images/elements/play-el.png'
 
 const HowToPlay = () => {
   const { data: howToPlayInfoData }: { data: HowToPlayInfo | undefined } =

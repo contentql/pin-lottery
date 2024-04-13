@@ -1,6 +1,6 @@
-import Image from 'next/image'
-
-import { Contest } from '@/payload-types'
+import specification_7 from '/public/images/icon/specification/7.png'
+import specification_8 from '/public/images/icon/specification/8.png'
+import specification_9 from '/public/images/icon/specification/9.png'
 import specification_10 from '/public/images/icon/specification/10.png'
 import specification_11 from '/public/images/icon/specification/11.png'
 import specification_12 from '/public/images/icon/specification/12.png'
@@ -10,9 +10,9 @@ import specification_15 from '/public/images/icon/specification/15.png'
 import specification_16 from '/public/images/icon/specification/16.png'
 import specification_17 from '/public/images/icon/specification/17.png'
 import specification_18 from '/public/images/icon/specification/18.png'
-import specification_7 from '/public/images/icon/specification/7.png'
-import specification_8 from '/public/images/icon/specification/8.png'
-import specification_9 from '/public/images/icon/specification/9.png'
+import Image from 'next/image'
+
+import { Contest } from '@/payload-types'
 
 function VehicleSpecifications({
   contestDetails,

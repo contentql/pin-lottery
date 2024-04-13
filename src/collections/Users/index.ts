@@ -1,6 +1,7 @@
-import { CollectionConfig } from 'payload/types'
 import { ResetPassword } from '../../email-templates/resetPassword'
 import { UserAccountVerification } from '../../email-templates/userAccountVerification'
+import { CollectionConfig } from 'payload/types'
+
 import { isAdminOrSelf } from './access/isAdminOrSelf'
 import { isManagerOrAdminOrSelf } from './access/isManagerOrAdminOrSelf'
 import { isAdmin } from './filed-level-access/isAdmin'

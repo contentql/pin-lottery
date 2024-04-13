@@ -1,24 +1,20 @@
 import { Modal, useModal } from '@faceless-ui/modal'
-import React, { useCallback, useState } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
-import { toast } from 'react-toastify'
-
-import type { Props } from 'payload/dist/admin/components/elements/DeleteDocument/types'
-
 import { requests } from 'payload/dist/admin/api'
 import Button from 'payload/dist/admin/components/elements/Button'
+import 'payload/dist/admin/components/elements/DeleteDocument/index.scss'
+import type { Props } from 'payload/dist/admin/components/elements/DeleteDocument/types'
 import * as PopupList from 'payload/dist/admin/components/elements/Popup/PopupButtonList'
 import { useForm } from 'payload/dist/admin/components/forms/Form/context'
 import MinimalTemplate from 'payload/dist/admin/components/templates/Minimal'
 import { useConfig } from 'payload/dist/admin/components/utilities/Config'
 import useTitle from 'payload/dist/admin/hooks/useTitle'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
-
-import 'payload/dist/admin/components/elements/DeleteDocument/index.scss'
-
+import React, { useCallback, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 // custom
 import { IoIosWarning } from 'react-icons/io'
+import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const baseClass = 'delete-document'
 
@@ -120,7 +116,8 @@ const DeleteDocument: React.FC<Props> = props => {
           onClick={() => {
             setDeleting(false)
             toggleModal(modalSlug)
-          }}>
+          }}
+        >
           {t('delete')}
           <IoIosWarning
             color='orange'
@@ -138,7 +135,8 @@ const DeleteDocument: React.FC<Props> = props => {
                 values={{
                   label: getTranslation(singular, i18n),
                   title: titleToRender,
-                }}>
+                }}
+              >
                 aboutToDelete
                 <strong>{titleToRender}</strong>
               </Trans>
@@ -157,12 +155,14 @@ const DeleteDocument: React.FC<Props> = props => {
                 buttonStyle='secondary'
                 id='confirm-cancel'
                 onClick={deleting ? undefined : () => toggleModal(modalSlug)}
-                type='button'>
+                type='button'
+              >
                 {t('cancel')}
               </Button>
               <Button
                 id='confirm-delete'
-                onClick={deleting ? undefined : handleDelete}>
+                onClick={deleting ? undefined : handleDelete}
+              >
                 {deleting ? t('deleting') : t('confirm')}
               </Button>
             </div>

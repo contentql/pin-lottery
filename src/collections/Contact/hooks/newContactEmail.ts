@@ -1,5 +1,6 @@
-import { CollectionAfterChangeHook } from 'payload/types'
 import { newContactForm } from '../../../email-templates/contactEmail'
+import { CollectionAfterChangeHook } from 'payload/types'
+
 const OPERATION = 'create'
 const SUBJECT = 'New contact submission'
 export const newContactEmail: CollectionAfterChangeHook = async ({
