@@ -124,7 +124,7 @@ const DeleteMany: React.FC<Props> = props => {
               size={16}
               style={{ marginRight: 6, marginBottom: 4 }}
             />
-            Deleting {count > 1 ? 'these contests' : 'this contest'} will
+            Deleting {count > 1 ? 'these winners' : 'this winner'} will
             trigger update to related contests by removing any winner relations
             and associated fields, if such contests exist.
           </p>
