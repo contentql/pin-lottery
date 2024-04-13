@@ -21,7 +21,7 @@
     "source.fixAll.eslint": "explicit"
   },
   "workbench.editor.customLabels.patterns": {
-    "**/{layout, page}.tsx": "${dirname} ${filename}",
+    "**/{layout, page, loading}.tsx": "${dirname} ${filename}",
     "**/{index}.ts": "${dirname} ${filename}"
   }
 }
