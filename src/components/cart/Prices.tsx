@@ -68,13 +68,12 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
       toast.warning('Please add tickets to proceed.')
       return
     }
-    if (
-      !!arrayOfTicketsWithPrices.length &&
-      (!userData?.amount || userData.amount < total_price_of_cart)
-    ) {
+
+    if (userData.amount < total_price_of_cart) {
       toast.error('Insufficient balance. Please add amount to continue.')
       return
     }
+
     setIsPurchasing(true)
     createTicketsMutation(arrayOfTicketsWithPrices)
   }
@@ -124,8 +123,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
               type='button'
               className='cmn-btn'
               onClick={() => handlePurchase()}
-              disabled={isPurchasing}
-            >
+              disabled={isPurchasing || isUserDataPending}>
               {isPurchasing ? (
                 <ImSpinner
                   size={22}
