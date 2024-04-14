@@ -1,5 +1,7 @@
 # Ticket Purchase System
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/efc8c48c55cb4b5cbaea7c1f904fa1c8)](https://app.codacy.com/gh/contentql/pin-lottery?utm_source=github.com&utm_medium=referral&utm_content=contentql/pin-lottery&utm_campaign=Badge_Grade)
+
 ## Ticket Details Page
 
 ### Adding Extra Tickets
