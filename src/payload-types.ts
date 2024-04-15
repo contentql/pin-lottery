@@ -151,6 +151,7 @@ export interface Contest {
   product_price: number;
   features: {
     root: {
+      type: string;
       children: {
         type: string;
         version: number;
@@ -159,13 +160,13 @@ export interface Contest {
       direction: ('ltr' | 'rtl') | null;
       format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
-      type: string;
       version: number;
     };
     [k: string]: unknown;
   };
   description: {
     root: {
+      type: string;
       children: {
         type: string;
         version: number;
@@ -174,7 +175,6 @@ export interface Contest {
       direction: ('ltr' | 'rtl') | null;
       format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
-      type: string;
       version: number;
     };
     [k: string]: unknown;
@@ -299,6 +299,7 @@ export interface Blog {
   short_desc: string;
   content: {
     root: {
+      type: string;
       children: {
         type: string;
         version: number;
@@ -307,7 +308,6 @@ export interface Blog {
       direction: ('ltr' | 'rtl') | null;
       format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
-      type: string;
       version: number;
     };
     [k: string]: unknown;
@@ -357,7 +357,10 @@ export interface Wishlist {
  */
 export interface Transaction {
   id: string;
-  email?: string | null;
+  user?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
   amount?: string | null;
   date?: string | null;
   status?: string | null;
@@ -436,6 +439,7 @@ export interface About {
   title: string;
   description: {
     root: {
+      type: string;
       children: {
         type: string;
         version: number;
@@ -444,7 +448,6 @@ export interface About {
       direction: ('ltr' | 'rtl') | null;
       format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
-      type: string;
       version: number;
     };
     [k: string]: unknown;

@@ -1,19 +1,35 @@
 import type { CollectionConfig } from 'payload/types'
 
+import { isAdminOrSelf } from './isAdminOrSelf'
+
 export const Transaction: CollectionConfig = {
   slug: 'transaction',
-  //   access: {
-  //     create: () => false,
-  //     update: () => false,
-  //   },
+  access: {
+    read: isAdminOrSelf,
+  },
   fields: [
     {
-      name: 'email',
-      type: 'email',
+      name: 'user',
+      type: 'relationship',
+      relationTo: ['users'],
       admin: {
         readOnly: true,
       },
-      label: 'User Email',
+      label: 'User',
+    },
+    {
+      name: 'type_of_transaction',
+      type: 'select',
+      options: [
+        { label: 'Deposit', value: 'deposit' },
+        { label: 'Withdraw', value: 'withdraw' },
+        { label: 'Tickets Purchased', value: 'tickets_purchased' },
+        { label: 'Refund', value: 'refund' },
+      ],
+      admin: {
+        readOnly: true,
+      },
+      label: 'Type of Transaction',
     },
     {
       name: 'amount',
@@ -62,7 +78,8 @@ export const Transaction: CollectionConfig = {
       path: '/paystack/webhook',
       method: 'post',
       handler: async (req, res) => {
-        const { payload, body } = req
+        const { payload, body, user } = req
+        const { payload, body, user } = req
 
         try {
           await payload.create({
@@ -73,11 +90,19 @@ export const Transaction: CollectionConfig = {
               status: body?.data.status,
               payment_method: body.data.authorization.brand,
               date: body.data.paid_at,
-              email: body.data.customer.email,
+              user: {
+                relationTo: 'users',
+                value: user.id,
+              },
+              user: {
+                relationTo: 'users',
+                value: user.id,
+              },
             },
           })
         } catch (error) {
-          console.log('Error while creating a tranction: ', error)
+          console.log('Error while creating a transaction: ', error)
+          console.log('Error while creating a transaction: ', error)
         }
 
         if (
@@ -85,27 +110,37 @@ export const Transaction: CollectionConfig = {
           body.data.authorization.authorization_code
         ) {
           try {
-            const { docs } = await payload.find({
-              collection: 'users',
-              where: {
-                email: {
-                  equals: body.data.customer.email,
-                },
-              },
-            })
+            // const { docs } = await payload.find({
+            //   collection: 'users',
+            //   where: {
+            //     email: {
+            //       equals: body.data.customer.email,
+            //     },
+            //   },
+            // })
+            // const { docs } = await payload.find({
+            //   collection: 'users',
+            //   where: {
+            //     email: {
+            //       equals: body.data.customer.email,
+            //     },
+            //   },
+            // })
 
-            const userAmount = docs.at(0)?.amount + body.data.amount
+            const userAmount = user.amount + body.data.amount
+            const userAmount = user.amount + body.data.amount
 
             await payload.update({
               collection: 'users',
+              id: user.id,
+              id: user.id,
               data: {
                 amount: userAmount,
               },
-              where: {
-                email: {
-                  equals: body.data.customer.email,
-                },
-              },
+              user: user,
+              overrideAccess: false, // enables access control
+              user: user,
+              overrideAccess: false, // enables access control
             })
           } catch (error) {
             console.log('Error while update user amount: ', error)
