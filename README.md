@@ -1,3 +1,5 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cc75e80a1c4045459bb41e585a3f8a17)](https://app.codacy.com/gh/contentql/pin-lottery/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 # Ticket Purchase System
 
 ## Ticket Details Page
