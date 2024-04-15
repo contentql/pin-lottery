@@ -141,22 +141,18 @@ const ContestCard = ({
               }}
               size={25}
               fill='red'
-              //  cursor={
-              //    isWishlistDeleted || isWishlistUpdated
-              //      ? 'not-allowed'
-              //      : 'pointer'
-              //  }
+              pointerEvents={isWishlistUpdated ? 'none' : 'auto'}
             />
           ) : (
             <FaRegHeart
               className='zoomin'
               size={25}
-              onClick={e => wishlistClickHandler(e)}
+              onClick={e => {
+                e.stopPropagation()
+                wishlistClickHandler(e)
+              }}
               style={{ color: 'white' }}
-              // cursor={
-              //   isWishlistDeleted || isWishlistUpdated
-              //     ? 'not-allowed'
-              //     : 'pointer'
+              pointerEvents={isWishlistDeleted ? 'none' : 'auto'}
             />
           )}
         </div>

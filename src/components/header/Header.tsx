@@ -134,7 +134,7 @@ const Header = () => {
             </div>
             <div>
               <div className='header-right-side'>
-                <div>
+                <div className='navbar navbar-expand-xl p-0 align-items-center'>
                   {' '}
                   {status === 'loggedIn' ? (
                     <div className='cart-wallet-flex'>
@@ -142,6 +142,79 @@ const Header = () => {
                         {ticketsMetadata?.currency} {user?.amount}
                       </span>
                       <Cart />
+                      <div>
+                        <Link
+                          href=''
+                          className='user-button'
+                          onClick={togglePopup}
+                          style={{
+                            backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
+                          }}>
+                          {popupVisible && (
+                            <div className='popup'>
+                              <div className='popup-arrow'></div>
+                              <Link
+                                href='/user-info'
+                                className='popup-btn user-profile'>
+                                <button
+                                  className='nav-user-profile'
+                                  style={{
+                                    backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
+                                  }}></button>
+                                <h6>{user?.user_name}</h6>
+                              </Link>
+                              <div className='divider'></div>
+                              <Link
+                                href='/user-info'
+                                className='popup-btn list-nav'>
+                                <span>
+                                  <LuUser2 size={24} color='white' />
+                                </span>
+                                <p>Personal Info</p>
+                              </Link>
+                              <Link href='/user' className='popup-btn list-nav'>
+                                <span>
+                                  <LiaTicketAltSolid size={24} color='white' />
+                                </span>
+                                <p>My Tickets</p>
+                              </Link>
+                              <Link
+                                href='/user-transaction'
+                                className='popup-btn list-nav'>
+                                <span>
+                                  <GrTransaction size={24} color='white' />
+                                </span>
+                                <p>Transactions</p>
+                              </Link>
+                              <Link
+                                href='/user-lottery'
+                                className='popup-btn list-nav'>
+                                <span>
+                                  <FaRegHeart size={24} color='white' />
+                                </span>
+                                <p>Wishlist</p>
+                              </Link>
+                              <div className='divider'></div>
+                              <button
+                                onClick={handleLogout}
+                                className='popup-btn list-nav'>
+                                <RxExit size={24} color='white' />
+                                <p> Logout</p>
+                              </button>
+                            </div>
+                          )}
+                        </Link>
+                        <div className='user-profile-link'>
+                          <Link
+                            href='/user-info'
+                            className='cmn-btn style--three btn--sm'>
+                            <span className='react-icon-profile'>
+                              <LuUser2 size={18} color='white' />
+                            </span>
+                            Profile Info
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   ) : (
                     <div>
@@ -244,7 +317,7 @@ const Header = () => {
                   <Image src={tag} alt='icon' className='me-1' /> Buy Tickets
                 </Link>
 
-                <div className='right'>
+                {/* <div className='right'>
                   {status === 'loggedIn' && (
                     <>
                       <Link
@@ -320,7 +393,7 @@ const Header = () => {
                       </div>
                     </>
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
           </nav>

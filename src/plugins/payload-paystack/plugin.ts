@@ -4,9 +4,7 @@ import { Paystack } from 'paystack-sdk'
 
 import Transaction from './collections/transaction'
 
-const paystackSdk = new Paystack(
-  'sk_test_6c2e7ca16d0d713386973b3039bfcecae37275e3',
-)
+const paystackSdk = new Paystack(process.env.PAYSTACK_SECRET_KEY!)
 
 const createPaystackCustomer: CollectionAfterOperationHook = async ({
   operation,
@@ -40,7 +38,7 @@ export const createPaystackCheckoutUrl = async (
 ) => {
   try {
     const checkout = await paystackSdk.transaction.initialize({
-      amount: depositAmount,
+      amount: String(Number(depositAmount) * 100),
       email: userEmail!,
     })
 
@@ -64,7 +62,7 @@ export const validatePaystackPaymentStatus = async ({
   }
 }
 
-//Widhdraw Payment
+// Withdraw Payment
 
 export const initializeTransfer = async () => {
   try {
