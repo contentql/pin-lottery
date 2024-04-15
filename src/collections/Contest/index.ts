@@ -485,6 +485,17 @@ const Contest: CollectionConfig = {
         position: 'sidebar',
         condition: data => data.contest_status === true,
       },
+      filterOptions: ({ relationTo, data, id }) => {
+        if (relationTo === 'winner') {
+          return {
+            'contest.value': {
+              equals: id,
+            },
+          }
+        }
+
+        return false
+      },
     },
     {
       name: 'show_in_hero',
