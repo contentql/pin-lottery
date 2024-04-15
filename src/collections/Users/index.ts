@@ -99,15 +99,6 @@ const Users: CollectionConfig = {
         update: isAdmin,
       },
     },
-    {
-      name: 'amount',
-      type: 'number',
-      label: 'Amount',
-      defaultValue: 0,
-      admin: {
-        readOnly: true,
-      },
-    },
   ],
 }
 
