@@ -94,12 +94,12 @@ export const Trash: CollectionConfig = {
 
         try {
           const queryString = req.params.id
-          const arrayOfIds = (qs.parse(queryString) as any).id
+          const arrayOfIds = (qs.parse(queryString) as any).where?.id?.in || []
 
-          // Ensure arrayOfIds is an array
-          const restoreDocIds = Array.isArray(arrayOfIds)
-            ? arrayOfIds
-            : [arrayOfIds]
+          const restoreDocIds =
+            typeof arrayOfIds === 'object' && !Array.isArray(arrayOfIds)
+              ? Object.values(arrayOfIds || {})
+              : [...arrayOfIds]
 
           // Use Promise.allSettled() to ensure all restoration operations are settled
           const results = await Promise.allSettled(
@@ -132,10 +132,10 @@ export const Trash: CollectionConfig = {
                 })
 
                 // Return a success result for this operation
-                return { status: 'fulfilled', id: restoreDocId }
+                return { trash_id: restoreDocId }
               } catch (error: any) {
                 // Return a failed result for this operation
-                return { status: 'rejected', reason: error.message }
+                throw { message: error.message, trash_id: restoreDocId }
               }
             }),
           )
@@ -150,7 +150,7 @@ export const Trash: CollectionConfig = {
               .json({ error: 'Error while restoring documents', results })
           } else {
             // If all promises succeeded, return a success response
-            res.status(200).json({ status: true })
+            res.status(200).json({ status: true, results })
           }
         } catch (error) {
           // If an unexpected error occurred, return a generic error response
