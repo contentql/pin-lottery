@@ -1553,3 +1553,16 @@ $duration: 1000;
 .cart-wallet-flex {
   display: flex;
 }
+.user-button {
+  display: none;
+  margin-left: 28px;
+  width: 40px;
+  height: 40px;
+  background-color: $base-color-two;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 48px;
+  @media (min-width: 1199px) {
+    display: block;
+  }
+}
