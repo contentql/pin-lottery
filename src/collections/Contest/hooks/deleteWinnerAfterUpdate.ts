@@ -28,7 +28,6 @@ export const deleteWinnerAfterUpdate: CollectionAfterChangeHook = async ({
           })
         } catch (error) {
           console.error('Error updating contest: ', error)
-          // throw new Error('Failed to update contest.')
         }
 
         return
@@ -43,7 +42,24 @@ export const deleteWinnerAfterUpdate: CollectionAfterChangeHook = async ({
         })
       } catch (error: any) {
         console.error('Error deleting winner document: ', error)
-        // throw new Error('Failed to delete winner document.')
+
+        if (error.status === 404) {
+          const latestData = {
+            contest_timer_status: false,
+            contest_status: false,
+            winner_ticket: null,
+          }
+
+          try {
+            await payload.update({
+              collection: 'contest',
+              id: doc?.id,
+              data: { ...latestData },
+            })
+          } catch (error) {
+            console.error('Error updating contest: ', error)
+          }
+        }
       }
     }
   }

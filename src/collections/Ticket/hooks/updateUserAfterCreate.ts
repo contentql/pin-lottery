@@ -6,9 +6,13 @@ export const updateUserAfterCreate: CollectionAfterChangeHook = async ({
   previousDoc, // document data before updating the collection
   operation, // name of the operation ie. 'create', 'update'
 }) => {
-  const { payload, user } = req
+  const { payload, user, context } = req
+
+  const { chargeAmount } = context
 
   if (operation === 'create') {
+    if (!chargeAmount) return
+
     const reducedAmount = user.amount - doc.ticket_price
 
     if (user.amount && user.amount >= doc.ticket_price) {

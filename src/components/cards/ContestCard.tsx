@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
+import * as sd from 'simple-duration'
 
 import { Contest, Media, Ticket, Winner, Wishlist } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
@@ -41,6 +42,13 @@ const ContestCard = ({
       type: 'query',
     },
   ]
+  const date = new Date(itm?.threshold_reached_date || '1')
+
+  const milliseconds = itm?.day_remain ? sd.parse(itm?.day_remain) * 1000 : 1
+
+  const winnerAnnouncingDate = new Date(date.getTime() + milliseconds)
+    .toISOString()
+    .split('T')[0]
 
   const { mutate: addToWishlist, isPending: isWishlistUpdated } =
     trpc.wishlist.addToWishlist.useMutation({
@@ -113,8 +121,7 @@ const ContestCard = ({
   return (
     <div
       className='contest-card'
-      onClick={() => router.push(`/contest/${itm.id}`)}
-    >
+      onClick={() => router.push(`/contest/${itm.id}`)}>
       <div className='contest-card__thumb'>
         <Image
           src={(itm.img as Media)?.sizes?.contestImage?.url || '/'}
@@ -185,20 +192,24 @@ const ContestCard = ({
             </li>
           </ul>
         </div>
-      ) : (
+      ) : itm?.reached_threshold &&
+        itm?.threshold_reached_date &&
+        !itm?.contest_status &&
+        !itm?.winner_ticket ? (
         // actual fotter
-        // <div className='contest-card__footer'>
-        //   <ul className='contest-card__meta'>
-        //     <li>
-        //       <i className='las la-clock'></i>
-        //       <span>{itm.day_remain}d</span>
-        //     </li>
-        //     <li>
-        //       <i className='las la-ticket-alt'></i>
-        //       <p>tickets available</p>
-        //     </li>
-        //   </ul>
-        // </div>
+        <div className='contest-card__footer'>
+          <ul className='contest-card__meta'>
+            <li>
+              <i className='las la-clock'></i>
+              <span>{winnerAnnouncingDate}</span>
+            </li>
+            <li>
+              <i className='las la-ticket-alt'></i>
+              <p>tickets available</p>
+            </li>
+          </ul>
+        </div>
+      ) : (
         <div className='contest-card__footer'>
           <ul>
             <li className='footer-card'>

@@ -9,11 +9,11 @@ import { CollectionConfig } from 'payload/types'
 
 import { DefaultCollectionEdit } from './custom/views/Edit/Default'
 import DefaultListView from './custom/views/List/DefaultListView'
+import { updateTagAfterChange } from './field-level-hooks/updateTagAfterChange'
 import { announceWinnerAfterUpdate } from './hooks/announceWinnerAfterUpdate'
 import { deleteCartAfterUpdate } from './hooks/deleteCartAfterUpdate'
 import { deleteRelatedDocsAfterDelete } from './hooks/deleteRelatedDocsAfterDelete'
 import { deleteWinnerAfterUpdate } from './hooks/deleteWinnerAfterUpdate'
-import { updateTagAfterChange } from './hooks/updateTagAfterChange'
 
 const Contest: CollectionConfig = {
   slug: 'contest',
@@ -484,6 +484,17 @@ const Contest: CollectionConfig = {
         description: 'Select the winner of the contest.',
         position: 'sidebar',
         condition: data => data.contest_status === true,
+      },
+      filterOptions: ({ relationTo, data, id }) => {
+        if (relationTo === 'winner') {
+          return {
+            'contest.value': {
+              equals: id,
+            },
+          }
+        }
+
+        return false
       },
     },
     {

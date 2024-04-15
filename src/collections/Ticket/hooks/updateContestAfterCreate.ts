@@ -25,41 +25,35 @@ export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
         ticket => ticket.id === doc.id,
       )
 
-      const { id, product_price, ticket_price } = purchasedTicket?.contest_id
-        .value as Contest
+      const {
+        id: contestId,
+        product_price,
+        ticket_price,
+        show_in_hero,
+        threshold_reached_date,
+      } = (purchasedTicket?.contest_id.value as Contest) ?? {}
+
+      if (!contestId) {
+        throw new Error('Contest ID not found for the ticket')
+      }
 
       const reachedThreshold = ticket_price * ticketsPurchased >= product_price
-      const date = doc?.contest_id.value.threshold_reached_date ?? new Date()
+      const date = threshold_reached_date ?? new Date()
 
       const latestData = {
         tickets_purchased: ticketsPurchased,
         reached_threshold: reachedThreshold,
         threshold_reached_date: reachedThreshold ? date.toString() : undefined,
-        show_in_hero: reachedThreshold
-          ? true
-          : (purchasedTicket?.contest_id.value as Contest).show_in_hero,
+        show_in_hero: reachedThreshold ? true : show_in_hero,
       }
 
-      try {
-        await payload.update({
-          collection: 'contest',
-          id,
-          data: latestData,
-        })
-      } catch (error: any) {
-        console.error(
-          'Error updating contest after creating a ticket  after create: ',
-          error?.message,
-        )
-        // throw new Error(
-        //   'Failed to update contest data after creating a ticket  after create.',
-        // )
-      }
+      await payload.update({
+        collection: 'contest',
+        id: contestId,
+        data: latestData,
+      })
     } catch (error) {
-      console.error('Error finding relevant tickets after create: ', error)
-      // throw new Error(
-      //   'Failed to find relevant tickets while updating contest data  after create.',
-      // )
+      console.error('Error in updateContestAfterCreate:', error)
     }
   }
 }
