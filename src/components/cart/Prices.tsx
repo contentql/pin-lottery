@@ -81,6 +81,9 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
   return (
     <div className='col-lg-4 mt-lg-0 mt-4'>
       <div className='checkout-wrapper'>
+        <div className='checkout-wrapper__header mb-4'>
+          <h3>Wallet amount: {userData?.amount}</h3>
+        </div>
         <div className='checkout-wrapper__header'>
           <h3>Your tickets:</h3>
         </div>
@@ -123,7 +126,11 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
               type='button'
               className='cmn-btn'
               onClick={() => handlePurchase()}
-              disabled={isPurchasing || isUserDataPending}>
+              disabled={
+                userData?.amount < total_price_of_cart
+                  ? true
+                  : isPurchasing || isUserDataPending
+              }>
               {isPurchasing ? (
                 <ImSpinner
                   size={22}
