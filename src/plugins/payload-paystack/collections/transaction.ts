@@ -79,7 +79,6 @@ export const Transaction: CollectionConfig = {
       method: 'post',
       handler: async (req, res) => {
         const { payload, body, user } = req
-        const { payload, body, user } = req
 
         try {
           await payload.create({
@@ -90,10 +89,6 @@ export const Transaction: CollectionConfig = {
               status: body?.data.status,
               payment_method: body.data.authorization.brand,
               date: body.data.paid_at,
-              user: {
-                relationTo: 'users',
-                value: user.id,
-              },
               user: {
                 relationTo: 'users',
                 value: user.id,
@@ -128,17 +123,13 @@ export const Transaction: CollectionConfig = {
             // })
 
             const userAmount = user.amount + body.data.amount
-            const userAmount = user.amount + body.data.amount
 
             await payload.update({
               collection: 'users',
               id: user.id,
-              id: user.id,
               data: {
                 amount: userAmount,
               },
-              user: user,
-              overrideAccess: false, // enables access control
               user: user,
               overrideAccess: false, // enables access control
             })
