@@ -45,7 +45,7 @@ export interface User {
   phone_number?: string | null;
   image?: string | Media | null;
   roles?: ('admin' | 'manager' | 'editor' | 'user')[] | null;
-  amount?: number | null;
+  amount: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -361,6 +361,7 @@ export interface Transaction {
     relationTo: 'users';
     value: string | User;
   } | null;
+  type_of_transaction?: ('deposit' | 'withdraw' | 'tickets_purchased' | 'refund') | null;
   amount?: string | null;
   date?: string | null;
   status?: string | null;

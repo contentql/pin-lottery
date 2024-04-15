@@ -15,7 +15,7 @@ const createPaystackCustomer: CollectionAfterOperationHook = async ({
 }) => {
   if (operation === 'create') {
     try {
-      const customer = await paystackSdk.customer.create({
+      const { data: customer } = await paystackSdk.customer.create({
         email: result.email,
         first_name: result.user_name,
         last_name: 'sum',
@@ -108,13 +108,26 @@ export const paystack: Plugin = (incomingConfig: Config): Config => {
           ...collection.hooks,
           afterOperation: [createPaystackCustomer],
         },
+        fields: [
+          ...JSON.parse(JSON.stringify(collection.fields)),
+          {
+            name: 'amount',
+            type: 'number',
+            label: 'Amount',
+            admin: {
+              readOnly: true,
+            },
+            required: true,
+            defaultValue: 0,
+          },
+        ],
       }
     }
 
     return collection
   })
 
-  const config = {
+  const config: Config = {
     ...incomingConfig,
     collections: [
       ...updatedCollection,
