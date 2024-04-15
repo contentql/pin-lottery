@@ -5,15 +5,15 @@ export const updateContestAfterDelete: CollectionAfterDeleteHook = async ({
   id, // id of document to delete
   doc, // deleted document
 }) => {
-  const { payload } = req
-
-  const latestData = {
-    contest_timer_status: false,
-    contest_status: false,
-    winner_ticket: null,
-  }
-
   try {
+    const { payload } = req
+
+    const latestData = {
+      contest_timer_status: false,
+      contest_status: false,
+      winner_ticket: null,
+    }
+
     await payload.update({
       collection: 'contest',
       data: { ...latestData },
@@ -28,9 +28,5 @@ export const updateContestAfterDelete: CollectionAfterDeleteHook = async ({
       'Error updating contest after deletion of winner document:',
       error,
     )
-    // throw new Error(
-    //   'Failed to update contest after deletion of winner document: ' +
-    //     error.message,
-    // )
   }
 }
