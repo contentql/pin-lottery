@@ -150,7 +150,7 @@ export const Trash: CollectionConfig = {
               .json({ error: 'Error while restoring documents', results })
           } else {
             // If all promises succeeded, return a success response
-            res.status(200).json({ status: true })
+            res.status(200).json({ status: true, results })
           }
         } catch (error) {
           // If an unexpected error occurred, return a generic error response
