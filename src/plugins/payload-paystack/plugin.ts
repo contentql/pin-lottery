@@ -120,6 +120,14 @@ export const paystack: Plugin = (incomingConfig: Config): Config => {
             required: true,
             defaultValue: 0,
           },
+          {
+            name: 'paystack_customer_code',
+            type: 'text',
+            label: 'Paystack Customer Code',
+            admin: {
+              readOnly: true,
+            },
+          },
         ],
       }
     }

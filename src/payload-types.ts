@@ -46,6 +46,7 @@ export interface User {
   image?: string | Media | null;
   roles?: ('admin' | 'manager' | 'editor' | 'user')[] | null;
   amount: number;
+  paystack_customer_code?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
