@@ -27,7 +27,6 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
         const { id: contestId } = doc
 
         // Fetch all tickets related to the contest
-        console.log('tickets')
         const { docs: contestTickets } = await payload.find({
           req,
           collection: 'tickets',
@@ -52,11 +51,9 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
           throw new Error('No ticket found for the contest')
         }
 
-        // @ts-ignore
         const { id: ticketId } = randomTicket
 
         // Create a winner entry
-        console.log('winner')
         const winner = await payload.create({
           req,
           collection: 'winner',
@@ -77,7 +74,6 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
         }
 
         // Update the contest data with the latest information
-        console.log('contest')
         await payload.update({
           req,
           collection: 'contest',
