@@ -2,8 +2,9 @@ import { DefaultCollectionEdit } from '../views/Edit/Default'
 import DefaultListView from '../views/List/DefaultListView'
 import type { CollectionConfig } from 'payload/types'
 import qs from 'qs'
+import { toast } from 'react-toastify'
 
-// This is a object converter that converts any  expanded relation including nested to plain relation (where the value of the relation is just the id)
+// This is an object converter that converts any expanded relation including nested to plain relation (where the value of the relation is just the id)
 function convertObject(obj: any) {
   Object.keys(obj).forEach(key => {
     // To convert relations
@@ -92,57 +93,56 @@ export const Trash: CollectionConfig = {
       handler: async (req, res) => {
         const { payload } = req
 
-        const queryString = req.params.id
-
-        const arrayOfIds = (qs.parse(queryString) as any).where?.id?.in
-
-        const convertArrayOfIds =
-          typeof arrayOfIds === 'object' && !Array.isArray(arrayOfIds)
-            ? Object.values(arrayOfIds || {})
-            : [...arrayOfIds]
-
         try {
+          const queryString = req.params.id
+          const arrayOfIds = (qs.parse(queryString) as any).id
+
+          // Ensure arrayOfIds is an array
+          const restoreDocIds = Array.isArray(arrayOfIds)
+            ? arrayOfIds
+            : [arrayOfIds]
+
+          // Use Promise.all() to ensure all restoration operations complete before responding
           await Promise.all(
-            convertArrayOfIds?.map(async (restoreDocId: string) => {
-              // eslint-disable-next-line dot-notation
-              const { value: newValue, collectionName } =
-                await payload.db.collections['trash'].findById(restoreDocId)
-
-              const middleData = { ...newValue, _id: newValue.id }
-              const { id, ...restData } = middleData
-
+            restoreDocIds.map(async (restoreDocId: string) => {
               try {
+                const trashDocument =
+                  await payload.db.collections['trash'].findById(restoreDocId)
+
+                if (!trashDocument) {
+                  throw new Error(
+                    `Trash document with ID ${restoreDocId} not found`,
+                  )
+                }
+
+                const { value: newValue, collectionName } = trashDocument
+
+                // Convert nested objects and relations to plain IDs
+                const convertedData = convertObject(newValue)
+
+                // Create a new document in the original collection
                 await payload.create({
                   collection: collectionName,
-                  data: { ...convertObject(restData) },
+                  data: convertedData,
                 })
 
-                // Delete the document from the trash only if creation succeeds
+                // Delete the document from the trash collection
                 await payload.delete({
                   collection: 'trash',
                   id: restoreDocId,
                 })
               } catch (error: any) {
-                console.log(`Error while restoring ${collectionName}: `, error)
-                // if (error.data.at(0).message) {
-                //   res.status(500).json({
-                //     error: error.data.at(0).message,
-                //   })
-                // } else {
-                //   res.status(500).json({
-                //     error: `An error occurred while restoring ${collectionName}: ${error}`,
-                //   })
-                // }
+                console.log('Error while restoring document: ', error)
+                toast.error(`Error while restoring document: ${error.message}`)
+                throw error
               }
             }),
           )
 
+          // Respond with success if all restoration operations complete successfully
           res.status(200).json({ status: true })
         } catch (error) {
-          res.status(500).json({
-            error: 'Error While Restoring',
-          })
-          console.log('Error while restoring: ', error)
+          res.status(500).json({ error: 'Error while restoring documents' })
         }
       },
     },
