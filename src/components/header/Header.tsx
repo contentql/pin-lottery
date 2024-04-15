@@ -4,7 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { FaRegHeart } from 'react-icons/fa'
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaRegHeart,
+  FaTwitter,
+} from 'react-icons/fa'
 import { GrTransaction } from 'react-icons/gr'
 import { LiaTicketAltSolid } from 'react-icons/lia'
 import { LuUser2 } from 'react-icons/lu'
@@ -14,6 +20,7 @@ import { toast } from 'react-toastify'
 import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { logout } from '@/queries/auth/logout'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
 
 import Cart from './Cart'
 
@@ -94,8 +101,81 @@ const Header = () => {
       id='gotoTop'
       className={`header ${
         windowHeight > 50 && 'menu-fixed animated fadeInDown'
-      }`}
-    >
+      }`}>
+      <div className='header__top'>
+        <div className='container'>
+          <div className='header-wrapper'>
+            <div>
+              <div className='left d-flex align-items-center'>
+                <ul className='social-links align-items-center'>
+                  <li>Follow Us :</li>
+                  <li>
+                    <Link href='/#'>
+                      <FaFacebookF />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/#'>
+                      <FaTwitter />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/#'>
+                      <FaLinkedinIn />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/#'>
+                      <FaInstagram />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div className='header-right-side'>
+                <div>
+                  {' '}
+                  {status === 'loggedIn' ? (
+                    <div className='cart-wallet-flex'>
+                      <span className='wallet-amount'>
+                        {ticketsMetadata?.currency} {user?.amount}
+                      </span>
+                      <Cart />
+                    </div>
+                  ) : (
+                    <div>
+                      <Link href='/login' className='login-btn btn--sm'>
+                        Login
+                      </Link>
+                      <Link
+                        href='/register'
+                        className='login-btn btn--sm ml-20'>
+                        Register
+                      </Link>
+                    </div>
+                  )}
+                </div>
+                {/* <div className="product__cart">
+                  <span className="total__amount">0.00</span>
+                  <Link href="/cart" className="amount__btn">
+                    <i className="las la-shopping-basket"></i>
+                    <span className="cart__num">{10}</span>
+                  </Link>
+                </div> */}
+                {/* <a
+                  href="#0"
+                  className="user__btn d-flex align-items-center justify-content-center"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                >
+                  <i className="las la-user"></i>
+                </a> */}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className='header__bottom'>
         <div className='container'>
           <nav className='navbar navbar-expand-xl p-0 align-items-center'>
@@ -165,8 +245,7 @@ const Header = () => {
                 </Link>
 
                 <div className='right'>
-                  {status === 'loggedIn' && <Cart />}
-                  {status === 'loggedIn' ? (
+                  {status === 'loggedIn' && (
                     <>
                       <Link
                         href=''
@@ -174,28 +253,24 @@ const Header = () => {
                         onClick={togglePopup}
                         style={{
                           backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
-                        }}
-                      >
+                        }}>
                         {popupVisible && (
                           <div className='popup'>
                             <div className='popup-arrow'></div>
                             <Link
                               href='/user-info'
-                              className='popup-btn user-profile'
-                            >
+                              className='popup-btn user-profile'>
                               <button
                                 className='nav-user-profile'
                                 style={{
                                   backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
-                                }}
-                              ></button>
+                                }}></button>
                               <h6>{user?.user_name}</h6>
                             </Link>
                             <div className='divider'></div>
                             <Link
                               href='/user-info'
-                              className='popup-btn list-nav'
-                            >
+                              className='popup-btn list-nav'>
                               <span>
                                 <LuUser2 size={24} color='white' />
                               </span>
@@ -209,8 +284,7 @@ const Header = () => {
                             </Link>
                             <Link
                               href='/user-transaction'
-                              className='popup-btn list-nav'
-                            >
+                              className='popup-btn list-nav'>
                               <span>
                                 <GrTransaction size={24} color='white' />
                               </span>
@@ -218,8 +292,7 @@ const Header = () => {
                             </Link>
                             <Link
                               href='/user-lottery'
-                              className='popup-btn list-nav'
-                            >
+                              className='popup-btn list-nav'>
                               <span>
                                 <FaRegHeart size={24} color='white' />
                               </span>
@@ -228,8 +301,7 @@ const Header = () => {
                             <div className='divider'></div>
                             <button
                               onClick={handleLogout}
-                              className='popup-btn list-nav'
-                            >
+                              className='popup-btn list-nav'>
                               <RxExit size={24} color='white' />
                               <p> Logout</p>
                             </button>
@@ -239,8 +311,7 @@ const Header = () => {
                       <div className='user-profile-link'>
                         <Link
                           href='/user-info'
-                          className='cmn-btn style--three btn--sm'
-                        >
+                          className='cmn-btn style--three btn--sm'>
                           <span className='react-icon-profile'>
                             <LuUser2 size={18} color='white' />
                           </span>
@@ -248,10 +319,6 @@ const Header = () => {
                         </Link>
                       </div>
                     </>
-                  ) : (
-                    <Link href='/login' className='login-btn btn--sm'>
-                      Login
-                    </Link>
                   )}
                 </div>
               </div>

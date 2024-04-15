@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { IoCartOutline } from 'react-icons/io5'
 
 import { trpc } from '@/trpc/client'
 
@@ -8,13 +9,13 @@ const Cart = () => {
   const { data: cartData, isPending } = trpc.cart.getCartTickets.useQuery()
 
   return (
-    <div className='product__cart'>
-      <Link href='/cart' className='amount__btn'>
-        <i className='las la-shopping-basket'></i>
-        {cartData?.length !== 0
-          ? !isPending && <span className='cart__num'>{cartData?.length}</span>
-          : ''}
+    <div className='cart-icon ml-20'>
+      <Link href='/cart'>
+        <IoCartOutline color='white' size={28} />
       </Link>
+      {cartData?.length !== 0
+        ? !isPending && <span className='cart-number'>{cartData?.length}</span>
+        : ''}
     </div>
   )
 }
