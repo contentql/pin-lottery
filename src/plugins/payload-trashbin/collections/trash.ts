@@ -2,7 +2,6 @@ import { DefaultCollectionEdit } from '../views/Edit/Default'
 import DefaultListView from '../views/List/DefaultListView'
 import type { CollectionConfig } from 'payload/types'
 import qs from 'qs'
-import { toast } from 'react-toastify'
 
 // This is an object converter that converts any expanded relation including nested to plain relation (where the value of the relation is just the id)
 function convertObject(obj: any) {
@@ -102,8 +101,8 @@ export const Trash: CollectionConfig = {
             ? arrayOfIds
             : [arrayOfIds]
 
-          // Use Promise.all() to ensure all restoration operations complete before responding
-          await Promise.all(
+          // Use Promise.allSettled() to ensure all restoration operations are settled
+          const results = await Promise.allSettled(
             restoreDocIds.map(async (restoreDocId: string) => {
               try {
                 const trashDocument =
@@ -131,17 +130,30 @@ export const Trash: CollectionConfig = {
                   collection: 'trash',
                   id: restoreDocId,
                 })
+
+                // Return a success result for this operation
+                return { status: 'fulfilled', id: restoreDocId }
               } catch (error: any) {
-                console.log('Error while restoring document: ', error)
-                toast.error(`Error while restoring document: ${error.message}`)
-                throw error
+                // Return a failed result for this operation
+                return { status: 'rejected', reason: error.message }
               }
             }),
           )
 
-          // Respond with success if all restoration operations complete successfully
-          res.status(200).json({ status: true })
+          // Check if any promise failed
+          const hasError = results.some(result => result.status === 'rejected')
+
+          if (hasError) {
+            // If any promise failed, return an error response
+            res
+              .status(500)
+              .json({ error: 'Error while restoring documents', results })
+          } else {
+            // If all promises succeeded, return a success response
+            res.status(200).json({ status: true })
+          }
         } catch (error) {
+          // If an unexpected error occurred, return a generic error response
           res.status(500).json({ error: 'Error while restoring documents' })
         }
       },
