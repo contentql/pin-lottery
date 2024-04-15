@@ -53,7 +53,7 @@ export const updateContestAfterCreate: CollectionAfterChangeHook = async ({
         data: latestData,
       })
     } catch (error) {
-      console.error('Error in announceWinnerAfterUpdate:', error)
+      console.error('Error in updateContestAfterCreate:', error)
     }
   }
 }
