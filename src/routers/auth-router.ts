@@ -55,6 +55,7 @@ export const authRouter = router({
             user_name,
             email,
             password,
+            amount: 0,
           },
         })
 
