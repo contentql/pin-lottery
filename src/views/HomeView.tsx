@@ -14,7 +14,6 @@ import Hero from '@/components/home/Hero'
 import WinnerDetails from '@/components/home/WinnerDetails'
 import HeroSkeleton from '@/components/skeletons/HeroSkeleton'
 import { Contest, Feature, Tag, Winner } from '@/payload-types'
-import { validatePaystackPaymentStatus } from '@/plugins/payload-paystack'
 import { trpc } from '@/trpc/client'
 
 const HomeView = ({ heroData }: { heroData: Contest[] }) => {
@@ -47,9 +46,27 @@ const HomeView = ({ heroData }: { heroData: Contest[] }) => {
 
   if (reference) {
     const testFunction = async () => {
-      const paymentStatus = await validatePaystackPaymentStatus({
-        reference,
-      })
+      try {
+        const response = await fetch(
+          '/api/transaction/paystack/validate-paystack-payment-status',
+          {
+            method: 'post',
+            body: JSON.stringify({ reference }),
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        )
+
+        const paymentStatus = await response.json()
+      } catch (error) {
+        console.log('Error while validating paystack payment status: ', error)
+      }
+
+      // const paymentStatus = await validatePaystackPaymentStatus({
+      //   reference,
+      // })
       // router.push
     }
     testFunction()
