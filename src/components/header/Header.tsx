@@ -105,7 +105,7 @@ const Header = () => {
       <div className='header__top'>
         <div className='container'>
           <div className='header-wrapper'>
-            <div>
+            <div className='left-side-header'>
               <div className='left d-flex align-items-center'>
                 <ul className='social-links align-items-center'>
                   <li>Follow Us :</li>
@@ -204,7 +204,7 @@ const Header = () => {
                             </div>
                           )}
                         </Link>
-                        <div className='user-profile-link'>
+                        {/* <div className='user-profile-link'>
                           <Link
                             href='/user-info'
                             className='cmn-btn style--three btn--sm'>
@@ -213,17 +213,19 @@ const Header = () => {
                             </span>
                             Profile Info
                           </Link>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   ) : (
                     <div>
-                      <Link href='/login' className='login-btn btn--sm'>
+                      <Link
+                        href='/login'
+                        className='cmn-btn style--three btn--sm'>
                         Login
                       </Link>
                       <Link
                         href='/register'
-                        className='login-btn btn--sm ml-20'>
+                        className='cmn-btn style--three btn--sm ml-20'>
                         Register
                       </Link>
                     </div>

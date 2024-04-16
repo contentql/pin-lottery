@@ -11,7 +11,11 @@ const Cart = () => {
   return (
     <div className='cart-icon ml-20'>
       <Link href='/cart'>
-        <IoCartOutline color='white' size={28} />
+        <IoCartOutline
+          color='white'
+          size={28}
+          style={{ marginBottom: '-12px' }}
+        />
       </Link>
       {cartData?.length !== 0
         ? !isPending && <span className='cart-number'>{cartData?.length}</span>
