@@ -9,11 +9,6 @@ import initializeTransfer from './handlers/initialize-transfer'
 import validatePaystackPaymentStatus from './handlers/validate-paystack-payment-status'
 import { PluginTypes } from './types'
 
-// const paystackSdk = new Paystack(String(process.env.PAYSTACK_SECRET_KEY))
-const paystackSdk = new Paystack(
-  'sk_test_6c2e7ca16d0d713386973b3039bfcecae37275e3',
-)
-
 const createPaystackCustomer =
   (paystackSdk: any): CollectionBeforeChangeHook =>
   async ({ operation, data }) => {
