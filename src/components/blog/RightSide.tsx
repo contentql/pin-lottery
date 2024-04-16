@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 import {
   FaFacebookF,
   FaInstagram,
@@ -8,32 +9,76 @@ import {
 } from 'react-icons/fa'
 
 import Social from '@/components/social/Social'
-import { blogData } from '@/data/blogData'
 
-import Categories from './Categories'
-import LatestPost from './LatestPost'
+const RightSide = ({
+  handleSearchByTag,
+  handleSearchByTitle,
+  blogFilters,
+  setBlogFilters,
+}: {
+  handleSearchByTag: Function
+  handleSearchByTitle: Function
+  blogFilters: { filterByTag: string; filterByTitle: string }
+  setBlogFilters: any
+}) => {
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const router = useRouter()
+  const [searchContent, setSearchContent] = useState('')
+  const Tags = ['Loot Tips', 'Mega Millions', 'Loot', 'Winners', 'Bonus']
 
-const RightSide = () => {
+  const clearFilters = () => {
+    const params = new URLSearchParams()
+    router.push(`${pathname}?${params.toString()}#blog`)
+    setBlogFilters({
+      filterByTag: 'all',
+      filterByTitle: '',
+      pageNumber: 1,
+    })
+  }
   return (
-    <aside className='col-lg-4'>
-      <div className='sidebar'>
+    <aside className='col-lg-4 '>
+      <div className='sidebar card-sticky-pos'>
+        {/* Latest Post Section here */}
+        {/* <LatestPost blogData={blogData} /> */}
+        <div className='widget'>
+          <h3 className='widget__title'>Featured Tags</h3>
+          <div className='tags'>
+            {Tags?.map((tag, index) => (
+              <button
+                key={index}
+                className={`${blogFilters.filterByTag === tag ? 'active' : ''}`}
+                onClick={() => handleSearchByTag(tag)}>
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className='widget'>
           <h3 className='widget__title'>sidebar</h3>
-          <form className='sidebar-search'>
+          <div className='sidebar-search'>
             <input
               type='search'
               name='sidebar-search'
               id='sidebar-search'
               placeholder='Enter your Search Content'
+              onChange={e => {
+                setSearchContent(e.target.value)
+              }}
             />
-            <button type='submit'>
-              <i className='fas fa-search'></i> search
+            <button
+              type='button'
+              onClick={() => handleSearchByTitle(searchContent)}>
+              {/* <i className='fas fa-search'></i> search */} Search
             </button>
-          </form>
+            <button
+              type='button'
+              className='ml-20'
+              onClick={() => clearFilters()}>
+              {/* <i className='fas fa-search'></i> search */} Clear
+            </button>
+          </div>
         </div>
-
-        {/* Latest Post Section here */}
-        <LatestPost blogData={blogData} />
 
         <div className='widget'>
           <h3 className='widget__title'>Follow Us</h3>
@@ -50,18 +95,7 @@ const RightSide = () => {
         </div>
 
         {/* Categories Post Section here */}
-        <Categories />
-
-        <div className='widget'>
-          <h3 className='widget__title'>Featured Tags</h3>
-          <div className='tags'>
-            <Link href='/#'>Loot tips</Link>
-            <Link href='/#'>Mega Millions </Link>
-            <Link href='/#'>Lotto</Link>
-            <Link href='/#'>Winners</Link>
-            <Link href='/#'>Bonus</Link>
-          </div>
-        </div>
+        {/* <Categories /> */}
       </div>
     </aside>
   )

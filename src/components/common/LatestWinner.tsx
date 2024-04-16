@@ -102,7 +102,9 @@ const LatestWinner = () => {
     .slice(indexOfFirstTemplate, indexOfLastTemplate)
 
   return (
-    <section className='latest-winner-section position-relative pt-120 pb-120'>
+    <section
+      className='latest-winner-section position-relative pt-120 pb-120'
+      id='winner_id'>
       <div className='el-1'>
         <Image src={w_el_1} alt='image' />
       </div>
@@ -128,7 +130,7 @@ const LatestWinner = () => {
           </div>
         </div>
         <div className='row'>
-          <div className='col-lg-12' id='winner_id'>
+          <div className='col-lg-12'>
             <FilterByTag
               filter={winnerFilters?.filterWinnerByTag}
               handleSearch={handleSearchTag}
@@ -138,8 +140,7 @@ const LatestWinner = () => {
                 className='tab-pane fade show active'
                 id='dream'
                 role='tabpanel'
-                aria-labelledby='dream-tab'
-              >
+                aria-labelledby='dream-tab'>
                 <div className='row mb-none-30'>
                   <div className='col-lg-4 mb-30'>
                     {/* ticket check card */}

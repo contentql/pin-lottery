@@ -159,15 +159,13 @@ const LatestContest = ({
       ?.at(0)?.id
 
   return (
-    <section className='pb-120 mt-minus-100'>
+    <section className='pb-120 mt-minus-100' id='contest'>
       <div className='container'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='contest-wrapper'>
               <div className='contest-wrapper__header pt-120'>
-                <h2 className='contest-wrapper__title' id='contest'>
-                  All Contests
-                </h2>
+                <h2 className='contest-wrapper__title'>All Contests</h2>
 
                 <FilterByTag
                   filter={filters?.filterByName}

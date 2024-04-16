@@ -78,7 +78,7 @@
           +transition(all 0.3s)
   .tags 
     margin: -5px -4px
-    a 
+    button 
       margin: 5px 4px
       font-size: 14px
       color: $para-color
@@ -93,11 +93,18 @@
         background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
         background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
         box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
+    .active
+      border-color: #fb6468
+      background-image: linear-gradient( 360deg, rgb(236,3,139) 0%, #fb6468 44%, rgb(251,185,54) 100%)
+      background-image: -moz-linear-gradient( 86deg, rgb(236,3,139) 0%, #fb6468 44%, rgb(251,185,54) 100%)
+      background-image: -webkit-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      background-image: -ms-linear-gradient( 86deg, rgb(236,3,139) 0%, rgb(251,100,104) 44%, rgb(251,185,54) 100%)
+      box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35)
 .small-post 
   &__thumb 
     img 
       +border-radius(10px)
-      height: 200px
+      height: 400px
       width: 100%
       +object-fit
   &__content

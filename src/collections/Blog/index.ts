@@ -12,11 +12,45 @@ const Blog: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      label: 'Title',
-      required: true,
-      admin: { description: 'Title of the blog post.' },
+      type: 'row',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          label: 'Title',
+          required: true,
+          admin: { description: 'Title of the blog post.' },
+        },
+
+        {
+          name: 'tag',
+          type: 'select',
+          label: 'Tag',
+          options: [
+            { label: 'Loot tips', value: 'Loot Tips' },
+            { label: 'Mega Millions ', value: 'Mega Millions' },
+            { label: 'Loot', value: 'Loot' },
+            { label: 'Winners', value: 'Winners' },
+            { label: 'Bonus', value: 'Bonus' },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'author_name',
+          type: 'text',
+          label: 'Author Name',
+        },
+        {
+          name: 'author_image',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Author Image',
+        },
+      ],
     },
     {
       name: 'short_desc',

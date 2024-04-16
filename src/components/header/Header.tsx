@@ -223,7 +223,10 @@ const Header = () => {
                     <div>
                       <Link
                         href='/login'
-                        className='cmn-btn style--three btn--sm'>
+                        className='cmn-btn style--three btn--sm'
+                        onClick={() => {
+                          localStorage.setItem('prevRoute', pathname)
+                        }}>
                         Login
                       </Link>
                       <Link

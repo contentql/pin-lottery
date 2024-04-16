@@ -3,6 +3,7 @@ import { BlogIdValidator } from '../lib/validators/blog-id-validator'
 import { ContactFormValidator } from '../lib/validators/contact-form-validator'
 import { publicProcedure, router } from '../trpc/trpc'
 import { TRPCError } from '@trpc/server'
+import { z } from 'zod'
 
 export const publicRouter = router({
   newContact: publicProcedure
@@ -47,35 +48,101 @@ export const publicRouter = router({
     }
   }),
 
-  getBlogData: publicProcedure.query(async () => {
-    const payload = await getPayloadClient()
+  getBlogData: publicProcedure
+    .input(
+      z.object({
+        filterByTag: z.string(),
+        filterByTitle: z.string(),
+        pageNumber: z.number(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const { filterByTag, filterByTitle, pageNumber } = input
+      const payload = await getPayloadClient()
 
-    try {
-      const blogs = await payload.find({ collection: 'blog' })
+      try {
+        const blogs = await payload.find({
+          collection: 'blog',
+          limit: 4,
+          page: pageNumber,
+          where: {
+            ...(filterByTag !== 'all' && {
+              tag: {
+                equals: filterByTag,
+              },
+            }),
+            and: [
+              {
+                ...(filterByTitle !== '' && {
+                  title: {
+                    contains: filterByTitle,
+                  },
+                }),
+              },
+            ],
+          },
+        })
+        const totalBlogs = blogs?.totalDocs
+        const blogDetails = blogs?.docs.map(
+          ({
+            id,
+            title,
+            short_desc,
+            img,
+            tag,
+            updatedAt,
+            createdAt,
+            author_image,
+            author_name,
+          }) => {
+            return {
+              id: id,
+              title: title,
+              author_image: author_image,
+              author_name: author_name,
+              short_desc: short_desc,
+              img: img,
+              tag: tag,
+              updatedAt: updatedAt,
+              createdAt: createdAt,
+            }
+          },
+        )
 
-      const blogDetails = blogs?.docs.map(
-        ({ id, title, short_desc, img, updatedAt, createdAt }) => {
-          return {
-            id: id,
-            title: title,
-            short_desc: short_desc,
-            img: img,
-            updatedAt: updatedAt,
-            createdAt: createdAt,
-          }
-        },
-      )
+        return { blogDetails, totalBlogs }
+      } catch (error: any) {
+        console.error('Error getting blog data:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to get blog data.',
+        })
+      }
+    }),
 
-      return blogDetails
-    } catch (error: any) {
-      console.error('Error getting blog data:', error)
-      throw new TRPCError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: error?.message || 'Failed to get blog data.',
-      })
-    }
-  }),
-
+  getSimilarBlogs: publicProcedure
+    .input(z.object({ similarTag: z.string() }))
+    .query(async ({ input }) => {
+      const payload = await getPayloadClient()
+      try {
+        const { similarTag } = input
+        const similarBlogs = await payload.find({
+          collection: 'blog',
+          limit: 5,
+          where: {
+            tag: {
+              equals: similarTag,
+            },
+          },
+        })
+        return similarBlogs.docs
+      } catch (error: any) {
+        console.error('Error getting blog details:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to get blog details.',
+        })
+      }
+    }),
   getBlogDetailsById: publicProcedure
     .input(BlogIdValidator)
     .query(async ({ input }) => {

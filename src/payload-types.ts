@@ -297,6 +297,9 @@ export interface Contact {
 export interface Blog {
   id: string;
   title: string;
+  tag?: ('loot_tips' | 'mega_millions' | 'loot' | 'winners' | 'bonus') | null;
+  author_name?: string | null;
+  author_image?: string | Media | null;
   short_desc: string;
   content: {
     root: {

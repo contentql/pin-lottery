@@ -1,24 +1,18 @@
-import author from '/public/images/blog/author.png'
-import blog_b1 from '/public/images/blog/b1.jpg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaRegComments, FaRegEye } from 'react-icons/fa'
 
-const Winner = () => {
+import { Blog, Media } from '@/payload-types'
+import { DateConverter } from '@/utils/date-converter'
+
+const Winner = ({ latestBlog }: { latestBlog: Blog }) => {
   return (
     <div className='row'>
       <div className='col-lg-12'>
         <div className='blog-card has-link'>
-          <Link href='/blog' className='item-link'></Link>
-          <div className='blog-card__thumb'>
-            <Image src={blog_b1} alt='blog b1' />
-          </div>
+          <Link href={`/blog/${latestBlog?.id}`} className='item-link'></Link>
           <div className='blog-card__content'>
-            <h3 className='blog-card__title'>
-              Lottery mistakes – check out the most common mistakes of lotto
-              players and winners
-            </h3>
-            <ul className='blog-card__meta'>
+            <h3 className='blog-card__title'>{latestBlog?.title}</h3>
+            {/* <ul className='blog-card__meta'>
               <li className='d-flex align-items-center gap-1'>
                 <FaRegComments className='fs-6' />
                 <span>20 Comments</span>
@@ -27,25 +21,27 @@ const Winner = () => {
                 <FaRegEye className='fs-6' />
                 <span>466 Views</span>
               </li>
-            </ul>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et magna aliqua. Quis ipsum
-              suspendisse ultrices gravida. Risus commodo viverra maecenas
-              accumsan.{' '}
-            </p>
+            </ul> */}
+            <p>{latestBlog?.short_desc}</p>
             <div className='blog-card__footer'>
               <div className='left'>
-                <span className='post-date'>Dece 15, 2020 BY</span>
+                <span className='post-date'>
+                  {DateConverter(latestBlog?.createdAt)} BY
+                </span>
                 <div className='post-author'>
-                  <Image src={author} alt='author' />
-                  <span className='name'>Alvin Mcdaniel</span>
+                  <Image
+                    src={(latestBlog?.author_image as Media)?.url || ''}
+                    alt='author'
+                    width={100}
+                    height={100}
+                  />
+                  <span className='name'>{latestBlog?.author_name}</span>
                 </div>
               </div>
               <div className='right'>
-                <a href='#0' className='read-btn'>
+                <Link href={`/blog/${latestBlog?.id}`} className='read-btn'>
                   Read More <i className='las la-arrow-right'></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
