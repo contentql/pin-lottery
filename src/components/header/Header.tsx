@@ -2,7 +2,7 @@ import tag from '/public/images/icon/btn/tag.png'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import {
   FaFacebookF,
@@ -29,6 +29,8 @@ const Header = () => {
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
   const [popupVisible, setPopupVisible] = useState(false)
+
+  const pathname = usePathname()
 
   const { status, user, fetchMe } = useAuth()
   const router = useRouter()
@@ -83,6 +85,7 @@ const Header = () => {
   })
 
   const handleLogout = () => {
+    localStorage.setItem('prevRoute', pathname)
     logoutMutation()
   }
 
