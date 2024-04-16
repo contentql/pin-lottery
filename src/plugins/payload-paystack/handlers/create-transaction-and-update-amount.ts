@@ -8,11 +8,13 @@ const createTransactionAndUpdateAmount = async (
   const { payload, body, user } = req
   const { amount, status, authorization, paid_at } = body.data
 
+  console.log('createTransactionAndUpdateAmount - user: ', user)
+  console.log('createTransactionAndUpdateAmount - body: ', body)
   try {
     await payload.create({
       collection: 'transaction',
       data: {
-        value: { body },
+        value: { ...body },
         amount,
         status,
         payment_method: authorization.brand,

@@ -1,1 +1,1 @@
-export { paystack, validatePaystackPaymentStatus } from './plugin'
+export { paystack } from './plugin'

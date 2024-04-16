@@ -34,7 +34,7 @@ export const Transaction: CollectionConfig = {
     },
     {
       name: 'amount',
-      type: 'text',
+      type: 'number',
       admin: {
         readOnly: true,
       },

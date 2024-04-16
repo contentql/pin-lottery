@@ -5,6 +5,8 @@ import { Paystack } from 'paystack-sdk'
 import Transaction from './collections/transaction'
 import createPaystackCheckoutUrl from './handlers/create-paystack-checkout-url'
 import createTransactionAndUpdateAmount from './handlers/create-transaction-and-update-amount'
+import initializeTransfer from './handlers/initialize-transfer'
+import validatePaystackPaymentStatus from './handlers/validate-paystack-payment-status'
 import { PluginTypes } from './types'
 
 // const paystackSdk = new Paystack(String(process.env.PAYSTACK_SECRET_KEY))
@@ -31,20 +33,6 @@ const createPaystackCustomer =
     }
     return data
   }
-
-export const validatePaystackPaymentStatus = async ({
-  reference,
-}: {
-  reference: string
-}) => {
-  try {
-    const paymentStatus = await paystackSdk.transaction.verify(reference)
-
-    return paymentStatus
-  } catch (error) {
-    console.log('Error validating paystack payment status', error)
-  }
-}
 
 export const paystack =
   (pluginOptions: PluginTypes): Plugin =>
@@ -105,6 +93,18 @@ export const paystack =
               method: 'post',
               handler: async (req, res) =>
                 createPaystackCheckoutUrl(req, res, paystackSdk),
+            },
+            {
+              path: '/paystack/initialize-transfer',
+              method: 'post',
+              handler: async (req, res) =>
+                initializeTransfer(req, res, paystackSdk),
+            },
+            {
+              path: '/paystack/validate-paystack-payment-status',
+              method: 'post',
+              handler: async (req, res) =>
+                validatePaystackPaymentStatus(req, res, paystackSdk),
             },
           ],
         },
