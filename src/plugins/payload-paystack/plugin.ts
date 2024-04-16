@@ -3,6 +3,7 @@ import { CollectionBeforeChangeHook } from 'payload/types'
 import { Paystack } from 'paystack-sdk'
 
 import Transaction from './collections/transaction'
+import createPaystackCheckoutUrl from './handlers/create-paystack-checkout-url'
 import { PluginTypes } from './types'
 
 // const paystackSdk = new Paystack(String(process.env.PAYSTACK_SECRET_KEY))
@@ -33,22 +34,6 @@ const createPaystackCustomer =
     // }
     return data
   }
-
-export const createPaystackCheckoutUrl = async (
-  userEmail: string | undefined,
-  depositAmount: string,
-) => {
-  try {
-    const checkout = await paystackSdk.transaction.initialize({
-      amount: String(Number(depositAmount) * 100),
-      email: userEmail!,
-    })
-
-    return checkout
-  } catch (error) {
-    console.log('Error creating paystack checkout url', error)
-  }
-}
 
 export const validatePaystackPaymentStatus = async ({
   reference,
@@ -147,6 +132,15 @@ export const paystack =
         ...updatedCollection,
         {
           ...Transaction,
+          endpoints: [
+            ...(Transaction.endpoints || []),
+            {
+              path: '/paystack/create-paystack-checkout-url/:depositAmount',
+              method: 'post',
+              handler: async (req, res) =>
+                createPaystackCheckoutUrl(req, res, paystackSdk),
+            },
+          ],
         },
       ],
     }
