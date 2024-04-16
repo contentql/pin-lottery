@@ -33,20 +33,6 @@ const createPaystackCustomer =
     return data
   }
 
-export const validatePaystackPaymentStatus = async ({
-  reference,
-}: {
-  reference: string
-}) => {
-  try {
-    const paymentStatus = await paystackSdk.transaction.verify(reference)
-
-    return paymentStatus
-  } catch (error) {
-    console.log('Error validating paystack payment status', error)
-  }
-}
-
 export const paystack =
   (pluginOptions: PluginTypes): Plugin =>
   (incomingConfig: Config): Config => {
@@ -109,6 +95,12 @@ export const paystack =
             },
             {
               path: '/paystack/initialize-transfer',
+              method: 'post',
+              handler: async (req, res) =>
+                initializeTransfer(req, res, paystackSdk),
+            },
+            {
+              path: '/paystack/validate-paystack-payment-status',
               method: 'post',
               handler: async (req, res) =>
                 initializeTransfer(req, res, paystackSdk),
