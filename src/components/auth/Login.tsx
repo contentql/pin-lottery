@@ -29,6 +29,9 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
+  const prevRoute =
+    typeof window !== 'undefined' ? localStorage.getItem('prevRoute') : null
+
   const { mutate: loginUser, isPending: isLoginPending } = useMutation({
     mutationFn: (args: { email: string; password: string }) => login(args),
     onError: (err: Error) => {
@@ -38,7 +41,8 @@ const Login = () => {
     onSuccess: () => {
       setValue('email', '')
       setValue('password', '')
-      router.back()
+      router.replace(prevRoute || '/')
+      localStorage.removeItem('prevRoute')
     },
   })
 
@@ -85,8 +89,7 @@ const Login = () => {
                     className='password-toggle-button'
                     onClick={() => {
                       setShowPassword(!showPassword)
-                    }}
-                  >
+                    }}>
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
@@ -113,8 +116,7 @@ const Login = () => {
                 <button
                   disabled={isLoginPending}
                   className='cmn-btn'
-                  type='submit'
-                >
+                  type='submit'>
                   {isLoginPending ? (
                     <ImSpinner
                       size={22}
