@@ -16,6 +16,7 @@ const createTransactionAndUpdateAmount = async (
         amount,
         status,
         payment_method: authorization.brand,
+        type_of_transaction: 'deposit',
         date: paid_at,
         user: {
           relationTo: 'users',

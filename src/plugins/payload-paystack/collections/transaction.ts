@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types'
 
 import { isAdminOrSelf } from './isAdminOrSelf'
 
+// If you wanna create endpoint, use the plugin.ts file
 export const Transaction: CollectionConfig = {
   slug: 'transaction',
   access: {
@@ -70,7 +71,7 @@ export const Transaction: CollectionConfig = {
       admin: {
         readOnly: true,
       },
-      label: 'Meta Data',
+      label: 'Paystack Body',
     },
   ],
 }
