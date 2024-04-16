@@ -5,7 +5,6 @@ import { Blog, Media } from '@/payload-types'
 import { DateConverter } from '@/utils/date-converter'
 
 const LeftSide = ({ blogData }: { blogData: Blog[] }) => {
-  console.log('blog', blogData)
   return (
     <div className='col-lg-8 mb-none-30'>
       {/* blog section here */}
