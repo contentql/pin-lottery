@@ -6,6 +6,7 @@ import Transaction from './collections/transaction'
 import createPaystackCheckoutUrl from './handlers/create-paystack-checkout-url'
 import createTransactionAndUpdateAmount from './handlers/create-transaction-and-update-amount'
 import initializeTransfer from './handlers/initialize-transfer'
+import validatePaystackPaymentStatus from './handlers/validate-paystack-payment-status'
 import { PluginTypes } from './types'
 
 // const paystackSdk = new Paystack(String(process.env.PAYSTACK_SECRET_KEY))
@@ -103,7 +104,7 @@ export const paystack =
               path: '/paystack/validate-paystack-payment-status',
               method: 'post',
               handler: async (req, res) =>
-                initializeTransfer(req, res, paystackSdk),
+                validatePaystackPaymentStatus(req, res, paystackSdk),
             },
           ],
         },
