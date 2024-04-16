@@ -1342,7 +1342,19 @@ $duration: 1000;
 .hero-slider {
   position: relative;
 }
-.line-clamp {
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
+.line-clamp-3 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -1591,3 +1603,7 @@ $duration: 1000;
 //   background-color: rgb(238, 71, 48);
 //   box-shadow: 0px 5px 9px 0px rgba(238, 71, 48, 0.54);
 // }
+.position-sticky {
+  position: sticky;
+  top: 100px;
+}
