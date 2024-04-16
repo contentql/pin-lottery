@@ -30,8 +30,8 @@ const LatestPost = ({ blogData }: any) => {
     speed: 700,
     arrows: true,
     dots: false,
-    nextArrow: <NextBtn />,
-    prevArrow: <PrevBtn />,
+    nextArrow: <PrevBtn />,
+    prevArrow: <NextBtn />,
   }
   return (
     <div className='widget'>

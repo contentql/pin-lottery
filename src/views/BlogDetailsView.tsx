@@ -3,8 +3,9 @@
 import inner_hero_shape_2 from '/public/images/elements/inner-hero-shape-2.png'
 import Image from 'next/image'
 
-import Banner from '@/components/common/Banner'
+import LatestPost from '@/components/blog/LatestPost'
 import Details from '@/components/single-blog/Details'
+import { blogData } from '@/data/blogData'
 import { Blog } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 
@@ -30,18 +31,21 @@ const BlogDetailsView = ({ blogId, blog }: PageProps) => {
         <div className='bg-shape'>
           <Image src={inner_hero_shape_2} alt='inner hero shape 2' />
         </div>
-        <Banner
-          breadcrumb={[
-            ['Home', '/'],
-            ['Pages', '/'],
-            ['Blog', '/'],
-            ['Single Blog', '/'],
-          ]}
-        />
       </div>
 
       {/* Details section here */}
       <Details blogDetails={blogDetails} />
+      <div className='container mb-50'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='blog-single'>
+              <div className='sidebar'>
+                <LatestPost blogData={blogData} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
