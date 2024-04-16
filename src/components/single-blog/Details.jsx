@@ -9,6 +9,7 @@ import {
 
 import Social from '@/components/social/Social'
 import ConvertToHtml from '@/utils/convertToHtml'
+import { DateConverter } from '@/utils/date-converter'
 
 const Details = ({ blogDetails }) => {
   return (
@@ -21,7 +22,9 @@ const Details = ({ blogDetails }) => {
                 <h3 className='blog-single__title'>{blogDetails?.title}</h3>
                 <div className='blog-single__meta'>
                   <div className='left'>
-                    <span className='post-date'>{blogDetails?.createdAt}</span>
+                    <span className='post-date'>
+                      {DateConverter(blogDetails?.createdAt)}
+                    </span>
                     {/* <div className='post-author'>
                       <Image src={author} alt='author' />
                       <span className='name'>Alvin Mcdaniel</span>

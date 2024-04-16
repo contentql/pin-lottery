@@ -119,6 +119,30 @@ export const publicRouter = router({
       }
     }),
 
+  getSimilarBlogs: publicProcedure
+    .input(z.object({ similarTag: z.string() }))
+    .query(async ({ input }) => {
+      const payload = await getPayloadClient()
+      try {
+        const { similarTag } = input
+        const similarBlogs = await payload.find({
+          collection: 'blog',
+          limit: 5,
+          where: {
+            tag: {
+              equals: similarTag,
+            },
+          },
+        })
+        return similarBlogs.docs
+      } catch (error: any) {
+        console.error('Error getting blog details:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message || 'Failed to get blog details.',
+        })
+      }
+    }),
   getBlogDetailsById: publicProcedure
     .input(BlogIdValidator)
     .query(async ({ input }) => {

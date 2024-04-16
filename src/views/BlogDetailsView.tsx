@@ -5,7 +5,6 @@ import Image from 'next/image'
 
 import LatestPost from '@/components/blog/LatestPost'
 import Details from '@/components/single-blog/Details'
-import { blogData } from '@/data/blogData'
 import { Blog } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 
@@ -24,6 +23,11 @@ const BlogDetailsView = ({ blogId, blog }: PageProps) => {
     },
   )
 
+  const { data: similarBlogs } = trpc.public.getSimilarBlogs.useQuery(
+    { similarTag: blogDetails?.tag! },
+    { enabled: !!blogDetails?.tag },
+  )
+
   return (
     <>
       {/* Banner section here */}
@@ -40,7 +44,7 @@ const BlogDetailsView = ({ blogId, blog }: PageProps) => {
           <div className='col-lg-12'>
             <div className='blog-single'>
               <div className='sidebar'>
-                <LatestPost blogData={blogData} />
+                <LatestPost blogData={similarBlogs as Blog[]} />
               </div>
             </div>
           </div>
