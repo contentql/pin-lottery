@@ -1,5 +1,5 @@
 import type { Config, Plugin } from 'payload/config'
-import { CollectionAfterOperationHook } from 'payload/types'
+import { CollectionBeforeChangeHook } from 'payload/types'
 import { Paystack } from 'paystack-sdk'
 
 import Transaction from './collections/transaction'
@@ -11,16 +11,18 @@ const paystackSdk = new Paystack(
 )
 
 const createPaystackCustomer =
-  (paystackSdk: any): CollectionAfterOperationHook =>
-  async ({ operation, result }: { operation: string; result: any }) => {
+  (paystackSdk: any): CollectionBeforeChangeHook =>
+  async ({ operation, data }) => {
     if (operation === 'create') {
       try {
         const { data: customer } = await paystackSdk.customer.create({
-          email: result.email,
-          first_name: result.user_name,
-          last_name: 'sum',
-          phone: result.phone_number,
+          email: data.email,
+          first_name: data.user_name,
+          last_name: '',
+          phone: data.phone_number,
         })
+
+        data.paystack_customer_code = customer?.customer_code
       } catch (error) {
         console.log('Error creating customer', error)
       }
@@ -29,7 +31,7 @@ const createPaystackCustomer =
     // if (operation === 'delete') {
     //   console.log('removing user from paystack')
     // }
-    return result
+    return data
   }
 
 export const createPaystackCheckoutUrl = async (
@@ -110,7 +112,7 @@ export const paystack =
           ...collection,
           hooks: {
             ...collection.hooks,
-            afterOperation: [createPaystackCustomer(paystackSdk)],
+            beforeChange: [createPaystackCustomer(paystackSdk)],
           },
           fields: [
             ...JSON.parse(JSON.stringify(collection.fields)),

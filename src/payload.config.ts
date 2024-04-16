@@ -133,7 +133,7 @@ export default buildConfig({
       generateImage,
       generateURL,
     }),
-    paystack({ secretKey: 'sk_test_6c2e7ca16d0d713386973b3039bfcecae37275e3' }),
+    paystack({ secretKey: process.env.PAYSTACK_SECRET_KEY! }),
     /* 
     Both for trashbin and roleBasedCollectionVisibility
 
