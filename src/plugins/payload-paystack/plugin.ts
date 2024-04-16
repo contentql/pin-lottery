@@ -4,6 +4,7 @@ import { Paystack } from 'paystack-sdk'
 
 import Transaction from './collections/transaction'
 import createPaystackCheckoutUrl from './handlers/create-paystack-checkout-url'
+import createTransactionAndUpdateAmount from './handlers/create-transaction-and-update-amount'
 import { PluginTypes } from './types'
 
 // const paystackSdk = new Paystack(String(process.env.PAYSTACK_SECRET_KEY))
@@ -46,42 +47,6 @@ export const validatePaystackPaymentStatus = async ({
     return paymentStatus
   } catch (error) {
     console.log('Error validating paystack payment status', error)
-  }
-}
-
-// Withdraw Payment
-
-export const initializeTransfer = async () => {
-  try {
-    const validateAccount = await paystackSdk.verification.resolveAccount({
-      account_number: '0001234567',
-      bank_code: '058',
-    })
-
-    if (validateAccount?.status && validateAccount.data?.account_name) {
-      const createTransferRecipient = await paystackSdk.recipient.create({
-        account_number: '0001234567',
-        bank_code: '058',
-        name: `${validateAccount?.data.account_name}`,
-        currency: 'NGN',
-        description: 'withdraw',
-        type: 'nuban',
-      })
-
-      const { status, data, message } = createTransferRecipient
-
-      if (status && createTransferRecipient?.data?.recipient_code) {
-        const createTransfer = await paystackSdk.transfer.initiate({
-          amount: 2000,
-          source: 'balance',
-          recipient: createTransferRecipient?.data?.recipient_code,
-        })
-
-        return createTransfer
-      }
-    }
-  } catch (error) {
-    console.log('error', error)
   }
 }
 
@@ -133,7 +98,12 @@ export const paystack =
         {
           ...Transaction,
           endpoints: [
-            ...(Transaction.endpoints || []),
+            {
+              path: '/paystack/webhook',
+              method: 'post',
+              handler: async (req, res) =>
+                createTransactionAndUpdateAmount(req, res),
+            },
             {
               path: '/paystack/create-paystack-checkout-url/:depositAmount',
               method: 'post',

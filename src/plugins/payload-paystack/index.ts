@@ -1,5 +1,1 @@
-export {
-  initializeTransfer,
-  paystack,
-  validatePaystackPaymentStatus,
-} from './plugin'
+export { paystack, validatePaystackPaymentStatus } from './plugin'

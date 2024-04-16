@@ -8,7 +8,6 @@ const createPaystackCheckoutUrl = async (
 ) => {
   const { body, user, params } = req
   console.log(req)
-  console.log(params)
 
   const checkout = await paystackSdk.transaction.initialize({
     amount: String(Number(params.depositAmount) * 100),
