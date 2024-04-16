@@ -22,11 +22,14 @@ function DepositAmount() {
 
     try {
       const response = await fetch(
-        `/api/transaction/paystack/create-paystack-checkout-url/${depositAmount}`,
+        '/api/transaction/paystack/create-paystack-checkout-url',
         {
           method: 'post',
-          body: JSON.stringify({ data: { depositAmount } }),
+          body: JSON.stringify({ depositAmount }),
           credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
       )
 

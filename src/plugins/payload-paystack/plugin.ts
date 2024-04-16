@@ -29,10 +29,6 @@ const createPaystackCustomer =
         console.log('Error creating customer', error)
       }
     }
-
-    // if (operation === 'delete') {
-    //   console.log('removing user from paystack')
-    // }
     return data
   }
 
@@ -105,7 +101,7 @@ export const paystack =
                 createTransactionAndUpdateAmount(req, res),
             },
             {
-              path: '/paystack/create-paystack-checkout-url/:depositAmount',
+              path: '/paystack/create-paystack-checkout-url',
               method: 'post',
               handler: async (req, res) =>
                 createPaystackCheckoutUrl(req, res, paystackSdk),

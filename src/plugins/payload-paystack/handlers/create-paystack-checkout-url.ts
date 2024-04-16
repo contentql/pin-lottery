@@ -6,11 +6,12 @@ const createPaystackCheckoutUrl = async (
   res: e.Response<any, Record<string, any>>,
   paystackSdk: any,
 ) => {
-  const { body, user, params } = req
-  console.log(req)
+  const { body, user } = req
+
+  console.log(body)
 
   const checkout = await paystackSdk.transaction.initialize({
-    amount: String(Number(params.depositAmount) * 100),
+    amount: String(Number(body.depositAmount) * 100),
     email: user.email,
   })
 
