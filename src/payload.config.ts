@@ -1,7 +1,6 @@
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
-import { sentry } from '@payloadcms/plugin-sentry'
 import seo from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import dotenv from 'dotenv'
@@ -107,24 +106,24 @@ export default buildConfig({
         },
       },
     }),
-    sentry({
-      dsn: process.env.SENTRY_DNS!,
-      options: {
-        init: {
-          debug: true,
-          environment: process.env.SENTRY_ENV,
-          tracesSampleRate: 1.0,
-        },
-        requestHandler: {
-          serverName: false,
-          user: ['email'],
-          include: {
-            user: true,
-          },
-        },
-        // captureErrors: [400, 403, 404],
-      },
-    }),
+    // sentry({
+    //   dsn: process.env.SENTRY_DNS!,
+    //   options: {
+    //     init: {
+    //       debug: true,
+    //       environment: process.env.SENTRY_ENV,
+    //       tracesSampleRate: 1.0,
+    //     },
+    //     requestHandler: {
+    //       serverName: false,
+    //       user: ['email'],
+    //       include: {
+    //         user: true,
+    //       },
+    //     },
+    //     // captureErrors: [400, 403, 404],
+    //   },
+    // }),
     seo({
       collections: ['blog', 'contest'],
       uploadsCollection: 'media',
@@ -134,7 +133,7 @@ export default buildConfig({
       generateImage,
       generateURL,
     }),
-    paystack,
+    paystack({ secretKey: process.env.PAYSTACK_SECRET_KEY! }),
     /* 
     Both for trashbin and roleBasedCollectionVisibility
 

@@ -1,55 +1,40 @@
 import type { Config, Plugin } from 'payload/config'
-import { CollectionAfterOperationHook } from 'payload/types'
+import { CollectionBeforeChangeHook } from 'payload/types'
 import { Paystack } from 'paystack-sdk'
 
 import Transaction from './collections/transaction'
+import createPaystackCheckoutUrl from './handlers/create-paystack-checkout-url'
+import createTransactionAndUpdateAmount from './handlers/create-transaction-and-update-amount'
+import { PluginTypes } from './types'
 
 // const paystackSdk = new Paystack(String(process.env.PAYSTACK_SECRET_KEY))
 const paystackSdk = new Paystack(
   'sk_test_6c2e7ca16d0d713386973b3039bfcecae37275e3',
 )
 
-const createPaystackCustomer: CollectionAfterOperationHook = async ({
-  operation,
-  result,
-}: {
-  operation: string
-  result: any
-}) => {
-  if (operation === 'create') {
-    try {
-      const { data: customer } = await paystackSdk.customer.create({
-        email: result.email,
-        first_name: result.user_name,
-        last_name: 'sum',
-        phone: result.phone_number,
-      })
-    } catch (error) {
-      console.log('Error creating customer', error)
+const createPaystackCustomer =
+  (paystackSdk: any): CollectionBeforeChangeHook =>
+  async ({ operation, data }) => {
+    if (operation === 'create') {
+      try {
+        const { data: customer } = await paystackSdk.customer.create({
+          email: data.email,
+          first_name: data.user_name,
+          last_name: '',
+          phone: data.phone_number,
+        })
+
+        data.paystack_customer_code = customer?.customer_code
+      } catch (error) {
+        console.log('Error creating customer', error)
+      }
     }
+
+    // if (operation === 'delete') {
+    //   console.log('removing user from paystack')
+    // }
+    return data
   }
-
-  // if (operation === 'delete') {
-  //   console.log('removing user from paystack')
-  // }
-  return result
-}
-
-export const createPaystackCheckoutUrl = async (
-  userEmail: string | undefined,
-  depositAmount: string,
-) => {
-  try {
-    const checkout = await paystackSdk.transaction.initialize({
-      amount: String(Number(depositAmount) * 100),
-      email: userEmail!,
-    })
-
-    return checkout
-  } catch (error) {
-    console.log('Error creating paystack checkout url', error)
-  }
-}
 
 export const validatePaystackPaymentStatus = async ({
   reference,
@@ -65,88 +50,70 @@ export const validatePaystackPaymentStatus = async ({
   }
 }
 
-// Withdraw Payment
+export const paystack =
+  (pluginOptions: PluginTypes): Plugin =>
+  (incomingConfig: Config): Config => {
+    const paystackSdk = new Paystack(pluginOptions.secretKey)
 
-export const initializeTransfer = async () => {
-  try {
-    const validateAccount = await paystackSdk.verification.resolveAccount({
-      account_number: '0001234567',
-      bank_code: '058',
+    // @ts-ignore
+    const updatedCollection = incomingConfig.collections.map(collection => {
+      if (collection.slug === 'users') {
+        return {
+          ...collection,
+          hooks: {
+            ...collection.hooks,
+            beforeChange: [createPaystackCustomer(paystackSdk)],
+          },
+          fields: [
+            ...JSON.parse(JSON.stringify(collection.fields)),
+            {
+              name: 'amount',
+              type: 'number',
+              label: 'Amount',
+              admin: {
+                readOnly: true,
+              },
+              required: true,
+              defaultValue: 0,
+            },
+            {
+              name: 'paystack_customer_code',
+              type: 'text',
+              label: 'Paystack Customer Code',
+              admin: {
+                readOnly: true,
+              },
+            },
+          ],
+        }
+      }
+
+      return collection
     })
 
-    if (validateAccount?.status && validateAccount.data?.account_name) {
-      const createTransferRecipient = await paystackSdk.recipient.create({
-        account_number: '0001234567',
-        bank_code: '058',
-        name: `${validateAccount?.data.account_name}`,
-        currency: 'NGN',
-        description: 'withdraw',
-        type: 'nuban',
-      })
-
-      const { status, data, message } = createTransferRecipient
-
-      if (status && createTransferRecipient?.data?.recipient_code) {
-        const createTransfer = await paystackSdk.transfer.initiate({
-          amount: 2000,
-          source: 'balance',
-          recipient: createTransferRecipient?.data?.recipient_code,
-        })
-
-        return createTransfer
-      }
-    }
-  } catch (error) {
-    console.log('error', error)
-  }
-}
-
-export const paystack: Plugin = (incomingConfig: Config): Config => {
-  // @ts-ignore
-  const updatedCollection = incomingConfig.collections.map(collection => {
-    if (collection.slug === 'users') {
-      return {
-        ...collection,
-        hooks: {
-          ...collection.hooks,
-          afterOperation: [createPaystackCustomer],
+    const config: Config = {
+      ...incomingConfig,
+      collections: [
+        ...updatedCollection,
+        {
+          ...Transaction,
+          endpoints: [
+            {
+              path: '/paystack/webhook',
+              method: 'post',
+              handler: async (req, res) =>
+                createTransactionAndUpdateAmount(req, res),
+            },
+            {
+              path: '/paystack/create-paystack-checkout-url/:depositAmount',
+              method: 'post',
+              handler: async (req, res) =>
+                createPaystackCheckoutUrl(req, res, paystackSdk),
+            },
+          ],
         },
-        fields: [
-          ...JSON.parse(JSON.stringify(collection.fields)),
-          {
-            name: 'amount',
-            type: 'number',
-            label: 'Amount',
-            admin: {
-              readOnly: true,
-            },
-            required: true,
-            defaultValue: 0,
-          },
-          {
-            name: 'paystack_customer_code',
-            type: 'text',
-            label: 'Paystack Customer Code',
-            admin: {
-              readOnly: true,
-            },
-          },
-        ],
-      }
+      ],
     }
 
-    return collection
-  })
-
-  const config: Config = {
-    ...incomingConfig,
-    collections: [
-      ...updatedCollection,
-      {
-        ...Transaction,
-      },
-    ],
+    return config
   }
-
-  return config
-}

@@ -686,9 +686,8 @@ strong {
 }
 
 .popup {
-  display: none;
   position: absolute;
-  top: 90%;
+  top: 50px;
   left: 100%;
   width: 300px;
   padding: 10px;
@@ -730,11 +729,11 @@ strong {
   color: white;
   border-radius: 10px;
 }
-@media only screen and (min-width: 1199px) {
-  .popup {
-    display: block;
-  }
-}
+// @media only screen and (min-width: 1199px) {
+//   .popup {
+//     display: block;
+//   }
+// }
 .border-between {
   border-bottom: 1px solid black;
   padding-top: 4px;
@@ -764,15 +763,15 @@ strong {
   font-weight: bold;
   color: white;
 }
-.user-profile-link {
-  display: none;
-  margin-left: 28px;
-}
-@media screen and (max-width: 1198px) {
-  .user-profile-link {
-    display: block;
-  }
-}
+// .user-profile-link {
+//   display: none;
+//   margin-left: 28px;
+// }
+// @media screen and (max-width: 1198px) {
+//   .user-profile-link {
+//     display: block;
+//   }
+// }
 .react-icon-profile {
   padding-right: 10px;
 }
@@ -1494,9 +1493,12 @@ $duration: 1000;
 }
 @media (max-width: 575px) {
   .header-wrapper {
-    flex-direction: column;
-    gap: 10px;
-    justify-content: center;
+    justify-content: flex-end;
+  }
+}
+@media (max-width: 575px) {
+  .left-side-header {
+    display: none;
   }
 }
 .ml-20 {
@@ -1543,18 +1545,19 @@ $duration: 1000;
 .wallet-amount {
   background-color: #2c0341;
   padding: 5px 18px;
+  text-align: center;
   color: #ffffff;
   font-size: 16px;
   @media (max-width: 1199px) {
     padding: 4px 10px;
     font-size: 14px;
   }
+  border-radius: 15px;
 }
 .cart-wallet-flex {
   display: flex;
 }
 .user-button {
-  display: none;
   margin-left: 28px;
   width: 40px;
   height: 40px;
@@ -1562,7 +1565,29 @@ $duration: 1000;
   border-radius: 50%;
   text-align: center;
   line-height: 48px;
-  @media (min-width: 1199px) {
-    display: block;
-  }
 }
+// .social-links-header {
+//   display: flex;
+// }
+
+// .social-links-header li {
+//   margin: 0px 5px;
+// }
+
+// .social-links-header li a {
+//   width: 30px;
+//   height: 30px;
+//   background-color: rgba(10, 30, 94, 0);
+//   border: 1px solid rgba(255, 255, 255, 0.1);
+//   border-radius: 50%;
+//   color: #ffffff;
+//   font-size: 8px;
+//   line-height: 20px;
+//   text-align: center;
+//   transition: all 0.3s;
+// }
+
+// .social-links-header li a:hover {
+//   background-color: rgb(238, 71, 48);
+//   box-shadow: 0px 5px 9px 0px rgba(238, 71, 48, 0.54);
+// }

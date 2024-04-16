@@ -1,45 +1,43 @@
-import { createPaystackCheckoutUrl } from '../../plugins/payload-paystack'
 import transaction_1 from '/public/images/icon/transaction/1.png'
 import Image from 'next/image'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
-import { useAuth } from '@/providers/Auth'
+interface Inputs {
+  depositAmount: number
+}
 
 function DepositAmount() {
-  const [depositAmount, setDepositAmount] = useState('0')
+  // const [depositAmount, setDepositAmount] = useState(0)
   const {
     formState: { errors },
     register,
     setValue,
     handleSubmit,
-  } = useForm({
-    defaultValues: {
-      depositAmount: '',
-    },
-  })
+  } = useForm<Inputs>()
   const router = useRouter()
-  const searchParams = useSearchParams()
 
-  const { user } = useAuth()
+  const onsubmit = async (data: Inputs) => {
+    const { depositAmount } = data
 
-  const onsubmit = async (data: { depositAmount: string }) => {
-    const url = await createPaystackCheckoutUrl(
-      user?.email,
-      data?.depositAmount,
-    )
+    try {
+      const response = await fetch(
+        `/api/transaction/paystack/create-paystack-checkout-url/${depositAmount}`,
+        {
+          method: 'post',
+          body: JSON.stringify({ data: { depositAmount } }),
+          credentials: 'include',
+        },
+      )
 
-    await router.push(url?.data?.authorization_url || '/user-transaction')
-    const reference = searchParams.get('reference')
+      const { data: responseData } = await response.json()
 
-    // if (reference) {
-    //   const paymentStatus = await validatePaystackPaymentStatus({
-    //     reference,
-    //   })
-    //   console.log('paymentStatus', paymentStatus)
-    // }
+      router.push(responseData?.authorization_url || '/user-transaction')
+    } catch (error) {
+      console.log('Error while creating paystack checkout url: ', error)
+    }
   }
+
   return (
     <div>
       <details>
@@ -57,8 +55,7 @@ function DepositAmount() {
               width='14'
               height='14'
               viewBox='0 0 14 14'
-              fill='none'
-            >
+              fill='none'>
               <path
                 fill-rule='evenodd'
                 clip-rule='evenodd'

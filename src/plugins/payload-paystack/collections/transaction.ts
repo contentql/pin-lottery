@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types'
 
 import { isAdminOrSelf } from './isAdminOrSelf'
 
+// If you wanna create endpoint, use the plugin.ts file
 export const Transaction: CollectionConfig = {
   slug: 'transaction',
   access: {
@@ -70,76 +71,7 @@ export const Transaction: CollectionConfig = {
       admin: {
         readOnly: true,
       },
-      label: 'Meta Data',
-    },
-  ],
-  endpoints: [
-    {
-      path: '/paystack/webhook',
-      method: 'post',
-      handler: async (req, res) => {
-        const { payload, body, user } = req
-
-        try {
-          await payload.create({
-            collection: 'transaction',
-            data: {
-              value: { body },
-              amount: body.data.amount,
-              status: body?.data.status,
-              payment_method: body.data.authorization.brand,
-              date: body.data.paid_at,
-              user: {
-                relationTo: 'users',
-                value: user.id,
-              },
-            },
-          })
-        } catch (error) {
-          console.log('Error while creating a transaction: ', error)
-          console.log('Error while creating a transaction: ', error)
-        }
-
-        if (
-          body.data.status === 'success' &&
-          body.data.authorization.authorization_code
-        ) {
-          try {
-            // const { docs } = await payload.find({
-            //   collection: 'users',
-            //   where: {
-            //     email: {
-            //       equals: body.data.customer.email,
-            //     },
-            //   },
-            // })
-            // const { docs } = await payload.find({
-            //   collection: 'users',
-            //   where: {
-            //     email: {
-            //       equals: body.data.customer.email,
-            //     },
-            //   },
-            // })
-
-            const userAmount = user.amount + body.data.amount
-
-            await payload.update({
-              collection: 'users',
-              id: user.id,
-              data: {
-                amount: userAmount,
-              },
-              user: user,
-              overrideAccess: false, // enables access control
-            })
-          } catch (error) {
-            console.log('Error while update user amount: ', error)
-          }
-        }
-
-        res.status(200).json({ status: true })
-      },
+      label: 'Paystack Body',
     },
   ],
 }
