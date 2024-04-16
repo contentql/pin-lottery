@@ -3,37 +3,34 @@ import { CollectionAfterOperationHook } from 'payload/types'
 import { Paystack } from 'paystack-sdk'
 
 import Transaction from './collections/transaction'
+import { PluginTypes } from './types'
 
 // const paystackSdk = new Paystack(String(process.env.PAYSTACK_SECRET_KEY))
 const paystackSdk = new Paystack(
   'sk_test_6c2e7ca16d0d713386973b3039bfcecae37275e3',
 )
 
-const createPaystackCustomer: CollectionAfterOperationHook = async ({
-  operation,
-  result,
-}: {
-  operation: string
-  result: any
-}) => {
-  if (operation === 'create') {
-    try {
-      const { data: customer } = await paystackSdk.customer.create({
-        email: result.email,
-        first_name: result.user_name,
-        last_name: 'sum',
-        phone: result.phone_number,
-      })
-    } catch (error) {
-      console.log('Error creating customer', error)
+const createPaystackCustomer =
+  (paystackSdk: any): CollectionAfterOperationHook =>
+  async ({ operation, result }: { operation: string; result: any }) => {
+    if (operation === 'create') {
+      try {
+        const { data: customer } = await paystackSdk.customer.create({
+          email: result.email,
+          first_name: result.user_name,
+          last_name: 'sum',
+          phone: result.phone_number,
+        })
+      } catch (error) {
+        console.log('Error creating customer', error)
+      }
     }
-  }
 
-  // if (operation === 'delete') {
-  //   console.log('removing user from paystack')
-  // }
-  return result
-}
+    // if (operation === 'delete') {
+    //   console.log('removing user from paystack')
+    // }
+    return result
+  }
 
 export const createPaystackCheckoutUrl = async (
   userEmail: string | undefined,
@@ -101,52 +98,56 @@ export const initializeTransfer = async () => {
   }
 }
 
-export const paystack: Plugin = (incomingConfig: Config): Config => {
-  // @ts-ignore
-  const updatedCollection = incomingConfig.collections.map(collection => {
-    if (collection.slug === 'users') {
-      return {
-        ...collection,
-        hooks: {
-          ...collection.hooks,
-          afterOperation: [createPaystackCustomer],
-        },
-        fields: [
-          ...JSON.parse(JSON.stringify(collection.fields)),
-          {
-            name: 'amount',
-            type: 'number',
-            label: 'Amount',
-            admin: {
-              readOnly: true,
-            },
-            required: true,
-            defaultValue: 0,
+export const paystack =
+  (pluginOptions: PluginTypes): Plugin =>
+  (incomingConfig: Config): Config => {
+    const paystackSdk = new Paystack(pluginOptions.secretKey)
+
+    // @ts-ignore
+    const updatedCollection = incomingConfig.collections.map(collection => {
+      if (collection.slug === 'users') {
+        return {
+          ...collection,
+          hooks: {
+            ...collection.hooks,
+            afterOperation: [createPaystackCustomer(paystackSdk)],
           },
-          {
-            name: 'paystack_customer_code',
-            type: 'text',
-            label: 'Paystack Customer Code',
-            admin: {
-              readOnly: true,
+          fields: [
+            ...JSON.parse(JSON.stringify(collection.fields)),
+            {
+              name: 'amount',
+              type: 'number',
+              label: 'Amount',
+              admin: {
+                readOnly: true,
+              },
+              required: true,
+              defaultValue: 0,
             },
-          },
-        ],
+            {
+              name: 'paystack_customer_code',
+              type: 'text',
+              label: 'Paystack Customer Code',
+              admin: {
+                readOnly: true,
+              },
+            },
+          ],
+        }
       }
+
+      return collection
+    })
+
+    const config: Config = {
+      ...incomingConfig,
+      collections: [
+        ...updatedCollection,
+        {
+          ...Transaction,
+        },
+      ],
     }
 
-    return collection
-  })
-
-  const config: Config = {
-    ...incomingConfig,
-    collections: [
-      ...updatedCollection,
-      {
-        ...Transaction,
-      },
-    ],
+    return config
   }
-
-  return config
-}
