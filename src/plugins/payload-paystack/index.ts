@@ -1,5 +1,4 @@
 export {
-  createPaystackCheckoutUrl,
   initializeTransfer,
   paystack,
   validatePaystackPaymentStatus,
