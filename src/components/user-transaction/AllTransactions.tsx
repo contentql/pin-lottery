@@ -83,7 +83,11 @@ const AllTransactions = () => {
                   <tr key={singleTran.id}>
                     <td>
                       <div className='date'>
-                        <span>{DateConverter(singleTran?.date!)}</span>
+                        <span>
+                          {DateConverter(singleTran?.date!).slice(
+                            DateConverter(singleTran?.date!).indexOf(' ') + 1,
+                          )}
+                        </span>
                       </div>
                     </td>
                     <td>
@@ -127,7 +131,11 @@ const AllTransactions = () => {
             </table>
           </div>
           <div className='load-more'>
-            {indexOfLastTransaction >= userTransactions?.length! ? (
+            {userTransactions?.length! <= indexOfLastTransaction ? (
+              <button
+                type='button'
+                className='d-flex align-items-center justify-content-lg-center gap-1'></button>
+            ) : indexOfLastTransaction >= userTransactions?.length! ? (
               <button
                 onClick={handleShowLess}
                 type='button'

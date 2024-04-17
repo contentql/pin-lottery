@@ -84,15 +84,13 @@ const PastDraws = ({
                       <td>
                         <Link
                           href={`/contest/${(ticket?.contest_id?.value as Contest)?.id}`}
-                          className='contest-no'
-                        >
+                          className='contest-no'>
                           {(ticket?.contest_id?.value as Contest)?.contest_no}
                         </Link>
                       </td>
                       <td>
                         <ul
-                          className={`number-list ${winStatus ? 'win-list' : ''}`}
-                        >
+                          className={`number-list ${winStatus ? 'win-list' : ''}`}>
                           {splitTicketNumber(ticket?.ticket_number).map(
                             (num: string, idx: number) => (
                               <li key={idx}>{num}</li>
@@ -114,20 +112,22 @@ const PastDraws = ({
             </table>
           </div>
           <div className='load-more'>
-            {indexOfLastTicket >= pastDrawsTicketsData?.length ? (
+            {pastDrawsTicketsData?.length! <= indexOfLastTicket ? (
+              <button
+                type='button'
+                className='d-flex align-items-center justify-content-lg-center gap-1'></button>
+            ) : indexOfLastTicket >= pastDrawsTicketsData?.length ? (
               <button
                 onClick={handleShowLess}
                 type='button'
-                className='d-flex align-items-center justify-content-lg-center gap-1'
-              >
+                className='d-flex align-items-center justify-content-lg-center gap-1'>
                 Show Less Lotteries <BsChevronUp />
               </button>
             ) : (
               <button
                 onClick={handleShowMore}
                 type='button'
-                className='d-flex align-items-center justify-content-lg-center gap-1'
-              >
+                className='d-flex align-items-center justify-content-lg-center gap-1'>
                 Show More Lotteries <BsChevronDown />
               </button>
             )}
