@@ -7,7 +7,8 @@ const PaymentSuccess = () => {
           justifyContent: 'center',
           alignItems: 'center',
           height: '100vh',
-        }}>
+        }}
+      >
         <div className='success-container'>
           <div className='success-checkmark'>
             <div className='check-icon'>

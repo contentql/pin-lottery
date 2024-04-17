@@ -4,7 +4,7 @@ import {
   FaInstagram,
   FaPinterestP,
   FaRedditAlien,
-  FaTwitter,
+  FaTwitter
 } from 'react-icons/fa'
 
 import Social from '@/components/social/Social'
@@ -40,7 +40,7 @@ const Details = ({ blogDetails }) => {
                         [FaTwitter, '/'],
                         [FaInstagram, '/'],
                         [FaPinterestP, '/'],
-                        [FaRedditAlien, '/'],
+                        [FaRedditAlien, '/']
                       ]}
                     />
                   </div>

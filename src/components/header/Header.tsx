@@ -104,7 +104,8 @@ const Header = () => {
       id='gotoTop'
       className={`header ${
         windowHeight > 50 && 'menu-fixed animated fadeInDown'
-      }`}>
+      }`}
+    >
       <div className='header__top'>
         <div className='container'>
           <div className='header-wrapper'>
@@ -152,24 +153,28 @@ const Header = () => {
                           onClick={togglePopup}
                           style={{
                             backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
-                          }}>
+                          }}
+                        >
                           {popupVisible && (
                             <div className='popup'>
                               <div className='popup-arrow'></div>
                               <Link
                                 href='/user-info'
-                                className='popup-btn user-profile'>
+                                className='popup-btn user-profile'
+                              >
                                 <button
                                   className='nav-user-profile'
                                   style={{
                                     backgroundImage: `url(${user?.image !== undefined ? (user?.image as Media)?.sizes?.navUserImage?.url : '/images/user/pp.png'})`,
-                                  }}></button>
+                                  }}
+                                ></button>
                                 <h6>{user?.user_name}</h6>
                               </Link>
                               <div className='divider'></div>
                               <Link
                                 href='/user-info'
-                                className='popup-btn list-nav'>
+                                className='popup-btn list-nav'
+                              >
                                 <span>
                                   <LuUser2 size={24} color='white' />
                                 </span>
@@ -183,7 +188,8 @@ const Header = () => {
                               </Link>
                               <Link
                                 href='/user-transaction'
-                                className='popup-btn list-nav'>
+                                className='popup-btn list-nav'
+                              >
                                 <span>
                                   <GrTransaction size={24} color='white' />
                                 </span>
@@ -191,7 +197,8 @@ const Header = () => {
                               </Link>
                               <Link
                                 href='/user-lottery'
-                                className='popup-btn list-nav'>
+                                className='popup-btn list-nav'
+                              >
                                 <span>
                                   <FaRegHeart size={24} color='white' />
                                 </span>
@@ -200,7 +207,8 @@ const Header = () => {
                               <div className='divider'></div>
                               <button
                                 onClick={handleLogout}
-                                className='popup-btn list-nav'>
+                                className='popup-btn list-nav'
+                              >
                                 <RxExit size={24} color='white' />
                                 <p> Logout</p>
                               </button>
@@ -226,12 +234,14 @@ const Header = () => {
                         className='cmn-btn style--three btn--sm'
                         onClick={() => {
                           localStorage.setItem('prevRoute', pathname)
-                        }}>
+                        }}
+                      >
                         Login
                       </Link>
                       <Link
                         href='/register'
-                        className='cmn-btn style--three btn--sm ml-20'>
+                        className='cmn-btn style--three btn--sm ml-20'
+                      >
                         Register
                       </Link>
                     </div>
