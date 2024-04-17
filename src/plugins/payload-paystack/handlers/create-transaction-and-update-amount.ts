@@ -24,12 +24,14 @@ const createTransactionAndUpdateAmount = async (
       return res.status(404).json({ error: 'User not found' })
     }
 
+    const actualAmount = amount / 100
+
     try {
       await payload.create({
         collection: 'transaction',
         data: {
           value: { ...body },
-          amount,
+          amount: actualAmount,
           status,
           payment_method: authorization.brand,
           type_of_transaction: 'deposit',
@@ -46,7 +48,7 @@ const createTransactionAndUpdateAmount = async (
 
     if (status === 'success' && authorization.authorization_code) {
       try {
-        const userAmount = user.amount + amount / 100
+        const userAmount = user.amount + actualAmount
 
         await payload.update({
           collection: 'users',
