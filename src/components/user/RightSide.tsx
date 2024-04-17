@@ -16,14 +16,14 @@ const RightSide = ({
 }) => {
   const tabs = [
     {
-      title: 'Past draws',
-      content: <PastDraws pastDrawsTicketsData={pastDrawsTicketsData} />,
-    },
-    {
       title: 'Upcoming draws',
       content: (
         <UpcomingDraws upcomingDrawTicketsData={upcomingDrawTicketsData} />
       ),
+    },
+    {
+      title: 'Past draws',
+      content: <PastDraws pastDrawsTicketsData={pastDrawsTicketsData} />,
     },
   ]
   return (
