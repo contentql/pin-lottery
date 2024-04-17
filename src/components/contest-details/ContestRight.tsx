@@ -107,19 +107,21 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
                 />
                 <div className='quantity-nav'>
                   <div
+                    aria-hidden
+                    role='button'
                     className={`quantity-button`}
                     onClick={() =>
                       removeTicket({ contest_no: contestDetails?.contest_no })
-                    }
-                    role='button'>
+                    }>
                     <i className='las la-minus'></i>
                   </div>
                   <div
+                    aria-hidden
+                    role='button'
                     className={`quantity-button quantity-up`}
                     onClick={() =>
                       addTicket({ contest_no: contestDetails?.contest_no })
-                    }
-                    role='button'>
+                    }>
                     <i className='las la-plus'></i>
                   </div>
                 </div>
@@ -139,22 +141,14 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
         <li>Share :</li>
         <li>
           <FacebookShareButton
-            url={
-              process.env.NEXT_PUBLIC_SERVER_URL +
-              '/contest/' +
-              contestDetails?.id
-            }
+            url={`${process.env.NEXT_PUBLIC_SERVER_URL}/contest/${contestDetails?.id}`}
             hashtag={'#lottery...'}>
-            <FacebookIcon size={35} round={true} />
+            <FacebookIcon size={35} round />
           </FacebookShareButton>
         </li>
         <li>
           <TwitterShareButton
-            url={
-              process.env.NEXT_PUBLIC_SERVER_URL +
-              '/contest/' +
-              contestDetails?.id
-            }>
+            url={`${process.env.NEXT_PUBLIC_SERVER_URL}/contest/${contestDetails?.id}`}>
             <TwitterIcon size={35} round />
           </TwitterShareButton>
         </li>
