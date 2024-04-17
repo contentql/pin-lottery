@@ -54,7 +54,7 @@ const createTransactionAndUpdateAmount = async (
           data: {
             amount: userAmount,
           },
-          user: user,
+          user,
           overrideAccess: false, // enables access control
         })
       } catch (error) {
