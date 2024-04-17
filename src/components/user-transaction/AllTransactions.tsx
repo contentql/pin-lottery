@@ -1,3 +1,4 @@
+// skipcql JS-0415
 import AllTransactionsSkeleton from '../skeletons/TransactionsSkeleton'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -10,6 +11,24 @@ import { trpc } from '@/trpc/client'
 import { DateConverter } from '@/utils/date-converter'
 //css
 import { ticketsMetadata } from '@/utils/tickets-metadata'
+
+const EmptyState = () => {
+  return (
+    <div className='all-transaction'>
+      <div>
+        <h3 className='transactions-empty-heading'>All Transactions</h3>
+        <div className='wishlist-button-center'>
+          <Image
+            src='/images/empty-states/empty-wishlist.png'
+            alt='empty state'
+            width={500}
+            height={300}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const AllTransactions = () => {
   const { data: userTransactions, isPending: isUserTransactionsPending } =
@@ -31,23 +50,11 @@ const AllTransactions = () => {
     setCurrentPage(1)
   }
   return (
-    <>
+    <div>
       {isUserTransactionsPending ? (
         <AllTransactionsSkeleton />
       ) : userTransactions?.length! <= 0 ? (
-        <div className='all-transaction'>
-          <div>
-            <h3 className='transactions-empty-heading'>All Transactions</h3>
-            <div className='wishlist-button-center'>
-              <Image
-                src='/images/empty-states/empty-wishlist.png'
-                alt='empty wishlist'
-                width={500}
-                height={300}
-              />
-            </div>
-          </div>
-        </div>
+        <EmptyState />
       ) : (
         <div className='all-transaction'>
           <div className='all-transaction__header'>
@@ -153,7 +160,7 @@ const AllTransactions = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

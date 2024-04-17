@@ -17,11 +17,15 @@ export const transactionRouter = router({
       })
 
       return transactions.docs
-    } catch (error: any) {
+    } catch (error: unknown) {
+      // Changed type from any to unknown
       console.error('Error getting transaction data:', error)
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
-        message: error?.message || 'Failed to retrieve transactions data.',
+        // Added a type assertion for error to have a 'message' property
+        message:
+          (error as { message?: string })?.message ||
+          'Failed to retrieve transactions data.',
       })
     }
   }),
