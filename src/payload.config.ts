@@ -107,24 +107,24 @@ export default buildConfig({
         },
       },
     }),
-    sentry({
-      dsn: process.env.SENTRY_DNS!,
-      options: {
-        init: {
-          debug: true,
-          environment: process.env.SENTRY_ENV,
-          tracesSampleRate: 1.0,
-        },
-        requestHandler: {
-          serverName: false,
-          user: ['email'],
-          include: {
-            user: true,
-          },
-        },
-        // captureErrors: [400, 403, 404],
-      },
-    }),
+    // sentry({
+    //   dsn: process.env.SENTRY_DNS!,
+    //   options: {
+    //     init: {
+    //       debug: true,
+    //       environment: process.env.SENTRY_ENV,
+    //       tracesSampleRate: 1.0,
+    //     },
+    //     requestHandler: {
+    //       serverName: false,
+    //       user: ['email'],
+    //       include: {
+    //         user: true,
+    //       },
+    //     },
+    //     // captureErrors: [400, 403, 404],
+    //   },
+    // }),
     seo({
       collections: ['blog', 'contest'],
       uploadsCollection: 'media',
