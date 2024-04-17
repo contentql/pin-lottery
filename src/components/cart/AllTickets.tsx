@@ -20,7 +20,7 @@ const AllTickets = ({
     <div className='col-lg-7'>
       <div className='ticket-wrapper'>
         <div className='ticket-wrapper__header'>
-          <h3>Your tickets:</h3>
+          <h3>Your Tickets:</h3>
           <button
             type='button'
             onClick={() => deleteAllTicketsOfUserFromCart()}>
@@ -77,7 +77,7 @@ const AllTickets = ({
                               <div className='circle-divider'>
                                 {/* <Image src={circle_border} alt='circle border' /> */}
                               </div>
-                              <ul className='cart-lottery-single__selected-number'>
+                              <ul className='cart-lottery-single__selected-number display-none-mobile'>
                                 {[...Array(7)].map((_, i) => (
                                   <li key={i} className=''>
                                     00
@@ -104,7 +104,7 @@ const AllTickets = ({
                             <div className='circle-divider'>
                               {/* <Image src={circle_border} alt='circle border' /> */}
                             </div>
-                            <ul className='cart-lottery-single__selected-number'>
+                            <ul className='cart-lottery-single__selected-number display-none-mobile'>
                               {[...Array(7)].map((_, i) => (
                                 <li key={i} className=''>
                                   00
@@ -145,7 +145,7 @@ const AllTickets = ({
                           <div className='circle-divider'>
                             {/* <Image src={circle_border} alt='circle border' /> */}
                           </div>
-                          <ul className='cart-lottery-single__selected-number'>
+                          <ul className='cart-lottery-single__selected-number display-none-mobile'>
                             {[...Array(7)].map((_, i) => (
                               <li key={i} className=''>
                                 00
