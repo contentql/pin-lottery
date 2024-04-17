@@ -13,6 +13,7 @@ export const transactionRouter = router({
         collection: 'transaction',
         user,
         overrideAccess: false,
+        pagination: false,
       })
 
       return transactions.docs

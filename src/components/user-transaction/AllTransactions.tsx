@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { BsChevronDown } from 'react-icons/bs'
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs'
 import { FaCheckCircle, FaEllipsisH, FaRegCalendarAlt } from 'react-icons/fa'
 
 import { trpc } from '@/trpc/client'
@@ -17,6 +17,19 @@ const AllTransactions = () => {
   console.log('user transactions', userTransactions)
   const [dateRange, setDateRange] = useState([null, null])
   const [startDate, endDate] = dateRange
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const transactionsToShow = 10
+
+  const indexOfLastTransaction = currentPage * transactionsToShow
+  const currentTransactions = userTransactions?.slice(0, indexOfLastTransaction)
+
+  const handleShowMore = () => {
+    setCurrentPage((next: number) => next + 1)
+  }
+  const handleShowLess = () => {
+    setCurrentPage(1)
+  }
   return (
     <>
       {isUserTransactionsPending ? (
@@ -66,7 +79,7 @@ const AllTransactions = () => {
                 </tr>
               </thead>
               <tbody>
-                {userTransactions?.map(singleTran => (
+                {currentTransactions?.map(singleTran => (
                   <tr key={singleTran.id}>
                     <td>
                       <div className='date'>
@@ -114,11 +127,21 @@ const AllTransactions = () => {
             </table>
           </div>
           <div className='load-more'>
-            <button
-              type='button'
-              className='d-flex align-items-center justify-content-lg-center gap-1'>
-              Show More Lotteries <BsChevronDown />
-            </button>
+            {indexOfLastTransaction >= userTransactions?.length! ? (
+              <button
+                onClick={handleShowLess}
+                type='button'
+                className='d-flex align-items-center justify-content-lg-center gap-1'>
+                Show Less Lotteries <BsChevronUp />
+              </button>
+            ) : (
+              <button
+                onClick={handleShowMore}
+                type='button'
+                className='d-flex align-items-center justify-content-lg-center gap-1'>
+                Show More Lotteries <BsChevronDown />
+              </button>
+            )}
           </div>
         </div>
       )}
