@@ -14,7 +14,7 @@ import { ticketsMetadata } from '@/utils/tickets-metadata'
 const AllTransactions = () => {
   const { data: userTransactions, isPending: isUserTransactionsPending } =
     trpc.transaction.getUserTransactions.useQuery()
-  console.log('user transactions', userTransactions)
+
   const [dateRange, setDateRange] = useState([null, null])
   const [startDate, endDate] = dateRange
 
