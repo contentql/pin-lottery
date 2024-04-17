@@ -1,4 +1,4 @@
-// skipcql JS-0415
+// skipcql
 import AllTransactionsSkeleton from '../skeletons/TransactionsSkeleton'
 import Image from 'next/image'
 import { useState } from 'react'
