@@ -69,7 +69,7 @@ const HomeView = ({ heroData }: { heroData: Contest[] }) => {
       // })
       // router.push
     }
-    validatePayment()
+    // validatePayment()
   }
 
   return (
