@@ -123,8 +123,7 @@ const LeftSideMenu = () => {
               className='avatar-preview'
               style={{
                 backgroundImage: `url(${uploadedImage ? uploadedImage : userData?.image !== undefined ? userData?.image?.sizes?.userProfile?.url : '/images/user/pp.png'})`,
-              }}
-            >
+              }}>
               <div id='imagePreview'></div>
             </div>
           </div>
@@ -133,8 +132,7 @@ const LeftSideMenu = () => {
               className='cmn-btn style--two d-flex align-items-center update-profile-image'
               type='button'
               disabled={isUserImagePending}
-              onClick={() => handleUpdateUserProfile()}
-            >
+              onClick={() => handleUpdateUserProfile()}>
               {isUserImagePending ? (
                 <ImSpinner
                   size={22}
