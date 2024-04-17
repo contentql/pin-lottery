@@ -3,7 +3,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
-import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from 'react-share'
 
 import { AppContext } from '@/context/context'
 import { Contest, Ticket, User, Winner } from '@/payload-types'
@@ -103,16 +110,14 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
                     className={`quantity-button`}
                     onClick={() =>
                       removeTicket({ contest_no: contestDetails?.contest_no })
-                    }
-                  >
+                    }>
                     <i className='las la-minus'></i>
                   </div>
                   <div
                     className={`quantity-button quantity-up`}
                     onClick={() =>
                       addTicket({ contest_no: contestDetails?.contest_no })
-                    }
-                  >
+                    }>
                     <i className='las la-plus'></i>
                   </div>
                 </div>
@@ -121,8 +126,7 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
             <div className='mt-sm-0 mt-3'>
               <Link
                 href={`${pathname}/ticket-details`}
-                className='cmn-btn style--three'
-              >
+                className='cmn-btn style--three'>
                 buy tickets
               </Link>
             </div>
@@ -132,19 +136,35 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
       <ul className='social-links align-items-center'>
         <li>Share :</li>
         <li>
-          <Link href='/#'>
-            <FaFacebookF />
-          </Link>
+          <FacebookShareButton
+            url={
+              process.env.NEXT_PUBLIC_SERVER_URL +
+              '/contest/' +
+              contestDetails?.id
+            }
+            hashtag={'#lottery...'}>
+            <FacebookIcon size={35} round={true} />
+          </FacebookShareButton>
         </li>
         <li>
-          <Link href='/#'>
-            <FaTwitter />
-          </Link>
+          <TwitterShareButton
+            url={
+              process.env.NEXT_PUBLIC_SERVER_URL +
+              '/contest/' +
+              contestDetails?.id
+            }>
+            <TwitterIcon size={35} round={true} />
+          </TwitterShareButton>
         </li>
         <li>
-          <Link href='/#'>
-            <FaLinkedinIn />
-          </Link>
+          <LinkedinShareButton
+            url={
+              process.env.NEXT_PUBLIC_SERVER_URL +
+              '/contest/' +
+              contestDetails?.id
+            }>
+            <LinkedinIcon size={35} round={true} />
+          </LinkedinShareButton>
         </li>
       </ul>
     </div>

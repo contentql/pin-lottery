@@ -81,11 +81,15 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
   return (
     <div className='col-lg-4 mt-lg-0 mt-4'>
       <div className='checkout-wrapper'>
-        <div className='checkout-wrapper__header mb-4'>
-          <h3>Wallet amount: {userData?.amount}</h3>
+        <div
+          className='checkout-wrapper__header mb-4'
+          style={{ borderRadius: '15px' }}>
+          <h3>
+            Wallet amount: {ticketsMetadata.currency} {userData?.amount}
+          </h3>
         </div>
         <div className='checkout-wrapper__header'>
-          <h3>Your tickets:</h3>
+          <h3>Your Tickets:</h3>
         </div>
         <div className='checkout-wrapper__body'>
           <ul className='price'>
@@ -125,6 +129,10 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
             <button
               type='button'
               className='cmn-btn'
+              style={{
+                color: `${userData?.amount < total_price_of_cart ? 'black' : ''}`,
+                background: `${userData?.amount < total_price_of_cart ? 'linear-gradient(180.3deg, rgb(221, 221, 221) 5.5%, rgb(110, 136, 161) 90.2%)' : ''}`,
+              }}
               onClick={() => handlePurchase()}
               disabled={
                 userData?.amount < total_price_of_cart
