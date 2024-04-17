@@ -3,7 +3,7 @@ import type { Config, Plugin } from 'payload/config'
 import { UploadsGridView } from './UploadsGridView'
 
 export const mediaGridView: Plugin = (incomingConfig: Config): Config => {
-  // @ts-ignore
+  // @ts-expect-error
   const updatedCollection = incomingConfig.collections.map(collection => {
     if (collection.slug === 'media') {
       const filteredImageSizes =

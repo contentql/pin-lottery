@@ -16,7 +16,7 @@ const addDocumentToTrashCollection: AfterDeleteHook = async ({
     value: doc,
   }
 
-  // @ts-ignore (just in case user was not generating types after adding plugin)
+  // @ts-expect-error (just in case user was not generating types after adding plugin)
   try {
     await payload.create({
       collection: 'trash',
@@ -70,7 +70,7 @@ export const trashBin =
           ...Trash,
           admin: {
             ...Trash.admin,
-            // @ts-ignore (JWT User issues, it is mandatory to save the roles in JWT here)
+            // @ts-expect-error (JWT User issues, it is mandatory to save the roles in JWT here)
             hidden: ({ user }) => {
               if (!displayToRoles?.length) {
                 return false

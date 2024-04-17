@@ -39,7 +39,7 @@ export const paystack =
   (incomingConfig: Config): Config => {
     const paystackSdk = new Paystack(pluginOptions.secretKey)
 
-    // @ts-ignore
+    // @ts-expect-error
     const updatedCollection = incomingConfig.collections.map(collection => {
       if (collection.slug === 'users') {
         return {

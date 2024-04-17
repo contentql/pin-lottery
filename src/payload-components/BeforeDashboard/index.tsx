@@ -6,7 +6,7 @@ import InfoCard from './InfoCard'
 const BeforeDashboard = () => {
   const { user } = useAuth()
 
-  // @ts-ignore
+  // @ts-expect-error
   if (user.roles.includes('admin'))
     return (
       <div>
