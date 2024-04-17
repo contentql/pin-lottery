@@ -2,28 +2,28 @@
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV !== 'development', // Remove console.log in production
+    removeConsole: process.env.NODE_ENV !== 'development' // Remove console.log in production
   },
   images: {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'localhost',
+        hostname: 'localhost'
       },
       {
         protocol: 'https',
-        hostname: 'pin-lottery-production.up.railway.app',
+        hostname: 'pin-lottery-production.up.railway.app'
       },
       {
         protocol: 'https',
-        hostname: 'r2.cloudflarestorage.com',
+        hostname: 'r2.cloudflarestorage.com'
       },
       {
         protocol: 'https',
-        hostname: 'pub-4569e4e5d557441e896fc4fbf32626f3.r2.dev',
-      },
-    ],
-  },
+        hostname: 'pub-4569e4e5d557441e896fc4fbf32626f3.r2.dev'
+      }
+    ]
+  }
 }
 
 module.exports = nextConfig

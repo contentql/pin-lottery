@@ -35,7 +35,8 @@ const CartTicketCard = ({
     <div className='cart-lottery-single'>
       <button
         className='cart-lottery-single__close'
-        onClick={() => handleDeleteTicket()}>
+        onClick={() => handleDeleteTicket()}
+      >
         <FaTimes />
       </button>
 

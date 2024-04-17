@@ -83,7 +83,8 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
       <div className='checkout-wrapper'>
         <div
           className='checkout-wrapper__header mb-4'
-          style={{ borderRadius: '15px' }}>
+          style={{ borderRadius: '15px' }}
+        >
           <h3>
             Wallet amount: {ticketsMetadata.currency} {userData?.amount}
           </h3>
@@ -138,7 +139,8 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
                 userData?.amount < total_price_of_cart
                   ? true
                   : isPurchasing || isUserDataPending
-              }>
+              }
+            >
               {isPurchasing ? (
                 <ImSpinner
                   size={22}

@@ -48,7 +48,8 @@ const RightSide = ({
               <button
                 key={index}
                 className={`${blogFilters.filterByTag === tag ? 'active' : ''}`}
-                onClick={() => handleSearchByTag(tag)}>
+                onClick={() => handleSearchByTag(tag)}
+              >
                 {tag}
               </button>
             ))}
@@ -68,13 +69,15 @@ const RightSide = ({
             />
             <button
               type='button'
-              onClick={() => handleSearchByTitle(searchContent)}>
+              onClick={() => handleSearchByTitle(searchContent)}
+            >
               {/* <i className='fas fa-search'></i> search */} Search
             </button>
             <button
               type='button'
               className='ml-20'
-              onClick={() => clearFilters()}>
+              onClick={() => clearFilters()}
+            >
               {/* <i className='fas fa-search'></i> search */} Clear
             </button>
           </div>

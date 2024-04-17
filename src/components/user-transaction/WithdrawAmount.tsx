@@ -75,7 +75,8 @@ function WithdrawAmount() {
               width='14'
               height='14'
               viewBox='0 0 14 14'
-              fill='none'>
+              fill='none'
+            >
               <path
                 fillRule='evenodd'
                 clipRule='evenodd'
@@ -95,7 +96,8 @@ function WithdrawAmount() {
                   className='border-0 select-input-style'
                   onChange={e => {
                     fetchBanks(e.target.value)
-                  }}>
+                  }}
+                >
                   <option value={'select'}>Select country</option>
                   <option value={'NGN'}>Nagira</option>
                   <option value={'USA'}>USA</option>

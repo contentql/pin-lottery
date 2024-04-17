@@ -89,7 +89,8 @@ const Login = () => {
                     className='password-toggle-button'
                     onClick={() => {
                       setShowPassword(!showPassword)
-                    }}>
+                    }}
+                  >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
@@ -116,7 +117,8 @@ const Login = () => {
                 <button
                   disabled={isLoginPending}
                   className='cmn-btn'
-                  type='submit'>
+                  type='submit'
+                >
                   {isLoginPending ? (
                     <ImSpinner
                       size={22}

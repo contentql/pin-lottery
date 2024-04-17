@@ -121,7 +121,8 @@ const ContestCard = ({
   return (
     <div
       className='contest-card'
-      onClick={() => router.push(`/contest/${itm.id}`)}>
+      onClick={() => router.push(`/contest/${itm.id}`)}
+    >
       <div className='contest-card__thumb'>
         <Image
           src={(itm.img as Media)?.sizes?.contestImage?.url || '/'}

@@ -112,7 +112,8 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
                     className={`quantity-button`}
                     onClick={() =>
                       removeTicket({ contest_no: contestDetails?.contest_no })
-                    }>
+                    }
+                  >
                     <i className='las la-minus'></i>
                   </div>
                   <div
@@ -121,7 +122,8 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
                     className={`quantity-button quantity-up`}
                     onClick={() =>
                       addTicket({ contest_no: contestDetails?.contest_no })
-                    }>
+                    }
+                  >
                     <i className='las la-plus'></i>
                   </div>
                 </div>
@@ -130,7 +132,8 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
             <div className='mt-sm-0 mt-3'>
               <Link
                 href={`${pathname}/ticket-details`}
-                className='cmn-btn style--three'>
+                className='cmn-btn style--three'
+              >
                 buy tickets
               </Link>
             </div>
@@ -142,19 +145,22 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
         <li>
           <FacebookShareButton
             url={`${process.env.NEXT_PUBLIC_SERVER_URL}/contest/${contestDetails?.id}`}
-            hashtag={'#lottery...'}>
+            hashtag={'#lottery...'}
+          >
             <FacebookIcon size={35} round />
           </FacebookShareButton>
         </li>
         <li>
           <TwitterShareButton
-            url={`${process.env.NEXT_PUBLIC_SERVER_URL}/contest/${contestDetails?.id}`}>
+            url={`${process.env.NEXT_PUBLIC_SERVER_URL}/contest/${contestDetails?.id}`}
+          >
             <TwitterIcon size={35} round />
           </TwitterShareButton>
         </li>
         <li>
           <LinkedinShareButton
-            url={`${process.env.NEXT_PUBLIC_SERVER_URL}/contest/${contestDetails?.id}`}>
+            url={`${process.env.NEXT_PUBLIC_SERVER_URL}/contest/${contestDetails?.id}`}
+          >
             <LinkedinIcon size={35} round />
           </LinkedinShareButton>
         </li>
