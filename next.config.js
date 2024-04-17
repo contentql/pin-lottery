@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-
-const dotenvExpand = require('dotenv-expand')
-dotenvExpand.expand({ parsed: { ...process.env } })
-
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
@@ -25,10 +21,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'pub-4569e4e5d557441e896fc4fbf32626f3.r2.dev',
-      },
-      {
-        protocol: 'https',
-        hostname: 'pin-lottery.vercel.app',
       },
     ],
   },
