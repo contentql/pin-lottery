@@ -25,7 +25,7 @@ const EmailVerificationView = ({ searchParams }: PageProps) => {
   if (isSuccess) {
     toast.success(`Your email successfully verified`)
     setTimeout(() => {
-      router.push('/login')
+      router.replace('/login')
     }, 2000)
   }
   if (isError) {
