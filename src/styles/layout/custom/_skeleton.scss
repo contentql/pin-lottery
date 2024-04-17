@@ -389,3 +389,78 @@
 .contest-cart-image {
   min-height: 150px;
 }
+
+.ribbon {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 1000;
+}
+
+.ribbon__content {
+  left: -25px;
+  top: 30px;
+  transform: rotate(45deg);
+  position: absolute;
+  display: block;
+  width: 300px; /* Increase width as needed */
+  padding: 50px 80px 10px -10px; /* Adjust padding to extend to the bottom */
+  background-image: linear-gradient(
+    110deg,
+    rgb(236, 19, 121) 0%,
+    rgb(108, 0, 146) 100%
+  );
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  margin-top: 10px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bolder;
+  // border: 2px dotted #fff;
+  // outline: 5px solid #f5cd79;
+  z-index: 1000;
+}
+.ribbon__content p {
+  color: white;
+  font-weight: bolder;
+  padding-top: 10px;
+}
+/* Pseudo-elements for ribbon corners */
+.ribbon::before,
+.ribbon::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  border-style: solid;
+  border-width: 5px;
+  overflow: hidden;
+}
+
+.ribbon::before {
+  top: 0;
+  left: 0;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-image: linear-gradient(
+    110deg,
+    rgb(236, 19, 121) 0%,
+    rgb(108, 0, 146) 100%
+  );
+}
+.ribbon::after {
+  bottom: 0;
+  right: 0;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-image: linear-gradient(
+    110deg,
+    rgb(236, 19, 121) 0%,
+    rgb(108, 0, 146) 100%
+  );
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
