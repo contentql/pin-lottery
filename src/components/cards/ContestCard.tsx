@@ -9,6 +9,7 @@ import * as sd from 'simple-duration'
 import { Contest, Media, Ticket, Winner, Wishlist } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
+import { DateConverter } from '@/utils/date-converter'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 
 const ContestCard = ({
@@ -128,7 +129,7 @@ const ContestCard = ({
         !itm?.winner_ticket && (
           <div className='ribbon'>
             <span className='ribbon__content'>
-              Draw date : <p>{winnerAnnouncingDate}</p>{' '}
+              Draw date <p>{winnerAnnouncingDate}</p>{' '}
             </span>
           </div>
         )}
@@ -198,25 +199,20 @@ const ContestCard = ({
             </li>
           </ul>
         </div>
+      ) : itm?.reached_threshold &&
+        itm?.threshold_reached_date &&
+        !itm?.contest_status &&
+        !itm?.winner_ticket ? (
+        // actual fotter
+        <div className='contest-card__footer'>
+          <ul>
+            <li className='footer-card'>
+              <p>Draw on :</p>
+              <p>{DateConverter(winnerAnnouncingDate)}</p>
+            </li>
+          </ul>
+        </div>
       ) : (
-        // ) : itm?.reached_threshold &&
-        //   itm?.threshold_reached_date &&
-        //   !itm?.contest_status &&
-        //   !itm?.winner_ticket ? (
-        //   // actual fotter
-        //   <div className='contest-card__footer'>
-        //     <ul className='contest-card__meta'>
-        //       <li>
-        //         <i className='las la-clock'></i>
-        //         <span>{winnerAnnouncingDate}</span>
-        //       </li>
-        //       <li>
-        //         <i className='las la-ticket-alt'></i>
-        //         <p>tickets available</p>
-        //       </li>
-        //     </ul>
-        //   </div>
-        // ) : (
         <div className='contest-card__footer'>
           <ul>
             <li className='footer-card'>

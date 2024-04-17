@@ -416,6 +416,7 @@
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
   color: #ffffff;
   margin-top: 10px;
+  padding-top: 3px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
   text-align: center;
@@ -427,7 +428,7 @@
 .ribbon__content p {
   color: white;
   font-weight: bolder;
-  padding-top: 10px;
+  padding: 0 0 5px 0;
 }
 /* Pseudo-elements for ribbon corners */
 .ribbon::before,

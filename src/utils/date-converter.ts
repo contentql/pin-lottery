@@ -9,7 +9,7 @@ export const DateConverter = (value: string) => {
   }
 
   const weekday = date.toLocaleString('en-US', { weekday: 'long' })
-  const month = date.toLocaleString('en-US', { month: 'long' })
+  const month = date.toLocaleString('en-US', { month: 'short' })
   const day = date.getDate()
   const year = date.getFullYear()
 

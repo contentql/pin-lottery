@@ -7,6 +7,9 @@ export const Transaction: CollectionConfig = {
   slug: 'transaction',
   access: {
     read: isAdminOrSelf,
+    create: isAdminOrSelf,
+    update: isAdminOrSelf,
+    delete: isAdminOrSelf,
   },
   fields: [
     {

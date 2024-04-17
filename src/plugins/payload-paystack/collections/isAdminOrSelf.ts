@@ -7,7 +7,7 @@ export const isAdminOrSelf: Access = ({ req: { user } }) => {
     if (roles?.includes('admin')) return true
 
     return {
-      id: {
+      'user.value': {
         equals: user.id,
       },
     }
