@@ -1,8 +1,16 @@
 version = 1
 
+exclude_patterns = ["node_modules, bower_components, out, bin, build, dist"]
+
 [[analyzers]]
 name = "javascript"
 
   [analyzers.meta]
   plugins = ["react"]
   environment = ["nodejs"]
+
+[[transformers]]
+name = "prettier"
+
+[[transformers]]
+name = "standardjs"
