@@ -11,10 +11,10 @@ const validatePaystackPaymentStatus = async (
   const paymentStatus = await paystackSdk.transaction.verify(body.reference)
 
   if (!paymentStatus.status) {
-    res.status(401).json({ ...paymentStatus })
-  } else {
-    res.status(200).json({ ...paymentStatus })
+    return res.status(406).json({ ...paymentStatus })
   }
+
+  return res.status(200).json({ ...paymentStatus })
 }
 
 export default validatePaystackPaymentStatus

@@ -14,10 +14,10 @@ const createPaystackCheckoutUrl = async (
   })
 
   if (!checkout.status) {
-    res.status(401).json({ ...checkout })
-  } else {
-    res.status(200).json({ ...checkout })
+    return res.status(406).json({ ...checkout })
   }
+
+  return res.status(200).json({ ...checkout })
 }
 
 export default createPaystackCheckoutUrl

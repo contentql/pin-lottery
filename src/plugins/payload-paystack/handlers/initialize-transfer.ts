@@ -30,13 +30,13 @@ const initializeTransfer = async (
         recipient: createTransferRecipient?.data?.recipient_code,
       })
 
-      res.status(200).json({ ...createTransfer })
-    } else {
-      res.status(401).json({ ...createTransferRecipient })
+      return res.status(200).json({ ...createTransfer })
     }
-  } else {
-    res.status(401).json({ ...validateAccount })
+
+    return res.status(401).json({ ...createTransferRecipient })
   }
+
+  return res.status(406).json({ ...validateAccount })
 }
 
 export default initializeTransfer

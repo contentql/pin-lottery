@@ -14,6 +14,17 @@
       @include transform(scale(1));
     }
   }
+  @media screen and (max-width: 500px) {
+    .display-none-mobile {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 770px) {
+    .card-position {
+      display: none;
+    }
+  }
 
   &__close {
     position: absolute;
@@ -91,7 +102,7 @@
 }
 
 .cart-lottery-single1 {
-  background-color: #5a4bcc;
+  background-color: #c9900a;
   position: relative;
   margin-bottom: 14px;
   @include border-radius(10px);

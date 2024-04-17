@@ -35,8 +35,7 @@ const CartTicketCard = ({
     <div className='cart-lottery-single'>
       <button
         className='cart-lottery-single__close'
-        onClick={() => handleDeleteTicket()}
-      >
+        onClick={() => handleDeleteTicket()}>
         <FaTimes />
       </button>
 
@@ -52,7 +51,7 @@ const CartTicketCard = ({
             <div className='circle-divider'>
               <Image src={circle_border} alt='circle border' />
             </div>
-            <ul className='cart-lottery-single__selected-number'>
+            <ul className='cart-lottery-single__selected-number display-none-mobile'>
               {[...Array(7)].map((_, i) => (
                 <li key={i} className=''>
                   00

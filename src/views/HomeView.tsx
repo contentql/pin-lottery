@@ -45,7 +45,7 @@ const HomeView = ({ heroData }: { heroData: Contest[] }) => {
   const reference = searchParams.get('reference')
 
   if (reference) {
-    const testFunction = async () => {
+    const validatePayment = async () => {
       try {
         const response = await fetch(
           '/api/transaction/paystack/validate-paystack-payment-status',
@@ -69,7 +69,7 @@ const HomeView = ({ heroData }: { heroData: Contest[] }) => {
       // })
       // router.push
     }
-    testFunction()
+    // validatePayment()
   }
 
   return (
