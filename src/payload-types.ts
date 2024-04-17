@@ -297,7 +297,7 @@ export interface Contact {
 export interface Blog {
   id: string;
   title: string;
-  tag?: ('loot_tips' | 'mega_millions' | 'loot' | 'winners' | 'bonus') | null;
+  tag?: ('Loot Tips' | 'Mega Millions' | 'Loot' | 'Winners' | 'Bonus') | null;
   author_name?: string | null;
   author_image?: string | Media | null;
   short_desc: string;
@@ -366,7 +366,7 @@ export interface Transaction {
     value: string | User;
   } | null;
   type_of_transaction?: ('deposit' | 'withdraw' | 'tickets_purchased' | 'refund') | null;
-  amount?: string | null;
+  amount?: number | null;
   date?: string | null;
   status?: string | null;
   payment_method?: string | null;
