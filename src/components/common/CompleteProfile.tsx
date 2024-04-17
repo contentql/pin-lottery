@@ -30,6 +30,7 @@ const CompleteProfile = () => {
   ]
 
   return (
+    // skipcq: JS-0415
     <div className='complete-profile-container'>
       <div className='complete-profile-screen'>
         <div className='complete-profile-app-body'>
