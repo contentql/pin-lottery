@@ -56,8 +56,7 @@ const Hero = ({
       <button
         type='button'
         className='next-button-slick-hero next-slick-button-position-hero'
-        onClick={onClick}
-      >
+        onClick={onClick}>
         <i className='las la-angle-left'></i>
       </button>
     )
@@ -68,8 +67,7 @@ const Hero = ({
       <button
         type='button'
         className='next-button-slick-hero prev-slick-button-hero'
-        onClick={onClick}
-      >
+        onClick={onClick}>
         <i className='las la-angle-right'></i>
       </button>
     )
@@ -129,8 +127,7 @@ const Hero = ({
                     </Link>
                     <button
                       className='video-btn'
-                      onClick={() => setIsOpen(true)}
-                    >
+                      onClick={() => setIsOpen(true)}>
                       <FaPlay />
                     </button>
                   </div>
@@ -253,7 +250,7 @@ const Hero = ({
                             </div>
                           )}
                         <h1>{contest?.title}</h1>
-                        <p className='line-clamp'>
+                        <p className='line-clamp-3'>
                           {contest?.hero_description}
                         </p>
                         {/* <div className='hero__btn'>
@@ -272,16 +269,14 @@ const Hero = ({
                           !contest?.winner_ticket ? (
                             <Link
                               className='cmn-btn'
-                              href={`/contest/${contest?.id}`}
-                            >
+                              href={`/contest/${contest?.id}`}>
                               {' '}
                               Buy Now
                             </Link>
                           ) : (
                             <Link
                               className='cmn-btn'
-                              href={`/contest/${contest?.id}`}
-                            >
+                              href={`/contest/${contest?.id}`}>
                               {' '}
                               View more details
                             </Link>

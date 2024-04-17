@@ -35,7 +35,7 @@ const ResetPassword = ({ searchParams }: PageProps) => {
     trpc.auth.resetPassword.useMutation({
       onSuccess: () => {
         toast.success(`Success! Your password has been reset`)
-        router.push('/user')
+        router.replace('/user')
       },
       onError: (err: any) => {
         if (err.data?.code === 'UNAUTHORIZED') {
@@ -105,8 +105,7 @@ const ResetPassword = ({ searchParams }: PageProps) => {
                 <button
                   className='cmn-btn'
                   type='submit'
-                  disabled={isResetPasswordPending}
-                >
+                  disabled={isResetPasswordPending}>
                   {isResetPasswordPending ? (
                     <ImSpinner
                       size={22}

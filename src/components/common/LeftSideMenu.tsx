@@ -108,9 +108,12 @@ const LeftSideMenu = () => {
   }
 
   return (
+    // skipcq: JS-0415
     <div className='col-lg-4'>
       <div className='card-sticky-pos'>
-        <div className='user-card'>
+        <div
+          className='user-card'
+          style={{ '--length': 10, '--i': 4 } as React.CSSProperties}>
           <div className='avatar-upload'>
             <div className='obj-el'>
               <Image src={team_obj} alt='team obj' />
@@ -123,8 +126,7 @@ const LeftSideMenu = () => {
               className='avatar-preview'
               style={{
                 backgroundImage: `url(${uploadedImage ? uploadedImage : userData?.image !== undefined ? userData?.image?.sizes?.userProfile?.url : '/images/user/pp.png'})`,
-              }}
-            >
+              }}>
               <div id='imagePreview'></div>
             </div>
           </div>
@@ -133,8 +135,7 @@ const LeftSideMenu = () => {
               className='cmn-btn style--two d-flex align-items-center update-profile-image'
               type='button'
               disabled={isUserImagePending}
-              onClick={() => handleUpdateUserProfile()}
-            >
+              onClick={() => handleUpdateUserProfile()}>
               {isUserImagePending ? (
                 <ImSpinner
                   size={22}
@@ -149,8 +150,9 @@ const LeftSideMenu = () => {
           )}
           <h3 className='user-card__name'>{userData?.user_name}</h3>
           <p className='user-card__id'>ID : {userData?.id}</p>
+
           <Link href='/user-info' className='complete-profile-button'>
-            Complete Your Profile
+            Complete your profile ({2}/{10})
             <FaArrowRightLong className='material-icons' />
           </Link>
         </div>

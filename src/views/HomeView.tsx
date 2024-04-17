@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 import ContestCategories from '@/components/common/ContestCategories'
 import ContestDetailsPage from '@/components/common/ContestDetailsPage'
@@ -14,11 +14,13 @@ import Hero from '@/components/home/Hero'
 import WinnerDetails from '@/components/home/WinnerDetails'
 import HeroSkeleton from '@/components/skeletons/HeroSkeleton'
 import { Contest, Feature, Tag, Winner } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
 import { trpc } from '@/trpc/client'
 
 const HomeView = ({ heroData }: { heroData: Contest[] }) => {
   const searchParams = useSearchParams()
-  const router = useRouter()
+
+  const { fetchMe } = useAuth()
 
   // get hero contests
   const {
@@ -45,7 +47,7 @@ const HomeView = ({ heroData }: { heroData: Contest[] }) => {
   const reference = searchParams.get('reference')
 
   if (reference) {
-    router.refresh()
+    fetchMe()
     // const validatePayment = async () => {
     //   try {
     //     const response = await fetch(

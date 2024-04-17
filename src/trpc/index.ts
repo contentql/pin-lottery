@@ -3,6 +3,7 @@ import { cartRouter } from '../routers/cart-router'
 import { contestRouter } from '../routers/contest-router'
 import { publicRouter } from '../routers/public-router'
 import { ticketRouter } from '../routers/ticket-router'
+import { transactionRouter } from '../routers/transaction-router'
 import { WinnerRouter } from '../routers/winner-router'
 import { wishlistRouter } from '../routers/wishlist-router'
 
@@ -20,6 +21,7 @@ export const appRouter = router({
   public: publicRouter,
   winner: WinnerRouter,
   wishlist: wishlistRouter,
+  transaction: transactionRouter,
 })
 
 export type AppRouter = typeof appRouter

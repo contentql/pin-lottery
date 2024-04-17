@@ -12,6 +12,7 @@
     "payloadcms",
     "paystack",
     "scss",
+    "skipcq",
     "tanstack",
     "trpc",
     "zoomin"
