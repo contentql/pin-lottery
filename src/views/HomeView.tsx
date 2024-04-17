@@ -1,6 +1,6 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import ContestCategories from '@/components/common/ContestCategories'
 import ContestDetailsPage from '@/components/common/ContestDetailsPage'
@@ -18,7 +18,7 @@ import { trpc } from '@/trpc/client'
 
 const HomeView = ({ heroData }: { heroData: Contest[] }) => {
   const searchParams = useSearchParams()
-  // const router =
+  const router = useRouter()
 
   // get hero contests
   const {
@@ -45,30 +45,31 @@ const HomeView = ({ heroData }: { heroData: Contest[] }) => {
   const reference = searchParams.get('reference')
 
   if (reference) {
-    const validatePayment = async () => {
-      try {
-        const response = await fetch(
-          '/api/transaction/paystack/validate-paystack-payment-status',
-          {
-            method: 'post',
-            body: JSON.stringify({ reference }),
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          },
-        )
+    router.refresh()
+    // const validatePayment = async () => {
+    //   try {
+    //     const response = await fetch(
+    //       '/api/transaction/paystack/validate-paystack-payment-status',
+    //       {
+    //         method: 'post',
+    //         body: JSON.stringify({ reference }),
+    //         credentials: 'include',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //       },
+    //     )
 
-        const paymentStatus = await response.json()
-      } catch (error) {
-        console.log('Error while validating paystack payment status: ', error)
-      }
+    //     const paymentStatus = await response.json()
+    //   } catch (error) {
+    //     console.log('Error while validating paystack payment status: ', error)
+    //   }
 
-      // const paymentStatus = await validatePaystackPaymentStatus({
-      //   reference,
-      // })
-      // router.push
-    }
+    //   // const paymentStatus = await validatePaystackPaymentStatus({
+    //   //   reference,
+    //   // })
+    //   // router.push
+    // }
     // validatePayment()
   }
 
