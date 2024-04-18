@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 
-import { Cart, Contest, Ticket } from '@/payload-types'
+import { Cart, Contest, Media, Ticket } from '@/payload-types'
 import { currentUser } from '@/queries/auth/currentUser'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
@@ -45,8 +45,11 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const getPurchasedTicketsDetails = (data: Ticket[]) => {
     return data?.map(item => {
       return {
+        title: (item?.contest_id?.value as Contest)?.title,
+        ticketPrice: (item?.contest_id?.value as Contest)?.ticket_price,
         contestNumber: (item?.contest_id?.value as Contest).contest_no,
         ticketNumber: item.ticket_number,
+        productImage: ((item?.contest_id?.value as Contest)?.img as Media)?.url,
       }
     })
   }

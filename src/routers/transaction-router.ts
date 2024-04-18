@@ -56,7 +56,7 @@ export const transactionRouter = router({
             type_of_transaction: 'tickets_purchased',
             status: paymentStatus,
             payment_method: paymentMethod,
-            value: { ...transactionBody },
+            tickets_transactions: { ...[transactionBody] },
           },
         })
       } catch (error: unknown) {
