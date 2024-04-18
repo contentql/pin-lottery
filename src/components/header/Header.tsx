@@ -143,10 +143,10 @@ const Header = () => {
                   {' '}
                   {status === 'loggedIn' ? (
                     <div className='cart-wallet-flex'>
-                      <div className='mr-20 mt-8'>
+                      <div className='mr-20 mt-6'>
                         <DepositAmount />
                       </div>
-                      <div className='mr-20 mt-8'>
+                      <div className='mr-20 mt-6'>
                         {' '}
                         <WithdrawAmount />
                       </div>
