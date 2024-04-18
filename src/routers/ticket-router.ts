@@ -106,9 +106,9 @@ export const ticketRouter = router({
       const { user } = ctx
 
       try {
-        await Promise.all(
+        const ticketsData = await Promise.all(
           input.map(async ({ ticket_price, contest_id }) => {
-            await payload.create({
+            return payload.create({
               collection: 'tickets',
               data: {
                 ticket_price,
@@ -121,8 +121,7 @@ export const ticketRouter = router({
             })
           }),
         )
-
-        return { success: true }
+        return ticketsData
       } catch (error: any) {
         console.log('Error adding tickets:', error)
         throw new TRPCError({

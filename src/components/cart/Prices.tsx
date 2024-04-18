@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 
-import { Cart, Contest } from '@/payload-types'
+import { Cart, Contest, Ticket } from '@/payload-types'
 import { currentUser } from '@/queries/auth/currentUser'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
@@ -36,6 +36,21 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     })),
   )
 
+  const TicketsPurchasedAmount = (data: Ticket[]) => {
+    return data?.reduce(
+      (total: number, item: Ticket) => total + item.ticket_price,
+      0,
+    )
+  }
+  const getPurchasedTicketsDetails = (data: Ticket[]) => {
+    return data?.map(item => {
+      return {
+        contestNumber: (item?.contest_id?.value as Contest).contest_no,
+        ticketNumber: item.ticket_number,
+      }
+    })
+  }
+
   const { mutate: deleteAllTicketsOfUserFromCart } =
     trpc.cart.deleteAllTicketsOfUserFromCart.useMutation({
       onSuccess: async () => {
@@ -49,9 +64,31 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
       },
     })
 
+  const {
+    mutate: ticketsPurchasedTransaction,
+    isPending: isTransactionPending,
+  } = trpc.transaction.addTicketsTransaction.useMutation({
+    onSuccess: () => {
+      toast.success(`Transaction completed successfully`)
+    },
+    onError: () => {
+      toast.error(`Transaction failed`)
+    },
+  })
+
   const { mutate: createTicketsMutation, isPending: isTicketPurchased } =
     trpc.ticket.addTickets.useMutation({
-      onSuccess: async () => {
+      onSuccess: async data => {
+        console.log('tickets data', data)
+        const amount = await TicketsPurchasedAmount(data)
+        const purchasedTicketsDetails = await getPurchasedTicketsDetails(data)
+        ticketsPurchasedTransaction({
+          amount: amount,
+          paymentMethod: 'lottery wallet',
+          paymentStatus: 'success',
+          transactionBody: purchasedTicketsDetails!,
+          transactionDate: data?.at(0)?.createdAt!,
+        })
         deleteAllTicketsOfUserFromCart()
         toast.success(
           'Tickets successfully purchased. Draw date will be announced shortly.',
