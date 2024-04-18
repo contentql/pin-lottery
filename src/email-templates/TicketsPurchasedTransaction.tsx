@@ -90,7 +90,7 @@ export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
                       <Column
                         style={{ verticalAlign: 'top', paddingLeft: '12px' }}>
                         <Text style={{ ...paragraph, fontWeight: '500' }}>
-                          Contest Name {item?.title}
+                          Contest Name: {item?.title}
                         </Text>
                         <Text style={global.text}>
                           Ticket Price: {item?.ticketPrice}
