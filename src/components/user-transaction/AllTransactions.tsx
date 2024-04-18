@@ -86,54 +86,78 @@ const AllTransactions = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentTransactions?.map(singleTran => (
-                  <tr key={singleTran.id}>
-                    <td>
-                      <div className='date'>
-                        <span>
-                          {DateConverter(singleTran?.date!).slice(
-                            DateConverter(singleTran?.date!).indexOf(' ') + 1,
-                          )}
-                        </span>
-                      </div>
-                    </td>
-                    <td>
-                      <p>{singleTran.type_of_transaction}</p>
-                      <span>Bank account to lottery Account</span>
-                    </td>
-                    <td>
-                      <p>{singleTran.payment_method}</p>
-                    </td>
-                    <td>
-                      {singleTran.type_of_transaction === 'withdraw' ? (
-                        <span className='amount minus-amount'>
-                          - ${singleTran.amount} (
-                          {ticketsMetadata?.currencyCode})
-                        </span>
-                      ) : (
-                        <span className='amount plus-amount'>
-                          + {singleTran.amount} ({ticketsMetadata?.currencyCode}
-                          )
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      {singleTran.status === '' ? (
-                        <div className='status-pending'>
-                          <i>
-                            <FaEllipsisH />
-                          </i>
+                {currentTransactions?.map(singleTran => {
+                  const ticketsTransactions = (
+                    singleTran.tickets_transactions as any
+                  )?.['0'] as Array<any>
+
+                  const contestIdsArray = [
+                    ...new Set(
+                      ticketsTransactions?.map(item => item?.contestNumber),
+                    ),
+                  ]
+                  const contestIds = contestIdsArray
+                    ? contestIdsArray.join(', ')
+                    : ''
+                  return (
+                    <tr key={singleTran.id}>
+                      <td>
+                        <div className='date'>
+                          <span>
+                            {DateConverter(singleTran?.date!).slice(
+                              DateConverter(singleTran?.date!).indexOf(' ') + 1,
+                            )}
+                          </span>
                         </div>
-                      ) : (
-                        <div className='status-success'>
-                          <i>
-                            <FaCheckCircle />
-                          </i>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      <td>
+                        <p>{singleTran.type_of_transaction}</p>
+                        {singleTran.type_of_transaction === 'withdraw' ? (
+                          <span> lottery Account to bank</span>
+                        ) : singleTran.type_of_transaction === 'deposit' ? (
+                          <span>Bank account to lottery Account</span>
+                        ) : singleTran.type_of_transaction === 'refund' ? (
+                          <span>tickets Refund</span>
+                        ) : (
+                          <span>Contest Nos: {contestIds}</span>
+                        )}
+                      </td>
+                      <td>
+                        <p>{singleTran.payment_method}</p>
+                      </td>
+                      <td>
+                        {singleTran.type_of_transaction === 'withdraw' ||
+                        singleTran.type_of_transaction ===
+                          'tickets_purchased' ? (
+                          <span className='amount minus-amount'>
+                            - ${singleTran.amount} (
+                            {ticketsMetadata?.currencyCode})
+                          </span>
+                        ) : (
+                          <span className='amount plus-amount'>
+                            + {singleTran.amount} (
+                            {ticketsMetadata?.currencyCode})
+                          </span>
+                        )}
+                      </td>
+                      <td>
+                        {singleTran.status === '' ? (
+                          <div className='status-pending'>
+                            <i>
+                              <FaEllipsisH />
+                            </i>
+                          </div>
+                        ) : (
+                          <div className='status-success'>
+                            <i>
+                              <FaCheckCircle />
+                            </i>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
