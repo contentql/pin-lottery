@@ -138,7 +138,7 @@ const AllTransactions = () => {
             </table>
           </div>
           <div className='load-more'>
-            {userTransactions?.length! <= indexOfLastTransaction ? (
+            {userTransactions?.length! <= transactionsToShow ? (
               <button
                 type='button'
                 className='d-flex align-items-center justify-content-lg-center gap-1'></button>
