@@ -67,13 +67,15 @@ const BlogView = () => {
             setBlogFilters={setBlogFilters as any}
           />
           {blogData?.totalBlogs! > 4 && (
-            <ResponsivePagination
-              current={blogFilters?.pageNumber}
-              total={Math.ceil((blogData?.totalBlogs as number) / 4)}
-              onPageChange={pageNumber =>
-                setBlogFilters({ ...blogFilters, pageNumber })
-              }
-            />
+            <div className='mt-50'>
+              <ResponsivePagination
+                current={blogFilters?.pageNumber}
+                total={Math.ceil((blogData?.totalBlogs as number) / 4)}
+                onPageChange={pageNumber =>
+                  setBlogFilters({ ...blogFilters, pageNumber })
+                }
+              />
+            </div>
           )}
         </div>
       </section>
