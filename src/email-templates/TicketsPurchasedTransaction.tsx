@@ -25,7 +25,6 @@ interface TicketsPurchasedProps {
 const imageUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/images/client/2.png`
 const env = process.env.NEXT_PUBLIC_SERVER_URL
 export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
-  console.log('tickets', doc)
   return (
     <Html>
       <Head />
