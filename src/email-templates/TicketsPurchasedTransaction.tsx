@@ -1,3 +1,4 @@
+import { DateConverter } from '../utils/date-converter'
 import {
   Body,
   Column,
@@ -50,7 +51,7 @@ export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
               src={imageUrl}
               width='66'
               height='22'
-              alt='Nike'
+              alt='Lottery'
               style={{ margin: 'auto' }}
             />
             <Heading style={global.heading}>
@@ -59,12 +60,6 @@ export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
             <Text style={global.text}>
               Embrace anticipation! Your lottery tickets are secured, opening
               doors to boundless possibilities. Get ready to dream big!
-            </Text>
-            <Text style={{ ...global.text, marginTop: 24 }}>
-              As you stand on the precipice of fate, imagine the myriad paths
-              that lay before you, each one leading to a different destination
-              of possibility. And why stop here? Add more tickets to amplify the
-              chorus of your dreams, increasing your chances to win big.
             </Text>
           </Section>
           <Hr style={global.hr} />
@@ -82,28 +77,34 @@ export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
             {doc?.tickets_transactions &&
               ((doc?.tickets_transactions as any)['0'] as Array<any>)?.map(
                 (item, index) => (
-                  <Row key={index}>
-                    <Column>
-                      <Img
-                        src={item?.productImage}
-                        alt="Brazil 2022/23 Stadium Away Women's Nike Dri-FIT Soccer Jersey"
-                        style={{ float: 'left' }}
-                        width='260px'
-                      />
-                    </Column>
-                    <Column
-                      style={{ verticalAlign: 'top', paddingLeft: '12px' }}>
-                      <Text style={{ ...paragraph, fontWeight: '500' }}>
-                        {item?.title}
-                      </Text>
-                      <Text style={global.text}>{item?.ticketPrice}</Text>
-                      <Text style={global.text}>{item?.contestNumber}</Text>
-                      <Text style={{ ...paragraph, fontWeight: '500' }}>
-                        {item?.ticketNumber}
-                      </Text>
-                    </Column>
+                  <Section key={index}>
+                    <Row>
+                      <Column>
+                        <Img
+                          src={item?.productImage}
+                          alt={item?.title}
+                          style={{ float: 'left' }}
+                          width='260px'
+                        />
+                      </Column>
+                      <Column
+                        style={{ verticalAlign: 'top', paddingLeft: '12px' }}>
+                        <Text style={{ ...paragraph, fontWeight: '500' }}>
+                          Contest Name {item?.title}
+                        </Text>
+                        <Text style={global.text}>
+                          Ticket Price: {item?.ticketPrice}
+                        </Text>
+                        <Text style={global.text}>
+                          Contest No: {item?.contestNumber}
+                        </Text>
+                        <Text style={{ ...paragraph, fontWeight: '500' }}>
+                          Ticket Number: {item?.ticketNumber}
+                        </Text>
+                      </Column>
+                    </Row>
                     <Hr style={global.hr} />
-                  </Row>
+                  </Section>
                 ),
               )}
           </Section>
@@ -111,12 +112,12 @@ export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
           <Section style={global.defaultPadding}>
             <Row style={{ display: 'inline-flex', marginBottom: 40 }}>
               <Column style={{ width: '170px' }}>
-                <Text style={global.paragraphWithBold}>Order Number</Text>
-                <Text style={track.number}>C0106373851</Text>
+                <Text style={global.paragraphWithBold}>Payment Status</Text>
+                <Text style={track.number}>{doc?.status}</Text>
               </Column>
               <Column>
-                <Text style={global.paragraphWithBold}>Order Date</Text>
-                <Text style={track.number}>Sep 22, 2022</Text>
+                <Text style={global.paragraphWithBold}>Payment Date</Text>
+                <Text style={track.number}>{DateConverter(doc?.date!)}</Text>
               </Column>
             </Row>
             <Row>
@@ -127,7 +128,7 @@ export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
               </Column>
             </Row>
           </Section>
-          <Hr style={global.hr} />
+
           <Hr style={global.hr} />
           <Section style={menu.container}>
             <Row>
@@ -144,8 +145,6 @@ export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
                   Faqs
                 </Link>
               </Column>
-            </Row>
-            <Row style={{ ...menu.content, paddingTop: '0' }}>
               <Column style={{ width: '33%' }} colSpan={1}>
                 <Link href={`${env}/about`} style={menu.text}>
                   About us
@@ -185,7 +184,7 @@ export const TicketsPurchasedEmail = ({ doc }: TicketsPurchasedProps) => {
           <Hr style={global.hr} />
           <Section style={paddingY}>
             <Row>
-              <Text style={global.heading}>Nike.com</Text>
+              <Text style={global.heading}>Website Links</Text>
             </Row>
             <Row style={categories.container}>
               <Column align='center'>
