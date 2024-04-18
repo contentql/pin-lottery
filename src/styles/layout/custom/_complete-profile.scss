@@ -30,7 +30,7 @@
   //   --i: 1;
   --stop: calc(100% / var(--length) * var(--i));
   --c1: hsl(calc((var(--i) - 1) * (180 / var(--length))), 61%, 62%);
-  --c2: hsl(calc((var(--i) - 1) * (180 / var(--length))), 61%, 90%);
+  --c2: hsl(calc((var(--i) - 1) * (180 / var(--length))), 0%, 100%);
 
   overflow: hidden;
 

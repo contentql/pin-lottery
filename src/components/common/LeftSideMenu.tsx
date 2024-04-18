@@ -25,7 +25,7 @@ const LeftSideMenu = () => {
 
   const queryClient = useQueryClient()
 
-  const { logout, setUser } = useAuth()
+  const { logout, setUser, totalUserFields, completedUserFields } = useAuth()
 
   const handleUpload = (event: any) => {
     setUserImage(event.target.files)
@@ -113,7 +113,12 @@ const LeftSideMenu = () => {
       <div className='card-sticky-pos'>
         <div
           className='user-card'
-          style={{ '--length': 10, '--i': 4 } as React.CSSProperties}>
+          style={
+            {
+              '--length': totalUserFields,
+              '--i': completedUserFields,
+            } as React.CSSProperties
+          }>
           <div className='avatar-upload'>
             <div className='obj-el'>
               <Image src={team_obj} alt='team obj' />
@@ -152,7 +157,7 @@ const LeftSideMenu = () => {
           <p className='user-card__id'>ID : {userData?.id}</p>
 
           <Link href='/user-info' className='complete-profile-button'>
-            Complete your profile ({2}/{10})
+            Complete your profile ({completedUserFields}/{totalUserFields})
             <FaArrowRightLong className='material-icons' />
           </Link>
         </div>
