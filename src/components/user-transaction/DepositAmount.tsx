@@ -1,14 +1,16 @@
 import transaction_1 from '/public/images/icon/transaction/1.png'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { ImSpinner } from 'react-icons/im'
 
 interface Inputs {
   depositAmount: number
 }
 
 function DepositAmount() {
-  // const [depositAmount, setDepositAmount] = useState(0)
+  const [loading, setLoading] = useState(false)
   const {
     formState: { errors },
     register,
@@ -19,7 +21,7 @@ function DepositAmount() {
 
   const onsubmit = async (data: Inputs) => {
     const { depositAmount } = data
-
+    setLoading(true)
     try {
       const response = await fetch(
         '/api/transaction/paystack/create-paystack-checkout-url',
@@ -34,7 +36,7 @@ function DepositAmount() {
       )
 
       const { data: responseData } = await response.json()
-
+      setLoading(false)
       router.push(responseData?.authorization_url || '/user-transaction')
     } catch (error) {
       console.log('Error while creating paystack checkout url: ', error)
@@ -88,7 +90,16 @@ function DepositAmount() {
                 </p>
               )}
               <button type='submit' className='add-amount-button cmn-btn'>
-                Add
+                {loading ? (
+                  <ImSpinner
+                    size={22}
+                    style={{
+                      animation: 'rotateAnimation 2s linear infinite',
+                    }}
+                  />
+                ) : (
+                  'Add'
+                )}
               </button>
             </form>
           </div>
