@@ -25,7 +25,13 @@ const LeftSideMenu = () => {
 
   const queryClient = useQueryClient()
 
-  const { logout, setUser, totalUserFields, completedUserFields } = useAuth()
+  const {
+    logout,
+    setUser,
+    totalUserFields,
+    completedUserFields,
+    isProfileCompleted,
+  } = useAuth()
 
   const handleUpload = (event: any) => {
     setUserImage(event.target.files)
@@ -112,7 +118,7 @@ const LeftSideMenu = () => {
     <div className='col-lg-4'>
       <div className='card-sticky-pos'>
         <div
-          className='user-card'
+          className={`user-card ${isProfileCompleted ? '' : 'profile-completetion-progress-bar'}`}
           style={
             {
               '--length': totalUserFields,
@@ -156,10 +162,12 @@ const LeftSideMenu = () => {
           <h3 className='user-card__name'>{userData?.user_name}</h3>
           <p className='user-card__id'>ID : {userData?.id}</p>
 
-          <Link href='/user-info' className='complete-profile-button'>
-            Complete your profile ({completedUserFields}/{totalUserFields})
-            <FaArrowRightLong className='material-icons' />
-          </Link>
+          {!isProfileCompleted && (
+            <Link href='/user-info' className='complete-profile-button'>
+              Complete your profile ({completedUserFields}/{totalUserFields})
+              <FaArrowRightLong className='material-icons' />
+            </Link>
+          )}
         </div>
 
         <div className='user-action-card'>
