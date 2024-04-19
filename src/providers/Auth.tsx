@@ -9,6 +9,8 @@ import React, {
   useState,
 } from 'react'
 
+import ProfileCompletionStatus from '@/utils/profile-completion-status'
+
 // eslint-disable-next-line no-unused-vars
 type ResetPassword = (args: {
   password: string
@@ -38,6 +40,9 @@ type AuthContext = {
   resetPassword: ResetPassword
   forgotPassword: ForgotPassword
   status: undefined | 'loggedOut' | 'loggedIn'
+  totalUserFields: number
+  completedUserFields: number
+  isProfileCompleted: boolean
 }
 
 const Context = createContext({} as AuthContext)
@@ -226,6 +231,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [])
 
+  const { totalUserFields, completedUserFields, isProfileCompleted } =
+    ProfileCompletionStatus(
+      ['user_name', 'dob', 'address', 'phone_number'],
+      user,
+    )
+
   return (
     <Context.Provider
       value={{
@@ -238,8 +249,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         resetPassword,
         forgotPassword,
         status,
-      }}
-    >
+        totalUserFields,
+        completedUserFields,
+        isProfileCompleted,
+      }}>
       {children}
     </Context.Provider>
   )

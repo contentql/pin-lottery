@@ -7,6 +7,7 @@ import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 
 import { Cart, Contest, Media, Ticket } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
 import { currentUser } from '@/queries/auth/currentUser'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
@@ -15,6 +16,8 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const router = useRouter()
 
   const [isPurchasing, setIsPurchasing] = useState(false)
+
+  const { isProfileCompleted } = useAuth()
 
   const currency = ticketsMetadata?.currency
 
@@ -110,7 +113,30 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     }
 
     if (userData.amount < total_price_of_cart) {
-      toast.error('Insufficient balance. Please add amount to continue.')
+      toast.error('Insufficient balance. Please add amount to continue.', {
+        toastId: 'insufficient-balance',
+        autoClose: 3000,
+        pauseOnHover: false,
+        onClose: () => {
+          if (toast.isActive('insufficient-balance')) return
+          toast.info('Redirecting to user-transaction page...', {
+            toastId: 'user-transaction-redirecting',
+            autoClose: 2000,
+            pauseOnHover: false,
+            onClose: () => {
+              if (toast.isActive('user-transaction-redirecting')) return
+              router.push('/user-transaction')
+            },
+          })
+        },
+      })
+      return
+    }
+
+    if (!isProfileCompleted) {
+      toast.warning(
+        'Please complete your profile to proceed with your purchase.',
+      )
       return
     }
 
@@ -169,16 +195,12 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
             <button
               type='button'
               className='cmn-btn'
-              style={{
-                color: `${userData?.amount < total_price_of_cart ? 'black' : ''}`,
-                background: `${userData?.amount < total_price_of_cart ? 'linear-gradient(180.3deg, rgb(221, 221, 221) 5.5%, rgb(110, 136, 161) 90.2%)' : ''}`,
-              }}
+              // style={{
+              //   color: `${userData?.amount < total_price_of_cart ? 'black' : ''}`,
+              //   background: `${userData?.amount < total_price_of_cart ? 'linear-gradient(180.3deg, rgb(221, 221, 221) 5.5%, rgb(110, 136, 161) 90.2%)' : ''}`,
+              // }}
               onClick={() => handlePurchase()}
-              disabled={
-                userData?.amount < total_price_of_cart
-                  ? true
-                  : isPurchasing || isUserDataPending
-              }>
+              disabled={isPurchasing || isUserDataPending}>
               {isPurchasing ? (
                 <ImSpinner
                   size={22}
