@@ -129,7 +129,7 @@ const ContestCard = ({
         !itm?.winner_ticket && (
           <div className='ribbon'>
             <span className='ribbon__content'>
-              Draw date <p>{winnerAnnouncingDate}</p>{' '}
+              Hurry UP! <p>Contest Ending Soon</p>{' '}
             </span>
           </div>
         )}

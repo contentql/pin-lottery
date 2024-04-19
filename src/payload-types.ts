@@ -370,7 +370,16 @@ export interface Transaction {
   date?: string | null;
   status?: string | null;
   payment_method?: string | null;
-  value:
+  value?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  tickets_transactions?:
     | {
         [k: string]: unknown;
       }

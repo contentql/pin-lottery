@@ -1,3 +1,5 @@
+import DepositAmount from '../user-transaction/DepositAmount'
+import WithdrawAmount from '../user-transaction/WithdrawAmount'
 import tag from '/public/images/icon/btn/tag.png'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
@@ -141,10 +143,18 @@ const Header = () => {
                   {' '}
                   {status === 'loggedIn' ? (
                     <div className='cart-wallet-flex'>
+                      <div className='mr-20 mt-6'>
+                        <DepositAmount />
+                      </div>
+                      <div className='mr-20 mt-6'>
+                        {' '}
+                        <WithdrawAmount />
+                      </div>
                       <span className='wallet-amount'>
                         {ticketsMetadata?.currency} {user?.amount}
                       </span>
                       <Cart />
+
                       <div>
                         <Link
                           href=''
