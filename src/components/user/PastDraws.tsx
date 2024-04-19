@@ -112,7 +112,7 @@ const PastDraws = ({
             </table>
           </div>
           <div className='load-more'>
-            {pastDrawsTicketsData?.length! <= indexOfLastTicket ? (
+            {pastDrawsTicketsData?.length! <= ticketsToShow ? (
               <button
                 type='button'
                 className='d-flex align-items-center justify-content-lg-center gap-1'></button>

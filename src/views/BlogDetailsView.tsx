@@ -39,17 +39,19 @@ const BlogDetailsView = ({ blogId, blog }: PageProps) => {
 
       {/* Details section here */}
       <Details blogDetails={blogDetails} />
-      <div className='container mb-50'>
-        <div className='row'>
-          <div className='col-lg-12'>
-            <div className='blog-single'>
-              <div className='sidebar'>
-                <LatestPost blogData={similarBlogs as Blog[]} />
+      {similarBlogs?.length! >= 2 && (
+        <div className='container mb-50'>
+          <div className='row'>
+            <div className='col-lg-12'>
+              <div className='blog-single'>
+                <div className='sidebar'>
+                  <LatestPost blogData={similarBlogs as Blog[]} />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

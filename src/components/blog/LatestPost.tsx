@@ -28,12 +28,46 @@ const PrevBtn = ({ onClick }: any) => {
 
 const LatestPost = ({ blogData }: { blogData: Blog[] }) => {
   const settings = {
-    infinite: false,
-    speed: 700,
-    arrows: true,
+    slidesToShow: 2,
+    slidesToScroll: 1,
     dots: false,
+    centerMode: true,
     nextArrow: <PrevBtn />,
     prevArrow: <NextBtn />,
+    centerPadding: '0px',
+    focusOnSelect: true,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 481,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 360,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   }
   return (
     <div className='widget'>
