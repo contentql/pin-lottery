@@ -17,7 +17,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
 
   const [isPurchasing, setIsPurchasing] = useState(false)
 
-  const { isProfileCompleted } = useAuth()
+  const { isProfileCompleted, fetchMe } = useAuth()
 
   const currency = ticketsMetadata?.currency
 
@@ -55,6 +55,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const { mutate: createTicketsMutation, isPending: isTicketPurchased } =
     trpc.ticket.addTickets.useMutation({
       onSuccess: async () => {
+        await fetchMe()
         deleteAllTicketsOfUserFromCart()
         toast.success(
           'Tickets successfully purchased. Draw date will be announced shortly.',

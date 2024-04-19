@@ -1,6 +1,7 @@
 'use client'
 
 import inner_hero_shape from '/public/images/elements/inner-hero-shape.png'
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 
@@ -12,14 +13,32 @@ const CartView = () => {
   const { data: cartData, refetch: cartDataRefetch } =
     trpc.cart.getCartTickets.useQuery()
 
+  const queryClient = useQueryClient()
+
   const { mutate: updateCartTicketsCountMutation } =
     trpc.cart.updateTicketsOfUserFromCart.useMutation({
       onSuccess: async () => {
-        cartDataRefetch()
         toast.success('Deleted successfully.')
       },
       onError: async () => {
         toast.error('Unable to delete. Please try again.')
+        cartDataRefetch()
+      },
+      onMutate: async (param: any) => {
+        queryClient.setQueryData(
+          [['cart', 'getCartTickets'], { type: 'query' }],
+          (prev: Cart[]) => {
+            return prev.map((cart: Cart) =>
+              cart.id === param.id
+                ? {
+                    ...cart,
+                    tickets: param.tickets,
+                    total_price: param.total_price,
+                  }
+                : cart,
+            )
+          },
+        )
       },
     })
 
@@ -31,6 +50,14 @@ const CartView = () => {
     onError: async () => {
       toast.error('Failed to delete tickets.')
     },
+    onMutate: async (param: { id: string }) => {
+      queryClient.setQueryData(
+        [['cart', 'getCartTickets'], { type: 'query' }],
+        (prev: Cart[]) => {
+          return prev.filter((cart: Cart) => cart?.id !== param.id)
+        },
+      )
+    },
   })
 
   const { mutate: deleteAllTicketsOfUserFromCart } =
@@ -41,6 +68,12 @@ const CartView = () => {
       },
       onError: async () => {
         toast.error('Failed to empty cart.')
+      },
+      onMutate: async () => {
+        queryClient.setQueryData(
+          [['cart', 'getCartTickets'], { type: 'query' }],
+          (prev: any) => [],
+        )
       },
     })
 

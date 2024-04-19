@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useContext } from 'react'
 import { FaCartPlus } from 'react-icons/fa'
@@ -12,6 +13,7 @@ import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 
 const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
+  const queryClient = useQueryClient()
   const { removeAllTickets, totalTicketsCount } = useContext(AppContext)
 
   const { status } = useAuth()
@@ -43,6 +45,11 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
 
       return
     }
+
+    queryClient.setQueryData(
+      [['cart', 'getCartTickets'], { type: 'query' }],
+      (prev: any) => [...prev, contestDetails],
+    )
 
     addTicketsToCart({
       contest_id: contestDetails?.id,
@@ -77,8 +84,7 @@ const BuyTicketCard = ({ contestDetails }: { contestDetails: Contest }) => {
             type='button'
             className='btn-border text-capitalize btn-transparent'
             disabled={isTicketAdded}
-            onClick={() => handleAddToCart()}
-          >
+            onClick={() => handleAddToCart()}>
             {isTicketAdded ? (
               <ImSpinner
                 size={22}
