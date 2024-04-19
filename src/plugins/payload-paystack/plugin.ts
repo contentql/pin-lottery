@@ -87,7 +87,7 @@ export const paystack =
               path: '/paystack/create-paystack-checkout-url',
               method: 'post',
               handler: async (req, res) =>
-                createPaystackCheckoutUrl(req, res, paystackSdk),
+                createPaystackCheckoutUrl(req, res, paystackSdk, pluginOptions),
             },
             {
               path: '/paystack/initialize-transfer',

@@ -421,12 +421,15 @@
   text-transform: uppercase;
   text-align: center;
   font-weight: bolder;
+  font-size: 18px;
   // border: 2px dotted #fff;
   // outline: 5px solid #f5cd79;
   z-index: 1000;
 }
 .ribbon__content p {
   color: white;
+  font-size: 16px;
+  text-transform: capitalize;
   font-weight: bolder;
   padding: 0 0 5px 0;
 }

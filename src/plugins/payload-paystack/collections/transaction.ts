@@ -1,3 +1,5 @@
+import { depositAmount } from '../hooks/emails/depositAmount'
+import { TicketsPurchased } from '../hooks/emails/ticketsPurchased'
 import type { CollectionConfig } from 'payload/types'
 
 import { isAdminOrSelf } from './isAdminOrSelf'
@@ -11,6 +13,7 @@ export const Transaction: CollectionConfig = {
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
   },
+  hooks: { afterChange: [depositAmount, TicketsPurchased] },
   fields: [
     {
       name: 'user',
@@ -70,11 +73,26 @@ export const Transaction: CollectionConfig = {
     {
       name: 'value',
       type: 'json',
-      required: true,
+      label: 'Paystack Body',
       admin: {
         readOnly: true,
+        description: 'this is Paystack details',
+        condition: data =>
+          data?.type_of_transaction === 'deposit' ||
+          data?.type_of_transaction === 'withdraw',
       },
-      label: 'Paystack Body',
+    },
+    {
+      name: 'tickets_transactions',
+      type: 'json',
+      label: 'Ticket Details',
+      admin: {
+        readOnly: true,
+        description: 'this is ticket details',
+        condition: data =>
+          data?.type_of_transaction === 'tickets_purchased' ||
+          data?.type_of_transaction === 'refund',
+      },
     },
   ],
 }
