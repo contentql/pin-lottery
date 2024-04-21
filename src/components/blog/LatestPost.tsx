@@ -70,28 +70,29 @@ const LatestPost = ({ blogData }: { blogData: Blog[] }) => {
     ],
   }
   return (
-    <div className='widget'>
+    <div className=''>
       <h3 className='widget__title'>Similar Posts</h3>
       <Slider {...settings} className='small-post-slider'>
         {blogData?.map((blog: any, i: any) => (
-          <div key={i} className='small-post'>
-            <div className='small-post__thumb'>
-              <Image
-                src={(blog.img as Media)?.url || ''}
-                height={100}
-                width={100}
-                alt={blog.title}
-              />
-            </div>
-            <div className='small-post__content'>
-              <Link href={`/blog/${blog.id}`}>
-                <h3 className='small-post__title line-clamp-1'>
-                  {blog?.title}
-                </h3>
-              </Link>
-              <p className='line-clamp-2 mt-30'>{blog.short_desc}</p>
+          <div className='mr-20 small-post-details' key={i}>
+            <div key={i} className='small-post '>
+              <div className='small-post__thumb'>
+                <Image
+                  src={(blog.img as Media)?.url || ''}
+                  height={100}
+                  width={100}
+                  alt={blog.title}
+                />
+              </div>
+              <div className='small-post__content'>
+                <Link href={`/blog/${blog.id}`}>
+                  <h3 className='small-post__title line-clamp-1'>
+                    {blog?.title}
+                  </h3>
+                </Link>
+                <p className='line-clamp-2 mt-6'>{blog.short_desc}</p>
 
-              {/* <ul className='blog-card__meta'>
+                {/* <ul className='blog-card__meta'>
                 <li className='d-flex align-items-center gap-1'>
                   <FaRegComments className='fs-6' />
                   <span>{blog.comments} Comments</span>
@@ -101,6 +102,7 @@ const LatestPost = ({ blogData }: { blogData: Blog[] }) => {
                   <span>{blog.views} Views</span>
                 </li>
               </ul> */}
+              </div>
             </div>
           </div>
         ))}
