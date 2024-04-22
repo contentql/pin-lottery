@@ -12,6 +12,8 @@ import { currentUser } from '@/queries/auth/currentUser'
 import { trpc } from '@/trpc/client'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 
+import CartDepositAmount from './CartDepositAmount'
+
 const Prices = ({ cartData }: { cartData: Cart[] }) => {
   const router = useRouter()
 
@@ -84,7 +86,6 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
 
   const { mutate: createTicketsMutation, isPending: isTicketPurchased } =
     trpc.ticket.addTickets.useMutation({
-
       onSuccess: async data => {
         console.log('tickets data', data)
         const amount = await TicketsPurchasedAmount(data)
@@ -96,7 +97,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
           transactionBody: purchasedTicketsDetails!,
           transactionDate: data?.at(0)?.createdAt!,
         })
-      await fetchMe()
+        await fetchMe()
         deleteAllTicketsOfUserFromCart()
         toast.success(
           'Tickets successfully purchased. Draw date will be announced shortly.',
@@ -119,18 +120,18 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
         toastId: 'insufficient-balance',
         autoClose: 3000,
         pauseOnHover: false,
-        onClose: () => {
-          if (toast.isActive('insufficient-balance')) return
-          toast.info('Redirecting to user-transaction page...', {
-            toastId: 'user-transaction-redirecting',
-            autoClose: 2000,
-            pauseOnHover: false,
-            onClose: () => {
-              if (toast.isActive('user-transaction-redirecting')) return
-              router.push('/user-transaction')
-            },
-          })
-        },
+        // onClose: () => {
+        //   if (toast.isActive('insufficient-balance')) return
+        //   toast.info('Redirecting to user-transaction page...', {
+        //     toastId: 'user-transaction-redirecting',
+        //     autoClose: 2000,
+        //     pauseOnHover: false,
+        //     onClose: () => {
+        //       if (toast.isActive('user-transaction-redirecting')) return
+        //       router.push('/user-transaction')
+        //     },
+        //   })
+        // },
       })
       return
     }
@@ -214,6 +215,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
                 'Buy Tickets'
               )}
             </button>
+            <CartDepositAmount />
           </div>
         </div>
         <div className='mt-30'>

@@ -1,5 +1,3 @@
-import transaction_1 from '/public/images/icon/transaction/1.png'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -11,7 +9,7 @@ interface Inputs {
   depositAmount: number
 }
 
-function DepositAmount() {
+function CartDepositAmount() {
   const [loading, setLoading] = useState(false)
   const {
     formState: { errors },
@@ -37,10 +35,15 @@ function DepositAmount() {
   return (
     <div>
       <details>
+        {/* <summary>
+          <button type='button' className='cmn-btn'>
+            Add Amount
+          </button>
+          <div className='details-modal-overlay'></div>
+        </summary> */}
         <summary>
-          <div className='transaction-action-btn'>
-            <Image src={transaction_1} alt='transaction 1' />
-            <span>Deposit</span>
+          <div className='transaction-action-btn '>
+            <span className='cmn-btn'>Add Amount</span>
           </div>
           <div className='details-modal-overlay'></div>
         </summary>
@@ -100,4 +103,4 @@ function DepositAmount() {
   )
 }
 
-export default DepositAmount
+export default CartDepositAmount
