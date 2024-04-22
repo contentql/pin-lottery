@@ -178,6 +178,7 @@ const AllTickets = ({
             </div>
           </div>
         ))}
+        <div className='ticket-wrapper__body2'></div>
       </div>
     </div>
   )

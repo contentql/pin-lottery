@@ -614,6 +614,7 @@
       display: inline-block
       height:150px
       width:200px
+      margin-bottom:40px
   .winner-content
     background-image: url("/images/elements/winner-content-bg.jpg")
     position: absolute
@@ -2287,6 +2288,10 @@
       text-transform: uppercase
       background-color: transparent
       color: #ffffff
+  &__body2 
+    background-color: #5a4bcc
+    padding: 20px 20px
+    border-radius:0 0 15px 15px
   &__body 
     background-color: #5a4bcc
     padding: 20px 20px
@@ -2406,7 +2411,9 @@
           font-size: 22px
           color: #ffffff
   &__btn 
-    text-align: center
+    +d-flex 
+    align-items: center
+    justify-content: space-around
     margin-bottom: -40px
     margin-top: 50px
 /* cart section css end */
