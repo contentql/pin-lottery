@@ -1542,27 +1542,6 @@ $duration: 1000;
 .cart-wallet-flex {
   display: flex;
 }
-.hide-in-mobile {
-  display: none;
-  @media (min-width: 600px) {
-    display: flex;
-  }
-}
-@media (max-width: 600px) {
-  .hide-in-mobile {
-    display: none;
-  }
-}
-
-.not-hide-in-mobile {
-  display: none;
-}
-@media (max-width: 600px) {
-  .not-hide-in-mobile {
-    display: flex;
-  }
-}
-
 .user-button {
   margin-left: 28px;
   width: 40px;
@@ -1604,4 +1583,7 @@ $duration: 1000;
 .transactions-empty-heading {
   font-size: 28px;
   padding-left: 20px;
+}
+.small-post-details {
+  padding: 0 20px;
 }

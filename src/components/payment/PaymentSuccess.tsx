@@ -1,4 +1,14 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
+
 const PaymentSuccess = () => {
+  const router = useRouter()
+  if (typeof window !== 'undefined') {
+    const route = localStorage.getItem('route')
+    router.replace(route || '/')
+  }
+
   return (
     <div>
       <div
