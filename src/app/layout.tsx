@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 import { AppProvider } from '@/context/context'
 import Providers from '@/providers/Providers'
@@ -16,6 +16,13 @@ export const metadata: Metadata = {
 
 if (typeof window !== 'undefined') {
   require('bootstrap/dist/js/bootstrap.bundle.min.js')
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 0.95,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({
