@@ -2,12 +2,16 @@
 
 import { useRouter } from 'next/navigation'
 
+import { useAuth } from '@/providers/Auth'
+
 const PaymentSuccess = () => {
+  const { fetchMe } = useAuth()
   const router = useRouter()
   if (typeof window !== 'undefined') {
     const route = localStorage.getItem('route')
     router.replace(route || '/')
   }
+  fetchMe()
 
   return (
     <div>
