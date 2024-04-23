@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ImSpinner } from 'react-icons/im'
@@ -10,6 +10,7 @@ interface Inputs {
 }
 
 function CartDepositAmount() {
+  const pathname = usePathname()
   const [loading, setLoading] = useState(false)
   const {
     formState: { errors },
@@ -23,7 +24,7 @@ function CartDepositAmount() {
     const { depositAmount } = data
     setLoading(true)
     try {
-      const url = await createPaystackCheckoutUrl(data)
+      const url = await createPaystackCheckoutUrl(data, pathname)
       setLoading(false)
       router.push(url)
     } catch (error) {

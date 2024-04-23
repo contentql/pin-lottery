@@ -2,16 +2,20 @@ interface Inputs {
   depositAmount: number
 }
 
-export async function createPaystackCheckoutUrl(data: Inputs): Promise<string> {
+export async function createPaystackCheckoutUrl(
+  data: Inputs,
+  pathname: string,
+): Promise<string> {
   const { depositAmount } = data
   try {
+    localStorage.setItem('route', pathname)
     const response = await fetch(
       '/api/transaction/paystack/create-paystack-checkout-url',
       {
         method: 'post',
         body: JSON.stringify({
           depositAmount,
-          callback_url: 'user-transaction',
+          callback_url: 'success',
         }),
         credentials: 'include',
         headers: {
