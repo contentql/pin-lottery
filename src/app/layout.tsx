@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 import { AppProvider } from '@/context/context'
 import Providers from '@/providers/Providers'
@@ -7,6 +7,13 @@ import '@/public/css/line-awesome.min.css'
 import '@/public/css/modal-video.scss'
 import '@/styles/main.sass'
 import ToastConfig from '@/utils/ToastConfig'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 0.95,
+  maximumScale: 1,
+  userScalable: false,
+}
 
 export const metadata: Metadata = {
   title: 'Lottery - Online Lotto & Lottery',
