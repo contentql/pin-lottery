@@ -1,5 +1,6 @@
 #popup {
   position: absolute;
+  visibility: hidden;
   top: 50px;
   width: 200px;
   right: 17px;
@@ -34,6 +35,7 @@
 }
 
 #popup:target {
+  visibility: visible;
   -khtml-opacity: 1;
   -moz-opacity: 1;
   -ms-filter: 'alpha(opacity=100)';

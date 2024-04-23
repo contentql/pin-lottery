@@ -36,6 +36,11 @@ const SignUp = () => {
     }
   }
 
+  const preventPaste = (event: any) => {
+    event.preventDefault()
+    return false
+  }
+
   const {
     register,
     handleSubmit,
@@ -163,6 +168,7 @@ const SignUp = () => {
                     name='confirm_password'
                     id='confirm_password'
                     placeholder='Confirm Password'
+                    onPaste={preventPaste}
                     required
                   />
                   <button
@@ -185,7 +191,10 @@ const SignUp = () => {
                   <label htmlFor='id-2'>I agree to the</label>
                   <span className='checkbox'></span>
                 </div>
-                <a href='#0' className='link ml-1'>
+                <a
+                  href='#0'
+                  className='link'
+                  style={{ marginLeft: '3px', marginTop: '5px' }}>
                   Terms, Privacy Policy and Fees
                 </a>
               </div>

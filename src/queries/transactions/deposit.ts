@@ -25,6 +25,7 @@ export async function createPaystackCheckoutUrl(
     )
 
     const { data: responseData } = await response.json()
+
     return responseData?.authorization_url || '/user-transaction'
   } catch (error) {
     console.log('Error while creating paystack checkout url: ', error)
