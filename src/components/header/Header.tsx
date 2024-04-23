@@ -31,7 +31,7 @@ const Header = () => {
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
   const [popupVisible, setPopupVisible] = useState(false)
-  const [isPopup, setIsPopup] = useState(false)
+
   const pathname = usePathname()
 
   const { status, user, fetchMe } = useAuth()
@@ -40,17 +40,6 @@ const Header = () => {
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible)
-    if (isPopup) {
-      setIsPopup(!isPopup)
-    }
-  }
-
-  const togglePopupWallet = () => {
-    setIsPopup(!isPopup)
-
-    if (popupVisible) {
-      setPopupVisible(!popupVisible)
-    }
   }
 
   // const handleOpen = (e: any) => {
@@ -154,31 +143,18 @@ const Header = () => {
                   {' '}
                   {status === 'loggedIn' ? (
                     <div className='cart-wallet-flex'>
-                      {/* <div className='mr-20 mt-6'>
+                      <div className='mr-20 mt-6'>
                         <DepositAmount />
                       </div>
                       <div className='mr-20 mt-6'>
                         {' '}
                         <WithdrawAmount />
-                      </div> */}
-                      <a
-                        href={isPopup ? '#popup' : '#'}
-                        onClick={togglePopupWallet}>
-                        <span className='wallet-amount'>
-                          {ticketsMetadata?.currency} {user?.amount}
-                        </span>
-                      </a>
-                      <div style={{ position: 'relative' }}>
-                        <div id='popup'>
-                          {/* <a id='close' href='#'>
-                          X
-                        </a> */}
-                          <div id='popup-arrow'></div>
-                          <DepositAmount />
-                          <WithdrawAmount />
-                        </div>
                       </div>
+                      <span className='wallet-amount'>
+                        {ticketsMetadata?.currency} {user?.amount}
+                      </span>
                       <Cart />
+
                       <div>
                         <Link
                           href=''
