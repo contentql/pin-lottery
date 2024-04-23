@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
 import { ZodError } from 'zod'
@@ -18,6 +19,23 @@ const SignUp = () => {
 
   const router = useRouter()
 
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(prev => !prev)
+    if (showConfirmPassword) {
+      setShowConfirmPassword(false)
+    }
+  }
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(prev => !prev)
+    if (showPassword) {
+      setShowPassword(false)
+    }
+  }
+
   const {
     register,
     handleSubmit,
@@ -27,25 +45,14 @@ const SignUp = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   })
 
-  const { mutate: addUser, isPending: isRegisterPending } =
+  const { mutate: addUser, isLoading: isRegisterPending } =
     trpc.auth.createUser.useMutation({
       onError: (err: any) => {
-        toast.error(err.message, {
-          // autoClose: 3000,
-          // onClose: () => {
-          //   toast.info('Redirecting to login page...', {
-          //     autoClose: 2000,
-          //     onClose: () => router.push('/login'),
-          //   })
-          // },
-        })
-
+        toast.error(err.message)
         if (err instanceof ZodError) {
           toast.error(err.issues[0].message)
-
           return
         }
-
         console.error('Something went wrong. Please try again.')
       },
       onSuccess: ({ sentEmailTo }: any) => {
@@ -53,7 +60,6 @@ const SignUp = () => {
         setValue('email', '')
         setValue('password', '')
         setValue('confirm_password', '')
-
         setIsEmailSent(true)
         setSentEmail(sentEmailTo)
       },
@@ -123,33 +129,49 @@ const SignUp = () => {
 
               <div className='form-group'>
                 <label>
-                  password <sup>*</sup>
+                  Password <sup>*</sup>
                 </label>
-                <input
-                  {...register('password')}
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='password'
-                  required
-                />
+                <div className='password-input-container'>
+                  <input
+                    {...register('password')}
+                    type={showPassword ? 'text' : 'password'}
+                    name='password'
+                    id='password'
+                    placeholder='Password'
+                    required
+                  />
+                  <button
+                    type='button'
+                    className='password-toggle-button'
+                    onClick={togglePasswordVisibility}>
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
                 {errors?.password && (
                   <p className='form-errors'>{errors.password.message}</p>
                 )}
               </div>
 
               <div className='form-group'>
-                <label htmlFor='confirm_password'>
-                  confirm password <sup>*</sup>
+                <label>
+                  Confirm Password <sup>*</sup>
                 </label>
-                <input
-                  {...register('confirm_password')}
-                  type='password'
-                  name='confirm_password'
-                  id='confirm_password'
-                  placeholder='Confirm Password'
-                  required
-                />
+                <div className='password-input-container'>
+                  <input
+                    {...register('confirm_password')}
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    name='confirm_password'
+                    id='confirm_password'
+                    placeholder='Confirm Password'
+                    required
+                  />
+                  <button
+                    type='button'
+                    className='password-toggle-button'
+                    onClick={toggleConfirmPasswordVisibility}>
+                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
                 {errors?.confirm_password && (
                   <p className='form-errors'>
                     {errors.confirm_password.message}
@@ -178,14 +200,13 @@ const SignUp = () => {
                       }}
                     />
                   ) : (
-                    'sign up'
+                    'Sign Up'
                   )}
                 </button>
               </div>
             </form>
 
             <p className='text-center mt-4'>
-              {' '}
               Already have an account? <a href='/login'>Login</a>
             </p>
           </div>
