@@ -6,6 +6,8 @@ import { publicProcedure, router } from '../trpc/trpc'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
 
+import { Contest } from '@/payload-types'
+
 export const contestRouter = router({
   getContests: publicProcedure
     .input(ContestPaginationValidator)
@@ -24,6 +26,7 @@ export const contestRouter = router({
         const contest = await payload.find({
           collection: 'contest',
           limit: 9,
+          sort: 'reached_threshold',
           page: pageNumber,
           where: {
             ...(filterByName !== 'all' && {
@@ -80,7 +83,7 @@ export const contestRouter = router({
 
         const totalContests = contest?.totalDocs
 
-        const allContests = contest.docs.map(
+        const contests = contest.docs.map(
           ({
             id,
             title,
@@ -111,7 +114,17 @@ export const contestRouter = router({
             }
           },
         )
+        let winnerContests: Contest[] = []
+        let liveContests: Contest[] = []
+        contests.forEach(contest => {
+          if (contest.contest_status) {
+            return winnerContests.push(contest as Contest)
+          } else {
+            liveContests.push(contest as Contest)
+          }
+        })
 
+        const allContests = [...liveContests, ...winnerContests]
         return { allContests, totalContests }
       } catch (error: any) {
         console.error('Error getting contests:', error)
