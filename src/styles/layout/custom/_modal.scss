@@ -1,0 +1,73 @@
+#popup {
+  position: absolute;
+  top: 50px;
+  width: 200px;
+  right: 17px;
+  background-color: #4939c1;
+  color: black;
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  padding: 20px;
+  border-radius: 15px;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  z-index: 1000;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.632);
+}
+
+#popup-arrow {
+  position: absolute;
+  top: -8px;
+  left: 90%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #4939c1;
+  z-index: 1000;
+}
+
+#popup:target {
+  -khtml-opacity: 1;
+  -moz-opacity: 1;
+  -ms-filter: 'alpha(opacity=100)';
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+/* Bouton fermeture */
+
+#close {
+  position: absolute;
+  left: 100%;
+  top: -20px;
+  margin-left: -10px;
+  background-color: #eff1f3;
+  font-size: 12px;
+  padding: 5px 7px;
+  border-radius: 50px;
+  border-style: solid;
+  border-color: #bbd8b3;
+  font-weight: bold;
+  color: #bbd8b3;
+  text-decoration: none;
+  font-family: arial;
+}
+
+#close:hover {
+  background-color: #eff1f3;
+  border-color: #bbd8b3;
+  color: #d77a61;
+}
+
+#close:active {
+  background-color: #a9f5f2;
+  color: black;
+}
