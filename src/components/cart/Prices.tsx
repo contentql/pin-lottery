@@ -139,6 +139,24 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
     if (!isProfileCompleted) {
       toast.warning(
         'Please complete your profile to proceed with your purchase.',
+        {
+          toastId: 'incomplete-profile',
+          autoClose: 3000,
+          pauseOnHover: false,
+          onClose: () => {
+            if (toast.isActive('incomplete-profile')) return
+            toast.info('Redirecting to personal info page...', {
+              toastId: 'personal-info-redirecting',
+              autoClose: 2000,
+              pauseOnHover: false,
+              onClose: () => {
+                if (toast.isActive('personal-info-redirecting')) return
+                localStorage.setItem('complete-profile-redirect', '/cart')
+                router.push('/user-info')
+              },
+            })
+          },
+        },
       )
       return
     }
