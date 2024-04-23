@@ -24,6 +24,7 @@ export const contestRouter = router({
         const contest = await payload.find({
           collection: 'contest',
           limit: 9,
+          sort: 'reached_threshold',
           page: pageNumber,
           where: {
             ...(filterByName !== 'all' && {
