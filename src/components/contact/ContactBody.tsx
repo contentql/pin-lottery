@@ -1,10 +1,24 @@
+import Link from 'next/link'
+
 import ContactForm from './ContactForm'
 import ContactInfo from './ContactInfo'
 import SocialMedia from './SocialMedia'
 
 const ContactBody = () => {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    // first prevent the default behavior
+    e.preventDefault()
+    // get the href and remove everything before the hash (#)
+    const href = e.currentTarget.href
+    const targetId = href.replace(/.*\#/, '')
+    // get the element by id and use scrollIntoView
+    const elem = document.getElementById(targetId)
+    elem?.scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
   return (
-    <section className='mt-minus-270 pb-120'>
+    <section className='mt-minus-270 pb-120' id='section-0'>
       <div className='container'>
         <div className='row justify-content-center'>
           <div className='col-lg-6'>
@@ -26,6 +40,12 @@ const ContactBody = () => {
                 <div className='col-lg-6'>
                   {/*Contact Info section here */}
                   <ContactInfo />
+                  <Link
+                    className='btn'
+                    href='#section-0'
+                    onClick={handleScroll}>
+                    Scroll to Section 1
+                  </Link>
                 </div>
               </div>
             </div>
