@@ -2,35 +2,53 @@
 
 import '../../src/styles/layout/custom/_pagination.scss'
 import { trpc } from '../trpc/client'
-import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import ResponsivePagination from 'react-responsive-pagination'
-import { useDebounceValue } from 'usehooks-ts'
+import { useDebounceValue, useLocalStorage } from 'usehooks-ts'
 
 import Banner from '@/components/common/Banner'
 import Feature from '@/components/contest/Feature'
 import LatestContest from '@/components/contest/LatestContest'
 
+interface FilterByContent {
+  filterByName: string
+  filterByTitle: string
+  filterByPrice: number
+  filterBySelect: string
+  filterByContestStatus: string
+}
+
 const ContestView = () => {
-  const searchParams = useSearchParams()
+  const initialValue: FilterByContent = {
+    filterByName: 'all',
+    filterByContestStatus: '',
+    filterByPrice: 0,
+    filterBySelect: '',
+    filterByTitle: '',
+  }
+
+  const [contentFilters, setContentFilters, removeContestFilters] =
+    useLocalStorage<FilterByContent>('filterByContent', initialValue)
   const templatesPerPage = 9
 
   //filters
   const [pageNumber, setPageNumber] = useState(1)
   const [filters, setFilters] = useDebounceValue(
     {
-      filterByName: searchParams?.get('tag') ? searchParams?.get('tag') : 'all',
-      filterByTitle: searchParams?.get('title')
-        ? searchParams?.get('title')
+      filterByName: contentFilters?.filterByName
+        ? contentFilters?.filterByName
+        : 'all',
+      filterByTitle: contentFilters?.filterByTitle
+        ? contentFilters?.filterByTitle
         : '',
-      filterByPrice: searchParams?.get('price')
-        ? searchParams?.get('price')
+      filterByPrice: contentFilters?.filterByPrice
+        ? contentFilters?.filterByPrice
         : 0,
-      filterBySelect: searchParams?.get('select')
-        ? searchParams?.get('select')
+      filterBySelect: contentFilters?.filterBySelect
+        ? contentFilters?.filterBySelect
         : 0,
-      filterByContestStatus: searchParams?.get('contest')
-        ? searchParams?.get('contest')
+      filterByContestStatus: contentFilters?.filterByContestStatus
+        ? contentFilters?.filterByContestStatus
         : '',
     },
     500,
@@ -73,7 +91,10 @@ const ContestView = () => {
         allTags={allTags}
         filters={filters}
         setFilters={setFilters}
+        contentFilters={contentFilters}
+        setContentFilters={setContentFilters}
         setPageNumber={setPageNumber}
+        removeContestFilters={removeContestFilters}
       />
       {contestDetails?.totalContests && contestDetails?.totalContests > 8 && (
         <div>

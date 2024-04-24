@@ -1,13 +1,11 @@
 import FilterByTag from '../filters/FilterByTag'
 import ContestSkeletons from '../skeletons/ContestSkeletons'
 import Image from 'next/image'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { useDebounceCallback } from 'usehooks-ts'
 
 import ContestCard from '@/components/cards/ContestCard'
-import { Contest, Wishlist } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 
 const LatestContest = ({
@@ -16,28 +14,29 @@ const LatestContest = ({
   filters,
   setFilters,
   setPageNumber,
+  setContentFilters,
+  contentFilters,
+  removeContestFilters,
 }: any) => {
   const { data: wishlistData, refetch: refetchWishlistData } =
     trpc.wishlist.getWishlistTickets.useQuery({ id: '' })
 
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const title = searchParams.get('title') ?? ''
-  const price = searchParams.get('price') ?? 0
-  const select = searchParams.get('select') ?? ''
-  const contest = searchParams.get('contest') ?? ''
+  const price = contentFilters?.filterByPrice ?? 0
   const MAX = 1000
 
-  const wishlistIds = wishlistData?.map(
-    (ele: Wishlist) => (ele?.contest?.value as Contest)?.id,
-  )
-
   const [resetValues, setResetValues] = useState({
-    sliderValue: price ? Number(price) : 0,
-    inputValue: title ? title : '',
-    selectValue: select ? select : '',
-    contestStatus: contest ? contest : '',
+    sliderValue: contentFilters?.filterByPrice
+      ? Number(contentFilters?.filterByPrice)
+      : 0,
+    inputValue: contentFilters?.filterByTitle
+      ? contentFilters?.filterByTitle
+      : '',
+    selectValue: contentFilters?.filterBySelect
+      ? contentFilters?.filterBySelect
+      : '',
+    contestStatus: contentFilters?.filterByContestStatus
+      ? contentFilters?.filterByContestStatus
+      : '',
   })
 
   const getBackgroundSize = () => {
@@ -46,22 +45,22 @@ const LatestContest = ({
     }
   }
 
-  const handleFilterByName = (tag: any) => {
-    if (filters.filterByName === 'all') return true
-    return filters.filterByName?.includes(tag?.tag?.value?.tag)
-  }
+  // const handleFilterByName = (tag: any) => {
+  //   if (filters.filterByName === 'all') return true
+  //   return filters.filterByName?.includes(tag?.tag?.value?.tag)
+  // }
 
-  const handleFilterByPrice = (contest: any) => {
-    if (filters.filterByPrice === 0) return true
-    return contest?.ticket_price <= filters.filterByPrice
-  }
+  // const handleFilterByPrice = (contest: any) => {
+  //   if (filters.filterByPrice === 0) return true
+  //   return contest?.ticket_price <= filters.filterByPrice
+  // }
 
-  const handleFilterByTitle = (contest: any) => {
-    if (title === '') return true
-    return contest?.title
-      ?.toLowerCase()
-      ?.includes(filters.filterByTitle?.toLowerCase())
-  }
+  // const handleFilterByTitle = (contest: any) => {
+  //   if (title === '') return true
+  //   return contest?.title
+  //     ?.toLowerCase()
+  //     ?.includes(filters.filterByTitle?.toLowerCase())
+  // }
 
   const handleFilterBySort = (value1: any, value2: any) => {
     if (filters.filterBySelect === 'priceLowToHigh') {
@@ -74,70 +73,43 @@ const LatestContest = ({
   }
 
   const handleSearchTag = (tag: string) => {
-    const search = new URLSearchParams(searchParams)
-    search.set('tag', tag.toString())
-    router.push(`${pathname}?${search.toString()}#contest`)
-    setFilters({ ...filters, filterByName: tag })
+    setContentFilters({ ...contentFilters, filterByName: tag })
+    setFilters({ ...filters, filterByName: contentFilters.filterByName })
     setPageNumber(1)
   }
 
   const handleSearchTitle = (value: string) => {
-    const search = new URLSearchParams(searchParams)
-    if (value.trim() === '') {
-      search.delete('title')
-    } else {
-      search.set('title', value)
-    }
-    router.push(`${pathname}?${search.toString()}#contest`)
-    setFilters({ ...filters, filterByTitle: value })
+    setContentFilters({ ...contentFilters, filterByTitle: value })
+    setFilters({ ...filters, filterByTitle: contentFilters.filterByTitle })
     setPageNumber(1)
   }
 
   const handleSearchPrice = (value: number) => {
-    const search = new URLSearchParams(searchParams)
-    if (value == 0) {
-      search.delete('price')
-    } else {
-      search.set('price', value.toString())
-    }
-    router.push(`${pathname}?${search.toString()}#contest`)
-    setFilters({ ...filters, filterByPrice: value })
+    setContentFilters({ ...contentFilters, filterByPrice: value })
+    setFilters({ ...filters, filterByPrice: contentFilters.filterByPrice })
     setPageNumber(1)
   }
 
   const handleSearchSortBy = (value: string) => {
-    const search = new URLSearchParams(searchParams)
-    if (value === '') {
-      search.delete('select')
-    } else {
-      search.set('select', value.toString())
-    }
-
-    router.push(`${pathname}?${search.toString()}#contest`)
-
-    setFilters({ ...filters, filterBySelect: value })
+    setContentFilters({ ...contentFilters, filterBySelect: value })
+    setFilters({ ...filters, filterBySelect: contentFilters.filterBySelect })
+    setPageNumber(1)
   }
 
   const handleSearchContestStatus = (value: string) => {
-    const search = new URLSearchParams(searchParams)
-    if (value === '') {
-      search.delete('contest')
-    } else {
-      search.set('contest', value.toString())
-      setPageNumber(1)
-    }
-
-    router.push(`${pathname}?${search.toString()}#contest`)
-
-    setFilters({ ...filters, filterBySelect: value })
+    setContentFilters({ ...contentFilters, filterByContestStatus: value })
+    setFilters({
+      ...filters,
+      filterByContestStatus: contentFilters.filterByContestStatus,
+    })
+    setPageNumber(1)
   }
 
-  const updatedTitle = useDebounceCallback(handleSearchTitle, 200)
+  const updatedTitle = useDebounceCallback(handleSearchTitle, 500)
   const updatedPrice = useDebounceCallback(handleSearchPrice, 500)
 
   const handleClearFilters = () => {
-    const params = new URLSearchParams()
-    router.push(`${pathname}?${params.toString()}#contest`)
+    removeContestFilters('filterByContent')
     setFilters({
       filterByName: 'all',
       filterByTitle: '',
@@ -152,11 +124,6 @@ const LatestContest = ({
       contestStatus: '',
     })
   }
-
-  const getWishlistId = (id: string) =>
-    wishlistData
-      ?.filter(ele => (ele?.contest?.value as Contest)?.id === id)
-      ?.at(0)?.id
 
   return (
     <section className='pb-120 mt-minus-100' id='contest'>
