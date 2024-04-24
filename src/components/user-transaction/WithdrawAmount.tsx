@@ -1,13 +1,17 @@
-import transaction_1 from '/public/images/icon/transaction/1.png'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import transaction_1 from '/public/images/icon/transaction/1.png'
 
 import { useAuth } from '@/providers/Auth'
 
+import { initializeTransfer } from '@/queries/transactions/withdraw'
+
 function WithdrawAmount() {
   const [banks, setBanks] = useState([])
+  const [bank, setBank] = useState({})
+
   const {
     formState: { errors },
     register,
@@ -15,11 +19,8 @@ function WithdrawAmount() {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      type: '',
       name: '',
       account_number: '',
-      bank_code: '',
-      currency: '',
       amount: '',
     },
   })
@@ -29,21 +30,16 @@ function WithdrawAmount() {
   const { user } = useAuth()
 
   const onsubmit = async (data: any) => {
-    // const url = await createPaystackCheckoutUrl(
-    //   user?.email,
-    //   data?.depositAmount,
-    // )
-    // console.log('url', url)
-    // await router.push(url?.data?.authorization_url || '/user-transaction')
-    // const reference = searchParams.get('reference')
-    // console.log('reference', reference)
-    // if (reference) {
-    //   const paymentStatus = await validatePaystackPaymentStatus({
-    //     reference,
-    //   })
-    //   console.log('paymentStatus', paymentStatus)
-    // }
+    const {name, account_number,amount} = data
+    try {
+      const res = await initializeTransfer(data, bank)
+      console.log("res", res)
+    } catch (error) {
+      console.log('Error occurred: ', error)
+    }
   }
+
+
   const fetchBanks = async (country: string) => {
     const details = await fetch(
       `https://api.paystack.co/bank?currency=${country}`,
@@ -52,11 +48,13 @@ function WithdrawAmount() {
     setBanks(result.data)
     return result.data
   }
-  //   const { data: BankDetails, isPending: isUserDataPending } = useQuery({
-  //     queryKey: ['/api/country/banks', 'get'],
-  //     queryFn: async () => await fetchBanks('NGN'),
-  //   })
-  //   console.log('query', BankDetails)
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedBankId = e.target.value;
+    const selectedBank = banks.find((bank: any) => bank.id === Number(selectedBankId));
+    setBank(selectedBank!)
+  };
+
 
   return (
     <div>
@@ -103,50 +101,50 @@ function WithdrawAmount() {
               </div>
               <label htmlFor='amount'>Select Bank</label>
               <div className='select border rounded-border'>
-                <select className='border-0 select-input-style' required>
+                <select className='border-0 select-input-style' onChange={handleChange} required>
                   <option value={'select'}>Select Bank</option>
                   {banks?.flatMap((bank: any, index: any) => (
-                    <option key={index} value={bank?.type}>
+                    <option key={index} value={bank.id}>
                       {bank?.name}
                     </option>
                   ))}
                 </select>
               </div>
-              <label htmlFor='amount'>Enter User Name</label>
+              <label htmlFor='account_name'>Enter User Name</label>
               <input
                 required
-                type='number'
+                type='text'
                 id='name'
-                placeholder='Enter amount to add'
+                placeholder='Enter account name'
                 {...register('name', {
                   required: 'Please enter name',
                 })}
               />
-              <label htmlFor='amount'>Account Number</label>
+              <label htmlFor='account_number'>Account Number</label>
               <input
                 required
                 type='text'
                 id='account_number'
-                placeholder='Enter amount to add'
+                placeholder='Enter account number'
                 {...register('account_number', {
-                  required: 'Please enter amount add',
+                  required: 'Please enter account number',
                 })}
               />
               <label htmlFor='amount'>Enter Amount</label>
               <input
                 required
                 type='number'
-                id='type'
+                id='amount'
                 placeholder='Enter amount to add'
-                {...register('type', {
+                {...register('amount', {
                   required: 'Please enter amount add',
                 })}
               />
-              {errors?.type && (
+              {/* {errors?.type && (
                 <p style={{ color: 'red', paddingBottom: '4px' }}>
                   {errors?.type?.message}
                 </p>
-              )}
+              )} */}
               <button type='submit' className='add-amount-button cmn-btn'>
                 Withdraw
               </button>

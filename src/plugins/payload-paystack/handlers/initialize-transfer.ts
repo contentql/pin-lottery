@@ -6,19 +6,26 @@ const initializeTransfer = async (
   res: e.Response<any, Record<string, any>>,
   paystackSdk: any,
 ) => {
+
+  const {body} = req
+
+  const {account_number, type, bank_code, currency, amount} = body
+
+  console.log("request", req)
+  
   const validateAccount = await paystackSdk.verification.resolveAccount({
-    account_number: '0001234567',
-    bank_code: '058',
+    account_number: account_number,
+    bank_code: bank_code,
   })
 
   if (validateAccount?.status && validateAccount.data?.account_name) {
     const createTransferRecipient = await paystackSdk.recipient.create({
-      account_number: '0001234567',
-      bank_code: '058',
+      account_number: account_number,
+      bank_code: bank_code,
       name: `${validateAccount?.data.account_name}`,
-      currency: 'NGN',
+      currency: currency,
       description: 'withdraw',
-      type: 'nuban',
+      type: type,
     })
 
     const { status, data, message } = createTransferRecipient
