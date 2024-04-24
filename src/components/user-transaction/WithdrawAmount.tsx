@@ -1,11 +1,13 @@
-import transaction_1 from '/public/images/icon/transaction/1.png'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import transaction_1 from '/public/images/icon/transaction/1.png'
 
 import { useAuth } from '@/providers/Auth'
 import { initializeTransfer } from '@/queries/transactions/withdraw'
+
+import { toast } from "react-toastify"
 
 function WithdrawAmount() {
   const [banks, setBanks] = useState([])
@@ -30,15 +32,21 @@ function WithdrawAmount() {
 
   const onsubmit = async (data: any) => {
     const { name, account_number, amount } = data
+    
+    if(amount > user?.amount!){
+      toast.error("You don't have enough balance")
+      return
+    }
     const res = await initializeTransfer(data, bank)
 
-    console.log(await res.json())
-    // try {
-    //   const res = initializeTransfer(data, bank)
-    //   console.log('res', res)
-    // } catch (error) {
-    //   console.log('Error occurred: ', error)
-    // }
+    const responceData = await res.json()
+
+    console.log("responceData", responceData)
+
+    if(responceData.status){
+      toast.success(`message : ${responceData.message}`)
+    }
+    toast.error(`message : ${responceData.message}`)
   }
 
   const fetchBanks = async (country: string) => {

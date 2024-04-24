@@ -31,7 +31,7 @@ const initializeTransfer = async (
 
     if (status && createTransferRecipient?.data?.recipient_code) {
       const createTransfer = await paystackSdk.transfer.initiate({
-        amount: 2000,
+        amount: Number(amount),
         source: 'balance',
         recipient: createTransferRecipient?.data?.recipient_code,
       })
