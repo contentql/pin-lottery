@@ -6,29 +6,34 @@ import w_el_1 from '/public/images/elements/w-el-1.png'
 import w_el_2 from '/public/images/elements/w-el-2.png'
 import w_el_3 from '/public/images/elements/w-el-3.png'
 import Image from 'next/image'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import ResponsivePagination from 'react-responsive-pagination'
+import { useLocalStorage } from 'usehooks-ts'
 
 import TicketCheckCard from '@/components/cards/TicketCheckCard'
 import { Winner } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 
-const LatestWinner = () => {
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-  const router = useRouter()
+interface WinnerFiltersProps {
+  filterWinnerByTag: string
+  ticketNumber: string
+  contestNumber: string
+}
 
+const LatestWinner = () => {
+  const initialValue: WinnerFiltersProps = {
+    filterWinnerByTag: 'all',
+    ticketNumber: '',
+    contestNumber: '',
+  }
+  const [filters, setFilters, removeFilters] =
+    useLocalStorage<WinnerFiltersProps>('winnerFilters', initialValue)
   const [winnerFilters, setWinnerFilters] = useState({
-    filterWinnerByTag: searchParams?.get('tag')
-      ? searchParams?.get('tag')
+    filterWinnerByTag: filters?.filterWinnerByTag
+      ? filters?.filterWinnerByTag
       : 'all',
-    ticketNumber: searchParams?.get('ticketNumber')
-      ? searchParams?.get('ticketNumber')
-      : '',
-    contestNumber: searchParams?.get('contestNumber')
-      ? searchParams?.get('contestNumber')
-      : '',
+    ticketNumber: filters?.ticketNumber ? filters?.ticketNumber : '',
+    contestNumber: filters?.contestNumber ? filters?.contestNumber : '',
   })
 
   const [pageNumber, setPageNumber] = useState(1)
@@ -38,10 +43,11 @@ const LatestWinner = () => {
     trpc.winner.getWinners.useQuery()
 
   const handleSearchByTicketNumber = (data: any) => {
-    const search = new URLSearchParams(searchParams)
-    search.set('ticketNumber', data?.ticketNumber)
-    search.set('contestNumber', data?.contestNumber)
-    router.push(`${pathname}?${search.toString()}#winner_id`)
+    setFilters({
+      ...filters,
+      ticketNumber: data?.ticketNumber,
+      contestNumber: data.contestNumber,
+    })
     setWinnerFilters({
       ...winnerFilters,
       ticketNumber: data.ticketNumber,
@@ -51,9 +57,7 @@ const LatestWinner = () => {
   }
 
   const handleSearchTag = (tag: string) => {
-    const search = new URLSearchParams(searchParams)
-    search.set('tag', tag.toString())
-    router.push(`${pathname}?${search.toString()}#winner_id`)
+    setFilters({ ...filters, filterWinnerByTag: tag })
     setWinnerFilters({
       ...winnerFilters,
       filterWinnerByTag: tag,
@@ -80,8 +84,7 @@ const LatestWinner = () => {
     )
   }
   const handleClearFilters = () => {
-    const params = new URLSearchParams()
-    router.push(`${pathname}?${params.toString()}#winner_id`)
+    removeFilters()
     setWinnerFilters({
       ...winnerFilters,
       filterWinnerByTag: 'all',
