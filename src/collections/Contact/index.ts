@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload/types'
 
-import { newContactEmail } from './hooks/newContactEmail'
+import { ContactEmailToAdmin } from './hooks/contactEmailToAdmin'
+import { ContactEmailToUser } from './hooks/contactEmailToUser'
 
 const Contact: CollectionConfig = {
   slug: 'contact',
@@ -8,7 +9,7 @@ const Contact: CollectionConfig = {
     useAsTitle: 'name',
   },
   hooks: {
-    afterChange: [newContactEmail],
+    afterChange: [ContactEmailToUser, ContactEmailToAdmin],
   },
   fields: [
     { name: 'name', type: 'text', label: 'Name', required: true },

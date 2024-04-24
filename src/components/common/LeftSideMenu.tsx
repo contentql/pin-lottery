@@ -45,6 +45,18 @@ const LeftSideMenu = () => {
     }
   }
 
+  if (isProfileCompleted) {
+    if (
+      typeof window !== 'undefined' &&
+      localStorage.getItem('complete-profile-redirect')
+    ) {
+      const route = localStorage.getItem('complete-profile-redirect')
+      router.replace(route || '')
+      toast.info(`please wait redirecting to cart`)
+      localStorage.removeItem('complete-profile-redirect')
+    }
+  }
+
   const { data: userData, isPending: isUserDataPending } = useQuery({
     queryKey: ['/api/users/me', 'get'],
     queryFn: async () => currentUser(),

@@ -1,6 +1,5 @@
 import {
   Body,
-  Button,
   Column,
   Container,
   Head,
@@ -27,11 +26,12 @@ export const ContactEmail = ({
   subject,
   message,
 }: UserContactEmailProps) => {
+  const [empty, setEmpty] = React.useState()
   const imageUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/images/client/2.png`
   return (
     <Html>
       <Head />
-      <Preview>Yelp recent login</Preview>
+      <Preview>contact</Preview>
       <Body style={main}>
         <Container>
           <Section style={logo}>
@@ -59,7 +59,7 @@ export const ContactEmail = ({
           </Section>
 
           <Section style={containerImageFooter}>
-            <Img style={image} width={620} src={imageUrl} />
+            <Img style={image} width={300} src={imageUrl} />
           </Section>
         </Container>
       </Body>
@@ -81,7 +81,9 @@ const paragraph = {
 }
 
 const logo = {
-  padding: '30px 20px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 }
 
 const containerButton = {
@@ -105,5 +107,6 @@ const boxInfos = {
 }
 
 const containerImageFooter = {
-  padding: '45px 0 0 0',
+  display: 'flex',
+  justifyContent: 'center',
 }

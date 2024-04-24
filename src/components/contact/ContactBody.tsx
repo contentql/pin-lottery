@@ -4,7 +4,7 @@ import SocialMedia from './SocialMedia'
 
 const ContactBody = () => {
   return (
-    <section className='mt-minus-270 pb-120'>
+    <section className='mt-minus-270 pb-120' id='section-0'>
       <div className='container'>
         <div className='row justify-content-center'>
           <div className='col-lg-6'>
