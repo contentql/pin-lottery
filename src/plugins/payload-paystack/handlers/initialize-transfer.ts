@@ -6,13 +6,12 @@ const initializeTransfer = async (
   res: e.Response<any, Record<string, any>>,
   paystackSdk: any,
 ) => {
+  const { body } = req
 
-  const {body} = req
+  const { account_number, type, bank_code, currency, amount } = body
 
-  const {account_number, type, bank_code, currency, amount} = body
+  console.log('request', req)
 
-  console.log("request", req)
-  
   const validateAccount = await paystackSdk.verification.resolveAccount({
     account_number: account_number,
     bank_code: bank_code,

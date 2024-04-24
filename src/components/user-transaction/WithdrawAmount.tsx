@@ -1,11 +1,10 @@
+import transaction_1 from '/public/images/icon/transaction/1.png'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import transaction_1 from '/public/images/icon/transaction/1.png'
 
 import { useAuth } from '@/providers/Auth'
-
 import { initializeTransfer } from '@/queries/transactions/withdraw'
 
 function WithdrawAmount() {
@@ -30,15 +29,17 @@ function WithdrawAmount() {
   const { user } = useAuth()
 
   const onsubmit = async (data: any) => {
-    const {name, account_number,amount} = data
-    try {
-      const res = await initializeTransfer(data, bank)
-      console.log("res", res)
-    } catch (error) {
-      console.log('Error occurred: ', error)
-    }
-  }
+    const { name, account_number, amount } = data
+    const res = await initializeTransfer(data, bank)
 
+    console.log(await res.json())
+    // try {
+    //   const res = initializeTransfer(data, bank)
+    //   console.log('res', res)
+    // } catch (error) {
+    //   console.log('Error occurred: ', error)
+    // }
+  }
 
   const fetchBanks = async (country: string) => {
     const details = await fetch(
@@ -50,11 +51,12 @@ function WithdrawAmount() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedBankId = e.target.value;
-    const selectedBank = banks.find((bank: any) => bank.id === Number(selectedBankId));
+    const selectedBankId = e.target.value
+    const selectedBank = banks.find(
+      (bank: any) => bank.id === Number(selectedBankId),
+    )
     setBank(selectedBank!)
-  };
-
+  }
 
   return (
     <div>
@@ -101,7 +103,10 @@ function WithdrawAmount() {
               </div>
               <label htmlFor='amount'>Select Bank</label>
               <div className='select border rounded-border'>
-                <select className='border-0 select-input-style' onChange={handleChange} required>
+                <select
+                  className='border-0 select-input-style'
+                  onChange={handleChange}
+                  required>
                   <option value={'select'}>Select Bank</option>
                   {banks?.flatMap((bank: any, index: any) => (
                     <option key={index} value={bank.id}>
