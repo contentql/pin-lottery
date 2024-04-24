@@ -22,7 +22,7 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
       !doc?.winner_ticket
     ) {
       try {
-        const { payload } = req
+        const { payload, user } = req
 
         const { id: contestId } = doc
 
@@ -60,6 +60,11 @@ export const announceWinnerAfterUpdate: CollectionAfterChangeHook = async ({
           data: {
             ticket: { relationTo: 'tickets', value: ticketId },
             contest: { relationTo: 'contest', value: contestId },
+          },
+          user,
+          overrideAccess: false,
+          context: {
+            allowCreate: true,
           },
         })
 

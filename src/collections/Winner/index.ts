@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types'
 
+import { self } from './access/self'
 import { DefaultCollectionEdit } from './custom/views/Edit/Default'
 import DefaultListView from './custom/views/List/DefaultListView'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
@@ -21,6 +22,7 @@ const Winner: CollectionConfig = {
     },
   },
   access: {
+    create: self,
     update: () => false,
   },
   hooks: {

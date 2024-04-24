@@ -50,7 +50,7 @@ const SignUp = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   })
 
-  const { mutate: addUser, isLoading: isRegisterPending } =
+  const { mutate: addUser, isPending: isRegisterPending } =
     trpc.auth.createUser.useMutation({
       onError: (err: any) => {
         toast.error(err.message)

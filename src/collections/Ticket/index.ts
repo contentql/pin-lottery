@@ -4,6 +4,7 @@ import { customAlphabet } from 'nanoid'
 import { CollectionConfig } from 'payload/types'
 
 import { isManagerOrAdminOrSelf } from './access/isManagerOrAdminOrSelf'
+import { self } from './access/self'
 import { customContestRelationshipField } from './custom/custom-contest-relationship-field/field'
 import { assignUserId } from './field-level-hooks/assignUserId'
 import { updateContestAfterCreate } from './hooks/updateContestAfterCreate'
@@ -13,7 +14,7 @@ import { updateUserAfterCreate } from './hooks/updateUserAfterCreate'
 const Ticket: CollectionConfig = {
   slug: 'tickets',
   access: {
-    create: isManagerOrAdminOrSelf,
+    create: self,
     read: isManagerOrAdminOrSelf,
     // update: isManagerOrAdminOrSelf,
     update: () => false,

@@ -115,8 +115,10 @@ export const ticketRouter = router({
                 contest_id: { relationTo: 'contest', value: contest_id },
               },
               user,
+              overrideAccess: false,
               context: {
                 chargeAmount: true,
+                allowCreate: true,
               },
             })
           }),
