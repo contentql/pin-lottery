@@ -166,7 +166,20 @@
     overflow: auto;
   }
 }
-
+@media screen and (max-width: 800px) {
+  .details-modal {
+    width: 90%;
+    pointer-events: none;
+    position: fixed;
+    top: 50%;
+    text-align: left;
+    max-height: 90vh;
+    display: flex;
+    color: white;
+    flex-direction: column;
+    z-index: 1000;
+  }
+}
 // -------------- OVERLAY
 
 .details-modal-overlay {
