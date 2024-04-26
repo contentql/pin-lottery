@@ -48,9 +48,10 @@ const Details = ({ blogDetails }) => {
               </div>
               <div className='blog-single__body'>
                 <Image
+                  style={{ borderRadius: '15px' }}
                   src={blogDetails?.img?.url}
-                  width={100}
-                  height={100}
+                  width={1000}
+                  height={1000}
                   alt='b2'
                 />
                 <ConvertToHtml htmlContent={blogDetails?.content_html} />
