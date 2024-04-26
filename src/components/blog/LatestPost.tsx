@@ -77,7 +77,7 @@ const LatestPost = ({ blogData }: { blogData: Blog[] }) => {
           <div className='mr-20 small-post-details' key={i}>
             <div key={i} className='small-post '>
               <Image
-                style={{ height: '280px' }}
+                style={{ height: '280px', borderRadius: '15px' }}
                 src={(blog.img as Media)?.url || ''}
                 height={100}
                 width={1000}
