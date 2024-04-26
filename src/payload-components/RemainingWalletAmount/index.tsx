@@ -1,5 +1,6 @@
 'use client'
 
+import { ticketsMetadata } from '../../utils/tickets-metadata'
 import React, { useEffect, useState } from 'react'
 
 const RemainingWalletAmount = ({ title }: any) => {
@@ -27,7 +28,9 @@ const RemainingWalletAmount = ({ title }: any) => {
       <div className='card card-users card--has-onclick'>
         <p className='card__title'>Remaining Wallet Amount</p>
         <div className='card__actions'>
-          <p className='card__title'>{walletAmount}</p>
+          <p className='card__title cart-currency-deposit'>
+            {ticketsMetadata?.currency} {walletAmount}
+          </p>
         </div>
       </div>
     </li>
