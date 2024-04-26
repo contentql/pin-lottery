@@ -6,12 +6,12 @@ import { useAuth } from '@/providers/Auth'
 
 const PaymentSuccess = () => {
   const { fetchMe } = useAuth()
+  fetchMe()
   const router = useRouter()
   if (typeof window !== 'undefined') {
     const route = localStorage.getItem('route')
     router.replace(route || '/')
   }
-  fetchMe()
 
   return (
     <div>

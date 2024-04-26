@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 
-const InfoCard = ({ title }: any) => {
+const TotalTicketsPurchased = ({ title }: any) => {
+  const test = React.useState()
   const [totalDocs, setTotalDocs] = useState(0)
 
   useEffect(() => {
@@ -21,12 +22,15 @@ const InfoCard = ({ title }: any) => {
   }, [])
 
   return (
-    <div className='info-card info-card--has-onclick'>
-      <p className='info-card__title'>
-        {title}: {totalDocs}
-      </p>
-    </div>
+    <li>
+      <div className='card card-users card--has-onclick'>
+        <p className='card__title'>Tickets Purchased</p>
+        <div className='card__actions'>
+          <p className='card__title'>{totalDocs}</p>
+        </div>
+      </div>
+    </li>
   )
 }
 
-export default InfoCard
+export default TotalTicketsPurchased

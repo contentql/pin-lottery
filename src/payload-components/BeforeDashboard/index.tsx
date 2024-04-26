@@ -1,9 +1,11 @@
+import RemainingWalletAmount from '../RemainingWalletAmount'
+import TotalTicketsPurchased from '../TotalTicketsPurchased'
+import Transactions from '../Transactions'
 import { useAuth } from 'payload/components/utilities'
 import React from 'react'
 
-import InfoCard from './InfoCard'
-
 const BeforeDashboard = () => {
+  const test = React.useState()
   const { user } = useAuth()
 
   // @ts-ignore
@@ -14,7 +16,14 @@ const BeforeDashboard = () => {
         <p style={{ color: 'darkorange' }}>
           This feature is still under process, more cards to come!
         </p>
-        <InfoCard title='Total Tickets' />
+        <div className='dashboard__group'>
+          <h2 className='dashboard__label'>Custom Components</h2>
+          <ul className='dashboard__card-list'>
+            <TotalTicketsPurchased />
+            <Transactions />
+            <RemainingWalletAmount />
+          </ul>
+        </div>
       </div>
     )
 

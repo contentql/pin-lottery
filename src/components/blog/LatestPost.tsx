@@ -76,14 +76,13 @@ const LatestPost = ({ blogData }: { blogData: Blog[] }) => {
         {blogData?.map((blog: any, i: any) => (
           <div className='mr-20 small-post-details' key={i}>
             <div key={i} className='small-post '>
-              <div className='small-post__thumb'>
-                <Image
-                  src={(blog.img as Media)?.url || ''}
-                  height={100}
-                  width={100}
-                  alt={blog.title}
-                />
-              </div>
+              <Image
+                style={{ height: '280px', borderRadius: '15px' }}
+                src={(blog.img as Media)?.url || ''}
+                height={100}
+                width={1000}
+                alt={blog.title}
+              />
               <div className='small-post__content'>
                 <Link href={`/blog/${blog.id}`}>
                   <h3 className='small-post__title line-clamp-1'>

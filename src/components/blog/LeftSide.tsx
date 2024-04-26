@@ -11,14 +11,15 @@ const LeftSide = ({ blogData }: { blogData: Blog[] }) => {
       {blogData?.map(blog => (
         <div key={blog.id} className='blog-card style--two mb-30 has-link'>
           <Link href={`/blog/${blog.id}`} className='item-link'></Link>
-          <div className='blog-card__thumb'>
-            <Image
-              src={(blog.img as Media)?.url || ''}
-              alt={blog.title}
-              width={100}
-              height={100}
-            />
-          </div>
+          {/* <div className='blog-card__thumb'> */}
+          <Image
+            style={{ height: '300px', borderRadius: '15px' }}
+            src={(blog.img as Media)?.url || ''}
+            alt={blog.title}
+            width={1000}
+            height={100}
+          />
+          {/* </div> */}
           <div className='blog-card__content'>
             <h3 className='blog-card__title line-clamp-1'>{blog.title}</h3>
             <p className='line-clamp-2'>{blog.short_desc}</p>
