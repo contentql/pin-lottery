@@ -164,6 +164,9 @@
     padding: 2em;
     pointer-events: all;
     overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 @media screen and (max-width: 800px) {
