@@ -1,5 +1,6 @@
 'use client'
 
+import { ticketsMetadata } from '../../utils/tickets-metadata'
 import React, { useEffect, useState } from 'react'
 
 const Transactions = ({ title }: any) => {
@@ -39,7 +40,9 @@ const Transactions = ({ title }: any) => {
         <div className='card card-users card--has-onclick'>
           <p className='card__title'>Total Deposited Amount</p>
           <div className='card__actions'>
-            <p className='card__title'>{depositedAmount}</p>
+            <p className='card__title cart-currency-deposit'>
+              {ticketsMetadata.currency} {depositedAmount}
+            </p>
           </div>
         </div>
       </li>
@@ -47,7 +50,9 @@ const Transactions = ({ title }: any) => {
         <div className='card card-users card--has-onclick'>
           <p className='card__title'>Tickets purchased Amount</p>
           <div className='card__actions'>
-            <p className='card__title'>{ticketsAmount}</p>
+            <p className='card__title cart-currency-withdraw'>
+              {ticketsMetadata.currency} {ticketsAmount}
+            </p>
           </div>
         </div>
       </li>
@@ -55,7 +60,9 @@ const Transactions = ({ title }: any) => {
         <div className='card card-users card--has-onclick'>
           <p className='card__title'>Withdraw Amount</p>
           <div className='card__actions'>
-            <p className='card__title'>{withDraw}</p>
+            <p className='card__title cart-currency-withdraw'>
+              {ticketsMetadata.currency} {withDraw}
+            </p>
           </div>
         </div>
       </li>
