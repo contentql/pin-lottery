@@ -1,7 +1,14 @@
-import circle_border from '/public/images/elements/circle-border.png'
+import { AppContext } from '@/context/context'
+import { Contest, Ticket, User, Winner } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
+import { trpc } from '@/trpc/client'
+import { splitTicketNumber } from '@/utils/split-ticket-number'
+import { ticketsMetadata } from '@/utils/tickets-metadata'
+import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useContext } from 'react'
 import {
   FacebookIcon,
@@ -11,24 +18,51 @@ import {
   TwitterIcon,
   TwitterShareButton,
 } from 'react-share'
-
-import { AppContext } from '@/context/context'
-import { Contest, Ticket, User, Winner } from '@/payload-types'
-import { splitTicketNumber } from '@/utils/split-ticket-number'
-import { ticketsMetadata } from '@/utils/tickets-metadata'
-import useMaintainMinimumTickets from '@/utils/useMaintainMinimumTickets'
+import { toast } from 'react-toastify'
+import circle_border from '/public/images/elements/circle-border.png'
 
 const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
-  const { addTicket, removeTicket, totalTicketsCount } = useContext(AppContext)
 
+  const router=useRouter()
+  const queryClient = useQueryClient()
+  const {mutate:EmptyCart}=trpc.cart.deleteAllTicketsOfUserFromCart.useMutation({})
+  const { mutate: addTicketsToCart, isPending: isTicketAdded } =
+  trpc.cart.addTicketsToCart.useMutation({
+    onSuccess: async () => {
+      toast.success('Successfully tickets are added to cart')
+      removeAllTickets({ contest_no: contestDetails?.contest_no })
+      router.push('/cart')
+    },
+    onError: async () => {
+      toast.error('Unable to add tickets to cart')
+    },
+  })
+  const { addTicket, removeTicket, totalTicketsCount ,removeAllTickets} = useContext(AppContext)
+  const {status}=useAuth()
   const pathname = usePathname()
 
   const currency = ticketsMetadata?.currency
 
   const quantity = totalTicketsCount({ contest_no: contestDetails?.contest_no })
 
+  const ticketPrice = contestDetails?.ticket_price
+  const totalTicketsPrice = quantity * ticketPrice
+
   useMaintainMinimumTickets(contestDetails?.contest_no)
 
+  const handleBuyTickets=async()=>{
+    if (status !== 'loggedIn') {
+      toast.error(`please login to buy tickets`)
+      return
+    }
+    await EmptyCart()
+   await addTicketsToCart({
+      contest_id:contestDetails?.id,
+      tickets:quantity,
+      total_price:totalTicketsPrice
+    })
+    
+  }
   return (
     <div className='contest-cart__right'>
       {contestDetails?.contest_status ? (
@@ -128,11 +162,18 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
               </div>
             </div>
             <div className='mt-sm-0 mt-3'>
-              <Link
+              <Link style={{marginRight:'4px'}}
                 href={`${pathname}/ticket-details`}
                 className='cmn-btn style--three'>
-                buy tickets
+                Add Cart
               </Link>
+            </div>
+            <div className='mt-sm-0 mt-3'>
+              <button
+                onClick={handleBuyTickets}
+                className='cmn-btn style--three'>
+                Play Now
+              </button>
             </div>
           </div>
         </>
