@@ -19,7 +19,7 @@ import DepositAmount from '../user-transaction/DepositAmount'
 import WithdrawAmount from '../user-transaction/WithdrawAmount'
 import tag from '/public/images/icon/btn/tag.png'
 
-import { Header, Media } from '@/payload-types'
+import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { logout } from '@/queries/auth/logout'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
@@ -27,8 +27,8 @@ import { ticketsMetadata } from '@/utils/tickets-metadata'
 import { trpc } from '@/trpc/client'
 import Cart from './Cart'
 
-const HeaderPage = ({header}:{header:Header}) => {
-  const { data: headerData = header } = trpc.public.getHeader.useQuery()
+const HeaderPage = () => {
+  const { data: headerData} = trpc.public.getHeader.useQuery()
   const [open, setOpen] = useState('')
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)

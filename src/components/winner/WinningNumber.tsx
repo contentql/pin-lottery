@@ -1,5 +1,5 @@
-import Confetti from '../common/Confetti'
 import Image from 'next/image'
+import Confetti from '../common/Confetti'
 
 import { Contest, Media, Ticket, User, Winner } from '@/payload-types'
 import { DateConverter } from '@/utils/date-converter'
@@ -65,9 +65,9 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
                       <li key={index}>{number}</li>
                     ))}
                   </ul>
-                  <h6>The winner details are: </h6>
+                  {/* <h6>The winner details are: </h6> */}
                   <div className='btn-grp'>
-                    <p>
+                    {/* <p>
                       {' '}
                       Email:
                       <span>
@@ -80,7 +80,7 @@ const WinningNumber = ({ contestDetails }: { contestDetails: Contest }) => {
                           )?.email
                         }
                       </span>
-                    </p>
+                    </p> */}
                     {/* <a href='#0' className='btn-border'>
                       Alerts
                     </a>

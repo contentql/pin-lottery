@@ -1,13 +1,11 @@
 'use client'
-
 import React from 'react'
 
 import Footer from '@/components/footer/Footer'
 import HeaderPage from '@/components/header/Header'
 import ScrollToTop from '@/components/scrollToTop/ScrollToTop'
-import { Header } from '@/payload-types'
 
-const LayoutView = ({ children,header }: { children: React.ReactNode ,header:Header}) => {
+const LayoutView = ({ children }: { children: React.ReactNode}) => {
   return (
     <>
       {/* SignUp Modal */}
@@ -17,7 +15,7 @@ const LayoutView = ({ children,header }: { children: React.ReactNode ,header:Hea
       {/* <Login /> */}
 
       {/* Header section */}
-      <HeaderPage header={header}/>
+      <HeaderPage/>
 
       {children}
 
