@@ -19,14 +19,16 @@ import DepositAmount from '../user-transaction/DepositAmount'
 import WithdrawAmount from '../user-transaction/WithdrawAmount'
 import tag from '/public/images/icon/btn/tag.png'
 
-import { Media } from '@/payload-types'
+import { Header, Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
 import { logout } from '@/queries/auth/logout'
 import { ticketsMetadata } from '@/utils/tickets-metadata'
 
+import { trpc } from '@/trpc/client'
 import Cart from './Cart'
 
-const Header = () => {
+const HeaderPage = ({header}:{header:Header}) => {
+  const { data: headerData = header } = trpc.public.getHeader.useQuery()
   const [open, setOpen] = useState('')
   const [windowHeight, setWindowHeight] = useState(0)
   const [show, setShow] = useState(false)
@@ -296,11 +298,11 @@ const Header = () => {
           <nav className='navbar navbar-expand-xl p-0 align-items-center'>
             <Link href='/' className='site-logo site-title'>
               <Image
-                src='/images/client/3.png'
+                src={(headerData?.icon as Media)?.sizes?.navLogo?.url!}
                 priority={true}
                 alt='logo'
-                width={200}
-                height={20}
+                width={(headerData?.icon as Media)?.sizes?.navLogo?.width!}
+                height={(headerData?.icon as Media)?.sizes?.navLogo?.height!}
               />
               <span className='logo-icon'>
                 <i className='flaticon-fire'></i>
@@ -323,17 +325,19 @@ const Header = () => {
               // id="navbarContent"
             >
               <ul className='navbar-nav main-menu ms-auto'>
-                <li>
-                  <Link href='/contest' onClick={() => setShow(false)}>
-                    Contest
-                  </Link>
-                </li>
-                <li>
+               {headerData?.nav_links?.map((navItem,index)=>(
+                 <li key={index}>
+                 <Link href={navItem?.link! } onClick={() => setShow(false)}>
+                  {navItem?.name}
+                 </Link>
+               </li>
+               ))}
+                {/* <li>
                   <Link href='/winner' onClick={() => setShow(false)}>
                     Winners
                   </Link>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <Link href='/about' onClick={() => setShow(false)}>
                     About us
                   </Link>
@@ -352,7 +356,7 @@ const Header = () => {
                   <Link href='/how-work' onClick={() => setShow(false)}>
                     How to use
                   </Link>
-                </li>
+                </li> */}
               </ul>
               <div className='nav-right'>
                 <Link href='/contest' className='cmn-btn style--three btn--sm'>
@@ -445,4 +449,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default HeaderPage

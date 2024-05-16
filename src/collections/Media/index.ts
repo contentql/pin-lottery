@@ -15,6 +15,12 @@ export const Media: CollectionConfig = {
     // adminThumbnail: 'thumbnail',
     imageSizes: [
       {
+        height: 50,
+        width: undefined,
+        crop: 'center',
+        name: 'navLogo',
+      },
+      {
         height: 40,
         width: undefined,
         crop: 'center',

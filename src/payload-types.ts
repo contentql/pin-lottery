@@ -77,6 +77,14 @@ export interface Media {
   width?: number | null;
   height?: number | null;
   sizes?: {
+    navLogo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     navUserImage?: {
       url?: string | null;
       width?: number | null;
@@ -426,8 +434,8 @@ export interface Header {
   icon: string | Media;
   nav_links?:
     | {
-        name?: string | null;
-        link?: string | null;
+        name: string;
+        link: string;
         id?: string | null;
       }[]
     | null;
