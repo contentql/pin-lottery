@@ -1,6 +1,4 @@
-import specification_7 from '/public/images/icon/specification/7.png'
-import specification_8 from '/public/images/icon/specification/8.png'
-import specification_9 from '/public/images/icon/specification/9.png'
+import Image from 'next/image'
 import specification_10 from '/public/images/icon/specification/10.png'
 import specification_11 from '/public/images/icon/specification/11.png'
 import specification_12 from '/public/images/icon/specification/12.png'
@@ -10,7 +8,9 @@ import specification_15 from '/public/images/icon/specification/15.png'
 import specification_16 from '/public/images/icon/specification/16.png'
 import specification_17 from '/public/images/icon/specification/17.png'
 import specification_18 from '/public/images/icon/specification/18.png'
-import Image from 'next/image'
+import specification_7 from '/public/images/icon/specification/7.png'
+import specification_8 from '/public/images/icon/specification/8.png'
+import specification_9 from '/public/images/icon/specification/9.png'
 
 import { Contest } from '@/payload-types'
 
@@ -32,7 +32,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Zero to Sixty</p>
-                <span>{contestDetails?.zero_sixty}</span>
+                {/* <span>{contestDetails?.zero_sixty}</span> */}
               </div>
             </div>
           </div>
@@ -43,7 +43,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Top Speed</p>
-                <h6>{contestDetails?.top_speed}</h6>
+                {/* <h6>{contestDetails?.top_speed}</h6> */}
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Power</p>
-                <h6>{contestDetails?.power}</h6>
+                {/* <h6>{contestDetails?.power}</h6> */}
               </div>
             </div>
           </div>
@@ -65,7 +65,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Displacement</p>
-                <h6>{contestDetails?.displacement}</h6>
+                {/* <h6>{contestDetails?.displacement}</h6> */}
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Break Horsepower</p>
-                <h6>{contestDetails?.bhp}</h6>
+                {/* <h6>{contestDetails?.bhp}</h6> */}
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Year</p>
-                <h6>{contestDetails?.year}</h6>
+                {/* <h6>{contestDetails?.year}</h6> */}
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Processor/CPU</p>
-                <span>{contestDetails?.processor_cpu}</span>
+                {/* <span>{contestDetails?.processor_cpu}</span> */}
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>RAM </p>
-                <h6>{contestDetails?.ram}</h6>
+                {/* <h6>{contestDetails?.ram}</h6> */}
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Storage</p>
-                <h6>{contestDetails?.storage}</h6>
+                {/* <h6>{contestDetails?.storage}</h6> */}
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Camera</p>
-                <h6>{contestDetails?.Camera}</h6>
+                {/* <h6>{contestDetails?.Camera}</h6> */}
               </div>
             </div>
           </div>
@@ -145,7 +145,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Battery</p>
-                <h6>{contestDetails?.battery}</h6>
+                {/* <h6>{contestDetails?.battery}</h6> */}
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ function VehicleSpecifications({
               </div>
               <div className='icon-item__content'>
                 <p>Display</p>
-                <h6>{contestDetails?.display}</h6>
+                {/* <h6>{contestDetails?.display}</h6> */}
               </div>
             </div>
           </div>

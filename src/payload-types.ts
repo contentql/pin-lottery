@@ -24,6 +24,8 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   globals: {
+    header: Header;
+    footer: Footer;
     about: About;
     team: Team;
     testimonial: Testimonial;
@@ -76,6 +78,14 @@ export interface Media {
   width?: number | null;
   height?: number | null;
   sizes?: {
+    navLogo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
     navUserImage?: {
       url?: string | null;
       width?: number | null;
@@ -150,21 +160,7 @@ export interface Contest {
   id: string;
   title: string;
   product_price: number;
-  features: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  product_type: 'Car' | 'Bike' | 'Mobile' | 'Laptop' | 'Test';
   description: {
     root: {
       type: string;
@@ -186,25 +182,11 @@ export interface Contest {
     product_images: string | Media;
     id?: string | null;
   }[];
-  features_html?: string | null;
   description_html?: string | null;
   contest_no: string;
   tickets_purchased?: number | null;
   ticket_price: number;
   day_remain: string;
-  product_type?: ('Car' | 'Bike' | 'Mobile' | 'Laptop' | 'Test') | null;
-  zero_sixty?: string | null;
-  top_speed?: string | null;
-  power?: string | null;
-  displacement?: string | null;
-  bhp?: string | null;
-  year?: string | null;
-  processor_cpu?: string | null;
-  ram?: string | null;
-  storage?: string | null;
-  display?: string | null;
-  battery?: string | null;
-  Camera?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -443,6 +425,40 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  icon: string | Media;
+  nav_links?:
+    | {
+        name: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  icon: string | Media;
+  nav_links?:
+    | {
+        name: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,9 +1,12 @@
-import round_shape_2 from '/public/images/elements/round-shape-2.png'
+import { Media } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import round_shape_2 from '/public/images/elements/round-shape-2.png'
 
 const Footer = () => {
+  const {data:footerData}=trpc.public.getFooter.useQuery()
   return (
     <footer className='footer-section'>
       <div className='bg-shape--top'>
@@ -40,10 +43,10 @@ const Footer = () => {
               <li>
                 <Link href='/'>
                   <Image
-                    src='/images/client/3.png'
+                    src={(footerData?.icon as Media)?.sizes?.navLogo?.url!}
                     alt='footer'
-                    width={200}
-                    height={200}
+                    width={(footerData?.icon as Media)?.sizes?.navLogo?.width!}
+                    height={(footerData?.icon as Media)?.sizes?.navLogo?.height!}
                   />
                 </Link>
               </li>
@@ -51,10 +54,12 @@ const Footer = () => {
           </div>
           <div className='col-lg-8'>
             <ul className='short-links justify-content-lg-end justify-content-center'>
-              <li>
-                <Link href='/about'>About</Link>
-              </li>
-              <li>
+             {footerData?.nav_links?.map((navItem,index)=>(
+               <li key={index}>
+               <Link href={navItem?.link}>{navItem?.name}</Link>
+             </li>
+             ))}
+              {/* <li>
                 <Link href='/blog'>Blogs</Link>
               </li>
               <li>
@@ -65,7 +70,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link href='/how-work'>How to Use</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

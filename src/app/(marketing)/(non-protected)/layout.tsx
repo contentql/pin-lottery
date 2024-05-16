@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'This is marketing layout',
 }
 
-const MarketingNonProtectedLayout = ({
+const MarketingNonProtectedLayout = async({
   children,
 }: {
   children: React.ReactNode
@@ -16,3 +16,4 @@ const MarketingNonProtectedLayout = ({
 }
 
 export default MarketingNonProtectedLayout
+

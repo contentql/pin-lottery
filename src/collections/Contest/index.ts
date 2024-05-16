@@ -73,21 +73,40 @@ const Contest: CollectionConfig = {
               ],
             },
             {
-              name: 'features',
-              type: 'richText',
-              label: 'Product Features',
-              required: true,
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [
-                  ...defaultFeatures,
-                  HTMLConverterFeature({}),
-                ],
-              }),
-              admin: {
-                description:
-                  'A list of key features or specifications of the product.',
-              },
-            },
+                    name: 'product_type',
+                    type: 'select',
+                    label: 'Product Type',
+                    required:true,
+                    options: [
+                      { label: 'Car', value: 'Car' },
+                      { label: 'Bike', value: 'Bike' },
+                      { label: 'Mobile', value: 'Mobile' },
+                      { label: 'Laptop', value: 'Laptop' },
+                      { label: 'Test', value: 'Test' },
+                    ],
+                    admin: {
+                      description: 'Select the type of product from the list.',
+                    },
+                    hooks: {
+                        afterChange: [updateTagAfterChange],
+                    },
+                  },
+            // {
+            //   name: 'features',
+            //   type: 'richText',
+            //   label: 'Product Features',
+            //   required: true,
+            //   editor: lexicalEditor({
+            //     features: ({ defaultFeatures }) => [
+            //       ...defaultFeatures,
+            //       HTMLConverterFeature({}),
+            //     ],
+            //   }),
+            //   admin: {
+            //     description:
+            //       'A list of key features or specifications of the product.',
+            //   },
+            // },
             {
               name: 'description',
               type: 'richText',
@@ -142,9 +161,9 @@ const Contest: CollectionConfig = {
                 },
               ],
             },
-            lexicalHTML('features', {
-              name: 'features_html',
-            }),
+            // lexicalHTML('features', {
+            //   name: 'features_html',
+            // }),
             lexicalHTML('description', {
               name: 'description_html',
             }),
@@ -239,195 +258,195 @@ const Contest: CollectionConfig = {
             },
           ],
         },
-        {
-          label: 'Product Specifications',
-          description: 'Product Specification',
-          fields: [
-            {
-              name: 'product_type',
-              type: 'select',
-              label: 'Product Type',
-              options: [
-                { label: 'Car', value: 'Car' },
-                { label: 'Bike', value: 'Bike' },
-                { label: 'Mobile', value: 'Mobile' },
-                { label: 'Laptop', value: 'Laptop' },
-                { label: 'Test', value: 'Test' },
-              ],
-              admin: {
-                description: 'Select the type of product from the list.',
-              },
-              hooks: {
-                afterChange: [updateTagAfterChange],
-              },
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'zero_sixty',
-                  type: 'text',
-                  label: 'Zero-to-Sixty',
-                  required: true,
-                  admin: {
-                    description: 'Time taken to accelerate from 0 to 60 mph.',
-                    condition: data =>
-                      data?.product_type === 'Car' ||
-                      data?.product_type === 'Bike',
-                  },
-                },
-                {
-                  name: 'top_speed',
-                  type: 'text',
-                  label: 'Top Speed',
-                  required: true,
-                  admin: {
-                    description: 'Maximum achievable speed of the product.',
-                    condition: data =>
-                      data?.product_type === 'Car' ||
-                      data?.product_type === 'Bike',
-                  },
-                },
-                {
-                  name: 'power',
-                  type: 'text',
-                  label: 'Power',
-                  required: true,
-                  admin: {
-                    description: 'The power output of the product.',
-                    condition: data =>
-                      data?.product_type === 'Car' ||
-                      data?.product_type === 'Bike',
-                  },
-                },
-              ],
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'displacement',
-                  type: 'text',
-                  label: 'Displacement',
-                  required: true,
-                  admin: {
-                    description: 'The engine displacement of the product.',
-                    condition: data =>
-                      data?.product_type === 'Car' ||
-                      data?.product_type === 'Bike',
-                  },
-                },
-                {
-                  name: 'bhp',
-                  type: 'text',
-                  label: 'Brake Horsepower',
-                  required: true,
-                  admin: {
-                    description: 'The brake horsepower (bhp) of the product.',
-                    condition: data =>
-                      data?.product_type === 'Car' ||
-                      data?.product_type === 'Bike',
-                  },
-                },
-                {
-                  name: 'year',
-                  type: 'text',
-                  label: 'Year',
-                  required: true,
-                  admin: {
-                    description: 'The year of manufacture for the product.',
-                    condition: data =>
-                      data?.product_type === 'Car' ||
-                      data?.product_type === 'Bike',
-                  },
-                },
-              ],
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'processor_cpu',
-                  type: 'text',
-                  label: 'Processor/CPU',
-                  required: true,
-                  admin: {
-                    description: 'The processor or CPU of the product.',
-                    condition: data =>
-                      data?.product_type === 'Mobile' ||
-                      data?.product_type === 'Laptop',
-                  },
-                },
-                {
-                  name: 'ram',
-                  type: 'text',
-                  label: 'RAM',
-                  required: true,
-                  admin: {
-                    description:
-                      'The RAM (Random Access Memory) of the product.',
-                    condition: data =>
-                      data?.product_type === 'Mobile' ||
-                      data?.product_type === 'Laptop',
-                  },
-                },
-                {
-                  name: 'storage',
-                  type: 'text',
-                  label: 'Storage',
-                  required: true,
-                  admin: {
-                    description: 'The storage capacity of the product.',
-                    condition: data =>
-                      data?.product_type === 'Mobile' ||
-                      data?.product_type === 'Laptop',
-                  },
-                },
-              ],
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'display',
-                  type: 'text',
-                  label: 'Display',
-                  required: true,
-                  admin: {
-                    description: 'The display specifications of the product.',
-                    condition: data =>
-                      data?.product_type === 'Mobile' ||
-                      data?.product_type === 'Laptop',
-                  },
-                },
-                {
-                  name: 'battery',
-                  type: 'text',
-                  label: 'Battery',
-                  required: true,
-                  admin: {
-                    description: 'The battery specifications of the product.',
-                    condition: data =>
-                      data?.product_type === 'Mobile' ||
-                      data?.product_type === 'Laptop',
-                  },
-                },
-                {
-                  name: 'Camera',
-                  type: 'text',
-                  label: 'Camera',
-                  required: true,
-                  admin: {
-                    description: 'The camera specifications of the product.',
-                    condition: data =>
-                      data?.product_type === 'Mobile' ||
-                      data?.product_type === 'Laptop',
-                  },
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   label: 'Product Specifications',
+        //   description: 'Product Specification',
+        //   fields: [
+        //     {
+        //       name: 'product_type',
+        //       type: 'select',
+        //       label: 'Product Type',
+        //       options: [
+        //         { label: 'Car', value: 'Car' },
+        //         { label: 'Bike', value: 'Bike' },
+        //         { label: 'Mobile', value: 'Mobile' },
+        //         { label: 'Laptop', value: 'Laptop' },
+        //         { label: 'Test', value: 'Test' },
+        //       ],
+        //       admin: {
+        //         description: 'Select the type of product from the list.',
+        //       },
+        //       hooks: {
+        //         afterChange: [updateTagAfterChange],
+        //       },
+        //     },
+        //     {
+        //       type: 'row',
+        //       fields: [
+        //         {
+        //           name: 'zero_sixty',
+        //           type: 'text',
+        //           label: 'Zero-to-Sixty',
+        //           required: true,
+        //           admin: {
+        //             description: 'Time taken to accelerate from 0 to 60 mph.',
+        //             condition: data =>
+        //               data?.product_type === 'Car' ||
+        //               data?.product_type === 'Bike',
+        //           },
+        //         },
+        //         {
+        //           name: 'top_speed',
+        //           type: 'text',
+        //           label: 'Top Speed',
+        //           required: true,
+        //           admin: {
+        //             description: 'Maximum achievable speed of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Car' ||
+        //               data?.product_type === 'Bike',
+        //           },
+        //         },
+        //         {
+        //           name: 'power',
+        //           type: 'text',
+        //           label: 'Power',
+        //           required: true,
+        //           admin: {
+        //             description: 'The power output of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Car' ||
+        //               data?.product_type === 'Bike',
+        //           },
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       type: 'row',
+        //       fields: [
+        //         {
+        //           name: 'displacement',
+        //           type: 'text',
+        //           label: 'Displacement',
+        //           required: true,
+        //           admin: {
+        //             description: 'The engine displacement of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Car' ||
+        //               data?.product_type === 'Bike',
+        //           },
+        //         },
+        //         {
+        //           name: 'bhp',
+        //           type: 'text',
+        //           label: 'Brake Horsepower',
+        //           required: true,
+        //           admin: {
+        //             description: 'The brake horsepower (bhp) of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Car' ||
+        //               data?.product_type === 'Bike',
+        //           },
+        //         },
+        //         {
+        //           name: 'year',
+        //           type: 'text',
+        //           label: 'Year',
+        //           required: true,
+        //           admin: {
+        //             description: 'The year of manufacture for the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Car' ||
+        //               data?.product_type === 'Bike',
+        //           },
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       type: 'row',
+        //       fields: [
+        //         {
+        //           name: 'processor_cpu',
+        //           type: 'text',
+        //           label: 'Processor/CPU',
+        //           required: true,
+        //           admin: {
+        //             description: 'The processor or CPU of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Mobile' ||
+        //               data?.product_type === 'Laptop',
+        //           },
+        //         },
+        //         {
+        //           name: 'ram',
+        //           type: 'text',
+        //           label: 'RAM',
+        //           required: true,
+        //           admin: {
+        //             description:
+        //               'The RAM (Random Access Memory) of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Mobile' ||
+        //               data?.product_type === 'Laptop',
+        //           },
+        //         },
+        //         {
+        //           name: 'storage',
+        //           type: 'text',
+        //           label: 'Storage',
+        //           required: true,
+        //           admin: {
+        //             description: 'The storage capacity of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Mobile' ||
+        //               data?.product_type === 'Laptop',
+        //           },
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       type: 'row',
+        //       fields: [
+        //         {
+        //           name: 'display',
+        //           type: 'text',
+        //           label: 'Display',
+        //           required: true,
+        //           admin: {
+        //             description: 'The display specifications of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Mobile' ||
+        //               data?.product_type === 'Laptop',
+        //           },
+        //         },
+        //         {
+        //           name: 'battery',
+        //           type: 'text',
+        //           label: 'Battery',
+        //           required: true,
+        //           admin: {
+        //             description: 'The battery specifications of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Mobile' ||
+        //               data?.product_type === 'Laptop',
+        //           },
+        //         },
+        //         {
+        //           name: 'Camera',
+        //           type: 'text',
+        //           label: 'Camera',
+        //           required: true,
+        //           admin: {
+        //             description: 'The camera specifications of the product.',
+        //             condition: data =>
+        //               data?.product_type === 'Mobile' ||
+        //               data?.product_type === 'Laptop',
+        //           },
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
       ],
     },
 

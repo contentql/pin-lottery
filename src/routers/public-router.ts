@@ -1,9 +1,9 @@
+import { TRPCError } from '@trpc/server'
+import { z } from 'zod'
 import { getPayloadClient } from '../get-payload'
 import { BlogIdValidator } from '../lib/validators/blog-id-validator'
 import { ContactFormValidator } from '../lib/validators/contact-form-validator'
 import { publicProcedure, router } from '../trpc/trpc'
-import { TRPCError } from '@trpc/server'
-import { z } from 'zod'
 
 export const publicRouter = router({
   newContact: publicProcedure
@@ -193,6 +193,34 @@ export const publicRouter = router({
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
         message: error?.message || 'Failed to get testimonials.',
+      })
+    }
+  }),
+  getHeader: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const headerData = await payload.findGlobal({ slug: 'header' })
+      return headerData
+    } catch (error: any) {
+      console.error('Error getting header:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get header data.',
+      })
+    }
+  }),
+  getFooter: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const footerData = await payload.findGlobal({ slug: 'footer' })
+      return footerData
+    } catch (error: any) {
+      console.error('Error getting footer:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get footer data.',
       })
     }
   }),

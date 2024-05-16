@@ -1,6 +1,5 @@
 'use client'
 
-import { User } from '../payload-types'
 import React, {
   createContext,
   useCallback,
@@ -8,6 +7,7 @@ import React, {
   useEffect,
   useState,
 } from 'react'
+import { User } from '../payload-types'
 
 import ProfileCompletionStatus from '@/utils/profile-completion-status'
 
@@ -233,7 +233,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const { totalUserFields, completedUserFields, isProfileCompleted } =
     ProfileCompletionStatus(
-      ['user_name', 'dob', 'address', 'phone_number'],
+      ['user_name', 'phone_number'],
       user,
     )
 

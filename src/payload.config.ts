@@ -6,7 +6,6 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
-
 import Blog from './collections/Blog'
 import Cart from './collections/Cart'
 import Contact from './collections/Contact'
@@ -22,6 +21,8 @@ import Logo from './components/payload-icons/Logo'
 import About from './globals/About'
 import Faq from './globals/Faq'
 import Features from './globals/Features'
+import { Footer } from './globals/Footer'
+import { Header } from './globals/Header'
 import { HowToPlayInfo } from './globals/HowToPlay'
 import { Support } from './globals/Support'
 import Team from './globals/Team'
@@ -58,7 +59,7 @@ export default buildConfig({
     Tags,
     Wishlist,
   ],
-  globals: [About, Team, Testimonial, Features, Support, Faq, HowToPlayInfo],
+  globals: [Header,Footer,About, Team, Testimonial, Features, Support, Faq, HowToPlayInfo,],
   routes: {
     admin: '/admin',
   },

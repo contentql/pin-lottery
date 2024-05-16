@@ -231,7 +231,7 @@ const Info = ({ userData }: { userData: User }) => {
           </div>
           <ul className='user-info-card__list'>
             <li>
-              <span className='caption'>Name</span>
+              <span className='caption'>Name <sup style={{color:'red'}}>*</sup></span>
               <span className='value'>
                 {isEditMode.personalDetails ? (
                   <>
@@ -251,6 +251,30 @@ const Info = ({ userData }: { userData: User }) => {
                   </>
                 ) : (
                   userData?.user_name
+                )}
+              </span>
+            </li>
+            <li>
+              <span className='caption'>Mobile <sup style={{color:'red'}}>*</sup></span>
+              <span className='value'>
+                {isEditMode.personalDetails ? (
+                  <>
+                    <input
+                      {...registerPersonalDetails('phone_number')}
+                      type='text'
+                      name='phone_number'
+                      id='phone_number'
+                      placeholder='mobile'
+                      required
+                    />
+                    {personalDetailsErrors?.phone_number && (
+                      <p className='form-errors'>
+                        {personalDetailsErrors?.phone_number?.message}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  userData?.phone_number
                 )}
               </span>
             </li>
@@ -302,30 +326,7 @@ const Info = ({ userData }: { userData: User }) => {
                 )}
               </span>
             </li>
-            <li>
-              <span className='caption'>Mobile</span>
-              <span className='value'>
-                {isEditMode.personalDetails ? (
-                  <>
-                    <input
-                      {...registerPersonalDetails('phone_number')}
-                      type='text'
-                      name='phone_number'
-                      id='phone_number'
-                      placeholder='mobile'
-                      required
-                    />
-                    {personalDetailsErrors?.phone_number && (
-                      <p className='form-errors'>
-                        {personalDetailsErrors?.phone_number?.message}
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  userData?.phone_number
-                )}
-              </span>
-            </li>
+            
           </ul>
         </form>
       </div>
