@@ -25,6 +25,7 @@ export interface Config {
   };
   globals: {
     header: Header;
+    footer: Footer;
     about: About;
     team: Team;
     testimonial: Testimonial;
@@ -430,6 +431,23 @@ export interface PayloadMigration {
  * via the `definition` "header".
  */
 export interface Header {
+  id: string;
+  icon: string | Media;
+  nav_links?:
+    | {
+        name: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
   id: string;
   icon: string | Media;
   nav_links?:

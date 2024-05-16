@@ -21,6 +21,7 @@ import Logo from './components/payload-icons/Logo'
 import About from './globals/About'
 import Faq from './globals/Faq'
 import Features from './globals/Features'
+import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
 import { HowToPlayInfo } from './globals/HowToPlay'
 import { Support } from './globals/Support'
@@ -58,7 +59,7 @@ export default buildConfig({
     Tags,
     Wishlist,
   ],
-  globals: [Header,About, Team, Testimonial, Features, Support, Faq, HowToPlayInfo,],
+  globals: [Header,Footer,About, Team, Testimonial, Features, Support, Faq, HowToPlayInfo,],
   routes: {
     admin: '/admin',
   },

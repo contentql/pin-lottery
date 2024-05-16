@@ -210,6 +210,20 @@ export const publicRouter = router({
       })
     }
   }),
+  getFooter: publicProcedure.query(async () => {
+    const payload = await getPayloadClient()
+
+    try {
+      const footerData = await payload.findGlobal({ slug: 'footer' })
+      return footerData
+    } catch (error: any) {
+      console.error('Error getting footer:', error)
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message || 'Failed to get footer data.',
+      })
+    }
+  }),
   getTeam: publicProcedure.query(async () => {
     const payload = await getPayloadClient()
 
