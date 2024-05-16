@@ -1,6 +1,3 @@
-import DepositAmount from '../user-transaction/DepositAmount'
-import WithdrawAmount from '../user-transaction/WithdrawAmount'
-import tag from '/public/images/icon/btn/tag.png'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,6 +15,9 @@ import { LiaTicketAltSolid } from 'react-icons/lia'
 import { LuUser2 } from 'react-icons/lu'
 import { RxExit } from 'react-icons/rx'
 import { toast } from 'react-toastify'
+import DepositAmount from '../user-transaction/DepositAmount'
+import WithdrawAmount from '../user-transaction/WithdrawAmount'
+import tag from '/public/images/icon/btn/tag.png'
 
 import { Media } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
@@ -356,7 +356,7 @@ const Header = () => {
               </ul>
               <div className='nav-right'>
                 <Link href='/contest' className='cmn-btn style--three btn--sm'>
-                  <Image src={tag} alt='icon' className='me-1' /> Buy Tickets
+                  <Image src={tag} alt='icon' className='me-1' /> Play Now
                 </Link>
 
                 {/* <div className='right'>
