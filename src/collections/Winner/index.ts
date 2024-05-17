@@ -4,6 +4,7 @@ import { self } from './access/self'
 import { DefaultCollectionEdit } from './custom/views/Edit/Default'
 import DefaultListView from './custom/views/List/DefaultListView'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
+import { WinnerEmail } from './hooks/winnerEmail'
 
 const Winner: CollectionConfig = {
   slug: 'winner',
@@ -27,6 +28,7 @@ const Winner: CollectionConfig = {
   },
   hooks: {
     afterDelete: [updateContestAfterDelete],
+    afterChange:[WinnerEmail]
   },
   fields: [
     {
