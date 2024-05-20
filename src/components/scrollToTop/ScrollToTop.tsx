@@ -1,6 +1,6 @@
+'use client'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
-
 const ScrollToTop = () => {
   const scrollTop = useRef<HTMLAnchorElement>(null)
 

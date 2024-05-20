@@ -1,11 +1,24 @@
-'use client'
+'use sever'
 import React from 'react'
 
 import Footer from '@/components/footer/Footer'
 import HeaderPage from '@/components/header/Header'
 import ScrollToTop from '@/components/scrollToTop/ScrollToTop'
+import { getPayloadClient } from '@/get-payload'
+import { Header } from '@/payload-types'
 
-const LayoutView = ({ children }: { children: React.ReactNode}) => {
+const LayoutView = async({ children }: { children: React.ReactNode}) => {
+  let headerData = null
+  const payload = await getPayloadClient()
+  try {
+    const header = await payload.findGlobal({
+      slug: 'header',
+      depth: 6,
+    })
+    headerData = header
+  } catch (error: any) {
+    console.error('Error fetching about:', error)
+  }
   return (
     <>
       {/* SignUp Modal */}
@@ -15,7 +28,7 @@ const LayoutView = ({ children }: { children: React.ReactNode}) => {
       {/* <Login /> */}
 
       {/* Header section */}
-      <HeaderPage/>
+      <HeaderPage header={headerData as Header}/>
 
       {children}
 
@@ -27,5 +40,16 @@ const LayoutView = ({ children }: { children: React.ReactNode}) => {
     </>
   )
 }
-
+export async function generateStaticParams(): Promise<any> {
+  const payload = await getPayloadClient()
+  try {
+    const headerData = await payload.findGlobal({
+      slug: 'header',
+      depth: 6,
+    })
+    return headerData as any
+  } catch (error: any) {
+    console.error('Error fetching about:', error)
+  }
+}
 export default LayoutView

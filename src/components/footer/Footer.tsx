@@ -1,3 +1,4 @@
+'use client'
 import { Media } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import Image from 'next/image'
