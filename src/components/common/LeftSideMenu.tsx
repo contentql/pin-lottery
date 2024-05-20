@@ -1,6 +1,5 @@
 'use client'
 
-import team_obj from '/public/images/elements/team-obj.png'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,6 +8,7 @@ import { useState } from 'react'
 import { FaArrowRightLong } from 'react-icons/fa6'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
+import team_obj from '/public/images/elements/team-obj.png'
 
 import { useAuth } from '@/providers/Auth'
 import { currentUser } from '@/queries/auth/currentUser'
@@ -188,7 +188,7 @@ const LeftSideMenu = () => {
               ['My Tickets', '/user'],
               ['Personal Information', '/user-info'],
               ['Transactions', '/user-transaction'],
-              ['Referral Program', '/user-referral'],
+              // ['Referral Program', '/user-referral'],
               ['Favorite Lotteries', '/user-lottery'],
               ['Help Center', '/contact'],
             ].map(([item, url], i) => (
