@@ -308,6 +308,9 @@ const HeaderPage = () => {
                 <i className='flaticon-fire'></i>
               </span>
             </Link>
+            <Link href='/contest' className='cmn-btn style--three btn--sm play-button'>
+                  <Image src={tag} alt='icon' className='me-1' /> Play Now
+                </Link>
             <button
               className='navbar-toggler ms-auto'
               type='button'
@@ -320,6 +323,7 @@ const HeaderPage = () => {
             >
               <span className='menu-toggle'></span>
             </button>
+            
             <div
               className={`collapse navbar-collapse ${show && 'show'}`}
               // id="navbarContent"
