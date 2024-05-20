@@ -308,6 +308,7 @@ const HeaderPage = () => {
                 <i className='flaticon-fire'></i>
               </span>
             </Link>
+            
             <Link href='/contest' className='cmn-btn style--three btn--sm play-button'>
                   <Image src={tag} alt='icon' className='me-1' /> Play Now
                 </Link>
@@ -363,9 +364,7 @@ const HeaderPage = () => {
                 </li> */}
               </ul>
               <div className='nav-right'>
-                <Link href='/contest' className='cmn-btn style--three btn--sm'>
-                  <Image src={tag} alt='icon' className='me-1' /> Play Now
-                </Link>
+              <Link className="glow-on-hover"  href='/contest'> <Image src={tag} alt='icon' className='me-1' /> play Now</Link>
 
                 {/* <div className='right'>
                   {status === 'loggedIn' && (
