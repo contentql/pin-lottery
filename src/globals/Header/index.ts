@@ -2,6 +2,9 @@ import { GlobalConfig } from 'payload/types'
 
 export const Header: GlobalConfig = {
   slug: 'header',
+  access:{
+    read:()=>true
+  },
   fields: [
     {name:'icon',type:'upload',relationTo:'media',label:'Icon',required:true},
     {

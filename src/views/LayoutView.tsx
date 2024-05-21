@@ -8,17 +8,11 @@ import { getPayloadClient } from '@/get-payload'
 import { Header } from '@/payload-types'
 
 const LayoutView = async({ children }: { children: React.ReactNode}) => {
-  let headerData = null
-  const payload = await getPayloadClient()
-  try {
-    const header = await payload.findGlobal({
-      slug: 'header',
-      depth: 6,
-    })
-    headerData = header
-  } catch (error: any) {
-    console.error('Error fetching about:', error)
-  }
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/header`,
+    { next: { revalidate: 60, tags: ['header'] } },
+  );
+  const headerData = (await res.json()) ;
   return (
     <>
       {/* SignUp Modal */}
