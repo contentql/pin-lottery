@@ -1,5 +1,7 @@
 'use client'
 
+import { Media } from '@/payload-types'
+import { trpc } from '@/trpc/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -35,6 +37,8 @@ const AuthLayoutView = () => {
     }
   }, [])
 
+  const {data:headerData}=trpc.public.getHeader.useQuery()
+
   return (
     <header
       id='gotoTop'
@@ -48,11 +52,11 @@ const AuthLayoutView = () => {
             <div>
               <Link href='/' className='site-logo site-title'>
                 <Image
-                  src='/images/client/3.png'
-                  priority={true}
-                  alt='logo'
-                  width={200}
-                  height={20}
+                 src={(headerData?.icon as Media)?.sizes?.navLogo?.url!}
+                 priority={true}
+                 alt='logo'
+                 width={(headerData?.icon as Media)?.sizes?.navLogo?.width!}
+                 height={(headerData?.icon as Media)?.sizes?.navLogo?.height!}
                 />
                 <span className='logo-icon'>
                   <i className='flaticon-fire'></i>
