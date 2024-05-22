@@ -12,7 +12,7 @@ const LayoutView = async({ children }: { children: React.ReactNode}) => {
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/header`,
     { next: { revalidate: 60, tags: ['header'] } },
   );
-  const headerData = (await res.json()) ;
+  const headerData = await res.json();
   return (
     <>
       {/* SignUp Modal */}

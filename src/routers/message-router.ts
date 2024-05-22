@@ -19,7 +19,7 @@ export const messageRouter=router({
           const senderData= await client.messages.create({
             body: body,
             from: 'whatsapp:+14155238886',
-            to: `whatsapp:+919390463796`
+            to: `whatsapp:+91${phoneNumber}`
           });
           return senderData
         } catch (error:any) {

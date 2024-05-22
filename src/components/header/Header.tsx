@@ -365,7 +365,7 @@ const HeaderPage = ({header}:{header:Header}) => {
                 </li> */}
               </ul>
               <div className='nav-right'>
-              <Link className="glow-on-hover"  href='/contest'> <Image src={tag} alt='icon' className='me-1' /> play Now</Link>
+              <Link className="glow-on-hover"  href='/contest'> <Image src={tag} alt='icon' className='me-1' /> Play Now</Link>
 
                 {/* <div className='right'>
                   {status === 'loggedIn' && (
