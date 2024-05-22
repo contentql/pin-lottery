@@ -65,6 +65,7 @@
     "sass": "^1.71.1",
     "simple-duration": "^1.1.0",
     "slick-carousel": "^1.8.1",
+    "twilio": "^5.0.4",
     "usehooks-ts": "^3.1.0",
     "zod": "^3.22.4"
   },

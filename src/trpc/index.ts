@@ -1,12 +1,12 @@
 import { authRouter } from '../routers/auth-router'
 import { cartRouter } from '../routers/cart-router'
 import { contestRouter } from '../routers/contest-router'
+import { messageRouter } from '../routers/message-router'
 import { publicRouter } from '../routers/public-router'
 import { ticketRouter } from '../routers/ticket-router'
 import { transactionRouter } from '../routers/transaction-router'
 import { WinnerRouter } from '../routers/winner-router'
 import { wishlistRouter } from '../routers/wishlist-router'
-
 import { router, userProcedure } from './trpc'
 
 export const appRouter = router({
@@ -22,6 +22,7 @@ export const appRouter = router({
   winner: WinnerRouter,
   wishlist: wishlistRouter,
   transaction: transactionRouter,
+  message:messageRouter
 })
 
 export type AppRouter = typeof appRouter

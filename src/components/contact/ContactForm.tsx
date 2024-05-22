@@ -19,6 +19,12 @@ const ContactForm = () => {
     resolver: zodResolver(ContactFormValidator),
   })
 
+  const {mutate:whatsappMutate}=trpc.message.contactWhatsappMessage.useMutation({
+    onSuccess:()=>{
+      console.log("success")
+    }
+  })
+
   const { mutate: addNewContact, isPending: isContactCompleted } =
     trpc.public.newContact.useMutation({
       onSuccess: () => {
@@ -30,13 +36,16 @@ const ContactForm = () => {
       },
       onError: error => toast.error(`error while submitting`),
     })
-  const onSubmit = ({
+  const onSubmit = async({
     name,
     email,
+    phoneNumber,
     message,
     subject,
   }: TContactFormValidator) => {
-    addNewContact({ name, email, message, subject })
+    whatsappMutate({email,message,name,phoneNumber,subject})
+    addNewContact({ name, email, message, subject ,phoneNumber})
+
   }
 
   return (
@@ -75,6 +84,20 @@ const ContactForm = () => {
             required
           />
           {errors?.email && <p>{errors?.email.message}</p>}
+        </div>
+        <div className='form-group'>
+          <label>
+            Phone Number <sup>*</sup>
+          </label>
+          <input
+            {...register('phoneNumber')}
+            type='number'
+            name='phoneNumber'
+            id='phoneNumber'
+            placeholder='Enter Your Phone Number'
+            required
+          />
+          {errors?.phoneNumber && <p>{errors?.phoneNumber.message}</p>}
         </div>
         <div className='form-group'>
           <label>
