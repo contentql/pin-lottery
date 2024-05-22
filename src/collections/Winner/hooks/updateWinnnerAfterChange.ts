@@ -26,7 +26,13 @@ export const updateWinnerAfterChange: CollectionAfterChangeHook = async ({
             dispatched:true
            }
           })
-          
+          await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/trpc/message.otpWhatsAppMessage`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({otp:otp})
+          });
         } catch (error) {
           console.error('Error in updateWinnerAfterChange:', error)
         }
@@ -45,7 +51,6 @@ export const updateWinnerAfterChange: CollectionAfterChangeHook = async ({
             dispatched:false
            }
           })
-          
         } catch (error) {
           console.error('Error in updateWinnerAfterChange:', error)
         }
