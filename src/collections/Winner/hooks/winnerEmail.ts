@@ -9,13 +9,13 @@ export const WinnerEmail: CollectionAfterChangeHook = async ({
   doc,
   req,
 }) => {
-    const ticketsData=await payload.findByID({
-        collection:'tickets',
-        id:doc.ticket.value || doc.ticket.value.id
-    })
-    
-    console.log("after fetch",ticketsData)
+  
   if (operation === OPERATION) {
+    const ticketsData=await payload.findByID({
+      collection:'tickets',
+      id:doc.ticket.value || doc.ticket.value.id
+  })
+  
     req.payload.sendEmail({
       to:(ticketsData?.purchased_by?.value as User)?.email,
       from: process.env.RESEND_SENDER_EMAIL,

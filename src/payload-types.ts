@@ -218,6 +218,9 @@ export interface Winner {
     relationTo: 'tickets';
     value: string | Ticket;
   } | null;
+  send_otp?: boolean | null;
+  winner_otp?: string | null;
+  dispatched?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }

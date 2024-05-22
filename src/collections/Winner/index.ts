@@ -4,6 +4,7 @@ import { self } from './access/self'
 import { DefaultCollectionEdit } from './custom/views/Edit/Default'
 import DefaultListView from './custom/views/List/DefaultListView'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
+import { updateWinnerAfterChange } from './hooks/updateWinnnerAfterChange'
 import { WinnerEmail } from './hooks/winnerEmail'
 
 const Winner: CollectionConfig = {
@@ -24,11 +25,11 @@ const Winner: CollectionConfig = {
   },
   access: {
     create: self,
-    update: () => false,
+    update: () => true,
   },
   hooks: {
     afterDelete: [updateContestAfterDelete],
-    afterChange:[WinnerEmail]
+    afterChange:[WinnerEmail,updateWinnerAfterChange]
   },
   fields: [
     {
@@ -58,6 +59,36 @@ const Winner: CollectionConfig = {
           return false
         }
       },
+    },
+    {
+      name:'send_otp',
+      type:'checkbox',
+      label:'Send OTP',
+      defaultValue:false,
+      admin:{
+        description:'Send otp to verify user',
+        position:'sidebar'
+      }
+    },
+    {
+      name:'winner_otp',
+      type:'text',
+      label:'Winner OTP',
+      admin:{
+        description:'User OTP',
+        position:'sidebar',
+        readOnly:true
+      }
+    },
+    {
+      name:'dispatched',
+      type:'checkbox',
+      label:'Dispatched',
+      defaultValue:false,
+      admin:{
+        description:'is product dispatched',
+        position:'sidebar'
+      }
     },
   ],
 }
