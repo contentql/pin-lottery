@@ -38,7 +38,7 @@ export const messageRouter=router({
         const client = require('twilio')(sid, auth);
         try {
           const senderData= await client.messages.create({
-            body: `your OTP for verification is:${otp}. Please use this code to collect your prize.`,
+            body: `your OTP for verification is:${otp}. Please use this code to collect your price.`,
             from: 'whatsapp:+14155238886',
             to: `whatsapp:+919390463796`
           });

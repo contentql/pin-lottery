@@ -1,6 +1,7 @@
 
 import { customAlphabet } from 'nanoid'
 import { CollectionAfterChangeHook } from 'payload/types'
+import { otpEmail } from '../../../email-templates/otpEmail'
 export const updateWinnerAfterChange: CollectionAfterChangeHook = async ({
   operation,
   previousDoc,
@@ -33,6 +34,14 @@ export const updateWinnerAfterChange: CollectionAfterChangeHook = async ({
             },
             body:JSON.stringify({otp:otp})
           });
+          await payload.sendEmail({
+            to:'jagadeeshmaripi2001@gmail.com',
+            from: process.env.RESEND_SENDER_EMAIL,
+            subject: `opt`, 
+            html: otpEmail({
+              otpCode:otp
+            }),
+          })
         } catch (error) {
           console.error('Error in updateWinnerAfterChange:', error)
         }
