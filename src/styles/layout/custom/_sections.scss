@@ -1615,9 +1615,7 @@ $duration: 1000;
  font-weight: bold;
 }
 .play-button{
-  position: absolute;
-  top: 0px;
-  right: 60px;
+  margin: auto;
   @media screen and (min-width:1199px) {
     display: none;
     
@@ -1641,7 +1639,7 @@ $duration: 1000;
   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   position: absolute;
   top: -2px;
-  left:-2px;
+ right: -1px;
   background-size: 400%;
   z-index: -1;
   filter: blur(5px);

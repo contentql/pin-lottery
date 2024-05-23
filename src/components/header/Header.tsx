@@ -310,9 +310,9 @@ const HeaderPage = ({header}:{header:Header}) => {
               </span>
             </Link>
             
-            <Link href='/contest' className='cmn-btn style--three btn--sm play-button'>
-                  <Image src={tag} alt='icon' className='me-1' /> Play Now
-                </Link>
+          
+                <Link className="glow-on-hover play-button"  href='/contest'> <Image src={tag} alt='icon' className='me-1' /> Play Now</Link>
+
             <button
               className='navbar-toggler ms-auto'
               type='button'
