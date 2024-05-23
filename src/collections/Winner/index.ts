@@ -1,6 +1,5 @@
 import { CollectionConfig } from 'payload/types'
 
-import { self } from './access/self'
 import { DefaultCollectionEdit } from './custom/views/Edit/Default'
 import DefaultListView from './custom/views/List/DefaultListView'
 import { updateContestAfterDelete } from './hooks/updateContestAfterDelete'
@@ -24,7 +23,7 @@ const Winner: CollectionConfig = {
     },
   },
   access: {
-    create: self,
+    create:()=> true,
     update: () => true,
   },
   hooks: {
@@ -39,6 +38,9 @@ const Winner: CollectionConfig = {
       unique: true,
       relationTo: ['contest'],
       hasMany: false,
+      admin:{
+        readOnly:true
+      }
     },
     {
       name: 'ticket',
@@ -47,6 +49,9 @@ const Winner: CollectionConfig = {
       label: 'Winner Ticket',
       unique: true,
       hasMany: false,
+      admin:{
+        readOnly:true
+      },
       filterOptions: ({ relationTo, data }) => {
         const selectedContestId = data?.contest?.value
         if (relationTo === 'tickets' && selectedContestId) {
