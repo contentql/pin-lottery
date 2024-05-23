@@ -50,6 +50,26 @@ export const messageRouter=router({
             message: error?.message || 'Failed to send message.',
           })
         }
+    }),
+    resetPassword:publicProcedure.input(z.object({token:z.string()})).mutation(async({input})=>{
+      const {token}=input
+      const sid = process.env.TWILIO_ACCOUNT_SID
+       const auth = process.env.TWILIO_AUTH_TOKEN
+       const client = require('twilio')(sid, auth);
+       try {
+         const senderData= await client.messages.create({
+           body: `please copy paste this ${process.env.NEXT_PUBLIC_SERVER_URL}/verify?token=${token}. link to reset your password.`,
+           from: 'whatsapp:+14155238886',
+           to: `whatsapp:+919390463796`
+         });
+         return senderData
+       } catch (error:any) {
+         console.error('Error while sending message:', error)
+         throw new TRPCError({
+           code: 'INTERNAL_SERVER_ERROR',
+           message: error?.message || 'Failed to send message.',
+         })
+       }
     })
     
 })

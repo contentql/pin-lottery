@@ -73,10 +73,11 @@ const SignUp = () => {
   const onSubmit = ({
     user_name,
     email,
+    phoneNumber,
     password,
     confirm_password,
   }: TAuthCredentialsValidator) => {
-    addUser({ user_name, email, password, confirm_password })
+    addUser({ user_name, email,phoneNumber, password, confirm_password })
   }
 
   return isEmailSent ? (
@@ -87,7 +88,7 @@ const SignUp = () => {
           <div className='email-sent-content'>
             <p className='email-sent-text'>
               An email has been sent to <strong>{sentEmail}</strong>. Please
-              check your inbox and follow the instructions to verify your email.
+              check your email inbox or whatsapp and follow the instructions to verify your email.
             </p>
           </div>
         </div>
@@ -129,6 +130,23 @@ const SignUp = () => {
                 />
                 {errors?.email && (
                   <p className='form-errors'>{errors.email.message}</p>
+                )}
+              </div>
+
+              <div className='form-group'>
+                <label htmlFor='phoneNumber'>
+                  Phone Number <sup>*</sup>
+                </label>
+                <input
+                type='number'
+                  {...register('phoneNumber')}
+                  name='phoneNumber'
+                  id='phoneNumber'
+                  placeholder='Enter your phone number'
+                  required
+                />
+                {errors?.phoneNumber && (
+                  <p className='form-errors'>{errors.phoneNumber.message}</p>
                 )}
               </div>
 

@@ -1,12 +1,12 @@
-import {
-  ForgotPasswordValidator,
-  TForgotPasswordValidator,
-} from '../../lib/validators/auth-router/forgot-password-validator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { ZodError } from 'zod'
+import {
+  ForgotPasswordValidator,
+  TForgotPasswordValidator,
+} from '../../lib/validators/auth-router/forgot-password-validator'
 
 import { trpc } from '@/trpc/client'
 
@@ -20,6 +20,12 @@ const ForgotPassword = () => {
     formState: { errors },
   } = useForm<TForgotPasswordValidator>({
     resolver: zodResolver(ForgotPasswordValidator),
+  })
+
+  const {mutate: sendResetToken}=trpc.message.resetPassword.useMutation({
+    onSuccess:()=>{
+      console.log("whatsapp message")
+    }
   })
 
   const { mutate: forgotPassword } = trpc.auth.forgotPassword.useMutation({
@@ -39,14 +45,15 @@ const ForgotPassword = () => {
 
       console.error('Something went wrong. Please try again.')
     },
-    onSuccess: () => {
+    onSuccess: async(data) => {
+      sendResetToken({token:data?.token})
       setIsEmailSent(true)
       setSentEmail(getValues('email'))
       toast.success(`Email sent successfully`)
     },
   })
 
-  const onSubmit = ({ email }: TForgotPasswordValidator) => {
+  const onSubmit = async({ email }: TForgotPasswordValidator) => {
     forgotPassword({ email })
   }
 

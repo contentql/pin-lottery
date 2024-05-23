@@ -7,6 +7,7 @@ export const AuthCredentialsValidator = z
       .min(3, 'Username must contain at least 3 character(s)')
       .max(20, 'Username must contain at most 20 character(s)'),
     email: z.string().email('Not a valid email'),
+    phoneNumber: z.string().min(10,'Please enter valid phone number'),
     password: z
       .string()
       .regex(
