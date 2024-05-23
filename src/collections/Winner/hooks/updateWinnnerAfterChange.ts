@@ -24,7 +24,6 @@ export const updateWinnerAfterChange: CollectionAfterChangeHook = async ({
            id:winnerId,
            data:{
             winner_otp: otp,
-            dispatched:true
            }
           })
           await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/trpc/message.otpWhatsAppMessage`, {
@@ -57,7 +56,6 @@ export const updateWinnerAfterChange: CollectionAfterChangeHook = async ({
            id:winnerId,
            data:{
             winner_otp: null,
-            dispatched:false
            }
           })
         } catch (error) {

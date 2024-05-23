@@ -44,7 +44,7 @@ function CartDepositAmount() {
         </summary> */}
         <summary>
           <div className='transaction-action-btn '>
-            <span className='cmn-btn'>Add Amount</span>
+            <span className='glow-on-hover'>Add Amount</span>
           </div>
           <div className='details-modal-overlay'></div>
         </summary>

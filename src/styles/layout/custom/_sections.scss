@@ -1622,8 +1622,8 @@ $duration: 1000;
   }
 }
 .glow-on-hover {
- padding: 5px 20px 5px 20px;
- text-align: center;
+  padding: 10px 25px;
+  text-align: center;
   border: none;
   outline: none;
   color: #fff;
@@ -1631,7 +1631,7 @@ $duration: 1000;
   cursor: pointer;
   position: relative;
   z-index: 0;
-  border-radius:20px;
+  border-radius:30px;
 }
 
 .glow-on-hover:before {
@@ -1648,7 +1648,7 @@ $duration: 1000;
   animation: glowing 20s linear infinite;
   opacity: 1;
   transition: opacity .3s ease-in-out;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .glow-on-hover:active {
@@ -1669,7 +1669,7 @@ $duration: 1000;
   background:#0f0232;
   left: 0;
   top: 0;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 @keyframes glowing {

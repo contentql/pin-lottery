@@ -1,10 +1,10 @@
-import payment from '/public/images/elements/payment.png'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
+import payment from '/public/images/elements/payment.png'
 
 import { Cart, Contest, Media, Ticket } from '@/payload-types'
 import { useAuth } from '@/providers/Auth'
@@ -215,7 +215,7 @@ const Prices = ({ cartData }: { cartData: Cart[] }) => {
           <div className='checkout-wrapper__btn'>
             <button
               type='button'
-              className='cmn-btn'
+              className='glow-on-hover'
               // style={{
               //   color: `${userData?.amount < total_price_of_cart ? 'black' : ''}`,
               //   background: `${userData?.amount < total_price_of_cart ? 'linear-gradient(180.3deg, rgb(221, 221, 221) 5.5%, rgb(110, 136, 161) 90.2%)' : ''}`,
