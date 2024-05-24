@@ -1,10 +1,11 @@
 import { CollectionConfig } from 'payload/types'
 import { ResetPassword } from '../../email-templates/resetPassword'
-import { UserAccountVerification } from '../../email-templates/userAccountVerification'
 
+import { UserAccountVerification } from '../../email-templates/userAccountVerification'
 import { isAdminOrSelf } from './access/isAdminOrSelf'
 import { isManagerOrAdminOrSelf } from './access/isManagerOrAdminOrSelf'
 import { isAdmin } from './filed-level-access/isAdmin'
+import { verifyUserEmail } from './hooks/verifyUserEmail'
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -54,9 +55,9 @@ const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
-  // hooks: {
-  //   afterChange: [verifyUserEmail],
-  // },
+  hooks: {
+    afterChange: [verifyUserEmail],
+  },
   fields: [
     {
       name: 'user_name',

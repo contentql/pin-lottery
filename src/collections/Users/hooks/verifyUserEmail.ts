@@ -1,20 +1,12 @@
 import { CollectionAfterChangeHook } from 'payload/types'
 
-const OPERATION = 'create'
-const SUBJECT = 'Email Verification'
-const ACTIONLABEL = 'verify your email'
-const BUTTONTEXT = 'Verify Email'
-
 export const verifyUserEmail: CollectionAfterChangeHook = async ({
   operation,
   req,
   doc,
 }) => {
   if (operation === 'create') {
-   const user=await req.payload.findByID({
-      collection:'users',
-      id:doc.id
-    })
+   const user=await req.payload.db.collections['users'].findOne({ _id: doc.id})
     console.log('fetched user',user,doc.id)
     console.log("console user after create",doc)
 
@@ -23,7 +15,7 @@ export const verifyUserEmail: CollectionAfterChangeHook = async ({
       headers: {
         'Content-Type': 'application/json',
       },
-      body:JSON.stringify({token:doc._verificationToken})
+      body:JSON.stringify({token:user._verificationToken})
     })
   }
 }
