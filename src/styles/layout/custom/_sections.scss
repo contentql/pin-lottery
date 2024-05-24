@@ -1194,6 +1194,7 @@ $duration: 1000;
 @media screen and (max-width: 767px) {
   .winner-image-slider {
     height: 300px;
+    object-fit: fill;
   }
 }
 .badge-coming-soon {

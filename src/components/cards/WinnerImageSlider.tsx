@@ -26,7 +26,7 @@ const WinnerImageSlider = ({ winner }: { winner: Winner }) => {
             src={(itm?.product_images as Media)?.url || '/'}
             width={150}
             height={10}
-            alt='2323'
+            alt='image'
           />
         ))}
       </Slider>
