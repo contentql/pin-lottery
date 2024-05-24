@@ -1689,3 +1689,15 @@ $duration: 1000;
   50% { background-position: 400% 0; }
   100% { background-position: 0 0; }
 }
+.contest-buttons{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 30px;
+  gap: 30px;
+}
+@media screen and (max-width:992px){
+  .contest-quantity{
+    flex-direction: column;
+  }
+}

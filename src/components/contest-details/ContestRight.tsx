@@ -128,7 +128,7 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
             </span>
             <small>Per ticket</small>
           </div>
-          <div className='d-flex flex-wrap align-items-center mb-30'>
+          <div className='d-flex flex-wrap align-items-center mb-30 contest-quantity'>
             <div className='select-quantity'>
               <span className='caption'>Quantity</span>
               <div className='quantity'>
@@ -161,7 +161,8 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
                 </div>
               </div>
             </div>
-            <div className='mt-sm-0 mt-3'>
+            <div className='contest-buttons'>
+              <div className='mt-sm-0 mt-3'>
               <Link style={{marginRight:'4px'}}
                 href={`${pathname}/ticket-details`}
                 className='cmn-btn style--three'>
@@ -174,7 +175,7 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
                 className='cmn-btn style--three'>
                 Play Now
               </button>
-            </div>
+            </div></div>
           </div>
         </>
       )}

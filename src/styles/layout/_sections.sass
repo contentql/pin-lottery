@@ -1636,8 +1636,11 @@
     padding-left: 15px
     
     @media (max-width: 991px)
-      width: 100%
-      padding-left: 0
+      width:100%
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
       margin-top: 50px
     .subtitle 
       color: $base-color
@@ -1697,10 +1700,10 @@
     .select-quantity 
       width: 49%
       +d-flex
+      flex-direction:column
       align-items: center
-      @media (max-width: 767px)
-        width: 58%
-      @media (max-width: 575px)
+      
+      @media (max-width:1199px)
         width: 100%
     .caption 
       color: #ffffff
