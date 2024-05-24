@@ -7,7 +7,7 @@ export const UserPersonalDetailsValidator = z.object({
     .max(20, 'Username must contain at most 20 character(s)'),
   dob: z.string().optional(),
   address: z.string().optional(),
-  phone_number: z.string().optional(),
+  phone_number: z.string().min(10,'please enter valid phone number')
 })
 
 export type TUserPersonalDetailsValidator = z.infer<

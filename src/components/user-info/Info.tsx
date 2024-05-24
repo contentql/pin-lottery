@@ -261,7 +261,7 @@ const Info = ({ userData }: { userData: User }) => {
                   <>
                     <input
                       {...registerPersonalDetails('phone_number')}
-                      type='text'
+                      type='number'
                       name='phone_number'
                       id='phone_number'
                       placeholder='mobile'
