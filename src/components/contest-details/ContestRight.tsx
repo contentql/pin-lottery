@@ -25,7 +25,7 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
 
   const router=useRouter()
   const queryClient = useQueryClient()
-  const {mutate:EmptyCart}=trpc.cart.deleteAllTicketsOfUserFromCart.useMutation({})
+  // const {mutate:EmptyCart}=trpc.cart.deleteAllTicketsOfUserFromCart.useMutation({})
   const { mutate: addTicketsToCart, isPending: isTicketAdded } =
   trpc.cart.addTicketsToCart.useMutation({
     onSuccess: async () => {
@@ -55,8 +55,8 @@ const ContestRight = ({ contestDetails }: { contestDetails: Contest }) => {
       toast.error(`please login to buy tickets`)
       return
     }
-    await EmptyCart()
-   await addTicketsToCart({
+   
+    addTicketsToCart({
       contest_id:contestDetails?.id,
       tickets:quantity,
       total_price:totalTicketsPrice
