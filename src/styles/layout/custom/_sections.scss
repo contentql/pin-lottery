@@ -1696,6 +1696,10 @@ $duration: 1000;
   flex-direction: row;
   margin-top: 30px;
   gap: 30px;
+  @media screen and (max-width:410px) {
+    gap: 10px;
+    flex-direction: column;
+  }
 }
 @media screen and (max-width:992px){
   .contest-quantity{
