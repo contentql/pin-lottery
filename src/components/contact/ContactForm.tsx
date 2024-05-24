@@ -32,6 +32,7 @@ const ContactForm = () => {
         setValue('email', '')
         setValue('subject', '')
         setValue('message', '')
+        setValue('phoneNumber', '')
         toast.success(`Thank you for contacting us`)
       },
       onError: error => toast.error(`error while submitting`),

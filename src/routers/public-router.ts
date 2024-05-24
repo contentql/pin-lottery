@@ -9,7 +9,7 @@ export const publicRouter = router({
   newContact: publicProcedure
     .input(ContactFormValidator)
     .mutation(async ({ input, ctx }) => {
-      const { name, email, message, subject } = input
+      const { name, email, message, subject,phoneNumber } = input
 
       const payload = await getPayloadClient()
 
@@ -19,6 +19,7 @@ export const publicRouter = router({
           data: {
             name: name,
             email: email,
+            phone_number:phoneNumber,
             subject: subject,
             message: message,
           },

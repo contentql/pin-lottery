@@ -14,6 +14,7 @@ const Contact: CollectionConfig = {
   fields: [
     { name: 'name', type: 'text', label: 'Name', required: true },
     { name: 'email', type: 'email', label: 'Email', required: true },
+    { name: 'phone_number', type: 'text', label: 'Phone Number', required: true },
     { name: 'subject', type: 'text', label: 'Subject', required: true },
     { name: 'message', type: 'textarea', label: 'Message', required: true },
   ],

@@ -270,6 +270,7 @@ export interface Contact {
   id: string;
   name: string;
   email: string;
+  phone_number: string;
   subject: string;
   message: string;
   updatedAt: string;
