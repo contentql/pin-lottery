@@ -52,7 +52,6 @@ export const paystack =
               admin: {
                 readOnly: true,
               },
-              required: true,
               defaultValue: 0,
             },
             {
